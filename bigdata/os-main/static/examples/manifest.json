@@ -1,0 +1,37 @@
+{
+  "name": "Mishkah Drawing Board - لوحة الرسم",
+  "short_name": "Drawing Board",
+  "description": "Professional drawing and PDF annotation tool for tablets and devices",
+  "start_url": "drawing.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#6366f1",
+  "orientation": "any",
+  "scope": "./",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%236366f1' rx='48'/><path d='M60 60h72v72H60z' fill='none' stroke='%23fff' stroke-width='8' stroke-linecap='round'/><path d='M80 100l20-20 32 32' fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%236366f1' rx='128'/><path d='M160 160h192v192H160z' fill='none' stroke='%23fff' stroke-width='20' stroke-linecap='round'/><path d='M210 270l55-55 87 87' fill='none' stroke='%23fff' stroke-width='16' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["graphics", "productivity", "education"],
+  "screenshots": [],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "features": [
+    "Drawing tools",
+    "PDF annotation",
+    "Multi-language support",
+    "Offline support"
+  ]
+}

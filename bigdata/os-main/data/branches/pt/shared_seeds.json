@@ -1,0 +1,147 @@
+{
+  "tables": {
+    "sys_companies": [],
+    "sys_branches": [],
+    "sys_users": [
+      {
+        "id": "4FC79509-7F4B-4AE9-B5A9-D148E85F904B",
+        "username": "04F89601-746D-4B34-B9D0-732362A4C5D0essam88@mas.com.eg",
+        "full_name": "essam MAS",
+        "password_hash": "####",
+        "email": "04F89601-746D-4B34-B9D0-732362A4C5D0essam88@mas.com.eg",
+        "license_status": 2,
+        "created_date": "2025-12-14T12:08:20.210",
+        "default_lang": "ar",
+        "default_theme": "light",
+        "pin_code": 1122
+      },
+      {
+        "id": "74832D620282413E8D4D2DD7C00E4EA6",
+        "username": "admin2@pt-clinic.mas.com.eg",
+        "full_name": "admin2",
+        "password_hash": "EAAAAKviZDWuEhyx89ryhlK/SCV+EYPDCXcvUEcZD1vzF3Av",
+        "email": "admin2@pt-clinic.mas.com.eg",
+        "license_status": 1,
+        "created_date": "2025-11-17T22:16:49.063",
+        "last_login": "2026-01-12T14:05:53.440",
+        "default_lang": "ar",
+        "default_theme": "light",
+        "pin_code": 1122
+      },
+      {
+        "id": "876F3E62-00EA-430C-A290-F1AAAC995351",
+        "username": "israa.Gaber@mas.com.eg",
+        "full_name": "israa.Gaber MAS",
+        "password_hash": "EAAAAJg/E/juQ5TbEH5wVd7aBMYL+GOCpYoHhy/8GjjOrjez1VPW8FB6eAjBHlXAmztqtAIJGShlJz0QCZNvVFVHoyA=",
+        "email": "israa.Gaber@mas.com.eg",
+        "license_status": 4,
+        "created_date": "2025-11-17T22:33:39.767",
+        "default_lang": "ar",
+        "default_theme": "light",
+        "pin_code": 1122
+      },
+      {
+        "id": "8BA090B7-163E-439E-99CD-8C9BCA8C2108",
+        "username": "m.shehab@mas.com.eg",
+        "full_name": "m.shehab MAS",
+        "password_hash": "00D08345-D83F-44F5-A69E-006C6BF64C9A",
+        "email": "m.shehab@mas.com.eg",
+        "license_status": 4,
+        "created_date": "2025-11-17T22:33:39.690",
+        "default_lang": "ar",
+        "default_theme": "light",
+        "pin_code": 1122
+      },
+      {
+        "id": "9A3C9FB3-D1FA-472F-98E1-9D47924E1E5C",
+        "username": "info@mas.com.eg",
+        "full_name": "info MAS",
+        "password_hash": "EAAAAPClM9K2cJ1tp2vSQ8iEQqtDI3oWxo4rHr7Zh6RJKziA",
+        "email": "info@mas.com.eg",
+        "license_status": 4,
+        "created_date": "2025-11-17T22:33:39.727",
+        "last_login": "2025-11-17T23:29:44.650",
+        "default_lang": "ar",
+        "default_theme": "light",
+        "pin_code": 1122
+      },
+      {
+        "id": "A792666AA3E14C5993CDC2EF01670ECA",
+        "username": "user2@pt-clinic.mas.com.eg",
+        "full_name": "user2",
+        "password_hash": "EAAAAEV3Loe9E5p8YjIRNmZ7MzmWjEZLLz6TEoWihiPovEgv",
+        "email": "user2@pt-clinic.mas.com.eg",
+        "license_status": 1,
+        "created_date": "2025-11-17T22:16:49.100",
+        "last_login": "2025-11-20T16:21:44.493",
+        "default_lang": "ar",
+        "default_theme": "light",
+        "pin_code": 1122
+      },
+      {
+        "id": "AC7837B8E3A446F7B130F170B00DE659",
+        "username": "user1@pt-clinic.mas.com.eg",
+        "full_name": "user1",
+        "password_hash": "EAAAAI/YHk2ERTeH3V0CqJhWKztApPzn5UT+gamDgz/237OI",
+        "email": "user1@pt-clinic.mas.com.eg",
+        "license_status": 1,
+        "created_date": "2025-11-17T22:16:49.130",
+        "last_login": "2025-11-20T16:20:53.927",
+        "default_lang": "ar",
+        "default_theme": "light",
+        "pin_code": 1122
+      },
+      {
+        "id": "BF1C3101-6072-495C-8C62-D16A6BFDD491",
+        "username": "mariam@mas.com.eg",
+        "full_name": "mariam MAS",
+        "password_hash": "7D7900DD-1F4A-4BB7-BAFB-CFEC02BF8BBE",
+        "email": "mariam@mas.com.eg",
+        "license_status": 4,
+        "created_date": "2025-11-17T22:33:39.727",
+        "default_lang": "ar",
+        "default_theme": "light",
+        "pin_code": 1122
+      },
+      {
+        "id": "D2B6C6BD-9D31-4843-9611-2A6424737FB0",
+        "username": "ibrahim@mas.com.eg",
+        "full_name": "ibrahim MAS",
+        "password_hash": "5534813C-9376-46C8-B0E2-2A94EEFC8186",
+        "email": "ibrahim@mas.com.eg",
+        "license_status": 4,
+        "created_date": "2025-11-17T22:33:39.767",
+        "default_lang": "ar",
+        "default_theme": "light",
+        "pin_code": 1122
+      },
+      {
+        "id": "F99D6D5ADC6747D39255BDF90E1A2622",
+        "username": "admin@pt-clinic.mas.com.eg",
+        "full_name": "admin",
+        "password_hash": "EAAAAPRShz7Xs3RD9Svcb06WmH35vzXZVOwnBNyitPvD9Bl1",
+        "email": "admin@pt-clinic.mas.com.eg",
+        "license_status": 1,
+        "created_date": "2025-11-17T22:16:49.190",
+        "last_login": "2025-11-20T16:19:50.397",
+        "default_lang": "ar",
+        "default_theme": "light",
+        "pin_code": 1122
+      },
+      {
+        "id": "FB564961-DB14-4A78-842F-B39D39563B29",
+        "username": "helmy@mas.com.eg",
+        "full_name": "helmy MAS",
+        "password_hash": "A932E360-C618-4A49-BA14-75BB4DAFD51D",
+        "email": "helmy@mas.com.eg",
+        "license_status": 4,
+        "created_date": "2025-11-17T22:33:39.727",
+        "default_lang": "ar",
+        "default_theme": "light",
+        "pin_code": 1122
+      }
+    ],
+    "sys_roles": [],
+    "sys_user_branch_access": []
+  }
+}

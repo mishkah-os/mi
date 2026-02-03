@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Mishkah Mobile Demo</title>
+    
+    <!-- Dependencies -->
+    <script src="https://ws.mas.com.eg/lib/mishkah.core.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Local Kit -->
+    <script src="../lib/mobile-kit.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 select-none touch-pan-y overflow-hidden h-screen w-full">
+    <div id="app" class="h-full w-full"></div>
+
+    <script>
+        const D = Mishkah.DSL;
+        const UI = AppKit.UI;
+
+        // 1. Configuration
+        const Config = {
+            theme: 'light',
+            lang: 'ar',
+            homeView: 'home',
+            data: { 
+                counter: 0,
+                showModal: false
+            }
+        };
+
+        // 2. Orders
+        const Orders = {
+            'demo:inc': {
+                on: ['click'],
+                gkeys: ['demo:inc'],
+                handler: (e, ctx) => {
+                    ctx.setState(prev => {
+                        const s = { ...prev };
+                        s.data.counter++;
+                        return s;
+                    });
+                }
+            },
+            'demo:open-modal': {
+                on: ['click'], gkeys: ['demo:open-modal'],
+                handler: (e, ctx) => {
+                    ctx.setState(prev => ({ ...prev, env: { ...prev.env, modal: 'info' } }));
+                }
+            }
+        };
+
+        // 3. Views
+        const Views = {
+            home: (db) => UI.Shell({
+                header: UI.Header({ 
+                    title: 'الرئيسية', 
+                    actions: [
+                        D.Button({ attrs: { gkey: 'app:toggle-theme', class: 'text-xl' } }, ['🌓'])
+                    ]
+                }),
+                nav: UI.NavBar({
+                    activeId: 'home',
+                    items: [
+                        { id: 'home', icon: '🏠', label: 'الرئيسية', to: 'home' },
+                        { id: 'settings', icon: '⚙️', label: 'الإعدادات', to: 'settings' }
+                    ]
+                })
+            }, [
+                // Content
+                D.Div({ attrs: { class: 'p-4 space-y-4' } }, [
+                    
+                    // Welcome Card
+                    UI.Card({ class: 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white' }, [
+                        D.H2({ attrs: { class: 'text-2xl font-bold mb-2' } }, ['مرحباً بك 👋']),
+                        D.P({ attrs: { class: 'opacity-90' } }, ['تطبيق تجريبي باستخدام Mishkah Mobile Kit'])
+                    ]),
+
+                    // Counter Demo
+                    UI.Card({}, [
+                        D.Div({ attrs: { class: 'flex justify-between items-center' } }, [
+                            D.Span({ attrs: { class: 'text-lg font-medium' } }, ['العداد: ' + db.data.counter]),
+                            D.Button({ 
+                                attrs: { 
+                                    gkey: 'demo:inc',
+                                    class: 'bg-[var(--primary)] text-white px-4 py-2 rounded-lg active:scale-95 transition-transform'
+                                } 
+                            }, ['زيادة +'])
+                        ])
+                    ]),
+
+                    // List Demo
+                    UI.Card({ class: '!p-0 overflow-hidden' }, [
+                        UI.ListItem({ title: 'معلومات التطبيق', subtitle: 'v1.0.0', icon: '📱', gkey: 'demo:open-modal' }),
+                        UI.ListItem({ title: 'الإشعارات', subtitle: 'نظام التنبيهات معطل', icon: '🔔' }),
+                        UI.ListItem({ title: 'تسجيل الخروج', icon: '🚪', class: 'text-red-500' })
+                    ])
+                ]),
+                
+                // Modals
+                UI.Modal({ 
+                    open: db.env.modal === 'info', 
+                    title: 'حول التطبيق',
+                    onClose: 'modal:close'
+                }, [
+                    D.P({ attrs: { class: 'text-gray-600 leading-relaxed' } }, [
+                        'هذا تطبيق تجريبي يوضح إمكانيات AppKit في بناء واجهات تشبه التطبيقات الأصلية باستخدام تقنيات الويب القياسية.'
+                    ])
+                ])
+            ]),
+
+            settings: (db) => UI.Shell({
+                header: UI.Header({ title: 'الإعدادات', back: true }),
+                nav: UI.NavBar({
+                    activeId: 'settings',
+                    items: [
+                        { id: 'home', icon: '🏠', label: 'الرئيسية', to: 'home' },
+                        { id: 'settings', icon: '⚙️', label: 'الإعدادات', to: 'settings' }
+                    ]
+                })
+            }, [
+                D.Div({ attrs: { class: 'p-4' } }, [
+                    UI.Card({ class: '!p-0 overflow-hidden' }, [
+                        UI.ListItem({ 
+                            title: 'اللغة', 
+                            subtitle: db.env.lang === 'ar' ? 'العربية' : 'English', 
+                            icon: '🌍',
+                            gkey: 'app:toggle-lang'
+                        }),
+                        UI.ListItem({ 
+                            title: 'الوضع الليلي', 
+                            subtitle: db.env.theme === 'dark' ? 'مفعل' : 'معطل', 
+                            icon: '🌙',
+                            gkey: 'app:toggle-theme'
+                        })
+                    ])
+                ])
+            ])
+        };
+
+        // 4. Body Router
+        function Body(db) {
+            const view = db.env.view || 'home';
+            return Views[view] ? Views[view](db) : Views['home'](db);
+        }
+
+        // 5. Launch
+        AppKit.create({
+            ...Config,
+            body: Body,
+            orders: Orders,
+            mount: '#app'
+        });
+
+    </script>
+</body>
+</html>

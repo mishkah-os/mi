@@ -1,0 +1,3865 @@
+{
+  "schema": {
+    "modules": [
+      {
+        "id": "financial",
+        "parent_id": null,
+        "labels": {
+          "ar": "المالية",
+          "en": "Financial"
+        },
+        "icon": "💰",
+        "order": 1
+      },
+      {
+        "id": "financial_settings",
+        "parent_id": "financial",
+        "labels": {
+          "ar": "الإعدادات",
+          "en": "Settings"
+        },
+        "icon": "⚙️",
+        "order": 1
+      },
+      {
+        "id": "financial_operations",
+        "parent_id": "financial",
+        "labels": {
+          "ar": "العمليات",
+          "en": "Operations"
+        },
+        "icon": "📝",
+        "order": 2
+      },
+      {
+        "id": "financial_analytic",
+        "parent_id": "financial",
+        "labels": {
+          "ar": "المحاسبة التحليلية",
+          "en": "Analytic Accounting"
+        },
+        "icon": "📊",
+        "order": 3
+      }
+    ],
+    "tables": [
+      {
+        "name": "ui_labels",
+        "label": "واجهة التطبيق (Keys)",
+        "comment": "Stores UI keys for the Clinic App",
+        "sqlName": "ui_labels",
+        "layout": {
+          "x": 0,
+          "y": 1000
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "uuid",
+            "primaryKey": true,
+            "nullable": false
+          },
+          {
+            "name": "code",
+            "columnName": "code",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false,
+            "unique": true
+          }
+        ],
+        "smart_features": {
+          "module_id": "system",
+          "settings": {
+            "icon": "🏷️",
+            "colors": {
+              "primary": "#6b7280",
+              "light": "#6b728020",
+              "dark": "#6b7280"
+            },
+            "info": "مفاتيح واجهة المستخدم"
+          },
+          "display_fk_priority": [],
+          "columns": [
+            {
+              "name": "text",
+              "source": "lang",
+              "labels": {
+                "ar": "text",
+                "en": "text"
+              },
+              "sort": 10,
+              "is_table_show": false,
+              "is_edit_show": false,
+              "is_searchable": false,
+              "component": null,
+              "default_value": null,
+              "default_expr": "localStorage:company_id",
+              "events": null
+            },
+            {
+              "name": "code",
+              "source": "direct",
+              "labels": {
+                "ar": "code",
+                "en": "code"
+              },
+              "sort": 30,
+              "is_table_show": false,
+              "is_edit_show": false,
+              "is_searchable": false,
+              "component": null,
+              "default_value": null,
+              "default_expr": null,
+              "events": null
+            },
+            {
+              "name": "id",
+              "source": "direct",
+              "labels": {
+                "ar": "id",
+                "en": "id"
+              },
+              "sort": 40,
+              "is_table_show": true,
+              "is_edit_show": true,
+              "is_searchable": true,
+              "component": null,
+              "default_value": null,
+              "default_expr": null,
+              "events": null
+            }
+          ],
+          "display_rule": {
+            "parts": [
+              {
+                "type": "text",
+                "value": {
+                  "ar": "واجهة التطبيق (Keys) - ",
+                  "en": "Clinic Ui Labels - "
+                }
+              },
+              {
+                "type": "lang",
+                "name": "text"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "ui_labels_lang",
+        "label": "واجهة التطبيق (Translations)",
+        "comment": "Stores translations for UI keys",
+        "sqlName": "ui_labels_lang",
+        "layout": {
+          "x": 250,
+          "y": 1050
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "uuid",
+            "primaryKey": true,
+            "nullable": false
+          },
+          {
+            "name": "ui_labels_id",
+            "columnName": "ui_labels_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "ui_labels",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "text",
+            "columnName": "text",
+            "type": "nvarchar",
+            "maxLength": 500,
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "UQ_ui_labels_lang",
+            "columns": [
+              "ui_labels_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ],
+        "smart_features": {
+          "module_id": "system",
+          "settings": {
+            "icon": "🌐",
+            "colors": {
+              "primary": "#6b7280",
+              "light": "#6b728020",
+              "dark": "#6b7280"
+            },
+            "info": "ترجمات الواجهة"
+          }
+        }
+      },
+      {
+        "name": "fin_currencies",
+        "label": "العملات",
+        "sqlName": "fin_currencies",
+        "smart_features": {
+          "module_id": "financial_settings",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "code",
+            "type": "nvarchar",
+            "maxLength": 3,
+            "unique": true,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false
+          },
+          {
+            "name": "symbol",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "decimal_places",
+            "type": "int",
+            "defaultValue": "2",
+            "nullable": false
+          },
+          {
+            "name": "is_company_currency",
+            "type": "bit",
+            "defaultValue": "0",
+            "nullable": false
+          },
+          {
+            "name": "is_active",
+            "type": "bit",
+            "defaultValue": "1",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_currencies_lang",
+        "label": "ترجمة العملات",
+        "sqlName": "fin_currencies_lang",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_currencies",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_currency_rates",
+        "label": "أسعار الصرف",
+        "sqlName": "fin_currency_rates",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "currency_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_currencies",
+              "column": "id"
+            }
+          },
+          {
+            "name": "rate_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "rate",
+            "type": "decimal",
+            "maxLength": 18,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_journal_types",
+        "label": "أنواع القيود",
+        "sqlName": "fin_journal_types",
+        "smart_features": {
+          "module_id": "financial_settings",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          },
+          {
+            "name": "code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "unique": true,
+            "nullable": false
+          },
+          {
+            "name": "type",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "nullable": false,
+            "options": [
+              "SALE",
+              "PURCHASE",
+              "CASH",
+              "BANK",
+              "GENERAL"
+            ]
+          },
+          {
+            "name": "default_account_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_chart_of_accounts",
+              "column": "id"
+            }
+          },
+          {
+            "name": "sequence_prefix",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": true
+          },
+          {
+            "name": "next_number",
+            "type": "bigint",
+            "defaultValue": "1",
+            "nullable": false
+          },
+          {
+            "name": "is_active",
+            "type": "bit",
+            "defaultValue": "1",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_journal_types_lang",
+        "label": "ترجمة أنواع القيود",
+        "sqlName": "fin_journal_types_lang",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_journal_types",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_payment_terms",
+        "label": "شروط السداد",
+        "sqlName": "fin_payment_terms",
+        "smart_features": {
+          "module_id": "financial_settings",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          },
+          {
+            "name": "days",
+            "type": "int",
+            "nullable": false,
+            "defaultValue": "0"
+          },
+          {
+            "name": "type",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "nullable": false,
+            "defaultValue": "'NET_DAYS'",
+            "options": [
+              "NET_DAYS",
+              "END_OF_MONTH"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "fin_payment_terms_lang",
+        "label": "ترجمة شروط السداد",
+        "sqlName": "fin_payment_terms_lang",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_payment_terms",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_entity_types",
+        "label": "أنواع الكيانات",
+        "sqlName": "fin_entity_types",
+        "smart_features": {
+          "module_id": "financial_settings",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "code",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "unique": true,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          },
+          {
+            "name": "related_table",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": true
+          }
+        ]
+      },
+      {
+        "name": "fin_entity_types_lang",
+        "label": "ترجمة أنواع الكيانات",
+        "sqlName": "fin_entity_types_lang",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_entity_types",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_entities",
+        "label": "سجل الكيانات الموحد",
+        "sqlName": "fin_entities",
+        "smart_features": {
+          "module_id": "financial_settings",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "entity_type_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_entity_types",
+              "column": "id"
+            }
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": false
+          },
+          {
+            "name": "tax_number",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": true
+          },
+          {
+            "name": "is_active",
+            "type": "bit",
+            "defaultValue": "1",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_entities_lang",
+        "label": "ترجمة الكيانات",
+        "sqlName": "fin_entities_lang",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_entities",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_fiscal_years",
+        "label": "السنوات المالية",
+        "sqlName": "fin_fiscal_years",
+        "smart_features": {
+          "module_id": "financial_settings",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false
+          },
+          {
+            "name": "start_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "end_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "is_closed",
+            "type": "bit",
+            "defaultValue": "0",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_fiscal_years_lang",
+        "label": "ترجمة السنوات المالية",
+        "sqlName": "fin_fiscal_years_lang",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_fiscal_years",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_fiscal_periods",
+        "label": "الفترات المالية",
+        "sqlName": "fin_fiscal_periods",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "fiscal_year_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_fiscal_years",
+              "column": "id"
+            }
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false
+          },
+          {
+            "name": "start_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "end_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "status",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "nullable": false,
+            "defaultValue": "'OPEN'",
+            "options": [
+              "OPEN",
+              "CLOSED"
+            ]
+          },
+          {
+            "name": "is_locked",
+            "type": "bit",
+            "defaultValue": "0",
+            "nullable": false,
+            "comment": "Prevents posting to this period when locked"
+          },
+          {
+            "name": "locked_date",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "locked_by",
+            "type": "uuid",
+            "nullable": true,
+            "comment": "User who locked this period"
+          }
+        ]
+      },
+      {
+        "name": "fin_fiscal_periods_lang",
+        "label": "ترجمة الفترات المالية",
+        "sqlName": "fin_fiscal_periods_lang",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_fiscal_periods",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_chart_of_accounts",
+        "label": "دليل الحسابات",
+        "sqlName": "fin_chart_of_accounts",
+        "smart_features": {
+          "module_id": "financial_settings",
+          "display_field": "code"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "parent_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_chart_of_accounts",
+              "column": "id"
+            }
+          },
+          {
+            "name": "code",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": false,
+            "comment": "Default/System Name"
+          },
+          {
+            "name": "account_type",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "nullable": false,
+            "options": [
+              "ASSETS",
+              "LIABILITIES",
+              "EQUITY",
+              "REVENUE",
+              "EXPENSE"
+            ],
+            "comment": "Account classification for automated reporting"
+          },
+          {
+            "name": "report_type",
+            "type": "nvarchar",
+            "maxLength": 2,
+            "nullable": false,
+            "options": [
+              "BS",
+              "PL"
+            ]
+          },
+          {
+            "name": "normal_balance",
+            "type": "nvarchar",
+            "maxLength": 1,
+            "nullable": false,
+            "options": [
+              "D",
+              "C"
+            ]
+          },
+          {
+            "name": "currency_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_currencies",
+              "column": "id"
+            }
+          },
+          {
+            "name": "is_transactional",
+            "type": "bit",
+            "defaultValue": "1",
+            "nullable": false
+          },
+          {
+            "name": "is_active",
+            "type": "bit",
+            "defaultValue": "1",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_chart_of_accounts_lang",
+        "label": "ترجمة دليل الحسابات",
+        "sqlName": "fin_chart_of_accounts_lang",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_chart_of_accounts",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_cost_centers",
+        "label": "مراكز التكلفة",
+        "sqlName": "fin_cost_centers",
+        "smart_features": {
+          "module_id": "financial_settings",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "parent_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_cost_centers",
+              "column": "id"
+            }
+          },
+          {
+            "name": "code",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": false
+          },
+          {
+            "name": "is_active",
+            "type": "bit",
+            "defaultValue": "1",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_cost_centers_lang",
+        "label": "ترجمة مراكز التكلفة",
+        "sqlName": "fin_cost_centers_lang",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_cost_centers",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_analytic_plans",
+        "label": "الخطط التحليلية",
+        "sqlName": "fin_analytic_plans",
+        "smart_features": {
+          "module_id": "financial_settings",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_analytic_plans_lang",
+        "label": "ترجمة الخطط التحليلية",
+        "sqlName": "fin_analytic_plans_lang",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_analytic_plans",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_analytic_accounts",
+        "label": "الحسابات التحليلية",
+        "sqlName": "fin_analytic_accounts",
+        "smart_features": {
+          "module_id": "financial_analytic",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "plan_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_analytic_plans",
+              "column": "id"
+            }
+          },
+          {
+            "name": "code",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": false
+          },
+          {
+            "name": "is_active",
+            "type": "bit",
+            "defaultValue": "1",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_analytic_accounts_lang",
+        "label": "ترجمة الحسابات التحليلية",
+        "sqlName": "fin_analytic_accounts_lang",
+        "smart_features": {
+          "module_id": "financial_analytic"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_analytic_accounts",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_tax_codes",
+        "label": "أكواد الضرائب",
+        "sqlName": "fin_tax_codes",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "code",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          },
+          {
+            "name": "rate",
+            "type": "decimal",
+            "nullable": false,
+            "defaultValue": "0"
+          },
+          {
+            "name": "account_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_chart_of_accounts",
+              "column": "id"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fin_tax_codes_lang",
+        "label": "ترجمة أكواد الضرائب",
+        "sqlName": "fin_tax_codes_lang",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_tax_codes",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_reconciliations",
+        "label": "سجل التسويات",
+        "sqlName": "fin_reconciliations",
+        "smart_features": {
+          "module_id": "financial_operations"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "reconcile_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "status",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "defaultValue": "'COMPLETED'",
+            "options": [
+              "COMPLETED",
+              "CANCELLED"
+            ]
+          },
+          {
+            "name": "total_amount",
+            "type": "decimal",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_reconciliation_items",
+        "label": "بنود التسوية",
+        "sqlName": "fin_reconciliation_items",
+        "smart_features": {
+          "module_id": "financial_operations"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "reconciliation_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_reconciliations",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "journal_line_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_journal_lines",
+              "column": "id"
+            }
+          },
+          {
+            "name": "allocated_amount",
+            "type": "decimal",
+            "nullable": false
+          },
+          {
+            "name": "currency_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_currencies",
+              "column": "id"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fin_journal_headers",
+        "label": "سجل اليومية العام",
+        "sqlName": "fin_journal_headers",
+        "smart_features": {
+          "module_id": "financial_operations"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true,
+            "comment": "Branch where this journal was entered (for audit & permissions)"
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "journal_type_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_journal_types",
+              "column": "id"
+            }
+          },
+          {
+            "name": "reversal_of_journal_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_journal_headers",
+              "column": "id"
+            },
+            "comment": "Links to the original journal if this is a reversal"
+          },
+          {
+            "name": "reversal_date",
+            "type": "date",
+            "nullable": true
+          },
+          {
+            "name": "batch_run_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_batch_runs",
+              "column": "id"
+            }
+          },
+          {
+            "name": "gl_sequence",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "journal_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "source_module",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false
+          },
+          {
+            "name": "source_id",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": true
+          },
+          {
+            "name": "status",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "defaultValue": "'DRAFT'",
+            "nullable": false,
+            "options": [
+              "DRAFT",
+              "POSTED",
+              "VOID"
+            ]
+          },
+          {
+            "name": "description",
+            "type": "nvarchar",
+            "maxLength": 500,
+            "nullable": true
+          },
+          {
+            "name": "is_deleted",
+            "type": "bit",
+            "defaultValue": "0",
+            "nullable": false,
+            "comment": "Soft delete flag"
+          },
+          {
+            "name": "deleted_date",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "deleted_by",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "deletion_reason",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": true
+          }
+        ]
+      },
+      {
+        "name": "fin_journal_lines",
+        "label": "تفاصيل القيد",
+        "sqlName": "fin_journal_lines",
+        "smart_features": {
+          "module_id": "financial_operations"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "header_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_journal_headers",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "account_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_chart_of_accounts",
+              "column": "id"
+            }
+          },
+          {
+            "name": "entity_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_entities",
+              "column": "id"
+            }
+          },
+          {
+            "name": "cost_center_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_cost_centers",
+              "column": "id"
+            }
+          },
+          {
+            "name": "accounting_branch_id",
+            "type": "uuid",
+            "nullable": true,
+            "comment": "Branch this line belongs to for GL reporting (can differ from header branch_id)"
+          },
+          {
+            "name": "due_date",
+            "type": "date",
+            "nullable": true
+          },
+          {
+            "name": "payment_term_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_payment_terms",
+              "column": "id"
+            }
+          },
+          {
+            "name": "tax_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_tax_codes",
+              "column": "id"
+            }
+          },
+          {
+            "name": "last_reconciliation_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_reconciliations",
+              "column": "id"
+            }
+          },
+          {
+            "name": "currency_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_currencies",
+              "column": "id"
+            }
+          },
+          {
+            "name": "exchange_rate",
+            "type": "decimal",
+            "maxLength": 18,
+            "nullable": false,
+            "defaultValue": "1.000000"
+          },
+          {
+            "name": "debit_foreign",
+            "type": "decimal",
+            "nullable": false,
+            "defaultValue": "0"
+          },
+          {
+            "name": "credit_foreign",
+            "type": "decimal",
+            "nullable": false,
+            "defaultValue": "0"
+          },
+          {
+            "name": "debit_local",
+            "type": "decimal",
+            "nullable": false,
+            "defaultValue": "0"
+          },
+          {
+            "name": "credit_local",
+            "type": "decimal",
+            "nullable": false,
+            "defaultValue": "0"
+          },
+          {
+            "name": "description",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": true
+          },
+          {
+            "name": "is_deleted",
+            "type": "bit",
+            "defaultValue": "0",
+            "nullable": false
+          },
+          {
+            "name": "deleted_date",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "deleted_by",
+            "type": "uuid",
+            "nullable": true
+          }
+        ]
+      },
+      {
+        "name": "fin_analytic_lines",
+        "label": "التوزيع التحليلي",
+        "sqlName": "fin_analytic_lines",
+        "smart_features": {
+          "module_id": "financial_analytic"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "journal_line_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_journal_lines",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "analytic_account_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_analytic_accounts",
+              "column": "id"
+            }
+          },
+          {
+            "name": "amount",
+            "type": "decimal",
+            "nullable": false
+          },
+          {
+            "name": "percentage",
+            "type": "decimal",
+            "nullable": true
+          }
+        ]
+      },
+      {
+        "name": "fin_budgets",
+        "label": "الموازنات التقديرية",
+        "sqlName": "fin_budgets",
+        "smart_features": {
+          "module_id": "financial_analytic",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          },
+          {
+            "name": "fiscal_year_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_fiscal_years",
+              "column": "id"
+            }
+          },
+          {
+            "name": "revision",
+            "type": "int",
+            "defaultValue": "1",
+            "nullable": false
+          },
+          {
+            "name": "status",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "defaultValue": "'DRAFT'",
+            "nullable": false,
+            "options": [
+              "DRAFT",
+              "CONFIRMED",
+              "CANCELLED"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "fin_budgets_lang",
+        "label": "ترجمة الموازنات",
+        "sqlName": "fin_budgets_lang",
+        "smart_features": {
+          "module_id": "financial_analytic"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_budgets",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_budget_lines",
+        "label": "بنود الموازنة",
+        "sqlName": "fin_budget_lines",
+        "smart_features": {
+          "module_id": "financial_analytic"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "budget_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_budgets",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "account_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_chart_of_accounts",
+              "column": "id"
+            }
+          },
+          {
+            "name": "analytic_account_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_analytic_accounts",
+              "column": "id"
+            }
+          },
+          {
+            "name": "fiscal_period_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_fiscal_periods",
+              "column": "id"
+            }
+          },
+          {
+            "name": "planned_amount",
+            "type": "decimal",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_journal_templates",
+        "label": "قوالب القيود",
+        "sqlName": "fin_journal_templates",
+        "smart_features": {
+          "module_id": "financial_settings",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          },
+          {
+            "name": "journal_type_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_journal_types",
+              "column": "id"
+            }
+          },
+          {
+            "name": "description_template",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": true
+          }
+        ]
+      },
+      {
+        "name": "fin_journal_templates_lang",
+        "label": "ترجمة قوالب القيود",
+        "sqlName": "fin_journal_templates_lang",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "ref_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_journal_templates",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "lang_code",
+            "type": "nvarchar",
+            "maxLength": 10,
+            "nullable": false
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_journal_template_lines",
+        "label": "بنود القالب",
+        "sqlName": "fin_journal_template_lines",
+        "smart_features": {
+          "module_id": "financial_settings"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "template_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_journal_templates",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "account_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_chart_of_accounts",
+              "column": "id"
+            }
+          },
+          {
+            "name": "debit_type",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "defaultValue": "'FIXED'",
+            "options": [
+              "FIXED",
+              "PERCENT"
+            ]
+          },
+          {
+            "name": "credit_type",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "defaultValue": "'FIXED'",
+            "options": [
+              "FIXED",
+              "PERCENT"
+            ]
+          },
+          {
+            "name": "debit_amount",
+            "type": "decimal",
+            "defaultValue": "0",
+            "nullable": false
+          },
+          {
+            "name": "credit_amount",
+            "type": "decimal",
+            "defaultValue": "0",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_recurring_schedules",
+        "label": "جداولة القيود المتكررة",
+        "sqlName": "fin_recurring_schedules",
+        "smart_features": {
+          "module_id": "financial_operations"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "template_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_journal_templates",
+              "column": "id"
+            }
+          },
+          {
+            "name": "frequency",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "nullable": false,
+            "options": [
+              "MONTHLY",
+              "WEEKLY",
+              "YEARLY"
+            ]
+          },
+          {
+            "name": "next_run_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "end_date",
+            "type": "date",
+            "nullable": true
+          },
+          {
+            "name": "last_generated_journal_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_journal_headers",
+              "column": "id"
+            }
+          },
+          {
+            "name": "is_active",
+            "type": "bit",
+            "defaultValue": "1",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_batch_runs",
+        "label": "تشغيلات الدفعات",
+        "sqlName": "fin_batch_runs",
+        "smart_features": {
+          "module_id": "financial_operations"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "description",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": false
+          },
+          {
+            "name": "run_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "status",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "defaultValue": "'PROCESSING'",
+            "options": [
+              "PROCESSING",
+              "COMPLETED",
+              "ERROR"
+            ]
+          },
+          {
+            "name": "total_debit",
+            "type": "decimal",
+            "nullable": true
+          },
+          {
+            "name": "total_credit",
+            "type": "decimal",
+            "nullable": true
+          }
+        ]
+      },
+      {
+        "name": "fin_accrual_schedules",
+        "label": "جدولة الاستحقاقات",
+        "sqlName": "fin_accrual_schedules",
+        "smart_features": {
+          "module_id": "financial_operations",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false,
+            "comment": "e.g. Rent 2024"
+          },
+          {
+            "name": "source_journal_line_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_journal_lines",
+              "column": "id"
+            }
+          },
+          {
+            "name": "start_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "end_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "months",
+            "type": "int",
+            "nullable": false
+          },
+          {
+            "name": "monthly_amount",
+            "type": "decimal",
+            "nullable": false
+          },
+          {
+            "name": "deferred_account_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_chart_of_accounts",
+              "column": "id"
+            },
+            "comment": "Balance Sheet Account (Prepaid/Accrued)"
+          },
+          {
+            "name": "target_account_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_chart_of_accounts",
+              "column": "id"
+            },
+            "comment": "P&L Account (Expense/Revenue)"
+          },
+          {
+            "name": "is_active",
+            "type": "bit",
+            "defaultValue": "1",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "fin_accrual_schedule_items",
+        "label": "أقساط الاستحقاق",
+        "sqlName": "fin_accrual_schedule_items",
+        "smart_features": {
+          "module_id": "financial_operations"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "schedule_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_accrual_schedules",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "due_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "amount",
+            "type": "decimal",
+            "nullable": false
+          },
+          {
+            "name": "generated_journal_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_journal_headers",
+              "column": "id"
+            }
+          },
+          {
+            "name": "status",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "defaultValue": "'PENDING'",
+            "options": [
+              "PENDING",
+              "POSTED"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "fin_cheques",
+        "label": "إدارة الشيكات",
+        "sqlName": "fin_cheques",
+        "smart_features": {
+          "module_id": "financial_operations",
+          "display_field": "cheque_number"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "cheque_number",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false
+          },
+          {
+            "name": "bank_name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": true,
+            "comment": "Customer Bank Name"
+          },
+          {
+            "name": "due_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "amount",
+            "type": "decimal",
+            "nullable": false
+          },
+          {
+            "name": "currency_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_currencies",
+              "column": "id"
+            }
+          },
+          {
+            "name": "beneficiary",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": true
+          },
+          {
+            "name": "status",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "defaultValue": "'ON_HAND'",
+            "options": [
+              "DRAFT",
+              "ON_HAND",
+              "DEPOSITED",
+              "CLEARED",
+              "BOUNCED",
+              "RETURNED",
+              "CANCELLED"
+            ]
+          },
+          {
+            "name": "type",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "nullable": false,
+            "options": [
+              "INBOUND",
+              "OUTBOUND"
+            ]
+          },
+          {
+            "name": "entity_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_entities",
+              "column": "id"
+            }
+          },
+          {
+            "name": "description",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": true
+          },
+          {
+            "name": "journal_line_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_journal_lines",
+              "column": "id"
+            },
+            "comment": "Link to current GL position"
+          }
+        ]
+      },
+      {
+        "name": "fin_cheque_history",
+        "label": "سجل تتبع الشيكات",
+        "sqlName": "fin_cheque_history",
+        "smart_features": {
+          "module_id": "financial_operations"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "cheque_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_cheques",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "status_from",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "nullable": true
+          },
+          {
+            "name": "status_to",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "nullable": false
+          },
+          {
+            "name": "change_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "changed_by",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "notes",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": true
+          }
+        ]
+      },
+      {
+        "name": "fin_bank_statements",
+        "label": "كشوف الحسابات البنكية",
+        "sqlName": "fin_bank_statements",
+        "smart_features": {
+          "module_id": "financial_operations",
+          "display_field": "statement_reference"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "account_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_chart_of_accounts",
+              "column": "id"
+            }
+          },
+          {
+            "name": "statement_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "statement_reference",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": true
+          },
+          {
+            "name": "start_balance",
+            "type": "decimal",
+            "nullable": false
+          },
+          {
+            "name": "end_balance",
+            "type": "decimal",
+            "nullable": false
+          },
+          {
+            "name": "status",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "defaultValue": "'DRAFT'",
+            "options": [
+              "DRAFT",
+              "RECONCILED"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "fin_bank_statement_lines",
+        "label": "بنود كشف البنك",
+        "sqlName": "fin_bank_statement_lines",
+        "smart_features": {
+          "module_id": "financial_operations"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "statement_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_bank_statements",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "transaction_date",
+            "type": "date",
+            "nullable": false
+          },
+          {
+            "name": "reference",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": true
+          },
+          {
+            "name": "description",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": true
+          },
+          {
+            "name": "amount",
+            "type": "decimal",
+            "nullable": false,
+            "comment": "Positive for Deposit, Negative for Withdrawal"
+          },
+          {
+            "name": "is_reconciled",
+            "type": "bit",
+            "defaultValue": "0",
+            "nullable": false
+          },
+          {
+            "name": "matched_journal_line_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_journal_lines",
+              "column": "id"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fin_report_layouts",
+        "label": "قوالب التقارير المالية",
+        "sqlName": "fin_report_layouts",
+        "smart_features": {
+          "module_id": "financial_reporting",
+          "display_field": "name"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "name",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          },
+          {
+            "name": "type",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "nullable": false,
+            "options": [
+              "BALANCE_SHEET",
+              "PROFIT_LOSS",
+              "CASH_FLOW",
+              "CUSTOM"
+            ]
+          },
+          {
+            "name": "is_system",
+            "type": "bit",
+            "defaultValue": "0",
+            "nullable": false,
+            "comment": "If true, cannot be deleted"
+          },
+          {
+            "name": "description",
+            "type": "nvarchar",
+            "maxLength": 200,
+            "nullable": true
+          }
+        ]
+      },
+      {
+        "name": "fin_report_layout_lines",
+        "label": "بنود قوالب التقارير",
+        "sqlName": "fin_report_layout_lines",
+        "smart_features": {
+          "module_id": "financial_reporting"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "created_date",
+            "type": "datetime",
+            "defaultValue": "GETDATE()",
+            "nullable": false
+          },
+          {
+            "name": "last_update",
+            "type": "datetime",
+            "nullable": true
+          },
+          {
+            "name": "user_insert",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "layout_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": {
+              "table": "fin_report_layouts",
+              "column": "id",
+              "onDelete": "CASCADE"
+            }
+          },
+          {
+            "name": "parent_line_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": {
+              "table": "fin_report_layout_lines",
+              "column": "id"
+            },
+            "comment": "For hierarchy sections"
+          },
+          {
+            "name": "sequence",
+            "type": "int",
+            "nullable": false
+          },
+          {
+            "name": "label",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": false
+          },
+          {
+            "name": "rule_type",
+            "type": "nvarchar",
+            "maxLength": 20,
+            "nullable": false,
+            "options": [
+              "ACCOUNT_TYPE",
+              "ACCOUNT_RANGE",
+              "SPECIFIC_ACCOUNTS",
+              "FORMULA",
+              "HEADER",
+              "TOTAL"
+            ]
+          },
+          {
+            "name": "rule_value",
+            "type": "nvarchar",
+            "maxLength": 500,
+            "nullable": true,
+            "comment": "JSON array of IDs, or specific type code"
+          },
+          {
+            "name": "sign_reversal",
+            "type": "bit",
+            "defaultValue": "0",
+            "nullable": false,
+            "comment": "Flip sign for display (e.g. Sales as positive)"
+          }
+        ]
+      },
+      {
+        "name": "fin_notifications",
+        "label": "التنبيهات المالية",
+        "sqlName": "fin_notifications",
+        "smart_features": {
+          "module_id": "financial_operations"
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "primaryKey": true
+          },
+          {
+            "name": "company_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "branch_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "type",
+            "label": "Notification Type",
+            "type": "nvarchar",
+            "maxLength": 50,
+            "nullable": false
+          },
+          {
+            "name": "entity_table",
+            "label": "Target Table",
+            "type": "nvarchar",
+            "maxLength": 100,
+            "nullable": true
+          },
+          {
+            "name": "entity_id",
+            "label": "Target ID",
+            "type": "uuid",
+            "nullable": true
+          },
+          {
+            "name": "message",
+            "label": "Message",
+            "type": "nvarchar",
+            "maxLength": 255,
+            "nullable": true
+          },
+          {
+            "name": "is_read",
+            "type": "bool",
+            "defaultValue": "false"
+          },
+          {
+            "name": "created_at",
+            "type": "datetime",
+            "defaultValue": "GETDATE()"
+          }
+        ]
+      }
+    ]
+  }
+}

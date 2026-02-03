@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mishkah Wiki System</title>
+
+    <!-- Dependencies -->
+    <!-- Mishkah Core with Auto-Loading Attributes -->
+    <script src="../lib/mishkah.js" data-indexeddb="true"></script>
+
+    <!-- We still need mishkah-utils.js if not auto-loaded, but user said "mishkah loads it alone" -->
+    <!-- If mishkah.js loads utils, we don't need this. But usually utils is separate. -->
+    <!-- User said "wait until utils loads from scaffold". So I assume mishkah.js loads it. -->
+    <!-- I will keep wiki-data.js and app scripts. -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Data & App -->
+    <script src="wiki-data.js"></script>
+    <script src="wiki-counter.js"></script>
+    <script src="wiki-cps.js"></script>
+
+    <script src="wiki-ui.js"></script>
+    <script src="wiki-app.js"></script>
+
+    <style>
+        /* Theme Variables */
+        :root {
+            --background: #ffffff;
+            --foreground: #0f172a;
+            --card: #ffffff;
+            --card-foreground: #0f172a;
+            --popover: #ffffff;
+            --popover-foreground: #0f172a;
+            --primary: #0f172a;
+            --primary-foreground: #f8fafc;
+            --secondary: #f1f5f9;
+            --secondary-foreground: #0f172a;
+            --muted: #f1f5f9;
+            --muted-foreground: #64748b;
+            --accent: #f1f5f9;
+            --accent-foreground: #0f172a;
+            --destructive: #ef4444;
+            --destructive-foreground: #f8fafc;
+            --border: #e2e8f0;
+            --input: #e2e8f0;
+            --ring: #0f172a;
+            --radius: 0.5rem;
+        }
+
+        [data-theme="dark"] {
+            --background: #020817;
+            --foreground: #f8fafc;
+            --card: #020817;
+            --card-foreground: #f8fafc;
+            --popover: #020817;
+            --popover-foreground: #f8fafc;
+            --primary: #f8fafc;
+            --primary-foreground: #0f172a;
+            --secondary: #1e293b;
+            --secondary-foreground: #f8fafc;
+            --muted: #1e293b;
+            --muted-foreground: #94a3b8;
+            --accent: #1e293b;
+            --accent-foreground: #f8fafc;
+            --destructive: #7f1d1d;
+            --destructive-foreground: #f8fafc;
+            --border: #1e293b;
+            --input: #1e293b;
+            --ring: #cbd5e1;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        #app {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // Initialize the Wiki App
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.WikiApp) {
+                window.WikiApp.start('#app');
+            } else {
+                console.error('WikiApp not found!');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinic CRUD - Knex Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: #4f46e5;
+        }
+
+        .main-content {
+            display: flex;
+            height: calc(100vh - 140px);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #f9fafb;
+            border-left: 1px solid #e5e7eb;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table-list {
+            list-style: none;
+        }
+
+        .table-item {
+            padding: 12px;
+            margin-bottom: 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .table-item:hover {
+            background: #e5e7eb;
+        }
+
+        .table-item.active {
+            background: #4f46e5;
+            color: white;
+            font-weight: 500;
+        }
+
+        .content-area {
+            flex: 1;
+            padding: 32px;
+            overflow-y: auto;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .toolbar h2 {
+            font-size: 22px;
+            color: #111827;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table thead {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+        }
+
+        .data-table th {
+            padding: 14px;
+            text-align: right;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .data-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 14px;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .fk-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #6b7280;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #e5e7eb;
+            border-top-color: #4f46e5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #4f46e5;
+        }
+
+        .stat-card h4 {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .stat-card .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 16px 24px;
+            background: #111827;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            animation: slideDown 0.3s ease;
+        }
+
+        .toast.success {
+            background: #10b981;
+        }
+
+        .toast.error {
+            background: #ef4444;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 Clinic CRUD - Knex Engine Test</h1>
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar">العربية</button>
+                <button class="lang-btn" data-lang="en">English</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>الجداول المتاحة</h3>
+                <ul class="table-list" id="tablesList">
+                    <li class="table-item">⏳ جاري التحميل...</li>
+                </ul>
+            </div>
+
+            <div class="content-area">
+                <div class="stats-grid" id="statsGrid" style="display: none;">
+                    <div class="stat-card">
+                        <h4>عدد السجلات</h4>
+                        <div class="value" id="recordCount">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>اللغة الحالية</h4>
+                        <div class="value" id="currentLang" style="font-size: 20px;">العربية</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>حالة FK</h4>
+                        <div class="value" id="fkStatus" style="font-size: 18px;">✅ Hydrated</div>
+                    </div>
+                </div>
+
+                <div class="toolbar" id="toolbar" style="display: none;">
+                    <h2 id="tableName"></h2>
+                    <div class="actions">
+                        <button class="btn btn-primary" id="refreshBtn">🔄 تحديث</button>
+                        <button class="btn btn-success" id="addBtn">➕ إضافة</button>
+                    </div>
+                </div>
+
+                <div id="dataContainer">
+                    <div class="loading">
+                        <p>اختر جدول من القائمة لعرض البيانات</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/crud-knex.js"></script>
+</body>
+
+</html>

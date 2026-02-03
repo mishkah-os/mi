@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mishkah POS — الإغلاق المالي</title>
+
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const brname = params.get('brname');
+
+    if (!brname || brname === 'dar') {
+      //window.location.replace('https://darwish.mas.com.eg');
+    }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --finance-bg: radial-gradient(circle at top, #0f172a 0%, #020617 65%);
+      --finance-shell-bg: rgba(2, 6, 23, 0.82);
+      --finance-shell-shadow: 0 24px 60px rgba(2, 6, 23, 0.55);
+      --finance-text: #e2e8f0;
+      --finance-muted: rgba(148, 163, 184, 0.78);
+      --finance-border: rgba(71, 85, 105, 0.55);
+      --finance-surface-1: rgba(15, 23, 42, 0.9);
+      --finance-surface-2: rgba(30, 41, 59, 0.72);
+      --finance-accent: rgba(56, 189, 248, 0.18);
+      --finance-positive: #34d399;
+    }
+
+    html[data-theme='light'] {
+      color-scheme: light;
+      --finance-bg: radial-gradient(circle at top, #f8fafc 0%, #e2e8f0 55%);
+      --finance-shell-bg: rgba(248, 250, 252, 0.97);
+      --finance-shell-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+      --finance-text: #0f172a;
+      --finance-muted: #475569;
+      --finance-border: rgba(203, 213, 225, 0.8);
+      --finance-surface-1: rgba(241, 245, 249, 0.94);
+      --finance-surface-2: rgba(255, 255, 255, 0.98);
+      --finance-accent: rgba(14, 165, 233, 0.18);
+      --finance-positive: #047857;
+    }
+
+    html,
+    body {
+      height: 100%;
+      min-height: 100vh;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background: var(--finance-bg);
+      color: var(--finance-text);
+      font-family: "Tajawal", "Cairo", system-ui, sans-serif;
+      font-size: clamp(16px, 1.05vw + 13px, 19px);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 100%;
+      overflow-y: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #app {
+      flex: 1 1 auto;
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    #app>div {
+      flex: 1 1 auto;
+      min-height: 100vh;
+      height: auto !important;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background: transparent;
+    }
+
+    .finance-shell {
+      background: var(--finance-shell-bg) !important;
+      color: var(--finance-text) !important;
+      box-shadow: var(--finance-shell-shadow);
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .finance-panel,
+    .finance-card,
+    .finance-table,
+    .finance-row,
+    .finance-status {
+      background: var(--finance-surface-2) !important;
+      border-color: var(--finance-border) !important;
+      color: var(--finance-text) !important;
+    }
+
+    .finance-card .text-slate-300,
+    .finance-panel .text-slate-300,
+    .finance-panel .text-slate-400,
+    .finance-panel .text-slate-500,
+    .finance-status .text-slate-400 {
+      color: var(--finance-muted) !important;
+    }
+
+    .finance-control {
+      border-color: var(--finance-border) !important;
+      background: var(--finance-surface-1) !important;
+      color: var(--finance-text) !important;
+    }
+
+    .finance-control__btn {
+      border: 1px solid transparent;
+      color: inherit;
+      background: transparent;
+    }
+
+    .finance-control__btn[data-active='true'] {
+      border-color: rgba(56, 189, 248, 0.45);
+      background: var(--finance-accent);
+    }
+
+    html[data-theme='light'] .finance-control__btn[data-active='true'] {
+      color: #0369a1;
+    }
+
+    .finance-shell .text-slate-100,
+    .finance-shell .text-slate-200,
+    .finance-shell .text-slate-500 {
+      color: var(--finance-text) !important;
+    }
+
+    .finance-shell .text-slate-300,
+    .finance-shell .text-slate-400 {
+      color: var(--finance-muted) !important;
+    }
+
+    .finance-shell .text-slate-500 {
+      opacity: 0.9;
+    }
+
+    .finance-shell .finance-positive,
+    .finance-shell .text-emerald-300 {
+      color: var(--finance-positive) !important;
+    }
+  </style>
+  <script>
+    (function () {
+      try {
+        const prefs = JSON.parse(localStorage.getItem('__POS_FINANCE_PREFS__') || '{}');
+        const theme = prefs.theme === 'light' ? 'light' : 'dark';
+        const lang = prefs.lang === 'en' ? 'en' : 'ar';
+        const root = document.documentElement;
+        root.setAttribute('data-theme', theme);
+        root.lang = lang;
+        root.dir = lang === 'en' ? 'ltr' : 'rtl';
+      } catch (err) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.lang = 'ar';
+        document.documentElement.dir = 'rtl';
+      }
+    })();
+  </script>
+  <script src="../lib/mishkah-utils.js"></script>
+  <script src="../lib/mishkah.core.js"></script>
+  <script src="../lib/mishkah-ui.js"></script>
+  <script src="../lib/mishkah-schema.js"></script>
+  <script src="./pos-fin-comp.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="../lib/mishkah.store.js"></script>
+  <script src="../lib/mishkah.simple-store.js"></script>
+  <script src="./pos-simple-loader.js"></script>
+  <script src="./pos-mini-db.js"></script>
+  <script src="./pos-mini-utils.js"></script>
+
+  <script>
+    const createPosDb = window.createPosDb;
+
+    // 'params' is already declared in the script block at the top of the file
+    const BRANCH_ID = (params.get('brname') || '').trim();
+
+    if (!BRANCH_ID) {
+      const lang = document.documentElement.lang === 'en' ? 'en' : 'ar';
+      const message = lang === 'en' ? 'Please select a branch' : 'يرجى اختيار الفرع';
+      document.body.innerHTML = `
+        <main
+          style="
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            color: var(--finance-text, #0f172a);
+            background: var(--finance-bg, #0f172a);
+            text-align:center;
+            padding: 2rem;
+          "
+        >
+          ${message}
+        </main>
+      `;
+    } else {
+
+      const status = {
+        status: 'loading',
+        startedAt: Date.now(),
+        finishedAt: null,
+        error: null,
+        keys: [],
+        branchId: BRANCH_ID
+      };
+
+      window.__POS_DATA_STATUS__ = status;
+      window.__POS_BRANCH_ID__ = BRANCH_ID;
+
+      try {
+        createPosDb({ branchId: BRANCH_ID, role: 'finance-shell', smartFetch: false })
+          .then(({ db, moduleEntry }) => {
+            window.__POS_DB__ = db;
+            window.__POS_MODULE_ENTRY__ = moduleEntry;
+            return db.ready();
+          })
+          .then(() => {
+            const db = window.__POS_DB__;
+
+            // Load data from REST API (preserves original structure)
+            const loadFromRestApi = async () => {
+              if (loadFromRestApi.inFlight) {
+                return loadFromRestApi.inFlight;
+              }
+
+              loadFromRestApi.inFlight = (async () => {
+                try {
+                  const tables = await window.loadPosData(BRANCH_ID, 'pos');
+                  window.database = tables;
+                  status.status = Object.keys(tables).length > 0 ? 'ready' : 'idle';
+                  status.keys = Object.keys(tables);
+                } catch (error) {
+                  window.database = {};
+                  status.status = 'error';
+                  throw error;
+                } finally {
+                  loadFromRestApi.inFlight = null;
+                }
+              })();
+
+              return loadFromRestApi.inFlight;
+            };
+
+            // Initial load from REST API
+            loadFromRestApi().then(() => {
+              status.finishedAt = Date.now();
+
+              // Watch for changes and reload from REST API to maintain structure consistency
+              const registeredNames = typeof db.getRegisteredNames === 'function'
+                ? db.getRegisteredNames()
+                : Object.keys(db.config?.objects || {});
+
+              registeredNames.forEach(name => {
+                if (name === 'pos_database') return;
+                db.watch(name, () => {
+                  loadFromRestApi(); // Reload from REST API on any change
+                }, { immediate: false });
+              });
+            });
+
+            const script = document.createElement('script');
+            script.src = './pos_finance.js';
+            document.head.appendChild(script);
+          })
+          .catch((error) => {
+            window.database = {};
+            status.status = 'error';
+            status.error = error;
+            status.finishedAt = Date.now();
+          });
+      } catch (error) {
+        window.database = {};
+        status.status = 'error';
+        status.error = error;
+        status.finishedAt = Date.now();
+      }
+
+    }
+  </script>
+</body>
+
+</html>

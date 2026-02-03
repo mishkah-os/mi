@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هماتيت | Hematite Engineering</title>
+
+    <!-- 1. TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Mishkah Core -->
+    <script src="https://ws.mas.com.eg/lib/mishkah.core.js"></script>
+
+    <!-- 3. Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;700&family=Exo+2:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 4. Global Styles -->
+    <style>
+        :root[data-theme='light'] {
+            --bg-body: #f3f4f6;
+            /* Cool Gray 100 */
+            --bg-surface: #ffffff;
+            --text-main: #111827;
+            /* Gray 900 */
+            --text-muted: #4b5563;
+            /* Gray 600 */
+            --primary: #be123c;
+            /* Hematite Red (Rose 700) */
+            --primary-fg: #ffffff;
+            --accent: #374151;
+            /* Dark Gray */
+            --border: #e5e7eb;
+        }
+
+        :root[data-theme='dark'] {
+            --bg-body: #09090b;
+            /* Zinc 950 (Deep Metal) */
+            --bg-surface: #18181b;
+            /* Zinc 900 */
+            --text-main: #f4f4f5;
+            /* Zinc 100 */
+            --text-muted: #a1a1aa;
+            /* Zinc 400 */
+            --primary: #e11d48;
+            /* Hematite Red (Rose 600) */
+            --primary-fg: #ffffff;
+            --accent: #52525b;
+            /* Zinc 600 */
+            --border: #27272a;
+            /* Zinc 800 */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Typography */
+        :root[lang='ar'] body {
+            font-family: 'Readex Pro', sans-serif;
+        }
+
+        :root[lang='en'] body {
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        /* Mineral Texture */
+        .mineral-grain {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // ==========================================
+        // 1. DATABASE
+        // ==========================================
+        const database = {
+            data: { mobileMenuOpen: false },
+            env: { theme: 'dark', lang: 'ar', dir: 'rtl' },
+            i18n: {
+                dict: {
+                    'brand': { ar: 'هماتيت', en: 'Hematite' },
+                    'brand_sub': { ar: 'الاستشارات الهندسية', en: 'Engineering Consultants' },
+
+                    // Nav
+                    'nav_home': { ar: 'الرئيسية', en: 'Home' },
+                    'nav_services': { ar: 'خدماتنا', en: 'Services' },
+                    'nav_projects': { ar: 'المشاريع', en: 'Projects' },
+                    'nav_contact': { ar: 'تواصل معنا', en: 'Contact' },
+
+                    // Hero
+                    'hero_title': { ar: 'صلابة في التأسيس، إبداع في التصميم', en: 'Solidity in Foundation, Creativity in Design' },
+                    'hero_desc': { ar: 'نستلهم من قوة حجر الهماتيت دقة التخطيط ومتانة التنفيذ لنقدم استشارات هندسية تليق بمستقبل المملكة.', en: 'Inspired by the strength of Hematite, we deliver precise planning and robust execution tailored for the Kingdom\'s future.' },
+                    'hero_cta': { ar: 'ابدأ مشروعك', en: 'Start Project' },
+                    'hero_contact': { ar: 'طلب عرض سعر', en: 'Get Quote' },
+
+                    // Services
+                    'srv_struct': { ar: 'تصميم إنشائي', en: 'Structural Design' },
+                    'srv_struct_desc': { ar: 'حلول إنشائية متينة واقتصادية تحقق الأمان والاستدامة.', en: 'Robust and economical structural solutions ensuring safety and sustainability.' },
+                    'srv_arch': { ar: 'تصميم معماري', en: 'Architectural Design' },
+                    'srv_arch_desc': { ar: 'تصاميم عصرية تعكس الهوية وتلبي احتياجات المستخدم.', en: 'Modern designs reflecting identity and meeting user needs.' },
+                    'srv_geo': { ar: 'دراسات التربة', en: 'Geotechnical Studies' },
+                    'srv_geo_desc': { ar: 'تحليل دقيق لطبقات الأرض لضمان تأسيس سليم.', en: 'Precise soil analysis ensuring sound foundations.' },
+
+                    // Contact
+                    'contact_title': { ar: 'ابنِ مستقبلك معنا', en: 'Build Your Future With Us' },
+                    'addr_label': { ar: 'المقر الرئيسي', en: 'Headquarters' },
+                    'addr_val': { ar: 'المملكة العربية السعودية', en: 'Kingdom of Saudi Arabia' },
+
+                    'copyright': { ar: '© 2026 هماتيت للاستشارات الهندسية.', en: '© 2026 Hematite Engineering Consultants.' }
+                }
+            }
+        };
+
+        // ==========================================
+        // 2. ORDERS
+        // ==========================================
+        const orders = {
+            'sys.theme': {
+                on: ['click'], gkeys: ['btn:theme'],
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, env: { ...s.env, theme: s.env.theme === 'light' ? 'dark' : 'light' } }))
+            },
+            'sys.lang': {
+                on: ['click'], gkeys: ['btn:lang'],
+                handler: (e, ctx) => ctx.setState(s => {
+                    const l = s.env.lang === 'ar' ? 'en' : 'ar';
+                    return { ...s, env: { ...s.env, lang: l, dir: l === 'ar' ? 'rtl' : 'ltr' } };
+                })
+            },
+            'ui.menu': {
+                on: ['click'], gkeys: ['btn:menu'],
+                handler: (e, ctx) => ctx.setState(s => { s.data.mobileMenuOpen = !s.data.mobileMenuOpen; return s; })
+            }
+        };
+
+        // ==========================================
+        // 3. BODY
+        // ==========================================
+        const D = Mishkah.DSL;
+
+        function body(db) {
+            const t = (k) => db.i18n.dict[k]?.[db.env.lang] || k;
+
+            const NavLink = (label) => D.A({
+                attrs: { href: '#', class: 'font-bold text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors uppercase tracking-wider text-sm' }
+            }, [label]);
+
+            const FeatureCard = (num, title, desc) => D.Div({
+                attrs: { class: 'relative p-8 bg-[var(--bg-surface)] border-r-4 border-[var(--border)] hover:border-[var(--primary)] transition-all group overflow-hidden' }
+            }, [
+                D.Div({ attrs: { class: 'absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--primary)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity' } }, []),
+                D.Span({ attrs: { class: 'text-4xl font-black text-[var(--border)] group-hover:text-[var(--primary)] absolute top-4 left-6 transition-colors' } }, [num]),
+                D.Div({ attrs: { class: 'mt-8 relative z-10' } }, [
+                    D.H3({ attrs: { class: 'text-xl font-bold mb-3' } }, [title]),
+                    D.P({ attrs: { class: 'text-[var(--text-muted)] text-sm leading-relaxed' } }, [desc])
+                ])
+            ]);
+
+            return D.Div({
+                attrs: {
+                    class: 'min-h-screen flex flex-col font-sans relative',
+                    'data-theme': db.env.theme,
+                    'dir': db.env.dir,
+                    lang: db.env.lang
+                }
+            }, [
+                // Texture Overlay
+                D.Div({ attrs: { class: 'absolute inset-0 mineral-grain pointer-events-none z-0 mix-blend-overlay' } }, []),
+
+                // Navbar
+                D.Nav({ attrs: { class: 'sticky top-0 z-50 bg-[var(--bg-body)]/90 backdrop-blur border-b border-[var(--border)]' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto px-6 h-24 flex items-center justify-between' } }, [
+                        // Brand
+                        D.Div({ attrs: { class: 'flex items-center gap-4' } }, [
+                            // Abstract Stone Logo
+                            D.Div({ attrs: { class: 'w-12 h-12 bg-gradient-to-br from-[var(--primary)] to-[var(--bg-surface)] border border-[var(--border)] transform rotate-45 flex items-center justify-center shadow-lg' } }, [
+                                D.Div({ attrs: { class: 'w-6 h-6 bg-[var(--bg-surface)] transform -rotate-45' } }, [])
+                            ]),
+                            D.Div({ attrs: { class: 'flex flex-col' } }, [
+                                D.Span({ attrs: { class: 'text-2xl font-black tracking-widest uppercase' } }, [t('brand')]),
+                                D.Span({ attrs: { class: 'text-[10px] font-bold text-[var(--primary)] uppercase tracking-[0.2em]' } }, [t('brand_sub')])
+                            ])
+                        ]),
+
+                        // Desktop Menu
+                        D.Div({ attrs: { class: 'hidden md:flex items-center gap-10' } }, [
+                            NavLink(t('nav_home')),
+                            NavLink(t('nav_services')),
+                            NavLink(t('nav_projects')),
+
+                            // Lang/Theme
+                            D.Div({ attrs: { class: 'flex items-center gap-4 border-r border-[var(--border)] pr-4' } }, [
+                                D.Button({ attrs: { gkey: 'btn:lang', class: 'font-bold text-xs hover:text-[var(--primary)]' } }, [db.env.lang === 'ar' ? 'EN' : 'عربي']),
+                                D.Button({ attrs: { gkey: 'btn:theme', class: 'opacity-60 hover:opacity-100' } }, [db.env.theme === 'light' ? '🌙' : '☀️'])
+                            ])
+                        ]),
+
+                        D.Button({ attrs: { gkey: 'btn:menu', class: 'md:hidden text-2xl' } }, ['☰'])
+                    ])
+                ]),
+
+                // Mobile Menu
+                db.data.mobileMenuOpen ? D.Div({ attrs: { class: 'md:hidden bg-[var(--bg-surface)] border-b border-[var(--border)] p-6 space-y-4 relative z-40' } }, [
+                    D.A({ attrs: { href: '#', class: 'block font-bold text-lg' } }, [t('nav_home')]),
+                    D.A({ attrs: { href: '#', class: 'block font-bold text-lg' } }, [t('nav_services')]),
+                    D.A({ attrs: { href: '#', class: 'block font-bold text-lg' } }, [t('nav_contact')])
+                ]) : null,
+
+                // Hero
+                D.Header({ attrs: { class: 'relative py-32 px-6 overflow-hidden' } }, [
+                    // Geometric Decor
+                    D.Div({ attrs: { class: 'absolute top-0 left-0 w-full h-full opacity-10' } }, [
+                        D.Div({ attrs: { class: 'absolute right-0 top-0 w-1/2 h-full bg-[var(--primary)] transform -skew-x-12 origin-top-right' } }, [])
+                    ]),
+
+                    D.Div({ attrs: { class: 'max-w-4xl mx-auto text-center relative z-10' } }, [
+                        D.H1({ attrs: { class: 'text-5xl md:text-7xl font-black mb-8 leading-tight tracking-tight' } }, [t('hero_title')]),
+                        D.P({ attrs: { class: 'text-xl md:text-2xl text-[var(--text-muted)] mb-12 max-w-2xl mx-auto leading-relaxed' } }, [t('hero_desc')]),
+
+                        D.Div({ attrs: { class: 'flex flex-col sm:flex-row items-center justify-center gap-6' } }, [
+                            D.A({ attrs: { href: '#', class: 'w-full sm:w-auto px-10 py-4 bg-[var(--primary)] text-white font-bold uppercase tracking-widest hover:bg-[var(--text-main)] transition-all' } }, [t('hero_cta')]),
+                            D.A({ attrs: { href: '#', class: 'w-full sm:w-auto px-10 py-4 border border-[var(--text-muted)] font-bold uppercase tracking-widest hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all' } }, [t('hero_contact')])
+                        ])
+                    ])
+                ]),
+
+                // Services Strip
+                D.Section({ attrs: { class: 'bg-[var(--bg-surface)] border-y border-[var(--border)]' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[var(--border)]' } }, [
+                        FeatureCard('01', t('srv_struct'), t('srv_struct_desc')),
+                        FeatureCard('02', t('srv_arch'), t('srv_arch_desc')),
+                        FeatureCard('03', t('srv_geo'), t('srv_geo_desc'))
+                    ])
+                ]),
+
+                // Contact Teaser
+                D.Section({ attrs: { class: 'py-24 px-6 text-center' } }, [
+                    D.H2({ attrs: { class: 'text-3xl font-bold mb-4' } }, [t('contact_title')]),
+                    D.P({ attrs: { class: 'text-[var(--text-muted)] mb-8' } }, [t('addr_val')]),
+                    D.A({ attrs: { href: '#', class: 'inline-block text-[var(--primary)] font-black uppercase tracking-widest border-b-2 border-[var(--primary)] hover:text-[var(--text-main)] hover:border-[var(--text-main)] transition-all pb-1' } }, [t('nav_contact')])
+                ]),
+
+                // Footer
+                D.Footer({ attrs: { class: 'bg-[var(--bg-surface)] py-12 border-t border-[var(--border)] text-center text-xs text-[var(--text-muted)] uppercase tracking-widest' } }, [
+                    t('copyright')
+                ])
+
+            ]);
+        }
+
+        Mishkah.app.setBody(body);
+        Mishkah.app.create(database, orders).mount('#app');
+    </script>
+</body>
+
+</html>

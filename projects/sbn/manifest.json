@@ -1,0 +1,133 @@
+{
+  "name": "مستعمل حواء - Mostamal Hawa",
+  "short_name": "مستعمل حواء",
+  "description": "منصة متكاملة للتجارة الإلكترونية والخدمات والمعرفة",
+  "version": "2.0.0",
+  "start_url": "/projects/sbn/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "orientation": "portrait",
+  "scope": "/projects/sbn/",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["shopping", "business", "lifestyle", "education"],
+  "icons": [
+    {
+      "src": "/projects/sbn/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/projects/sbn/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/projects/sbn/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/projects/sbn/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/projects/sbn/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/projects/sbn/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/projects/sbn/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/projects/sbn/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/projects/sbn/screenshots/home.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "label": "الشاشة الرئيسية"
+    },
+    {
+      "src": "/projects/sbn/screenshots/marketplace.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "label": "المتجر الإلكتروني"
+    }
+  ],
+  "share_target": {
+    "action": "/projects/sbn/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "media",
+          "accept": ["image/*"]
+        }
+      ]
+    }
+  },
+  "shortcuts": [
+    {
+      "name": "المتجر الإلكتروني",
+      "short_name": "المتجر",
+      "description": "تصفح المنتجات المستعملة والجديدة",
+      "url": "/projects/sbn/index.html?section=marketplace",
+      "icons": [
+        {
+          "src": "/projects/sbn/icons/marketplace-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "الخدمات",
+      "short_name": "الخدمات",
+      "description": "ابحث عن مزودي الخدمات",
+      "url": "/projects/sbn/index.html?section=services",
+      "icons": [
+        {
+          "src": "/projects/sbn/icons/services-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "المعرفة",
+      "short_name": "المعرفة",
+      "description": "استكشف مقالات الويكي",
+      "url": "/projects/sbn/index.html?section=knowledge",
+      "icons": [
+        {
+          "src": "/projects/sbn/icons/knowledge-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

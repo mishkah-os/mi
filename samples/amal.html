@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أمل العايد | Amal Al-Ayed</title>
+
+    <!-- 1. TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Mishkah Core -->
+    <script src="https://ws.mas.com.eg/lib/mishkah.core.js"></script>
+
+    <!-- 3. Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 4. Global Styles -->
+    <style>
+        :root[data-theme='light'] {
+            --bg-body: #ffffff;
+            --bg-surface: #f9fbfb;
+            /* Very Light Teal Tint */
+            --text-main: #1f2937;
+            --text-muted: #5e6c77;
+            --primary: #0d9488;
+            /* Teal 600 */
+            --primary-fg: #ffffff;
+            --accent: #d4a373;
+            /* Champagne Gold */
+            --border: #e6eef0;
+        }
+
+        :root[data-theme='dark'] {
+            --bg-body: #0f172a;
+            --bg-surface: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #14b8a6;
+            /* Teal 500 */
+            --primary-fg: #ffffff;
+            --accent: #fcd34d;
+            /* Gold */
+            --border: #334155;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Almarai', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        :root[lang='en'] body {
+            font-family: 'Playfair Display', serif;
+        }
+
+        :root[lang='en'] .sans {
+            font-family: sans-serif;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Abstract Curves Background */
+        .curves-bg {
+            background-image:
+                radial-gradient(circle at 100% 0%, rgba(var(--primary), 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 0% 100%, rgba(var(--accent), 0.05) 0%, transparent 25%);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // ==========================================
+        // 1. DATABASE
+        // ==========================================
+        const database = {
+            data: { mobileMenuOpen: false },
+            env: { theme: 'light', lang: 'ar', dir: 'rtl' },
+            i18n: {
+                dict: {
+                    'brand_first': { ar: 'أمل', en: 'Amal' },
+                    'brand_last': { ar: 'العايد', en: 'Al-Ayed' },
+                    'brand_sub': { ar: 'للاستشارات الهندسية', en: 'Engineering Consultants' },
+
+                    // Nav
+                    'nav_home': { ar: 'الرئيسية', en: 'Home' },
+                    'nav_services': { ar: 'خدماتنا', en: 'Services' },
+                    'nav_portfolio': { ar: 'أعمالنا', en: 'Portfolio' },
+                    'nav_contact': { ar: 'تواصل معنا', en: 'Contact' },
+
+                    // Hero
+                    'hero_title': { ar: 'نصمم المساحات التي تلهم الحياة', en: 'Designing Spaces That Inspire Life' },
+                    'hero_desc': { ar: 'نجمع بين أناقة التصميم المعماري ودقة الهندسة لنخلق بيئات سكنية وتجارية استثنائية.', en: 'Blending architectural elegance with engineering precision to create exceptional residential and commercial environments.' },
+                    'hero_cta': { ar: 'استكشف مشاريعنا', en: 'Explore Projects' },
+                    'hero_contact': { ar: 'احجز استشارة', en: 'Book Consultation' },
+
+                    // Services
+                    'srv_interior': { ar: 'تصميم داخلي', en: 'Interior Design' },
+                    'srv_interior_desc': { ar: 'تصاميم داخلية فاخرة تعكس ذوقك الرفيع وتحقق الراحة.', en: 'Luxury interior designs reflecting your taste and ensuring comfort.' },
+                    'srv_arch': { ar: 'تصميم معماري', en: 'Architecture' },
+                    'srv_arch_desc': { ar: 'واجهات عصرية ومخططات ذكية تستغل المساحات بكفاءة.', en: 'Modern facades and smart plans utilizing spaces efficiently.' },
+                    'srv_land': { ar: 'تنسيق حدائق', en: 'Landscape' },
+                    'srv_land_desc': { ar: 'تصميم مسطحات خضراء تحول محيطك إلى واحة طبيعية.', en: 'Designing green spaces turning your surroundings into a natural oasis.' },
+
+                    // Contact
+                    'contact_title': { ar: 'لنبدأ رحلة الإبداع', en: 'Let\'s Start the Journey' },
+                    'contact_sub': { ar: 'نحن هنا لتحويل أحلامك إلى واقع ملموس.', en: 'We are here to turn your dreams into reality.' },
+                    'addr_label': { ar: 'المملكة العربية السعودية', en: 'Saudi Arabia' },
+
+                    'copyright': { ar: '© 2026 مكتب أمل العايد للاستشارات الهندسية.', en: '© 2026 Amal Al-Ayed Engineering Consultants.' }
+                }
+            }
+        };
+
+        // ==========================================
+        // 2. ORDERS
+        // ==========================================
+        const orders = {
+            'sys.theme': {
+                on: ['click'], gkeys: ['btn:theme'],
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, env: { ...s.env, theme: s.env.theme === 'light' ? 'dark' : 'light' } }))
+            },
+            'sys.lang': {
+                on: ['click'], gkeys: ['btn:lang'],
+                handler: (e, ctx) => ctx.setState(s => {
+                    const l = s.env.lang === 'ar' ? 'en' : 'ar';
+                    return { ...s, env: { ...s.env, lang: l, dir: l === 'ar' ? 'rtl' : 'ltr' } };
+                })
+            },
+            'ui.menu': {
+                on: ['click'], gkeys: ['btn:menu'],
+                handler: (e, ctx) => ctx.setState(s => { s.data.mobileMenuOpen = !s.data.mobileMenuOpen; return s; })
+            }
+        };
+
+        // ==========================================
+        // 3. BODY
+        // ==========================================
+        const D = Mishkah.DSL;
+
+        function body(db) {
+            const t = (k) => db.i18n.dict[k]?.[db.env.lang] || k;
+
+            const NavLink = (label) => D.A({
+                attrs: { href: '#', class: 'text-sm font-medium text-[var(--text-main)] hover:text-[var(--primary)] transition-colors' }
+            }, [label]);
+
+            const ServiceCard = (img, title, desc) => D.Div({
+                attrs: { class: 'group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500' }
+            }, [
+                // Image Placeholder
+                D.Div({ attrs: { class: 'h-64 bg-[var(--bg-surface)] flex items-center justify-center text-6xl text-[var(--primary)] group-hover:scale-110 transition-transform duration-700 bg-opacity-50' } }, [img]),
+                // Content Overlay
+                D.Div({ attrs: { class: 'absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[var(--bg-body)] to-transparent pt-20' } }, [
+                    D.H3({ attrs: { class: 'text-xl font-bold mb-2' } }, [title]),
+                    D.P({ attrs: { class: 'text-[var(--text-muted)] text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300' } }, [desc])
+                ])
+            ]);
+
+            return D.Div({
+                attrs: {
+                    class: 'min-h-screen flex flex-col curves-bg',
+                    'data-theme': db.env.theme,
+                    'dir': db.env.dir,
+                    lang: db.env.lang
+                }
+            }, [
+                // Navbar
+                D.Nav({ attrs: { class: 'sticky top-0 z-50 bg-[var(--bg-body)]/80 backdrop-blur-lg border-b border-[var(--border)]' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto px-6 h-20 flex items-center justify-between' } }, [
+                        // Brand
+                        D.Div({ attrs: { class: 'flex items-center gap-2' } }, [
+                            D.Div({ attrs: { class: 'w-8 h-8 rounded-full border border-[var(--accent)] flex items-center justify-center text-[var(--primary)] font-serif italic font-bold' } }, ['A']),
+                            D.Div({ attrs: { class: 'flex flex-col' } }, [
+                                D.Span({ attrs: { class: 'font-bold text-lg leading-none tracking-wide' } }, [
+                                    D.Span({ attrs: { class: 'text-[var(--primary)]' } }, [t('brand_first')]),
+                                    D.Span({}, [' ' + t('brand_last')])
+                                ]),
+                                D.Span({ attrs: { class: 'text-[9px] text-[var(--text-muted)] uppercase tracking-widest' } }, [t('brand_sub')])
+                            ])
+                        ]),
+
+                        // Desktop Links
+                        D.Div({ attrs: { class: 'hidden md:flex items-center gap-8' } }, [
+                            NavLink(t('nav_home')),
+                            NavLink(t('nav_services')),
+                            NavLink(t('nav_portfolio')),
+                        ]),
+
+                        // Actions
+                        D.Div({ attrs: { class: 'flex items-center gap-4' } }, [
+                            D.Button({ attrs: { class: 'hidden md:block px-5 py-2 bg-[var(--primary)] text-white text-xs font-bold rounded-full hover:bg-[var(--accent)] transition-colors shadow-lg shadow-teal-500/20' } }, [t('nav_contact')]),
+                            D.Div({ attrs: { class: 'w-px h-6 bg-[var(--border)] hidden md:block' } }, []),
+                            D.Button({ attrs: { gkey: 'btn:lang', class: 'text-xs font-bold uppercase hover:text-[var(--primary)]' } }, [db.env.lang === 'ar' ? 'EN' : 'عربي']),
+                            D.Button({ attrs: { gkey: 'btn:theme', class: 'text-lg opacity-70 hover:opacity-100' } }, [db.env.theme === 'light' ? '🌙' : '☀️']),
+                            D.Button({ attrs: { gkey: 'btn:menu', class: 'md:hidden text-xl' } }, ['☰'])
+                        ])
+                    ])
+                ]),
+
+                // Mobile Menu
+                db.data.mobileMenuOpen ? D.Div({ attrs: { class: 'md:hidden bg-[var(--bg-body)] border-b border-[var(--border)] p-6 space-y-4' } }, [
+                    D.A({ attrs: { href: '#', class: 'block font-bold text-lg text-[var(--text-main)]' } }, [t('nav_home')]),
+                    D.A({ attrs: { href: '#', class: 'block font-bold text-lg text-[var(--text-main)]' } }, [t('nav_services')]),
+                    D.A({ attrs: { href: '#', class: 'block font-bold text-lg text-[var(--text-main)]' } }, [t('nav_portfolio')])
+                ]) : null,
+
+                // Hero Section
+                D.Header({ attrs: { class: 'relative py-24 md:py-32 px-6' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16' } }, [
+                        D.Div({ attrs: { class: 'flex-1 text-center md:text-start' } }, [
+                            D.Span({ attrs: { class: 'inline-block mb-4 text-[var(--accent)] font-serif italic text-lg' } }, ['Est. 2026']),
+                            D.H1({ attrs: { class: 'text-5xl md:text-7xl font-bold mb-6 leading-tight text-[var(--text-main)]' } }, [t('hero_title')]),
+                            D.P({ attrs: { class: 'text-lg text-[var(--text-muted)] mb-10 leading-relaxed max-w-lg' } }, [t('hero_desc')]),
+                            D.Div({ attrs: { class: 'flex items-center justify-center md:justify-start gap-4' } }, [
+                                D.Button({ attrs: { class: 'px-8 py-3 bg-[var(--text-main)] text-[var(--bg-body)] font-medium rounded-full hover:bg-[var(--primary)] transition-colors' } }, [t('hero_cta')]),
+                                D.Button({ attrs: { class: 'px-8 py-3 border border-[var(--border)] font-medium rounded-full hover:border-[var(--text-main)] transition-colors' } }, [t('hero_contact')])
+                            ])
+                        ]),
+                        // Visual
+                        D.Div({ attrs: { class: 'flex-1 relative w-full aspect-square md:aspect-auto md:h-[500px]' } }, [
+                            D.Div({ attrs: { class: 'absolute inset-0 bg-[var(--primary)] rounded-[3rem] opacity-10 transform rotate-6' } }, []),
+                            D.Div({ attrs: { class: 'absolute inset-0 bg-[var(--bg-surface)] rounded-[3rem] border border-[var(--border)] flex items-center justify-center overflow-hidden shadow-2xl' } }, [
+                                D.Div({ attrs: { class: 'text-[120px] opacity-10 filter grayscale blur-sm' } }, ['🏡'])
+                            ])
+                        ])
+                    ])
+                ]),
+
+                // Services Section
+                D.Section({ attrs: { class: 'py-24 bg-[var(--bg-surface)]' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto px-6' } }, [
+                        D.Div({ attrs: { class: 'text-center mb-16' } }, [
+                            D.H2({ attrs: { class: 'text-3xl font-bold mb-4 font-serif italic' } }, [t('nav_services')]),
+                            D.Div({ attrs: { class: 'w-12 h-1 bg-[var(--accent)] mx-auto' } }, [])
+                        ]),
+
+                        D.Div({ attrs: { class: 'grid md:grid-cols-3 gap-8' } }, [
+                            ServiceCard('🛋️', t('srv_interior'), t('srv_interior_desc')),
+                            ServiceCard('🏛️', t('srv_arch'), t('srv_arch_desc')),
+                            ServiceCard('🌳', t('srv_land'), t('srv_land_desc'))
+                        ])
+                    ])
+                ]),
+
+                // Contact Section (Minimal)
+                D.Section({ attrs: { class: 'py-24 px-6 relative overflow-hidden' } }, [
+                    D.Div({ attrs: { class: 'absolute inset-0 bg-[var(--primary)] opacity-5 transform -skew-y-3 scale-110' } }, []),
+                    D.Div({ attrs: { class: 'max-w-3xl mx-auto text-center relative z-10' } }, [
+                        D.H2({ attrs: { class: 'text-4xl md:text-5xl font-bold mb-6' } }, [t('contact_title')]),
+                        D.P({ attrs: { class: 'text-xl text-[var(--text-muted)] mb-10' } }, [t('contact_sub')]),
+                        D.A({ attrs: { href: '#', class: 'inline-flex items-center justify-center w-16 h-16 rounded-full bg-[var(--primary)] text-white text-2xl shadow-xl hover:scale-110 hover:rotate-12 transition-all' } }, ['✉️'])
+                    ])
+                ]),
+
+                // Footer
+                D.Footer({ attrs: { class: 'border-t border-[var(--border)] py-12 text-center' } }, [
+                    D.Div({ attrs: { class: 'mb-4 font-bold text-lg' } }, [t('brand_first'), ' ', t('brand_last')]),
+                    D.Div({ attrs: { class: 'text-sm text-[var(--text-muted)]' } }, [t('copyright')])
+                ])
+
+            ]);
+        }
+
+        Mishkah.app.setBody(body);
+        Mishkah.app.create(database, orders).mount('#app');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mishkah Vue - Final Features Test</title>
+    <script src="../mishkah.core.js"></script>
+    <script src="../mishkah-vue.js"></script>
+    <script src="../mishkah-vue-jsx.js"></script>
+    <style>
+        body {
+            background: #111;
+            color: #fff;
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .box {
+            border: 1px solid #444;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        .success {
+            color: #4ade80;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/mishkah-vue">
+        // 1. Inject Component
+        const ChildInjector = {
+            inject: ['themeColor'],
+            render() {
+                return (
+                    <div class="box" style={'border-color:' + this.themeColor}>
+                        <h4>Child Injector</h4>
+                        <p>Injected Color: <span id="injected-color">{this.themeColor}</span></p>
+                    </div>
+                )
+            }
+        }
+
+        const MiddleComponent = {
+            render() {
+                return <div><ChildInjector /></div>
+            }
+        }
+
+        const App = {
+            // Test Provide
+            provide() {
+                return {
+                    themeColor: '#4ade80' // Green
+                }
+            },
+            data() {
+                return {
+                    items: ['Apple', 'Banana', 'Cherry'],
+                    deepObj: { nested: { count: 0 } },
+                    watchLog: []
+                }
+            },
+            watch: {
+                // Test Deep Watch
+                deepObj: {
+                    handler(val) {
+                        this.watchLog.push('Deep: ' + val.nested.count);
+                    },
+                    deep: true
+                },
+                // Test Immediate
+                'deepObj.nested.count': {
+                    handler(val) {
+                        this.watchLog.push('Immediate: ' + val);
+                    },
+                    immediate: true
+                }
+            },
+            methods: {
+                addItem() {
+                    this.items.push('Date');
+                },
+                incDeep() {
+                    this.deepObj.nested.count++;
+                }
+            },
+            render() {
+                return (
+                    <div class="box">
+                        <h1>Final Features Test</h1>
+                        
+                        {/* Test 1: Provide/Inject */}
+                        <h3>1. Dependency Injection</h3>
+                        <MiddleComponent />
+
+                        {/* Test 2: v-for */}
+                        <h3>2. v-for List</h3>
+                        <ul>
+                            <li v-for="item in this.items" key={item}>
+                                {item}
+                            </li>
+                        </ul>
+                        <button onClick={this.addItem} id="btn-add">Add Item</button>
+
+                        {/* Test 3: Watch Options */}
+                        <h3>3. Watchers</h3>
+                        <p>Watch Log: <span id="watch-log">{this.watchLog.join(', ')}</span></p>
+                        <button onClick={this.incDeep} id="btn-deep">Increment Deep</button>
+                    </div>
+                )
+            }
+        }
+
+        Mishkah.Vue.createApp(App).mount('#app');
+    </script>
+</body>
+
+</html>

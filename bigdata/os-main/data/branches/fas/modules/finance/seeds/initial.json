@@ -1,0 +1,1340 @@
+{
+  "fin_chart_of_accounts": [
+    {
+      "id": "coa_fas_1",
+      "company_id": "fas_co",
+      "parent_id": null,
+      "code": "1",
+      "name": "الاصول",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_2",
+      "company_id": "fas_co",
+      "parent_id": null,
+      "code": "2",
+      "name": "الخصوم",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_3",
+      "company_id": "fas_co",
+      "parent_id": null,
+      "code": "3",
+      "name": "المصروفات",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_4",
+      "company_id": "fas_co",
+      "parent_id": null,
+      "code": "4",
+      "name": "الإيرادات",
+      "account_type": "REVENUE",
+      "report_type": "PL",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_11",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_1",
+      "code": "11",
+      "name": "الاصول المتداولة",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_12",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_1",
+      "code": "12",
+      "name": "الاصول الثابتة",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_13",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_1",
+      "code": "13",
+      "name": "ارصدة مدينة اخري",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_21",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_2",
+      "code": "21",
+      "name": "حقوق الملكية",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_22",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_2",
+      "code": "22",
+      "name": "الدائنون",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_31",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_3",
+      "code": "31",
+      "name": "المصروفات الادارية والعمومية",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_32",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_3",
+      "code": "32",
+      "name": "مصروفات أولية",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_33",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_3",
+      "code": "33",
+      "name": "مصاريف تشغيل",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_41",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_4",
+      "code": "41",
+      "name": "إيرادات المشاريع",
+      "account_type": "REVENUE",
+      "report_type": "PL",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_42",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_4",
+      "code": "42",
+      "name": "مصاريف فاس ت",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_45",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_4",
+      "code": "45",
+      "name": "مصروفات مشاريع",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_111",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_11",
+      "code": "111",
+      "name": "الصندوق",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_112",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_11",
+      "code": "112",
+      "name": "االبنوك",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_113",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_11",
+      "code": "113",
+      "name": "مدينون متنوعون",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 3,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_121",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_12",
+      "code": "121",
+      "name": "سيارات",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_122",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_12",
+      "code": "122",
+      "name": "الات ومعدات",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_123",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_12",
+      "code": "123",
+      "name": "اثاث واداوات مكتبية",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_124",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_12",
+      "code": "124",
+      "name": "أجهزة وبرامج",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_125",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_12",
+      "code": "125",
+      "name": "مباني",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_131",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_13",
+      "code": "131",
+      "name": "مصروفات مدفوعة مقدما",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_211",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_21",
+      "code": "211",
+      "name": "راس المال",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_212",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_21",
+      "code": "212",
+      "name": "جاري الشركاء",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_213",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_21",
+      "code": "213",
+      "name": "ارباح وخسائر",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_221",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_22",
+      "code": "221",
+      "name": "الموردين",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_222",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_22",
+      "code": "222",
+      "name": "ارصدة دائنة اخري",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_223",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_22",
+      "code": "223",
+      "name": "شركات شقيقة",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_224",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_22",
+      "code": "224",
+      "name": "المصروفات المستحقة",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_225",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_22",
+      "code": "225",
+      "name": "مجمع اهلاك الأصول",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 3,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_226",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_22",
+      "code": "226",
+      "name": "المخصصات",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 3,
+      "is_group": true
+    },
+    {
+      "id": "coa_fas_421",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_42",
+      "code": "421",
+      "name": "مصاريف فاس ت",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_423",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_42",
+      "code": "423",
+      "name": "مصروفات قسم الاشراف",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_1131",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_113",
+      "code": "1131",
+      "name": "المقاولون",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_1141",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_11",
+      "code": "1141",
+      "name": "سلف الموظفين",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_1151",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_11",
+      "code": "1151",
+      "name": "عهد نقديه",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_2251",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_225",
+      "code": "2251",
+      "name": "مجمع اهلاك  سيارات",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_425005",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_42",
+      "code": "425005",
+      "name": "مصروفات مشروع خالد المطيري",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_425006",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_42",
+      "code": "425006",
+      "name": "مصروفات مشروع نهي الراجحي",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_425007",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_42",
+      "code": "425007",
+      "name": "مصروف فيلا فهد الراشد",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_2260001",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_226",
+      "code": "2260001",
+      "name": "مخصص نهاية الخدمة",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_2260002",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_226",
+      "code": "2260002",
+      "name": "مخصص بدل إجازة",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_2260003",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_226",
+      "code": "2260003",
+      "name": "مخصص تذاكر سفر",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_fas_2260004",
+      "company_id": "fas_co",
+      "parent_id": "coa_fas_226",
+      "code": "2260004",
+      "name": "مخصص تامينات اجتماعية",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    }
+  ],
+  "fin_chart_of_accounts_lang": [
+    {
+      "id": "coa_lang_fas_1_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_1",
+      "lang_code": "ar",
+      "name": "الاصول"
+    },
+    {
+      "id": "coa_lang_fas_1_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_1",
+      "lang_code": "en",
+      "name": "الاصول"
+    },
+    {
+      "id": "coa_lang_fas_2_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_2",
+      "lang_code": "ar",
+      "name": "الخصوم"
+    },
+    {
+      "id": "coa_lang_fas_2_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_2",
+      "lang_code": "en",
+      "name": "الخصوم"
+    },
+    {
+      "id": "coa_lang_fas_3_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_3",
+      "lang_code": "ar",
+      "name": "المصروفات"
+    },
+    {
+      "id": "coa_lang_fas_3_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_3",
+      "lang_code": "en",
+      "name": "المصروفات"
+    },
+    {
+      "id": "coa_lang_fas_4_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_4",
+      "lang_code": "ar",
+      "name": "الإيرادات"
+    },
+    {
+      "id": "coa_lang_fas_4_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_4",
+      "lang_code": "en",
+      "name": "الإيرادات"
+    },
+    {
+      "id": "coa_lang_fas_11_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_11",
+      "lang_code": "ar",
+      "name": "الاصول المتداولة"
+    },
+    {
+      "id": "coa_lang_fas_11_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_11",
+      "lang_code": "en",
+      "name": "الاصول المتداولة"
+    },
+    {
+      "id": "coa_lang_fas_12_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_12",
+      "lang_code": "ar",
+      "name": "الاصول الثابتة"
+    },
+    {
+      "id": "coa_lang_fas_12_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_12",
+      "lang_code": "en",
+      "name": "الاصول الثابتة"
+    },
+    {
+      "id": "coa_lang_fas_13_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_13",
+      "lang_code": "ar",
+      "name": "ارصدة مدينة اخري"
+    },
+    {
+      "id": "coa_lang_fas_13_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_13",
+      "lang_code": "en",
+      "name": "ارصدة مدينة اخري"
+    },
+    {
+      "id": "coa_lang_fas_21_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_21",
+      "lang_code": "ar",
+      "name": "حقوق الملكية"
+    },
+    {
+      "id": "coa_lang_fas_21_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_21",
+      "lang_code": "en",
+      "name": "حقوق الملكية"
+    },
+    {
+      "id": "coa_lang_fas_22_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_22",
+      "lang_code": "ar",
+      "name": "الدائنون"
+    },
+    {
+      "id": "coa_lang_fas_22_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_22",
+      "lang_code": "en",
+      "name": "الدائنون"
+    },
+    {
+      "id": "coa_lang_fas_31_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_31",
+      "lang_code": "ar",
+      "name": "المصروفات الادارية والعمومية"
+    },
+    {
+      "id": "coa_lang_fas_31_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_31",
+      "lang_code": "en",
+      "name": "المصروفات الادارية والعمومية"
+    },
+    {
+      "id": "coa_lang_fas_32_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_32",
+      "lang_code": "ar",
+      "name": "مصروفات أولية"
+    },
+    {
+      "id": "coa_lang_fas_32_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_32",
+      "lang_code": "en",
+      "name": "مصروفات أولية"
+    },
+    {
+      "id": "coa_lang_fas_33_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_33",
+      "lang_code": "ar",
+      "name": "مصاريف تشغيل"
+    },
+    {
+      "id": "coa_lang_fas_33_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_33",
+      "lang_code": "en",
+      "name": "مصاريف تشغيل"
+    },
+    {
+      "id": "coa_lang_fas_41_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_41",
+      "lang_code": "ar",
+      "name": "إيرادات المشاريع"
+    },
+    {
+      "id": "coa_lang_fas_41_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_41",
+      "lang_code": "en",
+      "name": "إيرادات المشاريع"
+    },
+    {
+      "id": "coa_lang_fas_42_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_42",
+      "lang_code": "ar",
+      "name": "مصاريف فاس ت"
+    },
+    {
+      "id": "coa_lang_fas_42_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_42",
+      "lang_code": "en",
+      "name": "مصاريف فاس ت"
+    },
+    {
+      "id": "coa_lang_fas_45_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_45",
+      "lang_code": "ar",
+      "name": "مصروفات مشاريع"
+    },
+    {
+      "id": "coa_lang_fas_45_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_45",
+      "lang_code": "en",
+      "name": "مصروفات مشاريع"
+    },
+    {
+      "id": "coa_lang_fas_111_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_111",
+      "lang_code": "ar",
+      "name": "الصندوق"
+    },
+    {
+      "id": "coa_lang_fas_111_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_111",
+      "lang_code": "en",
+      "name": "الصندوق"
+    },
+    {
+      "id": "coa_lang_fas_112_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_112",
+      "lang_code": "ar",
+      "name": "االبنوك"
+    },
+    {
+      "id": "coa_lang_fas_112_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_112",
+      "lang_code": "en",
+      "name": "االبنوك"
+    },
+    {
+      "id": "coa_lang_fas_113_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_113",
+      "lang_code": "ar",
+      "name": "مدينون متنوعون"
+    },
+    {
+      "id": "coa_lang_fas_113_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_113",
+      "lang_code": "en",
+      "name": "مدينون متنوعون"
+    },
+    {
+      "id": "coa_lang_fas_121_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_121",
+      "lang_code": "ar",
+      "name": "سيارات"
+    },
+    {
+      "id": "coa_lang_fas_121_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_121",
+      "lang_code": "en",
+      "name": "سيارات"
+    },
+    {
+      "id": "coa_lang_fas_122_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_122",
+      "lang_code": "ar",
+      "name": "الات ومعدات"
+    },
+    {
+      "id": "coa_lang_fas_122_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_122",
+      "lang_code": "en",
+      "name": "الات ومعدات"
+    },
+    {
+      "id": "coa_lang_fas_123_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_123",
+      "lang_code": "ar",
+      "name": "اثاث واداوات مكتبية"
+    },
+    {
+      "id": "coa_lang_fas_123_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_123",
+      "lang_code": "en",
+      "name": "اثاث واداوات مكتبية"
+    },
+    {
+      "id": "coa_lang_fas_124_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_124",
+      "lang_code": "ar",
+      "name": "أجهزة وبرامج"
+    },
+    {
+      "id": "coa_lang_fas_124_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_124",
+      "lang_code": "en",
+      "name": "أجهزة وبرامج"
+    },
+    {
+      "id": "coa_lang_fas_125_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_125",
+      "lang_code": "ar",
+      "name": "مباني"
+    },
+    {
+      "id": "coa_lang_fas_125_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_125",
+      "lang_code": "en",
+      "name": "مباني"
+    },
+    {
+      "id": "coa_lang_fas_131_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_131",
+      "lang_code": "ar",
+      "name": "مصروفات مدفوعة مقدما"
+    },
+    {
+      "id": "coa_lang_fas_131_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_131",
+      "lang_code": "en",
+      "name": "مصروفات مدفوعة مقدما"
+    },
+    {
+      "id": "coa_lang_fas_211_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_211",
+      "lang_code": "ar",
+      "name": "راس المال"
+    },
+    {
+      "id": "coa_lang_fas_211_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_211",
+      "lang_code": "en",
+      "name": "راس المال"
+    },
+    {
+      "id": "coa_lang_fas_212_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_212",
+      "lang_code": "ar",
+      "name": "جاري الشركاء"
+    },
+    {
+      "id": "coa_lang_fas_212_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_212",
+      "lang_code": "en",
+      "name": "جاري الشركاء"
+    },
+    {
+      "id": "coa_lang_fas_213_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_213",
+      "lang_code": "ar",
+      "name": "ارباح وخسائر"
+    },
+    {
+      "id": "coa_lang_fas_213_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_213",
+      "lang_code": "en",
+      "name": "ارباح وخسائر"
+    },
+    {
+      "id": "coa_lang_fas_221_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_221",
+      "lang_code": "ar",
+      "name": "الموردين"
+    },
+    {
+      "id": "coa_lang_fas_221_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_221",
+      "lang_code": "en",
+      "name": "الموردين"
+    },
+    {
+      "id": "coa_lang_fas_222_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_222",
+      "lang_code": "ar",
+      "name": "ارصدة دائنة اخري"
+    },
+    {
+      "id": "coa_lang_fas_222_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_222",
+      "lang_code": "en",
+      "name": "ارصدة دائنة اخري"
+    },
+    {
+      "id": "coa_lang_fas_223_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_223",
+      "lang_code": "ar",
+      "name": "شركات شقيقة"
+    },
+    {
+      "id": "coa_lang_fas_223_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_223",
+      "lang_code": "en",
+      "name": "شركات شقيقة"
+    },
+    {
+      "id": "coa_lang_fas_224_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_224",
+      "lang_code": "ar",
+      "name": "المصروفات المستحقة"
+    },
+    {
+      "id": "coa_lang_fas_224_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_224",
+      "lang_code": "en",
+      "name": "المصروفات المستحقة"
+    },
+    {
+      "id": "coa_lang_fas_225_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_225",
+      "lang_code": "ar",
+      "name": "مجمع اهلاك الأصول"
+    },
+    {
+      "id": "coa_lang_fas_225_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_225",
+      "lang_code": "en",
+      "name": "مجمع اهلاك الأصول"
+    },
+    {
+      "id": "coa_lang_fas_226_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_226",
+      "lang_code": "ar",
+      "name": "المخصصات"
+    },
+    {
+      "id": "coa_lang_fas_226_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_226",
+      "lang_code": "en",
+      "name": "المخصصات"
+    },
+    {
+      "id": "coa_lang_fas_421_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_421",
+      "lang_code": "ar",
+      "name": "مصاريف فاس ت"
+    },
+    {
+      "id": "coa_lang_fas_421_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_421",
+      "lang_code": "en",
+      "name": "مصاريف فاس ت"
+    },
+    {
+      "id": "coa_lang_fas_423_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_423",
+      "lang_code": "ar",
+      "name": "مصروفات قسم الاشراف"
+    },
+    {
+      "id": "coa_lang_fas_423_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_423",
+      "lang_code": "en",
+      "name": "مصروفات قسم الاشراف"
+    },
+    {
+      "id": "coa_lang_fas_1131_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_1131",
+      "lang_code": "ar",
+      "name": "المقاولون"
+    },
+    {
+      "id": "coa_lang_fas_1131_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_1131",
+      "lang_code": "en",
+      "name": "المقاولون"
+    },
+    {
+      "id": "coa_lang_fas_1141_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_1141",
+      "lang_code": "ar",
+      "name": "سلف الموظفين"
+    },
+    {
+      "id": "coa_lang_fas_1141_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_1141",
+      "lang_code": "en",
+      "name": "سلف الموظفين"
+    },
+    {
+      "id": "coa_lang_fas_1151_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_1151",
+      "lang_code": "ar",
+      "name": "عهد نقديه"
+    },
+    {
+      "id": "coa_lang_fas_1151_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_1151",
+      "lang_code": "en",
+      "name": "عهد نقديه"
+    },
+    {
+      "id": "coa_lang_fas_2251_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_2251",
+      "lang_code": "ar",
+      "name": "مجمع اهلاك  سيارات"
+    },
+    {
+      "id": "coa_lang_fas_2251_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_2251",
+      "lang_code": "en",
+      "name": "مجمع اهلاك  سيارات"
+    },
+    {
+      "id": "coa_lang_fas_425005_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_425005",
+      "lang_code": "ar",
+      "name": "مصروفات مشروع خالد المطيري"
+    },
+    {
+      "id": "coa_lang_fas_425005_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_425005",
+      "lang_code": "en",
+      "name": "مصروفات مشروع خالد المطيري"
+    },
+    {
+      "id": "coa_lang_fas_425006_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_425006",
+      "lang_code": "ar",
+      "name": "مصروفات مشروع نهي الراجحي"
+    },
+    {
+      "id": "coa_lang_fas_425006_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_425006",
+      "lang_code": "en",
+      "name": "مصروفات مشروع نهي الراجحي"
+    },
+    {
+      "id": "coa_lang_fas_425007_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_425007",
+      "lang_code": "ar",
+      "name": "مصروف فيلا فهد الراشد"
+    },
+    {
+      "id": "coa_lang_fas_425007_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_425007",
+      "lang_code": "en",
+      "name": "مصروف فيلا فهد الراشد"
+    },
+    {
+      "id": "coa_lang_fas_2260001_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_2260001",
+      "lang_code": "ar",
+      "name": "مخصص نهاية الخدمة"
+    },
+    {
+      "id": "coa_lang_fas_2260001_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_2260001",
+      "lang_code": "en",
+      "name": "مخصص نهاية الخدمة"
+    },
+    {
+      "id": "coa_lang_fas_2260002_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_2260002",
+      "lang_code": "ar",
+      "name": "مخصص بدل إجازة"
+    },
+    {
+      "id": "coa_lang_fas_2260002_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_2260002",
+      "lang_code": "en",
+      "name": "مخصص بدل إجازة"
+    },
+    {
+      "id": "coa_lang_fas_2260003_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_2260003",
+      "lang_code": "ar",
+      "name": "مخصص تذاكر سفر"
+    },
+    {
+      "id": "coa_lang_fas_2260003_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_2260003",
+      "lang_code": "en",
+      "name": "مخصص تذاكر سفر"
+    },
+    {
+      "id": "coa_lang_fas_2260004_ar",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_2260004",
+      "lang_code": "ar",
+      "name": "مخصص تامينات اجتماعية"
+    },
+    {
+      "id": "coa_lang_fas_2260004_en",
+      "company_id": "fas_co",
+      "ref_id": "coa_fas_2260004",
+      "lang_code": "en",
+      "name": "مخصص تامينات اجتماعية"
+    }
+  ]
+}

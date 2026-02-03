@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mishkah SolidJS Layer Test</title>
+    <style>
+        body {
+            font-family: system-ui;
+            padding: 20px;
+        }
+
+        .card {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+            background: #2c4f7c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #446b9e;
+        }
+    </style>
+    <script src="../mishkah.core.js"></script>
+    <script src="../mishkah-react.js"></script>
+    <script src="../mishkah-solid.js"></script>
+</head>
+
+<body>
+
+    <div id="app-solid"></div>
+
+    <script>
+        const { render, createSignal, createEffect, createMemo, html, Show } = Mishkah.Solid;
+
+        function Counter() {
+            // 1. Signals (Getter/Setter)
+            const [count, setCount] = createSignal(0);
+            const [show, setShow] = createSignal(true);
+
+            // 2. Derived (Memo)
+            const double = createMemo(() => count() * 2);
+
+            // 3. Effect
+            createEffect(() => {
+                console.log('Solid Effect: Count is', count());
+            });
+
+            // 4. Template
+            return html`
+                <div class="card">
+                    <h2>SolidJS (Signals) 🚀</h2>
+                    <p>Count: <strong>${() => count()}</strong> (Double: ${() => double()})</p>
+                    
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <button onclick="${() => setCount(c => c + 1)}">Increment</button>
+                        <button onclick="${() => setShow(s => !s)}" style="background: #666;">Toggle Info</button>
+                    </div>
+
+                    <!-- Control Flow Component -->
+                    ${Show({
+                when: show,
+                children: html`<p style="color: #666; font-size: 0.9em;">
+                            <em>This is a "fine-grained" signal update simulation.</em>
+                        </p>`
+            })}
+                </div>
+            `;
+        }
+
+        render(Counter, document.getElementById('app-solid'));
+
+    </script>
+</body>
+
+</html>

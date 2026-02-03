@@ -1,0 +1,789 @@
+{
+  "fin_chart_of_accounts": [
+    {
+      "id": "coa_hematet_1",
+      "company_id": "hematet_co",
+      "parent_id": null,
+      "code": "1",
+      "name": "الاصول",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_hematet_2",
+      "company_id": "hematet_co",
+      "parent_id": null,
+      "code": "2",
+      "name": "الخصوم",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_hematet_3",
+      "company_id": "hematet_co",
+      "parent_id": null,
+      "code": "3",
+      "name": "المصروفات",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_hematet_4",
+      "company_id": "hematet_co",
+      "parent_id": null,
+      "code": "4",
+      "name": "إيرادات",
+      "account_type": "REVENUE",
+      "report_type": "PL",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_hematet_11",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_1",
+      "code": "11",
+      "name": "الاصول المتداولة",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_hematet_21",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_2",
+      "code": "21",
+      "name": "الخصوم المتداولة",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_hematet_22",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_2",
+      "code": "22",
+      "name": "حقوق الملكية",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_hematet_31",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_3",
+      "code": "31",
+      "name": "مصاريف عمومية وإدارية",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_32",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_3",
+      "code": "32",
+      "name": "مصاريف أولية",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_33",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_3",
+      "code": "33",
+      "name": "مصاريف تشغيل",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_41",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_4",
+      "code": "41",
+      "name": "إيرادات النشاط",
+      "account_type": "REVENUE",
+      "report_type": "PL",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_42",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_4",
+      "code": "42",
+      "name": "إيرادات أخرى",
+      "account_type": "REVENUE",
+      "report_type": "PL",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_111",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_11",
+      "code": "111",
+      "name": "النقد وما فى حكمة",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 3,
+      "is_group": true
+    },
+    {
+      "id": "coa_hematet_112",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_11",
+      "code": "112",
+      "name": "عملاء",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_113",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_11",
+      "code": "113",
+      "name": "أرصدة مدينة أخرى",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_114",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_11",
+      "code": "114",
+      "name": "عهد",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_115",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_11",
+      "code": "115",
+      "name": "سلف",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_211",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_21",
+      "code": "211",
+      "name": "دائنون تجاريون",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_212",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_21",
+      "code": "212",
+      "name": "أطراف ذات علاقة",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_213",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_21",
+      "code": "213",
+      "name": "ارصدة دائنة اخري",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_214",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_21",
+      "code": "214",
+      "name": "مخصصات",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_221",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_22",
+      "code": "221",
+      "name": "رأس المال وحقوق الملكية",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 3,
+      "is_group": true
+    },
+    {
+      "id": "coa_hematet_2211",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_221",
+      "code": "2211",
+      "name": "رأس المال",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_2212",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_221",
+      "code": "2212",
+      "name": "حقوق الملكية",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_1110001",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_111",
+      "code": "1110001",
+      "name": "الصندوق",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_1110002",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_111",
+      "code": "1110002",
+      "name": "بنك الإنماء",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_hematet_1110004",
+      "company_id": "hematet_co",
+      "parent_id": "coa_hematet_111",
+      "code": "1110004",
+      "name": "حساب الراجحي 7000",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    }
+  ],
+  "fin_chart_of_accounts_lang": [
+    {
+      "id": "coa_lang_hematet_1_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_1",
+      "lang_code": "ar",
+      "name": "الاصول"
+    },
+    {
+      "id": "coa_lang_hematet_1_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_1",
+      "lang_code": "en",
+      "name": "الاصول"
+    },
+    {
+      "id": "coa_lang_hematet_2_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_2",
+      "lang_code": "ar",
+      "name": "الخصوم"
+    },
+    {
+      "id": "coa_lang_hematet_2_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_2",
+      "lang_code": "en",
+      "name": "الخصوم"
+    },
+    {
+      "id": "coa_lang_hematet_3_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_3",
+      "lang_code": "ar",
+      "name": "المصروفات"
+    },
+    {
+      "id": "coa_lang_hematet_3_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_3",
+      "lang_code": "en",
+      "name": "المصروفات"
+    },
+    {
+      "id": "coa_lang_hematet_4_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_4",
+      "lang_code": "ar",
+      "name": "إيرادات"
+    },
+    {
+      "id": "coa_lang_hematet_4_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_4",
+      "lang_code": "en",
+      "name": "إيرادات"
+    },
+    {
+      "id": "coa_lang_hematet_11_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_11",
+      "lang_code": "ar",
+      "name": "الاصول المتداولة"
+    },
+    {
+      "id": "coa_lang_hematet_11_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_11",
+      "lang_code": "en",
+      "name": "الاصول المتداولة"
+    },
+    {
+      "id": "coa_lang_hematet_21_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_21",
+      "lang_code": "ar",
+      "name": "الخصوم المتداولة"
+    },
+    {
+      "id": "coa_lang_hematet_21_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_21",
+      "lang_code": "en",
+      "name": "الخصوم المتداولة"
+    },
+    {
+      "id": "coa_lang_hematet_22_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_22",
+      "lang_code": "ar",
+      "name": "حقوق الملكية"
+    },
+    {
+      "id": "coa_lang_hematet_22_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_22",
+      "lang_code": "en",
+      "name": "حقوق الملكية"
+    },
+    {
+      "id": "coa_lang_hematet_31_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_31",
+      "lang_code": "ar",
+      "name": "مصاريف عمومية وإدارية"
+    },
+    {
+      "id": "coa_lang_hematet_31_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_31",
+      "lang_code": "en",
+      "name": "مصاريف عمومية وإدارية"
+    },
+    {
+      "id": "coa_lang_hematet_32_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_32",
+      "lang_code": "ar",
+      "name": "مصاريف أولية"
+    },
+    {
+      "id": "coa_lang_hematet_32_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_32",
+      "lang_code": "en",
+      "name": "مصاريف أولية"
+    },
+    {
+      "id": "coa_lang_hematet_33_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_33",
+      "lang_code": "ar",
+      "name": "مصاريف تشغيل"
+    },
+    {
+      "id": "coa_lang_hematet_33_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_33",
+      "lang_code": "en",
+      "name": "مصاريف تشغيل"
+    },
+    {
+      "id": "coa_lang_hematet_41_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_41",
+      "lang_code": "ar",
+      "name": "إيرادات النشاط"
+    },
+    {
+      "id": "coa_lang_hematet_41_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_41",
+      "lang_code": "en",
+      "name": "إيرادات النشاط"
+    },
+    {
+      "id": "coa_lang_hematet_42_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_42",
+      "lang_code": "ar",
+      "name": "إيرادات أخرى"
+    },
+    {
+      "id": "coa_lang_hematet_42_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_42",
+      "lang_code": "en",
+      "name": "إيرادات أخرى"
+    },
+    {
+      "id": "coa_lang_hematet_111_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_111",
+      "lang_code": "ar",
+      "name": "النقد وما فى حكمة"
+    },
+    {
+      "id": "coa_lang_hematet_111_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_111",
+      "lang_code": "en",
+      "name": "النقد وما فى حكمة"
+    },
+    {
+      "id": "coa_lang_hematet_112_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_112",
+      "lang_code": "ar",
+      "name": "عملاء"
+    },
+    {
+      "id": "coa_lang_hematet_112_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_112",
+      "lang_code": "en",
+      "name": "عملاء"
+    },
+    {
+      "id": "coa_lang_hematet_113_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_113",
+      "lang_code": "ar",
+      "name": "أرصدة مدينة أخرى"
+    },
+    {
+      "id": "coa_lang_hematet_113_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_113",
+      "lang_code": "en",
+      "name": "أرصدة مدينة أخرى"
+    },
+    {
+      "id": "coa_lang_hematet_114_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_114",
+      "lang_code": "ar",
+      "name": "عهد"
+    },
+    {
+      "id": "coa_lang_hematet_114_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_114",
+      "lang_code": "en",
+      "name": "عهد"
+    },
+    {
+      "id": "coa_lang_hematet_115_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_115",
+      "lang_code": "ar",
+      "name": "سلف"
+    },
+    {
+      "id": "coa_lang_hematet_115_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_115",
+      "lang_code": "en",
+      "name": "سلف"
+    },
+    {
+      "id": "coa_lang_hematet_211_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_211",
+      "lang_code": "ar",
+      "name": "دائنون تجاريون"
+    },
+    {
+      "id": "coa_lang_hematet_211_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_211",
+      "lang_code": "en",
+      "name": "دائنون تجاريون"
+    },
+    {
+      "id": "coa_lang_hematet_212_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_212",
+      "lang_code": "ar",
+      "name": "أطراف ذات علاقة"
+    },
+    {
+      "id": "coa_lang_hematet_212_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_212",
+      "lang_code": "en",
+      "name": "أطراف ذات علاقة"
+    },
+    {
+      "id": "coa_lang_hematet_213_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_213",
+      "lang_code": "ar",
+      "name": "ارصدة دائنة اخري"
+    },
+    {
+      "id": "coa_lang_hematet_213_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_213",
+      "lang_code": "en",
+      "name": "ارصدة دائنة اخري"
+    },
+    {
+      "id": "coa_lang_hematet_214_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_214",
+      "lang_code": "ar",
+      "name": "مخصصات"
+    },
+    {
+      "id": "coa_lang_hematet_214_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_214",
+      "lang_code": "en",
+      "name": "مخصصات"
+    },
+    {
+      "id": "coa_lang_hematet_221_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_221",
+      "lang_code": "ar",
+      "name": "رأس المال وحقوق الملكية"
+    },
+    {
+      "id": "coa_lang_hematet_221_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_221",
+      "lang_code": "en",
+      "name": "رأس المال وحقوق الملكية"
+    },
+    {
+      "id": "coa_lang_hematet_2211_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_2211",
+      "lang_code": "ar",
+      "name": "رأس المال"
+    },
+    {
+      "id": "coa_lang_hematet_2211_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_2211",
+      "lang_code": "en",
+      "name": "رأس المال"
+    },
+    {
+      "id": "coa_lang_hematet_2212_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_2212",
+      "lang_code": "ar",
+      "name": "حقوق الملكية"
+    },
+    {
+      "id": "coa_lang_hematet_2212_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_2212",
+      "lang_code": "en",
+      "name": "حقوق الملكية"
+    },
+    {
+      "id": "coa_lang_hematet_1110001_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_1110001",
+      "lang_code": "ar",
+      "name": "الصندوق"
+    },
+    {
+      "id": "coa_lang_hematet_1110001_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_1110001",
+      "lang_code": "en",
+      "name": "الصندوق"
+    },
+    {
+      "id": "coa_lang_hematet_1110002_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_1110002",
+      "lang_code": "ar",
+      "name": "بنك الإنماء"
+    },
+    {
+      "id": "coa_lang_hematet_1110002_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_1110002",
+      "lang_code": "en",
+      "name": "بنك الإنماء"
+    },
+    {
+      "id": "coa_lang_hematet_1110004_ar",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_1110004",
+      "lang_code": "ar",
+      "name": "حساب الراجحي 7000"
+    },
+    {
+      "id": "coa_lang_hematet_1110004_en",
+      "company_id": "hematet_co",
+      "ref_id": "coa_hematet_1110004",
+      "lang_code": "en",
+      "name": "حساب الراجحي 7000"
+    }
+  ]
+}

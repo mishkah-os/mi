@@ -1,0 +1,37 @@
+{
+  "name": "mishkah-ws2",
+  "version": "0.1.0",
+  "description": "Lightweight dynamic WebSocket gateway for Mishkah POS experiments.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "dev": "NODE_ENV=development node ./src/server.js",
+    "test": "node --test",
+    "hybrid:migrate": "node ./src/tasks/hybridStoreTasks.js migrate",
+    "hybrid:loadtest": "node ./src/tasks/hybridStoreTasks.js loadtest",
+    "clinic:init": "node ./src/orm/init-clinic-db.js",
+    "clinic:seed": "node ./src/orm/seed-clinic-data.js",
+    "clinic:audit-sync": "node ./src/orm/sync-audit-tables.js",
+    "clinic:test": "node ./test-server.js",
+    "clinic:dev": "npm run clinic:init && npm run clinic:seed && npm run clinic:audit-sync && npm run clinic:test"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.6.0",
+    "busboy": "^1.6.0",
+    "knex": "^3.1.0",
+    "mysql2": "^3.16.0",
+    "pg": "^8.16.3",
+    "pino": "^9.1.0",
+    "prom-client": "^15.1.3",
+    "uuid": "^10.0.0",
+    "ws": "^8.18.0",
+    "moment": "^2.30.1"
+  },
+  "devDependencies": {
+    "acorn": "^8.15.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "magic-string": "^0.30.21"
+  }
+}

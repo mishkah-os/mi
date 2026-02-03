@@ -1,0 +1,5201 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes" />
+  <meta name="description" content="Professional drawing and PDF annotation tool for tablets and devices" />
+  <meta name="theme-color" content="#6366f1" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Drawing Board" />
+  <link rel="manifest" href="manifest.json" />
+  <title>لوحة الرسم — Mishkah Drawing Board</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", "Tajawal", system-ui, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      touch-action: none;
+      background: #0f172a;
+    }
+
+    /* Canvas Container - enables scrolling when zoomed */
+    .canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background: #0f172a;
+    }
+
+    /* Canvas fills entire screen */
+    #drawingCanvas {
+      display: block;
+      background: white;
+      cursor: crosshair;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+
+    /* Floating Top Toolbar - minimal and transparent */
+    .floating-toolbar {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 8px 12px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Toolbar buttons - small and compact */
+    .toolbar-btn {
+      background: rgba(51, 65, 85, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #f8fafc;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .toolbar-btn:hover,
+    .toolbar-btn.active {
+      background: #6366f1;
+      border-color: #6366f1;
+    }
+
+    .toolbar-btn-icon {
+      font-size: 1rem;
+    }
+
+    /* Side Toggle Buttons - minimal */
+    .toggle-btn {
+      position: fixed;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #f8fafc;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      z-index: 1000;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .toggle-btn:hover {
+      background: #6366f1;
+      transform: scale(1.1);
+    }
+
+    #toggleTools {
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    #toggleColors {
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* Floating Panels */
+    .floating-panel {
+      position: fixed;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      padding: 16px;
+      z-index: 999;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      max-height: 80vh;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .floating-panel.show {
+      display: block;
+      animation: slideIn 0.2s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #toolsPanel {
+      left: 10px;
+      top: 60px;
+      width: 200px;
+    }
+
+    #colorsPanel {
+      right: 10px;
+      top: 60px;
+      width: 260px;
+    }
+
+    .panel-header {
+      color: #818cf8;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .close-panel {
+      background: none;
+      border: none;
+      color: #f8fafc;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+
+    .close-panel:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    /* Tools Grid */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .tool-item {
+      background: rgba(51, 65, 85, 0.6);
+      border: 2px solid transparent;
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: rgba(248, 250, 252, 0.8);
+      font-size: 0.7rem;
+    }
+
+    .tool-item:hover {
+      background: rgba(51, 65, 85, 0.9);
+      border-color: #818cf8;
+    }
+
+    .tool-item.active {
+      background: #6366f1;
+      border-color: #6366f1;
+      color: white;
+    }
+
+    .tool-item-icon {
+      font-size: 1.6rem;
+    }
+
+    /* Colors Section */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .color-swatch {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .color-swatch:hover {
+      transform: scale(1.1);
+    }
+
+    .color-swatch.active {
+      border-color: white;
+      box-shadow: 0 0 0 2px #6366f1;
+    }
+
+    .custom-color-wrapper {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .custom-color-input {
+      flex: 1;
+      height: 40px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 8px;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    /* Brush Size */
+    .size-section {
+      margin-bottom: 12px;
+    }
+
+    .size-label {
+      color: #818cf8;
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .size-slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(51, 65, 85, 0.6);
+      -webkit-appearance: none;
+      appearance: none;
+      outline: none;
+      margin-bottom: 8px;
+    }
+
+    .size-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #6366f1;
+      cursor: pointer;
+    }
+
+    .size-slider::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #6366f1;
+      cursor: pointer;
+      border: none;
+    }
+
+    .size-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .size-btn {
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #f8fafc;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .size-btn:hover {
+      background: rgba(99, 102, 241, 0.4);
+      border-color: #6366f1;
+    }
+
+    .size-btn:active {
+      transform: scale(0.95);
+    }
+
+    .size-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      background: white;
+      border-radius: 8px;
+    }
+
+    .size-preview-dot {
+      background: currentColor;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+
+    /* Shapes Grid */
+    .shapes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .shape-btn {
+      aspect-ratio: 1;
+      background: rgba(51, 65, 85, 0.6);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      transition: all 0.2s;
+    }
+
+    .shape-btn:hover {
+      background: rgba(51, 65, 85, 0.9);
+      border-color: #818cf8;
+    }
+
+    /* Bottom Status Bar - minimal */
+    .status-bar {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.75rem;
+      color: rgba(248, 250, 252, 0.8);
+      z-index: 1000;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .status-divider {
+      width: 1px;
+      height: 12px;
+      background: rgba(148, 163, 184, 0.3);
+    }
+
+    /* Modals */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 500px;
+      width: 90%;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #818cf8;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      color: rgba(248, 250, 252, 0.8);
+    }
+
+    .form-input {
+      width: 100%;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #f8fafc;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #6366f1;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: #6366f1;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #5558e3;
+    }
+
+    .btn-secondary {
+      background: rgba(51, 65, 85, 0.6);
+      color: #f8fafc;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(51, 65, 85, 0.9);
+    }
+
+    /* Files List */
+    .files-list {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 16px;
+    }
+
+    .file-item {
+      background: rgba(30, 41, 59, 0.6);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .file-item:hover {
+      border-color: #818cf8;
+      background: rgba(30, 41, 59, 0.8);
+    }
+
+    .file-info {
+      flex: 1;
+    }
+
+    .file-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #f8fafc;
+    }
+
+    .file-meta {
+      font-size: 0.75rem;
+      color: rgba(148, 163, 184, 0.8);
+    }
+
+    .file-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-small {
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #f8fafc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-small:hover {
+      background: rgba(239, 68, 68, 0.4);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(30, 41, 59, 0.5);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(99, 102, 241, 0.5);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #6366f1;
+    }
+
+    #imageUpload {
+      display: none;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: rgba(148, 163, 184, 0.2);
+      margin: 12px 0;
+    }
+
+    /* PDF Navigation */
+    .pdf-navigation {
+      position: fixed;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 8px 12px;
+      gap: 8px;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .pdf-navigation.active {
+      display: flex;
+    }
+
+    .pdf-nav-btn {
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #f8fafc;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .pdf-nav-btn:hover:not(:disabled) {
+      background: rgba(99, 102, 241, 0.4);
+      border-color: #6366f1;
+    }
+
+    .pdf-nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .pdf-page-info {
+      color: #f8fafc;
+      font-size: 0.9rem;
+      padding: 0 8px;
+    }
+
+    /* Page Selector */
+    .page-input-container {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 6px;
+      padding: 2px 6px;
+    }
+
+    .page-num-input {
+      width: 45px;
+      background: transparent;
+      border: none;
+      color: #f8fafc;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .page-num-input::-webkit-inner-spin-button,
+    .page-num-input::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .page-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+      max-height: 400px;
+      overflow-y: auto;
+      margin: 20px 0;
+    }
+
+    .page-item {
+      background: rgba(30, 41, 59, 0.6);
+      border: 2px solid rgba(148, 163, 184, 0.3);
+      border-radius: 8px;
+      padding: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .page-item:hover {
+      border-color: #6366f1;
+    }
+
+    .page-item.selected {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.2);
+    }
+
+    .page-preview {
+      width: 100%;
+      height: 120px;
+      background: white;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    .page-label {
+      color: #f8fafc;
+      font-size: 0.85rem;
+    }
+
+    /* Install Prompt */
+    .install-prompt {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.4);
+      display: none;
+      align-items: center;
+      gap: 12px;
+      z-index: 10000;
+      max-width: 90%;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    .install-prompt.active {
+      display: flex;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateX(-50%) translateY(100px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .install-prompt-icon {
+      font-size: 2rem;
+    }
+
+    .install-prompt-content {
+      flex: 1;
+    }
+
+    .install-prompt-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .install-prompt-text {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .install-prompt-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .install-btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .install-btn-primary {
+      background: white;
+      color: #6366f1;
+    }
+
+    .install-btn-primary:hover {
+      transform: scale(1.05);
+    }
+
+    .install-btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .install-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Language Switcher */
+    /* Reload Button */
+    .reload-btn {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #f8fafc;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .reload-btn:hover {
+      background: #6366f1;
+      border-color: #6366f1;
+    }
+
+    .reload-btn:hover span:first-child {
+      display: inline-block;
+      animation: rotate 0.6s ease-in-out;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .reload-text {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .lang-switcher {
+      position: fixed;
+      top: 70px;
+      right: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      padding: 4px;
+      display: flex;
+      gap: 4px;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #f8fafc;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      font-weight: 600;
+    }
+
+    .lang-btn.active {
+      background: #6366f1;
+      border-color: #6366f1;
+    }
+
+    .lang-btn:hover:not(.active) {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: #6366f1;
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100000;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .loading-overlay.active {
+      display: flex;
+    }
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(99, 102, 241, 0.3);
+      border-top-color: #6366f1;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-text {
+      color: #f8fafc;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .loading-progress {
+      color: rgba(248, 250, 252, 0.7);
+      font-size: 0.9rem;
+    }
+
+    /* Page Range Input */
+    .page-range-input {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #f8fafc;
+      padding: 10px;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .page-range-input:focus {
+      outline: none;
+      border-color: #6366f1;
+    }
+
+    .page-range-help {
+      color: rgba(248, 250, 252, 0.6);
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+
+    .page-selector-header {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .page-selector-btn {
+      padding: 6px 12px;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #f8fafc;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .page-selector-btn:hover {
+      background: rgba(99, 102, 241, 0.4);
+      border-color: #6366f1;
+    }
+
+    /* Hide All UI Mode - Keep PDF navigation and hide zoom controls */
+    body.zen-mode .floating-toolbar,
+    body.zen-mode .pdf-navigation,
+    body.zen-mode .toggle-btn,
+    body.zen-mode .lang-switcher,
+    body.zen-mode .reload-btn,
+    body.zen-mode .status-bar,
+    body.zen-mode .install-prompt,
+    body.zen-mode .zoom-controls,
+    body.zen-mode #selectionActions,
+    body.zen-mode .modal {
+      display: none !important;
+    }
+
+    .zen-mode-toggle {
+      position: fixed;
+      top: 80px;
+      left: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      z-index: 10001;
+      transition: all 0.2s;
+    }
+
+    body.zen-mode .zen-mode-toggle {
+      background: #6366f1;
+      border-color: #6366f1;
+    }
+
+    .zen-mode-toggle:hover {
+      background: rgba(99, 102, 241, 0.4);
+      border-color: #6366f1;
+    }
+
+    /* Zoom Controls */
+    .zoom-controls {
+      position: fixed;
+      bottom: 20px;
+      right: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .zoom-btn {
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .zoom-btn:hover {
+      background: rgba(99, 102, 241, 0.4);
+      border-color: #6366f1;
+    }
+
+    .zoom-level {
+      color: #f8fafc;
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 4px;
+    }
+
+    /* Layers System */
+    #layersContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .layer-element {
+      position: absolute;
+      pointer-events: all;
+      cursor: move;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .layer-element.selected {
+      outline: 2px solid #6366f1;
+      outline-offset: 2px;
+    }
+
+    /* Transform Controls */
+    .transform-controls {
+      position: absolute;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .transform-box {
+      position: absolute;
+      border: 2px solid #6366f1;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
+      pointer-events: none;
+    }
+
+    .transform-handle {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: white;
+      border: 2px solid #6366f1;
+      border-radius: 50%;
+      pointer-events: all;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+    }
+
+    .transform-handle.nw {
+      top: 0;
+      left: 0;
+      cursor: nw-resize;
+    }
+
+    .transform-handle.n {
+      top: 0;
+      left: 50%;
+      cursor: n-resize;
+    }
+
+    .transform-handle.ne {
+      top: 0;
+      left: 100%;
+      cursor: ne-resize;
+    }
+
+    .transform-handle.e {
+      top: 50%;
+      left: 100%;
+      cursor: e-resize;
+    }
+
+    .transform-handle.se {
+      top: 100%;
+      left: 100%;
+      cursor: se-resize;
+    }
+
+    .transform-handle.s {
+      top: 100%;
+      left: 50%;
+      cursor: s-resize;
+    }
+
+    .transform-handle.sw {
+      top: 100%;
+      left: 0;
+      cursor: sw-resize;
+    }
+
+    .transform-handle.w {
+      top: 50%;
+      left: 0;
+      cursor: w-resize;
+    }
+
+    .rotate-handle {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: #6366f1;
+      border: 2px solid white;
+      border-radius: 50%;
+      pointer-events: all;
+      cursor: grab;
+      transform: translate(-50%, -50%);
+      top: -30px;
+      left: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.8rem;
+    }
+
+    .rotate-handle:active {
+      cursor: grabbing;
+    }
+
+    .delete-handle {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: #ef4444;
+      border: 2px solid white;
+      border-radius: 50%;
+      pointer-events: all;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      top: -30px;
+      right: -10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    /* Layers Panel */
+    #layersPanel {
+      right: 10px;
+      bottom: 140px;
+      width: 280px;
+      max-height: 400px;
+    }
+
+    #toggleLayers {
+      right: 10px;
+      top: calc(50% + 60px);
+    }
+
+    .layers-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .layer-item {
+      background: rgba(51, 65, 85, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 8px;
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .layer-item:hover {
+      background: rgba(51, 65, 85, 0.8);
+      border-color: #6366f1;
+    }
+
+    .layer-item.selected {
+      background: rgba(99, 102, 241, 0.3);
+      border-color: #6366f1;
+    }
+
+    .layer-preview {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .layer-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .layer-name {
+      color: #f8fafc;
+      font-size: 0.85rem;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .layer-type {
+      color: rgba(148, 163, 184, 0.8);
+      font-size: 0.75rem;
+    }
+
+    .layer-actions {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .layer-btn {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #f8fafc;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .layer-btn:hover {
+      background: rgba(99, 102, 241, 0.4);
+      border-color: #6366f1;
+    }
+
+    .layer-btn.danger:hover {
+      background: rgba(239, 68, 68, 0.4);
+      border-color: #ef4444;
+    }
+
+    .layers-controls {
+      display: flex;
+      gap: 6px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .layers-controls button {
+      flex: 1;
+      background: rgba(51, 65, 85, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #f8fafc;
+      padding: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      transition: all 0.2s;
+    }
+
+    .layers-controls button:hover {
+      background: rgba(99, 102, 241, 0.4);
+      border-color: #6366f1;
+    }
+
+    body.zen-mode #layersPanel,
+    body.zen-mode #toggleLayers,
+    body.zen-mode #layersContainer {
+      display: none !important;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    // Configure PDF.js worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  </script>
+</head>
+
+<body>
+  <!-- Canvas Container - enables scrolling when zoomed -->
+  <div id="canvasContainer" class="canvas-container">
+    <!-- Main Canvas - fills entire screen -->
+    <canvas id="drawingCanvas"></canvas>
+
+    <!-- Layers Container - for layer elements -->
+    <div id="layersContainer"></div>
+
+    <!-- Transform Controls - for selected layer -->
+    <div id="transformControls" class="transform-controls" style="display: none;">
+      <div class="transform-box" id="transformBox"></div>
+      <div class="transform-handle nw" data-handle="nw"></div>
+      <div class="transform-handle n" data-handle="n"></div>
+      <div class="transform-handle ne" data-handle="ne"></div>
+      <div class="transform-handle e" data-handle="e"></div>
+      <div class="transform-handle se" data-handle="se"></div>
+      <div class="transform-handle s" data-handle="s"></div>
+      <div class="transform-handle sw" data-handle="sw"></div>
+      <div class="transform-handle w" data-handle="w"></div>
+      <div class="rotate-handle">🔄</div>
+      <div class="delete-handle">×</div>
+    </div>
+  </div>
+
+  <!-- Hard Reload Button -->
+
+
+  <!-- Language Switcher -->
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="ar" onclick="app.switchLanguage('ar')">ع</button>
+    <button class="lang-btn" data-lang="en" onclick="app.switchLanguage('en')">EN</button>
+  </div>
+
+  <!-- Install Prompt -->
+  <div class="install-prompt" id="installPrompt">
+    <div class="install-prompt-icon">📲</div>
+    <div class="install-prompt-content">
+      <div class="install-prompt-title" data-i18n="install_title">ثبّت التطبيق</div>
+      <div class="install-prompt-text" data-i18n="install_text">للحصول على تجربة أفضل واستخدام التطبيق بدون اتصال
+        بالإنترنت</div>
+    </div>
+    <div class="install-prompt-actions">
+      <button class="install-btn install-btn-primary" onclick="app.installApp()" data-i18n="install_btn">تثبيت</button>
+      <button class="install-btn install-btn-secondary" onclick="app.dismissInstall()"
+        data-i18n="later_btn">لاحقاً</button>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text" data-i18n="loading">جاري التحميل...</div>
+    <div class="loading-progress" id="loadingProgress"></div>
+  </div>
+
+  <!-- Zen Mode Toggle -->
+  <button class="zen-mode-toggle" onclick="app.toggleZenMode()" data-i18n="zen_mode">📖</button>
+
+  <!-- Zoom Controls -->
+  <div class="zoom-controls">
+    <button class="zoom-btn" onclick="app.zoomIn()">+</button>
+    <div class="zoom-level" id="zoomLevel">100%</div>
+    <button class="zoom-btn" onclick="app.zoomOut()">−</button>
+    <button class="zoom-btn" onclick="app.resetZoom()">⟲</button>
+  </div>
+
+  <!-- Floating Top Toolbar -->
+  <div class="floating-toolbar">
+    <button class="reload-btn toolbar-btn" onclick="app.hardReload()" title="تحديث قوي - Hard Reload">
+      <span>🔄</span>
+      <span class="reload-text" data-i18n="reload">تحديث</span>
+    </button>
+    <button class="toolbar-btn" onclick="app.undo()">
+      <span class="toolbar-btn-icon">↶</span>
+      <span data-i18n="undo" style='display:none'>تراجع</span>
+    </button>
+    <button class="toolbar-btn" onclick="app.redo()">
+      <span class="toolbar-btn-icon">↷</span>
+      <span data-i18n="redo" style='display:none'>إعادة</span>
+    </button>
+    <button class="toolbar-btn" onclick="app.clearCanvas()">
+      <span class="toolbar-btn-icon">🗑️</span>
+    </button>
+    <div style="width: 1px; height: 20px; background: rgba(148, 163, 184, 0.3);"></div>
+    <button class="toolbar-btn" onclick="app.openSaveModal()">
+      <span class="toolbar-btn-icon">💾</span>
+      <span data-i18n="save">حفظ</span>
+    </button>
+    <button class="toolbar-btn" onclick="app.openLoadModal()">
+      <span class="toolbar-btn-icon">📁</span>
+    </button>
+    <button class="toolbar-btn" onclick="app.openExportModal()">
+      <span class="toolbar-btn-icon">📤</span>
+    </button>
+    <div style="width: 1px; height: 20px; background: rgba(148, 163, 184, 0.3);"></div>
+    <button class="toolbar-btn" onclick="document.getElementById('pdfUpload').click()">
+      <span class="toolbar-btn-icon">📄</span>
+      <span>PDF</span>
+    </button>
+    <div style="width: 1px; height: 20px; background: rgba(148, 163, 184, 0.3);"></div>
+    <button class="toolbar-btn" onclick="app.openHistoryModal()" title="سجل التاريخ">
+      <span class="toolbar-btn-icon">🕒</span>
+    </button>
+    <button class="toolbar-btn" onclick="app.openLibraryModal()" title="المكتبة">
+      <span class="toolbar-btn-icon">📚</span>
+    </button>
+    <button class="toolbar-btn" id="addToLibraryBtn" onclick="app.openAddToLibraryModal()" style="display: none;"
+      title="إضافة للمكتبة">
+      <span class="toolbar-btn-icon">➕</span>
+    </button>
+  </div>
+
+  <!-- PDF Navigation Bar -->
+  <div class="pdf-navigation" id="pdfNavigation">
+    <button class="pdf-nav-btn" id="prevPageBtn" onclick="app.previousPage()">
+      <span>←</span> <span data-i18n="previous">السابق</span>
+    </button>
+    <div class="page-input-container">
+      <input type="number" class="page-num-input" id="pageNumInput" min="1" value="1"
+        onchange="app.goToPageFromInput()">
+      <span class="pdf-page-info" id="pageInfo"> / 1</span>
+    </div>
+    <button class="pdf-nav-btn" id="nextPageBtn" onclick="app.nextPage()">
+      <span data-i18n="next">التالي</span> <span>→</span>
+    </button>
+  </div>
+
+  <!-- Toggle Buttons -->
+  <button class="toggle-btn" id="toggleTools" onclick="app.togglePanel('tools')">🛠️</button>
+  <button class="toggle-btn" id="toggleColors" onclick="app.togglePanel('colors')">🎨</button>
+  <button class="toggle-btn" id="toggleLayers" onclick="app.togglePanel('layers')">📚</button>
+
+  <!-- Tools Panel -->
+  <div class="floating-panel" id="toolsPanel">
+    <div class="panel-header">
+      الأدوات
+      <button class="close-panel" onclick="app.closePanel('tools')">×</button>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-item active" onclick="app.setTool('pen')" data-tool="pen">
+        <span class="tool-item-icon">✏️</span>
+        <span>قلم</span>
+      </div>
+      <div class="tool-item" onclick="app.setTool('brush')" data-tool="brush">
+        <span class="tool-item-icon">🖌️</span>
+        <span>فرشاة</span>
+      </div>
+      <div class="tool-item" onclick="app.setTool('eraser')" data-tool="eraser">
+        <span class="tool-item-icon">🧹</span>
+        <span>ممحاة</span>
+      </div>
+      <div class="tool-item" onclick="app.setTool('line')" data-tool="line">
+        <span class="tool-item-icon">📏</span>
+        <span>خط</span>
+      </div>
+      <div class="tool-item" onclick="app.setTool('rectangle')" data-tool="rectangle">
+        <span class="tool-item-icon">▭</span>
+        <span>مربع</span>
+      </div>
+      <div class="tool-item" onclick="app.setTool('circle')" data-tool="circle">
+        <span class="tool-item-icon">⭕</span>
+        <span>دائرة</span>
+      </div>
+      <div class="tool-item" onclick="app.setTool('arrow')" data-tool="arrow">
+        <span class="tool-item-icon">➡️</span>
+        <span>سهم</span>
+      </div>
+      <div class="tool-item" onclick="app.setTool('text')" data-tool="text">
+        <span class="tool-item-icon">📝</span>
+        <span data-i18n="text">نص</span>
+      </div>
+      <div class="tool-item" onclick="app.setTool('pan')" data-tool="pan">
+        <span class="tool-item-icon">✋</span>
+        <span data-i18n="pan">تحريك/تكبير</span>
+      </div>
+      <div class="tool-item" onclick="app.setTool('bucket')" data-tool="bucket">
+        <span class="tool-item-icon">🎨</span>
+        <span data-i18n="bucket">دلو الطلاء</span>
+      </div>
+      <div class="tool-item" onclick="app.setTool('wand')" data-tool="wand">
+        <span class="tool-item-icon">✨</span>
+        <span data-i18n="wand">العصا السحرية</span>
+      </div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="panel-header" style="margin-top: 12px;">أشكال جاهزة</div>
+    <div class="shapes-grid">
+      <button class="shape-btn" onclick="app.insertShape('star')">⭐</button>
+      <button class="shape-btn" onclick="app.insertShape('heart')">❤️</button>
+      <button class="shape-btn" onclick="app.insertShape('triangle')">🔺</button>
+      <button class="shape-btn" onclick="app.insertShape('hexagon')">⬡</button>
+      <button class="shape-btn" onclick="app.insertShape('pentagon')">⬟</button>
+      <button class="shape-btn" onclick="app.insertShape('diamond')">💎</button>
+    </div>
+    <div class="section-divider"></div>
+    <button class="toolbar-btn" style="width: 100%; justify-content: center; margin-top: 8px;"
+      onclick="app.importImage()">
+      <span class="toolbar-btn-icon">🖼️</span>
+      <span>استيراد صورة</span>
+    </button>
+  </div>
+
+  <!-- Colors Panel -->
+  <div class="floating-panel" id="colorsPanel">
+    <div class="panel-header">
+      الألوان والحجم
+      <button class="close-panel" onclick="app.closePanel('colors')">×</button>
+    </div>
+    <div class="color-grid" id="colorGrid"></div>
+    <div class="custom-color-wrapper">
+      <input type="color" class="custom-color-input" id="customColor" value="#000000" />
+    </div>
+    <div class="section-divider"></div>
+    <div class="size-section">
+      <label class="size-label">حجم الفرشاة: <span id="brushSizeLabel">3</span>px</label>
+      <div class="size-controls">
+        <button class="size-btn" onclick="app.decreaseBrushSize()">-</button>
+        <input type="range" class="size-slider" id="brushSize" min="1" max="50" value="3" />
+        <button class="size-btn" onclick="app.increaseBrushSize()">+</button>
+      </div>
+      <div class="size-preview">
+        <div id="sizePreviewDot" class="size-preview-dot"></div>
+      </div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="size-section">
+      <label class="size-label">حساسية الألوان: <span id="toleranceLabel">30</span></label>
+      <div class="size-controls">
+        <button class="size-btn" onclick="app.decreaseTolerance()">-</button>
+        <input type="range" class="size-slider" id="toleranceSlider" min="0" max="100" value="30" />
+        <button class="size-btn" onclick="app.increaseTolerance()">+</button>
+      </div>
+      <div style="color: rgba(148, 163, 184, 0.7); font-size: 0.7rem; margin-top: 4px;">
+        للدلو والعصا السحرية
+      </div>
+    </div>
+  </div>
+
+  <!-- Layers Panel -->
+  <div class="floating-panel" id="layersPanel">
+    <div class="panel-header">
+      <span data-i18n="layers">الطبقات</span>
+      <button class="close-panel" onclick="app.closePanel('layers')">×</button>
+    </div>
+    <div class="layers-list" id="layersList">
+      <div style="text-align: center; padding: 2rem; color: rgba(148, 163, 184, 0.8);">
+        <span data-i18n="no_layers">لا توجد طبقات</span>
+      </div>
+    </div>
+    <div class="layers-controls">
+      <button onclick="app.flattenLayers()"><span data-i18n="flatten_layers">⬇️ دمج</span></button>
+      <button onclick="app.clearAllLayers()"><span data-i18n="clear_all_layers">🗑️ حذف الكل</span></button>
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span>الأداة: <span id="toolStatus">pen</span></span>
+    <span class="status-divider"></span>
+    <span id="historyInfo">1 / 1</span>
+  </div>
+
+  <!-- Save Modal -->
+  <div class="modal" id="saveModal">
+    <div class="modal-content">
+      <h2 class="modal-header">💾 حفظ الرسمة</h2>
+      <div class="form-group">
+        <label class="form-label">اسم الرسمة</label>
+        <input type="text" class="form-input" id="saveName" placeholder="أدخل اسم الرسمة..." />
+      </div>
+      <div class="form-group">
+        <label class="form-label">المجلد (اختياري)</label>
+        <input type="text" class="form-input" id="saveFolder" placeholder="مثال: رسوماتي" />
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="app.closeSaveModal()">إلغاء</button>
+        <button class="btn btn-primary" onclick="app.saveDrawing()">حفظ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Modal -->
+  <div class="modal" id="loadModal">
+    <div class="modal-content">
+      <h2 class="modal-header">📁 فتح رسمة</h2>
+      <div class="files-list" id="filesList"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="app.closeLoadModal()">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Modal -->
+  <div class="modal" id="exportModal">
+    <div class="modal-content">
+      <h2 class="modal-header">📤 تصدير الرسمة</h2>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button class="btn btn-primary" onclick="app.exportAsPNG()">تصدير كـ PNG</button>
+        <button class="btn btn-primary" onclick="app.exportAsJPG()">تصدير كـ JPG</button>
+        <button class="btn btn-primary" onclick="app.exportAsPDF()">تصدير كـ PDF</button>
+        <button class="btn btn-secondary" onclick="app.closeExportModal()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PDF Page Selector Modal -->
+  <div class="modal" id="pdfPageModal">
+    <div class="modal-content" style="max-width: 800px;">
+      <h2 class="modal-header" data-i18n="select_pdf_pages">📄 اختيار صفحات PDF</h2>
+
+      <!-- Page Range Input -->
+      <input type="text" class="page-range-input" id="pageRangeInput" placeholder="1-10, 15, 20-25"
+        data-i18n-placeholder="page_range_placeholder" />
+      <div class="page-range-help" data-i18n="page_range_help">
+        مثال: 1-10 (من 1 إلى 10)، 15,20,25 (صفحات محددة)، أو الكل
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="page-selector-header">
+        <button class="page-selector-btn" onclick="app.selectAllPages()" data-i18n="select_all">تحديد الكل</button>
+        <button class="page-selector-btn" onclick="app.deselectAllPages()" data-i18n="deselect_all">إلغاء الكل</button>
+        <button class="page-selector-btn" onclick="app.applyPageRange()" data-i18n="apply_range">تطبيق النطاق</button>
+        <button class="page-selector-btn" onclick="app.previewRange()" data-i18n="preview_range">معاينة النطاق</button>
+      </div>
+
+      <p style="color: rgba(248, 250, 252, 0.7); margin-bottom: 10px; font-size: 0.9rem;" data-i18n="select_pages_text">
+        اضغط على الصفحات التي تريد استيرادها (يمكنك اختيار عدة صفحات)
+      </p>
+      <div class="page-selector" id="pdfPageSelector"></div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" onclick="app.importSelectedPages()" data-i18n="import_selected">استيراد الصفحات
+          المحددة</button>
+        <button class="btn btn-secondary" onclick="app.closePdfModal()" data-i18n="cancel">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Pages Selector Modal -->
+  <div class="modal" id="exportPagesModal">
+    <div class="modal-content" style="max-width: 800px;">
+      <h2 class="modal-header">📤 اختيار الصفحات للتصدير</h2>
+
+      <!-- Page Range Input -->
+      <input type="text" class="page-range-input" id="exportPageRangeInput" placeholder="1-10, 15, 20-25"
+        data-i18n-placeholder="page_range_placeholder" />
+      <div class="page-range-help" data-i18n="page_range_help">
+        مثال: 1-10 (من 1 إلى 10)، 15,20,25 (صفحات محددة)، أو الكل
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="page-selector-header">
+        <button class="page-selector-btn" onclick="app.selectAllExportPages()" data-i18n="select_all">تحديد
+          الكل</button>
+        <button class="page-selector-btn" onclick="app.deselectAllExportPages()" data-i18n="deselect_all">إلغاء
+          الكل</button>
+        <button class="page-selector-btn" onclick="app.applyExportPageRange()" data-i18n="apply_range">تطبيق
+          النطاق</button>
+      </div>
+
+      <p style="color: rgba(248, 250, 252, 0.7); margin-bottom: 10px; font-size: 0.9rem;">
+        اضغط على الصفحات التي تريد تصديرها (يمكنك اختيار عدة صفحات)
+      </p>
+      <div class="page-selector" id="exportPageSelector"></div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" onclick="app.confirmExportPages()">تصدير الصفحات المحددة</button>
+        <button class="btn btn-secondary" onclick="app.closeExportPagesModal()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden file inputs -->
+  <input type="file" id="imageUpload" accept="image/*" />
+  <input type="file" id="pdfUpload" accept="application/pdf" style="display: none;" />
+
+  <!-- jsPDF for PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script>
+    // Drawing Application
+    const app = {
+      currentTool: 'pen',
+      currentColor: '#000000',
+      brushSize: 3,
+      colorTolerance: 30,
+      isDrawing: false,
+      startX: 0,
+      startY: 0,
+      history: [],
+      historyIndex: -1,
+      lastSaved: null,
+      currentDrawingId: null,
+      currentDrawingName: '',
+      currentDrawingFolder: '',
+      lastCursorX: 0,
+      lastCursorY: 0,
+      currentSelection: null,
+
+      // Layers system properties
+      layers: [],
+      layerIdCounter: 0,
+      selectedLayer: null,
+      isDraggingLayer: false,
+      isResizingLayer: false,
+      isRotatingLayer: false,
+      dragStartX: 0,
+      dragStartY: 0,
+      resizeHandle: null,
+      layerStartRect: null,
+
+      // PDF-related properties
+      pdfDoc: null,
+      pdfPages: [],
+      currentPageIndex: 0,
+      selectedPdfPages: new Set(),
+      pdfMode: false,
+      pageAnnotations: {}, // Store annotations for each page
+
+      // PWA properties
+      currentLang: 'ar',
+      deferredPrompt: null,
+      db: null,
+
+      // Zoom and UI properties
+      zoomLevel: 1,
+      zenMode: false,
+      pinchStartDistance: 0,
+      isPinching: false,
+
+      colors: [
+        '#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF', '#FFFF00',
+        '#FF00FF', '#00FFFF', '#FFA500', '#800080', '#008000', '#800000',
+        '#808080', '#C0C0C0', '#FFB6C1', '#87CEEB', '#90EE90', '#DDA0DD'
+      ],
+
+      // Translations
+      translations: {
+        ar: {
+          // Install prompt
+          install_title: 'ثبّت التطبيق',
+          install_text: 'للحصول على تجربة أفضل واستخدام التطبيق بدون اتصال بالإنترنت',
+          install_btn: 'تثبيت',
+          later_btn: 'لاحقاً',
+
+          // Toolbar
+          undo: 'تراجع',
+          redo: 'إعادة',
+          save: 'حفظ',
+
+          // PDF Navigation
+          previous: 'السابق',
+          next: 'التالي',
+          page: 'صفحة',
+          of: 'من',
+
+          // Tools
+          pen: 'قلم',
+          brush: 'فرشاة',
+          eraser: 'ممحاة',
+          line: 'خط',
+          rectangle: 'مربع',
+          circle: 'دائرة',
+          arrow: 'سهم',
+          text: 'نص',
+          pan: 'تحريك/تكبير',
+          bucket: 'دلو الطلاء',
+          wand: 'العصا السحرية',
+
+          // Modals
+          save_drawing: 'حفظ الرسمة',
+          drawing_name: 'اسم الرسمة',
+          cancel: 'إلغاء',
+          open_drawing: 'فتح رسمة',
+          close: 'إغلاق',
+          export_drawing: 'تصدير الرسمة',
+          export_png: 'تصدير كـ PNG',
+          export_jpg: 'تصدير كـ JPG',
+          export_pdf: 'تصدير كـ PDF',
+
+          // PDF
+          select_pdf_pages: 'اختيار صفحات PDF',
+          select_pages_text: 'اضغط على الصفحات التي تريد استيرادها (يمكنك اختيار عدة صفحات)',
+          import_selected: 'استيراد الصفحات المحددة',
+
+          // Messages
+          clear_confirm: 'هل أنت متأكد من مسح اللوحة؟',
+          delete_confirm: 'هل أنت متأكد من حذف هذه الرسمة؟',
+          select_one_page: 'الرجاء اختيار صفحة واحدة على الأقل',
+          pdf_load_error: 'خطأ في فتح ملف PDF',
+          page_load_error: 'خطأ في تحميل الصفحة',
+          enter_name: 'الرجاء إدخال اسم للرسمة',
+          saved_success: 'تم الحفظ بنجاح!',
+
+          // New features
+          loading: 'جاري التحميل...',
+          zen_mode: '📖',
+          select_all: 'تحديد الكل',
+          deselect_all: 'إلغاء الكل',
+          apply_range: 'تطبيق النطاق',
+          preview_range: 'معاينة النطاق',
+          page_range_placeholder: '1-10, 15, 20-25',
+          page_range_help: 'مثال: 1-10 (من 1 إلى 10)، 15,20,25 (صفحات محددة)، أو الكل',
+          loading_pages: 'جاري تحميل الصفحات...',
+          page_x_of_y: 'صفحة {0} من {1}',
+          reload: 'تحديث',
+
+          // Layers
+          layers: 'الطبقات',
+          no_layers: 'لا توجد طبقات',
+          flatten_layers: 'دمج الطبقات',
+          clear_all_layers: 'حذف جميع الطبقات',
+          layer: 'طبقة',
+          shape: 'شكل',
+          image: 'صورة',
+          duplicate: 'تكرار',
+          delete: 'حذف',
+          flatten_confirm: 'هل تريد دمج جميع الطبقات على اللوحة؟ لا يمكن التراجع عن هذا الإجراء.',
+
+          // Shape names
+          shape_circle: 'دائرة',
+          shape_square: 'مربع',
+          shape_star: 'نجمة',
+          shape_heart: 'قلب',
+          shape_triangle: 'مثلث',
+          shape_hexagon: 'سداسي',
+          shape_pentagon: 'خماسي',
+          shape_diamond: 'معين'
+        },
+        en: {
+          // Install prompt
+          install_title: 'Install App',
+          install_text: 'For a better experience and offline usage',
+          install_btn: 'Install',
+          later_btn: 'Later',
+
+          // Toolbar
+          undo: 'Undo',
+          redo: 'Redo',
+          save: 'Save',
+
+          // PDF Navigation
+          previous: 'Previous',
+          next: 'Next',
+          page: 'Page',
+          of: 'of',
+
+          // Tools
+          pen: 'Pen',
+          brush: 'Brush',
+          eraser: 'Eraser',
+          line: 'Line',
+          rectangle: 'Rectangle',
+          circle: 'Circle',
+          arrow: 'Arrow',
+          text: 'Text',
+          pan: 'Pan/Zoom',
+          bucket: 'Paint Bucket',
+          wand: 'Magic Wand',
+
+          // Modals
+          save_drawing: 'Save Drawing',
+          drawing_name: 'Drawing Name',
+          cancel: 'Cancel',
+          open_drawing: 'Open Drawing',
+          close: 'Close',
+          export_drawing: 'Export Drawing',
+          export_png: 'Export as PNG',
+          export_jpg: 'Export as JPG',
+          export_pdf: 'Export as PDF',
+
+          // PDF
+          select_pdf_pages: 'Select PDF Pages',
+          select_pages_text: 'Click on the pages you want to import (you can select multiple pages)',
+          import_selected: 'Import Selected Pages',
+
+          // Messages
+          clear_confirm: 'Are you sure you want to clear the canvas?',
+          delete_confirm: 'Are you sure you want to delete this drawing?',
+          select_one_page: 'Please select at least one page',
+          pdf_load_error: 'Error opening PDF file',
+          page_load_error: 'Error loading page',
+          enter_name: 'Please enter a name for the drawing',
+          saved_success: 'Saved successfully!',
+
+          // New features
+          loading: 'Loading...',
+          zen_mode: '📖',
+          select_all: 'Select All',
+          deselect_all: 'Deselect All',
+          apply_range: 'Apply Range',
+          preview_range: 'Preview Range',
+          page_range_placeholder: '1-10, 15, 20-25',
+          page_range_help: 'Example: 1-10 (pages 1 to 10), 15,20,25 (specific pages), or all',
+          loading_pages: 'Loading pages...',
+          page_x_of_y: 'Page {0} of {1}',
+          reload: 'Reload',
+
+          // Layers
+          layers: 'Layers',
+          no_layers: 'No layers',
+          flatten_layers: 'Flatten Layers',
+          clear_all_layers: 'Clear All Layers',
+          layer: 'Layer',
+          shape: 'Shape',
+          image: 'Image',
+          duplicate: 'Duplicate',
+          delete: 'Delete',
+          flatten_confirm: 'Do you want to flatten all layers onto the canvas? This action cannot be undone.',
+
+          // Shape names
+          shape_circle: 'Circle',
+          shape_square: 'Square',
+          shape_star: 'Star',
+          shape_heart: 'Heart',
+          shape_triangle: 'Triangle',
+          shape_hexagon: 'Hexagon',
+          shape_pentagon: 'Pentagon',
+          shape_diamond: 'Diamond'
+        }
+      },
+
+      async init() {
+        this.canvas = document.getElementById('drawingCanvas');
+        this.ctx = this.canvas.getContext('2d');
+
+        // Set canvas size to window size
+        this.resizeCanvas();
+        window.addEventListener('resize', () => this.resizeCanvas());
+
+        this.ctx.lineCap = 'round';
+        this.ctx.lineJoin = 'round';
+
+        // Initialize PWA features
+        await this.initPWA();
+
+        // Load saved language
+        this.currentLang = localStorage.getItem('drawing_lang') || 'ar';
+        this.applyLanguage();
+
+        this.saveState();
+        this.setupEventListeners();
+        this.renderColors();
+        this.updateUI();
+
+        console.log('🎨 Drawing board ready!');
+      },
+
+      // PWA Initialization
+      async initPWA() {
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+          try {
+            const registration = await navigator.serviceWorker.register('./sw.js');
+            console.log('✅ Service Worker registered:', registration.scope);
+          } catch (error) {
+            console.error('❌ Service Worker registration failed:', error);
+          }
+        }
+
+        // Initialize IndexedDB
+        await this.initDB();
+
+        // Setup install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+          e.preventDefault();
+          this.deferredPrompt = e;
+
+          // Check if user hasn't dismissed the prompt before
+          const dismissed = localStorage.getItem('install_dismissed');
+          const installed = window.matchMedia('(display-mode: standalone)').matches;
+
+          if (!dismissed && !installed) {
+            // Show install prompt after 3 seconds
+            setTimeout(() => {
+              document.getElementById('installPrompt').classList.add('active');
+            }, 3000);
+          }
+        });
+
+        // Detect if already installed
+        window.addEventListener('appinstalled', () => {
+          console.log('✅ App installed successfully!');
+          this.deferredPrompt = null;
+          document.getElementById('installPrompt').classList.remove('active');
+        });
+      },
+
+      // IndexedDB Initialization
+      async initDB() {
+        return new Promise((resolve, reject) => {
+          const request = indexedDB.open('MishkahDrawingDB', 1);
+
+          request.onerror = () => reject(request.error);
+          request.onsuccess = () => {
+            this.db = request.result;
+            console.log('✅ IndexedDB initialized');
+            resolve();
+          };
+
+          request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+
+            // Create object stores
+            if (!db.objectStoreNames.contains('drawings')) {
+              const drawingStore = db.createObjectStore('drawings', { keyPath: 'id', autoIncrement: true });
+              drawingStore.createIndex('name', 'name', { unique: false });
+              drawingStore.createIndex('timestamp', 'timestamp', { unique: false });
+            }
+
+            if (!db.objectStoreNames.contains('history')) {
+              const historyStore = db.createObjectStore('history', { keyPath: 'id', autoIncrement: true });
+              historyStore.createIndex('timestamp', 'timestamp', { unique: false });
+            }
+          };
+        });
+      },
+
+      resizeCanvas() {
+        const oldData = this.canvas.toDataURL();
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+
+        // Restore content after resize
+        if (oldData) {
+          const img = new Image();
+          img.onload = () => {
+            this.ctx.drawImage(img, 0, 0);
+          };
+          img.src = oldData;
+        } else {
+          this.ctx.fillStyle = 'white';
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+      },
+
+      setupEventListeners() {
+        this.canvas.addEventListener('mousedown', (e) => {
+          this.startDrawing(e);
+          // Deselect layer when clicking canvas
+          if (this.selectedLayer !== null && e.target === this.canvas) {
+            this.deselectLayer();
+          }
+        });
+        this.canvas.addEventListener('mousemove', (e) => {
+          this.draw(e);
+        });
+        this.canvas.addEventListener('mouseup', (e) => {
+          this.stopDrawing(e);
+        });
+        this.canvas.addEventListener('mouseout', () => {
+          this.stopDrawing();
+        });
+
+        this.canvas.addEventListener('touchstart', (e) => this.handleTouch(e, 'start'), { passive: false });
+        this.canvas.addEventListener('touchmove', (e) => {
+          this.handleTouch(e, 'move');
+        }, { passive: false });
+        this.canvas.addEventListener('touchend', () => {
+          this.stopDrawing();
+        }, { passive: true });
+
+        // Layer drag events on document for global coverage
+        document.addEventListener('mousemove', (e) => {
+          this.handleLayerDrag(e);
+        });
+        document.addEventListener('mouseup', () => {
+          this.stopLayerDrag();
+        });
+        document.addEventListener('touchmove', (e) => {
+          this.handleLayerDrag(e);
+        }, { passive: false });
+        document.addEventListener('touchend', () => {
+          this.stopLayerDrag();
+        });
+
+        document.getElementById('customColor').addEventListener('input', (e) => {
+          this.currentColor = e.target.value;
+          this.updateUI();
+        });
+
+        document.getElementById('brushSize').addEventListener('input', (e) => {
+          this.brushSize = parseInt(e.target.value);
+          this.updateUI();
+        });
+
+        document.getElementById('toleranceSlider').addEventListener('input', (e) => {
+          this.colorTolerance = parseInt(e.target.value);
+          document.getElementById('toleranceLabel').textContent = this.colorTolerance;
+        });
+
+        document.getElementById('imageUpload').addEventListener('change', (e) => this.handleImageUpload(e));
+        document.getElementById('pdfUpload').addEventListener('change', (e) => this.handlePdfUpload(e));
+
+        // Close modals on outside click
+        ['saveModal', 'loadModal', 'exportModal', 'pdfPageModal'].forEach(id => {
+          const modal = document.getElementById(id);
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              modal.classList.remove('active');
+            }
+          });
+        });
+
+        // Transform controls - Delete button
+        const deleteHandle = document.querySelector('.delete-handle');
+        if (deleteHandle) {
+          deleteHandle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (this.selectedLayer !== null) {
+              this.deleteLayer(this.selectedLayer);
+            }
+          });
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+          // Delete layer with Delete or Backspace key
+          if ((e.key === 'Delete' || e.key === 'Backspace') && this.selectedLayer !== null) {
+            e.preventDefault();
+            this.deleteLayer(this.selectedLayer);
+          }
+          // Escape to deselect layer
+          if (e.key === 'Escape' && this.selectedLayer !== null) {
+            this.deselectLayer();
+          }
+        });
+      },
+
+      togglePanel(panelName) {
+        const panel = document.getElementById(panelName + 'Panel');
+        const otherPanel = panelName === 'tools' ? document.getElementById('colorsPanel') : document.getElementById('toolsPanel');
+
+        if (panel.classList.contains('show')) {
+          panel.classList.remove('show');
+        } else {
+          otherPanel.classList.remove('show');
+          panel.classList.add('show');
+        }
+      },
+
+      closePanel(panelName) {
+        document.getElementById(panelName + 'Panel').classList.remove('show');
+      },
+
+      renderColors() {
+        const grid = document.getElementById('colorGrid');
+        grid.innerHTML = '';
+        this.colors.forEach(color => {
+          const swatch = document.createElement('div');
+          swatch.className = 'color-swatch';
+          swatch.style.backgroundColor = color;
+          if (color === this.currentColor) swatch.classList.add('active');
+          swatch.addEventListener('click', () => {
+            this.currentColor = color;
+            document.getElementById('customColor').value = color;
+            this.updateUI();
+            this.renderColors();
+          });
+          grid.appendChild(swatch);
+        });
+      },
+
+      updateUI() {
+        document.getElementById('brushSizeLabel').textContent = this.brushSize;
+        document.getElementById('toolStatus').textContent = this.currentTool;
+        document.getElementById('historyInfo').textContent = `${this.historyIndex + 1} / ${this.history.length}`;
+
+        const dot = document.getElementById('sizePreviewDot');
+        dot.style.width = this.brushSize + 'px';
+        dot.style.height = this.brushSize + 'px';
+        dot.style.backgroundColor = this.currentColor;
+
+        document.querySelectorAll('.tool-item').forEach(item => {
+          item.classList.remove('active');
+          if (item.dataset.tool === this.currentTool) {
+            item.classList.add('active');
+          }
+        });
+      },
+
+      increaseBrushSize() {
+        if (this.brushSize < 50) {
+          this.brushSize++;
+          document.getElementById('brushSize').value = this.brushSize;
+          this.updateUI();
+        }
+      },
+
+      decreaseBrushSize() {
+        if (this.brushSize > 1) {
+          this.brushSize--;
+          document.getElementById('brushSize').value = this.brushSize;
+          this.updateUI();
+        }
+      },
+
+      increaseTolerance() {
+        if (this.colorTolerance < 100) {
+          this.colorTolerance++;
+          document.getElementById('toleranceSlider').value = this.colorTolerance;
+          document.getElementById('toleranceLabel').textContent = this.colorTolerance;
+        }
+      },
+
+      decreaseTolerance() {
+        if (this.colorTolerance > 0) {
+          this.colorTolerance--;
+          document.getElementById('toleranceSlider').value = this.colorTolerance;
+          document.getElementById('toleranceLabel').textContent = this.colorTolerance;
+        }
+      },
+
+      handleTouch(e, type) {
+        // Handle pinch to zoom
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          this.isPinching = true;
+
+          const touch1 = e.touches[0];
+          const touch2 = e.touches[1];
+          const distance = Math.hypot(
+            touch2.clientX - touch1.clientX,
+            touch2.clientY - touch1.clientY
+          );
+
+          if (type === 'start') {
+            this.pinchStartDistance = distance;
+          } else if (type === 'move' && this.pinchStartDistance > 0) {
+            const scale = distance / this.pinchStartDistance;
+            const newZoom = Math.max(0.5, Math.min(3, this.zoomLevel * scale));
+
+            if (Math.abs(newZoom - this.zoomLevel) > 0.01) {
+              this.zoomLevel = newZoom;
+              this.applyZoom();
+              this.pinchStartDistance = distance;
+            }
+          }
+          return;
+        }
+
+        // Normal drawing
+        if (this.isPinching) {
+          this.isPinching = false;
+          this.pinchStartDistance = 0;
+          return;
+        }
+
+        if (this.currentTool === 'pan') {
+          // Pan tool doesn't draw, just allows scrolling/zooming
+          return;
+        }
+
+        e.preventDefault();
+        const touch = e.touches[0];
+        if (touch) {
+          const mouseEvent = new MouseEvent(
+            type === 'start' ? 'mousedown' : 'mousemove',
+            { clientX: touch.clientX, clientY: touch.clientY }
+          );
+          this.canvas.dispatchEvent(mouseEvent);
+        }
+      },
+
+      getMousePos(e) {
+        const rect = this.canvas.getBoundingClientRect();
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
+
+        const pos = {
+          x: (e.clientX - rect.left) * scaleX,
+          y: (e.clientY - rect.top) * scaleY
+        };
+
+        // Track last cursor position
+        this.lastCursorX = pos.x;
+        this.lastCursorY = pos.y;
+
+        return pos;
+      },
+
+      startDrawing(e) {
+        this.isDrawing = true;
+        const pos = this.getMousePos(e);
+        this.startX = pos.x;
+        this.startY = pos.y;
+
+        if (this.currentTool === 'pen' || this.currentTool === 'brush') {
+          this.ctx.beginPath();
+          this.ctx.moveTo(pos.x, pos.y);
+        } else if (this.currentTool === 'text') {
+          this.drawText(pos.x, pos.y);
+          this.isDrawing = false;
+          this.saveState();
+        } else if (this.currentTool === 'bucket') {
+          this.floodFill(Math.floor(pos.x), Math.floor(pos.y), this.currentColor);
+          this.isDrawing = false;
+          this.saveState();
+        } else if (this.currentTool === 'wand') {
+          this.magicWandSelect(Math.floor(pos.x), Math.floor(pos.y));
+          this.isDrawing = false;
+        }
+      },
+
+      draw(e) {
+        if (!this.isDrawing) return;
+        const pos = this.getMousePos(e);
+
+        if (this.currentTool === 'pen' || this.currentTool === 'brush') {
+          this.ctx.strokeStyle = this.currentColor;
+          this.ctx.lineWidth = this.currentTool === 'brush' ? this.brushSize * 2 : this.brushSize;
+          this.ctx.lineTo(pos.x, pos.y);
+          this.ctx.stroke();
+        } else if (this.currentTool === 'eraser') {
+          this.ctx.clearRect(pos.x - this.brushSize, pos.y - this.brushSize, this.brushSize * 2, this.brushSize * 2);
+        }
+      },
+
+      stopDrawing(e) {
+        if (!this.isDrawing) return;
+
+        if (e) {
+          const pos = this.getMousePos(e);
+          if (this.currentTool === 'line') {
+            // Create line as a layer instead of drawing directly
+            this.createLineLayer(this.startX, this.startY, pos.x, pos.y);
+          } else if (this.currentTool === 'rectangle') {
+            this.drawRectangle(this.startX, this.startY, pos.x, pos.y);
+          } else if (this.currentTool === 'circle') {
+            // Create circle as a layer instead of drawing directly
+            this.createCircleLayer(this.startX, this.startY, pos.x, pos.y);
+          } else if (this.currentTool === 'arrow') {
+            // Create arrow as a layer instead of drawing directly
+            this.createArrowLayer(this.startX, this.startY, pos.x, pos.y);
+          }
+        }
+
+        this.isDrawing = false;
+        this.saveState();
+      },
+
+      drawLine(x1, y1, x2, y2) {
+        this.ctx.strokeStyle = this.currentColor;
+        this.ctx.lineWidth = this.brushSize;
+        this.ctx.beginPath();
+        this.ctx.moveTo(x1, y1);
+        this.ctx.lineTo(x2, y2);
+        this.ctx.stroke();
+      },
+
+      drawRectangle(x1, y1, x2, y2) {
+        this.ctx.strokeStyle = this.currentColor;
+        this.ctx.lineWidth = this.brushSize;
+        this.ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+      },
+
+      drawCircle(x1, y1, x2, y2) {
+        const radius = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        this.ctx.strokeStyle = this.currentColor;
+        this.ctx.lineWidth = this.brushSize;
+        this.ctx.beginPath();
+        this.ctx.arc(x1, y1, radius, 0, 2 * Math.PI);
+        this.ctx.stroke();
+      },
+
+      drawArrow(x1, y1, x2, y2) {
+        const headlen = 15;
+        const angle = Math.atan2(y2 - y1, x2 - x1);
+        this.ctx.strokeStyle = this.currentColor;
+        this.ctx.lineWidth = this.brushSize;
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(x1, y1);
+        this.ctx.lineTo(x2, y2);
+        this.ctx.stroke();
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(x2, y2);
+        this.ctx.lineTo(x2 - headlen * Math.cos(angle - Math.PI / 6), y2 - headlen * Math.sin(angle - Math.PI / 6));
+        this.ctx.moveTo(x2, y2);
+        this.ctx.lineTo(x2 - headlen * Math.cos(angle + Math.PI / 6), y2 - headlen * Math.sin(angle + Math.PI / 6));
+        this.ctx.stroke();
+      },
+
+      drawText(x, y) {
+        const text = prompt('أدخل النص:');
+        if (text) {
+          // Create text as a layer instead of drawing directly
+          this.createTextLayer(x, y, text);
+        }
+      },
+
+      insertShape(shape) {
+        // Use last cursor position if available, otherwise use center
+        const posX = this.lastCursorX || this.canvas.width / 2;
+        const posY = this.lastCursorY || this.canvas.height / 2;
+        const size = 100;
+
+        // Create shape as a layer instead of drawing directly
+        const layer = this.createLayer('shape', {
+          shape: shape,
+          color: this.currentColor,
+          x: posX - size / 2,
+          y: posY - size / 2,
+          width: size,
+          height: size
+        });
+
+        this.addLayer(layer);
+      },
+
+      createLineLayer(x1, y1, x2, y2) {
+        const minX = Math.min(x1, x2);
+        const minY = Math.min(y1, y2);
+        const width = Math.abs(x2 - x1);
+        const height = Math.abs(y2 - y1);
+
+        const layer = this.createLayer('line', {
+          x1: x1 - minX,
+          y1: y1 - minY,
+          x2: x2 - minX,
+          y2: y2 - minY,
+          color: this.currentColor,
+          lineWidth: this.brushSize,
+          x: minX,
+          y: minY,
+          width: width || 1,
+          height: height || 1
+        });
+
+        this.addLayer(layer);
+      },
+
+      createCircleLayer(centerX, centerY, x2, y2) {
+        const radius = Math.sqrt(Math.pow(x2 - centerX, 2) + Math.pow(y2 - centerY, 2));
+        const size = radius * 2;
+
+        const layer = this.createLayer('circle', {
+          radius: radius,
+          color: this.currentColor,
+          lineWidth: this.brushSize,
+          x: centerX - radius,
+          y: centerY - radius,
+          width: size,
+          height: size
+        });
+
+        this.addLayer(layer);
+      },
+
+      createArrowLayer(x1, y1, x2, y2) {
+        const minX = Math.min(x1, x2) - 20;
+        const minY = Math.min(y1, y2) - 20;
+        const width = Math.abs(x2 - x1) + 40;
+        const height = Math.abs(y2 - y1) + 40;
+
+        const layer = this.createLayer('arrow', {
+          x1: x1 - minX,
+          y1: y1 - minY,
+          x2: x2 - minX,
+          y2: y2 - minY,
+          color: this.currentColor,
+          lineWidth: this.brushSize,
+          x: minX,
+          y: minY,
+          width: width,
+          height: height
+        });
+
+        this.addLayer(layer);
+      },
+
+      createTextLayer(x, y, text) {
+        const fontSize = this.brushSize * 5;
+        // Estimate text dimensions
+        this.ctx.font = fontSize + 'px Arial';
+        const textWidth = this.ctx.measureText(text).width;
+        const textHeight = fontSize;
+
+        const layer = this.createLayer('text', {
+          text: text,
+          fontSize: fontSize,
+          color: this.currentColor,
+          x: x,
+          y: y - textHeight,
+          width: textWidth + 20,
+          height: textHeight + 20
+        });
+
+        this.addLayer(layer);
+      },
+
+      drawStar(cx, cy, spikes, outerRadius, innerRadius) {
+        let rot = Math.PI / 2 * 3;
+        const step = Math.PI / spikes;
+        this.ctx.beginPath();
+        this.ctx.moveTo(cx, cy - outerRadius);
+
+        for (let i = 0; i < spikes; i++) {
+          let x = cx + Math.cos(rot) * outerRadius;
+          let y = cy + Math.sin(rot) * outerRadius;
+          this.ctx.lineTo(x, y);
+          rot += step;
+          x = cx + Math.cos(rot) * innerRadius;
+          y = cy + Math.sin(rot) * innerRadius;
+          this.ctx.lineTo(x, y);
+          rot += step;
+        }
+
+        this.ctx.lineTo(cx, cy - outerRadius);
+        this.ctx.closePath();
+        this.ctx.stroke();
+      },
+
+      drawHeart(cx, cy, size) {
+        this.ctx.beginPath();
+        const topCurveHeight = size * 0.3;
+        this.ctx.moveTo(cx, cy + topCurveHeight);
+        this.ctx.bezierCurveTo(cx, cy, cx - size / 2, cy - size / 2, cx - size / 2, cy + topCurveHeight);
+        this.ctx.bezierCurveTo(cx - size / 2, cy + (size + topCurveHeight) / 2, cx, cy + (size + topCurveHeight) / 2, cx, cy + size);
+        this.ctx.bezierCurveTo(cx, cy + (size + topCurveHeight) / 2, cx + size / 2, cy + (size + topCurveHeight) / 2, cx + size / 2, cy + topCurveHeight);
+        this.ctx.bezierCurveTo(cx + size / 2, cy - size / 2, cx, cy, cx, cy + topCurveHeight);
+        this.ctx.closePath();
+        this.ctx.stroke();
+      },
+
+      drawTriangle(cx, cy, size) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(cx, cy - size);
+        this.ctx.lineTo(cx - size, cy + size);
+        this.ctx.lineTo(cx + size, cy + size);
+        this.ctx.closePath();
+        this.ctx.stroke();
+      },
+
+      drawPolygon(cx, cy, sides, size) {
+        this.ctx.beginPath();
+        for (let i = 0; i < sides; i++) {
+          const angle = (i * 2 * Math.PI) / sides - Math.PI / 2;
+          const x = cx + size * Math.cos(angle);
+          const y = cy + size * Math.sin(angle);
+          if (i === 0) this.ctx.moveTo(x, y);
+          else this.ctx.lineTo(x, y);
+        }
+        this.ctx.closePath();
+        this.ctx.stroke();
+      },
+
+      drawDiamond(cx, cy, size) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(cx, cy - size);
+        this.ctx.lineTo(cx + size, cy);
+        this.ctx.lineTo(cx, cy + size);
+        this.ctx.lineTo(cx - size, cy);
+        this.ctx.closePath();
+        this.ctx.stroke();
+      },
+
+      // Flood Fill (Paint Bucket)
+      floodFill(x, y, fillColor) {
+        const imageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+        const pixels = imageData.data;
+        const width = this.canvas.width;
+        const height = this.canvas.height;
+
+        // Convert hex color to RGB
+        const r = parseInt(fillColor.substr(1, 2), 16);
+        const g = parseInt(fillColor.substr(3, 2), 16);
+        const b = parseInt(fillColor.substr(5, 2), 16);
+
+        const targetColor = this.getPixelColor(pixels, x, y, width);
+
+        // If target color is the same as fill color, do nothing
+        if (this.colorsMatch(targetColor, { r, g, b }, 0)) {
+          return;
+        }
+
+        const stack = [[x, y]];
+        const visited = new Set();
+        const tolerance = this.colorTolerance; // Use user-defined tolerance
+
+        while (stack.length > 0) {
+          const [currentX, currentY] = stack.pop();
+          const key = `${currentX},${currentY}`;
+
+          if (visited.has(key)) continue;
+          if (currentX < 0 || currentX >= width || currentY < 0 || currentY >= height) continue;
+
+          const currentColor = this.getPixelColor(pixels, currentX, currentY, width);
+          if (!this.colorsMatch(currentColor, targetColor, tolerance)) continue;
+
+          visited.add(key);
+
+          // Fill this pixel
+          this.setPixelColor(pixels, currentX, currentY, width, r, g, b);
+
+          // Add neighbors to stack
+          stack.push([currentX + 1, currentY]);
+          stack.push([currentX - 1, currentY]);
+          stack.push([currentX, currentY + 1]);
+          stack.push([currentX, currentY - 1]);
+        }
+
+        this.ctx.putImageData(imageData, 0, 0);
+      },
+
+      getPixelColor(pixels, x, y, width) {
+        const index = (y * width + x) * 4;
+        return {
+          r: pixels[index],
+          g: pixels[index + 1],
+          b: pixels[index + 2],
+          a: pixels[index + 3]
+        };
+      },
+
+      setPixelColor(pixels, x, y, width, r, g, b) {
+        const index = (y * width + x) * 4;
+        pixels[index] = r;
+        pixels[index + 1] = g;
+        pixels[index + 2] = b;
+        pixels[index + 3] = 255; // Full opacity
+      },
+
+      colorsMatch(color1, color2, tolerance = 0) {
+        return Math.abs(color1.r - color2.r) <= tolerance &&
+          Math.abs(color1.g - color2.g) <= tolerance &&
+          Math.abs(color1.b - color2.b) <= tolerance;
+      },
+
+      // Magic Wand Selection
+      magicWandSelect(x, y) {
+        const imageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+        const pixels = imageData.data;
+        const width = this.canvas.width;
+        const height = this.canvas.height;
+
+        const targetColor = this.getPixelColor(pixels, x, y, width);
+        const tolerance = this.colorTolerance; // Use user-defined tolerance
+
+        const stack = [[x, y]];
+        const visited = new Set();
+        const selected = [];
+
+        while (stack.length > 0) {
+          const [currentX, currentY] = stack.pop();
+          const key = `${currentX},${currentY}`;
+
+          if (visited.has(key)) continue;
+          if (currentX < 0 || currentX >= width || currentY < 0 || currentY >= height) continue;
+
+          const currentColor = this.getPixelColor(pixels, currentX, currentY, width);
+          if (!this.colorsMatch(currentColor, targetColor, tolerance)) continue;
+
+          visited.add(key);
+          selected.push([currentX, currentY]);
+
+          // Add neighbors to stack
+          stack.push([currentX + 1, currentY]);
+          stack.push([currentX - 1, currentY]);
+          stack.push([currentX, currentY + 1]);
+          stack.push([currentX, currentY - 1]);
+        }
+
+        // Highlight selected area with semi-transparent overlay
+        this.ctx.save();
+        this.ctx.fillStyle = 'rgba(99, 102, 241, 0.3)';
+        selected.forEach(([px, py]) => {
+          this.ctx.fillRect(px, py, 1, 1);
+        });
+        this.ctx.restore();
+
+        // Store selection for later use (fill or delete)
+        this.currentSelection = { pixels: selected, imageData: imageData };
+
+        // Show action buttons
+        this.showSelectionActions();
+      },
+
+      showSelectionActions() {
+        // Create floating action buttons for selection
+        let actionsDiv = document.getElementById('selectionActions');
+        if (!actionsDiv) {
+          actionsDiv = document.createElement('div');
+          actionsDiv.id = 'selectionActions';
+          actionsDiv.style.cssText = `
+            position: fixed;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            gap: 8px;
+            z-index: 1001;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+          `;
+          actionsDiv.innerHTML = `
+            <button onclick="app.fillSelection()" class="toolbar-btn">
+              <span>🎨</span> <span>تلوين</span>
+            </button>
+            <button onclick="app.deleteSelection()" class="toolbar-btn">
+              <span>🗑️</span> <span>حذف</span>
+            </button>
+            <button onclick="app.cancelSelection()" class="toolbar-btn">
+              <span>✖️</span> <span>إلغاء</span>
+            </button>
+          `;
+          document.body.appendChild(actionsDiv);
+        }
+        actionsDiv.style.display = 'flex';
+      },
+
+      hideSelectionActions() {
+        const actionsDiv = document.getElementById('selectionActions');
+        if (actionsDiv) {
+          actionsDiv.style.display = 'none';
+        }
+      },
+
+      fillSelection() {
+        if (!this.currentSelection) return;
+
+        const imageData = this.currentSelection.imageData;
+        const pixels = imageData.data;
+        const width = this.canvas.width;
+
+        // Convert current color to RGB
+        const r = parseInt(this.currentColor.substr(1, 2), 16);
+        const g = parseInt(this.currentColor.substr(3, 2), 16);
+        const b = parseInt(this.currentColor.substr(5, 2), 16);
+
+        // Fill all selected pixels
+        this.currentSelection.pixels.forEach(([x, y]) => {
+          this.setPixelColor(pixels, x, y, width, r, g, b);
+        });
+
+        this.ctx.putImageData(imageData, 0, 0);
+        this.cancelSelection();
+        this.saveState();
+      },
+
+      deleteSelection() {
+        if (!this.currentSelection) return;
+
+        const imageData = this.currentSelection.imageData;
+        const pixels = imageData.data;
+        const width = this.canvas.width;
+
+        // Delete all selected pixels (set to white)
+        this.currentSelection.pixels.forEach(([x, y]) => {
+          this.setPixelColor(pixels, x, y, width, 255, 255, 255);
+        });
+
+        this.ctx.putImageData(imageData, 0, 0);
+        this.cancelSelection();
+        this.saveState();
+      },
+
+      cancelSelection() {
+        // Restore original canvas without selection overlay
+        if (this.currentSelection) {
+          this.ctx.putImageData(this.currentSelection.imageData, 0, 0);
+          this.currentSelection = null;
+        }
+        this.hideSelectionActions();
+      },
+
+      setTool(tool) {
+        this.currentTool = tool;
+        this.updateUI();
+      },
+
+      saveState() {
+        this.history = this.history.slice(0, this.historyIndex + 1);
+        this.history.push(this.canvas.toDataURL());
+        this.historyIndex++;
+        if (this.history.length > 50) {
+          this.history.shift();
+          this.historyIndex--;
+        }
+
+        // Persist PDF state if in PDF mode
+        if (this.pdfMode) {
+          this.saveCurrentPageAnnotations();
+          this.saveLastPdfPosition();
+        }
+
+        this.updateUI();
+      },
+
+      restoreState(index) {
+        const img = new Image();
+        img.src = this.history[index];
+        img.onload = () => {
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          this.ctx.drawImage(img, 0, 0);
+        };
+      },
+
+      undo() {
+        if (this.historyIndex > 0) {
+          this.historyIndex--;
+          this.restoreState(this.historyIndex);
+          this.updateUI();
+        }
+      },
+
+      redo() {
+        if (this.historyIndex < this.history.length - 1) {
+          this.historyIndex++;
+          this.restoreState(this.historyIndex);
+          this.updateUI();
+        }
+      },
+
+      clearCanvas() {
+        if (confirm(this.t('clear_confirm'))) {
+          this.ctx.fillStyle = 'white';
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+          // Reset current drawing (this is a new canvas)
+          this.currentDrawingId = null;
+          this.currentDrawingName = '';
+          this.currentDrawingFolder = '';
+
+          this.saveState();
+        }
+      },
+
+      importImage() {
+        document.getElementById('imageUpload').click();
+      },
+
+      handleImageUpload(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+              this.ctx.drawImage(img, 0, 0);
+              this.saveState();
+            };
+            img.src = event.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      },
+
+      openSaveModal() {
+        const modal = document.getElementById('saveModal');
+        const nameInput = document.getElementById('saveName');
+        const folderInput = document.getElementById('saveFolder');
+
+        // Pre-fill if we have a current drawing open
+        if (this.currentDrawingId) {
+          nameInput.value = this.currentDrawingName;
+          folderInput.value = this.currentDrawingFolder;
+        }
+
+        modal.classList.add('active');
+        nameInput.focus();
+        nameInput.select();
+      },
+
+      closeSaveModal() {
+        document.getElementById('saveModal').classList.remove('active');
+        document.getElementById('saveName').value = '';
+        document.getElementById('saveFolder').value = '';
+      },
+
+      openLoadModal() {
+        document.getElementById('loadModal').classList.add('active');
+        this.loadSavedFiles();
+      },
+
+      closeLoadModal() {
+        document.getElementById('loadModal').classList.remove('active');
+      },
+
+      openExportModal() {
+        document.getElementById('exportModal').classList.add('active');
+      },
+
+      closeExportModal() {
+        document.getElementById('exportModal').classList.remove('active');
+      },
+
+      saveDrawing() {
+        const name = document.getElementById('saveName').value.trim();
+        const folder = document.getElementById('saveFolder').value.trim();
+
+        if (!name) {
+          alert(this.t('enter_name'));
+          return;
+        }
+
+        // Save current page annotations if in PDF mode
+        if (this.pdfMode && this.pdfPages.length > 0) {
+          this.saveCurrentPageAnnotations();
+        }
+
+        // Create a temporary canvas that combines canvas + layers
+        const finalCanvas = this.getFinalCanvasWithLayers();
+        const data = finalCanvas.toDataURL();
+
+        let drawings = JSON.parse(localStorage.getItem('drawings') || '[]');
+
+        // Prepare PDF data if in PDF mode
+        const pdfData = this.pdfMode ? {
+          pdfMode: true,
+          pdfPages: this.pdfPages,
+          currentPageIndex: this.currentPageIndex,
+          pageAnnotations: this.pageAnnotations
+        } : null;
+
+        if (this.currentDrawingId) {
+          // Update existing drawing
+          const index = drawings.findIndex(d => d.id === this.currentDrawingId);
+          if (index !== -1) {
+            drawings[index] = {
+              ...drawings[index],
+              name: name,
+              folder: folder,
+              data: data,
+              layers: JSON.parse(JSON.stringify(this.layers)), // Save layers data
+              pdfData: pdfData, // Save PDF data
+              date: new Date().toLocaleDateString('ar-SA')
+            };
+          }
+        } else {
+          // Create new drawing
+          const drawing = {
+            id: Date.now(),
+            name: name,
+            folder: folder,
+            data: data,
+            layers: JSON.parse(JSON.stringify(this.layers)), // Save layers data
+            pdfData: pdfData, // Save PDF data
+            date: new Date().toLocaleDateString('ar-SA')
+          };
+          drawings.push(drawing);
+
+          // Set as current drawing
+          this.currentDrawingId = drawing.id;
+          this.currentDrawingName = name;
+          this.currentDrawingFolder = folder;
+        }
+
+        localStorage.setItem('drawings', JSON.stringify(drawings));
+
+        // Update current drawing info
+        this.currentDrawingName = name;
+        this.currentDrawingFolder = folder;
+
+        this.lastSaved = new Date().toLocaleDateString('ar-SA');
+        this.closeSaveModal();
+        alert(this.t('saved_success'));
+      },
+
+      // Get final canvas with layers rendered
+      getFinalCanvasWithLayers() {
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = this.canvas.width;
+        tempCanvas.height = this.canvas.height;
+        const tempCtx = tempCanvas.getContext('2d');
+
+        // Draw current canvas
+        tempCtx.drawImage(this.canvas, 0, 0);
+
+        // Draw each layer on top
+        this.layers.forEach(layer => {
+          if (layer.visible) {
+            tempCtx.save();
+
+            // Apply transformations
+            tempCtx.translate(layer.x + layer.width / 2, layer.y + layer.height / 2);
+            tempCtx.rotate(layer.rotation * Math.PI / 180);
+            tempCtx.translate(-layer.width / 2, -layer.height / 2);
+
+            // Render layer content
+            if (layer.type === 'shape') {
+              this.renderShapeToCanvas(tempCtx, layer);
+            }
+
+            tempCtx.restore();
+          }
+        });
+
+        return tempCanvas;
+      },
+
+      loadSavedFiles() {
+        const drawings = JSON.parse(localStorage.getItem('drawings') || '[]');
+        const list = document.getElementById('filesList');
+
+        if (drawings.length === 0) {
+          list.innerHTML = '<div style="text-align: center; padding: 2rem; color: rgba(148, 163, 184, 0.8);">لا توجد رسومات محفوظة</div>';
+          return;
+        }
+
+        list.innerHTML = '';
+        drawings.reverse().forEach(drawing => {
+          const item = document.createElement('div');
+          item.className = 'file-item';
+          item.innerHTML = `
+            <div class="file-info">
+              <div class="file-name">${drawing.name}</div>
+              <div class="file-meta">${drawing.folder || 'بدون مجلد'} • ${drawing.date}</div>
+            </div>
+            <div class="file-actions">
+              <button class="btn-small" onclick="app.deleteDrawing(${drawing.id}); event.stopPropagation();">🗑️</button>
+            </div>
+          `;
+          item.addEventListener('click', () => this.loadDrawing(drawing.id));
+          list.appendChild(item);
+        });
+      },
+
+      loadDrawing(id) {
+        const drawings = JSON.parse(localStorage.getItem('drawings') || '[]');
+        const drawing = drawings.find(d => d.id === id);
+
+        if (drawing) {
+          // Clear any existing layers first
+          this.clearAllLayers();
+
+          const img = new Image();
+          img.onload = () => {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.drawImage(img, 0, 0);
+
+            // Set current drawing info for update instead of new save
+            this.currentDrawingId = drawing.id;
+            this.currentDrawingName = drawing.name;
+            this.currentDrawingFolder = drawing.folder || '';
+
+            // Restore PDF mode if it was a PDF
+            if (drawing.pdfData && drawing.pdfData.pdfMode) {
+              this.pdfMode = true;
+              this.pdfPages = drawing.pdfData.pdfPages || [];
+              this.currentPageIndex = drawing.pdfData.currentPageIndex || 0;
+              this.pageAnnotations = drawing.pdfData.pageAnnotations || {};
+
+              // Show PDF navigation (use multiple methods for compatibility)
+              const pdfNav = document.getElementById('pdfNavigation');
+              if (pdfNav) {
+                pdfNav.style.display = 'flex';
+                pdfNav.style.visibility = 'visible';
+              }
+              this.updatePdfNavigation();
+
+              // Note: We can't restore pdfDoc without the original PDF file
+              // So we show a simplified navigation using saved annotations
+            } else {
+              // Not a PDF, hide PDF navigation
+              this.pdfMode = false;
+              this.pdfPages = [];
+              this.currentPageIndex = 0;
+              this.pageAnnotations = {};
+              const pdfNav = document.getElementById('pdfNavigation');
+              if (pdfNav) {
+                pdfNav.style.display = 'none';
+              }
+            }
+
+            // Load layers if they exist
+            if (drawing.layers && drawing.layers.length > 0) {
+              drawing.layers.forEach(layerData => {
+                const layer = this.createLayer(layerData.type, layerData.data);
+                layer.x = layerData.x;
+                layer.y = layerData.y;
+                layer.width = layerData.width;
+                layer.height = layerData.height;
+                layer.rotation = layerData.rotation || 0;
+                layer.visible = layerData.visible !== false;
+                layer.locked = layerData.locked || false;
+                this.addLayer(layer);
+              });
+            }
+
+            this.saveState();
+            this.closeLoadModal();
+          };
+          img.src = drawing.data;
+        }
+      },
+
+      deleteDrawing(id) {
+        if (confirm(this.t('delete_confirm'))) {
+          let drawings = JSON.parse(localStorage.getItem('drawings') || '[]');
+          drawings = drawings.filter(d => d.id !== id);
+          localStorage.setItem('drawings', JSON.stringify(drawings));
+          this.loadSavedFiles();
+        }
+      },
+
+      exportAsPNG() {
+        this.showLoading(this.currentLang === 'ar' ? 'جاري التصدير...' : 'Exporting...');
+
+        setTimeout(() => {
+          const link = document.createElement('a');
+          const name = document.getElementById('saveName').value.trim() || 'drawing';
+          link.download = name + '.png';
+
+          // Export with layers included
+          const finalCanvas = this.getFinalCanvasWithLayers();
+          link.href = finalCanvas.toDataURL();
+          link.click();
+
+          this.hideLoading();
+          this.closeExportModal();
+        }, 100);
+      },
+
+      exportAsJPG() {
+        this.showLoading(this.currentLang === 'ar' ? 'جاري التصدير...' : 'Exporting...');
+
+        setTimeout(() => {
+          const link = document.createElement('a');
+          const name = document.getElementById('saveName').value.trim() || 'drawing';
+          link.download = name + '.jpg';
+
+          // Export with layers included
+          const finalCanvas = this.getFinalCanvasWithLayers();
+          link.href = finalCanvas.toDataURL('image/jpeg');
+          link.click();
+
+          this.hideLoading();
+          this.closeExportModal();
+        }, 100);
+      },
+
+      async exportAsPDF() {
+        // If in PDF mode with multiple pages, show page selector
+        if (this.pdfMode && this.pdfPages.length > 1) {
+          this.closeExportModal();
+          await this.showExportPagesSelector();
+        } else {
+          // Single page export
+          await this.performPDFExport();
+        }
+      },
+
+      async showExportPagesSelector() {
+        const modal = document.getElementById('exportPagesModal');
+        const selector = document.getElementById('exportPageSelector');
+        selector.innerHTML = '';
+
+        // Initialize selectedExportPages if not exists
+        if (!this.selectedExportPages) {
+          this.selectedExportPages = new Set();
+        }
+        this.selectedExportPages.clear();
+
+        // Select all pages by default
+        for (let i = 0; i < this.pdfPages.length; i++) {
+          this.selectedExportPages.add(i);
+        }
+
+        // Create preview for each page
+        for (let i = 0; i < this.pdfPages.length; i++) {
+          const pageNum = this.pdfPages[i];
+          const pageItem = document.createElement('div');
+          pageItem.className = 'page-item selected';
+          pageItem.dataset.pageIndex = i;
+          pageItem.innerHTML = `
+            <div style="width: 150px; height: 100px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+              <div style="font-size: 2rem;">📄</div>
+            </div>
+            <div class="page-label">${this.t('page')} ${i + 1}</div>
+          `;
+
+          pageItem.addEventListener('click', () => {
+            pageItem.classList.toggle('selected');
+            if (pageItem.classList.contains('selected')) {
+              this.selectedExportPages.add(i);
+            } else {
+              this.selectedExportPages.delete(i);
+            }
+          });
+
+          selector.appendChild(pageItem);
+        }
+
+        modal.classList.add('active');
+      },
+
+      async confirmExportPages() {
+        if (!this.selectedExportPages || this.selectedExportPages.size === 0) {
+          alert(this.t('select_one_page') || 'الرجاء تحديد صفحة واحدة على الأقل');
+          return;
+        }
+
+        this.closeExportPagesModal();
+        await this.performPDFExport();
+      },
+
+      async performPDFExport() {
+        const { jsPDF } = window.jspdf;
+        const name = document.getElementById('saveName').value.trim() || 'drawing';
+
+        // If in PDF mode with multiple pages
+        if (this.pdfMode && this.pdfPages.length > 0) {
+          // Save current page annotations before export
+          this.saveCurrentPageAnnotations();
+
+          // Determine which pages to export
+          const pagesToExport = this.selectedExportPages && this.selectedExportPages.size > 0
+            ? Array.from(this.selectedExportPages).sort((a, b) => a - b)
+            : this.pdfPages.map((_, i) => i);
+
+          // Show loading with progress
+          this.showLoading(this.currentLang === 'ar' ? 'جاري التصدير...' : 'Exporting...');
+
+          const pdf = new jsPDF({
+            orientation: 'landscape',
+            unit: 'px',
+            format: [this.canvas.width, this.canvas.height]
+          });
+
+          const currentPageIndex = this.currentPageIndex;
+
+          // Add selected pages with annotations
+          for (let i = 0; i < pagesToExport.length; i++) {
+            const pageIndex = pagesToExport[i];
+            const pageNum = this.pdfPages[pageIndex];
+
+            // Update progress
+            this.updateLoadingProgress(i + 1, pagesToExport.length);
+
+            if (i > 0) {
+              pdf.addPage([this.canvas.width, this.canvas.height], 'landscape');
+            }
+
+            // Use saved annotations if available, otherwise load fresh
+            if (this.pageAnnotations[pageNum]) {
+              // Use the saved annotated version
+              await new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => {
+                  this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                  this.ctx.drawImage(img, 0, 0);
+                  const finalCanvas = this.getFinalCanvasWithLayers();
+                  pdf.addImage(finalCanvas.toDataURL(), 'PNG', 0, 0, this.canvas.width, this.canvas.height);
+                  resolve();
+                };
+                img.src = this.pageAnnotations[pageNum];
+              });
+            } else {
+              // Load the page without annotations
+              await this.loadPdfPage(pageNum, false);
+              const finalCanvas = this.getFinalCanvasWithLayers();
+              pdf.addImage(finalCanvas.toDataURL(), 'PNG', 0, 0, this.canvas.width, this.canvas.height);
+            }
+          }
+
+          // Restore current page view
+          this.currentPageIndex = currentPageIndex;
+          await this.loadPdfPage(this.pdfPages[this.currentPageIndex]);
+
+          this.hideLoading();
+          pdf.save(name + '_annotated.pdf');
+        } else {
+          // Single page export
+          this.showLoading(this.currentLang === 'ar' ? 'جاري التصدير...' : 'Exporting...');
+
+          const pdf = new jsPDF({
+            orientation: 'landscape',
+            unit: 'px',
+            format: [this.canvas.width, this.canvas.height]
+          });
+
+          const finalCanvas = this.getFinalCanvasWithLayers();
+          pdf.addImage(finalCanvas.toDataURL(), 'PNG', 0, 0, this.canvas.width, this.canvas.height);
+
+          this.hideLoading();
+          pdf.save(name + '.pdf');
+        }
+
+        this.closeExportModal();
+      },
+
+      // PDF Import Functions
+      // PDF Import Functions
+      async handlePdfUpload(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try {
+          // Check if file exists in history first
+          if (this.db) {
+            const cleanName = file.name.replace(/[^a-z0-9]/gi, '_');
+            const pdfId = 'pdf_' + cleanName + '_' + file.size;
+
+            const tx = this.db.transaction('history', 'readonly');
+            const store = tx.objectStore('history');
+            const request = store.get(pdfId);
+
+            request.onsuccess = async () => {
+              if (request.result) {
+                // Found in history! Resume session
+                // Use confirm to ask user, or just load. User requested "persistent state", implying auto-load
+                // But let's give a choice or just do it? 
+                // The requirement: "when I open a PDF ... it does not freeze the mode for the same book on the same page"
+                // This implies AUTO persistence.
+                // Let's use a subtle notification or just do it.
+                // For safety against "stuck" state, maybe confirm is better?
+                // Let's do auto for now as requested "persistent state".
+
+                this.currentPdfFile = file;
+                const item = request.result;
+
+                // Show loading
+                this.showLoading(this.t('loading'));
+
+                // Load PDF
+                try {
+                  // We need to load the PDF doc first to ensure valid PDF
+                  const arrayBuffer = await file.arrayBuffer();
+                  this.pdfDoc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+
+                  // Restore state
+                  this.pdfDocId = item.id;
+                  this.currentPdfName = item.name;
+                  this.pdfPages = item.pdfPages;
+                  this.currentPageIndex = (item.lastPage || 1) - 1;
+                  this.pageAnnotations = item.pageAnnotations || {};
+                  this.pdfMode = true;
+
+                  await this.loadPdfPage(this.pdfPages[this.currentPageIndex]);
+
+                  document.getElementById('pdfNavigation').classList.add('active');
+                  document.getElementById('addToLibraryBtn').style.display = 'flex';
+                  this.updatePdfNavigation();
+                  this.hideLoading();
+
+                  // Save as last state so if they refresh page it comes back here
+                  this.saveLastPdfPosition();
+                } catch (err) {
+                  console.error(err);
+                  this.processNewPdf(file);
+                }
+
+                // Reset input
+                e.target.value = '';
+                return;
+              }
+
+              // Not found -> Proceed to new load
+              this.processNewPdf(file);
+            };
+
+            request.onerror = () => this.processNewPdf(file);
+          } else {
+            this.processNewPdf(file);
+          }
+        } catch (error) {
+          alert(this.t('pdf_load_error') + ': ' + error.message);
+          e.target.value = '';
+        }
+      },
+
+      async processNewPdf(file) {
+        try {
+          const arrayBuffer = await file.arrayBuffer();
+          this.currentPdfFile = file;
+          this.showLoading(this.t('loading'));
+          this.pdfDoc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+          await this.showPdfPageSelector();
+        } catch (error) {
+          this.hideLoading();
+          alert(this.t('pdf_load_error') + ': ' + error.message);
+        }
+        // Reset input if called from upload
+        const input = document.getElementById('pdfUpload');
+        if (input) input.value = '';
+      },
+
+      async showPdfPageSelector() {
+        this.showLoading(this.t('loading_pages'));
+
+        const modal = document.getElementById('pdfPageModal');
+        const selector = document.getElementById('pdfPageSelector');
+        selector.innerHTML = '';
+        this.selectedPdfPages.clear();
+
+        const numPages = this.pdfDoc.numPages;
+
+        // Select all pages by default
+        for (let i = 1; i <= numPages; i++) {
+          this.selectedPdfPages.add(i);
+        }
+
+        // Limit preview to first 50 pages for performance
+        const previewLimit = Math.min(numPages, 50);
+
+        for (let i = 1; i <= previewLimit; i++) {
+          this.updateLoadingProgress(i, previewLimit);
+
+          const page = await this.pdfDoc.getPage(i);
+          const viewport = page.getViewport({ scale: 0.3 });
+
+          const canvas = document.createElement('canvas');
+          canvas.className = 'page-preview';
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          const ctx = canvas.getContext('2d');
+          await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+          const pageItem = document.createElement('div');
+          pageItem.className = 'page-item selected';
+          pageItem.dataset.pageNum = i;
+          pageItem.innerHTML = `
+            ${canvas.outerHTML}
+            <div class="page-label">${this.t('page')} ${i}</div>
+          `;
+
+          pageItem.addEventListener('click', () => {
+            pageItem.classList.toggle('selected');
+            if (pageItem.classList.contains('selected')) {
+              this.selectedPdfPages.add(i);
+            } else {
+              this.selectedPdfPages.delete(i);
+            }
+          });
+
+          selector.appendChild(pageItem);
+        }
+
+        // If there are more pages, show a message
+        if (numPages > previewLimit) {
+          const messageEl = document.createElement('div');
+          messageEl.style.cssText = 'grid-column: 1 / -1; text-align: center; padding: 20px; color: #f8fafc;';
+          messageEl.textContent = `${this.t('loading_pages')}... (${previewLimit}/${numPages}). ${this.t('page_range_help')}`;
+          selector.appendChild(messageEl);
+        }
+
+        this.hideLoading();
+        modal.classList.add('active');
+
+        // Set page range input to "all"
+        document.getElementById('pageRangeInput').value = numPages <= 50 ? '' : this.currentLang === 'ar' ? 'الكل' : 'all';
+      },
+
+      async importSelectedPages() {
+        if (this.selectedPdfPages.size === 0) {
+          alert(this.t('select_one_page'));
+          return;
+        }
+
+        // Convert selected pages to sorted array
+        this.pdfPages = Array.from(this.selectedPdfPages).sort((a, b) => a - b);
+        this.currentPageIndex = 0;
+        this.pdfMode = true;
+
+        // Load first page
+        await this.loadPdfPage(this.pdfPages[0]);
+
+        // Add to history and save state
+        if (this.currentPdfFile) {
+          await this.addToHistory(this.currentPdfFile, this.currentPdfFile.name);
+          this.currentPdfFile = null; // Clear after use
+        }
+
+        // Show PDF navigation
+        document.getElementById('pdfNavigation').classList.add('active');
+        this.updatePdfNavigation();
+
+        this.closePdfModal();
+      },
+
+      async loadPdfPage(pageNum, restoreAnnotations = true) {
+        try {
+          const page = await this.pdfDoc.getPage(pageNum);
+
+          // Calculate scale to fit canvas
+          const viewport = page.getViewport({ scale: 1 });
+          const scaleX = this.canvas.width / viewport.width;
+          const scaleY = this.canvas.height / viewport.height;
+          const scale = Math.min(scaleX, scaleY) * 0.9; // 90% of canvas size
+
+          const scaledViewport = page.getViewport({ scale: scale });
+
+          // Create temporary canvas for PDF rendering
+          const tempCanvas = document.createElement('canvas');
+          tempCanvas.width = scaledViewport.width;
+          tempCanvas.height = scaledViewport.height;
+          const tempCtx = tempCanvas.getContext('2d');
+
+          // Render PDF page
+          await page.render({
+            canvasContext: tempCtx,
+            viewport: scaledViewport
+          }).promise;
+
+          // Clear main canvas and draw PDF page centered
+          this.ctx.fillStyle = 'white';
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+          const x = (this.canvas.width - scaledViewport.width) / 2;
+          const y = (this.canvas.height - scaledViewport.height) / 2;
+          this.ctx.drawImage(tempCanvas, x, y);
+
+          // Restore annotations if available
+          if (restoreAnnotations && this.pageAnnotations[pageNum]) {
+            const img = new Image();
+            img.onload = () => {
+              this.ctx.drawImage(img, 0, 0);
+              this.saveState();
+            };
+            img.src = this.pageAnnotations[pageNum];
+          } else {
+            // Save to history
+            this.saveState();
+          }
+        } catch (error) {
+          alert(this.t('page_load_error') + ': ' + error.message);
+        }
+      },
+
+      saveCurrentPageAnnotations() {
+        if (this.pdfMode && this.pdfPages.length > 0) {
+          const currentPage = this.pdfPages[this.currentPageIndex];
+          this.pageAnnotations[currentPage] = this.canvas.toDataURL();
+        }
+      },
+
+      previousPage() {
+        if (this.currentPageIndex > 0) {
+          // Save current page annotations
+          this.saveCurrentPageAnnotations();
+
+          this.currentPageIndex--;
+          this.loadSavedPage();
+          this.updatePdfNavigation();
+
+          // Save last position
+          this.saveLastPdfPosition();
+        }
+      },
+
+      nextPage() {
+        if (this.currentPageIndex < this.pdfPages.length - 1) {
+          // Save current page annotations
+          this.saveCurrentPageAnnotations();
+
+          this.currentPageIndex++;
+          this.loadSavedPage();
+          this.updatePdfNavigation();
+
+          // Save last position
+          this.saveLastPdfPosition();
+        }
+      },
+
+      // Load page from saved annotations or PDF doc
+      loadSavedPage() {
+        const pageNum = this.pdfPages[this.currentPageIndex];
+
+        if (this.pdfDoc) {
+          // We have the original PDF, load from it
+          this.loadPdfPage(pageNum);
+        } else if (this.pageAnnotations[pageNum]) {
+          // No PDF doc, but we have saved annotations - load them
+          this.ctx.fillStyle = 'white';
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+          const img = new Image();
+          img.onload = () => {
+            this.ctx.drawImage(img, 0, 0);
+            this.saveState();
+          };
+          img.src = this.pageAnnotations[pageNum];
+        } else {
+          // No PDF doc and no annotations - show blank page
+          this.ctx.fillStyle = 'white';
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+          this.saveState();
+        }
+      },
+
+      updatePdfNavigation() {
+        const pageInfo = document.getElementById('pageInfo');
+        const prevBtn = document.getElementById('prevPageBtn');
+        const nextBtn = document.getElementById('nextPageBtn');
+        const input = document.getElementById('pageNumInput');
+
+        pageInfo.textContent = ` / ${this.pdfPages.length}`;
+        input.value = this.currentPageIndex + 1;
+        input.max = this.pdfPages.length;
+        prevBtn.disabled = this.currentPageIndex === 0;
+        nextBtn.disabled = this.currentPageIndex === this.pdfPages.length - 1;
+      },
+
+      goToPageFromInput() {
+        const input = document.getElementById('pageNumInput');
+        let pageNum = parseInt(input.value);
+        if (isNaN(pageNum)) return;
+
+        pageNum = Math.max(1, Math.min(this.pdfPages.length, pageNum));
+        const index = pageNum - 1;
+
+        if (index !== this.currentPageIndex) {
+          this.saveCurrentPageAnnotations();
+          this.currentPageIndex = index;
+          this.loadSavedPage();
+          this.updatePdfNavigation();
+          this.saveLastPdfPosition();
+        }
+      },
+
+      // Persistence and History Logic
+      async saveLastPdfPosition() {
+        if (!this.pdfMode || !this.pdfDocId) return;
+
+        const state = {
+          id: 'last_state',
+          pdfId: this.pdfDocId,
+          filename: this.currentPdfName,
+          currentPageIndex: this.currentPageIndex,
+          pdfPages: this.pdfPages,
+          pageAnnotations: this.pageAnnotations,
+          timestamp: Date.now()
+        };
+
+        const tx = this.db.transaction('history', 'readwrite');
+        const store = tx.objectStore('history');
+        await store.put(state);
+
+        // Update history entry with current page/annotations
+        this.updateHistoryItem(this.pdfDocId);
+      },
+
+      async updateHistoryItem(pdfId) {
+        const tx = this.db.transaction('history', 'readwrite');
+        const store = tx.objectStore('history');
+        const request = store.get(pdfId);
+
+        request.onsuccess = () => {
+          const item = request.result;
+          if (item) {
+            item.lastPage = this.currentPageIndex + 1;
+            item.timestamp = Date.now();
+            item.pageAnnotations = this.pageAnnotations;
+            store.put(item);
+          }
+        };
+      },
+
+      async addToHistory(pdfBlob, filename) {
+        return new Promise((resolve, reject) => {
+          // Generate deterministic ID: pdf_[clean_filename]_[size]
+          const cleanName = filename.replace(/[^a-z0-9]/gi, '_');
+          const pdfId = 'pdf_' + cleanName + '_' + pdfBlob.size;
+
+          this.pdfDocId = pdfId;
+          this.currentPdfName = filename;
+
+          const tx = this.db.transaction('history', 'readwrite');
+          const store = tx.objectStore('history');
+
+          // Check if it already exists
+          const getReq = store.get(pdfId);
+
+          getReq.onsuccess = () => {
+            const existing = getReq.result;
+
+            if (existing) {
+              // Already exists, just update timestamp
+              existing.timestamp = Date.now();
+              // If we are re-importing, maybe we should preserve pages/annotations?
+              // For now, let's assume if we are calling addToHistory, we are starting fresh OR 
+              // we might want to keep old annotations if pages match.
+              // Let's keep old annotations to be safe if it's the same file.
+              store.put(existing);
+
+              // Restore state if available
+              if (existing.pageAnnotations) {
+                this.pageAnnotations = existing.pageAnnotations;
+              }
+              if (existing.lastPage) {
+                // We might want to jump to last page? 
+                // But importSelectedPages sets currentPageIndex = 0.
+                // Let's stick to importSelectedPages logic for now, but ensure we don't lose data.
+              }
+            } else {
+              // New entry
+              const historyItem = {
+                id: pdfId,
+                name: filename,
+                blob: pdfBlob,
+                lastPage: 1,
+                pdfPages: this.pdfPages,
+                pageAnnotations: {},
+                timestamp: Date.now()
+              };
+              store.add(historyItem);
+            }
+          };
+
+          tx.oncomplete = () => {
+            // Also save as last state
+            this.saveLastPdfPosition();
+            // Show add to library button
+            document.getElementById('addToLibraryBtn').style.display = 'flex';
+            resolve();
+          };
+
+          tx.onerror = () => reject(tx.error);
+        });
+      },
+
+      async tryLoadLastState() {
+        const tx = this.db.transaction('history', 'readonly');
+        const store = tx.objectStore('history');
+        const request = store.get('last_state');
+
+        request.onsuccess = async () => {
+          const state = request.result;
+          if (state) {
+            const pdfRequest = store.get(state.pdfId);
+            pdfRequest.onsuccess = async () => {
+              const pdfData = pdfRequest.result;
+              if (pdfData && pdfData.blob) {
+                await this.loadPdfFromBlob(pdfData.blob, pdfData.name, state);
+              }
+            };
+          }
+        };
+      },
+
+      async loadPdfFromBlob(blob, filename, savedState = null) {
+        try {
+          this.showLoading(this.t('loading'));
+          const arrayBuffer = await blob.arrayBuffer();
+          this.pdfDoc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+
+          if (savedState) {
+            this.pdfDocId = savedState.pdfId;
+            this.currentPdfName = savedState.filename;
+            this.pdfPages = savedState.pdfPages;
+            this.currentPageIndex = savedState.currentPageIndex;
+            this.pageAnnotations = savedState.pageAnnotations || {};
+          } else {
+            // New load logic already handled by showPdfPageSelector
+          }
+
+          this.pdfMode = true;
+          await this.loadPdfPage(this.pdfPages[this.currentPageIndex]);
+
+          document.getElementById('pdfNavigation').classList.add('active');
+          document.getElementById('addToLibraryBtn').style.display = 'flex';
+          this.updatePdfNavigation();
+          this.hideLoading();
+        } catch (error) {
+          console.error('Error loading PDF from blob:', error);
+          this.hideLoading();
+        }
+      },
+
+      // History Modal
+      async openHistoryModal() {
+        const tx = this.db.transaction('history', 'readonly');
+        const store = tx.objectStore('history');
+        const request = store.getAll();
+
+        request.onsuccess = () => {
+          const list = document.getElementById('historyList');
+          list.innerHTML = '';
+          const items = request.result.filter(item => item.id !== 'last_state')
+            .sort((a, b) => b.timestamp - a.timestamp);
+
+          items.forEach(item => {
+            const el = document.createElement('div');
+            el.className = 'file-item';
+            el.innerHTML = `
+              <div class="file-info" onclick="app.loadFromHistory('${item.id}')">
+                <div class="file-name">${item.name}</div>
+                <div class="file-meta">آخر صفحة: ${item.lastPage || 1} | ${new Date(item.timestamp).toLocaleString('ar-EG')}</div>
+              </div>
+              <div class="file-actions">
+                 <button class="btn-small" onclick="app.deleteFromHistory('${item.id}')">حذف</button>
+              </div>
+            `;
+            list.appendChild(el);
+          });
+          document.getElementById('historyModal').classList.add('active');
+        };
+      },
+
+      async loadFromHistory(id) {
+        const tx = this.db.transaction('history', 'readonly');
+        const store = tx.objectStore('history');
+        const request = store.get(id);
+
+        request.onsuccess = async () => {
+          const item = request.result;
+          if (item) {
+            this.closeModal('history');
+            await this.loadPdfFromBlob(item.blob, item.name, {
+              pdfId: item.id,
+              filename: item.name,
+              pdfPages: item.pdfPages,
+              currentPageIndex: (item.lastPage || 1) - 1,
+              pageAnnotations: item.pageAnnotations || {}
+            });
+            this.saveLastPdfPosition();
+          }
+        };
+      },
+
+      async deleteFromHistory(id) {
+        if (confirm('هل أنت متأكد من حذف هذا الكتاب من السجل؟')) {
+          const tx = this.db.transaction('history', 'readwrite');
+          const store = tx.objectStore('history');
+          await store.delete(id);
+          this.openHistoryModal(); // Refresh
+        }
+      },
+
+      // Library / Collections Logic
+      async initDB() {
+        return new Promise((resolve, reject) => {
+          const request = indexedDB.open('MishkahDrawingDB', 2); // Upgrade version
+
+          request.onerror = () => reject(request.error);
+          request.onsuccess = () => {
+            this.db = request.result;
+            this.tryLoadLastState();
+            resolve();
+          };
+
+          request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+            if (!db.objectStoreNames.contains('drawings')) {
+              db.createObjectStore('drawings', { keyPath: 'id', autoIncrement: true });
+            }
+            if (!db.objectStoreNames.contains('history')) {
+              db.createObjectStore('history', { keyPath: 'id' });
+            }
+            if (!db.objectStoreNames.contains('collections')) {
+              db.createObjectStore('collections', { keyPath: 'id', autoIncrement: true });
+            }
+            if (!db.objectStoreNames.contains('library')) {
+              const libraryStore = db.createObjectStore('library', { keyPath: 'id', autoIncrement: true });
+              libraryStore.createIndex('collectionId', 'collectionId', { unique: false });
+            }
+          };
+        });
+      },
+
+      openLibraryModal() {
+        this.renderLibrary();
+        document.getElementById('libraryModal').classList.add('active');
+      },
+
+      async renderLibrary() {
+        const groupFilter = document.getElementById('libraryGroupFilter');
+        const list = document.getElementById('libraryList');
+
+        const groupsTx = this.db.transaction('collections', 'readonly');
+        const groupsStore = groupsTx.objectStore('collections');
+        const groupsReq = groupsStore.getAll();
+
+        groupsReq.onsuccess = () => {
+          const groups = groupsReq.result;
+          groupFilter.innerHTML = '<option value="all">الكل</option>';
+          groups.forEach(g => {
+            groupFilter.innerHTML += `<option value="${g.id}">${g.name}</option>`;
+          });
+
+          const selectedGroup = groupFilter.value;
+          const libTx = this.db.transaction(['library', 'history'], 'readonly');
+          const libStore = libTx.objectStore('library');
+          const histStore = libTx.objectStore('history');
+          const libReq = libStore.getAll();
+
+          libReq.onsuccess = () => {
+            list.innerHTML = '';
+            let items = libReq.result;
+            if (selectedGroup !== 'all') {
+              items = items.filter(i => i.collectionId == selectedGroup);
+            }
+
+            items.forEach(async item => {
+              const histReq = histStore.get(item.pdfId);
+              histReq.onsuccess = () => {
+                const pdf = histReq.result;
+                if (!pdf) return;
+                const el = document.createElement('div');
+                el.className = 'file-item';
+                el.innerHTML = `
+                  <div class="file-info" onclick="app.loadFromHistory('${item.pdfId}')">
+                    <div class="file-name">${pdf.name}</div>
+                    <div class="file-meta">المجموعة: ${groups.find(g => g.id == item.collectionId)?.name || 'غير محدد'}</div>
+                  </div>
+                  <div class="file-actions">
+                    <button class="btn-small" onclick="app.removeFromLibrary(${item.id})">حذف</button>
+                  </div>
+                `;
+                list.appendChild(el);
+              };
+            });
+          };
+        };
+      },
+
+      openAddGroupModal() {
+        document.getElementById('addGroupModal').classList.add('active');
+      },
+
+      async createNewGroup() {
+        const name = document.getElementById('newGroupName').value.trim();
+        if (!name) return;
+        const tx = this.db.transaction('collections', 'readwrite');
+        const store = tx.objectStore('collections');
+        await store.add({ name });
+        document.getElementById('newGroupName').value = '';
+        this.closeModal('addGroup');
+        this.renderLibrary();
+      },
+
+      async openAddToLibraryModal() {
+        const tx = this.db.transaction('collections', 'readonly');
+        const store = tx.objectStore('collections');
+        const request = store.getAll();
+        request.onsuccess = () => {
+          const select = document.getElementById('addToCollectionSelect');
+          select.innerHTML = '<option value="">اختر مجموعة...</option>';
+          request.result.forEach(g => {
+            select.innerHTML += `<option value="${g.id}">${g.name}</option>`;
+          });
+          document.getElementById('addToLibraryModal').classList.add('active');
+        };
+      },
+
+      async confirmAddToLibrary() {
+        const collectionId = document.getElementById('addToCollectionSelect').value;
+        if (!collectionId) {
+          alert('الرجاء اختيار مجموعة');
+          return;
+        }
+        const tx = this.db.transaction('library', 'readwrite');
+        const store = tx.objectStore('library');
+        await store.add({
+          pdfId: this.pdfDocId,
+          collectionId: parseInt(collectionId)
+        });
+        this.closeModal('addToLibrary');
+        alert('تمت الإضافة للمكتبة بنجاح');
+      },
+
+      async removeFromLibrary(id) {
+        if (confirm('هل تريد حذف هذا الكتاب من المكتبة؟')) {
+          const tx = this.db.transaction('library', 'readwrite');
+          const store = tx.objectStore('library');
+          await store.delete(id);
+          this.renderLibrary();
+        }
+      },
+
+      closeModal(name) {
+        document.getElementById(name + 'Modal').classList.remove('active');
+      },
+
+      closePdfModal() {
+        document.getElementById('pdfPageModal').classList.remove('active');
+      },
+
+      // Language Management
+      switchLanguage(lang) {
+        this.currentLang = lang;
+        localStorage.setItem('drawing_lang', lang);
+        this.applyLanguage();
+
+        // Update HTML attributes
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+        // Update active button
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+      },
+
+      applyLanguage() {
+        const translations = this.translations[this.currentLang];
+
+        // Update all elements with data-i18n attribute
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+          const key = element.getAttribute('data-i18n');
+          if (translations[key]) {
+            element.textContent = translations[key];
+          }
+        });
+
+        // Update title
+        document.title = this.currentLang === 'ar'
+          ? 'لوحة الرسم — Mishkah Drawing Board'
+          : 'Mishkah Drawing Board';
+      },
+
+      t(key) {
+        return this.translations[this.currentLang][key] || key;
+      },
+
+      // PWA Install Functions
+      async installApp() {
+        if (!this.deferredPrompt) {
+          console.log('Install prompt not available');
+          return;
+        }
+
+        // Show the install prompt
+        this.deferredPrompt.prompt();
+
+        // Wait for the user to respond
+        const { outcome } = await this.deferredPrompt.userChoice;
+        console.log(`User response: ${outcome}`);
+
+        // Clear the deferred prompt
+        this.deferredPrompt = null;
+
+        // Hide the install prompt
+        document.getElementById('installPrompt').classList.remove('active');
+      },
+
+      dismissInstall() {
+        document.getElementById('installPrompt').classList.remove('active');
+        localStorage.setItem('install_dismissed', 'true');
+      },
+
+      // Hard Reload - Clear cache and force update
+      async hardReload() {
+        try {
+          // Show loading indicator
+          this.showLoading(this.currentLang === 'ar' ? 'جاري تحديث التطبيق...' : 'Updating app...');
+
+          // Unregister all service workers
+          if ('serviceWorker' in navigator) {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            for (let registration of registrations) {
+              await registration.unregister();
+              console.log('Service worker unregistered');
+            }
+          }
+
+          // Clear all caches
+          if ('caches' in window) {
+            const cacheNames = await caches.keys();
+            for (let cacheName of cacheNames) {
+              await caches.delete(cacheName);
+              console.log(`Cache ${cacheName} deleted`);
+            }
+          }
+
+          // Clear localStorage EXCEPT language preference AND drawings (user data)
+          const lang = localStorage.getItem('drawing_lang');
+          const drawings = localStorage.getItem('drawings');
+          localStorage.clear();
+          if (lang) {
+            localStorage.setItem('drawing_lang', lang);
+          }
+          if (drawings) {
+            localStorage.setItem('drawings', drawings);
+          }
+
+          // Force reload with cache bypass
+          setTimeout(() => {
+            window.location.reload(true);
+          }, 500);
+        } catch (error) {
+          console.error('Hard reload error:', error);
+          // Force reload anyway
+          window.location.reload(true);
+        }
+      },
+
+      // Zoom Functions
+      zoomIn() {
+        this.zoomLevel = Math.min(3, this.zoomLevel + 0.1);
+        this.applyZoom();
+      },
+
+      zoomOut() {
+        this.zoomLevel = Math.max(0.5, this.zoomLevel - 0.1);
+        this.applyZoom();
+      },
+
+      resetZoom() {
+        this.zoomLevel = 1;
+        this.applyZoom();
+      },
+
+      applyZoom() {
+        // Remove transform and use direct sizing for better scroll support
+        // Set canvas visual size based on zoom level
+        const baseWidth = window.innerWidth;
+        const baseHeight = window.innerHeight;
+
+        this.canvas.style.width = `${baseWidth * this.zoomLevel}px`;
+        this.canvas.style.height = `${baseHeight * this.zoomLevel}px`;
+        this.canvas.style.transform = 'none';
+
+        // Update zoom level display
+        document.getElementById('zoomLevel').textContent = Math.round(this.zoomLevel * 100) + '%';
+      },
+
+      // Zen Mode
+      toggleZenMode() {
+        this.zenMode = !this.zenMode;
+        document.body.classList.toggle('zen-mode', this.zenMode);
+      },
+
+      // Loading Functions
+      showLoading(text = null) {
+        const overlay = document.getElementById('loadingOverlay');
+        const progressEl = document.getElementById('loadingProgress');
+        overlay.classList.add('active');
+        if (text) {
+          progressEl.textContent = text;
+        }
+      },
+
+      hideLoading() {
+        document.getElementById('loadingOverlay').classList.remove('active');
+      },
+
+      updateLoadingProgress(current, total) {
+        const progressEl = document.getElementById('loadingProgress');
+        progressEl.textContent = this.t('page_x_of_y').replace('{0}', current).replace('{1}', total);
+      },
+
+      // Smart Page Selector Functions
+      selectAllPages() {
+        if (!this.pdfDoc) return;
+
+        this.selectedPdfPages.clear();
+        for (let i = 1; i <= this.pdfDoc.numPages; i++) {
+          this.selectedPdfPages.add(i);
+        }
+
+        // Update UI
+        document.querySelectorAll('.page-item').forEach(item => {
+          item.classList.add('selected');
+        });
+      },
+
+      deselectAllPages() {
+        this.selectedPdfPages.clear();
+
+        // Update UI
+        document.querySelectorAll('.page-item').forEach(item => {
+          item.classList.remove('selected');
+        });
+      },
+
+      applyPageRange() {
+        const input = document.getElementById('pageRangeInput').value.trim();
+        if (!input || !this.pdfDoc) return;
+
+        const pages = this.parsePageRange(input, this.pdfDoc.numPages);
+        if (pages.length === 0) {
+          alert(this.t('select_one_page'));
+          return;
+        }
+
+        this.selectedPdfPages.clear();
+        pages.forEach(page => this.selectedPdfPages.add(page));
+
+        // Update UI
+        document.querySelectorAll('.page-item').forEach(item => {
+          const pageNum = parseInt(item.dataset.pageNum);
+          item.classList.toggle('selected', this.selectedPdfPages.has(pageNum));
+        });
+      },
+
+      parsePageRange(input, maxPages) {
+        const pages = new Set();
+
+        // Handle "all" or "الكل"
+        if (input.toLowerCase() === 'all' || input === 'الكل') {
+          for (let i = 1; i <= maxPages; i++) {
+            pages.add(i);
+          }
+          return Array.from(pages).sort((a, b) => a - b);
+        }
+
+        const parts = input.split(',');
+
+        for (let part of parts) {
+          part = part.trim();
+
+          // Handle range (e.g., "1-10")
+          if (part.includes('-')) {
+            const [start, end] = part.split('-').map(n => parseInt(n.trim()));
+            if (!isNaN(start) && !isNaN(end)) {
+              for (let i = Math.min(start, end); i <= Math.max(start, end); i++) {
+                if (i >= 1 && i <= maxPages) {
+                  pages.add(i);
+                }
+              }
+            }
+          } else {
+            // Handle single page
+            const page = parseInt(part);
+            if (!isNaN(page) && page >= 1 && page <= maxPages) {
+              pages.add(page);
+            }
+          }
+        }
+
+        return Array.from(pages).sort((a, b) => a - b);
+      },
+
+      async previewRange() {
+        const input = document.getElementById('pageRangeInput').value.trim();
+        if (!input || !this.pdfDoc) return;
+
+        const pages = this.parsePageRange(input, this.pdfDoc.numPages);
+        if (pages.length === 0) {
+          alert(this.t('select_one_page'));
+          return;
+        }
+
+        // Show only selected pages in preview
+        this.showLoading(this.t('loading_pages'));
+
+        const selector = document.getElementById('pdfPageSelector');
+        selector.innerHTML = '';
+
+        for (let pageNum of pages) {
+          const page = await this.pdfDoc.getPage(pageNum);
+          const viewport = page.getViewport({ scale: 0.3 });
+
+          const canvas = document.createElement('canvas');
+          canvas.className = 'page-preview';
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          const ctx = canvas.getContext('2d');
+          await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+          const pageItem = document.createElement('div');
+          pageItem.className = 'page-item selected';
+          pageItem.dataset.pageNum = pageNum;
+          pageItem.innerHTML = `
+            ${canvas.outerHTML}
+            <div class="page-label">${this.t('page')} ${pageNum}</div>
+          `;
+
+          pageItem.addEventListener('click', () => {
+            pageItem.classList.toggle('selected');
+            if (pageItem.classList.contains('selected')) {
+              this.selectedPdfPages.add(pageNum);
+            } else {
+              this.selectedPdfPages.delete(pageNum);
+            }
+          });
+
+          selector.appendChild(pageItem);
+          this.selectedPdfPages.add(pageNum);
+        }
+
+        this.hideLoading();
+      },
+
+      // Export Pages Modal Functions
+      closeExportPagesModal() {
+        document.getElementById('exportPagesModal').classList.remove('active');
+      },
+
+      selectAllExportPages() {
+        if (!this.selectedExportPages) {
+          this.selectedExportPages = new Set();
+        }
+        this.selectedExportPages.clear();
+
+        for (let i = 0; i < this.pdfPages.length; i++) {
+          this.selectedExportPages.add(i);
+        }
+
+        // Update UI
+        document.querySelectorAll('#exportPageSelector .page-item').forEach(item => {
+          item.classList.add('selected');
+        });
+      },
+
+      deselectAllExportPages() {
+        if (!this.selectedExportPages) {
+          this.selectedExportPages = new Set();
+        }
+        this.selectedExportPages.clear();
+
+        // Update UI
+        document.querySelectorAll('#exportPageSelector .page-item').forEach(item => {
+          item.classList.remove('selected');
+        });
+      },
+
+      applyExportPageRange() {
+        const input = document.getElementById('exportPageRangeInput').value.trim();
+        if (!input) return;
+
+        const pages = this.parseExportPageRange(input, this.pdfPages.length);
+        if (pages.length === 0) {
+          alert(this.t('select_one_page') || 'الرجاء تحديد صفحة واحدة على الأقل');
+          return;
+        }
+
+        if (!this.selectedExportPages) {
+          this.selectedExportPages = new Set();
+        }
+        this.selectedExportPages.clear();
+        pages.forEach(page => this.selectedExportPages.add(page));
+
+        // Update UI
+        document.querySelectorAll('#exportPageSelector .page-item').forEach(item => {
+          const pageIndex = parseInt(item.dataset.pageIndex);
+          item.classList.toggle('selected', this.selectedExportPages.has(pageIndex));
+        });
+      },
+
+      parseExportPageRange(input, maxPages) {
+        const pages = new Set();
+
+        // Handle "all" or "الكل"
+        if (input.toLowerCase() === 'all' || input === 'الكل') {
+          for (let i = 0; i < maxPages; i++) {
+            pages.add(i);
+          }
+          return Array.from(pages).sort((a, b) => a - b);
+        }
+
+        const parts = input.split(',');
+
+        for (let part of parts) {
+          part = part.trim();
+
+          // Handle range (e.g., "1-10")
+          if (part.includes('-')) {
+            const [start, end] = part.split('-').map(n => parseInt(n.trim()));
+            if (!isNaN(start) && !isNaN(end)) {
+              // Convert from 1-based to 0-based indexing
+              for (let i = Math.min(start, end) - 1; i < Math.max(start, end); i++) {
+                if (i >= 0 && i < maxPages) {
+                  pages.add(i);
+                }
+              }
+            }
+          } else {
+            // Handle single page (convert from 1-based to 0-based)
+            const page = parseInt(part) - 1;
+            if (!isNaN(page) && page >= 0 && page < maxPages) {
+              pages.add(page);
+            }
+          }
+        }
+
+        return Array.from(pages).sort((a, b) => a - b);
+      },
+
+      // Save last PDF position
+      saveLastPdfPosition() {
+        if (this.pdfMode && this.pdfPages.length > 0) {
+          localStorage.setItem('lastPdfPage', this.currentPageIndex);
+          localStorage.setItem('lastPdfPages', JSON.stringify(this.pdfPages));
+        }
+      },
+
+      loadLastPdfPosition() {
+        const lastPage = localStorage.getItem('lastPdfPage');
+        const lastPages = localStorage.getItem('lastPdfPages');
+
+        if (lastPage && lastPages) {
+          this.currentPageIndex = parseInt(lastPage);
+          return JSON.parse(lastPages);
+        }
+        return null;
+      },
+
+      // ===== LAYERS SYSTEM =====
+
+      // Create a new layer
+      createLayer(type, data) {
+        const layer = {
+          id: this.layerIdCounter++,
+          type: type, // 'shape', 'image', 'text'
+          data: data,
+          x: data.x || 100,
+          y: data.y || 100,
+          width: data.width || 100,
+          height: data.height || 100,
+          rotation: 0,
+          visible: true,
+          locked: false,
+          zIndex: this.layers.length
+        };
+
+        return layer;
+      },
+
+      // Add layer to DOM and array
+      addLayer(layer) {
+        this.layers.push(layer);
+
+        const layerElement = document.createElement('div');
+        layerElement.className = 'layer-element';
+        layerElement.id = 'layer-' + layer.id;
+        layerElement.style.left = layer.x + 'px';
+        layerElement.style.top = layer.y + 'px';
+        layerElement.style.width = layer.width + 'px';
+        layerElement.style.height = layer.height + 'px';
+        layerElement.style.zIndex = layer.zIndex;
+        layerElement.style.transform = `rotate(${layer.rotation}deg)`;
+
+        // Render layer content based on type
+        if (layer.type === 'shape') {
+          const svg = this.createShapeSVG(layer.data.shape, layer.width, layer.height, layer.data.color);
+          layerElement.innerHTML = svg;
+        } else if (layer.type === 'image') {
+          const img = document.createElement('img');
+          img.src = layer.data.src;
+          img.style.width = '100%';
+          img.style.height = '100%';
+          img.style.objectFit = 'contain';
+          layerElement.appendChild(img);
+        } else if (layer.type === 'line') {
+          const svg = this.createLineSVG(layer.data, layer.width, layer.height);
+          layerElement.innerHTML = svg;
+        } else if (layer.type === 'circle') {
+          const svg = this.createCircleSVG(layer.data, layer.width, layer.height);
+          layerElement.innerHTML = svg;
+        } else if (layer.type === 'arrow') {
+          const svg = this.createArrowSVG(layer.data, layer.width, layer.height);
+          layerElement.innerHTML = svg;
+        } else if (layer.type === 'text') {
+          const textDiv = this.createTextElement(layer.data);
+          layerElement.appendChild(textDiv);
+        }
+
+        // Add click handler to select layer
+        layerElement.addEventListener('mousedown', (e) => {
+          if (this.currentTool === 'pen' || this.currentTool === 'eraser') return;
+          e.stopPropagation();
+          this.selectLayer(layer.id);
+          this.startLayerDrag(e, layer);
+        });
+
+        layerElement.addEventListener('touchstart', (e) => {
+          if (this.currentTool === 'pen' || this.currentTool === 'eraser') return;
+          e.stopPropagation();
+          this.selectLayer(layer.id);
+          this.startLayerDrag(e, layer);
+        });
+
+        document.getElementById('layersContainer').appendChild(layerElement);
+        this.updateLayersList();
+        this.selectLayer(layer.id);
+      },
+
+      // Create SVG for shapes
+      createShapeSVG(shape, width, height, color) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '100%');
+        svg.setAttribute('height', '100%');
+        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+        let shapeElement;
+        const cx = width / 2;
+        const cy = height / 2;
+        const size = Math.min(width, height) / 2;
+
+        switch (shape) {
+          case 'circle':
+            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            shapeElement.setAttribute('cx', cx);
+            shapeElement.setAttribute('cy', cy);
+            shapeElement.setAttribute('r', size - 5);
+            shapeElement.setAttribute('fill', 'none');
+            shapeElement.setAttribute('stroke', color);
+            shapeElement.setAttribute('stroke-width', '3');
+            break;
+
+          case 'square':
+            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            shapeElement.setAttribute('x', '10');
+            shapeElement.setAttribute('y', '10');
+            shapeElement.setAttribute('width', width - 20);
+            shapeElement.setAttribute('height', height - 20);
+            shapeElement.setAttribute('fill', 'none');
+            shapeElement.setAttribute('stroke', color);
+            shapeElement.setAttribute('stroke-width', '3');
+            break;
+
+          case 'star':
+            const points = this.getStarPoints(cx, cy, 5, size - 5, (size - 5) / 2);
+            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            shapeElement.setAttribute('points', points);
+            shapeElement.setAttribute('fill', 'none');
+            shapeElement.setAttribute('stroke', color);
+            shapeElement.setAttribute('stroke-width', '3');
+            break;
+
+          case 'heart':
+            const path = this.getHeartPath(cx, cy, size - 5);
+            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            shapeElement.setAttribute('d', path);
+            shapeElement.setAttribute('fill', 'none');
+            shapeElement.setAttribute('stroke', color);
+            shapeElement.setAttribute('stroke-width', '3');
+            break;
+
+          case 'triangle':
+            const trianglePoints = `${cx},10 10,${height - 10} ${width - 10},${height - 10}`;
+            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            shapeElement.setAttribute('points', trianglePoints);
+            shapeElement.setAttribute('fill', 'none');
+            shapeElement.setAttribute('stroke', color);
+            shapeElement.setAttribute('stroke-width', '3');
+            break;
+
+          case 'hexagon':
+            const hexPoints = this.getPolygonPoints(cx, cy, 6, size - 5);
+            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            shapeElement.setAttribute('points', hexPoints);
+            shapeElement.setAttribute('fill', 'none');
+            shapeElement.setAttribute('stroke', color);
+            shapeElement.setAttribute('stroke-width', '3');
+            break;
+
+          case 'pentagon':
+            const pentPoints = this.getPolygonPoints(cx, cy, 5, size - 5);
+            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            shapeElement.setAttribute('points', pentPoints);
+            shapeElement.setAttribute('fill', 'none');
+            shapeElement.setAttribute('stroke', color);
+            shapeElement.setAttribute('stroke-width', '3');
+            break;
+
+          case 'diamond':
+            const diamondPoints = `${cx},10 10,${cy} ${cx},${height - 10} ${width - 10},${cy}`;
+            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            shapeElement.setAttribute('points', diamondPoints);
+            shapeElement.setAttribute('fill', 'none');
+            shapeElement.setAttribute('stroke', color);
+            shapeElement.setAttribute('stroke-width', '3');
+            break;
+        }
+
+        if (shapeElement) {
+          svg.appendChild(shapeElement);
+        }
+
+        return svg.outerHTML;
+      },
+
+      // Helper: Get star points
+      getStarPoints(cx, cy, spikes, outerRadius, innerRadius) {
+        let points = '';
+        const step = Math.PI / spikes;
+        let rot = Math.PI / 2 * 3;
+
+        for (let i = 0; i < spikes; i++) {
+          let x = cx + Math.cos(rot) * outerRadius;
+          let y = cy + Math.sin(rot) * outerRadius;
+          points += `${x},${y} `;
+          rot += step;
+
+          x = cx + Math.cos(rot) * innerRadius;
+          y = cy + Math.sin(rot) * innerRadius;
+          points += `${x},${y} `;
+          rot += step;
+        }
+
+        return points.trim();
+      },
+
+      // Helper: Get heart path
+      getHeartPath(cx, cy, size) {
+        const topCurveHeight = size * 0.3;
+        return `M ${cx} ${cy + topCurveHeight}
+                C ${cx} ${cy}, ${cx - size / 2} ${cy - size / 2}, ${cx - size / 2} ${cy + topCurveHeight}
+                C ${cx - size / 2} ${cy + (size + topCurveHeight) / 2}, ${cx} ${cy + (size + topCurveHeight) / 2}, ${cx} ${cy + size}
+                C ${cx} ${cy + (size + topCurveHeight) / 2}, ${cx + size / 2} ${cy + (size + topCurveHeight) / 2}, ${cx + size / 2} ${cy + topCurveHeight}
+                C ${cx + size / 2} ${cy - size / 2}, ${cx} ${cy}, ${cx} ${cy + topCurveHeight}`;
+      },
+
+      // Helper: Get polygon points
+      getPolygonPoints(cx, cy, sides, radius) {
+        let points = '';
+        for (let i = 0; i < sides; i++) {
+          const angle = (Math.PI * 2 * i) / sides - Math.PI / 2;
+          const x = cx + radius * Math.cos(angle);
+          const y = cy + radius * Math.sin(angle);
+          points += `${x},${y} `;
+        }
+        return points.trim();
+      },
+
+      // Create SVG for line
+      createLineSVG(data, width, height) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '100%');
+        svg.setAttribute('height', '100%');
+        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', data.x1);
+        line.setAttribute('y1', data.y1);
+        line.setAttribute('x2', data.x2);
+        line.setAttribute('y2', data.y2);
+        line.setAttribute('stroke', data.color);
+        line.setAttribute('stroke-width', data.lineWidth);
+        line.setAttribute('stroke-linecap', 'round');
+
+        svg.appendChild(line);
+        return svg.outerHTML;
+      },
+
+      // Create SVG for circle
+      createCircleSVG(data, width, height) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '100%');
+        svg.setAttribute('height', '100%');
+        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', width / 2);
+        circle.setAttribute('cy', height / 2);
+        circle.setAttribute('r', data.radius);
+        circle.setAttribute('stroke', data.color);
+        circle.setAttribute('stroke-width', data.lineWidth);
+        circle.setAttribute('fill', 'none');
+
+        svg.appendChild(circle);
+        return svg.outerHTML;
+      },
+
+      // Create SVG for arrow
+      createArrowSVG(data, width, height) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '100%');
+        svg.setAttribute('height', '100%');
+        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+        const headlen = 15;
+        const angle = Math.atan2(data.y2 - data.y1, data.x2 - data.x1);
+
+        // Main line
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', data.x1);
+        line.setAttribute('y1', data.y1);
+        line.setAttribute('x2', data.x2);
+        line.setAttribute('y2', data.y2);
+        line.setAttribute('stroke', data.color);
+        line.setAttribute('stroke-width', data.lineWidth);
+        line.setAttribute('stroke-linecap', 'round');
+
+        // Arrow head - left side
+        const arrowLeft = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        arrowLeft.setAttribute('x1', data.x2);
+        arrowLeft.setAttribute('y1', data.y2);
+        arrowLeft.setAttribute('x2', data.x2 - headlen * Math.cos(angle - Math.PI / 6));
+        arrowLeft.setAttribute('y2', data.y2 - headlen * Math.sin(angle - Math.PI / 6));
+        arrowLeft.setAttribute('stroke', data.color);
+        arrowLeft.setAttribute('stroke-width', data.lineWidth);
+        arrowLeft.setAttribute('stroke-linecap', 'round');
+
+        // Arrow head - right side
+        const arrowRight = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        arrowRight.setAttribute('x1', data.x2);
+        arrowRight.setAttribute('y1', data.y2);
+        arrowRight.setAttribute('x2', data.x2 - headlen * Math.cos(angle + Math.PI / 6));
+        arrowRight.setAttribute('y2', data.y2 - headlen * Math.sin(angle + Math.PI / 6));
+        arrowRight.setAttribute('stroke', data.color);
+        arrowRight.setAttribute('stroke-width', data.lineWidth);
+        arrowRight.setAttribute('stroke-linecap', 'round');
+
+        svg.appendChild(line);
+        svg.appendChild(arrowLeft);
+        svg.appendChild(arrowRight);
+        return svg.outerHTML;
+      },
+
+      // Create element for text
+      createTextElement(data) {
+        const textDiv = document.createElement('div');
+        textDiv.style.cssText = `
+          color: ${data.color};
+          font-size: ${data.fontSize}px;
+          font-family: Arial, sans-serif;
+          white-space: nowrap;
+          padding: 10px;
+          pointer-events: none;
+        `;
+        textDiv.textContent = data.text;
+        return textDiv;
+      },
+
+      // Select a layer
+      selectLayer(layerId) {
+        // Deselect previous layer
+        if (this.selectedLayer !== null) {
+          const prevElement = document.getElementById('layer-' + this.selectedLayer);
+          if (prevElement) {
+            prevElement.classList.remove('selected');
+          }
+        }
+
+        // Select new layer
+        this.selectedLayer = layerId;
+        const element = document.getElementById('layer-' + layerId);
+        if (element) {
+          element.classList.add('selected');
+          this.showTransformControls(layerId);
+        }
+
+        this.updateLayersList();
+      },
+
+      // Deselect layer
+      deselectLayer() {
+        if (this.selectedLayer !== null) {
+          const element = document.getElementById('layer-' + this.selectedLayer);
+          if (element) {
+            element.classList.remove('selected');
+          }
+          this.selectedLayer = null;
+          this.hideTransformControls();
+          this.updateLayersList();
+        }
+      },
+
+      // Show transform controls
+      showTransformControls(layerId) {
+        const layer = this.layers.find(l => l.id === layerId);
+        const element = document.getElementById('layer-' + layerId);
+        if (!layer || !element) return;
+
+        const rect = element.getBoundingClientRect();
+        const container = document.getElementById('canvasContainer');
+        const containerRect = container.getBoundingClientRect();
+
+        const controls = document.getElementById('transformControls');
+        const box = document.getElementById('transformBox');
+
+        controls.style.display = 'block';
+        controls.style.left = (rect.left - containerRect.left + container.scrollLeft) + 'px';
+        controls.style.top = (rect.top - containerRect.top + container.scrollTop) + 'px';
+        controls.style.width = rect.width + 'px';
+        controls.style.height = rect.height + 'px';
+
+        box.style.width = rect.width + 'px';
+        box.style.height = rect.height + 'px';
+      },
+
+      // Hide transform controls
+      hideTransformControls() {
+        document.getElementById('transformControls').style.display = 'none';
+      },
+
+      // Update layers list panel
+      updateLayersList() {
+        const list = document.getElementById('layersList');
+
+        if (this.layers.length === 0) {
+          list.innerHTML = `<div style="text-align: center; padding: 2rem; color: rgba(148, 163, 184, 0.8);">${this.t('no_layers')}</div>`;
+          return;
+        }
+
+        list.innerHTML = '';
+
+        // Display layers in reverse order (top layer first)
+        [...this.layers].reverse().forEach(layer => {
+          const item = document.createElement('div');
+          item.className = 'layer-item';
+          if (layer.id === this.selectedLayer) {
+            item.className += ' selected';
+          }
+
+          const icon = layer.type === 'shape' ? this.getShapeIcon(layer.data.shape) : '🖼️';
+          const name = layer.type === 'shape' ? this.getShapeName(layer.data.shape) : this.t('image');
+
+          item.innerHTML = `
+            <div class="layer-preview">${icon}</div>
+            <div class="layer-info">
+              <div class="layer-name">${name}</div>
+              <div class="layer-type">${layer.type === 'shape' ? this.t('shape') : this.t('image')}</div>
+            </div>
+            <div class="layer-actions">
+              <button class="layer-btn" onclick="app.duplicateLayer(${layer.id}); event.stopPropagation();" title="${this.t('duplicate')}">📋</button>
+              <button class="layer-btn danger" onclick="app.deleteLayer(${layer.id}); event.stopPropagation();" title="${this.t('delete')}">🗑️</button>
+            </div>
+          `;
+
+          item.addEventListener('click', () => this.selectLayer(layer.id));
+          list.appendChild(item);
+        });
+      },
+
+      // Get shape icon
+      getShapeIcon(shape) {
+        const icons = {
+          circle: '⭕',
+          square: '⬜',
+          star: '⭐',
+          heart: '❤️',
+          triangle: '🔺',
+          hexagon: '⬡',
+          pentagon: '⬠',
+          diamond: '💎'
+        };
+        return icons[shape] || '◻️';
+      },
+
+      // Get shape name
+      getShapeName(shape) {
+        return this.t('shape_' + shape) || shape;
+      },
+
+      // Delete layer
+      deleteLayer(layerId) {
+        const index = this.layers.findIndex(l => l.id === layerId);
+        if (index !== -1) {
+          this.layers.splice(index, 1);
+          const element = document.getElementById('layer-' + layerId);
+          if (element) {
+            element.remove();
+          }
+
+          if (this.selectedLayer === layerId) {
+            this.selectedLayer = null;
+            this.hideTransformControls();
+          }
+
+          this.updateLayersList();
+        }
+      },
+
+      // Duplicate layer
+      duplicateLayer(layerId) {
+        const layer = this.layers.find(l => l.id === layerId);
+        if (layer) {
+          const newLayer = this.createLayer(layer.type, {
+            ...layer.data,
+            x: layer.x + 20,
+            y: layer.y + 20,
+            width: layer.width,
+            height: layer.height
+          });
+          this.addLayer(newLayer);
+        }
+      },
+
+      // Flatten all layers to canvas
+      flattenLayers() {
+        if (this.layers.length === 0) return;
+
+        if (!confirm(this.t('flatten_confirm'))) {
+          return;
+        }
+
+        // Create a temporary canvas to render layers
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = this.canvas.width;
+        tempCanvas.height = this.canvas.height;
+        const tempCtx = tempCanvas.getContext('2d');
+
+        // Draw current canvas
+        tempCtx.drawImage(this.canvas, 0, 0);
+
+        // Draw each layer
+        this.layers.forEach(layer => {
+          const element = document.getElementById('layer-' + layer.id);
+          if (element && layer.visible) {
+            tempCtx.save();
+
+            // Apply transformations
+            tempCtx.translate(layer.x + layer.width / 2, layer.y + layer.height / 2);
+            tempCtx.rotate(layer.rotation * Math.PI / 180);
+            tempCtx.translate(-layer.width / 2, -layer.height / 2);
+
+            // Render layer content
+            if (layer.type === 'shape') {
+              this.renderShapeToCanvas(tempCtx, layer);
+            }
+
+            tempCtx.restore();
+          }
+        });
+
+        // Draw result back to main canvas
+        this.ctx.drawImage(tempCanvas, 0, 0);
+        this.saveState();
+
+        // Clear all layers
+        this.clearAllLayers();
+      },
+
+      // Render layer to canvas (for flattening)
+      renderShapeToCanvas(ctx, layer) {
+        if (layer.type === 'shape') {
+          ctx.strokeStyle = layer.data.color;
+          ctx.lineWidth = 3;
+          ctx.fillStyle = 'transparent';
+
+          const cx = layer.width / 2;
+          const cy = layer.height / 2;
+          const size = Math.min(layer.width, layer.height) / 2 - 5;
+
+          ctx.beginPath();
+
+          switch (layer.data.shape) {
+            case 'circle':
+              ctx.arc(cx, cy, size, 0, Math.PI * 2);
+              break;
+
+            case 'square':
+              ctx.rect(10, 10, layer.width - 20, layer.height - 20);
+              break;
+
+            case 'star':
+              this.drawStarToContext(ctx, cx, cy, 5, size, size / 2);
+              break;
+
+            case 'heart':
+              this.drawHeartToContext(ctx, cx, cy, size);
+              break;
+
+            case 'triangle':
+              ctx.moveTo(cx, 10);
+              ctx.lineTo(10, layer.height - 10);
+              ctx.lineTo(layer.width - 10, layer.height - 10);
+              ctx.closePath();
+              break;
+
+            case 'hexagon':
+              this.drawPolygonToContext(ctx, cx, cy, 6, size);
+              break;
+
+            case 'pentagon':
+              this.drawPolygonToContext(ctx, cx, cy, 5, size);
+              break;
+
+            case 'diamond':
+              ctx.moveTo(cx, 10);
+              ctx.lineTo(10, cy);
+              ctx.lineTo(cx, layer.height - 10);
+              ctx.lineTo(layer.width - 10, cy);
+              ctx.closePath();
+              break;
+          }
+
+          ctx.stroke();
+        } else if (layer.type === 'line') {
+          ctx.strokeStyle = layer.data.color;
+          ctx.lineWidth = layer.data.lineWidth;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(layer.data.x1, layer.data.y1);
+          ctx.lineTo(layer.data.x2, layer.data.y2);
+          ctx.stroke();
+        } else if (layer.type === 'circle') {
+          ctx.strokeStyle = layer.data.color;
+          ctx.lineWidth = layer.data.lineWidth;
+          ctx.beginPath();
+          ctx.arc(layer.width / 2, layer.height / 2, layer.data.radius, 0, Math.PI * 2);
+          ctx.stroke();
+        } else if (layer.type === 'arrow') {
+          const headlen = 15;
+          const angle = Math.atan2(layer.data.y2 - layer.data.y1, layer.data.x2 - layer.data.x1);
+
+          ctx.strokeStyle = layer.data.color;
+          ctx.lineWidth = layer.data.lineWidth;
+          ctx.lineCap = 'round';
+
+          // Main line
+          ctx.beginPath();
+          ctx.moveTo(layer.data.x1, layer.data.y1);
+          ctx.lineTo(layer.data.x2, layer.data.y2);
+          ctx.stroke();
+
+          // Arrow head
+          ctx.beginPath();
+          ctx.moveTo(layer.data.x2, layer.data.y2);
+          ctx.lineTo(layer.data.x2 - headlen * Math.cos(angle - Math.PI / 6), layer.data.y2 - headlen * Math.sin(angle - Math.PI / 6));
+          ctx.moveTo(layer.data.x2, layer.data.y2);
+          ctx.lineTo(layer.data.x2 - headlen * Math.cos(angle + Math.PI / 6), layer.data.y2 - headlen * Math.sin(angle + Math.PI / 6));
+          ctx.stroke();
+        } else if (layer.type === 'text') {
+          ctx.fillStyle = layer.data.color;
+          ctx.font = layer.data.fontSize + 'px Arial';
+          ctx.fillText(layer.data.text, 10, layer.data.fontSize + 10);
+        }
+      },
+
+      // Helper functions for rendering to specific context
+      drawStarToContext(ctx, cx, cy, spikes, outerRadius, innerRadius) {
+        let rot = Math.PI / 2 * 3;
+        const step = Math.PI / spikes;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - outerRadius);
+
+        for (let i = 0; i < spikes; i++) {
+          let x = cx + Math.cos(rot) * outerRadius;
+          let y = cy + Math.sin(rot) * outerRadius;
+          ctx.lineTo(x, y);
+          rot += step;
+          x = cx + Math.cos(rot) * innerRadius;
+          y = cy + Math.sin(rot) * innerRadius;
+          ctx.lineTo(x, y);
+          rot += step;
+        }
+
+        ctx.lineTo(cx, cy - outerRadius);
+        ctx.closePath();
+      },
+
+      drawHeartToContext(ctx, cx, cy, size) {
+        ctx.beginPath();
+        const topCurveHeight = size * 0.3;
+        ctx.moveTo(cx, cy + topCurveHeight);
+        ctx.bezierCurveTo(cx, cy, cx - size / 2, cy - size / 2, cx - size / 2, cy + topCurveHeight);
+        ctx.bezierCurveTo(cx - size / 2, cy + (size + topCurveHeight) / 2, cx, cy + (size + topCurveHeight) / 2, cx, cy + size);
+        ctx.bezierCurveTo(cx, cy + (size + topCurveHeight) / 2, cx + size / 2, cy + (size + topCurveHeight) / 2, cx + size / 2, cy + topCurveHeight);
+        ctx.bezierCurveTo(cx + size / 2, cy - size / 2, cx, cy, cx, cy + topCurveHeight);
+        ctx.closePath();
+      },
+
+      drawPolygonToContext(ctx, cx, cy, sides, radius) {
+        ctx.beginPath();
+        for (let i = 0; i < sides; i++) {
+          const angle = (Math.PI * 2 * i) / sides - Math.PI / 2;
+          const x = cx + radius * Math.cos(angle);
+          const y = cy + radius * Math.sin(angle);
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.closePath();
+      },
+
+      // Clear all layers
+      clearAllLayers() {
+        if (this.layers.length === 0) return;
+
+        this.layers.forEach(layer => {
+          const element = document.getElementById('layer-' + layer.id);
+          if (element) {
+            element.remove();
+          }
+        });
+
+        this.layers = [];
+        this.selectedLayer = null;
+        this.hideTransformControls();
+        this.updateLayersList();
+      },
+
+      // Start dragging layer
+      startLayerDrag(e, layer) {
+        if (layer.locked) return;
+
+        this.isDraggingLayer = true;
+
+        // Get position relative to canvas container
+        const container = document.getElementById('canvasContainer');
+        const rect = container.getBoundingClientRect();
+
+        let clientX, clientY;
+        if (e.touches && e.touches.length > 0) {
+          clientX = e.touches[0].clientX;
+          clientY = e.touches[0].clientY;
+        } else {
+          clientX = e.clientX;
+          clientY = e.clientY;
+        }
+
+        const x = clientX - rect.left + container.scrollLeft;
+        const y = clientY - rect.top + container.scrollTop;
+
+        this.dragStartX = x - layer.x;
+        this.dragStartY = y - layer.y;
+        this.layerStartRect = { x: layer.x, y: layer.y };
+
+        e.preventDefault();
+        e.stopPropagation();
+      },
+
+      // Handle layer drag
+      handleLayerDrag(e) {
+        if (!this.isDraggingLayer || this.selectedLayer === null) return;
+
+        const layer = this.layers.find(l => l.id === this.selectedLayer);
+        if (!layer || layer.locked) return;
+
+        // Get position relative to canvas container
+        const container = document.getElementById('canvasContainer');
+        const rect = container.getBoundingClientRect();
+
+        let clientX, clientY;
+        if (e.touches && e.touches.length > 0) {
+          clientX = e.touches[0].clientX;
+          clientY = e.touches[0].clientY;
+        } else {
+          clientX = e.clientX;
+          clientY = e.clientY;
+        }
+
+        const x = clientX - rect.left + container.scrollLeft;
+        const y = clientY - rect.top + container.scrollTop;
+
+        layer.x = x - this.dragStartX;
+        layer.y = y - this.dragStartY;
+
+        const element = document.getElementById('layer-' + layer.id);
+        if (element) {
+          element.style.left = layer.x + 'px';
+          element.style.top = layer.y + 'px';
+        }
+
+        this.showTransformControls(layer.id);
+      },
+
+      // Stop dragging layer
+      stopLayerDrag() {
+        this.isDraggingLayer = false;
+        this.dragStartX = 0;
+        this.dragStartY = 0;
+        this.layerStartRect = null;
+      },
+
+      // Close layers panel
+      closePanel(panelName) {
+        const panel = document.getElementById(panelName + 'Panel');
+        if (panel) {
+          panel.classList.remove('show');
+        }
+      }
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => app.init());
+    } else {
+      app.init();
+    }
+  </script>
+</body>
+
+</html>

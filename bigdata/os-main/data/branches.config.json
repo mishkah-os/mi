@@ -1,0 +1,102 @@
+{
+  "settings": {
+    "security_enabled": true
+  },
+  "branches": {
+    "dar": {
+      "label": "دار — الفرع الرئيسي",
+      "modules": [
+        "pos"
+      ]
+    },
+    "remal": {
+      "label": "رمال — الفرع السحابي",
+      "modules": [
+        "pos"
+      ]
+    },
+    "gim": {
+      "label": "جيم — نظام إدارة الجيم",
+      "modules": [
+        "gym"
+      ]
+    },
+    "aqar": {
+      "label": "منصة عقار بروكر",
+      "modules": [
+        "brocker"
+      ]
+    },
+    "sbn": {
+      "label": "شبكة الأعمال الاجتماعية - مستعمل حوا",
+      "modules": [
+        "mostamal"
+      ]
+    },
+    "pt": {
+      "label": "عيادة العلاج الطبيعي",
+      "modules": [
+        "clinic"
+      ]
+    },
+    "clinic": {
+      "label": "العيادة",
+      "modules": [
+        "clinic"
+      ]
+    },
+    "peg": {
+      "label": "PEG للاستشارات الهندسية",
+      "modules": [
+        "finance"
+      ]
+    },
+    "manzor": {
+      "label": "المنظور الشامل للاستشارات الهندسية",
+      "modules": [
+        "finance"
+      ]
+    },
+    "fas": {
+      "label": "شركة فاس الأولى و تمويل البناء",
+      "modules": [
+        "finance"
+      ]
+    },
+    "hematet": {
+      "label": " شركة هيماتيت للاستشارات الهندسية",
+      "modules": [
+        "finance"
+      ]
+    },
+    "amal": {
+      "label": "مكتب أمل العايد",
+      "modules": [
+        "finance"
+      ]
+    }
+  },
+  "patterns": [
+    {
+      "match": "^lab:",
+      "modules": [
+        "scratchpad"
+      ]
+    },
+    {
+      "match": "^pos:",
+      "modules": [
+        "pos"
+      ]
+    },
+    {
+      "match": "^gym:",
+      "modules": [
+        "gym"
+      ]
+    }
+  ],
+  "defaults": [
+    "pt"
+  ]
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Auto-Flattening Translation</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #1a1a1a;
+      color: #fff;
+    }
+    .controls {
+      margin-bottom: 20px;
+      padding: 20px;
+      background: #2a2a2a;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .status {
+      margin: 10px 0;
+      padding: 10px;
+      background: #333;
+      border-radius: 4px;
+    }
+    .project {
+      margin: 10px 0;
+      padding: 15px;
+      background: #2a2a2a;
+      border-radius: 8px;
+      border-left: 4px solid #4CAF50;
+    }
+    .metadata {
+      font-size: 12px;
+      color: #888;
+      margin-top: 10px;
+    }
+    .region {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 12px;
+      background: #333;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 Test Auto-Flattening Translation</h1>
+
+  <div class="controls">
+    <h2>Language Control</h2>
+    <button onclick="testLanguage('ar')">العربية (Arabic)</button>
+    <button onclick="testLanguage('en')">English</button>
+    <button onclick="testLanguage('fr')">Français (Fallback Test)</button>
+
+    <div class="status" id="status">Ready</div>
+    <div class="status" id="lang-info">Current Language: ar</div>
+  </div>
+
+  <div id="projects-container">
+    <h2>Projects</h2>
+    <div id="projects-list"></div>
+  </div>
+
+  <div id="regions-container">
+    <h2>Regions</h2>
+    <div id="regions-list"></div>
+  </div>
+
+  <script src="/lib/mishkah.store.js"></script>
+  <script src="/lib/mishkah.simple-store.js"></script>
+
+  <script>
+    const BRANCH_ID = 'aqar';
+    const MODULE_ID = 'brocker';
+
+    let currentStore = null;
+    let currentLang = 'ar';
+
+    async function testLanguage(lang) {
+      currentLang = lang;
+      document.getElementById('status').textContent = `Loading data with lang=${lang}...`;
+      document.getElementById('lang-info').textContent = `Current Language: ${lang}`;
+
+      // Disconnect old store
+      if (currentStore && typeof currentStore.disconnect === 'function') {
+        currentStore.disconnect();
+      }
+
+      // Create new store with language
+      currentStore = window.createStore({
+        branchId: BRANCH_ID,
+        moduleId: MODULE_ID,
+        lang: lang,
+        role: 'test-client',
+        autoReconnect: false,
+        logger: console
+      });
+
+      try {
+        await currentStore.connect();
+        document.getElementById('status').textContent = `✅ Connected with lang=${lang}`;
+
+        // Display projects
+        const snapshot = currentStore.snapshot();
+        const projects = snapshot.modules[MODULE_ID]?.tables?.projects || [];
+        const regions = snapshot.modules[MODULE_ID]?.tables?.regions || [];
+
+        displayProjects(projects);
+        displayRegions(regions);
+
+      } catch (error) {
+        document.getElementById('status').textContent = `❌ Error: ${error.message}`;
+        console.error('Connection error:', error);
+      }
+    }
+
+    function displayProjects(projects) {
+      const container = document.getElementById('projects-list');
+      if (!projects || projects.length === 0) {
+        container.innerHTML = '<p>No projects found</p>';
+        return;
+      }
+
+      container.innerHTML = projects.map(project => `
+        <div class="project">
+          <h3>${project.project_name || '(no name)'}</h3>
+          <p>${project.description || '(no description)'}</p>
+          <p><strong>Location:</strong> ${project.location || 'N/A'}</p>
+          <p><strong>Status:</strong> ${project.project_status || 'N/A'}</p>
+          <p><strong>Delivery:</strong> ${project.delivery_date || 'N/A'}</p>
+          <div class="metadata">
+            <strong>ID:</strong> ${project.id}<br>
+            <strong>Lang Used:</strong> ${project._lang_used || 'N/A'}<br>
+            <strong>Fallback:</strong> ${project._lang_fallback ? 'YES' : 'NO'}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function displayRegions(regions) {
+      const container = document.getElementById('regions-list');
+      if (!regions || regions.length === 0) {
+        container.innerHTML = '<p>No regions found</p>';
+        return;
+      }
+
+      container.innerHTML = regions.map(region => `
+        <div class="region">
+          <strong>${region.name || '(no name)'}</strong><br>
+          <small>${region.city || 'N/A'}, ${region.country || 'N/A'}</small><br>
+          <small style="color: #888">Lang: ${region._lang_used || 'N/A'}</small>
+        </div>
+      `).join('');
+    }
+
+    // Auto-load with Arabic on startup
+    window.addEventListener('load', () => {
+      testLanguage('ar');
+    });
+  </script>
+</body>
+</html>

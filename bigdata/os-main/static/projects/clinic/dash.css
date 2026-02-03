@@ -1,0 +1,116 @@
+:root{
+  --radius: 18px;
+  --font-sans: "Cairo", "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  --shadow-sm: 0 1px 2px rgba(2, 6, 23, .06);
+  --shadow-md: 0 16px 36px -22px rgba(2, 6, 23, .28);
+  --shadow: 0 22px 60px -36px rgba(2, 6, 23, .44);
+  --gradient-hero: radial-gradient(120% 100% at 0% 0%, color-mix(in oklab, var(--primary) 26%, transparent) 0%, transparent 60%);
+  --page-gradient: none;
+}
+
+:root[data-theme="light"],
+:root:not([data-theme]){
+  color-scheme: light;
+  --background: #f6f8fc;
+  --foreground: #0b1324;
+  --card: rgba(255,255,255,.72);
+  --card-foreground: var(--foreground);
+  --popover: rgba(255,255,255,.86);
+  --popover-foreground: var(--foreground);
+  --muted: rgba(2,6,23,.06);
+  --muted-foreground: rgba(2,6,23,.58);
+  --border: rgba(2,6,23,.12);
+  --input: rgba(2,6,23,.14);
+  --primary: #10b981;
+  --primary-foreground: #062017;
+  --secondary: rgba(2,6,23,.06);
+  --secondary-foreground: rgba(2,6,23,.86);
+  --accent: rgba(16,185,129,.14);
+  --accent-foreground: rgba(2,6,23,.9);
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --info: #38bdf8;
+  --ring: color-mix(in oklab, var(--primary) 55%, transparent);
+  --surface-0: rgba(255,255,255,.78);
+  --surface-1: rgba(255,255,255,.56);
+  --surface-2: rgba(255,255,255,.30);
+}
+
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --card: rgba(30, 41, 59, .85);
+  --card-foreground: var(--foreground);
+  --popover: rgba(30, 41, 59, .92);
+  --popover-foreground: var(--foreground);
+  --muted: rgba(148,163,184,.18);
+  --muted-foreground: rgba(203,213,225,.82);
+  --border: rgba(148,163,184,.28);
+  --input: rgba(148,163,184,.25);
+  --primary: #60a5fa;
+  --primary-foreground: #0f172a;
+  --secondary: rgba(100,116,139,.22);
+  --secondary-foreground: rgba(241,245,249,.96);
+  --accent: rgba(96,165,250,.22);
+  --accent-foreground: rgba(241,245,249,.96);
+  --destructive: #f87171;
+  --destructive-foreground: #0f172a;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --info: #60a5fa;
+  --ring: color-mix(in oklab, var(--primary) 50%, transparent);
+  --surface-0: rgba(30,41,59,.88);
+  --surface-1: rgba(30,41,59,.72);
+  --surface-2: rgba(30,41,59,.48);
+  --shadow-sm: 0 1px 3px rgba(15,23,42,.28);
+  --shadow-md: 0 20px 45px -24px rgba(15,23,42,.62);
+  --shadow: 0 32px 85px -48px rgba(15,23,42,.72);
+  --page-gradient: radial-gradient(circle at 22% 18%, rgba(96,165,250,.14), transparent 48%),
+    radial-gradient(circle at 78% 8%, rgba(52,211,153,.11), transparent 42%),
+    linear-gradient(135deg, #0f172a 0%, #1e293b 48%, #0f172a 100%);
+}
+
+html,
+body{
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  background-image: var(--page-gradient);
+  background-attachment: fixed;
+  color: var(--foreground);
+  min-height: 100vh;
+}
+
+*{ box-sizing: border-box; }
+
+::-webkit-scrollbar{ width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb{ background: color-mix(in oklab, var(--muted-foreground) 35%, transparent); border-radius: 999px; }
+::-webkit-scrollbar-track{ background: color-mix(in oklab, var(--muted) 75%, transparent); }
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb{ background: color-mix(in oklab, var(--muted-foreground) 45%, transparent); }
+
+.page-shell{
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.app-surface{
+  position: relative;
+  margin: 0;
+  max-width: 100%;
+  padding: 0;
+}
+
+.app-mount{
+  margin: 0;
+  width: 100%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+}

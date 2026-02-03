@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mishkah Vue - Teleport Test</title>
+    <script src="../mishkah.core.js"></script>
+    <script src="../mishkah-vue.js"></script>
+    <script src="../mishkah-vue-jsx.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: #2a2a2a;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 400px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal h2 {
+            margin: 0 0 15px 0;
+            color: #4ade80;
+        }
+
+        .modal button {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .modal button:hover {
+            background: #dc2626;
+        }
+
+        .app-container {
+            padding: 20px;
+        }
+
+        button {
+            background: #4ade80;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #22c55e;
+        }
+
+        #teleport-target {
+            border: 2px dashed #4ade80;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <h1>Teleport Component Test</h1>
+        <div id="app"></div>
+    </div>
+
+    <!-- Teleport Target (modal container) -->
+    <div id="teleport-target"></div>
+
+    <script type="text/mishkah-vue">
+        const { Teleport } = Mishkah.Vue;
+
+        const Modal = {
+            props: ['onClose'],
+            render() {
+                return (
+                    <div class="modal-backdrop" onClick={this.onClose}>
+                        <div class="modal" onClick={(e) => e.stopPropagation()}>
+                            <h2>🎯 Teleported Modal!</h2>
+                            <p>This modal was teleported to #teleport-target using the Teleport component.</p>
+                            <p>It's rendered outside the normal component hierarchy.</p>
+                            <button onClick={this.onClose}>Close Modal</button>
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        const App = {
+            data() {
+                return {
+                    showModal: false
+                }
+            },
+            methods: {
+                openModal() {
+                    this.showModal = true;
+                },
+                closeModal() {
+                    this.showModal = false;
+                }
+            },
+            render() {
+                return (
+                    <div>
+                        <h3>Click button to test Teleport:</h3>
+                        <button id="open-modal-btn" onClick={this.openModal}>
+                            Open Modal (Teleported)
+                        </button>
+
+                        <div style="margin-top: 20px; padding: 15px; background: #333; border-radius: 8px;">
+                            <h4>How it works:</h4>
+                            <p>• The modal is defined inside this component</p>
+                            <p>• But it renders inside <code>#teleport-target</code> (see below)</p>
+                            <p>• This allows proper z-index stacking and portal patterns</p>
+                        </div>
+
+                        {this.showModal && (
+                            <Teleport to="#teleport-target">
+                                <Modal onClose={this.closeModal} />
+                            </Teleport>
+                        )}
+                    </div>
+                )
+            }
+        }
+
+        Mishkah.Vue.createApp(App).mount('#app');
+    </script>
+</body>
+
+</html>

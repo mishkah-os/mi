@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mishkah UI + JSX - Dynamic Conversion Test</title>
+    <style>
+        /* CSS provided in the original request */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Default Dark Theme */
+        :root,
+        [data-theme="dark"] {
+            --background: #0f172a;
+            --foreground: #f8fafc;
+            --card: #1e293b;
+            --card-foreground: #f8fafc;
+            --primary: #6366f1;
+            --primary-foreground: #ffffff;
+            --secondary: #334155;
+            --secondary-foreground: #f8fafc;
+            --muted-foreground: #94a3b8;
+            --accent: #334155;
+            --accent-foreground: #f8fafc;
+            --border: #334155;
+            --input: #334155;
+            --ring: #6366f1;
+            --radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --surface-1: #1e293b;
+            --surface-2: #334155;
+            --destructive: #ef4444;
+            --destructive-foreground: #ffffff;
+        }
+
+        /* Light Theme Override */
+        [data-theme="light"] {
+            --background: #ffffff;
+            --foreground: #0f172a;
+            --card: #f8fafc;
+            --card-foreground: #0f172a;
+            --primary: #4f46e5;
+            --primary-foreground: #fff;
+            --secondary: #e2e8f0;
+            --secondary-foreground: #0f172a;
+            --muted-foreground: #64748b;
+            --accent: #e2e8f0;
+            --accent-foreground: #0f172a;
+            --border: #e2e8f0;
+            --input: #e2e8f0;
+            --ring: #4f46e5;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --surface-1: #e2e8f0;
+            --surface-2: #f1f5f9;
+            --destructive: #dc2626;
+        }
+
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: var(--background);
+            color: var(--foreground);
+            padding: 20px;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, var(--primary), #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2em;
+        }
+
+        .section {
+            background: var(--card);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+            align-items: center;
+        }
+
+        code {
+            background: var(--surface-2);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--primary);
+        }
+
+        .success {
+            color: #34d399;
+        }
+
+        .counter-display {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-clip: padding-box;
+            background-color: transparent;
+            border-radius: 12px;
+            margin: 15px 0;
+            color: var(--primary-foreground);
+        }
+    </style>
+    <script src="../mishkah.core.js"></script>
+    <script src="../mishkah-react.js"></script>
+    <script src="../mishkah-ui.js"></script>
+    <script src="../mishkah-ui-react.js"></script>
+    <script src="../mishkah-jsx.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎨 Dynamic UI → React Conversion</h1>
+        <div id="app">Loading...</div>
+    </div>
+
+    <script type="text/jsx">
+        const { 
+            useState, Fragment, createElement,
+            useTheme, useI18n,
+            MishkahProvider,
+            toggleTheme, toggleLang
+        } = Mishkah.React;
+        
+        // Assume UI components are globally available or exposed via Mishkah.UI
+        const UI = Mishkah.UI;
+        const { 
+            Card, Button, Input, HStack, VStack, 
+            Badge, Alert, Divider, Spinner, Progress, 
+            SweetNotice, Avatar, Skeleton
+        } = UI;
+
+
+        // === Initialization Data ===
+        const database = {
+            data: { count: 0 },
+            env: { theme: 'dark', lang: 'ar', dir: 'rtl' },
+            i18n: {
+                dict: {
+                    // Controls
+                    'theme.toggle': { ar: 'تبديل الثيم', en: 'Toggle Theme' },
+                    'lang.toggle': { ar: 'تبديل اللغة', en: 'Toggle Language' },
+                    
+                    // Buttons Test
+                    'section.buttons': { ar: 'الأزرار (تحويل ديناميكي)', en: 'Buttons (Dynamic Conversion)' },
+                    'btn.increment': { ar: '+ زيادة', en: '+ Increment' },
+                    'btn.decrement': { ar: '- نقصان', en: '- Decrement' },
+                    'btn.reset': { ar: 'إعادة تعيين', en: 'Reset' },
+                    'btn.success': { ar: 'UI.Button تحول تلقائياً لـ React!', en: 'UI.Button auto-converted to React!' },
+                    
+                    // Card Test
+                    'section.card': { ar: 'مكون البطاقة', en: 'Card Component' },
+                    'card.title': { ar: 'بطاقة ديناميكية', en: 'Dynamic Card' },
+                    'card.desc': { ar: 'تم تحويلها تلقائياً من DSL إلى React', en: 'Auto-converted from DSL to React' },
+                    'card.content': { ar: 'هذا المحتوى يظهر داخل البطاقة بشكل صحيح!', en: 'This content displays inside the card correctly!' },
+                    'card.action1': { ar: 'إجراء 1', en: 'Action 1' },
+                    'card.action2': { ar: 'إجراء 2', en: 'Action 2' },
+                    'card.success': { ar: 'UI.Card يعمل مع children معقدة!', en: 'UI.Card works with complex children!' },
+                    
+                    // Input Test
+                    'section.input': { ar: 'حقول الإدخال', en: 'Form Inputs' },
+                    'input.placeholder': { ar: 'اكتب شيئاً هنا...', en: 'Type something here...' },
+                    'input.value': { ar: 'القيمة:', en: 'Value:' },
+                    'input.empty': { ar: '(فارغ)', en: '(empty)' },
+                    'input.success': { ar: 'UI.Input يعمل مع onChange!', en: 'UI.Input works with onChange!' },
+                    
+                    // Layout Test
+                    'section.layout': { ar: 'التخطيط (HStack, VStack)', en: 'Layout (HStack, VStack)' },
+                    'layout.hstack': { ar: 'HStack (أفقي):', en: 'HStack (horizontal):' },
+                    'layout.vstack': { ar: 'VStack (عمودي):', en: 'VStack (vertical):' },
+                    'layout.item': { ar: 'عنصر', en: 'Item' },
+                    'alert.info': { ar: 'تنبيه معلوماتي', en: 'Info alert' },
+                    'alert.success': { ar: 'تمت العملية بنجاح', en: 'Operation completed successfully' },
+                    'layout.success': { ar: 'مكونات التخطيط تعمل!', en: 'Layout components work!' },
+                    
+                    // Pure React Test
+                    'section.react': { ar: 'مكونات React النقية', en: 'Pure React Components' },
+                    'react.progress': { ar: 'التقدم:', en: 'Progress:' },
+                    'react.success': { ar: 'مكونات React النقية جاهزة!', en: 'Pure React components ready!' },
+                    
+                    // SweetNotice Test
+                    'section.notice': { ar: 'مكون SweetNotice', en: 'SweetNotice Component' },
+                    'notice.show': { ar: 'إظهار', en: 'Show' },
+                    'notice.hide': { ar: 'إخفاء', en: 'Hide' },
+                    'notice.title': { ar: 'مبروك!', en: 'Congratulations!' },
+                    'notice.message': { ar: 'تم التحويل الديناميكي بنجاح', en: 'Dynamic conversion succeeded' },
+                    'notice.hint': { ar: 'جميع مكونات UI تعمل في JSX', en: 'All UI components work in JSX' },
+                    'notice.confirm': { ar: 'تأكيد', en: 'Confirm' },
+                    'notice.cancel': { ar: 'إلغاء', en: 'Cancel' },
+                    'notice.success': { ar: 'UI.SweetNotice مع actions تعمل!', en: 'UI.SweetNotice with actions works!' },
+                    
+                    // Summary
+                    'section.summary': { ar: 'النتيجة', en: 'Summary' },
+                    'summary.title': { ar: 'التحويل الديناميكي يعمل!', en: 'Dynamic conversion works!' },
+                    'summary.message': { ar: 'جميع مكونات M.UI تتحول تلقائياً لـ React عند الوصول إليها', en: 'All M.UI components auto-convert to React when accessed' }
+                }
+            }
+        };
+
+        // CRITICAL: Initialize contexts BEFORE render
+        Mishkah.React.initMishkah(database);
+
+        // ===== Controls Component (Theme & Language) =====
+        function Controls() {
+            const { theme } = useTheme();
+            const { lang, t } = useI18n();
+
+            const nextThemeIcon = theme === 'dark' ? '☀️' : '🌙';
+            const nextLangCode = lang === 'ar' ? 'EN' : 'AR';
+
+            return (
+                <HStack style={{ justifyContent: 'center', marginBottom: '30px' }}>
+                    <Button variant="soft" onClick={toggleTheme}>
+                        {t('theme.toggle')} ({nextThemeIcon})
+                    </Button>
+                    <Button variant="soft" onClick={toggleLang}>
+                        {t('lang.toggle')} ({nextLangCode})
+                    </Button>
+                </HStack>
+            );
+        }
+
+        // ===== Section Component =====
+        function Section({ emoji, title, children }) {
+            return (
+                <div className="section">
+                    <h2>{emoji} {title}</h2>
+                    {children}
+                </div>
+            );
+        }
+
+        // ===== Test 1: Button with State =====
+        function ButtonTest() {
+            const [count, setCount] = useState(0);
+            const { t } = useI18n();
+
+            return (
+                <Section emoji="🔘" title={t('section.buttons')}>
+                    <div className="counter-display">{count}</div>
+                    <div className="row">
+                        <Button variant="solid" onClick={() => setCount(count + 1)}>
+                            {t('btn.increment')}
+                        </Button>
+                        <Button variant="soft" onClick={() => setCount(count - 1)}>
+                            {t('btn.decrement')}
+                        </Button>
+                        <Button variant="destructive" onClick={() => setCount(0)}>
+                            {t('btn.reset')}
+                        </Button>
+                    </div>
+                    <p className="success">✓ {t('btn.success')}</p>
+                    <p><code>&lt;Button variant="solid" onClick={'{...}'}&gt;</code></p>
+                </Section>
+            );
+        }
+
+        // ===== Test 2: Card =====
+        function CardTest() {
+            const { t } = useI18n();
+            
+            return (
+                <Section emoji="🃏" title={t('section.card')}>
+                    <Card 
+                        title={t('card.title')} 
+                        description={t('card.desc')}
+                        content={
+                            <p>{t('card.content')}</p>
+                        }
+                        footer={
+                            <div className="row">
+                                <Button variant="soft" size="sm">{t('card.action1')}</Button>
+                                <Button variant="ghost" size="sm">{t('card.action2')}</Button>
+                            </div>
+                        }
+                    />
+                    <p className="success">✓ {t('card.success')}</p>
+                </Section>
+            );
+        }
+
+        // ===== Test 3: Inputs =====
+        function InputTest() {
+            const [text, setText] = useState('');
+            const { t } = useI18n();
+
+            return (
+                <Section emoji="📝" title={t('section.input')}>
+                    <div className="row">
+                        <div style={{ flex: 1 }}>
+                            <Input 
+                                placeholder={t('input.placeholder')}
+                                value={text}
+                                onChange={(e) => setText(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                    <p>{t('input.value')} <code>{text || t('input.empty')}</code></p>
+                    <p className="success">✓ {t('input.success')}</p>
+                </Section>
+            );
+        }
+
+        // ===== Test 4: Layout Components =====
+        function LayoutTest() {
+            const { t } = useI18n();
+            
+            return (
+                <Section emoji="📐" title={t('section.layout')}>
+                    <p style={{ marginBottom: '10px' }}>{t('layout.hstack')}</p>
+                    <HStack>
+                        <Badge variant="primary">{t('layout.item')} 1</Badge>
+                        <Badge variant="success">{t('layout.item')} 2</Badge>
+                        <Badge variant="warning">{t('layout.item')} 3</Badge>
+                    </HStack>
+                    
+                    <Divider />
+                    
+                    <p style={{ marginTop: '10px', marginBottom: '10px' }}>{t('layout.vstack')}</p>
+                    <VStack>
+                        <Alert type="info">{t('alert.info')}</Alert>
+                        <Alert type="success">{t('alert.success')}</Alert>
+                    </VStack>
+                    <p className="success">✓ {t('layout.success')}</p>
+                </Section>
+            );
+        }
+
+        // ===== Test 5: Pure React Components =====
+        function PureReactTest() {
+            const [progress, setProgress] = useState(65);
+            const { t } = useI18n();
+
+            return (
+                <Section emoji="⚛️" title={t('section.react')}>
+                    <div className="row">
+                        <Avatar name="أحمد محمد" size={40} />
+                        <Avatar name="سارة علي" size={48} />
+                        <Avatar name="User" src="../https://i.pravatar.cc/64?img=5" size={48} />
+                        <Spinner size="md" />
+                    </div>
+                    
+                    <div style={{ marginTop: '15px' }}>
+                        <p>{t('react.progress')} {progress}%</p>
+                        <Progress value={progress} />
+                        <div className="row" style={{ marginTop: '10px' }}>
+                            <Button variant="soft" size="sm" onClick={() => setProgress(Math.max(0, progress - 10))}>
+                                -10%
+                            </Button>
+                            <Button variant="soft" size="sm" onClick={() => setProgress(Math.min(100, progress + 10))}>
+                                +10%
+                            </Button>
+                        </div>
+                    </div>
+                    
+                    <div className="row" style={{ marginTop: '15px' }}>
+                        <Skeleton width="80px" height="80px" rounded="50%" />
+                        <div style={{ flex: 1 }}>
+                            <Skeleton width="60%" height="20px" />
+                            <div style={{ height: '8px' }}></div>
+                            <Skeleton width="90%" height="16px" />
+                        </div>
+                    </div>
+                    <p className="success">✓ {t('react.success')}</p>
+                </Section>
+            );
+        }
+
+        // ===== Test 6: SweetNotice =====
+        function SweetNoticeTest() {
+            const [showNotice, setShowNotice] = useState(false);
+            const { t } = useI18n();
+
+            return (
+                <Section emoji="🎉" title={t('section.notice')}>
+                    <Button variant="solid" onClick={() => setShowNotice(!showNotice)}>
+                        {showNotice ? t('notice.hide') : t('notice.show')} SweetNotice
+                    </Button>
+                    
+                    {showNotice && (
+                        <div style={{ marginTop: '15px' }}>
+                            <SweetNotice
+                                tone="success"
+                                icon="🎊"
+                                title={t('notice.title')}
+                                message={t('notice.message')}
+                                hint={t('notice.hint')}
+                                actions={[
+                                    <Button key="1" variant="solid" size="sm">{t('notice.confirm')}</Button>,
+                                    <Button key="2" variant="ghost" size="sm">{t('notice.cancel')}</Button>
+                                ]}
+                            />
+                        </div>
+                    )}
+                    <p className="success">✓ {t('notice.success')}</p>
+                </Section>
+            );
+        }
+
+        // ===== Summary =====
+        function Summary() {
+            const { t } = useI18n();
+            
+            return (
+                <Section emoji="✅" title={t('section.summary')}>
+                    <Alert type="success" title={t('summary.title')}>
+                        {t('summary.message')}
+                    </Alert>
+                    <div style={{ marginTop: '15px', fontSize: '14px' }}>
+                        <p><code>M.UI = new Proxy(originalUI, handler)</code></p>
+                        <p style={{ marginTop: '8px' }}>All property access goes through <code>reactify()</code>!</p>
+                    </div>
+                </Section>
+            );
+        }
+
+        // ===== Main App =====
+        function App() {
+            // Contexts must be consumed within a component rendered by the Provider
+            return (
+                <MishkahProvider database={database}>
+                    <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+                        <Controls />
+                        <ButtonTest />
+                        <CardTest />
+                        <InputTest />
+                        <LayoutTest />
+                        <PureReactTest />
+                        <SweetNoticeTest />
+                        <Summary />
+                    </div>
+                </MishkahProvider>
+            );
+        }
+
+        // Render the root component (App is wrapped in MishkahProvider internally)
+        Mishkah.React.render(App, document.getElementById('app'));
+    </script>
+</body>
+
+</html>

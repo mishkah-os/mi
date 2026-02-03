@@ -1,0 +1,283 @@
+/* ============================================================================
+   Mishkah Universal CRUD - CSS Variables Theme System
+   Production-grade styling with dark/light themes
+   ============================================================================ */
+
+:root {
+  /* Color Palette - Light Theme */
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --info: #3b82f6;
+  
+  /* Backgrounds */
+  --background: #ffffff;
+  --surface-1: #f9fafb;
+  --surface-2: #f3f4f6;
+  --card: #ffffff;
+  --muted: #f3f4f6;
+  
+  /* Text */
+  --foreground: #111827;
+  --muted-foreground: #6b7280;
+  
+  /* Borders */
+  --border: #e5e7eb;
+  --border-hover: #d1d5db;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  
+  /* Transitions */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+  
+  /* Spacing */
+  --radius-sm: 0.375rem;
+  --radius: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --primary: #818cf8;
+  --primary-hover: #6366f1;
+  --success: #34d399;
+  --danger: #f87171;
+  --warning: #fbbf24;
+  --info: #60a5fa;
+  
+  --background: #0f172a;
+  --surface-1: #1e293b;
+  --surface-2: #334155;
+  --card: #1e293b;
+  --muted: #334155;
+  
+  --foreground: #f1f5f9;
+  --muted-foreground: #94a3b8;
+  
+  --border: #334155;
+  --border-hover: #475569;
+  
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Tajawal', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  transition: background var(--duration-normal), color var(--duration-normal);
+  line-height: 1.5;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Component Tokens */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+  outline: none;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--foreground);
+  border-color: transparent;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--muted);
+}
+
+.btn-sm {
+  padding: 0.375rem 0.875rem;
+  font-size: 0.8125rem;
+}
+
+.btn-icon {
+  padding: 0.5rem;
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+/* Card */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: all var(--duration-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Field */
+.field {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--foreground);
+  font-size: 0.875rem;
+  transition: all var(--duration-fast);
+  outline: none;
+}
+
+.field:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+.field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--muted);
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table th {
+  background: var(--surface-1);
+  padding: 0.75rem 1rem;
+  text-align: start;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+  color: var(--foreground);
+}
+
+.table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+.table tbody tr:hover {
+  background: var(--surface-1);
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--card);
+  border-inline-end: 1px solid var(--border);
+  transition: all var(--duration-normal);
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: var(--radius);
+  border: 1px solid;
+}
+
+.badge-primary {
+  background: color-mix(in srgb, var(--primary) 15%, transparent);
+  color: var(--primary);
+  border-color: color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+.badge-success {
+  background: color-mix(in srgb, var(--success) 15%, transparent);
+  color: var(--success);
+  border-color: color-mix(in srgb, var(--success) 30%, transparent);
+}
+
+/* Loading Spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--muted);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Utility Classes */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار نظام الطلبات المجدولة</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f3f4f6;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            color: #1f2937;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1f2937;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        button {
+            padding: 12px 24px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        button.secondary {
+            background: #6b7280;
+        }
+
+        button.secondary:hover {
+            background: #4b5563;
+        }
+
+        button.success {
+            background: #10b981;
+        }
+
+        button.success:hover {
+            background: #059669;
+        }
+
+        .item-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .item-row input {
+            flex: 1;
+        }
+
+        .item-row button {
+            flex-shrink: 0;
+            padding: 10px 16px;
+            background: #ef4444;
+        }
+
+        .item-row button:hover {
+            background: #dc2626;
+        }
+
+        #items-list {
+            margin-bottom: 16px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-converted {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-cancelled {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+            color: #9ca3af;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        #log {
+            background: #1f2937;
+            color: #10b981;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .log-entry {
+            margin-bottom: 4px;
+        }
+
+        .log-error {
+            color: #ef4444;
+        }
+
+        .log-success {
+            color: #10b981;
+        }
+
+        .log-info {
+            color: #60a5fa;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗓️ اختبار نظام الطلبات المجدولة</h1>
+            <p class="subtitle">Full Cycle Test - من الحفظ إلى التأكيد</p>
+        </div>
+
+        <div class="grid">
+            <!-- Create Schedule Form -->
+            <div class="card">
+                <h2 class="card-title">1️⃣ إنشاء حجز جديد</h2>
+
+                <div class="form-group">
+                    <label>رقم العميل *</label>
+                    <input type="text" id="customerId" value="CUST-001" />
+                </div>
+
+                <div class="form-group">
+                    <label>نوع الطلب</label>
+                    <select id="orderType">
+                        <option value="dine_in">دين إن</option>
+                        <option value="delivery">توصيل</option>
+                        <option value="takeaway">تيك أواي</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>موعد الحجز *</label>
+                    <input type="datetime-local" id="scheduledAt" />
+                </div>
+
+                <div class="form-group">
+                    <label>المدة (بالدقائق)</label>
+                    <input type="number" id="duration" value="60" min="30" max="180" />
+                </div>
+
+                <div class="form-group">
+                    <label>الطاولات (مفصولة بفاصلة)</label>
+                    <input type="text" id="tableIds" value="TBL-001,TBL-002" placeholder="TBL-001, TBL-002" />
+                </div>
+
+                <div class="form-group">
+                    <label>الأصناف</label>
+                    <div id="items-list"></div>
+                    <button onclick="addItem()" class="secondary">+ إضافة صنف</button>
+                </div>
+
+                <div class="form-group">
+                    <label>ملاحظات</label>
+                    <textarea id="notes" rows="3" placeholder="ملاحظات إضافية..."></textarea>
+                </div>
+
+                <button onclick="testCreateSchedule()" class="success">✅ حفظ الحجز</button>
+            </div>
+
+            <!-- View Schedules -->
+            <div class="card">
+                <h2 class="card-title">2️⃣ عرض الحجوزات</h2>
+
+                <div class="form-group">
+                    <label>تصفية حسب الحالة</label>
+                    <select id="statusFilter" onchange="testLoadSchedules()">
+                        <option value="">الكل</option>
+                        <option value="pending" selected>قيد الانتظار</option>
+                        <option value="converted">تم التحويل</option>
+                        <option value="cancelled">ملغي</option>
+                    </select>
+                </div>
+
+                <button onclick="testLoadSchedules()">🔄 تحديث القائمة</button>
+                <button onclick="openReservationsModal()" class="secondary">📅 فتح لوحة الحجوزات</button>
+
+                <div id="schedules-preview" style="margin-top: 16px; max-height: 400px; overflow-y: auto;"></div>
+            </div>
+
+            <!-- Actions -->
+            <div class="card">
+                <h2 class="card-title">3️⃣ الإجراءات</h2>
+
+                <div class="form-group">
+                    <label>رقم الحجز</label>
+                    <input type="text" id="scheduleIdAction" placeholder="SCH-PT-XXXXXX" />
+                </div>
+
+                <button onclick="testConfirmSchedule()" class="success">✅ تأكيد الحجز</button>
+                <button onclick="testCancelSchedule()" style="background: #ef4444; margin-top: 8px;">❌ إلغاء
+                    الحجز</button>
+            </div>
+        </div>
+
+        <!-- Log Console -->
+        <div class="card">
+            <h2 class="card-title">📝 سجل الأحداث</h2>
+            <div id="log"></div>
+            <button onclick="clearLog()" class="secondary" style="margin-top: 12px;">مسح السجل</button>
+        </div>
+    </div>
+
+    <!-- Include Schedule Module -->
+    <script src="schedule-module.js"></script>
+
+    <script>
+        // Configuration
+        window.POS_CONFIG = {
+            branchId: 'pt',
+            moduleId: 'pos'
+        };
+
+        // Initialize
+        let itemsCount = 0;
+        let currentSchedules = [];
+
+        // Set default scheduled time (1 hour from now)
+        const now = new Date();
+        now.setHours(now.getHours() + 1);
+        document.getElementById('scheduledAt').value = now.toISOString().slice(0, 16);
+
+        // Add initial item
+        addItem();
+
+        // Log function
+        function log(message, type = 'info') {
+            const logEl = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString('ar-SA');
+            const className = `log-${type}`;
+            logEl.innerHTML += `<div class="log-entry ${className}">[${timestamp}] ${message}</div>`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('log').innerHTML = '';
+        }
+
+        // Add item to order
+        function addItem() {
+            itemsCount++;
+            const container = document.getElementById('items-list');
+            const row = document.createElement('div');
+            row.className = 'item-row';
+            row.id = `item-${itemsCount}`;
+            row.innerHTML = `
+                <input type="text" placeholder="اسم الصنف" data-field="name" value="صنف ${itemsCount}" />
+                <input type="number" placeholder="الكمية" data-field="qty" value="1" min="1" style="max-width: 80px;" />
+                <input type="number" placeholder="السعر" data-field="price" value="${20 + itemsCount * 5}" min="0" step="0.01" style="max-width: 100px;" />
+                <button onclick="removeItem(${itemsCount})">🗑️</button>
+            `;
+            container.appendChild(row);
+        }
+
+        function removeItem(id) {
+            const row = document.getElementById(`item-${id}`);
+            if (row) row.remove();
+        }
+
+        // Collect items
+        function collectItems() {
+            const items = [];
+            document.querySelectorAll('#items-list .item-row').forEach((row, idx) => {
+                const name = row.querySelector('[data-field="name"]').value;
+                const qty = parseInt(row.querySelector('[data-field="qty"]').value);
+                const price = parseFloat(row.querySelector('[data-field="price"]').value);
+
+                items.push({
+                    itemId: `ITEM-${String(idx + 1).padStart(3, '0')}`,
+                    name,
+                    qty,
+                    price,
+                    unitPrice: price,
+                    quantity: qty
+                });
+            });
+            return items;
+        }
+
+        // Calculate totals
+        function calculateTotals(items) {
+            const subtotal = items.reduce((sum, item) => sum + (item.qty * item.price), 0);
+            const vat = subtotal * 0.15;
+            const service = subtotal * 0.10;
+            const due = subtotal + vat + service;
+
+            return {
+                subtotal: parseFloat(subtotal.toFixed(2)),
+                vat: parseFloat(vat.toFixed(2)),
+                service: parseFloat(service.toFixed(2)),
+                due: parseFloat(due.toFixed(2))
+            };
+        }
+
+        // Test: Create Schedule
+        async function testCreateSchedule() {
+            try {
+                log('📤 جاري إنشاء حجز جديد...', 'info');
+
+                const items = collectItems();
+                const totals = calculateTotals(items);
+
+                const tableIdsRaw = document.getElementById('tableIds').value;
+                const tableIds = tableIdsRaw ? tableIdsRaw.split(',').map(t => t.trim()) : [];
+
+                const orderData = {
+                    customerId: document.getElementById('customerId').value,
+                    orderType: document.getElementById('orderType').value,
+                    scheduledAt: document.getElementById('scheduledAt').value,
+                    duration: parseInt(document.getElementById('duration').value),
+                    tableIds: tableIds,
+                    lines: items,
+                    totals: totals,
+                    discount: null,
+                    payments: [],
+                    notes: document.getElementById('notes').value
+                };
+
+                log(`📋 البيانات: ${JSON.stringify(orderData, null, 2)}`, 'info');
+
+                const result = await window.ScheduleModule.saveScheduledOrder(orderData);
+
+                log(`✅ تم إنشاء الحجز بنجاح: ${result.scheduleId}`, 'success');
+                log(`📦 النتيجة: ${JSON.stringify(result, null, 2)}`, 'success');
+
+                // Store last schedule ID
+                document.getElementById('scheduleIdAction').value = result.scheduleId;
+
+                // Refresh list
+                await testLoadSchedules();
+
+            } catch (error) {
+                log(`❌ خطأ: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        // Test: Load Schedules
+        async function testLoadSchedules() {
+            try {
+                log('📥 جاري تحميل الحجوزات...', 'info');
+
+                const status = document.getElementById('statusFilter').value;
+                const filters = status ? { status } : {};
+
+                const schedules = await window.ScheduleModule.loadScheduledOrders(filters);
+                currentSchedules = schedules;
+
+                log(`✅ تم تحميل ${schedules.length} حجز`, 'success');
+
+                // Display preview
+                const preview = document.getElementById('schedules-preview');
+                if (schedules.length === 0) {
+                    preview.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📅</div><div>لا توجد حجوزات</div></div>';
+                } else {
+                    preview.innerHTML = schedules.map(s => {
+                        const payload = s.payload || {};
+                        const statusClass = `status-${s.status}`;
+                        return `
+                            <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; margin-bottom: 8px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <strong>${s.id}</strong>
+                                    <span class="status-badge ${statusClass}">${s.status}</span>
+                                </div>
+                                <div style="font-size: 13px; color: #6b7280;">
+                                    ${s.customerName || s.customer_id} | ${payload.lines?.length || 0} صنف
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+
+            } catch (error) {
+                log(`❌ خطأ في التحميل: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        // Test: Confirm Schedule
+        async function testConfirmSchedule() {
+            try {
+                const scheduleId = document.getElementById('scheduleIdAction').value;
+                if (!scheduleId) {
+                    log('⚠️ الرجاء إدخال رقم الحجز', 'error');
+                    return;
+                }
+
+                log(`📤 جاري تأكيد الحجز: ${scheduleId}...`, 'info');
+
+                const result = await window.ScheduleModule.confirmScheduledOrder(scheduleId);
+
+                log(`✅ تم تأكيد الحجز! رقم الطلب الجديد: ${result.orderId}`, 'success');
+                log(`📦 النتيجة: ${JSON.stringify(result, null, 2)}`, 'success');
+
+                // Refresh list
+                await testLoadSchedules();
+
+            } catch (error) {
+                log(`❌ خطأ في التأكيد: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        // Test: Cancel Schedule
+        async function testCancelSchedule() {
+            try {
+                const scheduleId = document.getElementById('scheduleIdAction').value;
+                if (!scheduleId) {
+                    log('⚠️ الرجاء إدخال رقم الحجز', 'error');
+                    return;
+                }
+
+                if (!confirm('هل تريد إلغاء هذا الحجز؟')) return;
+
+                log(`📤 جاري إلغاء الحجز: ${scheduleId}...`, 'info');
+
+                const result = await window.ScheduleModule.cancelScheduledOrder(scheduleId);
+
+                log(`✅ تم إلغاء الحجز بنجاح`, 'success');
+                log(`📦 النتيجة: ${JSON.stringify(result, null, 2)}`, 'success');
+
+                // Refresh list
+                await testLoadSchedules();
+
+            } catch (error) {
+                log(`❌ خطأ في الإلغاء: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        // Open reservations modal
+        function openReservationsModal() {
+            if (currentSchedules.length === 0) {
+                log('⚠️ الرجاء تحميل الحجوزات أولاً', 'error');
+                return;
+            }
+            window.ScheduleModule.handleOpenReservations({ preventDefault: () => { } });
+        }
+
+        // Initial load
+        log('🚀 تم تحميل صفحة الاختبار', 'success');
+        log('📋 جاهز للاختبار - ابدأ بإنشاء حجز جديد', 'info');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rovlex | IT Solutions & Infrastructure</title>
+
+    <!-- 1. TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Mishkah Core -->
+    <script src="https://ws.mas.com.eg/lib/mishkah.core.js"></script>
+
+    <!-- 3. Google Fonts (Cairo for Arabic, Inter for English) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Inter:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- 4. Global Styles & Theme Variables -->
+    <style>
+        :root[data-theme='light'] {
+            --bg-body: #ffffff;
+            --bg-surface: #f4f4f5;
+            --text-main: #09090b;
+            --text-muted: #52525b;
+            --primary: #dc2626;
+            --primary-fg: #ffffff;
+            --accent: #18181b;
+            --border: #e4e4e7;
+        }
+
+        :root[data-theme='dark'] {
+            --bg-body: #0a0a0a;
+            --bg-surface: #171717;
+            --text-main: #fafafa;
+            --text-muted: #a1a1aa;
+            --primary: #ef4444;
+            --primary-fg: #ffffff;
+            --accent: #991b1b;
+            --border: #27272a;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Typography based on Lang */
+        :root[lang='ar'] body {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        :root[lang='en'] body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-nav {
+            background: rgba(var(--bg-body), 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // ==========================================
+        // 1. DATABASE (State + Env + i18n)
+        // ==========================================
+        const database = {
+            data: {
+                mobileMenuOpen: false
+            },
+            env: {
+                theme: 'dark',
+                lang: 'ar',
+                dir: 'rtl'
+            },
+            i18n: {
+                dict: {
+                    // Meta
+                    'brand': { ar: 'Rovlex', en: 'Rovlex' },
+                    'tagline': { ar: 'مستقبل الحلول الرقمية', en: 'Future of Digital Solutions' },
+
+                    // Nav
+                    'nav_home': { ar: 'الرئيسية', en: 'Home' },
+                    'nav_services': { ar: 'خدماتنا', en: 'Services' },
+                    'nav_about': { ar: 'عن الشركة', en: 'About Us' },
+                    'nav_contact': { ar: 'تواصل معنا', en: 'Contact' },
+
+                    // Hero
+                    'hero_title': { ar: 'نبتكر الحلول التقنية لتطوير أعمالك', en: 'Innovating Tech Solutions to Grow Your Business' },
+                    'hero_desc': { ar: 'شركة رائدة في البرمجيات، الاستشارات، وتوريد البنية التحتية المتكاملة في مصر والشرق الأوسط.', en: 'Leading Software, Consultancy, and Infrastructure Supply company in Egypt and the Middle East.' },
+                    'hero_cta': { ar: 'ابدأ مشروعك معنا', en: 'Start Your Project' },
+                    'hero_contact': { ar: 'اتصل الآن', en: 'Call Now' },
+
+                    // Services
+                    'srv_title': { ar: 'خدماتنا المتكاملة', en: 'Our Integrated Services' },
+                    'srv_soft_title': { ar: 'حلول البرمجيات', en: 'Software Solutions' },
+                    'srv_soft_desc': { ar: 'تطوير مواقع، تطبيقات موبايل، وأنظمة إدارة متكاملة.', en: 'Web development, mobile apps, and ERP systems.' },
+                    'srv_it_title': { ar: 'استشارات IT', en: 'IT Consultancy' },
+                    'srv_it_desc': { ar: 'خطط استراتيجية وتحليل فني لرفع كفاءة مؤسستك.', en: 'Strategic planning and technical analysis to boost efficiency.' },
+                    'srv_infra_title': { ar: 'بنية تحتية وشبكات', en: 'Infrastructure & Networks' },
+                    'srv_infra_desc': { ar: 'توريد وتركيب السيرفرات، الشبكات، وأنظمة الحماية.', en: 'Supply and installation of servers, networks, and security systems.' },
+                    'srv_equip_title': { ar: 'توريد أجهزة', en: 'Hardware Supply' },
+                    'srv_equip_desc': { ar: 'أحدث أجهزة الحاسب ومستلزمات التشغيل للشركات.', en: 'Latest computer hardware and operational supplies for corporates.' },
+
+                    // Contact
+                    'contact_title': { ar: 'تواصل معنا', en: 'Get in Touch' },
+                    'addr_label': { ar: 'العنوان', en: 'Address' },
+                    'addr_val': { ar: 'القاهرة، المعادي - مصر', en: 'Cairo, Maadi - Egypt' },
+                    'phone_label': { ar: 'الهاتف', en: 'Phone' },
+                    'phone_val': { ar: '+20 10 99991424', en: '+20 10 99991424' },
+                    'email_label': { ar: 'البريد الإلكتروني', en: 'Email' },
+                    'email_val': { ar: 'info@rovlex.com', en: 'info@rovlex.com' },
+
+                    // Actions
+                    'toggle_theme': { ar: '🌙', en: '🌙' },
+                    'toggle_lang': { ar: 'English', en: 'عربي' },
+                    'copyright': { ar: '© 2026 Rovlex. جميع الحقوق محفوظة.', en: '© 2026 Rovlex. All rights reserved.' }
+                }
+            }
+        };
+
+        // ==========================================
+        // 2. ORDERS (Logic)
+        // ==========================================
+        const orders = {
+            'sys.toggleTheme': {
+                on: ['click'],
+                gkeys: ['btn:theme'],
+                handler: (e, ctx) => {
+                    ctx.setState(s => {
+                        const ns = { ...s };
+                        ns.env.theme = ns.env.theme === 'light' ? 'dark' : 'light';
+                        return ns;
+                    });
+                }
+            },
+            'sys.toggleLang': {
+                on: ['click'],
+                gkeys: ['btn:lang'],
+                handler: (e, ctx) => {
+                    ctx.setState(s => {
+                        const ns = { ...s };
+                        ns.env.lang = ns.env.lang === 'ar' ? 'en' : 'ar';
+                        ns.env.dir = ns.env.lang === 'ar' ? 'rtl' : 'ltr';
+                        return ns;
+                    });
+                }
+            },
+            'ui.toggleMenu': {
+                on: ['click'],
+                gkeys: ['btn:menu'],
+                handler: (e, ctx) => {
+                    ctx.setState(s => {
+                        const ns = { ...s };
+                        ns.data.mobileMenuOpen = !ns.data.mobileMenuOpen;
+                        return ns;
+                    });
+                }
+            }
+        };
+
+        // ==========================================
+        // 3. DSL BODY (View)
+        // ==========================================
+        const D = Mishkah.DSL;
+
+        function body(db) {
+            const t = (k) => db.i18n.dict[k]?.[db.env.lang] || k;
+            const isRtl = db.env.dir === 'rtl';
+
+            // Common Classes
+            const containerClass = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
+            const sectionClass = "py-20";
+            const cardClass = "bg-[var(--bg-surface)] p-8 rounded-2xl border border-[var(--border)] hover:border-[var(--primary)] transition-all duration-300 shadow-sm hover:shadow-md group";
+
+            return D.Div({
+                attrs: {
+                    class: 'min-h-screen flex flex-col',
+                    'data-theme': db.env.theme,
+                    'dir': db.env.dir,
+                    lang: db.env.lang
+                }
+            }, [
+                // ------------------------------------------
+                // Header (Navbar)
+                // ------------------------------------------
+                D.Header({
+                    attrs: { class: 'sticky top-0 z-50 bg-[var(--bg-body)]/80 backdrop-blur-md border-b border-[var(--border)]' }
+                }, [
+                    D.Div({ attrs: { class: containerClass } }, [
+                        D.Div({ attrs: { class: 'flex items-center justify-between h-20' } }, [
+
+                            // Logo
+                            D.Div({ attrs: { class: 'flex-shrink-0 flex items-center gap-2' } }, [
+                                // Hexagon Icon Shape
+                                D.Div({ attrs: { class: 'w-10 h-10 bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] rounded-lg flex items-center justify-center text-white font-bold text-xl transform rotate-3' } }, ['R']),
+                                D.Span({ attrs: { class: 'text-2xl font-bold tracking-tight text-[var(--text-main)]' } }, [t('brand')])
+                            ]),
+
+                            // Desktop Nav
+                            D.Nav({ attrs: { class: 'hidden md:flex items-center gap-8' } }, [
+                                D.A({ attrs: { href: '#hero', class: 'text-[var(--text-muted)] hover:text-[var(--primary)] font-medium transition-colors' } }, [t('nav_home')]),
+                                D.A({ attrs: { href: '#services', class: 'text-[var(--text-muted)] hover:text-[var(--primary)] font-medium transition-colors' } }, [t('nav_services')]),
+                                D.A({ attrs: { href: '#contact', class: 'text-[var(--text-muted)] hover:text-[var(--primary)] font-medium transition-colors' } }, [t('nav_contact')]),
+                            ]),
+
+                            // Right Actions
+                            D.Div({ attrs: { class: 'flex items-center gap-3' } }, [
+                                // Lang Switch
+                                D.Button({
+                                    attrs: {
+                                        gkey: 'btn:lang',
+                                        class: 'px-3 py-1 text-sm font-semibold rounded-md border border-[var(--border)] hover:bg-[var(--bg-surface)] transition-colors'
+                                    }
+                                }, [t('toggle_lang')]),
+
+                                // Theme Toggle
+                                D.Button({
+                                    attrs: {
+                                        gkey: 'btn:theme',
+                                        class: 'w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-surface)] hover:bg-[var(--border)] transition-colors text-lg'
+                                    }
+                                }, [db.env.theme === 'light' ? '🌙' : '☀️']),
+
+                                // Mobile Menu Button
+                                D.Button({
+                                    attrs: {
+                                        gkey: 'btn:menu',
+                                        class: 'md:hidden p-2 rounded-md hover:bg-[var(--bg-surface)]'
+                                    }
+                                }, [
+                                    D.Span({ attrs: { class: 'block text-2xl leading-none' } }, ['☰'])
+                                ])
+                            ])
+                        ])
+                    ]),
+
+                    // Mobile Menu Dropdown
+                    db.data.mobileMenuOpen ? D.Div({
+                        attrs: { class: 'md:hidden bg-[var(--bg-surface)] border-b border-[var(--border)] p-4 space-y-2' }
+                    }, [
+                        D.A({ attrs: { href: '#hero', class: 'block p-3 rounded-lg hover:bg-[var(--bg-body)]' } }, [t('nav_home')]),
+                        D.A({ attrs: { href: '#services', class: 'block p-3 rounded-lg hover:bg-[var(--bg-body)]' } }, [t('nav_services')]),
+                        D.A({ attrs: { href: '#contact', class: 'block p-3 rounded-lg hover:bg-[var(--bg-body)]' } }, [t('nav_contact')])
+                    ]) : null
+                ]),
+
+                // ------------------------------------------
+                // Hero Section
+                // ------------------------------------------
+                D.Section({
+                    attrs: {
+                        id: 'hero',
+                        class: 'relative overflow-hidden pt-20 pb-32 bg-gradient-to-b from-[var(--bg-surface)] to-[var(--bg-body)]'
+                    }
+                }, [
+                    // Background Glow
+                    D.Div({ attrs: { class: 'absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[var(--primary)] opacity-10 blur-[100px] rounded-full pointer-events-none' } }, []),
+
+                    D.Div({ attrs: { class: containerClass + ' relative z-10 text-center' } }, [
+                        D.Span({ attrs: { class: 'inline-block px-4 py-1.5 rounded-full bg-[var(--primary)] bg-opacity-10 text-[var(--primary)] font-semibold text-sm mb-6 border border-[var(--primary)] border-opacity-20' } }, [
+                            t('tagline')
+                        ]),
+                        D.H1({ attrs: { class: 'text-5xl md:text-7xl font-black mb-8 leading-tight tracking-tight text-[var(--text-main)]' } }, [
+                            t('hero_title')
+                        ]),
+                        D.P({ attrs: { class: 'text-xl md:text-2xl text-[var(--text-muted)] max-w-3xl mx-auto mb-10 leading-relaxed' } }, [
+                            t('hero_desc')
+                        ]),
+                        D.Div({ attrs: { class: 'flex flex-col sm:flex-row items-center justify-center gap-4' } }, [
+                            D.A({
+                                attrs: {
+                                    href: '#contact',
+                                    class: 'w-full sm:w-auto px-8 py-4 bg-[var(--primary)] text-white font-bold rounded-xl shadow-lg shadow-red-500/20 hover:scale-105 active:scale-95 transition-all'
+                                }
+                            }, [t('hero_cta')]),
+                            D.A({
+                                attrs: {
+                                    href: 'tel:+201099991424',
+                                    class: 'w-full sm:w-auto px-8 py-4 bg-[var(--bg-surface)] text-[var(--text-main)] border border-[var(--border)] font-bold rounded-xl hover:bg-[var(--border)] transition-all'
+                                }
+                            }, [
+                                D.Span({ attrs: { class: 'mr-2' } }, ['📞']),
+                                t('hero_contact')
+                            ])
+                        ])
+                    ])
+                ]),
+
+                // ------------------------------------------
+                // Services Section
+                // ------------------------------------------
+                D.Section({
+                    attrs: { id: 'services', class: sectionClass }
+                }, [
+                    D.Div({ attrs: { class: containerClass } }, [
+                        // Section Header
+                        D.Div({ attrs: { class: 'text-center mb-16' } }, [
+                            D.H2({ attrs: { class: 'text-3xl md:text-4xl font-bold mb-4' } }, [t('srv_title')]),
+                            D.Div({ attrs: { class: 'h-1.5 w-20 bg-[var(--primary)] mx-auto rounded-full' } }, [])
+                        ]),
+
+                        // Grid
+                        D.Div({ attrs: { class: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8' } }, [
+                            // Card 1: Software
+                            D.Div({ attrs: { class: cardClass } }, [
+                                D.Div({ attrs: { class: 'w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center text-2xl mb-6' } }, ['💻']),
+                                D.H3({ attrs: { class: 'text-xl font-bold mb-3 group-hover:text-[var(--primary)] transition-colors' } }, [t('srv_soft_title')]),
+                                D.P({ attrs: { class: 'text-[var(--text-muted)] leading-relaxed' } }, [t('srv_soft_desc')])
+                            ]),
+                            // Card 2: IT Consult
+                            D.Div({ attrs: { class: cardClass } }, [
+                                D.Div({ attrs: { class: 'w-12 h-12 bg-zinc-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center text-2xl mb-6' } }, ['🧠']),
+                                D.H3({ attrs: { class: 'text-xl font-bold mb-3 group-hover:text-[var(--primary)] transition-colors' } }, [t('srv_it_title')]),
+                                D.P({ attrs: { class: 'text-[var(--text-muted)] leading-relaxed' } }, [t('srv_it_desc')])
+                            ]),
+                            // Card 3: Infrastructure
+                            D.Div({ attrs: { class: cardClass } }, [
+                                D.Div({ attrs: { class: 'w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center text-2xl mb-6' } }, ['🏗️']),
+                                D.H3({ attrs: { class: 'text-xl font-bold mb-3 group-hover:text-[var(--primary)] transition-colors' } }, [t('srv_infra_title')]),
+                                D.P({ attrs: { class: 'text-[var(--text-muted)] leading-relaxed' } }, [t('srv_infra_desc')])
+                            ]),
+                            // Card 4: Equipment
+                            D.Div({ attrs: { class: cardClass } }, [
+                                D.Div({ attrs: { class: 'w-12 h-12 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center text-2xl mb-6' } }, ['🖥️']),
+                                D.H3({ attrs: { class: 'text-xl font-bold mb-3 group-hover:text-[var(--primary)] transition-colors' } }, [t('srv_equip_title')]),
+                                D.P({ attrs: { class: 'text-[var(--text-muted)] leading-relaxed' } }, [t('srv_equip_desc')])
+                            ]),
+                        ])
+                    ])
+                ]),
+
+                // ------------------------------------------
+                // Contact Section
+                // ------------------------------------------
+                D.Section({
+                    attrs: {
+                        id: 'contact',
+                        class: sectionClass + ' bg-[var(--bg-surface)] border-t border-[var(--border)]'
+                    }
+                }, [
+                    D.Div({ attrs: { class: containerClass } }, [
+                        D.Div({ attrs: { class: 'grid md:grid-cols-2 gap-12 items-center' } }, [
+                            // Info
+                            D.Div({}, [
+                                D.H2({ attrs: { class: 'text-4xl font-bold mb-8' } }, [t('contact_title')]),
+
+                                // Contact Item
+                                D.Div({ attrs: { class: 'flex items-start gap-4 mb-6' } }, [
+                                    D.Div({ attrs: { class: 'w-10 h-10 bg-[var(--bg-body)] rounded-full flex items-center justify-center border border-[var(--border)] text-xl' } }, ['📍']),
+                                    D.Div({}, [
+                                        D.H4({ attrs: { class: 'font-bold text-[var(--text-main)]' } }, [t('addr_label')]),
+                                        D.P({ attrs: { class: 'text-[var(--text-muted)]' } }, [t('addr_val')])
+                                    ])
+                                ]),
+
+                                D.Div({ attrs: { class: 'flex items-start gap-4 mb-6' } }, [
+                                    D.Div({ attrs: { class: 'w-10 h-10 bg-[var(--bg-body)] rounded-full flex items-center justify-center border border-[var(--border)] text-xl' } }, ['📞']),
+                                    D.Div({}, [
+                                        D.H4({ attrs: { class: 'font-bold text-[var(--text-main)]' } }, [t('phone_label')]),
+                                        D.A({ attrs: { href: 'tel:+201099991424', class: 'text-[var(--primary)] dir-ltr block text-left' } }, [t('phone_val')])
+                                    ])
+                                ]),
+
+                                D.Div({ attrs: { class: 'flex items-start gap-4' } }, [
+                                    D.Div({ attrs: { class: 'w-10 h-10 bg-[var(--bg-body)] rounded-full flex items-center justify-center border border-[var(--border)] text-xl' } }, ['✉️']),
+                                    D.Div({}, [
+                                        D.H4({ attrs: { class: 'font-bold text-[var(--text-main)]' } }, [t('email_label')]),
+                                        D.A({ attrs: { href: 'mailto:info@rovlex.com', class: 'text-[var(--primary)]' } }, [t('email_val')])
+                                    ])
+                                ])
+                            ]),
+
+                            // Visual / Map Placeholder
+                            D.Div({ attrs: { class: 'relative h-80 rounded-2xl overflow-hidden bg-[var(--bg-body)] border border-[var(--border)] shadow-inner flex items-center justify-center group' } }, [
+                                D.Div({ attrs: { class: 'absolute inset-0 bg-gradient-to-tr from-[var(--primary)] to-[var(--accent)] opacity-10' } }, []),
+                                D.Span({ attrs: { class: 'text-6xl grayscale opacity-20 group-hover:scale-110 transition-transform duration-700' } }, ['🌍'])
+                            ])
+                        ])
+                    ])
+                ]),
+
+                // ------------------------------------------
+                // Footer
+                // ------------------------------------------
+                D.Footer({
+                    attrs: { class: 'py-8 border-t border-[var(--border)] text-center text-[var(--text-muted)] text-sm' }
+                }, [
+                    t('copyright')
+                ])
+
+            ]);
+        }
+
+        // ==========================================
+        // 4. LAUNCH
+        // ==========================================
+        Mishkah.app.setBody(body);
+        Mishkah.app.create(database, orders).mount('#app');
+
+    </script>
+</body>
+
+</html>

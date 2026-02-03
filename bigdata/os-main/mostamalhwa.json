@@ -1,0 +1,2800 @@
+{
+  "name": "schema_2vy5",
+  "title": "???? ????",
+  "description": "Merged schema for Hawa (SBN) including Auth, E-Commerce, and Social/Messaging modules. sbn_user_profiles is the central user table.",
+  "schema": {
+    "tables": [
+      {
+        "name": "sbn_user_profiles",
+        "label": "sbn_user_profiles",
+        "comment": "",
+        "sqlName": "sbn_user_profiles",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "email",
+            "columnName": "email",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "username",
+            "columnName": "username",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "password_hash",
+            "columnName": "password_hash",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "role_id",
+            "columnName": "role_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_roles",
+              "column": "role_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "full_name",
+            "columnName": "full_name",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "bio",
+            "columnName": "bio",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "avatar_url",
+            "columnName": "avatar_url",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "location",
+            "columnName": "location",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "gender",
+            "columnName": "gender",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "birth_date",
+            "columnName": "birth_date",
+            "type": "date",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "create_date",
+            "columnName": "create_date",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_roles",
+        "label": "sbn_roles",
+        "comment": "",
+        "sqlName": "sbn_roles",
+        "layout": {
+          "x": 400,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "role_id",
+            "columnName": "role_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_permissions",
+        "label": "sbn_permissions",
+        "comment": "",
+        "sqlName": "sbn_permissions",
+        "layout": {
+          "x": 800,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "permission_id",
+            "columnName": "permission_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_role_permissions",
+        "label": "sbn_role_permissions",
+        "comment": "",
+        "sqlName": "sbn_role_permissions",
+        "layout": {
+          "x": 600,
+          "y": 200
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "role_id",
+            "columnName": "role_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_roles",
+              "column": "role_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "permission_id",
+            "columnName": "permission_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_permissions",
+              "column": "permission_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_sessions",
+        "label": "sbn_sessions",
+        "comment": "",
+        "sqlName": "sbn_sessions",
+        "layout": {
+          "x": 200,
+          "y": 400
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "session_id",
+            "columnName": "session_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "ip_address",
+            "columnName": "ip_address",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "device_info",
+            "columnName": "device_info",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "create_date",
+            "columnName": "create_date",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_categories",
+        "label": "sbn_categories",
+        "comment": "",
+        "sqlName": "sbn_categories",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "parent_id",
+            "columnName": "parent_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_categories",
+              "column": "category_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "image",
+            "columnName": "image",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "create_date",
+            "columnName": "create_date",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_standard_products",
+        "label": "sbn_standard_products",
+        "comment": "",
+        "sqlName": "sbn_standard_products",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "standard_id",
+            "columnName": "standard_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "brand",
+            "columnName": "brand",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_categories",
+              "column": "category_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "images",
+            "columnName": "images",
+            "type": "json",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "create_date",
+            "columnName": "create_date",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_products",
+        "label": "sbn_products",
+        "comment": "",
+        "sqlName": "sbn_products",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "product_id",
+            "columnName": "product_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "standard_id",
+            "columnName": "standard_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_standard_products",
+              "column": "standard_id",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_categories",
+              "column": "category_id",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "seller_id",
+            "columnName": "seller_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "price",
+            "columnName": "price",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 18,
+            "scale": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "stock",
+            "columnName": "stock",
+            "type": "integer",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "images",
+            "columnName": "images",
+            "type": "json",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "created_date",
+            "columnName": "created_date",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_orders",
+        "label": "sbn_orders",
+        "comment": "",
+        "sqlName": "sbn_orders",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "buyer_id",
+            "columnName": "buyer_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "cart_id",
+            "columnName": "cart_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_carts",
+              "column": "cart_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "total",
+            "columnName": "total",
+            "type": "decimal",
+            "nullable": false,
+            "precision": 18,
+            "scale": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "shipping_address",
+            "columnName": "shipping_address",
+            "type": "json",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "create_date",
+            "columnName": "create_date",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_payments",
+        "label": "sbn_payments",
+        "comment": "",
+        "sqlName": "sbn_payments",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "order_id",
+            "columnName": "order_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_orders",
+              "column": "id",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "method",
+            "columnName": "method",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "amount",
+            "columnName": "amount",
+            "type": "decimal",
+            "nullable": false,
+            "precision": 18,
+            "scale": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "date",
+            "columnName": "date",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_refunds",
+        "label": "sbn_refunds",
+        "comment": "",
+        "sqlName": "sbn_refunds",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "payment_id",
+            "columnName": "payment_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_payments",
+              "column": "id",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "amount",
+            "columnName": "amount",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 18,
+            "scale": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "reason",
+            "columnName": "reason",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "approved_by",
+            "columnName": "approved_by",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "approved_date",
+            "columnName": "approved_date",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": true,
+            "defaultValue": "pending",
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_shipping",
+        "label": "sbn_shipping",
+        "comment": "",
+        "sqlName": "sbn_shipping",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "order_id",
+            "columnName": "order_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_orders",
+              "column": "id",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "carrier",
+            "columnName": "carrier",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "tracking_number",
+            "columnName": "tracking_number",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": true,
+            "defaultValue": "pending",
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "shipped_date",
+            "columnName": "shipped_date",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "delivered_date",
+            "columnName": "delivered_date",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_offers",
+        "label": "sbn_offers",
+        "comment": "",
+        "sqlName": "sbn_offers",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "product_id",
+            "columnName": "product_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_products",
+              "column": "product_id",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "discount_type",
+            "columnName": "discount_type",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "discount_value",
+            "columnName": "discount_value",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 18,
+            "scale": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "start_date",
+            "columnName": "start_date",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "end_date",
+            "columnName": "end_date",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "order_items",
+        "label": "order_items",
+        "comment": "",
+        "sqlName": "order_items",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "order_id",
+            "columnName": "order_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_orders",
+              "column": "id",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "product_id",
+            "columnName": "product_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_products",
+              "column": "product_id",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "quantity",
+            "columnName": "quantity",
+            "type": "integer",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "unit_price",
+            "columnName": "unit_price",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 18,
+            "scale": 3,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "total",
+            "columnName": "total",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 18,
+            "scale": 3,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_payment_methods",
+        "label": "sbn_payment_methods",
+        "comment": "",
+        "sqlName": "sbn_payment_methods",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "method_id",
+            "columnName": "method_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_payments",
+              "column": "method",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "provider",
+            "columnName": "provider",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "create_date",
+            "columnName": "create_date",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_reviews",
+        "label": "sbn_reviews",
+        "comment": "",
+        "sqlName": "sbn_reviews",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "review_id",
+            "columnName": "review_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "product_id",
+            "columnName": "product_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_products",
+              "column": "product_id",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "rating",
+            "columnName": "rating",
+            "type": "integer",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "comment",
+            "columnName": "comment",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "create_date",
+            "columnName": "create_date",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_delivery_addresses",
+        "label": "sbn_delivery_addresses",
+        "comment": "",
+        "sqlName": "sbn_delivery_addresses",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "address_id",
+            "columnName": "address_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "NO ACTION",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "phone_number",
+            "columnName": "phone_number",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "city",
+            "columnName": "city",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_post_type",
+        "label": "sbn_post_type",
+        "comment": "",
+        "sqlName": "sbn_post_type",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "post_id",
+            "columnName": "post_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },{
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "post_type",
+            "columnName": "post_type",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "content",
+            "columnName": "content",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "media_url",
+            "columnName": "media_url",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "duration_seconds",
+            "columnName": "duration_seconds",
+            "type": "integer",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "visibility",
+            "columnName": "visibility",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "expires_at",
+            "columnName": "expires_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_comments",
+        "label": "sbn_comments",
+        "comment": "",
+        "sqlName": "sbn_comments",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "comment_id",
+            "columnName": "comment_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "post_id",
+            "columnName": "post_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_post_type",
+              "column": "post_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "content",
+            "columnName": "content",
+            "type": "text",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_reactions",
+        "label": "sbn_reactions",
+        "comment": "",
+        "sqlName": "sbn_reactions",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "reaction_id",
+            "columnName": "reaction_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "target_type",
+            "columnName": "target_type",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "target_id",
+            "columnName": "target_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "reaction_type",
+            "columnName": "reaction_type",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_shares",
+        "label": "sbn_shares",
+        "comment": "",
+        "sqlName": "sbn_shares",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "share_id",
+            "columnName": "share_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "post_id",
+            "columnName": "post_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_post_type",
+              "column": "post_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "shared_at",
+            "columnName": "shared_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_hashtags",
+        "label": "sbn_hashtags",
+        "comment": "",
+        "sqlName": "sbn_hashtags",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "hashtag_id",
+            "columnName": "hashtag_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "usage_count",
+            "columnName": "usage_count",
+            "type": "integer",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "trending_hashtags",
+            "columnName": "trending_hashtags",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_post_hashtags",
+        "label": "sbn_post_hashtags",
+        "comment": "",
+        "sqlName": "sbn_post_hashtags",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "post_id",
+            "columnName": "post_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_post_type",
+              "column": "post_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "hashtag_id",
+            "columnName": "hashtag_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_hashtags",
+              "column": "hashtag_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_mentions",
+        "label": "sbn_mentions",
+        "comment": "",
+        "sqlName": "sbn_mentions",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "mention_id",
+            "columnName": "mention_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "post_id",
+            "columnName": "post_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_post_type",
+              "column": "post_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "mentioned_user_id",
+            "columnName": "mentioned_user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_post_analytics",
+        "label": "sbn_post_analytics",
+        "comment": "",
+        "sqlName": "sbn_post_analytics",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "analytics_id",
+            "columnName": "analytics_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "post_id",
+            "columnName": "post_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_post_type",
+              "column": "post_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "views",
+            "columnName": "views",
+            "type": "integer",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "shares",
+            "columnName": "shares",
+            "type": "integer",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_conversations",
+        "label": "sbn_conversations",
+        "comment": "",
+        "sqlName": "sbn_conversations",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "conversation_id",
+            "columnName": "conversation_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "type",
+            "columnName": "type",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "is_voice_call",
+            "columnName": "is_voice_call",
+            "type": "boolean",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "is_video_call",
+            "columnName": "is_video_call",
+            "type": "boolean",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "call_start",
+            "columnName": "call_start",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "call_end",
+            "columnName": "call_end",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_conversation_participants",
+        "label": "sbn_conversation_participants",
+        "comment": "",
+        "sqlName": "sbn_conversation_participants",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "participant_id",
+            "columnName": "participant_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "conversation_id",
+            "columnName": "conversation_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_conversations",
+              "column": "conversation_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "joined_at",
+            "columnName": "joined_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_messages",
+        "label": "sbn_messages",
+        "comment": "",
+        "sqlName": "sbn_messages",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "message_id",
+            "columnName": "message_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "conversation_id",
+            "columnName": "conversation_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_conversations",
+              "column": "conversation_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "sender_id",
+            "columnName": "sender_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "content",
+            "columnName": "content",
+            "type": "text",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "attachments",
+            "columnName": "attachments",
+            "type": "json",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "reactions",
+            "columnName": "reactions",
+            "type": "json",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "voice_url",
+            "columnName": "voice_url",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "sent_at",
+            "columnName": "sent_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_saved_posts",
+        "label": "sbn_saved_posts",
+        "comment": "",
+        "sqlName": "sbn_saved_posts",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "save_id",
+            "columnName": "save_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_user_profiles",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "post_id",
+            "columnName": "post_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_post_type",
+              "column": "post_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_polls",
+        "label": "sbn_polls",
+        "comment": "",
+        "sqlName": "sbn_polls",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "poll_id",
+            "columnName": "poll_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "post_id",
+            "columnName": "post_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_post_type",
+              "column": "post_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "question",
+            "columnName": "question",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "expires_at",
+            "columnName": "expires_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_poll_options",
+        "label": "sbn_poll_options",
+        "comment": "",
+        "sqlName": "sbn_poll_options",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "option_id",
+            "columnName": "option_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "poll_id",
+            "columnName": "poll_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "sbn_polls",
+              "column": "poll_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "NO ACTION"
+            }
+          },
+          {
+            "name": "text",
+            "columnName": "text",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "vote_count",
+            "columnName": "vote_count",
+            "type": "integer",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "sbn_post_views",
+        "label": "sbn_post_views",
+        "comment": "",
+        "sqlName": "sbn_post_views",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "view_id",
+            "columnName": "view_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "post_id",
+            "columnName": "post_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      }
+    ]
+  },
+  "layout": {
+    "sbn_user_profiles": {
+      "x": 0,
+      "y": 0
+    },
+    "sbn_roles": {
+      "x": 400,
+      "y": 0
+    },
+    "sbn_permissions": {
+      "x": 800,
+      "y": 0
+    },
+    "sbn_role_permissions": {
+      "x": 600,
+      "y": 200
+    },
+    "sbn_sessions": {
+      "x": -174,
+      "y": 488
+    },
+    "sbn_categories": {
+      "x": 2640,
+      "y": 1024
+    },
+    "sbn_standard_products": {
+      "x": 1435,
+      "y": 434
+    },
+    "sbn_products": {
+      "x": 1040,
+      "y": 200
+    },
+    "sbn_orders": {
+      "x": 1840,
+      "y": 968
+    },
+    "sbn_payments": {
+      "x": 1031,
+      "y": 925
+    },
+    "sbn_refunds": {
+      "x": 240,
+      "y": 912
+    },
+    "sbn_shipping": {
+      "x": 996,
+      "y": 1213
+    },
+    "sbn_offers": {
+      "x": 144,
+      "y": 1483
+    },
+    "order_items": {
+      "x": -159,
+      "y": 730
+    },
+    "sbn_payment_methods": {
+      "x": -651,
+      "y": 950
+    },
+    "sbn_reviews": {
+      "x": 168,
+      "y": 1223
+    },
+    "sbn_delivery_addresses": {
+      "x": -638,
+      "y": 262
+    },
+    "sbn_post_type": {
+      "x": 1840,
+      "y": 200
+    },
+    "sbn_comments": {
+      "x": 625,
+      "y": 810
+    },
+    "sbn_reactions": {
+      "x": -649,
+      "y": 1214
+    },
+    "sbn_shares": {
+      "x": -649,
+      "y": 730
+    },
+    "sbn_hashtags": {
+      "x": 574,
+      "y": 1404
+    },
+    "sbn_post_hashtags": {
+      "x": -648,
+      "y": 530
+    },
+    "sbn_mentions": {
+      "x": -295,
+      "y": 1278
+    },
+    "sbn_post_analytics": {
+      "x": 1412,
+      "y": 1039
+    },
+    "sbn_conversations": {
+      "x": 1073,
+      "y": 618
+    },
+    "sbn_conversation_participants": {
+      "x": 549,
+      "y": 1151
+    },
+    "sbn_messages": {
+      "x": 446,
+      "y": 538
+    },
+    "sbn_saved_posts": {
+      "x": -233,
+      "y": 1446
+    },
+    "sbn_polls": {
+      "x": 593,
+      "y": 1645
+    },
+    "sbn_poll_options": {
+      "x": -213,
+      "y": 1015
+    },
+    "sbn_post_views": {
+      "x": 4520,
+      "y": 200
+    }
+  },
+  "canvas": {
+    "zoom": 0.4,
+    "mode": "manual"
+  },
+  "classes": []
+}

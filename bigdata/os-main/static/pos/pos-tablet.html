@@ -1,0 +1,1346 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>نقطة البيع — نسخة التابلت</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0f172a;
+        --surface-1: rgba(15, 23, 42, 0.92);
+        --surface-2: rgba(21, 32, 50, 0.74);
+        --surface-3: rgba(15, 23, 42, 0.58);
+        --border: rgba(148, 163, 184, 0.18);
+        --accent: linear-gradient(135deg, #6366f1, #22d3ee);
+        --text: #f8fafc;
+        --muted: rgba(148, 163, 184, 0.7);
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 55%), var(--bg);
+        color: var(--text);
+        font-family: "Inter", "Tajawal", system-ui, sans-serif;
+        padding: clamp(1.4rem, 3vw, 2.4rem);
+        display: flex;
+        justify-content: center;
+      }
+
+      .pos-mini-shell {
+        width: min(1420px, 100%);
+        display: grid;
+        grid-template-columns: minmax(0, 1.9fr) minmax(0, 1.1fr);
+        gap: clamp(1.2rem, 2.6vw, 2.2rem);
+      }
+
+      .pos-mini-card {
+        background: var(--surface-1);
+        border-radius: 26px;
+        border: 1px solid var(--border);
+        box-shadow: 0 38px 70px -48px rgba(15, 23, 42, 0.9);
+        padding: clamp(1.4rem, 2.8vw, 2.1rem);
+        display: flex;
+        flex-direction: column;
+        gap: clamp(1rem, 2vw, 1.5rem);
+      }
+
+      .pos-mini-stack {
+        display: grid;
+        gap: clamp(1rem, 2vw, 1.5rem);
+      }
+
+      .pos-mini-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .pos-mini-title {
+        margin: 0;
+        font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+
+      .pos-mini-pill {
+        padding: 0.35rem 0.9rem;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        font-size: 0.82rem;
+        color: var(--muted);
+        background: rgba(15, 23, 42, 0.6);
+      }
+
+      .pos-mini-sections {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+      }
+
+      .pos-mini-section-btn {
+        border: 1px solid transparent;
+        border-radius: 18px;
+        padding: 0.55rem 1.1rem;
+        font: inherit;
+        cursor: pointer;
+        background: rgba(71, 85, 105, 0.16);
+        color: inherit;
+        transition: border 0.2s, background 0.2s;
+      }
+
+      .pos-mini-section-btn[data-active="true"] {
+        border-color: rgba(99, 102, 241, 0.45);
+        background: rgba(99, 102, 241, 0.12);
+        color: #c7d2fe;
+      }
+
+      .pos-mini-menu {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: clamp(0.8rem, 1.8vw, 1.4rem);
+      }
+
+      .pos-mini-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem;
+        border-radius: 24px;
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        background: var(--surface-2);
+        cursor: pointer;
+        min-height: 220px;
+        transition: border 0.2s, transform 0.2s;
+      }
+
+      .pos-mini-item:hover {
+        border-color: rgba(99, 102, 241, 0.45);
+        transform: translateY(-2px);
+      }
+
+      .pos-mini-item img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 18px;
+        background: rgba(15, 23, 42, 0.4);
+      }
+
+      .pos-mini-item h3 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .pos-mini-item p {
+        margin: 0;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      .pos-mini-item .price {
+        margin-top: auto;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #a5b4fc;
+      }
+
+      .pos-mini-cart {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .pos-mini-cart-line {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0.4rem;
+        padding: 0.85rem 1rem;
+        border-radius: 18px;
+        background: rgba(15, 23, 42, 0.5);
+        border: 1px solid rgba(148, 163, 184, 0.15);
+      }
+
+      .pos-mini-cart-line h4 {
+        margin: 0 0 0.35rem;
+        font-size: 0.98rem;
+        font-weight: 600;
+      }
+
+      .pos-mini-cart-line small {
+        color: var(--muted);
+        display: block;
+        font-size: 0.78rem;
+      }
+
+      .pos-mini-cart-actions {
+        display: flex;
+        gap: 0.35rem;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .pos-mini-btn {
+        border: none;
+        border-radius: 16px;
+        padding: 0.55rem 1.1rem;
+        font: inherit;
+        cursor: pointer;
+        background: rgba(99, 102, 241, 0.18);
+        color: #c7d2fe;
+        transition: transform 0.2s ease;
+      }
+
+      .pos-mini-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .pos-mini-btn.danger {
+        background: rgba(248, 113, 113, 0.16);
+        color: #fecaca;
+      }
+
+      .pos-mini-btn.solid {
+        background: var(--accent);
+        color: #fff;
+        font-weight: 600;
+        box-shadow: 0 24px 50px -36px rgba(34, 211, 238, 0.8);
+      }
+
+      .pos-mini-select {
+        background: rgba(15, 23, 42, 0.55);
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        border-radius: 16px;
+        color: inherit;
+        font: inherit;
+        padding: 0.55rem 0.9rem;
+        min-height: 48px;
+      }
+
+      .pos-mini-totals {
+        margin-top: 0.5rem;
+        display: grid;
+        gap: 0.35rem;
+        font-size: 0.9rem;
+      }
+
+      .pos-mini-empty {
+        text-align: center;
+        padding: 1.4rem;
+        border-radius: 18px;
+        border: 1px dashed rgba(148, 163, 184, 0.25);
+        color: var(--muted);
+      }
+
+      .pos-mini-toast {
+        font-size: 0.86rem;
+        padding: 0.65rem 1rem;
+        border-radius: 16px;
+        background: rgba(34, 197, 94, 0.16);
+        border: 1px solid rgba(34, 197, 94, 0.25);
+        color: #bbf7d0;
+      }
+
+      .pos-mini-toast.error {
+        background: rgba(248, 113, 113, 0.16);
+        border-color: rgba(248, 113, 113, 0.25);
+        color: #fecaca;
+      }
+
+      .pos-mini-orders {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .pos-mini-order-card {
+        border-radius: 20px;
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        background: var(--surface-3);
+        padding: 1rem 1.2rem;
+        display: grid;
+        gap: 0.55rem;
+      }
+
+      .pos-mini-order-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      .pos-mini-order-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .pos-mini-order-head h3 {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .pos-mini-order-amount {
+        font-weight: 700;
+        color: #c7d2fe;
+      }
+
+      @media (max-width: 1120px) {
+        .pos-mini-shell {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+    </style>
+  <script>window.basedomain='https://ws.mas.com.eg';</script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="./../lib/mishkah-utils.js"></script>
+    <script src="./../lib/mishkah.core.js"></script>
+      <script src="../lib/mishkah.store.js"></script>
+  <script src="../lib/mishkah.simple-store.js"></script>
+  <script src="./pos-mini-db.js"></script>
+    <script src="./pos-mini-utils.js"></script>
+
+    <script >
+      let createPosDb = window.createPosDb;
+ 
+      ensurePosIdentity(window);
+
+      const params = new URLSearchParams(window.location.search || '');
+      const BRANCH_ID =
+        params.get('branch') ||
+        params.get('branchId') ||
+        params.get('brname') ||
+        window.POS_BRANCH_PARAM ||
+        'dar';
+
+      const INITIAL_STATE = {
+        status: 'connecting',
+        branchId: BRANCH_ID,
+        lang: 'ar',
+        categories: [],
+        items: [],
+        activeCategoryId: null,
+        cart: [],
+        totals: calculateTotals([]),
+        lastOrderId: null,
+        submissionStatus: null,
+        submissionMessage: '',
+        shiftId: null,
+        availableTables: [],
+        selectedTableId: null,
+        orders: [],
+        ordersFilter: 'all',
+        orderActionStatus: null,
+        orderActionMessage: ''
+      };
+
+      const DEFAULT_ORDER_TYPES = [
+        { id: 'dine_in', label: { ar: 'صالة', en: 'Dine-in' } },
+        { id: 'delivery', label: { ar: 'توصيل', en: 'Delivery' } },
+        { id: 'takeaway', label: { ar: 'تيك أواي', en: 'Takeaway' } }
+      ];
+
+      const STATUS_FALLBACK = {
+        open: { ar: 'قيد التنفيذ', en: 'In progress' },
+        held: { ar: 'معلّق', en: 'On hold' },
+        finalized: { ar: 'منتهي', en: 'Finalized' },
+        closed: { ar: 'مغلق', en: 'Closed' }
+      };
+
+      const PAYMENT_FALLBACK = {
+        unpaid: { ar: 'غير مدفوع', en: 'Unpaid' },
+        partial: { ar: 'مدفوع جزئيًا', en: 'Partially paid' },
+        paid: { ar: 'مدفوع', en: 'Paid' }
+      };
+
+      function normalizeOrderTypeId(value) {
+        if (!value) return 'dine_in';
+        const normalized = String(value).trim().toLowerCase().replace(/[^a-z0-9]+/g, '_');
+        return normalized || 'dine_in';
+      }
+
+      function createOrderTypeIndex(list = []) {
+        const map = new Map();
+        DEFAULT_ORDER_TYPES.forEach((entry) => {
+          map.set(entry.id, { id: entry.id, label: { ...entry.label } });
+        });
+        const entries = Array.isArray(list) ? list : [];
+        for (const entry of entries) {
+          if (!entry) continue;
+          const idRaw = entry.id || entry.order_type_id || entry.orderTypeId || entry.code || entry.value;
+          if (!idRaw) continue;
+          const id = normalizeOrderTypeId(idRaw);
+          const nameSource = entry.type_name || entry.name || entry.label || {};
+          const ar =
+            typeof nameSource === 'object'
+              ? nameSource.ar || nameSource.en || map.get(id)?.label?.ar || id
+              : String(nameSource || id);
+          const en =
+            typeof nameSource === 'object'
+              ? nameSource.en || nameSource.ar || map.get(id)?.label?.en || id
+              : String(nameSource || id);
+          map.set(id, { id, label: { ar, en } });
+        }
+        return map;
+      }
+
+      const defaultOrderTypeIndex = createOrderTypeIndex(DEFAULT_ORDER_TYPES);
+
+      const database = {
+        head: { title: 'Mishkah POS Tablet' },
+        env: { theme: 'dark', lang: 'ar', dir: 'rtl' },
+        data: INITIAL_STATE
+      };
+
+      const orders = {};
+      let app;
+
+      const runtime = {
+        menuIndex: new Map(),
+        menuByCategory: new Map(),
+        payload: {},
+        employee: null,
+        posInfo: {},
+        tables: [],
+        tableIndex: new Map(),
+        kitchenSections: [],
+        orderStatuses: [],
+        paymentStates: [],
+        lineStatuses: [],
+        orderTypes: Array.from(defaultOrderTypeIndex.values()),
+        orderTypeIndex: defaultOrderTypeIndex,
+        ordersIndex: new Map()
+      };
+
+      function localizeOrderTypeLabel(typeId, lang = 'ar') {
+        const normalized = normalizeOrderTypeId(typeId);
+        const entry = runtime.orderTypeIndex.get(normalized) || runtime.orderTypeIndex.get('dine_in');
+        if (!entry) return normalized;
+        return lang === 'en'
+          ? entry.label.en || entry.label.ar || normalized
+          : entry.label.ar || entry.label.en || normalized;
+      }
+
+      function localizeStatusLabel(statusId, lang = 'ar') {
+        if (!statusId) return lang === 'en' ? 'Unknown' : 'غير معروف';
+        const normalized = String(statusId).toLowerCase();
+        const match = (runtime.orderStatuses || []).find((entry) => {
+          const candidate = entry?.id || entry?.status_id || entry?.statusId;
+          return candidate && String(candidate).toLowerCase() === normalized;
+        });
+        if (match) {
+          const source = match.status_name || match.name || match.label;
+          if (typeof source === 'object') {
+            return lang === 'en'
+              ? source.en || source.ar || normalized
+              : source.ar || source.en || normalized;
+          }
+          if (source) return String(source);
+        }
+        const fallback = STATUS_FALLBACK[normalized];
+        if (fallback) return lang === 'en' ? fallback.en : fallback.ar;
+        return normalized;
+      }
+
+      function localizePaymentStateLabel(stateId, lang = 'ar') {
+        if (!stateId) return lang === 'en' ? 'Unknown' : 'غير معروف';
+        const normalized = String(stateId).toLowerCase();
+        const match = (runtime.paymentStates || []).find((entry) => {
+          const candidate = entry?.id || entry?.payment_state_id || entry?.paymentStateId;
+          return candidate && String(candidate).toLowerCase() === normalized;
+        });
+        if (match) {
+          const source = match.payment_name || match.name || match.label;
+          if (typeof source === 'object') {
+            return lang === 'en'
+              ? source.en || source.ar || normalized
+              : source.ar || source.en || normalized;
+          }
+          if (source) return String(source);
+        }
+        const fallback = PAYMENT_FALLBACK[normalized];
+        if (fallback) return lang === 'en' ? fallback.en : fallback.ar;
+        return normalized;
+      }
+
+      let dynamicHandlers = {};
+      let currentShiftId = null;
+
+      function rebuildHandlers(state) {
+        dynamicHandlers = {};
+        for (const category of state.categories) {
+          const key = `pos:category:${category.id || 'all'}`;
+          dynamicHandlers[key] = {
+            on: ['click'],
+            gkeys: [key],
+            handler: () => selectCategory(category.id)
+          };
+        }
+        for (const item of state.items) {
+          const key = `pos:menu:add:${item.uid}`;
+          dynamicHandlers[key] = {
+            on: ['click'],
+            gkeys: [key],
+            handler: () => addItemToCart(item.id)
+          };
+        }
+        for (const line of state.cart) {
+          const removeKey = `pos:cart:remove:${line.key}`;
+          const increaseKey = `pos:cart:inc:${line.key}`;
+          const decreaseKey = `pos:cart:dec:${line.key}`;
+          dynamicHandlers[removeKey] = {
+            on: ['click'],
+            gkeys: [removeKey],
+            handler: () => removeLine(line.key)
+          };
+          dynamicHandlers[increaseKey] = {
+            on: ['click'],
+            gkeys: [increaseKey],
+            handler: () => changeQuantity(line.key, line.quantity + 1)
+          };
+          dynamicHandlers[decreaseKey] = {
+            on: ['click'],
+            gkeys: [decreaseKey],
+            handler: () => changeQuantity(line.key, line.quantity - 1)
+          };
+        }
+        for (const order of state.orders) {
+          const finishKey = `pos:orders:finish:${order.id}`;
+          dynamicHandlers[finishKey] = {
+            on: ['click'],
+            gkeys: [finishKey],
+            handler: () => completeOrder(order.id)
+          };
+        }
+        const baseHandlers = {
+          'pos:cart:clear': {
+            on: ['click'],
+            gkeys: ['pos:cart:clear'],
+            handler: clearCart
+          },
+          'pos:order:submit': {
+            on: ['click'],
+            gkeys: ['pos:order:submit'],
+            handler: submitOrder
+          },
+          'pos:table:change': {
+            on: ['change'],
+            gkeys: ['pos:table:change'],
+            handler: handleTableChange
+          }
+        };
+        if (app) {
+          app.setOrders(Object.assign({}, baseHandlers, dynamicHandlers));
+        }
+      }
+
+      function updateState(mutator) {
+        if (!app) return;
+        app.setState((previous) => {
+          const current = previous.data || INITIAL_STATE;
+          const next =
+            typeof mutator === 'function' ? mutator(current) : { ...current, ...(mutator || {}) };
+          return { ...previous, data: next };
+        });
+        const data = app.getState().data;
+        rebuildHandlers(data);
+      }
+
+      function selectCategory(categoryId) {
+        updateState((state) => {
+          const nextCategory = categoryId || null;
+          const items =
+            nextCategory && runtime.menuByCategory.has(nextCategory)
+              ? runtime.menuByCategory.get(nextCategory).map(normalizeMenuItem)
+              : Array.from(runtime.menuIndex.values());
+          return {
+            ...state,
+            activeCategoryId: nextCategory,
+            items
+          };
+        });
+      }
+
+      function normalizeMenuItem(raw) {
+        if (!raw) return null;
+        const existing = runtime.menuIndex.get(raw.id);
+        if (existing) return existing;
+        const price = Number(raw.pricing?.base ?? raw.basePrice ?? raw.price ?? 0);
+        const normalized = {
+          id: raw.id,
+          uid: `${raw.id}`,
+          categoryId: raw.category_id || raw.categoryId || null,
+          kitchenSectionId: raw.kitchen_section_id || raw.kitchenSectionId || null,
+          nameAr: localizeText(raw.item_name || raw.nameAr || raw.name, 'ar'),
+          nameEn: localizeText(raw.item_name || raw.nameEn || raw.name, 'en'),
+          descriptionAr: localizeText(raw.item_description || raw.descriptionAr || raw.description, 'ar'),
+          descriptionEn: localizeText(raw.item_description || raw.descriptionEn || raw.description, 'en'),
+          image: raw.media?.image || raw.image || null,
+          unitPrice: roundCurrency(price)
+        };
+        runtime.menuIndex.set(raw.id, normalized);
+        return normalized;
+      }
+
+      function rebuildMenuFromPayload(payload = {}) {
+        const { items, categories, byCategory } = deriveMenuFromSnapshot(payload);
+        runtime.menuIndex.clear();
+        runtime.menuByCategory.clear();
+        const normalizedCategories = [{ id: null, label: 'الكل' }];
+        for (const category of categories) {
+          const entry = {
+            id: category.id,
+            label: localizeText(category.category_name || category.name || category.label, 'ar')
+          };
+          normalizedCategories.push(entry);
+          const bucket = byCategory.get(category.id);
+          if (bucket) {
+            const normalizedItems = bucket.items.map(normalizeMenuItem).filter(Boolean);
+            runtime.menuByCategory.set(category.id, normalizedItems);
+          }
+        }
+        const normalizedItems = items.map(normalizeMenuItem).filter(Boolean);
+        updateState((state) => ({
+          ...state,
+          status: 'ready',
+          categories: normalizedCategories,
+          items: normalizedItems
+        }));
+      }
+
+      function rebuildOrderTypesFromPayload(payload = {}) {
+        const source = payload.order_types || payload.orderTypes;
+        const index = createOrderTypeIndex(Array.isArray(source) ? source : []);
+        runtime.orderTypeIndex = index;
+        runtime.orderTypes = Array.from(index.values());
+      }
+
+      function syncTables(tables = []) {
+        runtime.tableIndex.clear();
+        const normalized = tables
+          .map((table) => {
+            if (!table) return null;
+            const id = table.id || table.tableId || table.table_id;
+            if (!id) return null;
+            const label =
+              localizeText(table.table_name || table.name || table.label || `طاولة ${id}`, 'ar') ||
+              `طاولة ${id}`;
+            const status = table.status || table.table_status || 'available';
+            const entry = { id, label, status };
+            runtime.tableIndex.set(id, { ...table, ...entry });
+            return entry;
+          })
+          .filter(Boolean);
+        updateState((state) => {
+          const hasSelected = normalized.some((table) => table.id === state.selectedTableId);
+          const fallbackId = normalized[0]?.id || null;
+          return {
+            ...state,
+            availableTables: normalized,
+            selectedTableId: hasSelected ? state.selectedTableId : fallbackId
+          };
+        });
+      }
+
+      let cartLineCounter = 0;
+      function addItemToCart(itemId) {
+        const item = runtime.menuIndex.get(itemId);
+        if (!item) return;
+        updateState((state) => {
+          const existing = state.cart.find((line) => line.itemId === itemId);
+          let nextCart;
+          if (existing) {
+            nextCart = state.cart.map((line) =>
+              line.itemId === itemId
+                ? {
+                    ...line,
+                    quantity: line.quantity + 1,
+                    total: roundCurrency((line.quantity + 1) * line.unitPrice)
+                  }
+                : line
+            );
+          } else {
+            const key = `line-${++cartLineCounter}`;
+            nextCart = state.cart.concat([
+              {
+                key,
+                itemId,
+                nameAr: item.nameAr,
+                nameEn: item.nameEn,
+                unitPrice: item.unitPrice,
+                quantity: 1,
+                total: roundCurrency(item.unitPrice),
+                kitchenSectionId: item.kitchenSectionId,
+                image: item.image || null,
+                numericId: Math.floor(Math.random() * 1_000_000)
+              }
+            ]);
+          }
+          return {
+            ...state,
+            cart: nextCart,
+            totals: calculateTotals(
+              nextCart.map((line) => ({
+                quantity: line.quantity,
+                unitPrice: line.unitPrice
+              }))
+            ),
+            submissionStatus: null,
+            submissionMessage: ''
+          };
+        });
+      }
+
+      function changeQuantity(key, quantity) {
+        updateState((state) => {
+          const nextQty = Math.max(0, quantity);
+          const nextCart = state.cart
+            .map((line) => {
+              if (line.key !== key) return line;
+              if (nextQty === 0) return null;
+              return { ...line, quantity: nextQty, total: roundCurrency(nextQty * line.unitPrice) };
+            })
+            .filter(Boolean);
+          return {
+            ...state,
+            cart: nextCart,
+            totals: calculateTotals(
+              nextCart.map((line) => ({
+                quantity: line.quantity,
+                unitPrice: line.unitPrice
+              }))
+            )
+          };
+        });
+      }
+
+      function removeLine(key) {
+        updateState((state) => {
+          const nextCart = state.cart.filter((line) => line.key !== key);
+          return {
+            ...state,
+            cart: nextCart,
+            totals: calculateTotals(
+              nextCart.map((line) => ({
+                quantity: line.quantity,
+                unitPrice: line.unitPrice
+              }))
+            )
+          };
+        });
+      }
+
+      function clearCart() {
+        updateState((state) => ({
+          ...state,
+          cart: [],
+          totals: calculateTotals([]),
+          submissionStatus: null,
+          submissionMessage: ''
+        }));
+      }
+
+      async function ensureShift() {
+        if (currentShiftId) return currentShiftId;
+        const cashier = runtime.employee || { id: 'cashier-tablet', full_name: 'Cashier Tablet', role: 'cashier' };
+        const pos = runtime.posInfo || {};
+        const created = await posDb.insert('pos_shift', {
+          posId: pos.id || 'pos-tablet',
+          posLabel: pos.label || 'POS Tablet',
+          posNumber: Number(pos.number) || 1,
+          cashierId: cashier.id,
+          cashierName: cashier.full_name || cashier.name || 'Cashier',
+          cashierRole: cashier.role || 'cashier',
+          employeeId: cashier.id,
+          openedBy: cashier.id,
+          status: 'open',
+          isClosed: false,
+          totalsByType: {},
+          paymentsByMethod: {},
+          countsByType: {},
+          ordersCount: 0,
+          orders: [],
+          totalSales: 0
+        });
+        currentShiftId = created.id;
+        return currentShiftId;
+      }
+
+      function handleTableChange(event) {
+        const value = event?.target?.value || '';
+        updateState((state) => ({
+          ...state,
+          selectedTableId: value || null
+        }));
+      }
+
+      function findOrderById(orderId) {
+        return runtime.ordersIndex.get(orderId) || null;
+      }
+
+      async function completeOrder(orderId) {
+        if (!orderId) return;
+        const existing = findOrderById(orderId);
+        if (!existing) return;
+        try {
+          updateState((state) => ({
+            ...state,
+            orderActionStatus: 'pending',
+            orderActionMessage: `جاري إنهاء الطلب ${existing.displayNumber || orderId}...`
+          }));
+          const nowIso = new Date().toISOString();
+          const employeeId = runtime.employee?.id || existing.raw.closedBy || existing.raw.closed_by || existing.raw.openedBy || existing.raw.opened_by || 'cashier-tablet';
+          const totalPaid = roundCurrency(
+            existing.raw.totalPaid ?? existing.raw.total_paid ?? existing.raw.totalDue ?? existing.raw.total_due ?? existing.total
+          );
+          const metadata = {
+            ...(existing.raw.metadata || {}),
+            finishedAt: nowIso,
+            finishedBy: employeeId,
+            source: 'pos-tablet'
+          };
+          const payload = {
+            ...existing.raw,
+            statusId: 'completed',
+            status_id: 'completed',
+            stageId: 'closed',
+            stage_id: 'closed',
+            paymentStateId: 'paid',
+            payment_state_id: 'paid',
+            totalPaid,
+            total_paid: totalPaid,
+            closedAt: nowIso,
+            closed_at: nowIso,
+            closedBy: employeeId,
+            closed_by: employeeId,
+            metadata
+          };
+          await posDb.update('order_header', payload);
+          updateState((state) => ({
+            ...state,
+            orderActionStatus: 'success',
+            orderActionMessage: `تم إنهاء الطلب ${existing.displayNumber || orderId} بنجاح.`
+          }));
+        } catch (error) {
+          console.error('[POS-Tablet] failed to complete order', error);
+          updateState((state) => ({
+            ...state,
+            orderActionStatus: 'error',
+            orderActionMessage: error?.message || 'تعذّر إنهاء الطلب، يرجى المحاولة لاحقًا.'
+          }));
+        }
+      }
+
+      function normalizeOrder(raw) {
+        if (!raw) return null;
+        const id = raw.id || raw.orderId || raw.order_id;
+        if (!id) return null;
+        const status = raw.statusId || raw.status_id || raw.status || 'open';
+        if (status === 'completed' || status === 'closed') return null;
+        const typeId = normalizeOrderTypeId(
+          raw.orderTypeId || raw.order_type_id || raw.order_type || raw.type || 'dine_in'
+        );
+        const tableId = raw.tableId || raw.table_id || null;
+        const table = tableId ? runtime.tableIndex.get(tableId) : null;
+        const due = roundCurrency(
+          raw.totalDue ?? raw.total_due ?? raw.total ?? raw.total_amount ?? raw.totalPaid ?? raw.total_paid ?? 0
+        );
+        const paid = roundCurrency(raw.totalPaid ?? raw.total_paid ?? 0);
+        const remaining = Math.max(0, roundCurrency(due - paid));
+        const paymentState = raw.paymentStateId || raw.payment_state_id || raw.payment_state || 'unpaid';
+        const openedAt = raw.openedAt || raw.opened_at || raw.createdAt || raw.created_at || null;
+        const displayNumber = raw.metadata?.displayNumber || raw.metadata?.display_number || id;
+        const tableLabel = table ? table.label : tableId ? `طاولة ${tableId}` : '—';
+        runtime.ordersIndex.set(id, {
+          raw,
+          id,
+          displayNumber,
+          total: due,
+          paid,
+          remaining,
+          status,
+          paymentState,
+          typeId,
+          tableId,
+          tableLabel
+        });
+        return {
+          id,
+          displayNumber,
+          total: due,
+          paid,
+          remaining,
+          status,
+          paymentState,
+          typeId,
+          tableId,
+          tableLabel,
+          openedAt
+        };
+      }
+
+      function rebuildOrders(rows = []) {
+        runtime.ordersIndex.clear();
+        const mapped = rows
+          .map((row) => normalizeOrder(row))
+          .filter(Boolean)
+          .sort((a, b) => {
+            const aTime = a.openedAt ? new Date(a.openedAt).getTime() : 0;
+            const bTime = b.openedAt ? new Date(b.openedAt).getTime() : 0;
+            return bTime - aTime;
+          });
+        updateState((state) => {
+          const filter = state.ordersFilter || 'all';
+          const visible = filter === 'all' ? mapped : mapped.filter((order) => order.typeId === filter);
+          return {
+            ...state,
+            orders: visible
+          };
+        });
+      }
+
+      async function submitOrder(event) {
+        event?.preventDefault?.();
+        const state = app.getState().data;
+        if (!state.cart.length) {
+          updateState((prev) => ({
+            ...prev,
+            submissionStatus: 'error',
+            submissionMessage: 'الرجاء إضافة عناصر للسلة قبل الحفظ.'
+          }));
+          return;
+        }
+
+        try {
+          updateState((prev) => ({
+            ...prev,
+            submissionStatus: 'pending',
+            submissionMessage: 'جاري حفظ الطلب في الخادم المركزي...'
+          }));
+
+          const shiftId = await ensureShift();
+          const totals = calculateTotals(
+            state.cart.map((line) => ({ quantity: line.quantity, unitPrice: line.unitPrice }))
+          );
+          const orderId = generateOrderId('ord');
+          const nowIso = new Date().toISOString();
+          const tableId = state.selectedTableId || runtime.tables[0]?.id || runtime.tables[0]?.table_id || null;
+
+          await posDb.insert('order_header', {
+            id: orderId,
+            shiftId,
+            posId: (runtime.posInfo && runtime.posInfo.id) || 'pos-tablet',
+            posNumber: Number(runtime.posInfo?.number) || 1,
+            orderTypeId: 'dine_in',
+            statusId: 'open',
+            stageId: 'new',
+            paymentStateId: 'unpaid',
+            tableId,
+            openedBy: runtime.employee?.id || 'cashier-tablet',
+            guests: 1,
+            subtotal: totals.subtotal,
+            discount: totals.discount,
+            service: totals.service,
+            tax: totals.tax,
+            deliveryFee: totals.deliveryFee,
+            totalDue: totals.due,
+            totalPaid: 0,
+            metadata: {
+              source: 'pos-tablet',
+              branchId: BRANCH_ID,
+              submittedAt: nowIso
+            },
+            notes: []
+          });
+
+          for (const line of state.cart) {
+            await posDb.insert('order_line', {
+              orderId,
+              itemId: line.numericId || Math.floor(Math.random() * 1_000_000),
+              kitchenSectionId: line.kitchenSectionId || null,
+              statusId: 'queued',
+              quantity: line.quantity,
+              unitPrice: roundCurrency(line.unitPrice),
+              total: roundCurrency(line.total),
+              metadata: {
+                itemId: line.itemId,
+                itemNameAr: line.nameAr,
+                itemNameEn: line.nameEn,
+                image: line.image || null,
+                sectionId: line.kitchenSectionId || null,
+                source: 'pos-tablet'
+              }
+            });
+          }
+
+          clearCart();
+          updateState((prev) => ({
+            ...prev,
+            lastOrderId: orderId,
+            submissionStatus: 'success',
+            submissionMessage: `تم حفظ الطلب بنجاح • رقم ${orderId}`
+          }));
+        } catch (error) {
+          console.error('[POS-Tablet] failed to submit order', error);
+          updateState((prev) => ({
+            ...prev,
+            submissionStatus: 'error',
+            submissionMessage: error?.message || 'تعذّر حفظ الطلب، يرجى المحاولة لاحقًا.'
+          }));
+        }
+      }
+
+      window.Mishkah.app.setBody((stateWrapper, D) => {
+        const state = stateWrapper.data || INITIAL_STATE;
+        const lang = state.lang || 'ar';
+        const cartEmpty = !state.cart.length;
+
+        const statusBadge = D.Text.Span({ attrs: { class: 'pos-mini-pill' } }, [
+          state.status === 'connecting'
+            ? 'جاري الاتصال بالمخدم'
+            : state.status === 'ready'
+            ? 'متصل'
+            : state.status === 'error'
+            ? 'حدث خطأ'
+            : state.status || 'جاهز'
+        ]);
+
+        const header = D.Containers.Div({ attrs: { class: 'pos-mini-header' } }, [
+          D.Containers.Div({}, [
+            D.Text.H1({ attrs: { class: 'pos-mini-title' } }, ['نقطة البيع — وضع التابلت']),
+            statusBadge
+          ]),
+          D.Text.Span({ attrs: { class: 'pos-mini-pill' } }, [`الفرع: ${state.branchId}`])
+        ]);
+
+        const categoryButtons = state.categories.map((category) =>
+          D.Forms.Button(
+            {
+              attrs: {
+                type: 'button',
+                class: 'pos-mini-section-btn',
+                gkey: `pos:category:${category.id || 'all'}`,
+                'data-active': state.activeCategoryId === category.id ? 'true' : null
+              }
+            },
+            [category.label]
+          )
+        );
+
+        const menuGrid = state.items.length
+          ? D.Containers.Div(
+              { attrs: { class: 'pos-mini-menu' } },
+              state.items.map((item) =>
+                D.Containers.Article(
+                  {
+                    attrs: {
+                      class: 'pos-mini-item',
+                      gkey: `pos:menu:add:${item.uid}`
+                    }
+                  },
+                  [
+                    item.image
+                      ? D.Media.Img({ attrs: { src: item.image, alt: item.nameAr || item.nameEn || 'صنف' } })
+                      : null,
+                    D.Text.H3({}, [item.nameAr || item.nameEn || 'صنف']),
+                    item.descriptionAr
+                      ? D.Text.P({}, [item.descriptionAr])
+                      : item.descriptionEn
+                      ? D.Text.P({}, [item.descriptionEn])
+                      : null,
+                    D.Text.Span({ attrs: { class: 'price' } }, [
+                      formatCurrency(item.unitPrice, { lang })
+                    ])
+                  ].filter(Boolean)
+                )
+              )
+            )
+          : D.Containers.Div(
+              { attrs: { class: 'pos-mini-empty' } },
+              ['لا توجد عناصر متاحة حاليًا، تأكد من تحميل قائمة الفرع.']
+            );
+
+        const cartLines = state.cart.map((line) =>
+          D.Containers.Div(
+            { attrs: { class: 'pos-mini-cart-line' } },
+            [
+              D.Containers.Div({}, [
+                D.Text.H4({}, [line.nameAr]),
+                D.Text.Small({}, [
+                  `الكمية: ${line.quantity} • السعر: ${formatCurrency(line.unitPrice, { lang })}`
+                ])
+              ]),
+              D.Containers.Div(
+                { attrs: { class: 'pos-mini-cart-actions' } },
+                [
+                  D.Forms.Button(
+                    {
+                      attrs: {
+                        type: 'button',
+                        class: 'pos-mini-btn',
+                        gkey: `pos:cart:inc:${line.key}`
+                      }
+                    },
+                    ['+']
+                  ),
+                  D.Forms.Button(
+                    {
+                      attrs: {
+                        type: 'button',
+                        class: 'pos-mini-btn',
+                        gkey: `pos:cart:dec:${line.key}`
+                      }
+                    },
+                    ['−']
+                  ),
+                  D.Forms.Button(
+                    {
+                      attrs: {
+                        type: 'button',
+                        class: 'pos-mini-btn danger',
+                        gkey: `pos:cart:remove:${line.key}`
+                      }
+                    },
+                    ['حذف']
+                  )
+                ]
+              )
+            ]
+          )
+        );
+
+        const totalsView = D.Containers.Div({ attrs: { class: 'pos-mini-totals' } }, [
+          D.Text.Span({}, [`الإجمالي: ${formatCurrency(state.totals.subtotal, { lang })}`]),
+          D.Text.Span({}, [`المستحق: ${formatCurrency(state.totals.due, { lang })}`])
+        ]);
+
+        const feedback =
+          state.submissionStatus === 'success' || state.submissionStatus === 'error'
+            ? D.Containers.Div(
+                {
+                  attrs: {
+                    class: `pos-mini-toast ${state.submissionStatus === 'error' ? 'error' : ''}`
+                  }
+                },
+                [state.submissionMessage || '']
+              )
+            : state.submissionStatus === 'pending'
+            ? D.Containers.Div(
+                { attrs: { class: 'pos-mini-toast' } },
+                [state.submissionMessage || 'جاري الحفظ...']
+              )
+            : null;
+
+        const tableOptions = state.availableTables.length
+          ? state.availableTables.map((table) =>
+              D.Inputs.Option(
+                {
+                  attrs: {
+                    value: table.id,
+                    selected: state.selectedTableId === table.id ? 'selected' : null
+                  }
+                },
+                [table.label]
+              )
+            )
+          : [D.Inputs.Option({ attrs: { value: '' } }, ['لا توجد طاولات متاحة'])];
+
+        const tableSelector = D.Forms.Fieldset({}, [
+          D.Text.Small({ attrs: { class: 'pos-mini-pill' } }, ['اختيار الطاولة']),
+          D.Inputs.Select(
+            {
+              attrs: {
+                class: 'pos-mini-select',
+                gkey: 'pos:table:change'
+              }
+            },
+            tableOptions
+          )
+        ]);
+
+        const cartSection = D.Containers.Section({ attrs: { class: 'pos-mini-card' } }, [
+          D.Containers.Div({ attrs: { class: 'pos-mini-header' } }, [
+            D.Text.H2({ attrs: { class: 'pos-mini-title' } }, ['سلة الطلب']),
+            D.Forms.Button(
+              {
+                attrs: {
+                  type: 'button',
+                  class: 'pos-mini-btn danger',
+                  gkey: 'pos:cart:clear',
+                  disabled: cartEmpty ? 'disabled' : null
+                }
+              },
+              ['إفراغ السلة']
+            )
+          ]),
+          tableSelector,
+          cartLines.length
+            ? D.Containers.Div({ attrs: { class: 'pos-mini-cart' } }, cartLines)
+            : D.Containers.Div({ attrs: { class: 'pos-mini-empty' } }, ['ابدأ بإضافة الأصناف من القائمة.']),
+          totalsView,
+          D.Forms.Button(
+            {
+              attrs: {
+                type: 'button',
+                class: 'pos-mini-btn solid',
+                gkey: 'pos:order:submit',
+                disabled: cartEmpty ? 'disabled' : null
+              }
+            },
+            ['حفظ الطلب في الخادم المركزي']
+          ),
+          feedback
+        ]);
+
+        const ordersFeedback =
+          state.orderActionStatus === 'success' || state.orderActionStatus === 'error'
+            ? D.Containers.Div(
+                {
+                  attrs: {
+                    class: `pos-mini-toast ${state.orderActionStatus === 'error' ? 'error' : ''}`
+                  }
+                },
+                [state.orderActionMessage || '']
+              )
+            : state.orderActionStatus === 'pending'
+            ? D.Containers.Div(
+                { attrs: { class: 'pos-mini-toast' } },
+                [state.orderActionMessage || 'جاري إنهاء الطلب...']
+              )
+            : null;
+
+        const activeFilterLabel =
+          state.ordersFilter === 'all'
+            ? lang === 'en' ? 'All orders' : 'كل الطلبات'
+            : localizeOrderTypeLabel(state.ordersFilter, lang);
+
+        const typeLabelText = lang === 'en' ? 'Service type' : 'نوع الطلب';
+        const tableLabelText = lang === 'en' ? 'Table' : 'الطاولة';
+        const startedLabelText = lang === 'en' ? 'Opened at' : 'وقت البدء';
+        const statusLabelText = lang === 'en' ? 'Status' : 'الحالة';
+        const paymentStateText = lang === 'en' ? 'Payment' : 'حالة الدفع';
+        const paidLabelText = lang === 'en' ? 'Paid' : 'المدفوع';
+        const remainingLabelText = lang === 'en' ? 'Outstanding' : 'المتبقي';
+
+        const ordersList = state.orders.length
+          ? state.orders.map((order) =>
+              D.Containers.Article(
+                { attrs: { class: 'pos-mini-order-card' } },
+                [
+                  D.Containers.Div({ attrs: { class: 'pos-mini-order-head' } }, [
+                    D.Text.H3({}, [`طلب #${order.displayNumber || order.id}`]),
+                    D.Text.Span(
+                      { attrs: { class: 'pos-mini-order-amount' } },
+                      [formatCurrency(order.total, { lang })]
+                    )
+                  ]),
+                  D.Containers.Div({ attrs: { class: 'pos-mini-order-meta' } }, [
+                    D.Text.Span({}, [`${typeLabelText}: ${localizeOrderTypeLabel(order.typeId, lang)}`]),
+                    D.Text.Span({}, [`${tableLabelText}: ${order.tableLabel}`]),
+                    order.openedAt
+                      ? D.Text.Span({}, [
+                          `${startedLabelText}: ${new Date(order.openedAt).toLocaleTimeString(
+                            lang === 'en' ? 'en-US' : 'ar-EG'
+                          )}`
+                        ])
+                      : null,
+                    D.Text.Span({}, [`${statusLabelText}: ${localizeStatusLabel(order.status, lang)}`]),
+                    D.Text.Span({}, [`${paymentStateText}: ${localizePaymentStateLabel(order.paymentState, lang)}`]),
+                    D.Text.Span({}, [`${paidLabelText}: ${formatCurrency(order.paid, { lang })}`]),
+                    D.Text.Span({}, [`${remainingLabelText}: ${formatCurrency(order.remaining, { lang })}`])
+                  ].filter(Boolean)),
+                  D.Forms.Button(
+                    {
+                      attrs: {
+                        type: 'button',
+                        class: 'pos-mini-btn solid',
+                        gkey: `pos:orders:finish:${order.id}`
+                      }
+                    },
+                    ['إنهاء الطلب']
+                  )
+                ]
+              )
+            )
+          : [
+              D.Containers.Div(
+                { attrs: { class: 'pos-mini-empty' } },
+                [lang === 'en' ? 'No active orders right now.' : 'لا توجد طلبات حالية الآن.']
+              )
+            ];
+
+        const ordersSection = D.Containers.Section({ attrs: { class: 'pos-mini-card' } }, [
+          D.Containers.Div({ attrs: { class: 'pos-mini-header' } }, [
+            D.Text.H2({ attrs: { class: 'pos-mini-title' } }, [lang === 'en' ? 'Current orders' : 'الطلبات الحالية']),
+            D.Text.Span({ attrs: { class: 'pos-mini-pill' } }, [
+              lang === 'en' ? `Filter: ${activeFilterLabel}` : `الفلتر: ${activeFilterLabel}`
+            ])
+          ]),
+          D.Containers.Div({ attrs: { class: 'pos-mini-orders' } }, ordersList),
+          ordersFeedback
+        ]);
+
+        const menuSection = D.Containers.Section({ attrs: { class: 'pos-mini-card' } }, [
+          header,
+          D.Containers.Div({ attrs: { class: 'pos-mini-sections' } }, categoryButtons),
+          menuGrid
+        ]);
+
+        const stack = D.Containers.Div({ attrs: { class: 'pos-mini-stack' } }, [cartSection, ordersSection]);
+
+        return D.Containers.Div({ attrs: { class: 'pos-mini-shell' } }, [menuSection, stack]);
+      });
+
+      const posDbPromise = createPosDb({ branchId: BRANCH_ID });
+      app = window.Mishkah.app.createApp(database, orders);
+      app.mount('#app');
+      posDbPromise.then(({ db: posDb }) => {
+        posDb.status((payload) => {
+          const status = typeof payload === 'string' ? payload : payload?.status || 'idle';
+          updateState((state) => ({ ...state, status }));
+        });
+
+        posDb.watch('pos_database', (rows) => {
+          if (!rows || !rows.length) return;
+          const latest = rows[rows.length - 1];
+          if (!latest || !latest.payload) return;
+          runtime.payload = latest.payload;
+          runtime.posInfo = latest.payload?.settings?.pos || {};
+          runtime.tables = latest.payload?.tables || [];
+          runtime.employee = (latest.payload?.employees || [])[0] || runtime.employee;
+          runtime.kitchenSections = latest.payload?.kitchen_sections || [];
+          runtime.orderStatuses = latest.payload?.order_statuses || [];
+          runtime.paymentStates = latest.payload?.order_payment_states || [];
+          runtime.lineStatuses = latest.payload?.order_line_statuses || [];
+          rebuildMenuFromPayload(latest.payload);
+          rebuildOrderTypesFromPayload(latest.payload);
+          syncTables(runtime.tables);
+        });
+
+        posDb.watch('pos_shift', (rows) => {
+          const openShift = (rows || []).find((shift) => shift && shift.status !== 'closed' && !shift.isClosed);
+          currentShiftId = openShift ? openShift.id : null;
+          updateState((state) => ({ ...state, shiftId: currentShiftId }));
+        });
+
+        posDb.watch('order_header', (rows) => {
+          rebuildOrders(rows || []);
+        });
+
+        rebuildHandlers(INITIAL_STATE);
+      }).catch((error) => {
+        console.error('[POS-Tablet] Failed to initialize database', error);
+        updateState((state) => ({ ...state, status: 'error' }));
+      });
+    </script>
+  </body>
+</html>

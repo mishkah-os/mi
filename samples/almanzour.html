@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المنظور الشامل | Al-Manzour Al-Shamel</title>
+
+    <!-- 1. TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Mishkah Core -->
+    <script src="https://ws.mas.com.eg/lib/mishkah.core.js"></script>
+
+    <!-- 3. Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 4. Global Styles -->
+    <style>
+        :root[data-theme='light'] {
+            --bg-body: #fdfbf7;
+            /* Warn White */
+            --bg-surface: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --primary: #cca43b;
+            /* Mecca Gold */
+            --primary-fg: #ffffff;
+            --accent: #243c5a;
+            /* Deep Slate */
+            --border: #e5e7eb;
+        }
+
+        :root[data-theme='dark'] {
+            --bg-body: #0f1115;
+            /* Rich Black */
+            --bg-surface: #181a20;
+            /* Dark Charcoal */
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --primary: #d4af37;
+            /* Gold */
+            --primary-fg: #000000;
+            --accent: #4b5563;
+            /* Slate */
+            --border: #27272a;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Typography */
+        :root[lang='ar'] body {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+
+        :root[lang='en'] body {
+            font-family: 'Playfair Display', serif;
+        }
+
+        :root[lang='en'] p {
+            font-family: sans-serif;
+        }
+
+        /* Islamic Pattern Overlay */
+        .pattern-overlay {
+            background-image: radial-gradient(var(--primary) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.05;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // ==========================================
+        // 1. DATABASE
+        // ==========================================
+        const database = {
+            data: { mobileMenuOpen: false },
+            env: { theme: 'dark', lang: 'ar', dir: 'rtl' },
+            i18n: {
+                dict: {
+                    'brand': { ar: 'المنظور الشامل', en: 'Al-Manzour' },
+                    'brand_sub': { ar: 'للاستشارات الهندسية', en: 'Al-Shamel Engineering' },
+
+                    // Nav
+                    'nav_home': { ar: 'الرئيسية', en: 'Home' },
+                    'nav_services': { ar: 'خدماتنا', en: 'Services' },
+                    'nav_portfolio': { ar: 'معرض الأعمال', en: 'Portfolio' },
+                    'nav_contact': { ar: 'اتصل بنا', en: 'Contact' },
+
+                    // Hero
+                    'hero_title': { ar: 'رؤية هندسية تعانق عنان السماء', en: 'Engineering Vision That Touches the Sky' },
+                    'hero_desc': { ar: 'نقدم في المنظور الشامل خبرات هندسية متكاملة في قلب مكة المكرمة، حيث نمزج الأصالة بالحداثة لنبني مستقبلاً مستداماً.', en: 'At Al-Manzour Al-Shamel, we offer integrated engineering expertise in the heart of Makkah, blending tradition with modernity to build a sustainable future.' },
+                    'hero_cta': { ar: 'تواصل معنا', en: 'Contact Us' },
+
+                    // Services
+                    'srv_design': { ar: 'تصميم معماري', en: 'Architectural Design' },
+                    'srv_design_desc': { ar: 'تصاميم إبداعية تراعي الهوية المكية وتلبي تطلعات العصر.', en: 'Creative designs reflecting Makkah identity and meeting modern aspirations.' },
+                    'srv_supervision': { ar: 'إشراف هندسي', en: 'Engineering Supervision' },
+                    'srv_supervision_desc': { ar: 'متابعة ميدانية دقيقة لضمان أعلى معايير الجودة والسلامة.', en: 'Precise field supervision ensuring highest quality and safety standards.' },
+                    'srv_survey': { ar: 'مسح وتخطيط', en: 'Surveying & Planning' },
+                    'srv_survey_desc': { ar: 'خدمات مساحية دقيقة وتخطيط عمراني متطور.', en: 'Accurate surveying services and advanced urban planning.' },
+
+                    // Contact
+                    'addr_title': { ar: 'عنواننا', en: 'Our Address' },
+                    'addr_val': { ar: 'مكة المكرمة، شارع عبدالقادر كوشك، 2195', en: 'Makkah, Abdulqader Koshak St, 2195' },
+                    'contact_title': { ar: 'دعنا نبني رؤيتك', en: 'Let\'s Build Your Vision' },
+
+                    'copyright': { ar: '© 2026 شركة المنظور الشامل للاستشارات الهندسية.', en: '© 2026 Al-Manzour Al-Shamel Engineering Consultants.' }
+                }
+            }
+        };
+
+        // ==========================================
+        // 2. ORDERS
+        // ==========================================
+        const orders = {
+            'sys.theme': {
+                on: ['click'], gkeys: ['btn:theme'],
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, env: { ...s.env, theme: s.env.theme === 'light' ? 'dark' : 'light' } }))
+            },
+            'sys.lang': {
+                on: ['click'], gkeys: ['btn:lang'],
+                handler: (e, ctx) => ctx.setState(s => {
+                    const l = s.env.lang === 'ar' ? 'en' : 'ar';
+                    return { ...s, env: { ...s.env, lang: l, dir: l === 'ar' ? 'rtl' : 'ltr' } };
+                })
+            },
+            'ui.menu': {
+                on: ['click'], gkeys: ['btn:menu'],
+                handler: (e, ctx) => ctx.setState(s => { s.data.mobileMenuOpen = !s.data.mobileMenuOpen; return s; })
+            }
+        };
+
+        // ==========================================
+        // 3. BODY
+        // ==========================================
+        const D = Mishkah.DSL;
+
+        function body(db) {
+            const t = (k) => db.i18n.dict[k]?.[db.env.lang] || k;
+
+            // Icon Helper (SVG)
+            const Icon = (path) => D.Svg({
+                attrs: { class: 'w-6 h-6', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }
+            }, [D.Path({ attrs: { d: path } })]);
+
+            return D.Div({
+                attrs: {
+                    class: 'min-h-screen flex flex-col relative',
+                    'data-theme': db.env.theme,
+                    'dir': db.env.dir,
+                    lang: db.env.lang
+                }
+            }, [
+                // Pattern Bg
+                D.Div({ attrs: { class: 'absolute inset-0 pattern-overlay pointer-events-none' } }, []),
+
+                // Navbar
+                D.Nav({ attrs: { class: 'relative z-50 px-6 py-6' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto bg-[var(--bg-surface)]/80 backdrop-blur-md border border-[var(--border)] rounded-full px-8 h-20 flex items-center justify-between shadow-lg' } }, [
+                        // Logo
+                        D.Div({ attrs: { class: 'flex items-center gap-3' } }, [
+                            D.Div({ attrs: { class: 'w-10 h-10 rounded-full border-2 border-[var(--primary)] flex items-center justify-center' } }, [
+                                D.Div({ attrs: { class: 'w-6 h-6 bg-[var(--primary)] transform rotate-45' } }, [])
+                            ]),
+                            D.Div({ attrs: { class: 'flex flex-col' } }, [
+                                D.Span({ attrs: { class: 'font-bold leading-none text-lg text-[var(--text-main)]' } }, [t('brand')]),
+                                D.Span({ attrs: { class: 'text-[10px] text-[var(--primary)] uppercase tracking-widest' } }, [t('brand_sub')])
+                            ])
+                        ]),
+
+                        // Desktop Links
+                        D.Div({ attrs: { class: 'hidden md:flex items-center gap-8' } }, [
+                            D.A({ attrs: { href: '#', class: 'font-medium text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors' } }, [t('nav_home')]),
+                            D.A({ attrs: { href: '#services', class: 'font-medium text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors' } }, [t('nav_services')]),
+                            D.A({ attrs: { href: '#contact', class: 'font-medium text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors' } }, [t('nav_contact')]),
+                        ]),
+
+                        // Actions
+                        D.Div({ attrs: { class: 'flex items-center gap-4' } }, [
+                            D.Button({ attrs: { gkey: 'btn:lang', class: 'text-sm font-bold text-[var(--text-main)] hover:text-[var(--primary)]' } }, [db.env.lang === 'ar' ? 'EN' : 'عربي']),
+                            D.Button({ attrs: { gkey: 'btn:theme', class: 'text-lg' } }, [db.env.theme === 'light' ? '🌙' : '☀️']),
+                            D.Button({ attrs: { gkey: 'btn:menu', class: 'md:hidden text-2xl' } }, ['☰'])
+                        ])
+                    ])
+                ]),
+
+                // Mobile Menu
+                db.data.mobileMenuOpen ? D.Div({ attrs: { class: 'md:hidden bg-[var(--bg-surface)] p-6 m-4 mt-0 rounded-2xl border border-[var(--border)] shadow-xl relative z-40' } }, [
+                    D.A({ attrs: { href: '#', class: 'block py-3 border-b border-[var(--border)] font-bold' } }, [t('nav_home')]),
+                    D.A({ attrs: { href: '#services', class: 'block py-3 border-b border-[var(--border)] font-bold' } }, [t('nav_services')]),
+                    D.A({ attrs: { href: '#contact', class: 'block py-3 font-bold' } }, [t('nav_contact')])
+                ]) : null,
+
+                // Hero
+                D.Header({ attrs: { class: 'relative py-20 px-6' } }, [
+                    D.Div({ attrs: { class: 'max-w-4xl mx-auto text-center' } }, [
+                        D.Div({ attrs: { class: 'inline-block my-8 w-px h-20 bg-gradient-to-b from-transparent via-[var(--primary)] to-transparent' } }, []),
+                        D.H1({ attrs: { class: 'text-5xl md:text-8xl font-bold mb-8 leading-tight text-[var(--text-main)] drop-shadow-sm' } }, [t('hero_title')]),
+                        D.P({ attrs: { class: 'text-xl md:text-2xl text-[var(--text-muted)] leading-relaxed mb-12 max-w-2xl mx-auto' } }, [t('hero_desc')]),
+                        D.A({ attrs: { href: '#contact', class: 'inline-block px-10 py-4 bg-[var(--primary)] text-[var(--primary-fg)] font-bold rounded-full hover:bg-[var(--text-main)] hover:text-[var(--bg-body)] transition-all transform hover:-translate-y-1 shadow-lg shadow-yellow-500/20' } }, [t('hero_cta')])
+                    ])
+                ]),
+
+                // Services
+                D.Section({ attrs: { id: 'services', class: 'py-20 px-6' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto grid md:grid-cols-3 gap-8' } }, [
+                        // Card 1
+                        D.Div({ attrs: { class: 'bg-[var(--bg-surface)] p-8 rounded-3xl border border-[var(--border)] hover:border-[var(--primary)] transition-all group' } }, [
+                            D.Div({ attrs: { class: 'w-16 h-16 rounded-2xl bg-[var(--bg-body)] flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform' } }, ['🏛️']),
+                            D.H3({ attrs: { class: 'text-2xl font-bold mb-4' } }, [t('srv_design')]),
+                            D.P({ attrs: { class: 'text-[var(--text-muted)] leading-relaxed' } }, [t('srv_design_desc')])
+                        ]),
+                        // Card 2
+                        D.Div({ attrs: { class: 'bg-[var(--bg-surface)] p-8 rounded-3xl border border-[var(--border)] hover:border-[var(--primary)] transition-all group' } }, [
+                            D.Div({ attrs: { class: 'w-16 h-16 rounded-2xl bg-[var(--bg-body)] flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform' } }, ['🏗️']),
+                            D.H3({ attrs: { class: 'text-2xl font-bold mb-4' } }, [t('srv_supervision')]),
+                            D.P({ attrs: { class: 'text-[var(--text-muted)] leading-relaxed' } }, [t('srv_supervision_desc')])
+                        ]),
+                        // Card 3
+                        D.Div({ attrs: { class: 'bg-[var(--bg-surface)] p-8 rounded-3xl border border-[var(--border)] hover:border-[var(--primary)] transition-all group' } }, [
+                            D.Div({ attrs: { class: 'w-16 h-16 rounded-2xl bg-[var(--bg-body)] flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform' } }, ['📐']),
+                            D.H3({ attrs: { class: 'text-2xl font-bold mb-4' } }, [t('srv_survey')]),
+                            D.P({ attrs: { class: 'text-[var(--text-muted)] leading-relaxed' } }, [t('srv_survey_desc')])
+                        ])
+                    ])
+                ]),
+
+                // Info / Contact Banner
+                D.Section({ attrs: { id: 'contact', class: 'py-20 px-6 bg-[var(--bg-surface)] border-y border-[var(--border)]' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12' } }, [
+                        D.Div({ attrs: { class: 'text-center md:text-right' } }, [
+                            D.H2({ attrs: { class: 'text-4xl font-bold mb-6' } }, [t('contact_title')]),
+                            D.Div({ attrs: { class: 'flex items-center justify-center md:justify-start gap-4 mb-2' } }, [
+                                D.Span({ attrs: { class: 'text-2xl' } }, ['📍']),
+                                D.Div({}, [
+                                    D.Div({ attrs: { class: 'text-xs text-[var(--primary)] font-bold uppercase tracking-wider' } }, [t('addr_title')]),
+                                    D.Div({ attrs: { class: 'text-xl font-medium' } }, [t('addr_val')])
+                                ])
+                            ])
+                        ]),
+                        D.Div({ attrs: { class: 'w-full md:w-1/3 h-64 bg-[var(--bg-body)] rounded-3xl border border-[var(--border)] flex items-center justify-center relative overflow-hidden' } }, [
+                            // Decorative Map Placeholder
+                            D.Div({ attrs: { class: 'absolute inset-0 opacity-20 bg-[var(--primary)]' } }, []),
+                            D.Span({ attrs: { class: 'text-6xl animate-pulse' } }, ['🕋'])
+                        ])
+                    ])
+                ]),
+
+                // Footer
+                D.Footer({ attrs: { class: 'py-12 text-center text-sm text-[var(--text-muted)]' } }, [
+                    t('copyright')
+                ])
+
+            ]);
+        }
+
+        Mishkah.app.setBody(body);
+        Mishkah.app.create(database, orders).mount('#app');
+    </script>
+</body>
+
+</html>

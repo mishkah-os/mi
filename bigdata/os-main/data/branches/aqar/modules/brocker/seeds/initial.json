@@ -1,0 +1,4395 @@
+{
+  "version": 1,
+  "meta": {
+    "branchId": "aqar",
+    "moduleId": "brocker",
+    "counter": 0,
+    "labCounter": 0
+  },
+  "tables": {
+    "regions": [
+      {
+        "id": "region-new-cairo",
+        "name": "التجمع الخامس",
+        "city": "القاهرة الجديدة",
+        "country": "مصر",
+        "slug": "new-cairo",
+        "priority": 1,
+        "is_primary_market": true
+      },
+      {
+        "id": "region-zayed",
+        "name": "الشيخ زايد",
+        "city": "الجيزة",
+        "country": "مصر",
+        "slug": "sheikh-zayed",
+        "priority": 2,
+        "is_primary_market": true
+      },
+      {
+        "id": "region-capital",
+        "name": "العاصمة الإدارية",
+        "city": "القاهرة",
+        "country": "مصر",
+        "slug": "new-capital",
+        "priority": 3,
+        "is_primary_market": false
+      }
+    ],
+    "regions_lang": [
+      {
+        "id": "region-lang-new-cairo-en",
+        "regions_id": "region-new-cairo",
+        "lang": "en",
+        "name": "New Cairo",
+        "city": "New Cairo",
+        "country": "Egypt"
+      },
+      {
+        "id": "region-lang-zayed-en",
+        "regions_id": "region-zayed",
+        "lang": "en",
+        "name": "Sheikh Zayed",
+        "city": "Giza",
+        "country": "Egypt"
+      },
+      {
+        "id": "region-lang-capital-en",
+        "regions_id": "region-capital",
+        "lang": "en",
+        "name": "New Administrative Capital",
+        "city": "Cairo",
+        "country": "Egypt"
+      },
+      {
+        "id": "region-lang-region-new-cairo-ar",
+        "regions_id": "region-new-cairo",
+        "name": "التجمع الخامس",
+        "city": "القاهرة الجديدة",
+        "country": "مصر",
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z"
+      },
+      {
+        "id": "region-lang-region-zayed-ar",
+        "regions_id": "region-zayed",
+        "name": "الشيخ زايد",
+        "city": "الجيزة",
+        "country": "مصر",
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z"
+      },
+      {
+        "id": "region-lang-region-capital-ar",
+        "regions_id": "region-capital",
+        "name": "العاصمة الإدارية",
+        "city": "القاهرة",
+        "country": "مصر",
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z"
+      }
+    ],
+    "app_settings": [
+      {
+        "id": "brocker-app-config",
+        "lang": "ar",
+        "brand_name": "مكاتب عقارات",
+        "tagline": "منصة ذكية لإدارة مكاتب العقارات",
+        "hero_title": "منصة متكاملة للوسطاء",
+        "hero_subtitle": "ابحث، أدر، وتابع طلبات عملائك بسهولة.",
+        "brand_logo": "/projects/brocker/images/logo.svg",
+        "support_phone": "+201222334455",
+        "support_whatsapp": "+201222334455",
+        "theme_color": "#0f172a",
+        "background_color": "#05070f",
+        "pwa_install_required": false,
+        "pwa_install_message": "لتحصل على إشعارات فورية وتتبع حي، قم بتثبيت التطبيق على جهازك.",
+        "pwa_storage_key": "brocker:pwa:installed",
+        "pwa_manifest_url": "/api/pwa/aqar/brocker/manifest.json",
+        "pwa_icons": [
+          {
+            "src": "https://img.icons8.com/color/192/city-buildings.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+          },
+          {
+            "src": "https://img.icons8.com/color/512/real-estate.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+          }
+        ],
+        "primary_cta_label": "تواصل معنا",
+        "primary_cta_link": "https://wa.me/201222334455",
+        "created_at": "2024-11-25T09:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z"
+      }
+    ],
+    "app_settings_lang": [
+      {
+        "id": "settings-lang-en",
+        "app_settings_id": "brocker-app-config",
+        "lang": "en",
+        "brand_name": "Makateb Aqarat",
+        "tagline": "Smart Platform for Real Estate Offices",
+        "hero_title": "Integrated Platform for Brokers",
+        "hero_subtitle": "Search, manage, and track your client requests easily."
+      }
+    ],
+    "hero_slides": [
+      {
+        "id": "slide-explore",
+        "title": "اكتشف عقارات جاهزة للتسليم",
+        "subtitle": "أحدث المشروعات في القاهرة الجديدة بخيارات تمويل مرنة.",
+        "media_type": "image",
+        "media_url": "https://images.unsplash.com/photo-1582719478239-2f66c2401b1b?auto=format&fit=crop&w=1600&q=80",
+        "cta_label": "ابدأ البحث",
+        "cta_action": "search",
+        "priority": 1,
+        "created_at": "2024-11-20T08:00:00Z"
+      },
+      {
+        "id": "slide-dashboard",
+        "title": "لوحة تحكم فورية للوسطاء",
+        "subtitle": "تابع الطلبات، فعّل الوحدات، واستجب من أي مكان.",
+        "media_type": "image",
+        "media_url": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80",
+        "cta_label": "شاهد التجربة",
+        "cta_action": "video",
+        "priority": 2,
+        "created_at": "2024-11-21T08:00:00Z"
+      },
+      {
+        "id": "slide-otp",
+        "title": "دخول آمن عبر واتساب",
+        "subtitle": "تحقق فوري للوسطاء المعتمدين مع سجل تدقيق كامل.",
+        "media_type": "image",
+        "media_url": "https://images.unsplash.com/photo-1505691723518-36a5ac3be353?auto=format&fit=crop&w=1600&q=80",
+        "cta_label": "سجل وسيط جديد",
+        "cta_action": "broker-onboard",
+        "priority": 3,
+        "created_at": "2024-11-22T08:00:00Z"
+      }
+    ],
+    "unit_types": [
+      {
+        "id": "unit-type-apartment",
+        "name": "شقة سكنية",
+        "description": "وحدات بمساحات متوسطة لعائلات صغيرة",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-type-villa",
+        "name": "فيلا مستقلة",
+        "description": "خصوصية كاملة وحديقة خاصة",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-type-chalet",
+        "name": "شاليه بحري",
+        "description": "إطلالات بحرية مع تراس واسع",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-type-factory",
+        "name": "مصنع خفيف",
+        "description": "مساحات صناعية بترخيص تشغيلي",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-type-retail",
+        "name": "محل تجاري",
+        "description": "واجهات تجارية على ميادين رئيسية",
+        "lang": "ar"
+      }
+    ],
+    "developers": [
+      {
+        "id": "dev-mishkah",
+        "company_name": "مشكاة للتطوير",
+        "description": "مجموعة متخصصة في مشاريع mixed-use",
+        "logo_url": "https://raw.githubusercontent.com/tabler/tabler-icons/master/icons/filled/building-skyscraper.svg",
+        "contact_email": "hello@mishkah.dev",
+        "contact_phone": "+20225777000",
+        "address": "القاهرة الجديدة - محور محمد نجيب",
+        "created_at": "2023-02-10T09:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "dev-hilal",
+        "company_name": "الهلال للتطوير",
+        "description": "مشاريع فيلا فاخرة في زايد",
+        "logo_url": "https://raw.githubusercontent.com/tabler/tabler-icons/master/icons/filled/building-store.svg",
+        "contact_email": "sales@hilal.dev",
+        "contact_phone": "+202112334455",
+        "address": "الشيخ زايد - الحي السادس",
+        "created_at": "2022-11-05T10:00:00Z",
+        "lang": "ar"
+      }
+    ],
+    "projects": [
+      {
+        "id": "proj-nour-heights",
+        "developer_id": "dev-mishkah",
+        "project_name": "Nour Heights",
+        "description": "مجمع متكامل بشقق فاخرة وخدمات فندقية",
+        "location": "التجمع الخامس - شارع النوادي",
+        "delivery_date": "2025-09-01",
+        "project_status": "under_construction",
+        "created_at": "2023-04-01T09:00:00Z",
+        "lang": "ar",
+        "region_id": "region-new-cairo",
+        "district": "حي النوادي"
+      },
+      {
+        "id": "proj-hayat-villas",
+        "developer_id": "dev-hilal",
+        "project_name": "Hayat Villas",
+        "description": "فلل مستقلة بحدائق داخل الشيخ زايد",
+        "location": "الشيخ زايد - محور 26 يوليو",
+        "delivery_date": "2026-03-01",
+        "project_status": "upcoming",
+        "created_at": "2023-06-15T09:00:00Z",
+        "lang": "ar",
+        "region_id": "region-zayed",
+        "district": "الحي العاشر"
+      },
+      {
+        "id": "proj-capital-gate",
+        "developer_id": "dev-mishkah",
+        "project_name": "Capital Gate",
+        "description": "مكاتب ومحلات متكاملة في محور الأعمال",
+        "location": "العاصمة الإدارية - محور محمد بن زايد",
+        "delivery_date": "2024-12-01",
+        "project_status": "delivered",
+        "created_at": "2022-08-20T09:00:00Z",
+        "lang": "ar",
+        "region_id": "region-capital",
+        "district": "داون تاون"
+      }
+    ],
+    "project_media": [
+      {
+        "id": "media-nour-master",
+        "project_id": "proj-nour-heights",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1400&q=80",
+        "description": "مخطط رئيسي"
+      },
+      {
+        "id": "media-hayat-tour",
+        "project_id": "proj-hayat-villas",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80",
+        "description": "جولة افتراضية"
+      }
+    ],
+    "buildings": [
+      {
+        "id": "bld-nour-t1",
+        "project_id": "proj-nour-heights",
+        "building_name": "برج الندى",
+        "floors_count": 12,
+        "description": "برج بواجهة زجاجية"
+      },
+      {
+        "id": "bld-nour-t2",
+        "project_id": "proj-nour-heights",
+        "building_name": "برج البانوراما",
+        "floors_count": 15,
+        "description": "إطلالة على محور النوادي"
+      },
+      {
+        "id": "bld-hayat-cluster",
+        "project_id": "proj-hayat-villas",
+        "building_name": "مجموعة فيلات C",
+        "floors_count": 2,
+        "description": "فلل منفصلة"
+      },
+      {
+        "id": "bld-capital-retail",
+        "project_id": "proj-capital-gate",
+        "building_name": "كابيتال جريت مول",
+        "floors_count": 5,
+        "description": "محور تجاري"
+      }
+    ],
+    "units": [
+      {
+        "id": "unit-nour-0901",
+        "building_id": "bld-nour-t1",
+        "unit_code": "NH-09-01",
+        "unit_type_id": "unit-type-apartment",
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "area": 165,
+        "price": 3500000,
+        "availability_status": "available",
+        "floor_number": 9,
+        "view": "واجهة مفتوحة",
+        "finishing_status": "تشطيب فندقي",
+        "created_at": "2024-11-01T08:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-nour-1203",
+        "building_id": "bld-nour-t2",
+        "unit_code": "NH-12-03",
+        "unit_type_id": "unit-type-apartment",
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "area": 132,
+        "price": 2800000,
+        "availability_status": "available",
+        "floor_number": 12,
+        "view": "حدائق داخلية",
+        "finishing_status": "مفروش جزئياً",
+        "created_at": "2024-10-18T08:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-hayat-villa05",
+        "building_id": "bld-hayat-cluster",
+        "unit_code": "HV-05",
+        "unit_type_id": "unit-type-villa",
+        "bedrooms": 4,
+        "bathrooms": 5,
+        "area": 420,
+        "price": 9200000,
+        "availability_status": "available",
+        "floor_number": 0,
+        "view": "حديقة خاصة",
+        "finishing_status": "نصف تشطيب",
+        "created_at": "2024-09-05T08:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-capital-retail-a3",
+        "building_id": "bld-capital-retail",
+        "unit_code": "CG-A3",
+        "unit_type_id": "unit-type-retail",
+        "bedrooms": 0,
+        "bathrooms": 1,
+        "area": 95,
+        "price": 4500000,
+        "availability_status": "available",
+        "floor_number": 1,
+        "view": "شارع رئيسي",
+        "finishing_status": "على الطوب",
+        "created_at": "2024-08-12T08:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-nour-1501",
+        "project_id": "proj-nour-heights",
+        "building_id": "building-nour-a",
+        "unit_type_id": "unit-type-apartment",
+        "unit_number": "15-01",
+        "floor": 15,
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "area": 120,
+        "direction": "شمال",
+        "status": "available",
+        "description": "شقة 2 غرف مع إطلالة على النيل، تشطيب ممتاز",
+        "created_at": "2024-10-15T08:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-nour-0805",
+        "project_id": "proj-nour-heights",
+        "building_id": "building-nour-a",
+        "unit_type_id": "unit-type-apartment",
+        "unit_number": "08-05",
+        "floor": 8,
+        "bedrooms": 1,
+        "bathrooms": 1,
+        "area": 85,
+        "direction": "جنوب",
+        "status": "available",
+        "description": "استوديو واسع مع بلكونة كبيرة",
+        "created_at": "2024-09-20T08:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-hayat-villa08",
+        "project_id": "proj-hayat-villas",
+        "building_id": "building-hayat-b",
+        "unit_type_id": "unit-type-villa",
+        "unit_number": "V-08",
+        "floor": 0,
+        "bedrooms": 5,
+        "bathrooms": 4,
+        "area": 450,
+        "direction": "غرب",
+        "status": "available",
+        "description": "فيلا فاخرة مع حمام سباحة خاص",
+        "created_at": "2024-08-10T08:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-capital-office-b2",
+        "project_id": "proj-capital-biz",
+        "building_id": "building-capital-biz",
+        "unit_type_id": "unit-type-retail",
+        "unit_number": "B2-05",
+        "floor": 2,
+        "bedrooms": 0,
+        "bathrooms": 2,
+        "area": 180,
+        "direction": "شمال",
+        "status": "available",
+        "description": "مكتب تجاري في برج أعمال حديث",
+        "created_at": "2024-07-15T08:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-nour-2003",
+        "project_id": "proj-nour-heights",
+        "building_id": "building-nour-a",
+        "unit_type_id": "unit-type-apartment",
+        "unit_number": "20-03",
+        "floor": 20,
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "area": 210,
+        "direction": "شرق",
+        "status": "available",
+        "description": "بنتهاوس مع روف خاص وجاكوزي",
+        "created_at": "2024-11-01T08:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-nour-1501",
+        "project_id": "proj-nour-heights",
+        "building_id": "building-nour-a",
+        "unit_type_id": "unit-type-apartment",
+        "unit_number": "15-01",
+        "floor": 15,
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "area": 120,
+        "direction": "شمال",
+        "status": "available",
+        "description": "شقة 2 غرف مع إطلالة على النيل، تشطيب ممتاز",
+        "created_at": "2024-10-15T08:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-nour-0805",
+        "project_id": "proj-nour-heights",
+        "building_id": "building-nour-a",
+        "unit_type_id": "unit-type-apartment",
+        "unit_number": "08-05",
+        "floor": 8,
+        "bedrooms": 1,
+        "bathrooms": 1,
+        "area": 85,
+        "direction": "جنوب",
+        "status": "available",
+        "description": "استوديو واسع مع بلكونة كبيرة",
+        "created_at": "2024-09-20T08:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-hayat-villa08",
+        "project_id": "proj-hayat-villas",
+        "building_id": "building-hayat-b",
+        "unit_type_id": "unit-type-villa",
+        "unit_number": "V-08",
+        "floor": 0,
+        "bedrooms": 5,
+        "bathrooms": 4,
+        "area": 450,
+        "direction": "غرب",
+        "status": "available",
+        "description": "فيلا فاخرة مع حمام سباحة خاص",
+        "created_at": "2024-08-10T08:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-capital-office-b2",
+        "project_id": "proj-capital-biz",
+        "building_id": "building-capital-biz",
+        "unit_type_id": "unit-type-retail",
+        "unit_number": "B2-05",
+        "floor": 2,
+        "bedrooms": 0,
+        "bathrooms": 2,
+        "area": 180,
+        "direction": "شمال",
+        "status": "available",
+        "description": "مكتب تجاري في برج أعمال حديث",
+        "created_at": "2024-07-15T08:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z",
+        "lang": "ar"
+      },
+      {
+        "id": "unit-nour-2003",
+        "project_id": "proj-nour-heights",
+        "building_id": "building-nour-a",
+        "unit_type_id": "unit-type-apartment",
+        "unit_number": "20-03",
+        "floor": 20,
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "area": 210,
+        "direction": "شرق",
+        "status": "available",
+        "description": "بنتهاوس مع روف خاص وجاكوزي",
+        "created_at": "2024-11-01T08:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z",
+        "lang": "ar"
+      }
+    ],
+    "unit_media": [
+      {
+        "id": "media-nour-0901-1",
+        "unit_id": "unit-nour-0901",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1400&q=80",
+        "description": "غرفة المعيشة",
+        "priority": 1
+      },
+      {
+        "id": "media-nour-0901-2",
+        "unit_id": "unit-nour-0901",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1400&q=80",
+        "description": "إطلالة بانورامية",
+        "priority": 2
+      },
+      {
+        "id": "media-nour-1203-1",
+        "unit_id": "unit-nour-1203",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80",
+        "description": "جولة افتراضية",
+        "priority": 1
+      },
+      {
+        "id": "media-hayat-villa05-1",
+        "unit_id": "unit-hayat-villa05",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1400&q=80",
+        "description": "حديقة خاصة",
+        "priority": 1
+      },
+      {
+        "id": "media-capital-retail-a3-1",
+        "unit_id": "unit-capital-retail-a3",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80",
+        "description": "واجهة المحل",
+        "priority": 1
+      },
+      {
+        "id": "media-nour-1501-1",
+        "unit_id": "unit-nour-1501",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?auto=format&fit=crop&w=1400&q=80",
+        "description": "غرفة معيشة عصرية",
+        "priority": 1
+      },
+      {
+        "id": "media-nour-1501-2",
+        "unit_id": "unit-nour-1501",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1400&q=80",
+        "description": "إطلالة على النيل",
+        "priority": 2
+      },
+      {
+        "id": "media-nour-0805-1",
+        "unit_id": "unit-nour-0805",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1400&q=80",
+        "description": "استوديو مفتوح",
+        "priority": 1
+      },
+      {
+        "id": "media-hayat-villa08-1",
+        "unit_id": "unit-hayat-villa08",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1400&q=80",
+        "description": "فيلا فاخرة",
+        "priority": 1
+      },
+      {
+        "id": "media-hayat-villa08-2",
+        "unit_id": "unit-hayat-villa08",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?auto=format&fit=crop&w=1400&q=80",
+        "description": "حمام سباحة خاص",
+        "priority": 2
+      },
+      {
+        "id": "media-capital-office-b2-1",
+        "unit_id": "unit-capital-office-b2",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=80",
+        "description": "مكتب حديث",
+        "priority": 1
+      },
+      {
+        "id": "media-nour-2003-1",
+        "unit_id": "unit-nour-2003",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80",
+        "description": "بنتهاوس فاخر",
+        "priority": 1
+      },
+      {
+        "id": "media-nour-2003-2",
+        "unit_id": "unit-nour-2003",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80",
+        "description": "روف بانورامي",
+        "priority": 2
+      },
+      {
+        "id": "media-nour-1501-1",
+        "unit_id": "unit-nour-1501",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?auto=format&fit=crop&w=1400&q=80",
+        "description": "غرفة معيشة عصرية",
+        "priority": 1
+      },
+      {
+        "id": "media-nour-1501-2",
+        "unit_id": "unit-nour-1501",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1400&q=80",
+        "description": "إطلالة على النيل",
+        "priority": 2
+      },
+      {
+        "id": "media-nour-0805-1",
+        "unit_id": "unit-nour-0805",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1400&q=80",
+        "description": "استوديو مفتوح",
+        "priority": 1
+      },
+      {
+        "id": "media-hayat-villa08-1",
+        "unit_id": "unit-hayat-villa08",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1400&q=80",
+        "description": "فيلا فاخرة",
+        "priority": 1
+      },
+      {
+        "id": "media-hayat-villa08-2",
+        "unit_id": "unit-hayat-villa08",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?auto=format&fit=crop&w=1400&q=80",
+        "description": "حمام سباحة خاص",
+        "priority": 2
+      },
+      {
+        "id": "media-capital-office-b2-1",
+        "unit_id": "unit-capital-office-b2",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=80",
+        "description": "مكتب حديث",
+        "priority": 1
+      },
+      {
+        "id": "media-nour-2003-1",
+        "unit_id": "unit-nour-2003",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80",
+        "description": "بنتهاوس فاخر",
+        "priority": 1
+      },
+      {
+        "id": "media-nour-2003-2",
+        "unit_id": "unit-nour-2003",
+        "media_type": "image",
+        "url": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80",
+        "description": "روف بانورامي",
+        "priority": 2
+      }
+    ],
+    "unit_features": [
+      {
+        "id": "feature-smart-home",
+        "name": "نظام سمارت",
+        "description": "تحكم مركزي في الإضاءة والتكييف",
+        "data_type": "boolean",
+        "lang": "ar"
+      },
+      {
+        "id": "feature-parking",
+        "name": "موقف مغطى",
+        "description": "موقف خاص في البدروم",
+        "data_type": "integer",
+        "lang": "ar"
+      },
+      {
+        "id": "feature-garden",
+        "name": "حديقة",
+        "description": "مساحة خضراء خاصة",
+        "data_type": "decimal",
+        "lang": "ar"
+      },
+      {
+        "id": "feature-license",
+        "name": "ترخيص تجاري",
+        "description": "جاهزية قانونية للنشاط التجاري",
+        "data_type": "string",
+        "lang": "ar"
+      }
+    ],
+    "feature_values": [
+      {
+        "id": "fv-nour-0901-smart",
+        "unit_id": "unit-nour-0901",
+        "feature_id": "feature-smart-home",
+        "value": "true",
+        "created_at": "2024-11-01T08:10:00Z"
+      },
+      {
+        "id": "fv-nour-0901-parking",
+        "unit_id": "unit-nour-0901",
+        "feature_id": "feature-parking",
+        "value": "2",
+        "created_at": "2024-11-01T08:10:00Z"
+      },
+      {
+        "id": "fv-hayat-garden",
+        "unit_id": "unit-hayat-villa05",
+        "feature_id": "feature-garden",
+        "value": "120",
+        "created_at": "2024-09-05T08:10:00Z"
+      },
+      {
+        "id": "fv-capital-license",
+        "unit_id": "unit-capital-retail-a3",
+        "feature_id": "feature-license",
+        "value": "سجل تجاري فئة أ",
+        "created_at": "2024-08-12T08:10:00Z"
+      }
+    ],
+    "users": [
+      {
+        "id": "user-rahma",
+        "full_name": "رهام سمير",
+        "email": "rehamsamir@brocker.app",
+        "phone": "+201000111222",
+        "password_hash": "hashed-secret",
+        "role": "agent",
+        "status": "active",
+        "created_at": "2023-03-01T09:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "user-youssef",
+        "full_name": "يوسف الشربيني",
+        "email": "youssef@brocker.app",
+        "phone": "+201115556677",
+        "password_hash": "hashed-secret",
+        "role": "agent",
+        "status": "active",
+        "created_at": "2023-03-02T09:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "user-salma",
+        "full_name": "سلمى الخطاب",
+        "email": "salma@brocker.app",
+        "phone": "+201066699944",
+        "password_hash": "hashed-secret",
+        "role": "agent",
+        "status": "active",
+        "created_at": "2023-04-10T09:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "user-ops",
+        "full_name": "فريق الدعم",
+        "email": "ops@brocker.app",
+        "phone": "+201200334455",
+        "password_hash": "hashed-secret",
+        "role": "admin",
+        "status": "active",
+        "created_at": "2022-12-01T09:00:00Z",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "user-test",
+        "full_name": "مستخدم تجريبي",
+        "email": "user@test.com",
+        "phone": "+201234567890",
+        "password_hash": "123456",
+        "role": "customer",
+        "status": "active",
+        "created_at": "2024-11-30T12:00:00Z",
+        "updated_at": "2024-11-30T12:00:00Z"
+      }
+    ],
+    "user_sessions": [
+      {
+        "id": "session-rahma",
+        "user_id": "user-rahma",
+        "token": "otp-rahma-1122",
+        "expires_at": "2024-12-05T10:00:00Z",
+        "created_at": "2024-11-30T10:00:00Z"
+      }
+    ],
+    "brokers": [
+      {
+        "id": "broker-rahma",
+        "full_name": "رهام سمير",
+        "email": "rehamsamir@brocker.app",
+        "phone": "+201000111222",
+        "company_name": "Brocker Studio",
+        "license_number": "BR-45822",
+        "user_id": "user-rahma",
+        "created_at": "2023-03-01T09:00:00Z",
+        "region_id": "region-new-cairo",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80",
+        "cover_url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80",
+        "bio": "خبيرة عقارات فاخرة في القاهرة الجديدة",
+        "whatsapp": "https://wa.me/201000111222",
+        "otp_channel": "https://api.whatsapp.com/send?phone=201000111222",
+        "service_regions": [
+          "region-new-cairo",
+          "region-capital"
+        ],
+        "rating": 4.9,
+        "active_since": "2016-05-01",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "broker-youssef",
+        "full_name": "يوسف الشربيني",
+        "email": "youssef@brocker.app",
+        "phone": "+201115556677",
+        "company_name": "Sky Keys",
+        "license_number": "BR-37719",
+        "user_id": "user-youssef",
+        "created_at": "2023-03-02T09:00:00Z",
+        "region_id": "region-zayed",
+        "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
+        "cover_url": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80",
+        "bio": "متخصص في الفلل والمجمعات المغلقة",
+        "whatsapp": "https://wa.me/201115556677",
+        "otp_channel": "https://api.whatsapp.com/send?phone=201115556677",
+        "service_regions": [
+          "region-zayed"
+        ],
+        "rating": 4.7,
+        "active_since": "2014-09-12",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "broker-salma",
+        "full_name": "سلمى الخطاب",
+        "email": "salma@brocker.app",
+        "phone": "+201066699944",
+        "company_name": "Axis Realty",
+        "license_number": "BR-51104",
+        "user_id": "user-salma",
+        "created_at": "2023-04-10T09:00:00Z",
+        "region_id": "region-capital",
+        "avatar_url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80",
+        "cover_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+        "bio": "تدير مساحات تجارية في العاصمة",
+        "whatsapp": "https://wa.me/201066699944",
+        "otp_channel": "https://api.whatsapp.com/send?phone=201066699944",
+        "service_regions": [
+          "region-capital",
+          "region-new-cairo"
+        ],
+        "rating": 4.8,
+        "active_since": "2015-01-20",
+        "updated_at": "2024-11-30T10:00:00Z"
+      }
+    ],
+    "listings": [
+      {
+        "id": "listing-nour-0901-sale",
+        "unit_id": "unit-nour-0901",
+        "broker_id": "broker-rahma",
+        "listing_type": "sale",
+        "listing_status": "active",
+        "price_amount": 4300000,
+        "currency": "EGP",
+        "price_period": "one_time",
+        "available_from": "2024-12-15",
+        "security_deposit": null,
+        "created_at": "2024-11-01T09:30:00Z",
+        "lang": "ar",
+        "headline": "شقة 3 غرف مع تراس بانورامي",
+        "excerpt": "165م بتشطيب فندقي وموقفين سيارات في برج الندى",
+        "region_id": "region-new-cairo",
+        "primary_media_id": "media-nour-0901-1",
+        "tags": [
+          "تشطيب فندقي",
+          "موقف مزدوج"
+        ],
+        "highlights": [
+          {
+            "label": "المقدم",
+            "value": "10%"
+          },
+          {
+            "label": "خطة سداد",
+            "value": "6 سنوات"
+          }
+        ],
+        "featured_order": 1,
+        "primary_highlight": "جاهزة للتسليم",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-1203-rent",
+        "unit_id": "unit-nour-1203",
+        "broker_id": "broker-rahma",
+        "listing_type": "rent",
+        "listing_status": "active",
+        "price_amount": 42000,
+        "currency": "EGP",
+        "price_period": "monthly",
+        "available_from": "2025-01-05",
+        "security_deposit": 84000,
+        "created_at": "2024-11-10T09:30:00Z",
+        "lang": "ar",
+        "headline": "شقة مفروشة بالكامل",
+        "excerpt": "132م مع شرفة واسعة وخدمة فندقية",
+        "region_id": "region-new-cairo",
+        "primary_media_id": "media-nour-1203-1",
+        "tags": [
+          "مفروش",
+          "إطلالة خضراء"
+        ],
+        "highlights": [
+          {
+            "label": "يشمل الصيانة",
+            "value": "نعم"
+          }
+        ],
+        "featured_order": 2,
+        "primary_highlight": "إيجار شهري",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-hayat-villa05",
+        "unit_id": "unit-hayat-villa05",
+        "broker_id": "broker-youssef",
+        "listing_type": "sale",
+        "listing_status": "active",
+        "price_amount": 12500000,
+        "currency": "EGP",
+        "price_period": "one_time",
+        "available_from": "2025-06-01",
+        "security_deposit": null,
+        "created_at": "2024-10-01T10:00:00Z",
+        "lang": "ar",
+        "headline": "فيلا مستقلة مع حديقة 120م",
+        "excerpt": "تصميم عصري في قلب زايد مع إمكانية توسعة",
+        "region_id": "region-zayed",
+        "primary_media_id": "media-hayat-villa05-1",
+        "tags": [
+          "حديقة",
+          "نصف تشطيب"
+        ],
+        "highlights": [
+          {
+            "label": "مساحة الأرض",
+            "value": "520م"
+          }
+        ],
+        "featured_order": 3,
+        "primary_highlight": "نصف تشطيب",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-capital-retail-a3",
+        "unit_id": "unit-capital-retail-a3",
+        "broker_id": "broker-salma",
+        "listing_type": "sale",
+        "listing_status": "active",
+        "price_amount": 5700000,
+        "currency": "EGP",
+        "price_period": "one_time",
+        "available_from": "2024-12-01",
+        "security_deposit": null,
+        "created_at": "2024-08-25T10:00:00Z",
+        "lang": "ar",
+        "headline": "محل تجاري بواجهة 9 م",
+        "excerpt": "جاهز للترخيص التجاري في محور الأعمال",
+        "region_id": "region-capital",
+        "primary_media_id": "media-capital-retail-a3-1",
+        "tags": [
+          "مرخص",
+          "محور الأعمال"
+        ],
+        "highlights": [
+          {
+            "label": "تشطيب",
+            "value": "على الطوب"
+          }
+        ],
+        "featured_order": 4,
+        "primary_highlight": "ترخيص تجاري",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-1501-sale",
+        "unit_id": "unit-nour-1501",
+        "broker_id": "broker-rahma",
+        "listing_type": "sale",
+        "listing_status": "active",
+        "price_amount": 2950000,
+        "currency": "EGP",
+        "price_period": "one_time",
+        "available_from": "2025-02-01",
+        "security_deposit": null,
+        "created_at": "2024-11-15T09:30:00Z",
+        "lang": "ar",
+        "headline": "شقة 2 غرف بإطلالة على النيل",
+        "excerpt": "120م بتشطيب سوبر لوكس وإطلالة مباشرة",
+        "region_id": "region-new-cairo",
+        "primary_media_id": "media-nour-1501-1",
+        "tags": [
+          "إطلالة نيل",
+          "تشطيب سوبر لوكس"
+        ],
+        "highlights": [
+          {
+            "label": "المقدم",
+            "value": "15%"
+          },
+          {
+            "label": "خطة سداد",
+            "value": "5 سنوات"
+          }
+        ],
+        "featured_order": 5,
+        "primary_highlight": "إطلالة نيل مباشرة",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-hayat-villa08-sale",
+        "unit_id": "unit-hayat-villa08",
+        "broker_id": "broker-youssef",
+        "listing_type": "sale",
+        "listing_status": "active",
+        "price_amount": 18500000,
+        "currency": "EGP",
+        "price_period": "one_time",
+        "available_from": "2025-03-15",
+        "security_deposit": null,
+        "created_at": "2024-10-20T10:00:00Z",
+        "lang": "ar",
+        "headline": "فيلا فاخرة مع حمام سباحة",
+        "excerpt": "450م مع حديقة 200م وحمام سباحة خاص",
+        "region_id": "region-zayed",
+        "primary_media_id": "media-hayat-villa08-1",
+        "tags": [
+          "حمام سباحة",
+          "حديقة كبيرة"
+        ],
+        "highlights": [
+          {
+            "label": "الدور",
+            "value": "دورين"
+          },
+          {
+            "label": "مساحة الأرض",
+            "value": "650م"
+          }
+        ],
+        "featured_order": 6,
+        "primary_highlight": "حمام سباحة خاص",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-0805-rent",
+        "unit_id": "unit-nour-0805",
+        "broker_id": "broker-rahma",
+        "listing_type": "rent",
+        "listing_status": "active",
+        "price_amount": 18000,
+        "currency": "EGP",
+        "price_period": "monthly",
+        "available_from": "2025-01-10",
+        "security_deposit": 36000,
+        "created_at": "2024-11-12T09:30:00Z",
+        "lang": "ar",
+        "headline": "استوديو مفروش للإيجار",
+        "excerpt": "85م مفروش بالكامل مع بلكونة واسعة",
+        "region_id": "region-new-cairo",
+        "primary_media_id": "media-nour-0805-1",
+        "tags": [
+          "مفروش",
+          "بلكونة"
+        ],
+        "highlights": [
+          {
+            "label": "الصيانة",
+            "value": "شاملة"
+          }
+        ],
+        "featured_order": 7,
+        "primary_highlight": "مفروش بالكامل",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-capital-office-rent",
+        "unit_id": "unit-capital-office-b2",
+        "broker_id": "broker-salma",
+        "listing_type": "rent",
+        "listing_status": "active",
+        "price_amount": 28000,
+        "currency": "EGP",
+        "price_period": "monthly",
+        "available_from": "2025-01-01",
+        "security_deposit": 56000,
+        "created_at": "2024-10-25T10:00:00Z",
+        "lang": "ar",
+        "headline": "مكتب تجاري في برج أعمال",
+        "excerpt": "180م مع إطلالة رائعة وخدمات متكاملة",
+        "region_id": "region-capital",
+        "primary_media_id": "media-capital-office-b2-1",
+        "tags": [
+          "خدمات",
+          "إطلالة"
+        ],
+        "highlights": [
+          {
+            "label": "موقف",
+            "value": "3 سيارات"
+          }
+        ],
+        "featured_order": 8,
+        "primary_highlight": "برج أعمال حديث",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-2003-lease",
+        "unit_id": "unit-nour-2003",
+        "broker_id": "broker-rahma",
+        "listing_type": "lease",
+        "listing_status": "active",
+        "price_amount": 95000,
+        "currency": "EGP",
+        "price_period": "monthly",
+        "available_from": "2025-02-01",
+        "security_deposit": 285000,
+        "created_at": "2024-11-18T09:30:00Z",
+        "lang": "ar",
+        "headline": "بنتهاوس مع روف خاص",
+        "excerpt": "210م + روف 100م مع جاكوزي وإطلالة بانورامية",
+        "region_id": "region-new-cairo",
+        "primary_media_id": "media-nour-2003-1",
+        "tags": [
+          "روف",
+          "جاكوزي",
+          "بنتهاوس"
+        ],
+        "highlights": [
+          {
+            "label": "عقد",
+            "value": "سنتان"
+          },
+          {
+            "label": "روف",
+            "value": "100م"
+          }
+        ],
+        "featured_order": 9,
+        "primary_highlight": "روف خاص",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-1501-short",
+        "unit_id": "unit-nour-1501",
+        "broker_id": "broker-youssef",
+        "listing_type": "short-stay",
+        "listing_status": "active",
+        "price_amount": 1500,
+        "currency": "EGP",
+        "price_period": "daily",
+        "available_from": "2024-12-20",
+        "security_deposit": 3000,
+        "created_at": "2024-11-20T10:00:00Z",
+        "lang": "ar",
+        "headline": "إيجار يومي شقة مفروشة",
+        "excerpt": "120م مفروشة فندقي للإيجار اليومي/الأسبوعي",
+        "region_id": "region-new-cairo",
+        "primary_media_id": "media-nour-1501-1",
+        "tags": [
+          "إيجار يومي",
+          "مفروش فندقي"
+        ],
+        "highlights": [
+          {
+            "label": "الحد الأدنى",
+            "value": "3 أيام"
+          }
+        ],
+        "featured_order": 10,
+        "primary_highlight": "إيجار يومي",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-1501-sale",
+        "unit_id": "unit-nour-1501",
+        "broker_id": "broker-rahma",
+        "listing_type": "sale",
+        "listing_status": "active",
+        "price_amount": 2950000,
+        "currency": "EGP",
+        "price_period": "one_time",
+        "available_from": "2025-02-01",
+        "security_deposit": null,
+        "created_at": "2024-11-15T09:30:00Z",
+        "lang": "ar",
+        "headline": "شقة 2 غرف بإطلالة على النيل",
+        "excerpt": "120م بتشطيب سوبر لوكس وإطلالة مباشرة",
+        "region_id": "region-new-cairo",
+        "primary_media_id": "media-nour-1501-1",
+        "tags": [
+          "إطلالة نيل",
+          "تشطيب سوبر لوكس"
+        ],
+        "highlights": [
+          {
+            "label": "المقدم",
+            "value": "15%"
+          },
+          {
+            "label": "خطة سداد",
+            "value": "5 سنوات"
+          }
+        ],
+        "featured_order": 5,
+        "primary_highlight": "إطلالة نيل مباشرة",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-hayat-villa08-sale",
+        "unit_id": "unit-hayat-villa08",
+        "broker_id": "broker-youssef",
+        "listing_type": "sale",
+        "listing_status": "active",
+        "price_amount": 18500000,
+        "currency": "EGP",
+        "price_period": "one_time",
+        "available_from": "2025-03-15",
+        "security_deposit": null,
+        "created_at": "2024-10-20T10:00:00Z",
+        "lang": "ar",
+        "headline": "فيلا فاخرة مع حمام سباحة",
+        "excerpt": "450م مع حديقة 200م وحمام سباحة خاص",
+        "region_id": "region-zayed",
+        "primary_media_id": "media-hayat-villa08-1",
+        "tags": [
+          "حمام سباحة",
+          "حديقة كبيرة"
+        ],
+        "highlights": [
+          {
+            "label": "الدور",
+            "value": "دورين"
+          },
+          {
+            "label": "مساحة الأرض",
+            "value": "650م"
+          }
+        ],
+        "featured_order": 6,
+        "primary_highlight": "حمام سباحة خاص",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-0805-rent",
+        "unit_id": "unit-nour-0805",
+        "broker_id": "broker-rahma",
+        "listing_type": "rent",
+        "listing_status": "active",
+        "price_amount": 18000,
+        "currency": "EGP",
+        "price_period": "monthly",
+        "available_from": "2025-01-10",
+        "security_deposit": 36000,
+        "created_at": "2024-11-12T09:30:00Z",
+        "lang": "ar",
+        "headline": "استوديو مفروش للإيجار",
+        "excerpt": "85م مفروش بالكامل مع بلكونة واسعة",
+        "region_id": "region-new-cairo",
+        "primary_media_id": "media-nour-0805-1",
+        "tags": [
+          "مفروش",
+          "بلكونة"
+        ],
+        "highlights": [
+          {
+            "label": "الصيانة",
+            "value": "شاملة"
+          }
+        ],
+        "featured_order": 7,
+        "primary_highlight": "مفروش بالكامل",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-capital-office-rent",
+        "unit_id": "unit-capital-office-b2",
+        "broker_id": "broker-salma",
+        "listing_type": "rent",
+        "listing_status": "active",
+        "price_amount": 28000,
+        "currency": "EGP",
+        "price_period": "monthly",
+        "available_from": "2025-01-01",
+        "security_deposit": 56000,
+        "created_at": "2024-10-25T10:00:00Z",
+        "lang": "ar",
+        "headline": "مكتب تجاري في برج أعمال",
+        "excerpt": "180م مع إطلالة رائعة وخدمات متكاملة",
+        "region_id": "region-capital",
+        "primary_media_id": "media-capital-office-b2-1",
+        "tags": [
+          "خدمات",
+          "إطلالة"
+        ],
+        "highlights": [
+          {
+            "label": "موقف",
+            "value": "3 سيارات"
+          }
+        ],
+        "featured_order": 8,
+        "primary_highlight": "برج أعمال حديث",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-2003-lease",
+        "unit_id": "unit-nour-2003",
+        "broker_id": "broker-rahma",
+        "listing_type": "lease",
+        "listing_status": "active",
+        "price_amount": 95000,
+        "currency": "EGP",
+        "price_period": "monthly",
+        "available_from": "2025-02-01",
+        "security_deposit": 285000,
+        "created_at": "2024-11-18T09:30:00Z",
+        "lang": "ar",
+        "headline": "بنتهاوس مع روف خاص",
+        "excerpt": "210م + روف 100م مع جاكوزي وإطلالة بانورامية",
+        "region_id": "region-new-cairo",
+        "primary_media_id": "media-nour-2003-1",
+        "tags": [
+          "روف",
+          "جاكوزي",
+          "بنتهاوس"
+        ],
+        "highlights": [
+          {
+            "label": "عقد",
+            "value": "سنتان"
+          },
+          {
+            "label": "روف",
+            "value": "100م"
+          }
+        ],
+        "featured_order": 9,
+        "primary_highlight": "روف خاص",
+        "updated_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-1501-short",
+        "unit_id": "unit-nour-1501",
+        "broker_id": "broker-youssef",
+        "listing_type": "short-stay",
+        "listing_status": "active",
+        "price_amount": 1500,
+        "currency": "EGP",
+        "price_period": "daily",
+        "available_from": "2024-12-20",
+        "security_deposit": 3000,
+        "created_at": "2024-11-20T10:00:00Z",
+        "lang": "ar",
+        "headline": "إيجار يومي شقة مفروشة",
+        "excerpt": "120م مفروشة فندقي للإيجار اليومي/الأسبوعي",
+        "region_id": "region-new-cairo",
+        "primary_media_id": "media-nour-1501-1",
+        "tags": [
+          "إيجار يومي",
+          "مفروش فندقي"
+        ],
+        "highlights": [
+          {
+            "label": "الحد الأدنى",
+            "value": "3 أيام"
+          }
+        ],
+        "featured_order": 10,
+        "primary_highlight": "إيجار يومي",
+        "updated_at": "2024-11-30T10:00:00Z"
+      }
+    ],
+    "notifications": [
+      {
+        "id": "notif-inquiry-01",
+        "user_id": "user-rahma",
+        "title": "طلب جديد",
+        "message": "عميل يطلب مشاهدة شقة NH-09-01",
+        "notification_type": "inquiry",
+        "is_read": false,
+        "channel": "push",
+        "payload": {
+          "listingId": "listing-nour-0901-sale"
+        },
+        "action_url": "https://app.brocker.local/requests/inq-001",
+        "priority": 1,
+        "created_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "notif-otp-rahma",
+        "user_id": "user-rahma",
+        "title": "رمز تحقق",
+        "message": "رمز الدخول هو 447712",
+        "notification_type": "otp",
+        "is_read": true,
+        "channel": "whatsapp",
+        "payload": {
+          "otp": "447712"
+        },
+        "action_url": "https://wa.me/201000111222",
+        "priority": 2,
+        "created_at": "2024-11-29T07:30:00Z"
+      }
+    ],
+    "inquiries": [
+      {
+        "id": "inq-001",
+        "user_id": null,
+        "project_id": "proj-nour-heights",
+        "unit_id": "unit-nour-0901",
+        "listing_id": "listing-nour-0901-sale",
+        "message": "أرغب في معاينة الشقة نهاية الأسبوع",
+        "status": "new",
+        "contact_name": "أحمد منصور",
+        "contact_phone": "+201008889999",
+        "contact_channel": "phone",
+        "preferred_contact_time": "مساء",
+        "notes": "يفضل التمويل البنكي",
+        "created_at": "2024-11-30T10:00:00Z"
+      },
+      {
+        "id": "inq-002",
+        "user_id": null,
+        "project_id": "proj-capital-gate",
+        "unit_id": "unit-capital-retail-a3",
+        "listing_id": "listing-capital-retail-a3",
+        "message": "أحتاج تفاصيل الترخيص",
+        "status": "replied",
+        "contact_name": "ليلى بدر",
+        "contact_phone": "+201090002211",
+        "contact_channel": "whatsapp",
+        "preferred_contact_time": "صباح",
+        "notes": "تاجر ذهب",
+        "created_at": "2024-11-20T12:00:00Z"
+      }
+    ],
+    "reservations": [],
+    "transactions": [],
+    "inquiry_replies": [],
+    "developers_lang": [],
+    "projects_lang": [],
+    "units_lang": [],
+    "listings_lang": [
+      {
+        "id": "listing-lang-nour-0901-en",
+        "listings_id": "listing-nour-0901-sale",
+        "lang": "en",
+        "headline": "3-Bedroom Apartment with Panoramic Terrace",
+        "excerpt": "165sqm with hotel-style finishing and 2 parking spaces in Al Nada Tower",
+        "primary_highlight": "Ready for Delivery"
+      },
+      {
+        "id": "listing-lang-nour-1203-en",
+        "listings_id": "listing-nour-1203-rent",
+        "lang": "en",
+        "headline": "Fully Furnished Apartment",
+        "excerpt": "Modern furnished apartment in prime location",
+        "primary_highlight": "Move-in Ready"
+      },
+      {
+        "id": "listing-lang-hayat-villa05-en",
+        "listings_id": "listing-hayat-villa05",
+        "lang": "en",
+        "headline": "Standalone Villa with 120sqm Garden",
+        "excerpt": "Spacious villa with private garden in gated community",
+        "primary_highlight": "Exclusive Location"
+      },
+      {
+        "id": "listing-lang-capital-retail-a3-en",
+        "listings_id": "listing-capital-retail-a3",
+        "lang": "en",
+        "headline": "Commercial Shop with 9m Frontage",
+        "excerpt": "Prime commercial space in high-traffic area",
+        "primary_highlight": "High ROI"
+      },
+      {
+        "id": "listing-nour-1501-sale-en",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-1501-sale",
+        "field": "headline",
+        "lang": "en",
+        "text": "2 Bedroom Apartment with Nile View",
+        "created_at": "2024-11-15T09:30:00Z"
+      },
+      {
+        "id": "listing-nour-1501-sale-en-excerpt",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-1501-sale",
+        "field": "excerpt",
+        "lang": "en",
+        "text": "120sqm super lux finishing with direct view",
+        "created_at": "2024-11-15T09:30:00Z"
+      },
+      {
+        "id": "listing-hayat-villa08-sale-en",
+        "entity_type": "listings",
+        "entity_id": "listing-hayat-villa08-sale",
+        "field": "headline",
+        "lang": "en",
+        "text": "Luxury Villa with Private Pool",
+        "created_at": "2024-10-20T10:00:00Z"
+      },
+      {
+        "id": "listing-hayat-villa08-sale-en-excerpt",
+        "entity_type": "listings",
+        "entity_id": "listing-hayat-villa08-sale",
+        "field": "excerpt",
+        "lang": "en",
+        "text": "450sqm with 200sqm garden and private pool",
+        "created_at": "2024-10-20T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-0805-rent-en",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-0805-rent",
+        "field": "headline",
+        "lang": "en",
+        "text": "Furnished Studio for Rent",
+        "created_at": "2024-11-12T09:30:00Z"
+      },
+      {
+        "id": "listing-nour-0805-rent-en-excerpt",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-0805-rent",
+        "field": "excerpt",
+        "lang": "en",
+        "text": "85sqm fully furnished with spacious balcony",
+        "created_at": "2024-11-12T09:30:00Z"
+      },
+      {
+        "id": "listing-capital-office-rent-en",
+        "entity_type": "listings",
+        "entity_id": "listing-capital-office-rent",
+        "field": "headline",
+        "lang": "en",
+        "text": "Commercial Office in Business Tower",
+        "created_at": "2024-10-25T10:00:00Z"
+      },
+      {
+        "id": "listing-capital-office-rent-en-excerpt",
+        "entity_type": "listings",
+        "entity_id": "listing-capital-office-rent",
+        "field": "excerpt",
+        "lang": "en",
+        "text": "180sqm with great view and full services",
+        "created_at": "2024-10-25T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-2003-lease-en",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-2003-lease",
+        "field": "headline",
+        "lang": "en",
+        "text": "Penthouse with Private Roof",
+        "created_at": "2024-11-18T09:30:00Z"
+      },
+      {
+        "id": "listing-nour-2003-lease-en-excerpt",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-2003-lease",
+        "field": "excerpt",
+        "lang": "en",
+        "text": "210sqm + 100sqm roof with jacuzzi and panoramic view",
+        "created_at": "2024-11-18T09:30:00Z"
+      },
+      {
+        "id": "listing-nour-1501-short-en",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-1501-short",
+        "field": "headline",
+        "lang": "en",
+        "text": "Daily Rental Furnished Apartment",
+        "created_at": "2024-11-20T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-1501-short-en-excerpt",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-1501-short",
+        "field": "excerpt",
+        "lang": "en",
+        "text": "120sqm hotel-furnished for daily/weekly rental",
+        "created_at": "2024-11-20T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-1501-sale-en",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-1501-sale",
+        "field": "headline",
+        "lang": "en",
+        "text": "2 Bedroom Apartment with Nile View",
+        "created_at": "2024-11-15T09:30:00Z"
+      },
+      {
+        "id": "listing-nour-1501-sale-en-excerpt",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-1501-sale",
+        "field": "excerpt",
+        "lang": "en",
+        "text": "120sqm super lux finishing with direct view",
+        "created_at": "2024-11-15T09:30:00Z"
+      },
+      {
+        "id": "listing-hayat-villa08-sale-en",
+        "entity_type": "listings",
+        "entity_id": "listing-hayat-villa08-sale",
+        "field": "headline",
+        "lang": "en",
+        "text": "Luxury Villa with Private Pool",
+        "created_at": "2024-10-20T10:00:00Z"
+      },
+      {
+        "id": "listing-hayat-villa08-sale-en-excerpt",
+        "entity_type": "listings",
+        "entity_id": "listing-hayat-villa08-sale",
+        "field": "excerpt",
+        "lang": "en",
+        "text": "450sqm with 200sqm garden and private pool",
+        "created_at": "2024-10-20T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-0805-rent-en",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-0805-rent",
+        "field": "headline",
+        "lang": "en",
+        "text": "Furnished Studio for Rent",
+        "created_at": "2024-11-12T09:30:00Z"
+      },
+      {
+        "id": "listing-nour-0805-rent-en-excerpt",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-0805-rent",
+        "field": "excerpt",
+        "lang": "en",
+        "text": "85sqm fully furnished with spacious balcony",
+        "created_at": "2024-11-12T09:30:00Z"
+      },
+      {
+        "id": "listing-capital-office-rent-en",
+        "entity_type": "listings",
+        "entity_id": "listing-capital-office-rent",
+        "field": "headline",
+        "lang": "en",
+        "text": "Commercial Office in Business Tower",
+        "created_at": "2024-10-25T10:00:00Z"
+      },
+      {
+        "id": "listing-capital-office-rent-en-excerpt",
+        "entity_type": "listings",
+        "entity_id": "listing-capital-office-rent",
+        "field": "excerpt",
+        "lang": "en",
+        "text": "180sqm with great view and full services",
+        "created_at": "2024-10-25T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-2003-lease-en",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-2003-lease",
+        "field": "headline",
+        "lang": "en",
+        "text": "Penthouse with Private Roof",
+        "created_at": "2024-11-18T09:30:00Z"
+      },
+      {
+        "id": "listing-nour-2003-lease-en-excerpt",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-2003-lease",
+        "field": "excerpt",
+        "lang": "en",
+        "text": "210sqm + 100sqm roof with jacuzzi and panoramic view",
+        "created_at": "2024-11-18T09:30:00Z"
+      },
+      {
+        "id": "listing-nour-1501-short-en",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-1501-short",
+        "field": "headline",
+        "lang": "en",
+        "text": "Daily Rental Furnished Apartment",
+        "created_at": "2024-11-20T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-1501-short-en-excerpt",
+        "entity_type": "listings",
+        "entity_id": "listing-nour-1501-short",
+        "field": "excerpt",
+        "lang": "en",
+        "text": "120sqm hotel-furnished for daily/weekly rental",
+        "created_at": "2024-11-20T10:00:00Z"
+      },
+      {
+        "id": "listing-nour-1501-sale-en",
+        "listings_id": "listing-nour-1501-sale",
+        "lang": "en",
+        "headline": "2 Bedroom Apartment with Nile View",
+        "excerpt": "120sqm super lux finishing with direct view",
+        "primary_highlight": "Direct Nile View"
+      },
+      {
+        "id": "listing-hayat-villa08-sale-en",
+        "listings_id": "listing-hayat-villa08-sale",
+        "lang": "en",
+        "headline": "Luxury Villa with Private Pool",
+        "excerpt": "450sqm with 200sqm garden and private pool",
+        "primary_highlight": "Private Pool"
+      },
+      {
+        "id": "listing-nour-0805-rent-en",
+        "listings_id": "listing-nour-0805-rent",
+        "lang": "en",
+        "headline": "Furnished Studio for Rent",
+        "excerpt": "85sqm fully furnished with spacious balcony",
+        "primary_highlight": "Fully Furnished"
+      },
+      {
+        "id": "listing-capital-office-rent-en",
+        "listings_id": "listing-capital-office-rent",
+        "lang": "en",
+        "headline": "Commercial Office in Business Tower",
+        "excerpt": "180sqm with great view and full services",
+        "primary_highlight": "Modern Business Tower"
+      },
+      {
+        "id": "listing-nour-2003-lease-en",
+        "listings_id": "listing-nour-2003-lease",
+        "lang": "en",
+        "headline": "Penthouse with Private Roof",
+        "excerpt": "210sqm + 100sqm roof with jacuzzi and panoramic view",
+        "primary_highlight": "Private Roof"
+      },
+      {
+        "id": "listing-nour-1501-short-en",
+        "listings_id": "listing-nour-1501-short",
+        "lang": "en",
+        "headline": "Daily Rental Furnished Apartment",
+        "excerpt": "120sqm hotel-furnished for daily/weekly rental",
+        "primary_highlight": "Daily Rental"
+      },
+      {
+        "id": "listing-lang-listing-nour-0901-sale-ar",
+        "listings_id": "listing-nour-0901-sale",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.742Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "شقة 3 غرف مع تراس بانورامي",
+        "excerpt": "165م بتشطيب فندقي وموقفين سيارات في برج الندى",
+        "primary_highlight": "جاهزة للتسليم"
+      },
+      {
+        "id": "listing-lang-listing-nour-1203-rent-ar",
+        "listings_id": "listing-nour-1203-rent",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "شقة مفروشة بالكامل",
+        "excerpt": "132م مع شرفة واسعة وخدمة فندقية",
+        "primary_highlight": "إيجار شهري"
+      },
+      {
+        "id": "listing-lang-listing-hayat-villa05-ar",
+        "listings_id": "listing-hayat-villa05",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "فيلا مستقلة مع حديقة 120م",
+        "excerpt": "تصميم عصري في قلب زايد مع إمكانية توسعة",
+        "primary_highlight": "نصف تشطيب"
+      },
+      {
+        "id": "listing-lang-listing-capital-retail-a3-ar",
+        "listings_id": "listing-capital-retail-a3",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "محل تجاري بواجهة 9 م",
+        "excerpt": "جاهز للترخيص التجاري في محور الأعمال",
+        "primary_highlight": "ترخيص تجاري"
+      },
+      {
+        "id": "listing-lang-listing-nour-1501-sale-ar",
+        "listings_id": "listing-nour-1501-sale",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "شقة 2 غرف بإطلالة على النيل",
+        "excerpt": "120م بتشطيب سوبر لوكس وإطلالة مباشرة",
+        "primary_highlight": "إطلالة نيل مباشرة"
+      },
+      {
+        "id": "listing-lang-listing-hayat-villa08-sale-ar",
+        "listings_id": "listing-hayat-villa08-sale",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "فيلا فاخرة مع حمام سباحة",
+        "excerpt": "450م مع حديقة 200م وحمام سباحة خاص",
+        "primary_highlight": "حمام سباحة خاص"
+      },
+      {
+        "id": "listing-lang-listing-nour-0805-rent-ar",
+        "listings_id": "listing-nour-0805-rent",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "استوديو مفروش للإيجار",
+        "excerpt": "85م مفروش بالكامل مع بلكونة واسعة",
+        "primary_highlight": "مفروش بالكامل"
+      },
+      {
+        "id": "listing-lang-listing-capital-office-rent-ar",
+        "listings_id": "listing-capital-office-rent",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "مكتب تجاري في برج أعمال",
+        "excerpt": "180م مع إطلالة رائعة وخدمات متكاملة",
+        "primary_highlight": "برج أعمال حديث"
+      },
+      {
+        "id": "listing-lang-listing-nour-2003-lease-ar",
+        "listings_id": "listing-nour-2003-lease",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "بنتهاوس مع روف خاص",
+        "excerpt": "210م + روف 100م مع جاكوزي وإطلالة بانورامية",
+        "primary_highlight": "روف خاص"
+      },
+      {
+        "id": "listing-lang-listing-nour-1501-short-ar",
+        "listings_id": "listing-nour-1501-short",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "إيجار يومي شقة مفروشة",
+        "excerpt": "120م مفروشة فندقي للإيجار اليومي/الأسبوعي",
+        "primary_highlight": "إيجار يومي"
+      },
+      {
+        "id": "listing-lang-listing-nour-1501-sale-ar",
+        "listings_id": "listing-nour-1501-sale",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "شقة 2 غرف بإطلالة على النيل",
+        "excerpt": "120م بتشطيب سوبر لوكس وإطلالة مباشرة",
+        "primary_highlight": "إطلالة نيل مباشرة"
+      },
+      {
+        "id": "listing-lang-listing-hayat-villa08-sale-ar",
+        "listings_id": "listing-hayat-villa08-sale",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "فيلا فاخرة مع حمام سباحة",
+        "excerpt": "450م مع حديقة 200م وحمام سباحة خاص",
+        "primary_highlight": "حمام سباحة خاص"
+      },
+      {
+        "id": "listing-lang-listing-nour-0805-rent-ar",
+        "listings_id": "listing-nour-0805-rent",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "استوديو مفروش للإيجار",
+        "excerpt": "85م مفروش بالكامل مع بلكونة واسعة",
+        "primary_highlight": "مفروش بالكامل"
+      },
+      {
+        "id": "listing-lang-listing-capital-office-rent-ar",
+        "listings_id": "listing-capital-office-rent",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "مكتب تجاري في برج أعمال",
+        "excerpt": "180م مع إطلالة رائعة وخدمات متكاملة",
+        "primary_highlight": "برج أعمال حديث"
+      },
+      {
+        "id": "listing-lang-listing-nour-2003-lease-ar",
+        "listings_id": "listing-nour-2003-lease",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "بنتهاوس مع روف خاص",
+        "excerpt": "210م + روف 100م مع جاكوزي وإطلالة بانورامية",
+        "primary_highlight": "روف خاص"
+      },
+      {
+        "id": "listing-lang-listing-nour-1501-short-ar",
+        "listings_id": "listing-nour-1501-short",
+        "listing_type": null,
+        "listing_status": null,
+        "currency": null,
+        "price_period": null,
+        "lang": "ar",
+        "created_date": "2025-11-22T19:06:19.743Z",
+        "modified_date": "2025-11-22T19:06:19.743Z",
+        "headline": "إيجار يومي شقة مفروشة",
+        "excerpt": "120م مفروشة فندقي للإيجار اليومي/الأسبوعي",
+        "primary_highlight": "إيجار يومي"
+      }
+    ],
+    "unit_features_lang": [],
+    "inquiries_lang": [],
+    "inquiry_replies_lang": [],
+    "unit_layouts": [],
+    "ui_labels": [
+      {
+        "id": "ui-nav.home-ar",
+        "key": "nav.home",
+        "lang": "ar",
+        "text": "الرئيسية",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-nav.home-en",
+        "key": "nav.home",
+        "lang": "en",
+        "text": "Home",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-nav.brokers-ar",
+        "key": "nav.brokers",
+        "lang": "ar",
+        "text": "الوسطاء",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-nav.brokers-en",
+        "key": "nav.brokers",
+        "lang": "en",
+        "text": "Brokers",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-nav.dashboard-ar",
+        "key": "nav.dashboard",
+        "lang": "ar",
+        "text": "الطلبات",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-nav.dashboard-en",
+        "key": "nav.dashboard",
+        "lang": "en",
+        "text": "Requests",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-nav.listing-ar",
+        "key": "nav.listing",
+        "lang": "ar",
+        "text": "تفاصيل",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-nav.listing-en",
+        "key": "nav.listing",
+        "lang": "en",
+        "text": "Details",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.resetFilters-ar",
+        "key": "actions.resetFilters",
+        "lang": "ar",
+        "text": "إعادة التصفية",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.resetFilters-en",
+        "key": "actions.resetFilters",
+        "lang": "en",
+        "text": "Reset filters",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.install-ar",
+        "key": "actions.install",
+        "lang": "ar",
+        "text": "تثبيت",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.install-en",
+        "key": "actions.install",
+        "lang": "en",
+        "text": "Install",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.skip-ar",
+        "key": "actions.skip",
+        "lang": "ar",
+        "text": "لاحقاً",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.skip-en",
+        "key": "actions.skip",
+        "lang": "en",
+        "text": "Later",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.installNow-ar",
+        "key": "actions.installNow",
+        "lang": "ar",
+        "text": "تثبيت الآن",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.installNow-en",
+        "key": "actions.installNow",
+        "lang": "en",
+        "text": "Install now",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.dismiss-ar",
+        "key": "actions.dismiss",
+        "lang": "ar",
+        "text": "إغلاق",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.dismiss-en",
+        "key": "actions.dismiss",
+        "lang": "en",
+        "text": "Dismiss",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.toggleTheme-ar",
+        "key": "actions.toggleTheme",
+        "lang": "ar",
+        "text": "تبديل الثيم",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.toggleTheme-en",
+        "key": "actions.toggleTheme",
+        "lang": "en",
+        "text": "Theme",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.toggleLang-ar",
+        "key": "actions.toggleLang",
+        "lang": "ar",
+        "text": "EN / AR",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.toggleLang-en",
+        "key": "actions.toggleLang",
+        "lang": "en",
+        "text": "EN / AR",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.title-ar",
+        "key": "search.title",
+        "lang": "ar",
+        "text": "ابحث عن الوحدة المناسبة",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.title-en",
+        "key": "search.title",
+        "lang": "en",
+        "text": "Find the right unit",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.region-ar",
+        "key": "search.region",
+        "lang": "ar",
+        "text": "المنطقة",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.region-en",
+        "key": "search.region",
+        "lang": "en",
+        "text": "Region",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.unitType-ar",
+        "key": "search.unitType",
+        "lang": "ar",
+        "text": "نوع الوحدة",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.unitType-en",
+        "key": "search.unitType",
+        "lang": "en",
+        "text": "Unit type",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.listingType-ar",
+        "key": "search.listingType",
+        "lang": "ar",
+        "text": "نوع العرض",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.listingType-en",
+        "key": "search.listingType",
+        "lang": "en",
+        "text": "Listing type",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.allRegions-ar",
+        "key": "search.allRegions",
+        "lang": "ar",
+        "text": "كل المناطق",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.allRegions-en",
+        "key": "search.allRegions",
+        "lang": "en",
+        "text": "All regions",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.allUnitTypes-ar",
+        "key": "search.allUnitTypes",
+        "lang": "ar",
+        "text": "كل أنواع الوحدات",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.allUnitTypes-en",
+        "key": "search.allUnitTypes",
+        "lang": "en",
+        "text": "All unit types",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.allListings-ar",
+        "key": "search.allListings",
+        "lang": "ar",
+        "text": "كل طرق العرض",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-search.allListings-en",
+        "key": "search.allListings",
+        "lang": "en",
+        "text": "All listing types",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listings.empty-ar",
+        "key": "listings.empty",
+        "lang": "ar",
+        "text": "لا توجد وحدات متاحة حالياً.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listings.empty-en",
+        "key": "listings.empty",
+        "lang": "en",
+        "text": "No listings available yet.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.back-ar",
+        "key": "listing.back",
+        "lang": "ar",
+        "text": "← العودة للنتائج",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.back-en",
+        "key": "listing.back",
+        "lang": "en",
+        "text": "← Back to results",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.gallery-ar",
+        "key": "listing.gallery",
+        "lang": "ar",
+        "text": "معرض الصور",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.gallery-en",
+        "key": "listing.gallery",
+        "lang": "en",
+        "text": "Gallery",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.details-ar",
+        "key": "listing.details",
+        "lang": "ar",
+        "text": "تفاصيل الوحدة",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.details-en",
+        "key": "listing.details",
+        "lang": "en",
+        "text": "Unit details",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.features-ar",
+        "key": "listing.features",
+        "lang": "ar",
+        "text": "المميزات",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.features-en",
+        "key": "listing.features",
+        "lang": "en",
+        "text": "Highlights",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.layouts-ar",
+        "key": "listing.layouts",
+        "lang": "ar",
+        "text": "المخططات",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.layouts-en",
+        "key": "listing.layouts",
+        "lang": "en",
+        "text": "Layouts",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.contact-ar",
+        "key": "listing.contact",
+        "lang": "ar",
+        "text": "تواصل مع وسيط",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.contact-en",
+        "key": "listing.contact",
+        "lang": "en",
+        "text": "Contact broker",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.priceOnCall-ar",
+        "key": "listing.priceOnCall",
+        "lang": "ar",
+        "text": "السعر عند الطلب",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.priceOnCall-en",
+        "key": "listing.priceOnCall",
+        "lang": "en",
+        "text": "Price on request",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.download-ar",
+        "key": "listing.download",
+        "lang": "ar",
+        "text": "تحميل",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.download-en",
+        "key": "listing.download",
+        "lang": "en",
+        "text": "Download",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.view360-ar",
+        "key": "listing.view360",
+        "lang": "ar",
+        "text": "مشاهدة 360°",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.view360-en",
+        "key": "listing.view360",
+        "lang": "en",
+        "text": "View 360°",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.type.sale-ar",
+        "key": "listing.type.sale",
+        "lang": "ar",
+        "text": "بيع",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.type.sale-en",
+        "key": "listing.type.sale",
+        "lang": "en",
+        "text": "Sale",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.type.rent-ar",
+        "key": "listing.type.rent",
+        "lang": "ar",
+        "text": "إيجار",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.type.rent-en",
+        "key": "listing.type.rent",
+        "lang": "en",
+        "text": "Rent",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.type.lease-ar",
+        "key": "listing.type.lease",
+        "lang": "ar",
+        "text": "إيجار تشغيلي",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.type.lease-en",
+        "key": "listing.type.lease",
+        "lang": "en",
+        "text": "Operational lease",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.type.short-ar",
+        "key": "listing.type.short",
+        "lang": "ar",
+        "text": "إيجار قصير",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.type.short-en",
+        "key": "listing.type.short",
+        "lang": "en",
+        "text": "Short stay",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.price-ar",
+        "key": "listing.price",
+        "lang": "ar",
+        "text": "السعر",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.price-en",
+        "key": "listing.price",
+        "lang": "en",
+        "text": "Price",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.defaultSuccess-ar",
+        "key": "toast.defaultSuccess",
+        "lang": "ar",
+        "text": "تم تنفيذ العملية.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.defaultSuccess-en",
+        "key": "toast.defaultSuccess",
+        "lang": "en",
+        "text": "Action completed.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.installError-ar",
+        "key": "toast.installError",
+        "lang": "ar",
+        "text": "التثبيت غير مدعوم.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.installError-en",
+        "key": "toast.installError",
+        "lang": "en",
+        "text": "Install not supported.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.installOpenError-ar",
+        "key": "toast.installOpenError",
+        "lang": "ar",
+        "text": "تعذر فتح نافذة التثبيت.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.installOpenError-en",
+        "key": "toast.installOpenError",
+        "lang": "en",
+        "text": "Could not open install dialog.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.requiredFields-ar",
+        "key": "toast.requiredFields",
+        "lang": "ar",
+        "text": "يرجى استكمال الحقول.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.requiredFields-en",
+        "key": "toast.requiredFields",
+        "lang": "en",
+        "text": "Please complete all fields.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.sent-ar",
+        "key": "toast.sent",
+        "lang": "ar",
+        "text": "تم إرسال طلبك بنجاح.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.sent-en",
+        "key": "toast.sent",
+        "lang": "en",
+        "text": "Your request was sent.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.failed-ar",
+        "key": "toast.failed",
+        "lang": "ar",
+        "text": "تعذر إرسال الطلب.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.failed-en",
+        "key": "toast.failed",
+        "lang": "en",
+        "text": "Could not submit request.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.connection-ar",
+        "key": "toast.connection",
+        "lang": "ar",
+        "text": "الاتصال غير متاح الآن.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.connection-en",
+        "key": "toast.connection",
+        "lang": "en",
+        "text": "Connection not available right now.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.brokerPhone-ar",
+        "key": "toast.brokerPhone",
+        "lang": "ar",
+        "text": "أدخل رقم الهاتف.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.brokerPhone-en",
+        "key": "toast.brokerPhone",
+        "lang": "en",
+        "text": "Enter phone number.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.updated-ar",
+        "key": "toast.updated",
+        "lang": "ar",
+        "text": "تم تحديث الطلب.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.updated-en",
+        "key": "toast.updated",
+        "lang": "en",
+        "text": "Request updated.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.notUpdated-ar",
+        "key": "toast.notUpdated",
+        "lang": "ar",
+        "text": "لم يتم تحديث الطلب.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.notUpdated-en",
+        "key": "toast.notUpdated",
+        "lang": "en",
+        "text": "Request not updated.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.listingUpdated-ar",
+        "key": "toast.listingUpdated",
+        "lang": "ar",
+        "text": "تم تعديل حالة الإعلان.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.listingUpdated-en",
+        "key": "toast.listingUpdated",
+        "lang": "en",
+        "text": "Listing status updated.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.listingNotUpdated-ar",
+        "key": "toast.listingNotUpdated",
+        "lang": "ar",
+        "text": "تعذر تعديل الإعلان.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-toast.listingNotUpdated-en",
+        "key": "toast.listingNotUpdated",
+        "lang": "en",
+        "text": "Could not update listing.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-labels.recentListings-ar",
+        "key": "labels.recentListings",
+        "lang": "ar",
+        "text": "أحدث الوحدات",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-labels.recentListings-en",
+        "key": "labels.recentListings",
+        "lang": "en",
+        "text": "Recent listings",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-labels.smartFilters-ar",
+        "key": "labels.smartFilters",
+        "lang": "ar",
+        "text": "تصفية ذكية",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-labels.smartFilters-en",
+        "key": "labels.smartFilters",
+        "lang": "en",
+        "text": "Smart filters",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-labels.orderByNewest-ar",
+        "key": "labels.orderByNewest",
+        "lang": "ar",
+        "text": "ترتيب حسب أحدث الطلبات",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-labels.orderByNewest-en",
+        "key": "labels.orderByNewest",
+        "lang": "en",
+        "text": "Sort by latest",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.empty-ar",
+        "key": "dashboard.empty",
+        "lang": "ar",
+        "text": "لا توجد طلبات حالياً.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.empty-en",
+        "key": "dashboard.empty",
+        "lang": "en",
+        "text": "No requests yet.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.assign-ar",
+        "key": "dashboard.assign",
+        "lang": "ar",
+        "text": "تعيين كمردود",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.assign-en",
+        "key": "dashboard.assign",
+        "lang": "en",
+        "text": "Mark as replied",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.close-ar",
+        "key": "dashboard.close",
+        "lang": "ar",
+        "text": "إغلاق",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.close-en",
+        "key": "dashboard.close",
+        "lang": "en",
+        "text": "Close",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-status.new-ar",
+        "key": "status.new",
+        "lang": "ar",
+        "text": "جديد",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-status.new-en",
+        "key": "status.new",
+        "lang": "en",
+        "text": "New",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-status.replied-ar",
+        "key": "status.replied",
+        "lang": "ar",
+        "text": "تم الرد",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-status.replied-en",
+        "key": "status.replied",
+        "lang": "en",
+        "text": "Replied",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-status.closed-ar",
+        "key": "status.closed",
+        "lang": "ar",
+        "text": "مغلق",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-status.closed-en",
+        "key": "status.closed",
+        "lang": "en",
+        "text": "Closed",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-status.all-ar",
+        "key": "status.all",
+        "lang": "ar",
+        "text": "الكل",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-status.all-en",
+        "key": "status.all",
+        "lang": "en",
+        "text": "All",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-pwa.installTitle-ar",
+        "key": "pwa.installTitle",
+        "lang": "ar",
+        "text": "حوّل المنصة إلى تطبيق",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-pwa.installTitle-en",
+        "key": "pwa.installTitle",
+        "lang": "en",
+        "text": "Turn the platform into an app",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-pwa.installDesc-ar",
+        "key": "pwa.installDesc",
+        "lang": "ar",
+        "text": "ثبّت التطبيق لتحصل على تجربة أسرع وإشعارات فورية.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-pwa.installDesc-en",
+        "key": "pwa.installDesc",
+        "lang": "en",
+        "text": "Install to get faster experience and instant notifications.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-pwa.installRequired-ar",
+        "key": "pwa.installRequired",
+        "lang": "ar",
+        "text": "تثبيت التطبيق مطلوب",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-pwa.installRequired-en",
+        "key": "pwa.installRequired",
+        "lang": "en",
+        "text": "App installation required",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-pwa.installRequiredDesc-ar",
+        "key": "pwa.installRequiredDesc",
+        "lang": "ar",
+        "text": "لتجربة كاملة على الجوال قم بتثبيت التطبيق كـ PWA.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-pwa.installRequiredDesc-en",
+        "key": "pwa.installRequiredDesc",
+        "lang": "en",
+        "text": "Install as a PWA for the full mobile experience.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.submit-ar",
+        "key": "forms.submit",
+        "lang": "ar",
+        "text": "إرسال",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.submit-en",
+        "key": "forms.submit",
+        "lang": "en",
+        "text": "Submit",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.contactPhone-ar",
+        "key": "forms.contactPhone",
+        "lang": "ar",
+        "text": "هاتف للتواصل",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.contactPhone-en",
+        "key": "forms.contactPhone",
+        "lang": "en",
+        "text": "Contact phone",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.contactName-ar",
+        "key": "forms.contactName",
+        "lang": "ar",
+        "text": "الاسم",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.contactName-en",
+        "key": "forms.contactName",
+        "lang": "en",
+        "text": "Name",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.message-ar",
+        "key": "forms.message",
+        "lang": "ar",
+        "text": "رسالة",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.message-en",
+        "key": "forms.message",
+        "lang": "en",
+        "text": "Message",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.preferredTime-ar",
+        "key": "forms.preferredTime",
+        "lang": "ar",
+        "text": "وقت مفضل للاتصال",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.preferredTime-en",
+        "key": "forms.preferredTime",
+        "lang": "en",
+        "text": "Preferred time to contact",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.preferredAny-ar",
+        "key": "forms.preferredAny",
+        "lang": "ar",
+        "text": "أي وقت",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.preferredAny-en",
+        "key": "forms.preferredAny",
+        "lang": "en",
+        "text": "Any time",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.preferredMorning-ar",
+        "key": "forms.preferredMorning",
+        "lang": "ar",
+        "text": "صباحاً",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.preferredMorning-en",
+        "key": "forms.preferredMorning",
+        "lang": "en",
+        "text": "Morning",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.preferredEvening-ar",
+        "key": "forms.preferredEvening",
+        "lang": "ar",
+        "text": "مساءً",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-forms.preferredEvening-en",
+        "key": "forms.preferredEvening",
+        "lang": "en",
+        "text": "Evening",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-notification.title-ar",
+        "key": "notification.title",
+        "lang": "ar",
+        "text": "تنبيه",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-notification.title-en",
+        "key": "notification.title",
+        "lang": "en",
+        "text": "Notification",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-misc.loading-ar",
+        "key": "misc.loading",
+        "lang": "ar",
+        "text": "جارِ تحميل بيانات الوسطاء...",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-misc.loading-en",
+        "key": "misc.loading",
+        "lang": "en",
+        "text": "Loading brokers...",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-misc.noBroker-ar",
+        "key": "misc.noBroker",
+        "lang": "ar",
+        "text": "لم يتم العثور على الوحدة المختارة.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-misc.noBroker-en",
+        "key": "misc.noBroker",
+        "lang": "en",
+        "text": "Selected unit not found.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-misc.noNotifications-ar",
+        "key": "misc.noNotifications",
+        "lang": "ar",
+        "text": "آخر التنبيهات",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-misc.noNotifications-en",
+        "key": "misc.noNotifications",
+        "lang": "en",
+        "text": "Notifications",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-misc.brokerBack-ar",
+        "key": "misc.brokerBack",
+        "lang": "ar",
+        "text": "← جميع الوسطاء",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-misc.brokerBack-en",
+        "key": "misc.brokerBack",
+        "lang": "en",
+        "text": "← All brokers",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-lead.potential-ar",
+        "key": "lead.potential",
+        "lang": "ar",
+        "text": "عميل محتمل",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-lead.potential-en",
+        "key": "lead.potential",
+        "lang": "en",
+        "text": "Potential lead",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-lead.noPhone-ar",
+        "key": "lead.noPhone",
+        "lang": "ar",
+        "text": "بدون هاتف",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-lead.noPhone-en",
+        "key": "lead.noPhone",
+        "lang": "en",
+        "text": "No phone",
+        "kind": "ui"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.brand_name-ar",
+        "key": "app_settings.brocker-app-config.brand_name",
+        "lang": "ar",
+        "text": "Brocker Mishkah",
+        "kind": "content"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.brand_name-en",
+        "key": "app_settings.brocker-app-config.brand_name",
+        "lang": "en",
+        "text": "Brocker Mishkah",
+        "kind": "content"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.tagline-ar",
+        "key": "app_settings.brocker-app-config.tagline",
+        "lang": "ar",
+        "text": "منصة ذكية لإدارة مكاتب العقارات",
+        "kind": "content"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.tagline-en",
+        "key": "app_settings.brocker-app-config.tagline",
+        "lang": "en",
+        "text": "Smart platform for broker offices",
+        "kind": "content"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.hero_title-ar",
+        "key": "app_settings.brocker-app-config.hero_title",
+        "lang": "ar",
+        "text": "منصة متكاملة للوسطاء",
+        "kind": "content"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.hero_title-en",
+        "key": "app_settings.brocker-app-config.hero_title",
+        "lang": "en",
+        "text": "Integrated platform for brokers",
+        "kind": "content"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.hero_subtitle-ar",
+        "key": "app_settings.brocker-app-config.hero_subtitle",
+        "lang": "ar",
+        "text": "ابحث، أدر، وتابع طلبات عملائك عبر تجربة PWA مصممة للموبايل.",
+        "kind": "content"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.hero_subtitle-en",
+        "key": "app_settings.brocker-app-config.hero_subtitle",
+        "lang": "en",
+        "text": "Search, manage, and track your clients with a mobile-first PWA experience.",
+        "kind": "content"
+      },
+      {
+        "id": "content-listing.detail.subtitle-ar",
+        "key": "listing.detail.subtitle",
+        "lang": "ar",
+        "text": "استكشف التفاصيل الكاملة للوحدة",
+        "kind": "content"
+      },
+      {
+        "id": "content-listing.detail.subtitle-en",
+        "key": "listing.detail.subtitle",
+        "lang": "en",
+        "text": "Explore full unit details",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-explore.title-ar",
+        "key": "hero_slides.slide-explore.title",
+        "lang": "ar",
+        "text": "اكتشف عقارات جاهزة للتسليم",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-explore.title-en",
+        "key": "hero_slides.slide-explore.title",
+        "lang": "en",
+        "text": "Discover ready-to-move homes",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-explore.subtitle-ar",
+        "key": "hero_slides.slide-explore.subtitle",
+        "lang": "ar",
+        "text": "أحدث المشروعات في القاهرة الجديدة بخيارات تمويل مرنة.",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-explore.subtitle-en",
+        "key": "hero_slides.slide-explore.subtitle",
+        "lang": "en",
+        "text": "Latest New Cairo projects with flexible financing.",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-explore.cta_label-ar",
+        "key": "hero_slides.slide-explore.cta_label",
+        "lang": "ar",
+        "text": "ابدأ البحث",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-explore.cta_label-en",
+        "key": "hero_slides.slide-explore.cta_label",
+        "lang": "en",
+        "text": "Start searching",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-dashboard.title-ar",
+        "key": "hero_slides.slide-dashboard.title",
+        "lang": "ar",
+        "text": "لوحة تحكم فورية للوسطاء",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-dashboard.title-en",
+        "key": "hero_slides.slide-dashboard.title",
+        "lang": "en",
+        "text": "Instant broker dashboard",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-dashboard.subtitle-ar",
+        "key": "hero_slides.slide-dashboard.subtitle",
+        "lang": "ar",
+        "text": "تابع الطلبات، فعّل الوحدات، واستجب من أي مكان.",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-dashboard.subtitle-en",
+        "key": "hero_slides.slide-dashboard.subtitle",
+        "lang": "en",
+        "text": "Track requests, activate units, and respond anywhere.",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-dashboard.cta_label-ar",
+        "key": "hero_slides.slide-dashboard.cta_label",
+        "lang": "ar",
+        "text": "شاهد التجربة",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-dashboard.cta_label-en",
+        "key": "hero_slides.slide-dashboard.cta_label",
+        "lang": "en",
+        "text": "Watch the experience",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-otp.title-ar",
+        "key": "hero_slides.slide-otp.title",
+        "lang": "ar",
+        "text": "دخول آمن عبر واتساب",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-otp.title-en",
+        "key": "hero_slides.slide-otp.title",
+        "lang": "en",
+        "text": "Secure WhatsApp login",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-otp.subtitle-ar",
+        "key": "hero_slides.slide-otp.subtitle",
+        "lang": "ar",
+        "text": "تحقق فوري للوسطاء المعتمدين مع سجل تدقيق كامل.",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-otp.subtitle-en",
+        "key": "hero_slides.slide-otp.subtitle",
+        "lang": "en",
+        "text": "Instant verification for trusted brokers with full audit log.",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-otp.cta_label-ar",
+        "key": "hero_slides.slide-otp.cta_label",
+        "lang": "ar",
+        "text": "سجل وسيط جديد",
+        "kind": "content"
+      },
+      {
+        "id": "content-hero_slides.slide-otp.cta_label-en",
+        "key": "hero_slides.slide-otp.cta_label",
+        "lang": "en",
+        "text": "Register a broker",
+        "kind": "content"
+      },
+      {
+        "id": "content-regions.region-new-cairo.name-ar",
+        "key": "regions.region-new-cairo.name",
+        "lang": "ar",
+        "text": "التجمع الخامس",
+        "kind": "content"
+      },
+      {
+        "id": "content-regions.region-new-cairo.name-en",
+        "key": "regions.region-new-cairo.name",
+        "lang": "en",
+        "text": "New Cairo",
+        "kind": "content"
+      },
+      {
+        "id": "content-regions.region-zayed.name-ar",
+        "key": "regions.region-zayed.name",
+        "lang": "ar",
+        "text": "الشيخ زايد",
+        "kind": "content"
+      },
+      {
+        "id": "content-regions.region-zayed.name-en",
+        "key": "regions.region-zayed.name",
+        "lang": "en",
+        "text": "Sheikh Zayed",
+        "kind": "content"
+      },
+      {
+        "id": "content-regions.region-capital.name-ar",
+        "key": "regions.region-capital.name",
+        "lang": "ar",
+        "text": "العاصمة الإدارية",
+        "kind": "content"
+      },
+      {
+        "id": "content-regions.region-capital.name-en",
+        "key": "regions.region-capital.name",
+        "lang": "en",
+        "text": "New Capital",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_types.unit-type-apartment.name-ar",
+        "key": "unit_types.unit-type-apartment.name",
+        "lang": "ar",
+        "text": "شقة سكنية",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_types.unit-type-apartment.name-en",
+        "key": "unit_types.unit-type-apartment.name",
+        "lang": "en",
+        "text": "Apartment",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_types.unit-type-villa.name-ar",
+        "key": "unit_types.unit-type-villa.name",
+        "lang": "ar",
+        "text": "فيلا مستقلة",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_types.unit-type-villa.name-en",
+        "key": "unit_types.unit-type-villa.name",
+        "lang": "en",
+        "text": "Villa",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_types.unit-type-chalet.name-ar",
+        "key": "unit_types.unit-type-chalet.name",
+        "lang": "ar",
+        "text": "شاليه بحري",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_types.unit-type-chalet.name-en",
+        "key": "unit_types.unit-type-chalet.name",
+        "lang": "en",
+        "text": "Beach chalet",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_types.unit-type-factory.name-ar",
+        "key": "unit_types.unit-type-factory.name",
+        "lang": "ar",
+        "text": "مصنع خفيف",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_types.unit-type-factory.name-en",
+        "key": "unit_types.unit-type-factory.name",
+        "lang": "en",
+        "text": "Light factory",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_types.unit-type-retail.name-ar",
+        "key": "unit_types.unit-type-retail.name",
+        "lang": "ar",
+        "text": "محل تجاري",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_types.unit-type-retail.name-en",
+        "key": "unit_types.unit-type-retail.name",
+        "lang": "en",
+        "text": "Retail shop",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_features.feature-smart-home.name-ar",
+        "key": "unit_features.feature-smart-home.name",
+        "lang": "ar",
+        "text": "نظام سمارت",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_features.feature-smart-home.name-en",
+        "key": "unit_features.feature-smart-home.name",
+        "lang": "en",
+        "text": "Smart system",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_features.feature-parking.name-ar",
+        "key": "unit_features.feature-parking.name",
+        "lang": "ar",
+        "text": "موقف مغطى",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_features.feature-parking.name-en",
+        "key": "unit_features.feature-parking.name",
+        "lang": "en",
+        "text": "Covered parking",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_features.feature-garden.name-ar",
+        "key": "unit_features.feature-garden.name",
+        "lang": "ar",
+        "text": "حديقة",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_features.feature-garden.name-en",
+        "key": "unit_features.feature-garden.name",
+        "lang": "en",
+        "text": "Garden",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_features.feature-license.name-ar",
+        "key": "unit_features.feature-license.name",
+        "lang": "ar",
+        "text": "سجل تجاري فئة أ",
+        "kind": "content"
+      },
+      {
+        "id": "content-unit_features.feature-license.name-en",
+        "key": "unit_features.feature-license.name",
+        "lang": "en",
+        "text": "Class A trade license",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-nour-09-01.headline-ar",
+        "key": "listings.listing-nour-09-01.headline",
+        "lang": "ar",
+        "text": "شقة 3 غرف مع تراس بانورامي",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-nour-09-01.headline-en",
+        "key": "listings.listing-nour-09-01.headline",
+        "lang": "en",
+        "text": "3BR apartment with panoramic terrace",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-nour-09-01.excerpt-ar",
+        "key": "listings.listing-nour-09-01.excerpt",
+        "lang": "ar",
+        "text": "تشطيب فندقي مع مطبخ متكامل وإطلالة مفتوحة.",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-nour-09-01.excerpt-en",
+        "key": "listings.listing-nour-09-01.excerpt",
+        "lang": "en",
+        "text": "Hotel-finish with fitted kitchen and open view.",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-nour-09-01.primary_highlight-ar",
+        "key": "listings.listing-nour-09-01.primary_highlight",
+        "lang": "ar",
+        "text": "جاهزة للتسليم",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-nour-09-01.primary_highlight-en",
+        "key": "listings.listing-nour-09-01.primary_highlight",
+        "lang": "en",
+        "text": "Ready for delivery",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-nour-12-03.headline-ar",
+        "key": "listings.listing-nour-12-03.headline",
+        "lang": "ar",
+        "text": "شقة مفروشة بالكامل",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-nour-12-03.headline-en",
+        "key": "listings.listing-nour-12-03.headline",
+        "lang": "en",
+        "text": "Fully furnished apartment",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-nour-12-03.excerpt-ar",
+        "key": "listings.listing-nour-12-03.excerpt",
+        "lang": "ar",
+        "text": "مفروشة مع أجهزة كاملة وإدارة تأجير.",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-nour-12-03.excerpt-en",
+        "key": "listings.listing-nour-12-03.excerpt",
+        "lang": "en",
+        "text": "Furnished with full appliances and rental management.",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-nour-12-03.primary_highlight-ar",
+        "key": "listings.listing-nour-12-03.primary_highlight",
+        "lang": "ar",
+        "text": "مفروش",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-nour-12-03.primary_highlight-en",
+        "key": "listings.listing-nour-12-03.primary_highlight",
+        "lang": "en",
+        "text": "Furnished",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-hayat-villa05.headline-ar",
+        "key": "listings.listing-hayat-villa05.headline",
+        "lang": "ar",
+        "text": "فيلا مستقلة مع حديقة 120م",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-hayat-villa05.headline-en",
+        "key": "listings.listing-hayat-villa05.headline",
+        "lang": "en",
+        "text": "Standalone villa with 120m garden",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-hayat-villa05.excerpt-ar",
+        "key": "listings.listing-hayat-villa05.excerpt",
+        "lang": "ar",
+        "text": "نصف تشطيب مع إمكانية التقسيط حتى 6 سنوات.",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-hayat-villa05.excerpt-en",
+        "key": "listings.listing-hayat-villa05.excerpt",
+        "lang": "en",
+        "text": "Semi-finished with installments up to 6 years.",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-hayat-villa05.primary_highlight-ar",
+        "key": "listings.listing-hayat-villa05.primary_highlight",
+        "lang": "ar",
+        "text": "مساحات خضراء",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-hayat-villa05.primary_highlight-en",
+        "key": "listings.listing-hayat-villa05.primary_highlight",
+        "lang": "en",
+        "text": "Green retreat",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-capital-retail-a3.headline-ar",
+        "key": "listings.listing-capital-retail-a3.headline",
+        "lang": "ar",
+        "text": "محل تجاري بواجهة 9 م",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-capital-retail-a3.headline-en",
+        "key": "listings.listing-capital-retail-a3.headline",
+        "lang": "en",
+        "text": "Retail store with 9m frontage",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-capital-retail-a3.excerpt-ar",
+        "key": "listings.listing-capital-retail-a3.excerpt",
+        "lang": "ar",
+        "text": "واجهة على محور الأعمال وترخيص فئة أ.",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-capital-retail-a3.excerpt-en",
+        "key": "listings.listing-capital-retail-a3.excerpt",
+        "lang": "en",
+        "text": "Frontage on business axis with Class A license.",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-capital-retail-a3.primary_highlight-ar",
+        "key": "listings.listing-capital-retail-a3.primary_highlight",
+        "lang": "ar",
+        "text": "جاهز للتشغيل",
+        "kind": "content"
+      },
+      {
+        "id": "content-listings.listing-capital-retail-a3.primary_highlight-en",
+        "key": "listings.listing-capital-retail-a3.primary_highlight",
+        "lang": "en",
+        "text": "Operational ready",
+        "kind": "content"
+      },
+      {
+        "id": "content-units.unit-nour-0901.description-ar",
+        "key": "units.unit-nour-0901.description",
+        "lang": "ar",
+        "text": "إطلالة مفتوحة على محور محمد نجيب.",
+        "kind": "content"
+      },
+      {
+        "id": "content-units.unit-nour-0901.description-en",
+        "key": "units.unit-nour-0901.description",
+        "lang": "en",
+        "text": "إطلالة مفتوحة على محور محمد نجيب.",
+        "kind": "content"
+      },
+      {
+        "id": "content-units.unit-nour-1203.description-ar",
+        "key": "units.unit-nour-1203.description",
+        "lang": "ar",
+        "text": "إطلالة هادئة على حدائق داخلية.",
+        "kind": "content"
+      },
+      {
+        "id": "content-units.unit-nour-1203.description-en",
+        "key": "units.unit-nour-1203.description",
+        "lang": "en",
+        "text": "إطلالة هادئة على حدائق داخلية.",
+        "kind": "content"
+      },
+      {
+        "id": "content-units.unit-hayat-villa05.description-ar",
+        "key": "units.unit-hayat-villa05.description",
+        "lang": "ar",
+        "text": "حديقة خاصة بمساحة 120 متر مع ممر جانبي.",
+        "kind": "content"
+      },
+      {
+        "id": "content-units.unit-hayat-villa05.description-en",
+        "key": "units.unit-hayat-villa05.description",
+        "lang": "en",
+        "text": "حديقة خاصة بمساحة 120 متر مع ممر جانبي.",
+        "kind": "content"
+      },
+      {
+        "id": "content-units.unit-capital-retail-a3.description-ar",
+        "key": "units.unit-capital-retail-a3.description",
+        "lang": "ar",
+        "text": "واجهة زجاجية على محور الأعمال.",
+        "kind": "content"
+      },
+      {
+        "id": "content-units.unit-capital-retail-a3.description-en",
+        "key": "units.unit-capital-retail-a3.description",
+        "lang": "en",
+        "text": "واجهة زجاجية على محور الأعمال.",
+        "kind": "content"
+      },
+      {
+        "id": "ui-footer.subscribe-ar",
+        "key": "footer.subscribe",
+        "lang": "ar",
+        "text": "اشترك معنا الآن",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-footer.subscribe-en",
+        "key": "footer.subscribe",
+        "lang": "en",
+        "text": "Subscribe Now",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-footer.rights-ar",
+        "key": "footer.rights",
+        "lang": "ar",
+        "text": "جميع الحقوق محفوظة",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-footer.rights-en",
+        "key": "footer.rights",
+        "lang": "en",
+        "text": "All Rights Reserved",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.title-ar",
+        "key": "subscribe.title",
+        "lang": "ar",
+        "text": "اشترك معنا",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.title-en",
+        "key": "subscribe.title",
+        "lang": "en",
+        "text": "Subscribe",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.name-ar",
+        "key": "subscribe.name",
+        "lang": "ar",
+        "text": "الاسم",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.name-en",
+        "key": "subscribe.name",
+        "lang": "en",
+        "text": "Name",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.phone-ar",
+        "key": "subscribe.phone",
+        "lang": "ar",
+        "text": "رقم الهاتف",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.phone-en",
+        "key": "subscribe.phone",
+        "lang": "en",
+        "text": "Phone Number",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.email-ar",
+        "key": "subscribe.email",
+        "lang": "ar",
+        "text": "البريد الإلكتروني",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.email-en",
+        "key": "subscribe.email",
+        "lang": "en",
+        "text": "Email",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.optional-ar",
+        "key": "subscribe.optional",
+        "lang": "ar",
+        "text": "اختياري",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.optional-en",
+        "key": "subscribe.optional",
+        "lang": "en",
+        "text": "Optional",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.namePlaceholder-ar",
+        "key": "subscribe.namePlaceholder",
+        "lang": "ar",
+        "text": "أدخل اسمك",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.namePlaceholder-en",
+        "key": "subscribe.namePlaceholder",
+        "lang": "en",
+        "text": "Enter your name",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.phonePlaceholder-ar",
+        "key": "subscribe.phonePlaceholder",
+        "lang": "ar",
+        "text": "05xxxxxxxx",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.phonePlaceholder-en",
+        "key": "subscribe.phonePlaceholder",
+        "lang": "en",
+        "text": "05xxxxxxxx",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.emailPlaceholder-ar",
+        "key": "subscribe.emailPlaceholder",
+        "lang": "ar",
+        "text": "example@email.com",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.emailPlaceholder-en",
+        "key": "subscribe.emailPlaceholder",
+        "lang": "en",
+        "text": "example@email.com",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.submit-ar",
+        "key": "subscribe.submit",
+        "lang": "ar",
+        "text": "إرسال الطلب",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.submit-en",
+        "key": "subscribe.submit",
+        "lang": "en",
+        "text": "Submit Request",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.success-ar",
+        "key": "subscribe.success",
+        "lang": "ar",
+        "text": "تم إرسال طلبك بنجاح! سنتواصل معك قريباً.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-subscribe.success-en",
+        "key": "subscribe.success",
+        "lang": "en",
+        "text": "Your request has been submitted successfully! We will contact you soon.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.login-ar",
+        "key": "auth.login",
+        "lang": "ar",
+        "text": "تسجيل الدخول",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.login-en",
+        "key": "auth.login",
+        "lang": "en",
+        "text": "Login",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.loginBtn-ar",
+        "key": "auth.loginBtn",
+        "lang": "ar",
+        "text": "دخول",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.loginBtn-en",
+        "key": "auth.loginBtn",
+        "lang": "en",
+        "text": "Sign In",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.register-ar",
+        "key": "auth.register",
+        "lang": "ar",
+        "text": "إنشاء حساب",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.register-en",
+        "key": "auth.register",
+        "lang": "en",
+        "text": "Register",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-footer.joinUsTitle-en",
+        "key": "footer.joinUsTitle",
+        "lang": "en",
+        "text": "Join Us Now",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-footer.joinUsSubtitle-en",
+        "key": "footer.joinUsSubtitle",
+        "lang": "en",
+        "text": "Register with us to get the best real estate offers",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.phoneOrEmail-en",
+        "key": "auth.phoneOrEmail",
+        "lang": "en",
+        "text": "Mobile Number or Email",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.password-en",
+        "key": "auth.password",
+        "lang": "en",
+        "text": "Password",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.forgotPassword-en",
+        "key": "auth.forgotPassword",
+        "lang": "en",
+        "text": "Forgot Password?",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.loginTab-en",
+        "key": "auth.loginTab",
+        "lang": "en",
+        "text": "Login",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.registerTab-en",
+        "key": "auth.registerTab",
+        "lang": "en",
+        "text": "Sign Up",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.fullName-en",
+        "key": "auth.fullName",
+        "lang": "en",
+        "text": "Full Name",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.email-en",
+        "key": "auth.email",
+        "lang": "en",
+        "text": "Email Address",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.phone-en",
+        "key": "auth.phone",
+        "lang": "en",
+        "text": "Mobile Number",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.createAccount-en",
+        "key": "auth.createAccount",
+        "lang": "en",
+        "text": "Create Account",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.registerTitle-en",
+        "key": "broker.registerTitle",
+        "lang": "en",
+        "text": "Register Broker Office",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.registerDesc-en",
+        "key": "broker.registerDesc",
+        "lang": "en",
+        "text": "Register your office to manage listings and leads",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.officeName-en",
+        "key": "broker.officeName",
+        "lang": "en",
+        "text": "Office Name",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.officePhone-en",
+        "key": "broker.officePhone",
+        "lang": "en",
+        "text": "Office Phone",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.officeAddress-en",
+        "key": "broker.officeAddress",
+        "lang": "en",
+        "text": "Office Address",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.registerBtn-en",
+        "key": "broker.registerBtn",
+        "lang": "en",
+        "text": "Register Office",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.totalInquiries-en",
+        "key": "dashboard.totalInquiries",
+        "lang": "en",
+        "text": "Total Requests",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.newLeads-en",
+        "key": "dashboard.newLeads",
+        "lang": "en",
+        "text": "New Leads",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.activeListings-en",
+        "key": "dashboard.activeListings",
+        "lang": "en",
+        "text": "Active Listings",
+        "kind": "ui"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.brand_name-en",
+        "key": "app_settings.brocker-app-config.brand_name",
+        "lang": "en",
+        "text": "Makateb Aqarat",
+        "kind": "content"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.tagline-en",
+        "key": "app_settings.brocker-app-config.tagline",
+        "lang": "en",
+        "text": "Smart Platform for Real Estate Offices",
+        "kind": "content"
+      },
+      {
+        "id": "ui-dashboard.requireAuth-en",
+        "key": "dashboard.requireAuth",
+        "lang": "en",
+        "text": "Login Required",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.requireAuthDesc-en",
+        "key": "dashboard.requireAuthDesc",
+        "lang": "en",
+        "text": "Please log in to access your dashboard and manage requests.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.detail.subtitle-en",
+        "key": "listing.detail.subtitle",
+        "lang": "en",
+        "text": "Explore Full Unit Details",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.allListings-en",
+        "key": "dashboard.allListings",
+        "lang": "en",
+        "text": "All Listings",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.profile-en",
+        "key": "actions.profile",
+        "lang": "en",
+        "text": "User",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.dashboard-en",
+        "key": "actions.dashboard",
+        "lang": "en",
+        "text": "Dashboard",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.inbox-en",
+        "key": "actions.inbox",
+        "lang": "en",
+        "text": "Inbox",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.logout-en",
+        "key": "actions.logout",
+        "lang": "en",
+        "text": "Logout",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.fullNamePlaceholder-en",
+        "key": "auth.fullNamePlaceholder",
+        "lang": "en",
+        "text": "Enter your full name",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.passwordHint-en",
+        "key": "auth.passwordHint",
+        "lang": "en",
+        "text": "At least 6 characters",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.emailPlaceholder-en",
+        "key": "auth.emailPlaceholder",
+        "lang": "en",
+        "text": "name@example.com",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.passwordPlaceholder-en",
+        "key": "auth.passwordPlaceholder",
+        "lang": "en",
+        "text": "••••••",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-auth.phoneOrEmailPlaceholder-en",
+        "key": "auth.phoneOrEmailPlaceholder",
+        "lang": "en",
+        "text": "+201xxxxxxxxx or email",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.detail.subtitle-en",
+        "key": "listing.detail.subtitle",
+        "lang": "en",
+        "text": "Explore Full Unit Details",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.requireAuth-en",
+        "key": "dashboard.requireAuth",
+        "lang": "en",
+        "text": "Login Required",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.requireAuthDesc-en",
+        "key": "dashboard.requireAuthDesc",
+        "lang": "en",
+        "text": "Please log in to access your dashboard and manage requests.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-dashboard.allListings-en",
+        "key": "dashboard.allListings",
+        "lang": "en",
+        "text": "All Listings",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.profile-en",
+        "key": "actions.profile",
+        "lang": "en",
+        "text": "User",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.dashboard-en",
+        "key": "actions.dashboard",
+        "lang": "en",
+        "text": "Dashboard",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.inbox-en",
+        "key": "actions.inbox",
+        "lang": "en",
+        "text": "Inbox",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-actions.logout-en",
+        "key": "actions.logout",
+        "lang": "en",
+        "text": "Logout",
+        "kind": "ui"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.brand_name-en",
+        "key": "app_settings.brocker-app-config.brand_name",
+        "lang": "en",
+        "text": "Makateb Aqarat",
+        "kind": "content"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.tagline-en",
+        "key": "app_settings.brocker-app-config.tagline",
+        "lang": "en",
+        "text": "Smart Platform for Real Estate Offices",
+        "kind": "content"
+      },
+      {
+        "id": "ui-listing.selectRegion-en",
+        "key": "listing.selectRegion",
+        "lang": "en",
+        "text": "Select Region",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.officeNamePlaceholder-en",
+        "key": "broker.officeNamePlaceholder",
+        "lang": "en",
+        "text": "e.g. Premium Estate",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.officeAddressPlaceholder-en",
+        "key": "broker.officeAddressPlaceholder",
+        "lang": "en",
+        "text": "Street, District, City",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.licenseNumber-en",
+        "key": "broker.licenseNumber",
+        "lang": "en",
+        "text": "License Number",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.licenseNumberPlaceholder-en",
+        "key": "broker.licenseNumberPlaceholder",
+        "lang": "en",
+        "text": "Broker License No.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.description-en",
+        "key": "broker.description",
+        "lang": "en",
+        "text": "Description",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.descriptionPlaceholder-en",
+        "key": "broker.descriptionPlaceholder",
+        "lang": "en",
+        "text": "About your office and services...",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-common.optional-en",
+        "key": "common.optional",
+        "lang": "en",
+        "text": "Optional",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-footer.defaultHeroTitle-en",
+        "key": "footer.defaultHeroTitle",
+        "lang": "en",
+        "text": "Integrated Platform for Brokers",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-footer.defaultHeroSubtitle-en",
+        "key": "footer.defaultHeroSubtitle",
+        "lang": "en",
+        "text": "Search, manage, and track your client requests easily.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-header.defaultTitle-en",
+        "key": "header.defaultTitle",
+        "lang": "en",
+        "text": "Broker Platform",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.empty-en",
+        "key": "broker.empty",
+        "lang": "en",
+        "text": "No brokers found.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.certified-en",
+        "key": "broker.certified",
+        "lang": "en",
+        "text": "Certified Broker",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.unitsTitle-en",
+        "key": "broker.unitsTitle",
+        "lang": "en",
+        "text": "Broker Units",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.noUnits-en",
+        "key": "broker.noUnits",
+        "lang": "en",
+        "text": "No units listed for this broker.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.joinTitle-en",
+        "key": "broker.joinTitle",
+        "lang": "en",
+        "text": "Join as Certified Broker",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.joinDesc-en",
+        "key": "broker.joinDesc",
+        "lang": "en",
+        "text": "Register your details to receive WhatsApp verification code.",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.requestOtp-en",
+        "key": "broker.requestOtp",
+        "lang": "en",
+        "text": "Request OTP",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-broker.otpSent-en",
+        "key": "broker.otpSent",
+        "lang": "en",
+        "text": "Last code sent to:",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-listing.defaultHeadline-en",
+        "key": "listing.defaultHeadline",
+        "lang": "en",
+        "text": "Available Unit",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-gallery.empty-en",
+        "key": "gallery.empty",
+        "lang": "en",
+        "text": "No media available.",
+        "kind": "ui"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.brand_name-en",
+        "key": "app_settings.brocker-app-config.brand_name",
+        "lang": "en",
+        "text": "Makateb Aqarat",
+        "kind": "content"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.hero_title-en",
+        "key": "app_settings.brocker-app-config.hero_title",
+        "lang": "en",
+        "text": "Integrated Platform for Brokers",
+        "kind": "content"
+      },
+      {
+        "id": "content-app_settings.brocker-app-config.hero_subtitle-en",
+        "key": "app_settings.brocker-app-config.hero_subtitle",
+        "lang": "en",
+        "text": "Search, manage, and track your client requests easily.",
+        "kind": "content"
+      },
+      {
+        "id": "ui-app.brandName-en",
+        "key": "app.brandName",
+        "lang": "en",
+        "text": "Makateb Aqarat",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-app.brandTagline-en",
+        "key": "app.brandTagline",
+        "lang": "en",
+        "text": "Smart Platform for Real Estate Offices",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-app.heroTitle-en",
+        "key": "app.heroTitle",
+        "lang": "en",
+        "text": "Integrated Platform for Brokers",
+        "kind": "ui"
+      },
+      {
+        "id": "ui-app.heroSubtitle-en",
+        "key": "app.heroSubtitle",
+        "lang": "en",
+        "text": "Search, manage, and track your client requests easily.",
+        "kind": "ui"
+      }
+    ]
+  }
+}

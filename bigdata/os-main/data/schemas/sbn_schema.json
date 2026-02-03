@@ -1,0 +1,5475 @@
+{
+  "name": "sbn_schema",
+  "title": "مستعمل حواء - Social Business Network",
+  "description": "Complete schema for Mostamal Hawa platform: marketplace, services, knowledge/wiki, and social networking. Supports i18n with separate translation tables.",
+  "schema": {
+    "tables": [
+      {
+        "name": "sbn_classified_categories",
+        "label": "Classified Categories",
+        "comment": "Hierarchical categories for Hawaa classifieds",
+        "sqlName": "sbn_classified_categories",
+        "layout": {
+          "x": 800,
+          "y": 0
+        },
+        "fields": [
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "parent_id",
+            "columnName": "parent_id",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_classified_categories",
+              "column": "category_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "category_type",
+            "columnName": "category_type",
+            "type": "string",
+            "nullable": false,
+            "comment": "classified, marketplace, service, knowledge"
+          },
+          {
+            "name": "slug",
+            "columnName": "slug",
+            "type": "string",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "icon_url",
+            "columnName": "icon_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "cover_url",
+            "columnName": "cover_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "sort_order",
+            "columnName": "sort_order",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "is_active",
+            "columnName": "is_active",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": true
+          },
+          {
+            "name": "items_count",
+            "columnName": "items_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_categories_parent",
+            "columns": [
+              "parent_id"
+            ]
+          },
+          {
+            "name": "idx_categories_type",
+            "columns": [
+              "category_type"
+            ]
+          },
+          {
+            "name": "idx_categories_slug",
+            "columns": [
+              "slug"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_classified_categories_lang",
+        "label": "Classified Categories Translations",
+        "comment": "Hierarchical categories for Hawaa classifieds translations",
+        "sqlName": "sbn_classified_categories_lang",
+        "layout": {
+          "x": 800,
+          "y": 0
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_classified_categories",
+              "column": "category_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_categories_lang_parent",
+            "columns": [
+              "category_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_categories_lang_unique",
+            "columns": [
+              "category_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_classifieds",
+        "label": "Classified Listings",
+        "comment": "Lightweight peer-to-peer listings for Hawaa classifieds",
+        "sqlName": "sbn_classifieds",
+        "layout": {
+          "x": 400,
+          "y": 400
+        },
+        "fields": [
+          {
+            "name": "classified_id",
+            "columnName": "classified_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "seller_id",
+            "columnName": "seller_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_classified_categories",
+              "column": "category_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "price",
+            "columnName": "price",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 18,
+            "scale": 2
+          },
+          {
+            "name": "currency",
+            "columnName": "currency",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "EGP",
+            "maxLength": 3
+          },
+          {
+            "name": "images",
+            "columnName": "images",
+            "type": "json",
+            "nullable": true
+          },
+          {
+            "name": "contact_phone",
+            "columnName": "contact_phone",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "contact_whatsapp",
+            "columnName": "contact_whatsapp",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "location_city",
+            "columnName": "location_city",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "location_district",
+            "columnName": "location_district",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "active",
+            "comment": "draft, active, archived, expired"
+          },
+          {
+            "name": "expires_at",
+            "columnName": "expires_at",
+            "type": "timestamp",
+            "nullable": true
+          },
+          {
+            "name": "views_count",
+            "columnName": "views_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "leads_count",
+            "columnName": "leads_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "published_at",
+            "columnName": "published_at",
+            "type": "timestamp",
+            "nullable": true
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_classifieds_seller",
+            "columns": [
+              "seller_id"
+            ]
+          },
+          {
+            "name": "idx_classifieds_category",
+            "columns": [
+              "category_id"
+            ]
+          },
+          {
+            "name": "idx_classifieds_status",
+            "columns": [
+              "status"
+            ]
+          },
+          {
+            "name": "idx_classifieds_expires",
+            "columns": [
+              "expires_at"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_classifieds_lang",
+        "label": "Classified Listings Translations",
+        "comment": "Language-specific content for classified listings",
+        "sqlName": "sbn_classifieds_lang",
+        "layout": {
+          "x": 600,
+          "y": 400
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "classified_id",
+            "columnName": "classified_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_classifieds",
+              "column": "classified_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_classifieds_lang_parent",
+            "columns": [
+              "classified_id"
+            ]
+          },
+          {
+            "name": "idx_classifieds_lang_unique",
+            "columns": [
+              "classified_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_comments",
+        "label": "Comments",
+        "comment": "Comments on posts, products, services, and articles",
+        "sqlName": "sbn_comments",
+        "layout": {
+          "x": 300,
+          "y": 1200
+        },
+        "fields": [
+          {
+            "name": "comment_id",
+            "columnName": "comment_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "parent_comment_id",
+            "columnName": "parent_comment_id",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_comments",
+              "column": "comment_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "target_type",
+            "columnName": "target_type",
+            "type": "string",
+            "nullable": false,
+            "comment": "post, product, service, article"
+          },
+          {
+            "name": "target_id",
+            "columnName": "target_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "likes_count",
+            "columnName": "likes_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "replies_count",
+            "columnName": "replies_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "is_edited",
+            "columnName": "is_edited",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_comments_user",
+            "columns": [
+              "user_id"
+            ]
+          },
+          {
+            "name": "idx_comments_parent",
+            "columns": [
+              "parent_comment_id"
+            ]
+          },
+          {
+            "name": "idx_comments_target",
+            "columns": [
+              "target_type",
+              "target_id"
+            ]
+          },
+          {
+            "name": "idx_comments_created",
+            "columns": [
+              "created_at"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_comments_lang",
+        "label": "Comments Translations",
+        "comment": "Language-specific content for sbn_comments",
+        "sqlName": "sbn_comments_lang",
+        "layout": {
+          "x": 500,
+          "y": 1200
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "comment_id",
+            "columnName": "comment_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_comments",
+              "column": "comment_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "content",
+            "columnName": "content",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_comments_lang_parent",
+            "columns": [
+              "comment_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_comments_lang_unique",
+            "columns": [
+              "comment_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_conversation_participants",
+        "label": "Conversation Participants",
+        "comment": "Users participating in conversations",
+        "sqlName": "sbn_conversation_participants",
+        "layout": {
+          "x": 300,
+          "y": 2000
+        },
+        "fields": [
+          {
+            "name": "participant_id",
+            "columnName": "participant_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "conversation_id",
+            "columnName": "conversation_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_conversations",
+              "column": "conversation_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "is_admin",
+            "columnName": "is_admin",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "is_muted",
+            "columnName": "is_muted",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "last_read_at",
+            "columnName": "last_read_at",
+            "type": "timestamp",
+            "nullable": true
+          },
+          {
+            "name": "joined_at",
+            "columnName": "joined_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_participants_conversation",
+            "columns": [
+              "conversation_id"
+            ]
+          },
+          {
+            "name": "idx_participants_user",
+            "columns": [
+              "user_id"
+            ]
+          },
+          {
+            "name": "idx_participants_unique",
+            "columns": [
+              "conversation_id",
+              "user_id"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_conversations",
+        "label": "Conversations",
+        "comment": "Direct messaging conversations",
+        "sqlName": "sbn_conversations",
+        "layout": {
+          "x": 0,
+          "y": 2000
+        },
+        "fields": [
+          {
+            "name": "conversation_id",
+            "columnName": "conversation_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "type",
+            "columnName": "type",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "direct",
+            "comment": "direct, group"
+          },
+          {
+            "name": "last_message_at",
+            "columnName": "last_message_at",
+            "type": "timestamp",
+            "nullable": true
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "sbn_conversations_lang",
+        "label": "Conversations Translations",
+        "comment": "Language-specific content for sbn_conversations",
+        "sqlName": "sbn_conversations_lang",
+        "layout": {
+          "x": 200,
+          "y": 2000
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "conversation_id",
+            "columnName": "conversation_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_conversations",
+              "column": "conversation_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_conversations_lang_parent",
+            "columns": [
+              "conversation_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_conversations_lang_unique",
+            "columns": [
+              "conversation_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_follows",
+        "label": "User Follows",
+        "comment": "User follow relationships",
+        "sqlName": "sbn_follows",
+        "layout": {
+          "x": 0,
+          "y": 200
+        },
+        "fields": [
+          {
+            "name": "follow_id",
+            "columnName": "follow_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "follower_id",
+            "columnName": "follower_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "following_id",
+            "columnName": "following_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "followed_at",
+            "columnName": "followed_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_follows_follower",
+            "columns": [
+              "follower_id"
+            ]
+          },
+          {
+            "name": "idx_follows_following",
+            "columns": [
+              "following_id"
+            ]
+          },
+          {
+            "name": "idx_follows_unique",
+            "columns": [
+              "follower_id",
+              "following_id"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_hashtag_usages",
+        "label": "Hashtag Usages",
+        "comment": "Many-to-many relationship between hashtags and content",
+        "sqlName": "sbn_hashtag_usages",
+        "layout": {
+          "x": 300,
+          "y": 1600
+        },
+        "fields": [
+          {
+            "name": "usage_id",
+            "columnName": "usage_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "hashtag_id",
+            "columnName": "hashtag_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_hashtags",
+              "column": "hashtag_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "target_type",
+            "columnName": "target_type",
+            "type": "string",
+            "nullable": false,
+            "comment": "post, product, service, article"
+          },
+          {
+            "name": "target_id",
+            "columnName": "target_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_hashtag_usages_hashtag",
+            "columns": [
+              "hashtag_id"
+            ]
+          },
+          {
+            "name": "idx_hashtag_usages_target",
+            "columns": [
+              "target_type",
+              "target_id"
+            ]
+          },
+          {
+            "name": "idx_hashtag_usages_unique",
+            "columns": [
+              "hashtag_id",
+              "target_type",
+              "target_id"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_hashtags",
+        "label": "Hashtags",
+        "comment": "Hashtag registry",
+        "sqlName": "sbn_hashtags",
+        "layout": {
+          "x": 0,
+          "y": 1600
+        },
+        "fields": [
+          {
+            "name": "hashtag_id",
+            "columnName": "hashtag_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "normalized_name",
+            "columnName": "normalized_name",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "usage_count",
+            "columnName": "usage_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "is_trending",
+            "columnName": "is_trending",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "last_used_at",
+            "columnName": "last_used_at",
+            "type": "timestamp",
+            "nullable": true
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_hashtags_name",
+            "columns": [
+              "name"
+            ],
+            "unique": true
+          },
+          {
+            "name": "idx_hashtags_normalized",
+            "columns": [
+              "normalized_name"
+            ]
+          },
+          {
+            "name": "idx_hashtags_trending",
+            "columns": [
+              "is_trending"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_hashtags_lang",
+        "label": "Hashtags Translations",
+        "comment": "Language-specific content for sbn_hashtags",
+        "sqlName": "sbn_hashtags_lang",
+        "layout": {
+          "x": 200,
+          "y": 1600
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "hashtag_id",
+            "columnName": "hashtag_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_hashtags",
+              "column": "hashtag_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_hashtags_lang_parent",
+            "columns": [
+              "hashtag_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_hashtags_lang_unique",
+            "columns": [
+              "hashtag_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_knowledge_categories",
+        "label": "Knowledge Categories",
+        "comment": "Hierarchical categories for Hawaa knowledge base",
+        "sqlName": "sbn_knowledge_categories",
+        "layout": {
+          "x": 1400,
+          "y": 0
+        },
+        "fields": [
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "parent_id",
+            "columnName": "parent_id",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_knowledge_categories",
+              "column": "category_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "category_type",
+            "columnName": "category_type",
+            "type": "string",
+            "nullable": false,
+            "comment": "classified, marketplace, service, knowledge"
+          },
+          {
+            "name": "slug",
+            "columnName": "slug",
+            "type": "string",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "icon_url",
+            "columnName": "icon_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "cover_url",
+            "columnName": "cover_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "sort_order",
+            "columnName": "sort_order",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "is_active",
+            "columnName": "is_active",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": true
+          },
+          {
+            "name": "items_count",
+            "columnName": "items_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_categories_parent",
+            "columns": [
+              "parent_id"
+            ]
+          },
+          {
+            "name": "idx_categories_type",
+            "columns": [
+              "category_type"
+            ]
+          },
+          {
+            "name": "idx_categories_slug",
+            "columns": [
+              "slug"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_knowledge_categories_lang",
+        "label": "Knowledge Categories Translations",
+        "comment": "Hierarchical categories for Hawaa knowledge base translations",
+        "sqlName": "sbn_knowledge_categories_lang",
+        "layout": {
+          "x": 1400,
+          "y": 0
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_knowledge_categories",
+              "column": "category_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_categories_lang_parent",
+            "columns": [
+              "category_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_categories_lang_unique",
+            "columns": [
+              "category_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_marketplace_categories",
+        "label": "Marketplace Categories",
+        "comment": "Hierarchical categories for Hawaa marketplace",
+        "sqlName": "sbn_marketplace_categories",
+        "layout": {
+          "x": 1000,
+          "y": 0
+        },
+        "fields": [
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "parent_id",
+            "columnName": "parent_id",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_marketplace_categories",
+              "column": "category_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "category_type",
+            "columnName": "category_type",
+            "type": "string",
+            "nullable": false,
+            "comment": "classified, marketplace, service, knowledge"
+          },
+          {
+            "name": "slug",
+            "columnName": "slug",
+            "type": "string",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "icon_url",
+            "columnName": "icon_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "cover_url",
+            "columnName": "cover_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "sort_order",
+            "columnName": "sort_order",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "is_active",
+            "columnName": "is_active",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": true
+          },
+          {
+            "name": "items_count",
+            "columnName": "items_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_categories_parent",
+            "columns": [
+              "parent_id"
+            ]
+          },
+          {
+            "name": "idx_categories_type",
+            "columns": [
+              "category_type"
+            ]
+          },
+          {
+            "name": "idx_categories_slug",
+            "columns": [
+              "slug"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_marketplace_categories_lang",
+        "label": "Marketplace Categories Translations",
+        "comment": "Hierarchical categories for Hawaa marketplace translations",
+        "sqlName": "sbn_marketplace_categories_lang",
+        "layout": {
+          "x": 1000,
+          "y": 0
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_marketplace_categories",
+              "column": "category_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_categories_lang_parent",
+            "columns": [
+              "category_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_categories_lang_unique",
+            "columns": [
+              "category_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_messages",
+        "label": "Messages",
+        "comment": "Direct messages between users",
+        "sqlName": "sbn_messages",
+        "layout": {
+          "x": 600,
+          "y": 2000
+        },
+        "fields": [
+          {
+            "name": "message_id",
+            "columnName": "message_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "conversation_id",
+            "columnName": "conversation_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_conversations",
+              "column": "conversation_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "sender_id",
+            "columnName": "sender_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "message_type",
+            "columnName": "message_type",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "text",
+            "comment": "text, image, video, audio, file, location"
+          },
+          {
+            "name": "media_url",
+            "columnName": "media_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "media_metadata",
+            "columnName": "media_metadata",
+            "type": "json",
+            "nullable": true
+          },
+          {
+            "name": "is_edited",
+            "columnName": "is_edited",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "is_deleted",
+            "columnName": "is_deleted",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_messages_conversation",
+            "columns": [
+              "conversation_id"
+            ]
+          },
+          {
+            "name": "idx_messages_sender",
+            "columns": [
+              "sender_id"
+            ]
+          },
+          {
+            "name": "idx_messages_created",
+            "columns": [
+              "created_at"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_messages_lang",
+        "label": "Messages Translations",
+        "comment": "Language-specific content for sbn_messages",
+        "sqlName": "sbn_messages_lang",
+        "layout": {
+          "x": 800,
+          "y": 2000
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "message_id",
+            "columnName": "message_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_messages",
+              "column": "message_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "content",
+            "columnName": "content",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_messages_lang_parent",
+            "columns": [
+              "message_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_messages_lang_unique",
+            "columns": [
+              "message_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_notifications",
+        "label": "Notifications",
+        "comment": "User notifications",
+        "sqlName": "sbn_notifications",
+        "layout": {
+          "x": 900,
+          "y": 2000
+        },
+        "fields": [
+          {
+            "name": "notification_id",
+            "columnName": "notification_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "type",
+            "columnName": "type",
+            "type": "string",
+            "nullable": false,
+            "comment": "like, comment, follow, message, product_inquiry, service_booking, etc."
+          },
+          {
+            "name": "actor_id",
+            "columnName": "actor_id",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "target_type",
+            "columnName": "target_type",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "target_id",
+            "columnName": "target_id",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "data",
+            "columnName": "data",
+            "type": "json",
+            "nullable": true
+          },
+          {
+            "name": "is_read",
+            "columnName": "is_read",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_notifications_user",
+            "columns": [
+              "user_id"
+            ]
+          },
+          {
+            "name": "idx_notifications_type",
+            "columns": [
+              "type"
+            ]
+          },
+          {
+            "name": "idx_notifications_read",
+            "columns": [
+              "is_read"
+            ]
+          },
+          {
+            "name": "idx_notifications_created",
+            "columns": [
+              "created_at"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_notifications_lang",
+        "label": "Notifications Translations",
+        "comment": "Language-specific content for sbn_notifications",
+        "sqlName": "sbn_notifications_lang",
+        "layout": {
+          "x": 1100,
+          "y": 2000
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "notification_id",
+            "columnName": "notification_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_notifications",
+              "column": "notification_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "message",
+            "columnName": "message",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_notifications_lang_parent",
+            "columns": [
+              "notification_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_notifications_lang_unique",
+            "columns": [
+              "notification_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_posts",
+        "label": "Social Posts",
+        "comment": "General social posts/feed items",
+        "sqlName": "sbn_posts",
+        "layout": {
+          "x": 0,
+          "y": 1200
+        },
+        "fields": [
+          {
+            "name": "post_id",
+            "columnName": "post_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "media_mode",
+            "columnName": "media_mode",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "plain",
+            "comment": "plain, reel"
+          },
+          {
+            "name": "attachment_kind",
+            "columnName": "attachment_kind",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "none",
+            "comment": "none, product, service, classified, wiki, ad"
+          },
+          {
+            "name": "media_urls",
+            "columnName": "media_urls",
+            "type": "json",
+            "nullable": true,
+            "comment": "Array of media URLs"
+          },
+          {
+            "name": "media_metadata",
+            "columnName": "media_metadata",
+            "type": "json",
+            "nullable": true,
+            "comment": "Presentation metadata (og tags, reel duration, etc.)"
+          },
+          {
+            "name": "link_url",
+            "columnName": "link_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "link_image",
+            "columnName": "link_image",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "shared_product_id",
+            "columnName": "shared_product_id",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_products",
+              "column": "product_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "shared_service_id",
+            "columnName": "shared_service_id",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_services",
+              "column": "service_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "shared_article_id",
+            "columnName": "shared_article_id",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_wiki_articles",
+              "column": "article_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "shared_classified_id",
+            "columnName": "shared_classified_id",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_classifieds",
+              "column": "classified_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "visibility",
+            "columnName": "visibility",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "public",
+            "comment": "public, followers, private"
+          },
+          {
+            "name": "is_pinned",
+            "columnName": "is_pinned",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "views_count",
+            "columnName": "views_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "likes_count",
+            "columnName": "likes_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "comments_count",
+            "columnName": "comments_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "shares_count",
+            "columnName": "shares_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_posts_user",
+            "columns": [
+              "user_id"
+            ]
+          },
+          {
+            "name": "idx_posts_created",
+            "columns": [
+              "created_at"
+            ]
+          },
+          {
+            "name": "idx_posts_visibility",
+            "columns": [
+              "visibility"
+            ]
+          },
+          {
+            "name": "idx_posts_feed_filter",
+            "columns": [
+              "media_mode",
+              "attachment_kind",
+              "created_at"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_posts_lang",
+        "label": "Social Posts Translations",
+        "comment": "Language-specific content for sbn_posts",
+        "sqlName": "sbn_posts_lang",
+        "layout": {
+          "x": 200,
+          "y": 1200
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "post_id",
+            "columnName": "post_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_posts",
+              "column": "post_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "content",
+            "columnName": "content",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "link_title",
+            "columnName": "link_title",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "link_description",
+            "columnName": "link_description",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_posts_lang_parent",
+            "columns": [
+              "post_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_posts_lang_unique",
+            "columns": [
+              "post_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_product_attributes",
+        "label": "Product Attributes",
+        "comment": "Additional custom attributes for products",
+        "sqlName": "sbn_product_attributes",
+        "layout": {
+          "x": 300,
+          "y": 400
+        },
+        "fields": [
+          {
+            "name": "attribute_id",
+            "columnName": "attribute_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "product_id",
+            "columnName": "product_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_products",
+              "column": "product_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "attribute_key",
+            "columnName": "attribute_key",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "attribute_value",
+            "columnName": "attribute_value",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_product_attrs_product",
+            "columns": [
+              "product_id"
+            ]
+          },
+          {
+            "name": "idx_product_attrs_key",
+            "columns": [
+              "attribute_key"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_product_inquiries",
+        "label": "Product Inquiries",
+        "comment": "Buyer inquiries about products",
+        "sqlName": "sbn_product_inquiries",
+        "layout": {
+          "x": 300,
+          "y": 2400
+        },
+        "fields": [
+          {
+            "name": "inquiry_id",
+            "columnName": "inquiry_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "product_id",
+            "columnName": "product_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_products",
+              "column": "product_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "buyer_id",
+            "columnName": "buyer_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "seller_id",
+            "columnName": "seller_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "offer_price",
+            "columnName": "offer_price",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 18,
+            "scale": 2
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "pending",
+            "comment": "pending, accepted, rejected, expired"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_inquiries_product",
+            "columns": [
+              "product_id"
+            ]
+          },
+          {
+            "name": "idx_inquiries_buyer",
+            "columns": [
+              "buyer_id"
+            ]
+          },
+          {
+            "name": "idx_inquiries_seller",
+            "columns": [
+              "seller_id"
+            ]
+          },
+          {
+            "name": "idx_inquiries_status",
+            "columns": [
+              "status"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_product_inquiries_lang",
+        "label": "Product Inquiries Translations",
+        "comment": "Language-specific content for sbn_product_inquiries",
+        "sqlName": "sbn_product_inquiries_lang",
+        "layout": {
+          "x": 500,
+          "y": 2400
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "inquiry_id",
+            "columnName": "inquiry_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_product_inquiries",
+              "column": "inquiry_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "message",
+            "columnName": "message",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_product_inquiries_lang_parent",
+            "columns": [
+              "inquiry_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_product_inquiries_lang_unique",
+            "columns": [
+              "inquiry_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_products",
+        "label": "Products (Marketplace)",
+        "comment": "Used and new products marketplace",
+        "sqlName": "sbn_products",
+        "layout": {
+          "x": 0,
+          "y": 400
+        },
+        "fields": [
+          {
+            "name": "product_id",
+            "columnName": "product_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "seller_id",
+            "columnName": "seller_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_marketplace_categories",
+              "column": "category_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "condition",
+            "columnName": "condition",
+            "type": "string",
+            "nullable": false,
+            "comment": "new, like_new, good, fair, poor"
+          },
+          {
+            "name": "price",
+            "columnName": "price",
+            "type": "decimal",
+            "nullable": false,
+            "precision": 18,
+            "scale": 2
+          },
+          {
+            "name": "original_price",
+            "columnName": "original_price",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 18,
+            "scale": 2
+          },
+          {
+            "name": "currency",
+            "columnName": "currency",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "SAR",
+            "maxLength": 3
+          },
+          {
+            "name": "quantity",
+            "columnName": "quantity",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 1
+          },
+          {
+            "name": "year",
+            "columnName": "year",
+            "type": "integer",
+            "nullable": true
+          },
+          {
+            "name": "images",
+            "columnName": "images",
+            "type": "json",
+            "nullable": true,
+            "comment": "Array of image URLs"
+          },
+          {
+            "name": "video_url",
+            "columnName": "video_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "location_city",
+            "columnName": "location_city",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "location_district",
+            "columnName": "location_district",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "latitude",
+            "columnName": "latitude",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 10,
+            "scale": 8
+          },
+          {
+            "name": "longitude",
+            "columnName": "longitude",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 11,
+            "scale": 8
+          },
+          {
+            "name": "is_negotiable",
+            "columnName": "is_negotiable",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": true
+          },
+          {
+            "name": "is_delivery_available",
+            "columnName": "is_delivery_available",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "delivery_cost",
+            "columnName": "delivery_cost",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 10,
+            "scale": 2
+          },
+          {
+            "name": "views_count",
+            "columnName": "views_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "likes_count",
+            "columnName": "likes_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "shares_count",
+            "columnName": "shares_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "comments_count",
+            "columnName": "comments_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "saves_count",
+            "columnName": "saves_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "active",
+            "comment": "draft, active, sold, expired, removed"
+          },
+          {
+            "name": "featured_until",
+            "columnName": "featured_until",
+            "type": "timestamp",
+            "nullable": true
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "published_at",
+            "columnName": "published_at",
+            "type": "timestamp",
+            "nullable": true
+          },
+          {
+            "name": "sold_at",
+            "columnName": "sold_at",
+            "type": "timestamp",
+            "nullable": true
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_products_seller",
+            "columns": [
+              "seller_id"
+            ]
+          },
+          {
+            "name": "idx_products_category",
+            "columns": [
+              "category_id"
+            ]
+          },
+          {
+            "name": "idx_products_status",
+            "columns": [
+              "status"
+            ]
+          },
+          {
+            "name": "idx_products_created",
+            "columns": [
+              "created_at"
+            ]
+          },
+          {
+            "name": "idx_products_location",
+            "columns": [
+              "location_city"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_products_lang",
+        "label": "Products (Marketplace) Translations",
+        "comment": "Language-specific content for sbn_products",
+        "sqlName": "sbn_products_lang",
+        "layout": {
+          "x": 200,
+          "y": 400
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "product_id",
+            "columnName": "product_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_products",
+              "column": "product_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "brand",
+            "columnName": "brand",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "model",
+            "columnName": "model",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "color",
+            "columnName": "color",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "material",
+            "columnName": "material",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "size",
+            "columnName": "size",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_products_lang_parent",
+            "columns": [
+              "product_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_products_lang_unique",
+            "columns": [
+              "product_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_reactions",
+        "label": "Reactions/Likes",
+        "comment": "Reactions to posts, comments, products, services, articles",
+        "sqlName": "sbn_reactions",
+        "layout": {
+          "x": 600,
+          "y": 1200
+        },
+        "fields": [
+          {
+            "name": "reaction_id",
+            "columnName": "reaction_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "target_type",
+            "columnName": "target_type",
+            "type": "string",
+            "nullable": false,
+            "comment": "post, comment, product, service, article"
+          },
+          {
+            "name": "target_id",
+            "columnName": "target_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "reaction_type",
+            "columnName": "reaction_type",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "like",
+            "comment": "like, love, wow, sad, angry"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_reactions_user",
+            "columns": [
+              "user_id"
+            ]
+          },
+          {
+            "name": "idx_reactions_target",
+            "columns": [
+              "target_type",
+              "target_id"
+            ]
+          },
+          {
+            "name": "idx_reactions_unique",
+            "columns": [
+              "user_id",
+              "target_type",
+              "target_id"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_reports",
+        "label": "Content Reports",
+        "comment": "User reports for inappropriate content",
+        "sqlName": "sbn_reports",
+        "layout": {
+          "x": 0,
+          "y": 2400
+        },
+        "fields": [
+          {
+            "name": "report_id",
+            "columnName": "report_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "reporter_id",
+            "columnName": "reporter_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "target_type",
+            "columnName": "target_type",
+            "type": "string",
+            "nullable": false,
+            "comment": "user, post, product, service, article, comment"
+          },
+          {
+            "name": "target_id",
+            "columnName": "target_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "reason",
+            "columnName": "reason",
+            "type": "string",
+            "nullable": false,
+            "comment": "spam, harassment, inappropriate, fake, other"
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "pending",
+            "comment": "pending, reviewed, action_taken, dismissed"
+          },
+          {
+            "name": "reviewed_by",
+            "columnName": "reviewed_by",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "reviewed_at",
+            "columnName": "reviewed_at",
+            "type": "timestamp",
+            "nullable": true
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_reports_reporter",
+            "columns": [
+              "reporter_id"
+            ]
+          },
+          {
+            "name": "idx_reports_target",
+            "columns": [
+              "target_type",
+              "target_id"
+            ]
+          },
+          {
+            "name": "idx_reports_status",
+            "columns": [
+              "status"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_reports_lang",
+        "label": "Content Reports Translations",
+        "comment": "Language-specific content for sbn_reports",
+        "sqlName": "sbn_reports_lang",
+        "layout": {
+          "x": 200,
+          "y": 2400
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "report_id",
+            "columnName": "report_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_reports",
+              "column": "report_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_reports_lang_parent",
+            "columns": [
+              "report_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_reports_lang_unique",
+            "columns": [
+              "report_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_reviews",
+        "label": "Reviews/Ratings",
+        "comment": "Reviews for products, services, and users",
+        "sqlName": "sbn_reviews",
+        "layout": {
+          "x": 600,
+          "y": 1600
+        },
+        "fields": [
+          {
+            "name": "review_id",
+            "columnName": "review_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "reviewer_id",
+            "columnName": "reviewer_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "target_type",
+            "columnName": "target_type",
+            "type": "string",
+            "nullable": false,
+            "comment": "product, service, user"
+          },
+          {
+            "name": "target_id",
+            "columnName": "target_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "rating",
+            "columnName": "rating",
+            "type": "integer",
+            "nullable": false,
+            "comment": "1-5 stars"
+          },
+          {
+            "name": "images",
+            "columnName": "images",
+            "type": "json",
+            "nullable": true,
+            "comment": "Array of review images"
+          },
+          {
+            "name": "is_verified_purchase",
+            "columnName": "is_verified_purchase",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "helpful_count",
+            "columnName": "helpful_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_reviews_reviewer",
+            "columns": [
+              "reviewer_id"
+            ]
+          },
+          {
+            "name": "idx_reviews_target",
+            "columns": [
+              "target_type",
+              "target_id"
+            ]
+          },
+          {
+            "name": "idx_reviews_rating",
+            "columns": [
+              "rating"
+            ]
+          },
+          {
+            "name": "idx_reviews_created",
+            "columns": [
+              "created_at"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_reviews_lang",
+        "label": "Reviews/Ratings Translations",
+        "comment": "Language-specific content for sbn_reviews",
+        "sqlName": "sbn_reviews_lang",
+        "layout": {
+          "x": 800,
+          "y": 1600
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "review_id",
+            "columnName": "review_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_reviews",
+              "column": "review_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "content",
+            "columnName": "content",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_reviews_lang_parent",
+            "columns": [
+              "review_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_reviews_lang_unique",
+            "columns": [
+              "review_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_saves",
+        "label": "Saved Items",
+        "comment": "User saved/bookmarked items",
+        "sqlName": "sbn_saves",
+        "layout": {
+          "x": 900,
+          "y": 1200
+        },
+        "fields": [
+          {
+            "name": "save_id",
+            "columnName": "save_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "target_type",
+            "columnName": "target_type",
+            "type": "string",
+            "nullable": false,
+            "comment": "post, product, service, article"
+          },
+          {
+            "name": "target_id",
+            "columnName": "target_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "collection_name",
+            "columnName": "collection_name",
+            "type": "string",
+            "nullable": true,
+            "comment": "Optional collection/folder name"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_saves_user",
+            "columns": [
+              "user_id"
+            ]
+          },
+          {
+            "name": "idx_saves_target",
+            "columns": [
+              "target_type",
+              "target_id"
+            ]
+          },
+          {
+            "name": "idx_saves_unique",
+            "columns": [
+              "user_id",
+              "target_type",
+              "target_id"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_saves_lang",
+        "label": "Saved Items Translations",
+        "comment": "Language-specific content for sbn_saves",
+        "sqlName": "sbn_saves_lang",
+        "layout": {
+          "x": 1100,
+          "y": 1200
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "save_id",
+            "columnName": "save_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_saves",
+              "column": "save_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "notes",
+            "columnName": "notes",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_saves_lang_parent",
+            "columns": [
+              "save_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_saves_lang_unique",
+            "columns": [
+              "save_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_service_bookings",
+        "label": "Service Bookings",
+        "comment": "Service booking requests and appointments",
+        "sqlName": "sbn_service_bookings",
+        "layout": {
+          "x": 900,
+          "y": 400
+        },
+        "fields": [
+          {
+            "name": "booking_id",
+            "columnName": "booking_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "service_id",
+            "columnName": "service_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_services",
+              "column": "service_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "customer_id",
+            "columnName": "customer_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "provider_id",
+            "columnName": "provider_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "booking_date",
+            "columnName": "booking_date",
+            "type": "date",
+            "nullable": true
+          },
+          {
+            "name": "booking_time",
+            "columnName": "booking_time",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "duration_minutes",
+            "columnName": "duration_minutes",
+            "type": "integer",
+            "nullable": true
+          },
+          {
+            "name": "price_agreed",
+            "columnName": "price_agreed",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 18,
+            "scale": 2
+          },
+          {
+            "name": "currency",
+            "columnName": "currency",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "SAR",
+            "maxLength": 3
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "pending",
+            "comment": "pending, confirmed, in_progress, completed, cancelled"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "completed_at",
+            "columnName": "completed_at",
+            "type": "timestamp",
+            "nullable": true
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_bookings_service",
+            "columns": [
+              "service_id"
+            ]
+          },
+          {
+            "name": "idx_bookings_customer",
+            "columns": [
+              "customer_id"
+            ]
+          },
+          {
+            "name": "idx_bookings_provider",
+            "columns": [
+              "provider_id"
+            ]
+          },
+          {
+            "name": "idx_bookings_status",
+            "columns": [
+              "status"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_service_bookings_lang",
+        "label": "Service Bookings Translations",
+        "comment": "Language-specific content for sbn_service_bookings",
+        "sqlName": "sbn_service_bookings_lang",
+        "layout": {
+          "x": 1100,
+          "y": 400
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "booking_id",
+            "columnName": "booking_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_service_bookings",
+              "column": "booking_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "notes",
+            "columnName": "notes",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "cancellation_reason",
+            "columnName": "cancellation_reason",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_service_bookings_lang_parent",
+            "columns": [
+              "booking_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_service_bookings_lang_unique",
+            "columns": [
+              "booking_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_service_categories",
+        "label": "Service Categories",
+        "comment": "Hierarchical categories for Hawaa services",
+        "sqlName": "sbn_service_categories",
+        "layout": {
+          "x": 1200,
+          "y": 0
+        },
+        "fields": [
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "parent_id",
+            "columnName": "parent_id",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_service_categories",
+              "column": "category_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "category_type",
+            "columnName": "category_type",
+            "type": "string",
+            "nullable": false,
+            "comment": "classified, marketplace, service, knowledge"
+          },
+          {
+            "name": "slug",
+            "columnName": "slug",
+            "type": "string",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "icon_url",
+            "columnName": "icon_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "cover_url",
+            "columnName": "cover_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "sort_order",
+            "columnName": "sort_order",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "is_active",
+            "columnName": "is_active",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": true
+          },
+          {
+            "name": "items_count",
+            "columnName": "items_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_categories_parent",
+            "columns": [
+              "parent_id"
+            ]
+          },
+          {
+            "name": "idx_categories_type",
+            "columns": [
+              "category_type"
+            ]
+          },
+          {
+            "name": "idx_categories_slug",
+            "columns": [
+              "slug"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_service_categories_lang",
+        "label": "Service Categories Translations",
+        "comment": "Hierarchical categories for Hawaa services translations",
+        "sqlName": "sbn_service_categories_lang",
+        "layout": {
+          "x": 1200,
+          "y": 0
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_service_categories",
+              "column": "category_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_categories_lang_parent",
+            "columns": [
+              "category_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_categories_lang_unique",
+            "columns": [
+              "category_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_services",
+        "label": "Services",
+        "comment": "Service offerings from providers",
+        "sqlName": "sbn_services",
+        "layout": {
+          "x": 600,
+          "y": 400
+        },
+        "fields": [
+          {
+            "name": "service_id",
+            "columnName": "service_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "provider_id",
+            "columnName": "provider_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_service_categories",
+              "column": "category_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "service_type",
+            "columnName": "service_type",
+            "type": "string",
+            "nullable": false,
+            "comment": "one_time, hourly, daily, project_based, subscription"
+          },
+          {
+            "name": "price_min",
+            "columnName": "price_min",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 18,
+            "scale": 2
+          },
+          {
+            "name": "price_max",
+            "columnName": "price_max",
+            "type": "decimal",
+            "nullable": true,
+            "precision": 18,
+            "scale": 2
+          },
+          {
+            "name": "currency",
+            "columnName": "currency",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "SAR",
+            "maxLength": 3
+          },
+          {
+            "name": "duration_min",
+            "columnName": "duration_min",
+            "type": "integer",
+            "nullable": true,
+            "comment": "Minimum duration in minutes"
+          },
+          {
+            "name": "duration_max",
+            "columnName": "duration_max",
+            "type": "integer",
+            "nullable": true,
+            "comment": "Maximum duration in minutes"
+          },
+          {
+            "name": "images",
+            "columnName": "images",
+            "type": "json",
+            "nullable": true
+          },
+          {
+            "name": "video_url",
+            "columnName": "video_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "portfolio_urls",
+            "columnName": "portfolio_urls",
+            "type": "json",
+            "nullable": true,
+            "comment": "Array of portfolio/work samples"
+          },
+          {
+            "name": "location_city",
+            "columnName": "location_city",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "is_remote",
+            "columnName": "is_remote",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "is_onsite",
+            "columnName": "is_onsite",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "availability",
+            "columnName": "availability",
+            "type": "json",
+            "nullable": true,
+            "comment": "Available days/hours"
+          },
+          {
+            "name": "rating_avg",
+            "columnName": "rating_avg",
+            "type": "decimal",
+            "nullable": false,
+            "defaultValue": 0,
+            "precision": 3,
+            "scale": 2
+          },
+          {
+            "name": "rating_count",
+            "columnName": "rating_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "orders_completed",
+            "columnName": "orders_completed",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "views_count",
+            "columnName": "views_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "likes_count",
+            "columnName": "likes_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "saves_count",
+            "columnName": "saves_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "active",
+            "comment": "draft, active, paused, removed"
+          },
+          {
+            "name": "featured_until",
+            "columnName": "featured_until",
+            "type": "timestamp",
+            "nullable": true
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "published_at",
+            "columnName": "published_at",
+            "type": "timestamp",
+            "nullable": true
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_services_provider",
+            "columns": [
+              "provider_id"
+            ]
+          },
+          {
+            "name": "idx_services_category",
+            "columns": [
+              "category_id"
+            ]
+          },
+          {
+            "name": "idx_services_status",
+            "columns": [
+              "status"
+            ]
+          },
+          {
+            "name": "idx_services_created",
+            "columns": [
+              "created_at"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_services_lang",
+        "label": "Services Translations",
+        "comment": "Language-specific content for sbn_services",
+        "sqlName": "sbn_services_lang",
+        "layout": {
+          "x": 800,
+          "y": 400
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "service_id",
+            "columnName": "service_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_services",
+              "column": "service_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_services_lang_parent",
+            "columns": [
+              "service_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_services_lang_unique",
+            "columns": [
+              "service_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_transactions",
+        "label": "Transactions",
+        "comment": "Financial transactions for products and services",
+        "sqlName": "sbn_transactions",
+        "layout": {
+          "x": 600,
+          "y": 2400
+        },
+        "fields": [
+          {
+            "name": "transaction_id",
+            "columnName": "transaction_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "buyer_id",
+            "columnName": "buyer_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "seller_id",
+            "columnName": "seller_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "transaction_type",
+            "columnName": "transaction_type",
+            "type": "string",
+            "nullable": false,
+            "comment": "product, service"
+          },
+          {
+            "name": "item_id",
+            "columnName": "item_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "amount",
+            "columnName": "amount",
+            "type": "decimal",
+            "nullable": false,
+            "precision": 18,
+            "scale": 2
+          },
+          {
+            "name": "currency",
+            "columnName": "currency",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "SAR",
+            "maxLength": 3
+          },
+          {
+            "name": "payment_method",
+            "columnName": "payment_method",
+            "type": "string",
+            "nullable": true,
+            "comment": "cash, card, transfer, wallet"
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "pending",
+            "comment": "pending, completed, cancelled, refunded"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "completed_at",
+            "columnName": "completed_at",
+            "type": "timestamp",
+            "nullable": true
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_transactions_buyer",
+            "columns": [
+              "buyer_id"
+            ]
+          },
+          {
+            "name": "idx_transactions_seller",
+            "columns": [
+              "seller_id"
+            ]
+          },
+          {
+            "name": "idx_transactions_status",
+            "columns": [
+              "status"
+            ]
+          },
+          {
+            "name": "idx_transactions_created",
+            "columns": [
+              "created_at"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_transactions_lang",
+        "label": "Transactions Translations",
+        "comment": "Language-specific content for sbn_transactions",
+        "sqlName": "sbn_transactions_lang",
+        "layout": {
+          "x": 800,
+          "y": 2400
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "transaction_id",
+            "columnName": "transaction_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_transactions",
+              "column": "transaction_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "notes",
+            "columnName": "notes",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_transactions_lang_parent",
+            "columns": [
+              "transaction_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_transactions_lang_unique",
+            "columns": [
+              "transaction_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_ui_labels",
+        "label": "UI Labels",
+        "comment": "Internationalization labels for UI elements",
+        "sqlName": "sbn_ui_labels",
+        "layout": {
+          "x": 0,
+          "y": 2800
+        },
+        "fields": [
+          {
+            "name": "label_id",
+            "columnName": "label_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "label_key",
+            "columnName": "label_key",
+            "type": "string",
+            "nullable": false,
+            "index": true
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "comment": "Language code (ar, en)"
+          },
+          {
+            "name": "text",
+            "columnName": "text",
+            "type": "text",
+            "nullable": false
+          },
+          {
+            "name": "context",
+            "columnName": "context",
+            "type": "string",
+            "nullable": true,
+            "comment": "UI context (nav, button, label, etc.)"
+          },
+          {
+            "name": "category",
+            "columnName": "category",
+            "type": "string",
+            "nullable": true,
+            "comment": "Category grouping"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_ui_labels_key",
+            "columns": [
+              "label_key"
+            ]
+          },
+          {
+            "name": "idx_ui_labels_lang",
+            "columns": [
+              "lang"
+            ]
+          },
+          {
+            "name": "idx_ui_labels_unique",
+            "columns": [
+              "label_key",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_user_role_assignments",
+        "label": "User Role Assignments",
+        "comment": "Many-to-many relationship between users and roles",
+        "sqlName": "sbn_user_role_assignments",
+        "layout": {
+          "x": 200,
+          "y": 100
+        },
+        "fields": [
+          {
+            "name": "assignment_id",
+            "columnName": "assignment_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "role_id",
+            "columnName": "role_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_user_roles",
+              "column": "role_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "assigned_at",
+            "columnName": "assigned_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "assigned_by",
+            "columnName": "assigned_by",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          }
+        ]
+      },
+      {
+        "name": "sbn_user_roles",
+        "label": "User Roles",
+        "comment": "User role assignments",
+        "sqlName": "sbn_user_roles",
+        "layout": {
+          "x": 400,
+          "y": 0
+        },
+        "fields": [
+          {
+            "name": "role_id",
+            "columnName": "role_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "role_code",
+            "columnName": "role_code",
+            "type": "string",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "permissions",
+            "columnName": "permissions",
+            "type": "json",
+            "nullable": true
+          },
+          {
+            "name": "is_system",
+            "columnName": "is_system",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ]
+      },
+      {
+        "name": "sbn_user_roles_lang",
+        "label": "User Roles Translations",
+        "comment": "Language-specific content for sbn_user_roles",
+        "sqlName": "sbn_user_roles_lang",
+        "layout": {
+          "x": 600,
+          "y": 0
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "role_id",
+            "columnName": "role_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_user_roles",
+              "column": "role_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "role_name",
+            "columnName": "role_name",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_user_roles_lang_parent",
+            "columns": [
+              "role_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_user_roles_lang_unique",
+            "columns": [
+              "role_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_user_stats",
+        "label": "User Statistics",
+        "comment": "Aggregated user activity statistics",
+        "sqlName": "sbn_user_stats",
+        "layout": {
+          "x": 900,
+          "y": 2400
+        },
+        "fields": [
+          {
+            "name": "stat_id",
+            "columnName": "stat_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "unique": true,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "products_listed",
+            "columnName": "products_listed",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "products_sold",
+            "columnName": "products_sold",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "services_listed",
+            "columnName": "services_listed",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "services_completed",
+            "columnName": "services_completed",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "articles_published",
+            "columnName": "articles_published",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "total_earnings",
+            "columnName": "total_earnings",
+            "type": "decimal",
+            "nullable": false,
+            "defaultValue": 0,
+            "precision": 18,
+            "scale": 2
+          },
+          {
+            "name": "total_spent",
+            "columnName": "total_spent",
+            "type": "decimal",
+            "nullable": false,
+            "defaultValue": 0,
+            "precision": 18,
+            "scale": 2
+          },
+          {
+            "name": "avg_rating",
+            "columnName": "avg_rating",
+            "type": "decimal",
+            "nullable": false,
+            "defaultValue": 0,
+            "precision": 3,
+            "scale": 2
+          },
+          {
+            "name": "total_reviews",
+            "columnName": "total_reviews",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_stats_user",
+            "columns": [
+              "user_id"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_users",
+        "label": "Users",
+        "comment": "Core user accounts",
+        "sqlName": "sbn_users",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "fields": [
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": true,
+            "index": false
+          },
+          {
+            "name": "email",
+            "columnName": "email",
+            "type": "string",
+            "nullable": false,
+            "unique": true,
+            "index": true
+          },
+          {
+            "name": "username",
+            "columnName": "username",
+            "type": "string",
+            "nullable": false,
+            "unique": true,
+            "index": true
+          },
+          {
+            "name": "password_hash",
+            "columnName": "password_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "phone",
+            "columnName": "phone",
+            "type": "string",
+            "nullable": true,
+            "unique": true
+          },
+          {
+            "name": "phone_verified",
+            "columnName": "phone_verified",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "email_verified",
+            "columnName": "email_verified",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "avatar_url",
+            "columnName": "avatar_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "cover_url",
+            "columnName": "cover_url",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "gender",
+            "columnName": "gender",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "birth_date",
+            "columnName": "birth_date",
+            "type": "date",
+            "nullable": true
+          },
+          {
+            "name": "location_city",
+            "columnName": "location_city",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "location_country",
+            "columnName": "location_country",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "preferred_lang",
+            "columnName": "preferred_lang",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "ar",
+            "maxLength": 2
+          },
+          {
+            "name": "account_type",
+            "columnName": "account_type",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "personal",
+            "comment": "personal, business, verified"
+          },
+          {
+            "name": "is_seller",
+            "columnName": "is_seller",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "is_service_provider",
+            "columnName": "is_service_provider",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "is_content_creator",
+            "columnName": "is_content_creator",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "is_verified",
+            "columnName": "is_verified",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "trust_score",
+            "columnName": "trust_score",
+            "type": "decimal",
+            "nullable": false,
+            "defaultValue": 0,
+            "precision": 5,
+            "scale": 2
+          },
+          {
+            "name": "followers_count",
+            "columnName": "followers_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "following_count",
+            "columnName": "following_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "posts_count",
+            "columnName": "posts_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "active",
+            "comment": "active, suspended, banned"
+          },
+          {
+            "name": "last_login_at",
+            "columnName": "last_login_at",
+            "type": "timestamp",
+            "nullable": true
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_users_email",
+            "columns": [
+              "email"
+            ],
+            "unique": true
+          },
+          {
+            "name": "idx_users_username",
+            "columns": [
+              "username"
+            ],
+            "unique": true
+          },
+          {
+            "name": "idx_users_phone",
+            "columns": [
+              "phone"
+            ]
+          },
+          {
+            "name": "idx_users_status",
+            "columns": [
+              "status"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_users_lang",
+        "label": "Users Translations",
+        "comment": "Language-specific content for sbn_users",
+        "sqlName": "sbn_users_lang",
+        "layout": {
+          "x": 200,
+          "y": 0
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "full_name",
+            "columnName": "full_name",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "bio",
+            "columnName": "bio",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_users_lang_parent",
+            "columns": [
+              "user_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_users_lang_unique",
+            "columns": [
+              "user_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_wiki_articles",
+        "label": "Wiki/Knowledge Articles",
+        "comment": "Knowledge base articles with hierarchical structure",
+        "sqlName": "sbn_wiki_articles",
+        "layout": {
+          "x": 0,
+          "y": 800
+        },
+        "fields": [
+          {
+            "name": "article_id",
+            "columnName": "article_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "author_id",
+            "columnName": "author_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "parent_id",
+            "columnName": "parent_id",
+            "type": "string",
+            "nullable": true,
+            "references": {
+              "table": "sbn_wiki_articles",
+              "column": "article_id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "category_id",
+            "columnName": "category_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_knowledge_categories",
+              "column": "category_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "slug",
+            "columnName": "slug",
+            "type": "string",
+            "nullable": false,
+            "unique": true
+          },
+          {
+            "name": "content_format",
+            "columnName": "content_format",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "markdown",
+            "comment": "markdown, html, plain"
+          },
+          {
+            "name": "cover_image",
+            "columnName": "cover_image",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "reading_time_minutes",
+            "columnName": "reading_time_minutes",
+            "type": "integer",
+            "nullable": true
+          },
+          {
+            "name": "difficulty_level",
+            "columnName": "difficulty_level",
+            "type": "string",
+            "nullable": true,
+            "comment": "beginner, intermediate, advanced, expert"
+          },
+          {
+            "name": "is_featured",
+            "columnName": "is_featured",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false
+          },
+          {
+            "name": "views_count",
+            "columnName": "views_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "likes_count",
+            "columnName": "likes_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "shares_count",
+            "columnName": "shares_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "comments_count",
+            "columnName": "comments_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "saves_count",
+            "columnName": "saves_count",
+            "type": "integer",
+            "nullable": false,
+            "defaultValue": 0
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "defaultValue": "draft",
+            "comment": "draft, published, archived"
+          },
+          {
+            "name": "seo_keywords",
+            "columnName": "seo_keywords",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false
+          },
+          {
+            "name": "published_at",
+            "columnName": "published_at",
+            "type": "timestamp",
+            "nullable": true
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_wiki_author",
+            "columns": [
+              "author_id"
+            ]
+          },
+          {
+            "name": "idx_wiki_parent",
+            "columns": [
+              "parent_id"
+            ]
+          },
+          {
+            "name": "idx_wiki_category",
+            "columns": [
+              "category_id"
+            ]
+          },
+          {
+            "name": "idx_wiki_slug",
+            "columns": [
+              "slug"
+            ],
+            "unique": true
+          },
+          {
+            "name": "idx_wiki_status",
+            "columns": [
+              "status"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_wiki_articles_lang",
+        "label": "Wiki/Knowledge Articles Translations",
+        "comment": "Language-specific content for sbn_wiki_articles",
+        "sqlName": "sbn_wiki_articles_lang",
+        "layout": {
+          "x": 200,
+          "y": 800
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "article_id",
+            "columnName": "article_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_wiki_articles",
+              "column": "article_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "excerpt",
+            "columnName": "excerpt",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "content",
+            "columnName": "content",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "seo_title",
+            "columnName": "seo_title",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "seo_description",
+            "columnName": "seo_description",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_wiki_articles_lang_parent",
+            "columns": [
+              "article_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_wiki_articles_lang_unique",
+            "columns": [
+              "article_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "sbn_wiki_revisions",
+        "label": "Wiki Article Revisions",
+        "comment": "Version history for wiki articles",
+        "sqlName": "sbn_wiki_revisions",
+        "layout": {
+          "x": 600,
+          "y": 800
+        },
+        "fields": [
+          {
+            "name": "revision_id",
+            "columnName": "revision_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "article_id",
+            "columnName": "article_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_wiki_articles",
+              "column": "article_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "editor_id",
+            "columnName": "editor_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_users",
+              "column": "user_id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "revision_number",
+            "columnName": "revision_number",
+            "type": "integer",
+            "nullable": false
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_revisions_article",
+            "columns": [
+              "article_id"
+            ]
+          },
+          {
+            "name": "idx_revisions_editor",
+            "columns": [
+              "editor_id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sbn_wiki_revisions_lang",
+        "label": "Wiki Article Revisions Translations",
+        "comment": "Language-specific content for sbn_wiki_revisions",
+        "sqlName": "sbn_wiki_revisions_lang",
+        "layout": {
+          "x": 800,
+          "y": 800
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "revision_id",
+            "columnName": "revision_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "sbn_wiki_revisions",
+              "column": "revision_id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "content",
+            "columnName": "content",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "change_summary",
+            "columnName": "change_summary",
+            "type": "text",
+            "nullable": true
+          },
+          {
+            "name": "is_auto",
+            "columnName": "is_auto",
+            "type": "boolean",
+            "nullable": false,
+            "defaultValue": false,
+            "comment": "Whether translation is AI-generated"
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_sbn_wiki_revisions_lang_parent",
+            "columns": [
+              "revision_id"
+            ]
+          },
+          {
+            "name": "idx_sbn_wiki_revisions_lang_unique",
+            "columns": [
+              "revision_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      }
+    ]
+  }
+}

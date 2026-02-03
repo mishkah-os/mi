@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNA - لوحة الإدارة</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            color: #e0e6ed;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .user-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-danger {
+            background: #f56565;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #ed8936;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .add-user-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        input,
+        select {
+            padding: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #e0e6ed;
+            font-size: 1rem;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-admin {
+            background: rgba(237, 137, 54, 0.2);
+            color: #f6ad55;
+        }
+
+        .badge-user {
+            background: rgba(72, 187, 120, 0.2);
+            color: #68d391;
+        }
+
+        .badge-active {
+            background: rgba(72, 187, 120, 0.2);
+            color: #68d391;
+        }
+
+        .badge-inactive {
+            background: rgba(245, 101, 101, 0.2);
+            color: #fc8181;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1a1f3a;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 20px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>👥 إدارة المستخدمين</h1>
+            <div class="user-info">
+                <span id="current-user"></span>
+                <button class="btn btn-danger" onclick="logout()">تسجيل الخروج</button>
+            </div>
+        </header>
+
+        <!-- Add User Section -->
+        <div class="section">
+            <h2>إضافة مستخدم جديد</h2>
+            <form class="add-user-form" id="add-user-form" onsubmit="addUser(event)">
+                <input type="text" name="username" placeholder="اسم المستخدم" required>
+                <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+                <input type="password" name="password" placeholder="كلمة المرور" required>
+                <select name="role" required>
+                    <option value="user">مستخدم</option>
+                    <option value="admin">مدير</option>
+                </select>
+                <button type="submit" class="btn btn-primary">إضافة</button>
+            </form>
+        </div>
+
+        <!-- Users Table -->
+        <div class="section">
+            <h2>قائمة المستخدمين</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>المستخدم</th>
+                        <th>البريد</th>
+                        <th>الدور</th>
+                        <th>الحالة</th>
+                        <th>آخر دخول</th>
+                        <th>إجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="users-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div class="modal" id="reset-password-modal">
+        <div class="modal-content">
+            <h3>إعادة تعيين كلمة المرور</h3>
+            <input type="password" id="new-password" placeholder="كلمة المرور الجديدة">
+            <button class="btn btn-primary" onclick="confirmResetPassword()">تأكيد</button>
+            <button class="btn btn-danger" onclick="closeModal()">إلغاء</button>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '/api';
+        const token = localStorage.getItem('token');
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
+
+        let currentResetUserId = null;
+
+        // Check auth
+        if (!token || localStorage.getItem('role') !== 'admin') {
+            alert('Unauthorized! Admin access required.');
+            window.location.href = '/login.html';
+        }
+
+        // Load current user info
+        async function loadUserInfo() {
+            const response = await fetch(`${API_BASE}/auth/me`, { headers });
+            const user = await response.json();
+            document.getElementById('current-user').textContent = `مرحباً، ${user.username}`;
+        }
+
+        // Load users
+        async function loadUsers() {
+            try {
+                const response = await fetch(`${API_BASE}/admin/users`, { headers });
+                const users = await response.json();
+
+                const tbody = document.getElementById('users-tbody');
+                tbody.innerHTML = users.map(user => `
+                    <tr>
+                        <td>${user.id}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td><span class="badge badge-${user.role}">${user.role}</span></td>
+                        <td><span class="badge badge-${user.is_active ? 'active' : 'inactive'}">${user.is_active ? 'نشط' : 'معطل'}</span></td>
+                        <td>${user.last_login ? new Date(user.last_login).toLocaleString('ar') : 'لم يدخل بعد'}</td>
+                        <td>
+                            <button class="btn btn-warning" onclick="resetPassword(${user.id})">إعادة تعيين</button>
+                            <button class="btn btn-primary" onclick="showPassword(${user.id})">عرض كلمة المرور</button>
+                            <button class="btn btn-danger" onclick="deleteUser(${user.id})">حذف</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading users:', error);
+                alert('فشل تحميل المستخدمين');
+            }
+        }
+
+        // Add user
+        async function addUser(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch(`${API_BASE}/admin/users`, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert('تم إضافة المستخدم بنجاح');
+                    e.target.reset();
+                    loadUsers();
+                } else {
+                    const error = await response.json();
+                    alert(`فشل: ${error.detail}`);
+                }
+            } catch (error) {
+                alert('خطأ في الشبكة');
+            }
+        }
+
+        // Reset password
+        function resetPassword(userId) {
+            currentResetUserId = userId;
+            document.getElementById('reset-password-modal').classList.add('active');
+        }
+
+        async function confirmResetPassword() {
+            const newPassword = document.getElementById('new-password').value;
+            if (!newPassword) {
+                alert('الرجاء إدخال كلمة المرور');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/admin/users/${currentResetUserId}/reset-password`, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify({ new_password: newPassword })
+                });
+
+                if (response.ok) {
+                    alert('تم تغيير كلمة المرور');
+                    closeModal();
+                    loadUsers();
+                } else {
+                    alert('فشل تغيير كلمة المرور');
+                }
+            } catch (error) {
+                alert('خطأ في الشبكة');
+            }
+        }
+
+        // Show password (DANGEROUS!)
+        async function showPassword(userId) {
+            if (!confirm('⚠️ تحذير: هذه خاصية خطيرة! هل تريد عرض كلمة المرور؟')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/admin/users/${userId}/password`, { headers });
+                const data = await response.json();
+
+                const message = `كلمة مرور ${data.username}:\n\n${data.password}\n\n⚠️ احفظها في مكان آمن!`;
+                alert(message);
+            } catch (error) {
+                alert('فشل في عرض كلمة المرور');
+            }
+        }
+
+        // Delete user
+        async function deleteUser(userId) {
+            if (!confirm('هل أنت متأكد من حذف هذا المستخدم؟')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/admin/users/${userId}`, {
+                    method: 'DELETE',
+                    headers
+                });
+
+                if (response.ok) {
+                    alert('تم حذف المستخدم');
+                    loadUsers();
+                } else {
+                    const error = await response.json();
+                    alert(`فشل: ${error.detail}`);
+                }
+            } catch (error) {
+                alert('خطأ في الشبكة');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('reset-password-modal').classList.remove('active');
+            document.getElementById('new-password').value = '';
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = '/login.html';
+        }
+
+        // Load on start
+        loadUserInfo();
+        loadUsers();
+    </script>
+</body>
+
+</html>

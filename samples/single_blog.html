@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>مقالة | الكوتش سالي راضي</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ws.mas.com.eg/lib/mishkah.core.js"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        :root[data-theme="light"] {
+            --bg-body: #f8fafc;
+            --bg-grad: radial-gradient(1200px 600px at 50% 0%, #f1f8ff 0%, #f8fafc 55%, #f3f4f6 100%);
+            --bg-surface: #ffffff;
+            --bg-elev: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-fg: #ffffff;
+            --accent: #ec4899;
+            --border: #e2e8f0;
+            --ring: rgba(37, 99, 235, .20);
+            --glass: rgba(255, 255, 255, .76);
+            --shadow: 0 18px 50px rgba(2, 6, 23, .12);
+            --soft: rgba(37, 99, 235, .08);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-body: #040b1a;
+            --bg-grad: radial-gradient(1000px 520px at 50% 0%, #0d2b6a 0%, #071225 55%, #040b1a 100%);
+            --bg-surface: #081a36;
+            --bg-elev: #0b2145;
+            --text-main: #e6f1ff;
+            --text-muted: #9ab0d6;
+            --primary: #8ab4ff;
+            --primary-fg: #041224;
+            --accent: #ff7ab6;
+            --border: #1e3a66;
+            --ring: rgba(138, 180, 255, .22);
+            --glass: rgba(4, 11, 26, .64);
+            --shadow: 0 30px 90px rgba(0, 0, 0, .45);
+            --soft: rgba(138, 180, 255, .12);
+        }
+
+        body {
+            background: var(--bg-grad);
+            background-attachment: fixed;
+            color: var(--text-main);
+            font-family: "Cairo", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+            min-height: 100vh;
+            transition: background .25s, color .25s;
+        }
+
+        .glass {
+            background: var(--glass);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, .08) 0%, rgba(255, 255, 255, .03) 100%);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        :root[data-theme="light"] .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, .92) 0%, rgba(255, 255, 255, .78) 100%);
+        }
+
+        .btn {
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, .04);
+            color: var(--text-main);
+        }
+
+        :root[data-theme="light"] .btn {
+            background: rgba(2, 6, 23, .02)
+        }
+
+        .btn:hover {
+            filter: brightness(1.03)
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--primary-fg);
+            border-color: transparent;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.02)
+        }
+
+        .focus-ring:focus {
+            outline: none;
+            box-shadow: 0 0 0 6px var(--ring)
+        }
+
+        .article-content p {
+            margin-top: 1.25em;
+            line-height: 1.8;
+        }
+
+        .article-content h2 {
+            margin-top: 2em;
+            font-size: 1.75em;
+            font-weight: bold;
+        }
+
+        .article-content h3 {
+            margin-top: 1.5em;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        const API_URL = "../../r/j";
+        const whatsappLink = "";
+
+        function qp(name) {
+            try { return new URLSearchParams(location.search).get(name) || ""; } catch (_) { return ""; }
+        }
+        function safe(v, fb) { return (v == null || v === "") ? (fb || "") : v; }
+        function cleanPath(p) {
+            if (!p) return "";
+            const s = String(p).trim();
+            if (!s) return "";
+            if (s.startsWith("http://") || s.startsWith("https://")) return s;
+            if (s.startsWith("./") || s.startsWith("../")) return s;
+            if (s.startsWith("/")) return s;
+            return "../../" + s;
+        }
+
+        async function apiPost(payload) {
+            try {
+                const r = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
+                    body: new URLSearchParams(payload)
+                });
+                const j = await r.json();
+                if (Array.isArray(j)) return j;
+                if (j && Array.isArray(j.data)) return j.data;
+                if (j && Array.isArray(j.rows)) return j.rows;
+                return j ? [j] : [];
+            } catch (_) {
+                return null;
+            }
+        }
+
+        async function fetchSingleBlog(id, companyId) {
+            const parm = "('" + (companyId || "") + "','" + (id || "") + "')";
+            const rows = await apiPost({ tb: "coach_life_get_post_byId", tbtype: "view", cols: "ID,main_photo,title,post_details,company_id", parm });
+            return rows && rows[0] ? rows[0] : null;
+        }
+
+        const database = {
+            data: {
+                blog: null,
+                loading: true
+            },
+            env: { theme: "dark", lang: "ar", dir: "rtl", companyId: "1D6109C1-53F5-4393-A476-CE1A9CAB99CC" },
+            content: {
+                brand: {
+                    name: { ar: "سالي راضي", en: "Sally Rady" },
+                    logo: "https://sallyrady.com/UploadFiles/web/ecommerce_coash/images/sallyraddylogo.png"
+                }
+            },
+            i18n: {
+                dict: {
+                    btn_lang: { ar: "EN", en: "AR" },
+                    btn_theme: { ar: "الثيم", en: "Theme" },
+                    btn_back: { ar: "← العودة للمدونة", en: "← Back to Blog" },
+                    lbl_loading: { ar: "جاري التحميل…", en: "Loading…" }
+                }
+            }
+        };
+
+        const orders = {
+            "sys.theme": {
+                on: ["click"], gkeys: ["btn:theme"],
+                handler: (e, ctx) => {
+                    const st = ctx.getState();
+                    const next = st.env.theme === "light" ? "dark" : "light";
+                    ctx.setState(s => ({ ...s, env: { ...s.env, theme: next } }));
+                }
+            },
+            "sys.lang": {
+                on: ["click"], gkeys: ["btn:lang"],
+                handler: (e, ctx) => {
+                    const st = ctx.getState();
+                    const next = st.env.lang === "ar" ? "en" : "ar";
+                    const dir = next === "ar" ? "rtl" : "ltr";
+                    ctx.setState(s => ({ ...s, env: { ...s.env, lang: next, dir } }));
+                }
+            }
+        };
+
+        function body(db) {
+            const D = Mishkah.DSL;
+            const t = (k) => db.i18n.dict[k] ? (db.i18n.dict[k][db.env.lang] || db.i18n.dict[k].ar || db.i18n.dict[k].en || k) : k;
+            const content = (obj) => obj ? (obj[db.env.lang] || obj.ar || obj.en || "") : "";
+            const brand = db.content.brand;
+
+            document.documentElement.setAttribute("data-theme", db.env.theme);
+            document.documentElement.setAttribute("lang", db.env.lang);
+            document.documentElement.setAttribute("dir", db.env.dir);
+
+            const Navbar = () => D.Nav({ attrs: { class: "sticky top-0 z-50 glass" } }, [
+                D.Div({ attrs: { class: "max-w-7xl mx-auto px-4 h-20 flex items-center justify-between" } }, [
+                    D.A({ attrs: { href: "coash-life.html", class: "flex items-center gap-3" } }, [
+                        D.Img({ attrs: { src: cleanPath(brand.logo), class: "h-11 w-11 rounded-2xl object-contain border border-[var(--border)] bg-white/50" } }),
+                        D.Div({ attrs: { class: "leading-tight" } }, [
+                            D.Div({ attrs: { class: "text-lg font-black tracking-wide" } }, [content(brand.name)])
+                        ])
+                    ]),
+
+                    D.Div({ attrs: { class: "flex items-center gap-2" } }, [
+                        D.Button({ attrs: { gkey: "btn:lang", class: "btn px-3 py-2 rounded-xl text-xs font-black focus-ring" } }, [t("btn_lang")]),
+                        D.Button({ attrs: { gkey: "btn:theme", class: "btn w-10 h-10 rounded-xl flex items-center justify-center focus-ring" } }, [db.env.theme === "light" ? "🌙" : "☀️"])
+                    ])
+                ])
+            ]);
+
+            if (db.data.loading) {
+                return D.Div({ attrs: { class: "min-h-screen" } }, [
+                    Navbar(),
+                    D.Div({ attrs: { class: "max-w-4xl mx-auto px-4 py-20 text-center" } }, [
+                        D.Div({ attrs: { class: "text-[var(--text-muted)] font-bold text-lg" } }, [t("lbl_loading")])
+                    ])
+                ]);
+            }
+
+            const blog = db.data.blog;
+            if (!blog) {
+                return D.Div({ attrs: { class: "min-h-screen" } }, [
+                    Navbar(),
+                    D.Div({ attrs: { class: "max-w-4xl mx-auto px-4 py-20 text-center" } }, [
+                        D.Div({ attrs: { class: "text-[var(--text-muted)] font-bold text-lg" } }, [content({ ar: "لم يتم العثور على المقالة", en: "Article not found" })]),
+                        D.A({ attrs: { href: "coash-life.html#blog", class: "mt-6 inline-block btn-primary px-6 py-4 rounded-2xl font-bold focus-ring" } }, [t("btn_back")])
+                    ])
+                ]);
+            }
+
+            return D.Div({ attrs: { class: "min-h-screen" } }, [
+                Navbar(),
+
+                D.Article({ attrs: { class: "pt-6 pb-16" } }, [
+                    D.Div({ attrs: { class: "max-w-4xl mx-auto px-4" } }, [
+                        D.A({ attrs: { href: "coash-life.html#blog", class: "inline-flex items-center gap-2 btn px-4 py-3 rounded-2xl font-bold focus-ring mb-6" } }, [
+                            D.I({ attrs: { class: "fa-solid fa-arrow-right" } }),
+                            t("btn_back")
+                        ]),
+
+                        blog.main_photo ? D.Div({ attrs: { class: "rounded-[2.5rem] overflow-hidden border border-[var(--border)] shadow-soft mb-8" } }, [
+                            D.Img({ attrs: { src: cleanPath(blog.main_photo), class: "w-full h-auto max-h-[60vh] object-cover" } })
+                        ]) : null,
+
+                        D.Div({ attrs: { class: "card rounded-[2.5rem] p-8 sm:p-12" } }, [
+                            D.H1({ attrs: { class: "text-3xl sm:text-4xl lg:text-5xl font-serif font-bold leading-tight" } }, [safe(blog.title, "")]),
+
+                            D.Div({ attrs: { class: "mt-8 article-content text-[var(--text-muted)] leading-relaxed text-lg" } }, [
+                                safe(blog.post_details, "").split("\n").map(p => D.P({}, [p.trim()]))
+                            ])
+                        ])
+                    ])
+                ])
+            ]);
+        }
+
+        Mishkah.app.setBody(body);
+        const app = Mishkah.app.create(database, orders);
+        app.mount("#app");
+
+        document.documentElement.dataset.theme = app.getState().env.theme;
+
+        (async () => {
+            const blogId = qp("id");
+            if (!blogId) {
+                app.setState(s => ({ ...s, data: { ...s.data, loading: false, blog: null } }));
+                return;
+            }
+
+            const st = app.getState();
+            const blog = await fetchSingleBlog(blogId, st.env.companyId);
+            app.setState(s => ({ ...s, data: { ...s.data, blog, loading: false } }));
+        })().catch(_ => app.setState(s => ({ ...s, data: { ...s.data, loading: false } })));
+    </script>
+</body>
+
+</html>

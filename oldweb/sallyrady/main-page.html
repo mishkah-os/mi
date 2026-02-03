@@ -1,0 +1,920 @@
+
+
+<style>
+    .background-media-text__video video {
+        max-width: 100%;
+        height: auto;
+        max-height: 720px;
+        /* Adjust resolution */
+    }
+
+    .bt_bb_color_scheme_6.bt_bb_button.bt_bb_style_filled a:hover {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+
+        color: #ffffff;
+    }
+
+
+    .bt_bb_color_scheme_6.bt_bb_button.bt_bb_style_filled a {
+        box-shadow: 0 0 0 rgba(0, 0, 0, .3);
+
+        color: #ffffff;
+    }
+
+
+
+
+    .bt_bb_color_scheme_4.bt_bb_icon.bt_bb_style_outline .bt_bb_icon_holder:before {
+        background-color: transparent;
+        box-shadow: 0 0 0 2px #b915d7 inset;
+        color: #b915d7;
+    }
+
+
+    .bt_bb_row_holder .bt_bb_column {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+     .slider-wrapper {
+        position: relative;
+        padding-bottom: 60px; /* مساحة كافية للنقاط */
+    }
+
+    .slick-dots {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+    }
+
+    /* تخصيص شكل النقاط */
+    .slick-dots li button:before {
+        font-size: 12px;
+        color: #501f5b;
+        opacity: 0.75;
+    }
+
+    .slick-dots li.slick-active button:before {
+        color: #FF6F61;
+        opacity: 1;
+    }
+
+    /* للموبايل ضبط المسافات */
+    @media (max-width: 768px) {
+        .slider-wrapper {
+            padding-bottom: 50px;
+        }
+        .slick-dots {
+            bottom: 0;
+        }
+    }
+    .modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+
+.modal-box {
+  display: none;
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; max-width: 600px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 15px;
+  background: #501f5b;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+.modal-footer {
+  padding: 10px 15px;
+  text-align: right;
+  background: #f9f9f9;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+}
+
+.confirm-btn {
+  padding: 8px 16px;
+  background-color: #501f5b;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+</style>
+<div class="btContentWrap btClear">
+    <div class="btContentHolder">
+
+        <div class="btContent">
+
+
+            <div class="bt_bb_wrapper" data-templates-time="">2
+                <section id="bt_bb_section67a40b14dc6c5"
+                    class="bt_bb_section bt_bb_layout_wide bt_bb_vertical_align_top bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm bt_bb_highlighted_no"
+                    data-bt-override-class="null">
+                    <div class="bt_bb_port">
+                        <div class="bt_bb_cell">
+                            <div class="bt_bb_cell_inner">
+                                <div class="bt_bb_row " data-bt-override-class="{}">
+                                    <div class="bt_bb_row_holder">
+                                        <div class="bt_bb_column col-xxl-12 col-xl-12 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal"
+                                            data-width="12" data-bt-override-class="{}">
+                                            <div class="bt_bb_column_content">
+                                                <div class="bt_bb_column_content_inner">
+                                                    <div class="bt_bb_content_slider bt_bb_gap_no_gap bt_bb_arrows_size_normal bt_bb_show_dots_hide bt_bb_height_auto bt_bb_animation_fade bt_bb_animation_fade animate"
+                                                        data-bt-override-class="{}">
+                                                        <div class="slick-slider fade" data-slick='{ "lazyLoad": "progressive", "cssEase": "ease-out", "speed": "600", "accessibility": false, "fade": true, 
+"prevArrow": "&lt;button type=\"button\" class=\"slick-prev\" aria-label=\"Previous\" tabindex=\"0\" role=\"button\"&gt;&lt;/button&gt;", 
+"nextArrow": "&lt;button type=\"button\" class=\"slick-next\" aria-label=\"Next\" tabindex=\"0\" role=\"button\"&gt;&lt;/button&gt;", 
+"adaptiveHeight": true,"autoplay": true,"autoplaySpeed": 3000}'>
+                                                            <div class="bt_bb_content_slider_item bt_bb_column_background_image bt_bb_highlighted_no"
+                                                                style="; background-image: url(&#039;/UploadFiles/web/ecommerce_coash/images/bgn-slider-01.jpg&#039;);margin:35px;  ">
+                                                                <div class="bt_bb_content_slider_item_content content">
+                                                                    <div class=" bt_bb_row_inner"
+                                                                        data-bt-override-class="{}">
+                                                                        <div class="bt_bb_row_inner_holder">
+                                                                            <div class="bt_bb_column_inner col-xxl-5 col-xl-5 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal"
+                                                                                data-width="5"
+                                                                                data-bt-override-class="{}">
+                                                                                <div class="bt_bb_column_inner_content">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="bt_bb_column_inner col-xxl-7 col-xl-7 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal bt_bb_animation_fade_in bt_bb_animation_zoom_in animate bt_bb_highlighted_no"
+                                                                                data-width="7"
+                                                                                data-bt-override-class="{}">
+                                                                                <div class="bt_bb_column_inner_content">
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+                                                                                    <header
+                                                                                        class="bt_bb_headline bt_bb_dash_none bt_bb_subheadline bt_bb_size_extralarge bt_bb_align_inherit"
+                                                                                        data-bt-override-class="null">
+                                                                                        <h2>
+                                                                                            <span
+                                                                                                class="bt_bb_headline_content"
+                                                                                                style="direction: rtl;">
+                                                                                                <span>
+                                                                                                    سالي راضي
+                                                                                                    <br />
+                                                                                                    <strong
+                                                                                                        style="padding: 151px;">لايف
+                                                                                                        كوتش </strong>
+                                                                                                </span>
+                                                                                            </span>
+                                                                                        </h2>
+                                                                                        <div class="bt_bb_headline_subheadline"
+                                                                                            style="direction: rtl;">
+                                                                                            متخصصة في العلاقات الزوجية
+                                                                                            والأسرية وتنمية الذات، مع
+                                                                                            خبرة واسعة في الجلسات
+                                                                                            الفردية والجروب كوتشنج.
+                                                                                            تساعد عملاءها على فهم أنفسهم
+                                                                                            بشكل أعمق من خلال التدوين
+                                                                                            وأدوات الكوتشنج الفعالة.
+                                                                                        </div>
+                                                                                    </header>
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_medium"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+
+
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="bt_bb_content_slider_item bt_bb_column_background_image bt_bb_highlighted_no"
+                                                                style=";background-image:url(&#039;/UploadFiles/web/ecommerce_coash/images/bgn-slider-02.jpg&#039;); margin:35px;">
+                                                                <div class="bt_bb_content_slider_item_content content">
+                                                                    <div class=" bt_bb_row_inner"
+                                                                        data-bt-override-class="{}">
+                                                                        <div class="bt_bb_row_inner_holder">
+                                                                            <div class="bt_bb_column_inner col-xxl-7 col-xl-7 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal bt_bb_animation_fade_in bt_bb_animation_zoom_in animate bt_bb_highlighted_no"
+                                                                                data-width="7"
+                                                                                data-bt-override-class="{}">
+                                                                                <div class="bt_bb_column_inner_content">
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+                                                                                    <header
+                                                                                        class="bt_bb_headline bt_bb_dash_none bt_bb_subheadline bt_bb_size_extralarge bt_bb_align_inherit"
+                                                                                        data-bt-override-class="null">
+                                                                                        <h2>
+                                                                                            <span
+                                                                                                class="bt_bb_headline_content">
+                                                                                                <span>
+                                                                                                    <strong>الاهتمام
+                                                                                                        بقضايا حياتك
+                                                                                                    </strong> </span>
+                                                                                            </span>
+                                                                                        </h2>
+                                                                                        <div
+                                                                                            class="bt_bb_headline_subheadline">
+                                                                                            نحن جميعًا نعلم كم يمكن أن
+                                                                                            تكون الحياة مليئة بالتحديات
+                                                                                            والصعوبات، وأنه لا يوجد
+                                                                                            دائمًا جواب لكل المشاكل التي
+                                                                                            قد تواجهها. أنا هنا
+                                                                                            لمساعدتك.</div>
+                                                                                    </header>
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_medium"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+
+
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+                                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm"
+                                                                                        data-bt-override-class="null">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="bt_bb_column_inner col-xxl-5 col-xl-5 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal"
+                                                                                data-width="5"
+                                                                                data-bt-override-class="{}">
+                                                                                <div class="bt_bb_column_inner_content">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- cell_inner -->
+                        </div><!-- cell -->
+                    </div><!-- port -->
+                </section>
+                <section id="bt_bb_section67a40b14dd6ab"
+                class="bt_bb_section bt_bb_layout_wide bt_bb_vertical_align_top bt_bb_hidden_md bt_bb_hidden_lg bt_bb_highlighted_no"
+                data-bt-override-class="null">
+                <div class="bt_bb_port">
+                    <div class="bt_bb_cell">
+                        <div class="bt_bb_cell_inner">
+                            <div class="bt_bb_row" data-bt-override-class="{}">
+                                <div class="bt_bb_row_holder">
+                                    <div class="bt_bb_column col-xxl-12 col-xl-12 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal"
+                                        data-width="12" data-bt-override-class="{}">
+                                        <div class="bt_bb_column_content">
+                                            <div class="bt_bb_column_content_inner">
+                                                <div class="bt_bb_content_slider bt_bb_gap_no_gap bt_bb_arrows_size_normal bt_bb_show_dots_hide bt_bb_height_auto bt_bb_animation_fade bt_bb_animation_fade animate"
+                                                    data-bt-override-class="{}">
+                                                    <div class="slick-slider fade"
+                                                        data-slick='{
+                                                            "lazyLoad": "progressive",
+                                                            "cssEase": "ease-out",
+                                                            "speed": 600,
+                                                            "accessibility": false,
+                                                            "fade": true,
+                                                            "prevArrow": "<button type=\"button\" class=\"slick-prev\" aria-label=\"Previous\" tabindex=\"0\" role=\"button\"></button>",
+                                                            "nextArrow": "<button type=\"button\" class=\"slick-next\" aria-label=\"Next\" tabindex=\"0\" role=\"button\"></button>",
+                                                            "adaptiveHeight": true,
+                                                            "autoplay": true,
+                                                            "autoplaySpeed": 3000
+                                                        }'>
+            
+                                                        <!-- Slide 1 -->
+                                                        <div class="bt_bb_content_slider_item bt_bb_column_background_image bt_bb_background_overlay_light_solid bt_bb_highlighted_no"
+                                                            style="background-image:url('/UploadFiles/web/ecommerce_coash/images/mobile.jpg'); background-size: cover; background-position: center; min-height: 550px;">
+                                                            <div class="bt_bb_content_slider_item_content content">
+                                                                <div class="bt_bb_row_inner" data-bt-override-class="{}">
+                                                                    <div class="bt_bb_row_inner_holder">
+                                                                       
+                                                                        <div class="bt_bb_column_inner col-xxl-7 col-xl-7 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal bt_bb_animation_fade_in bt_bb_animation_zoom_in animate bt_bb_highlighted_no"
+                                                                            data-width="7" data-bt-override-class="{}">
+                                                                            <div class="bt_bb_column_inner_content" style="padding-top: 41px;">
+                                                    
+                                                                                <header
+                                                                                    class="bt_bb_headline bt_bb_dash_none bt_bb_subheadline bt_bb_size_extralarge bt_bb_align_inherit" style="margin: 12px;">
+                                                                                    <h2>
+                                                                                        </br></br></br>
+                                                                                        <span class="bt_bb_headline_content">
+                                                                                            <span>
+                                                                                                سالي راضي
+                                                                                               
+                                                                                            </span>
+                                                                                        </span>
+                                                                                    </h2>
+                                                                                    <div class="bt_bb_headline_subheadline" style="direction: rtl;">
+                                                                                       مدرب حياة لعلاقات الأسرة وتحقيق الذات، وكاتب ورائد أعمال.
+                                                                                    </div>
+                                                                                </header>
+                                                                                <div class="bt_bb_button bt_bb_color_scheme_6 bt_bb_icon_position_left bt_bb_style_filled bt_bb_size_normal bt_bb_width_full bt_bb_shape_inherit bt_bb_target_self bt_bb_align_inherit bt_bb_hidden_ms bt_bb_hidden_sm bt_bb_hidden_md bt_bb_hidden_lg" style=" margin: 10px" data-bt-override-class="{}"><a href="/web/index?id=@indexidxaboutus" target="_self" class="bt_bb_link" title="FIND OUT MORE"><span class="bt_bb_button_text">  قراه المزيد</span></a></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+            
+                                                        <!-- Slide 2 -->
+                                                        <div class="bt_bb_content_slider_item bt_bb_column_background_image bt_bb_background_overlay_light_solid bt_bb_highlighted_no"
+                                                            style="background-image:url('/UploadFiles/web/ecommerce_coash/images/mobile_2.jpg'); background-size: cover; background-position: center; min-height: 550px;">
+                                                            <div class="bt_bb_content_slider_item_content content">
+                                                                <div class="bt_bb_row_inner" data-bt-override-class="{}">
+                                                                    <div class="bt_bb_row_inner_holder">
+                                                                        <div class="bt_bb_column_inner col-xxl-7 col-xl-7 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal bt_bb_animation_fade_in bt_bb_animation_zoom_in animate bt_bb_highlighted_no"
+                                                                            data-width="7" data-bt-override-class="{}">
+                                                                            <div class="bt_bb_column_inner_content" style="padding-top: 41px;">
+                                                                                <header
+                                                                                    class="bt_bb_headline bt_bb_dash_none bt_bb_subheadline bt_bb_size_extralarge bt_bb_align_inherit" style="margin: 12px;">
+                                                                                    <h2>
+                                                                                        </br></br></br>
+                                                                                        <span class="bt_bb_headline_content">
+                                                                                             <span>
+                                                                                                سالي راضي
+                                                                                               
+                                                                                            </span>
+                                                                                        </span>
+                                                                                    </h2>
+                                                                                    <div class="bt_bb_headline_subheadline" style="direction: rtl;">
+                                                                                       مدرب حياة لعلاقات الأسرة وتحقيق الذات، وكاتب ورائد أعمال.
+                                                                                    </div>
+                                                                                </header>
+                                                                                      <div class="bt_bb_button bt_bb_color_scheme_6 bt_bb_icon_position_left bt_bb_style_filled bt_bb_size_normal bt_bb_width_full bt_bb_shape_inherit bt_bb_target_self bt_bb_align_inherit bt_bb_hidden_ms bt_bb_hidden_sm bt_bb_hidden_md bt_bb_hidden_lg" style=" margin: 10px" data-bt-override-class="{}"><a href="/web/index?id=@indexidxaboutus" target="_self" class="bt_bb_link" title="FIND OUT MORE"><span class="bt_bb_button_text">  قراه المزيد</span></a></div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                       
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+            
+                                                    </div> <!-- slick-slider -->
+                                                </div> <!-- bt_bb_content_slider -->
+                                            </div> <!-- column_content_inner -->
+                                        </div> <!-- column_content -->
+                                    </div> <!-- column -->
+                                </div> <!-- row_holder -->
+                            </div> <!-- row -->
+                        </div> <!-- cell_inner -->
+                    </div> <!-- cell -->
+                </div> <!-- port -->
+            </section>
+            
+                <section id="bt_bb_section67a40b14e06d6"
+                    class="bt_bb_section bt_bb_layout_boxed_1200 bt_bb_vertical_align_top bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm bt_bb_highlighted_no"
+                    data-bt-override-class="null">
+                    <div class="bt_bb_background_image_holder_wrapper">
+                        <div class="bt_bb_background_image_holder" data-parallax-zoom-start="1"
+                            data-parallax-zoom-end="1" data-parallax-blur-start="0" data-parallax-blur-end="0"
+                            data-parallax-opacity-start="1" data-parallax-opacity-end="1"
+                            style="background-image: url(&#039;/UploadFiles/web/ecommerce_coash/images/2018_01_bgn-quote.jpg&#039;); ">
+                        </div>
+                    </div>
+                    <div class="bt_bb_port">
+                        <div class="bt_bb_cell">
+                            <div class="bt_bb_cell_inner">
+                                <div class="bt_bb_row " data-bt-override-class="{}">
+                                    <div class="bt_bb_row_holder">
+                                        <div class="bt_bb_column col-xxl-7 col-xl-7 bt_bb_vertical_align_middle bt_bb_align_center bt_bb_padding_normal bt_bb_animation_fade_in bt_bb_animation_zoom_in animate bt_bb_highlighted_no"
+                                            data-width="7" data-bt-override-class="{}">
+                                            <div class="bt_bb_column_content">
+                                                <div class="bt_bb_column_content_inner">
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm"
+                                                        data-bt-override-class="null"></div>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm"
+                                                        data-bt-override-class="null"></div>
+                                                    <div class="bt_bb_image bt_bb_shape_square bt_bb_target_self bt_bb_align_inherit bt_bb_hover_style_simple bt_bb_content_display_always bt_bb_content_align_middle"
+                                                        data-bt-override-class="{}"></div>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_medium"
+                                                        data-bt-override-class="null"></div>
+                                                    <header
+                                                        class="bt_bb_headline bt_bb_dash_none bt_bb_subheadline bt_bb_size_extralarge bt_bb_align_inherit"
+                                                        data-bt-override-class="null">
+                                                        <div class="bt_bb_headline_subheadline"> لايف كوتش وكوتش علاقات
+                                                            متخصصة في العلاقات الزوجية والأسرية وتنمية الذات، مع خبرة
+                                                            واسعة في الجلسات الفردية والجروب كوتشنج. تساعد عملاءها على
+                                                            فهم أنفسهم بشكل أعمق من خلال التدوين وأدوات الكوتشنج
+                                                            الفعالة.
+                                                        </div>
+                                                    </header>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_medium"
+                                                        data-bt-override-class="null"></div>
+                                                    <div class="btReadMoreColumn">
+                                                        <div class="bt_bb_button bt_bb_icon_position_right bt_bb_style_filled bt_bb_size_normal"
+                                                            data-bt-override-class="{}" >
+                                                            <a href="/web/index?id=9cd9a4d8025046e78457778c36a1f56daboutus"
+                                                                target="_self" class="bt_bb_link"
+                                                                title="CONTINUE READING"
+                                                                style="background-color: #501f5b;">
+                                                                <span data-ico-fa="" class="bt_bb_icon_holder"></span>
+                                                                <span class="bt_bb_button_text"> قراه المزيد</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_extra_large"
+                                                        data-bt-override-class="null"></div>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm"
+                                                        data-bt-override-class="null"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bt_bb_column col-xxl-5 col-xl-5 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal"
+                                            data-width="5" data-bt-override-class="{}">
+                                            <div class="bt_bb_column_content">
+                                                <div class="bt_bb_column_content_inner"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- cell_inner -->
+                        </div><!-- cell -->
+                    </div><!-- port -->
+                </section>
+                <section id="bt_bb_section67a40b14dc6c5"
+                    class="bt_bb_section bt_bb_layout_wide bt_bb_vertical_align_top bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm bt_bb_highlighted_no"
+                    data-bt-override-class="null">
+                    <div class="bt_bb_port">
+                        <div class="bt_bb_cell">
+                            <div class="bt_bb_cell_inner">
+                                <div class="bt_bb_row " data-bt-override-class="{}">
+                                    <div class="bt_bb_row_holder">
+                                        <div data-section-id="161228361857f0bb65" data-section-type="video-section"
+                                            class="video-parent-section background-media-text background-media-text--161228361857f0bb65 background-media-text--550 aos-init loaded aos-animate"
+                                            data-aos="background-media-text__animation" style="
+    width: 100%;">
+
+                                            <div class="background-media-text__video"><video
+                                                    id="Mp4Video-161228361857f0bb65"
+                                                    src="/UploadFiles/web/ecommerce_coash/images/logo_video.mp4" loop=""
+                                                    muted="" playsinline="" autoplay="" style="
+    width: 100%;"></video></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- cell_inner -->
+                        </div><!-- cell -->
+                    </div><!-- port -->
+                </section>
+
+                <section id="bt_bb_section67a40b14de5f3"
+                    class="bt_bb_section bt_bb_color_scheme_6 bt_bb_layout_boxed_1200 bt_bb_vertical_align_top bt_bb_bottom_spacing_medium bt_bb_hidden_md bt_bb_hidden_lg bt_bb_top_negative_margin_normal bt_bb_highlighted_no"
+                    style="background: transparent;; --section-primary-color:#ffffff; --section-secondary-color:#d51cf7;"
+                    data-bt-override-class="null">
+                    <div class="bt_bb_port">
+                        <div class="bt_bb_cell">
+                            <div class="bt_bb_cell_inner">
+                                <div class="bt_bb_row  bt_bb_column_gap_15" style="margin-left: 0; margin-right: 0;"
+                                    data-bt-override-class="{}">
+                                    <div class="bt_bb_row_holder">
+
+                                        <div data-section-id="161228361857f0bb65" data-section-type="video-section"
+                                            class="video-parent-section background-media-text background-media-text--161228361857f0bb65 background-media-text--550 aos-init loaded aos-animate"
+                                            data-aos="background-media-text__animation" style="
+width: 100%;">
+
+                                            <div class="background-media-text__video"><video
+                                                    id="Mp4Video-161228361857f0bb65"
+                                                    src="/UploadFiles/web/ecommerce_coash/images/logo_video.mp4" loop=""
+                                                    muted="" playsinline="" autoplay="" style="
+width: 100%;"></video></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div><!-- cell_inner -->
+                        </div><!-- cell -->
+                    </div><!-- port -->
+                </section>
+                <section id="bt_bb_section67c8a42506183"
+                    class="bt_bb_section bt_bb_layout_boxed_1200 bt_bb_vertical_align_top bt_bb_highlighted_no"
+                    data-bt-override-class="null">
+                    <div class="bt_bb_port">
+                        <div class="bt_bb_cell">
+                            <div class="bt_bb_cell_inner">
+                                <div class="bt_bb_row  bt_bb_column_gap_10 bt_bb_hidden_xs bt_bb_hidden_ms"
+                                    data-bt-override-class="{}" data-structure="3-3-3-3">
+                                    <div class="bt_bb_row_holder" id="row">
+
+
+
+                </section>
+
+
+                <section id="bt_bb_section67a40b14e0f43"
+                    class="bt_bb_section bt_bb_layout_boxed_1200 bt_bb_vertical_align_top bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large bt_bb_hidden_md bt_bb_hidden_lg bt_bb_highlighted_no"
+                    data-bt-override-class="null">
+                    <div class="bt_bb_background_image_holder_wrapper">
+                        <div class="bt_bb_background_image_holder" data-parallax-zoom-start="1"
+                            data-parallax-zoom-end="1" data-parallax-blur-start="0" data-parallax-blur-end="0"
+                            data-parallax-opacity-start="1" data-parallax-opacity-end="1"
+                            style=" background-image:url(&#039;https://celeste.bold-themes.com/main-demo/wp-content/uploads/sites/3/2018/01/bgn-slider-02-1.jpg&#039;);">
+                        </div>
+                    </div>
+                    <div class="bt_bb_port" style="padding-top:0px !important ;padding-bottom:0px !important">
+                        <div class="bt_bb_cell">
+                            <div class="bt_bb_cell_inner">
+                                <div class="bt_bb_row " data-bt-override-class="{}">
+                                    <div class="bt_bb_row_holder">
+                                        <div class="bt_bb_column col-xxl-7 col-xl-7 bt_bb_vertical_align_middle bt_bb_align_center bt_bb_padding_normal bt_bb_animation_fade_in bt_bb_animation_zoom_in animate bt_bb_highlighted_no"
+                                            data-width="7" data-bt-override-class="{}">
+                                            <div class="bt_bb_column_content">
+                                                <div class="bt_bb_column_content_inner">
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm"
+                                                        data-bt-override-class="null"></div>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm"
+                                                        data-bt-override-class="null"></div>
+                                                    <div class="bt_bb_image bt_bb_shape_square bt_bb_target_self bt_bb_align_inherit bt_bb_hover_style_simple bt_bb_content_display_always bt_bb_content_align_middle"
+                                                        data-bt-override-class="{}"><span><img loading="lazy"
+                                                                decoding="async" 
+                                                                src="/UploadFiles/web/ecommerce_coash/images/2018_01_bgn-quote.jpg"
+                                                                class="attachment-full size-full"
+                                                                alt="/UploadFiles/web/ecommerce_coash/images/2018_01_bgn-quote.jpg"
+                                                                data-full_image_src="/UploadFiles/web/ecommerce_coash/images/2018_01_bgn-quote.jpg"
+                                                                title="quote" /></span></div>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_medium"
+                                                        data-bt-override-class="null"></div>
+                                                    <header
+                                                        class="bt_bb_headline bt_bb_dash_none bt_bb_subheadline bt_bb_size_extralarge bt_bb_align_inherit"
+                                                        data-bt-override-class="null">
+                                                        <div class="bt_bb_headline_subheadline">لايف كوتش وكوتش علاقات متخصصة في العلاقات الزوجية والأسرية وتنمية الذات، مع خبرة واسعة في الجلسات الفردية والجروب كوتشنج. تساعد عملاءها على فهم أنفسهم بشكل أعمق من خلال التدوين وأدوات الكوتشنج الفعالة.
+                                                        </div>
+                                                    </header>
+                                                    <div class="bt_bb_button bt_bb_color_scheme_6 bt_bb_icon_position_left bt_bb_style_filled bt_bb_size_normal bt_bb_width_full bt_bb_shape_inherit bt_bb_target_self bt_bb_align_inherit bt_bb_hidden_ms bt_bb_hidden_sm bt_bb_hidden_md bt_bb_hidden_lg" style=" margin: 10px" data-bt-override-class="{}"><a href="/web/index?id=@indexidxaboutus" target="_self" class="bt_bb_link" title="FIND OUT MORE"><span class="bt_bb_button_text">  قراه المزيد</span></a></div>
+
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div><!-- cell_inner -->
+                        </div><!-- cell -->
+                    </div><!-- port -->
+                </section>
+
+                <section id="bt_bb_section6809379309eee"
+                class="bt_bb_section bt_bb_color_scheme_6 bt_bb_layout_boxed_right_1200 bt_bb_vertical_align_top bt_bb_bottom_spacing_medium bt_bb_top_negative_margin_extra_large bt_bb_highlighted_no" style=" max-width:100% !important; height:auto;"
+                >
+                <div class="bt_bb_port">
+                    <div class="bt_bb_cell" style="padding-left:0 !important">
+                        <div class="bt_bb_cell_inner">
+                            <div class="bt_bb_row" data-bt-override-class="{}" data-structure="7-5">
+                                <div class="bt_bb_row_holder">
+                                    <div class="bt_bb_column col-xl-5 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal bt_bb_animation_fade_in animate bt_bb_highlighted_no animated"
+                                         >
+                                        <div class="bt_bb_column_content">
+                                            <div class="bt_bb_column_content_inner">
+                                            <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_normal"
+                                                                        data-bt-override-class="null"></div>
+                                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_normal"
+                                                                        data-bt-override-class="null"></div>
+                                                                        <div class="slider-wrapper">
+                                                                            <div id="slick" class="bt_bb_content_slider"></div>
+                                                                        </div>
+                                                                        
+                                            </div>
+                                        </div>
+                                    </div> <!-- /column -->
+                                </div> <!-- /row_holder -->
+                            </div> <!-- /row -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+              
+
+
+                <section id="bt_bb_section67a40b14e60c8"
+                    class="bt_bb_section bt_bb_layout_boxed_1200 bt_bb_vertical_align_top bt_bb_top_spacing_extra_large bt_bb_bottom_spacing_extra_large bt_bb_highlighted_no"
+                    data-bt-override-class="null">
+                    <div class="bt_bb_background_image_holder_wrapper">
+                        <div class="bt_bb_background_image_holder" data-parallax-zoom-start="1"
+                            data-parallax-zoom-end="1" data-parallax-blur-start="0" data-parallax-blur-end="0"
+                            data-parallax-opacity-start="1" data-parallax-opacity-end="1"
+                            style=" background-image:url(&#039;/UploadFiles/web/ecommerce_coash/images/bgn-slider-03.jpg&#039;);">
+                        </div>
+                    </div>
+                    <div class="bt_bb_port">
+                        <div class="bt_bb_cell">
+                            <div class="bt_bb_cell_inner">
+                                <div class="bt_bb_row " data-bt-override-class="{}">
+                                    <div class="bt_bb_row_holder">
+                                        <div class="bt_bb_column col-xxl-6 col-xl-6 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal"
+                                            data-width="6" data-bt-override-class="{}">
+                                            <div class="bt_bb_column_content">
+                                                <div class="bt_bb_column_content_inner"></div>
+                                            </div>
+                                        </div>
+                                        <div class="bt_bb_column col-xxl-6 col-xl-6 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal bt_bb_animation_fade_in bt_bb_animation_zoom_out animate bt_bb_highlighted_no"
+                                            data-width="6" data-bt-override-class="{}">
+                                            <div class="bt_bb_column_content">
+                                                <div class="bt_bb_column_content_inner">
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm"
+                                                        data-bt-override-class="null"></div>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm"
+                                                        data-bt-override-class="null"></div>
+                                                    <header
+                                                        class="bt_bb_headline bt_bb_dash_none bt_bb_subheadline bt_bb_size_extralarge bt_bb_align_inherit"
+                                                        data-bt-override-class="null">
+                                                        <h2>
+                                                            <span class="bt_bb_headline_content"
+                                                                style="direction: rtl;">
+                                                                <span>
+                                                                    <strong>ابدأ الآن</strong><br />
+                                                                    مع الكوتشينج الحياتي
+                                                                </span>
+                                                            </span>
+                                                        </h2>
+                                                        <div class="bt_bb_headline_subheadline">احصل على الدافع والتوجيه
+                                                            والدعم الذي تحتاجه لوضع حياتك على المسار الصحيح. لم يعد عليك
+                                                            أن تكافح بمفردك بعد الآن!</div>
+                                                    </header>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_medium"
+                                                        data-bt-override-class="null"></div>
+                                                    <!-- زر الحجز -->
+<!-- الزرار -->
+<div class="bt_bb_button bt_bb_color_scheme_6 bt_bb_icon_position_right bt_bb_style_filled bt_bb_size_normal bt_bb_width_inline bt_bb_shape_inherit bt_bb_target_self bt_bb_align_inherit"
+     style="--primary-color:#ffffff; --secondary-color:#f71c52;">
+  <a href="#" onclick="event.preventDefault(); loadAppointments();" class="bt_bb_link" title="BOOK AN APPOINTMENT">
+    <span class="bt_bb_button_text">احجز موعدًا الآن</span>
+    <span data-ico-fontawesome="&#xf133;" class="bt_bb_icon_holder"></span>
+  </a>
+</div>
+
+
+
+<!-- Modal -->
+<div id="appointmentModal" class="modal-box">
+  <div class="modal-header">
+    <h3>اختر موعدًا مناسبًا</h3>
+    <button class="close-btn" onclick="closeModal()">×</button>
+  </div>
+  <div class="modal-body" id="appointments-container">
+    <!-- المواعيد تظهر هنا -->
+  </div>
+  <div class="modal-footer">
+    <button onclick="submitSelectedAppointment()" class="confirm-btn">تأكيد الحجز</button>
+  </div>
+</div>
+
+
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_extra_large"
+                                                        data-bt-override-class="null"></div>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_extra_large bt_bb_hidden_xs bt_bb_hidden_ms bt_bb_hidden_sm"
+                                                        data-bt-override-class="null"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div><!-- cell_inner -->
+                        </div><!-- cell -->
+                    </div><!-- port -->
+                </section>
+
+            </div><span id="bt_bb_fe_preview_toggler" class="bt_bb_fe_preview_toggler" title="Edit/Preview"></span>
+        </div><!-- /boldthemes_content -->
+
+    </div><!-- /contentHolder -->
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+    var company_id = 'D0641A94-1463-4E2B-9180-ABD6BBCF955F';
+    get_user_profile()
+    function get_user_profile() {
+
+        $.post("../../r/j", { tb: "coach_life_get_last_post", tbtype: "view", cols: "ID,main_photo,title,post_details,company_id,post_outline", parm: "('" + company_id + "')" },
+            function (data) {
+                console.log(data);
+                data.forEach(e => {
+                    $("#row").append(`
+
+                                        <div class="bt_bb_column col-xxl-3 col-xl-3 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_text_indent bt_bb_animation_fade_in bt_bb_animation_move_up animate bt_bb_highlighted_no"
+                                            style="margin-bottom: 20px;" data-width="3" data-bt-override-class="{}">
+                                            <div class="bt_bb_column_content"
+                                                style="background-color:rgba(237, 237, 237, 1);">
+                                                <div class="bt_bb_column_content_inner">
+                                                    <div class="bt_bb_image btDarkSkin bt_bb_shape_square bt_bb_target_self bt_bb_align_inherit bt_bb_hover_style_simple bt_bb_content_display_show-on-hover bt_bb_content_align_top bt_bb_content_exists"
+                                                        data-bt-override-class="{}"><a href="#" target="_self"
+                                                            title="life-coach-excerpt-01"><img fetchpriority="high"
+                                                                decoding="async" width="640" height="427"
+                                                                src=${e.main_photo}
+                                                                class="attachment-medium size-medium"
+                                                                alt=${e.main_photo}
+                                                                data-full_image_src=${e.main_photo}
+                                                                title="life-coach-excerpt-01"
+                                                                sizes="(max-width: 640px) 100vw, 640px" /></a>
+                                                        <div class="bt_bb_image_content"
+                                                            style="background-color: rgba(213, 28, 247, 0.5);">
+                                                            <div class="bt_bb_image_content_flex">
+                                                                <div class="bt_bb_image_content_inner">
+                                                                    <header
+                                                                        class="bt_bb_headline bt_bb_color_scheme_2 bt_bb_dash_none bt_bb_superheadline bt_bb_size_extrasmall bt_bb_align_inherit"
+                                                                        style="pointer-events: none;; --primary-color:#000000; --secondary-color:#ffffff;"
+                                                                        data-bt-override-class="null">
+                                                                      
+                                                                    </header>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_normal"
+                                                        data-bt-override-class="null"></div>
+                                                    <header
+                                                        class="bt_bb_headline bt_bb_color_scheme_3 bt_bb_dash_top bt_bb_superheadline bt_bb_size_normal bt_bb_align_inherit"
+                                                        style="; --primary-color:#b915d7; --secondary-color:#000000;"
+                                                        data-bt-override-class="null">
+                                                        <h4><span class="bt_bb_headline_superheadline">${e.title}</span></h4>
+                                                    </header>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_small bt_bb_bottom_spacing_normal"
+                                                        data-bt-override-class="null"></div>
+                                                    <div class="bt_bb_text">
+                                                        <p>${e.post_outline}</p>
+                                                    </div>
+                                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_top_spacing_extra_small bt_bb_bottom_spacing_normal"
+                                                        data-bt-override-class="null">
+                                                         <div class="bt_bb_button bt_bb_icon_position_right bt_bb_style_filled bt_bb_size_normal" data-bt-override-class="{}">
+                                                            <a href="/WEB/index?id=9cd9a4d8025046e78457778c36a1f56dsingle_blog&blog_id=${e.ID}" target="_self" class="bt_bb_link" title="CONTINUE READING" style="background-color: #501f5b">
+                                                             <span data-ico-fa="" class="bt_bb_icon_holder"></span>
+                                                            <span class="bt_bb_button_text"> قراه المزيد</span>
+                                                           </a></div>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>       
+ `)
+                })
+            });
+        html += `</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+    }
+</script>
+<script>
+      var company_id = 'D0641A94-1463-4E2B-9180-ABD6BBCF955F';
+    $.post("../../r/j", { tb: "web_coach_get_gallery_v2", tbtype: "view",cols:"ID,photo_url,type",parm:"('" + company_id + "')" },
+function (data) {
+console.log(data);
+data.forEach((e, index) => {
+                $("#slick").append(`
+                    <div>
+                        <div class="bt_bb_content_slider_item_content content">
+                            <div class="bt_bb_image">
+                                 <img src="${e.photo_url}" alt="صورة" style="width:100%; height:auto; border-radius: 15px;">
+                            </div>
+                        </div>
+                    </div>
+                `);
+            });
+
+           
+            $('#slick').slick({
+    centerMode: true,
+    centerPadding: '60px',
+    slidesToShow: 3,
+    lazyLoad: 'progressive',
+    cssEase: 'ease-out',
+    speed: 800,
+    accessibility: true,
+    arrows: true,
+    adaptiveHeight: true,
+    dots: true,
+    autoplay: true,
+    autoplaySpeed: 2500,
+   
+    responsive: [
+        {
+            breakpoint: 1024, // لما العرض يبقى أقل من 1024px
+            settings: {
+                slidesToShow: 2,
+                centerPadding: '40px'
+            }
+        },
+        {
+            breakpoint: 768, // لما العرض يبقى أقل من 768px (موبايل تابلت)
+            settings: {
+                slidesToShow: 1,
+                centerPadding: '20px'
+            }
+        },
+        {
+            breakpoint: 480, // لما العرض يبقى أقل من 480px (موبايل صغير جداً)
+            settings: {
+                slidesToShow: 1,
+                centerPadding: '10px'
+            }
+        }
+    ]
+});
+ });
+</script>
+<script>
+function loadAppointments() {
+    const compId = 'D0641A94-1463-4E2B-9180-ABD6BBCF955F';
+    const date1 = '2025-04-01';
+    const date2 = '2025-04-30';
+
+    $.post("../../r/j", {
+        tb: "web_coach_time_get",
+        tbtype: "view",
+        cols: "ID,day,beginning_time,end_time,notes,Company_ID",
+        parm: `('${compId}','${date1}','${date2}')`
+    }, function (data) {
+        let html = '<table border="1" cellpadding="6" style="width:100%; text-align:center; border-collapse: collapse;">';
+        html += '<tr><th>اختيار</th><th>اليوم</th><th>من</th><th>إلى</th><th>ملاحظات</th></tr>';
+        data.forEach(item => {
+            html += `<tr>
+                <td><input type="checkbox" name="appointment" value="${item.ID}"></td>
+                <td>${item.day}</td>
+                <td>${item.beginning_time}</td>
+                <td>${item.end_time}</td>
+                <td>${item.notes || ''}</td>
+            </tr>`;
+        });
+        html += '</table>';
+        $('#appointments-container').html(html);
+        $('#modalOverlay').fadeIn();
+        $('#appointmentModal').fadeIn();
+    });
+}
+
+function closeModal() {
+    $('#modalOverlay').fadeOut();
+    $('#appointmentModal').fadeOut();
+}
+
+function submitSelectedAppointment() {
+    const selected = $("input[name='appointment']:checked").val();
+    if (selected) {
+        alert("تم اختيار الموعد رقم: " + selected);
+        closeModal();
+    } else {
+        alert("من فضلك اختر موعدًا أولاً.");
+    }
+}
+</script>
+    

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تسجيل الدخول | Mishkah Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .login-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      padding: 40px;
+      width: 100%;
+      max-width: 420px;
+      animation: slideUp 0.5s ease;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .logo {
+      text-align: center;
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      color: #555;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: all 0.3s;
+      font-family: 'Cairo', sans-serif;
+    }
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s;
+      font-family: 'Cairo', sans-serif;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    }
+    .btn:active {
+      transform: translateY(0);
+    }
+    .error {
+      background: #fee;
+      color: #c33;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+      display: none;
+    }
+    .error.show {
+      display: block;
+      animation: shake 0.5s;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="logo">🏥</div>
+    <h1>تسجيل الدخول</h1>
+    <div class="error" id="error"></div>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">اسم المستخدم</label>
+        <input type="text" id="username" name="username" required autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label for="password">كلمة المرور</label>
+        <input type="password" id="password" name="password" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn">دخول</button>
+    </form>
+  </div>
+
+  <script>
+    const API_BASE = '/api/v1';
+    const errorEl = document.getElementById('error');
+    const form = document.getElementById('loginForm');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.classList.remove('show');
+      
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!username || !password) {
+        showError('الرجاء إدخال اسم المستخدم وكلمة المرور');
+        return;
+      }
+
+      try {
+        const response = await fetch(API_BASE + '/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+            branch_id: 'pt'
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'فشل تسجيل الدخول');
+        }
+
+        if (data.ok && data.token) {
+          // Store token and user info
+          localStorage.setItem('mishkah_token', data.token);
+          localStorage.setItem('mishkah_user', JSON.stringify(data.user));
+          
+          // Redirect to main app
+          window.location.href = 'index.html';
+        } else {
+          throw new Error('استجابة غير صحيحة من الخادم');
+        }
+      } catch (error) {
+        showError(error.message || 'حدث خطأ أثناء تسجيل الدخول');
+      }
+    });
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.classList.add('show');
+    }
+
+    // Check if already logged in
+    if (localStorage.getItem('mishkah_token')) {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

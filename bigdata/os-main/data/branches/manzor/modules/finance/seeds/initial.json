@@ -1,0 +1,1311 @@
+{
+  "fin_chart_of_accounts": [
+    {
+      "id": "coa_manzor_1",
+      "company_id": "manzor_co",
+      "parent_id": null,
+      "code": "1",
+      "name": "الاصول",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_2",
+      "company_id": "manzor_co",
+      "parent_id": null,
+      "code": "2",
+      "name": "الخصوم",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_3",
+      "company_id": "manzor_co",
+      "parent_id": null,
+      "code": "3",
+      "name": "المصروفات",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_4",
+      "company_id": "manzor_co",
+      "parent_id": null,
+      "code": "4",
+      "name": "إيرادات",
+      "account_type": "REVENUE",
+      "report_type": "PL",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_11",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_1",
+      "code": "11",
+      "name": "أصول ثابته",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_12",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_1",
+      "code": "12",
+      "name": "الاصول المتداولة",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_21",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_2",
+      "code": "21",
+      "name": "حقوق الملكية",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_22",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_2",
+      "code": "22",
+      "name": "الدائنون",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_24",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_2",
+      "code": "24",
+      "name": "المصروفات المستحقة",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_25",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_2",
+      "code": "25",
+      "name": "مجمع اهلاك الأصول",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_27",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_2",
+      "code": "27",
+      "name": "المخصصات",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_31",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_3",
+      "code": "31",
+      "name": "المصروفات الادارية والعمومية",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_32",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_3",
+      "code": "32",
+      "name": "مصروفات أولية",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_33",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_3",
+      "code": "33",
+      "name": "مصروفات التشغيل",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_41",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_4",
+      "code": "41",
+      "name": "ايراادات المشاريع",
+      "account_type": "REVENUE",
+      "report_type": "PL",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_42",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_4",
+      "code": "42",
+      "name": "إيرادات أخرى",
+      "account_type": "REVENUE",
+      "report_type": "PL",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_111",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_11",
+      "code": "111",
+      "name": "سيارات",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_112",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_11",
+      "code": "112",
+      "name": "الات ومعدات",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_113",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_11",
+      "code": "113",
+      "name": "اثاث واداوات مكتبية",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_114",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_11",
+      "code": "114",
+      "name": "أجهزة وبرامج",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_115",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_11",
+      "code": "115",
+      "name": "مباني",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_121",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_12",
+      "code": "121",
+      "name": "االبنوك والصندوق",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 3,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_131",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_1",
+      "code": "131",
+      "name": "مدينون متنوعون",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_141",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_1",
+      "code": "141",
+      "name": "سلف الموظفين",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_151",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_1",
+      "code": "151",
+      "name": "عهد نقديه",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_161",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_1",
+      "code": "161",
+      "name": "ارصدة مدينة اخري",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_212",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_21",
+      "code": "212",
+      "name": "جاري الشركاء",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_213",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_21",
+      "code": "213",
+      "name": "ارباح وخسائر",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 3,
+      "is_group": true
+    },
+    {
+      "id": "coa_manzor_221",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_22",
+      "code": "221",
+      "name": "امانات عملاء - عهد",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_223",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_22",
+      "code": "223",
+      "name": "ارصدة دائنة اخري",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_255",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_25",
+      "code": "255",
+      "name": "مجمع اهلاك السيارات",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_256",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_25",
+      "code": "256",
+      "name": "مجمع اهلاك الات والمعدات",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_257",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_25",
+      "code": "257",
+      "name": "مجمع اهلاك الأثاث والأدوات المكتبية",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_258",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_25",
+      "code": "258",
+      "name": "مجمع اهلاك الأجهزة والبرامج",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_259",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_25",
+      "code": "259",
+      "name": "مجمع اهلاك المباني",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_2701",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_27",
+      "code": "2701",
+      "name": "مخصص بدل إجازة",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_2702",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_27",
+      "code": "2702",
+      "name": "مخصص تذاكر سفر",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_2703",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_27",
+      "code": "2703",
+      "name": "مخصص تامينات اجتماعية",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_2704",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_27",
+      "code": "2704",
+      "name": "مخصص تامين طبي",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_2705",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_27",
+      "code": "2705",
+      "name": "مخصص نهاية خدمة",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_240001",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_24",
+      "code": "240001",
+      "name": "مصروفات مستحقة - رواتب",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_1210001",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_121",
+      "code": "1210001",
+      "name": "حساب بنك الراجحي رقم 1546",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_1210002",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_121",
+      "code": "1210002",
+      "name": "حساب بنك الرياض رقم 2453654129940",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_1210003",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_121",
+      "code": "1210003",
+      "name": "الصندوق",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_manzor_2130001",
+      "company_id": "manzor_co",
+      "parent_id": "coa_manzor_213",
+      "code": "2130001",
+      "name": "ارباح وخسائر مرحلة",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    }
+  ],
+  "fin_chart_of_accounts_lang": [
+    {
+      "id": "coa_lang_manzor_1_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_1",
+      "lang_code": "ar",
+      "name": "الاصول"
+    },
+    {
+      "id": "coa_lang_manzor_1_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_1",
+      "lang_code": "en",
+      "name": "الاصول"
+    },
+    {
+      "id": "coa_lang_manzor_2_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2",
+      "lang_code": "ar",
+      "name": "الخصوم"
+    },
+    {
+      "id": "coa_lang_manzor_2_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2",
+      "lang_code": "en",
+      "name": "الخصوم"
+    },
+    {
+      "id": "coa_lang_manzor_3_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_3",
+      "lang_code": "ar",
+      "name": "المصروفات"
+    },
+    {
+      "id": "coa_lang_manzor_3_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_3",
+      "lang_code": "en",
+      "name": "المصروفات"
+    },
+    {
+      "id": "coa_lang_manzor_4_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_4",
+      "lang_code": "ar",
+      "name": "إيرادات"
+    },
+    {
+      "id": "coa_lang_manzor_4_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_4",
+      "lang_code": "en",
+      "name": "إيرادات"
+    },
+    {
+      "id": "coa_lang_manzor_11_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_11",
+      "lang_code": "ar",
+      "name": "أصول ثابته"
+    },
+    {
+      "id": "coa_lang_manzor_11_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_11",
+      "lang_code": "en",
+      "name": "أصول ثابته"
+    },
+    {
+      "id": "coa_lang_manzor_12_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_12",
+      "lang_code": "ar",
+      "name": "الاصول المتداولة"
+    },
+    {
+      "id": "coa_lang_manzor_12_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_12",
+      "lang_code": "en",
+      "name": "الاصول المتداولة"
+    },
+    {
+      "id": "coa_lang_manzor_21_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_21",
+      "lang_code": "ar",
+      "name": "حقوق الملكية"
+    },
+    {
+      "id": "coa_lang_manzor_21_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_21",
+      "lang_code": "en",
+      "name": "حقوق الملكية"
+    },
+    {
+      "id": "coa_lang_manzor_22_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_22",
+      "lang_code": "ar",
+      "name": "الدائنون"
+    },
+    {
+      "id": "coa_lang_manzor_22_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_22",
+      "lang_code": "en",
+      "name": "الدائنون"
+    },
+    {
+      "id": "coa_lang_manzor_24_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_24",
+      "lang_code": "ar",
+      "name": "المصروفات المستحقة"
+    },
+    {
+      "id": "coa_lang_manzor_24_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_24",
+      "lang_code": "en",
+      "name": "المصروفات المستحقة"
+    },
+    {
+      "id": "coa_lang_manzor_25_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_25",
+      "lang_code": "ar",
+      "name": "مجمع اهلاك الأصول"
+    },
+    {
+      "id": "coa_lang_manzor_25_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_25",
+      "lang_code": "en",
+      "name": "مجمع اهلاك الأصول"
+    },
+    {
+      "id": "coa_lang_manzor_27_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_27",
+      "lang_code": "ar",
+      "name": "المخصصات"
+    },
+    {
+      "id": "coa_lang_manzor_27_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_27",
+      "lang_code": "en",
+      "name": "المخصصات"
+    },
+    {
+      "id": "coa_lang_manzor_31_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_31",
+      "lang_code": "ar",
+      "name": "المصروفات الادارية والعمومية"
+    },
+    {
+      "id": "coa_lang_manzor_31_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_31",
+      "lang_code": "en",
+      "name": "المصروفات الادارية والعمومية"
+    },
+    {
+      "id": "coa_lang_manzor_32_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_32",
+      "lang_code": "ar",
+      "name": "مصروفات أولية"
+    },
+    {
+      "id": "coa_lang_manzor_32_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_32",
+      "lang_code": "en",
+      "name": "مصروفات أولية"
+    },
+    {
+      "id": "coa_lang_manzor_33_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_33",
+      "lang_code": "ar",
+      "name": "مصروفات التشغيل"
+    },
+    {
+      "id": "coa_lang_manzor_33_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_33",
+      "lang_code": "en",
+      "name": "مصروفات التشغيل"
+    },
+    {
+      "id": "coa_lang_manzor_41_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_41",
+      "lang_code": "ar",
+      "name": "ايراادات المشاريع"
+    },
+    {
+      "id": "coa_lang_manzor_41_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_41",
+      "lang_code": "en",
+      "name": "ايراادات المشاريع"
+    },
+    {
+      "id": "coa_lang_manzor_42_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_42",
+      "lang_code": "ar",
+      "name": "إيرادات أخرى"
+    },
+    {
+      "id": "coa_lang_manzor_42_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_42",
+      "lang_code": "en",
+      "name": "إيرادات أخرى"
+    },
+    {
+      "id": "coa_lang_manzor_111_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_111",
+      "lang_code": "ar",
+      "name": "سيارات"
+    },
+    {
+      "id": "coa_lang_manzor_111_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_111",
+      "lang_code": "en",
+      "name": "سيارات"
+    },
+    {
+      "id": "coa_lang_manzor_112_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_112",
+      "lang_code": "ar",
+      "name": "الات ومعدات"
+    },
+    {
+      "id": "coa_lang_manzor_112_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_112",
+      "lang_code": "en",
+      "name": "الات ومعدات"
+    },
+    {
+      "id": "coa_lang_manzor_113_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_113",
+      "lang_code": "ar",
+      "name": "اثاث واداوات مكتبية"
+    },
+    {
+      "id": "coa_lang_manzor_113_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_113",
+      "lang_code": "en",
+      "name": "اثاث واداوات مكتبية"
+    },
+    {
+      "id": "coa_lang_manzor_114_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_114",
+      "lang_code": "ar",
+      "name": "أجهزة وبرامج"
+    },
+    {
+      "id": "coa_lang_manzor_114_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_114",
+      "lang_code": "en",
+      "name": "أجهزة وبرامج"
+    },
+    {
+      "id": "coa_lang_manzor_115_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_115",
+      "lang_code": "ar",
+      "name": "مباني"
+    },
+    {
+      "id": "coa_lang_manzor_115_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_115",
+      "lang_code": "en",
+      "name": "مباني"
+    },
+    {
+      "id": "coa_lang_manzor_121_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_121",
+      "lang_code": "ar",
+      "name": "االبنوك والصندوق"
+    },
+    {
+      "id": "coa_lang_manzor_121_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_121",
+      "lang_code": "en",
+      "name": "االبنوك والصندوق"
+    },
+    {
+      "id": "coa_lang_manzor_131_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_131",
+      "lang_code": "ar",
+      "name": "مدينون متنوعون"
+    },
+    {
+      "id": "coa_lang_manzor_131_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_131",
+      "lang_code": "en",
+      "name": "مدينون متنوعون"
+    },
+    {
+      "id": "coa_lang_manzor_141_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_141",
+      "lang_code": "ar",
+      "name": "سلف الموظفين"
+    },
+    {
+      "id": "coa_lang_manzor_141_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_141",
+      "lang_code": "en",
+      "name": "سلف الموظفين"
+    },
+    {
+      "id": "coa_lang_manzor_151_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_151",
+      "lang_code": "ar",
+      "name": "عهد نقديه"
+    },
+    {
+      "id": "coa_lang_manzor_151_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_151",
+      "lang_code": "en",
+      "name": "عهد نقديه"
+    },
+    {
+      "id": "coa_lang_manzor_161_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_161",
+      "lang_code": "ar",
+      "name": "ارصدة مدينة اخري"
+    },
+    {
+      "id": "coa_lang_manzor_161_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_161",
+      "lang_code": "en",
+      "name": "ارصدة مدينة اخري"
+    },
+    {
+      "id": "coa_lang_manzor_212_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_212",
+      "lang_code": "ar",
+      "name": "جاري الشركاء"
+    },
+    {
+      "id": "coa_lang_manzor_212_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_212",
+      "lang_code": "en",
+      "name": "جاري الشركاء"
+    },
+    {
+      "id": "coa_lang_manzor_213_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_213",
+      "lang_code": "ar",
+      "name": "ارباح وخسائر"
+    },
+    {
+      "id": "coa_lang_manzor_213_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_213",
+      "lang_code": "en",
+      "name": "ارباح وخسائر"
+    },
+    {
+      "id": "coa_lang_manzor_221_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_221",
+      "lang_code": "ar",
+      "name": "امانات عملاء - عهد"
+    },
+    {
+      "id": "coa_lang_manzor_221_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_221",
+      "lang_code": "en",
+      "name": "امانات عملاء - عهد"
+    },
+    {
+      "id": "coa_lang_manzor_223_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_223",
+      "lang_code": "ar",
+      "name": "ارصدة دائنة اخري"
+    },
+    {
+      "id": "coa_lang_manzor_223_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_223",
+      "lang_code": "en",
+      "name": "ارصدة دائنة اخري"
+    },
+    {
+      "id": "coa_lang_manzor_255_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_255",
+      "lang_code": "ar",
+      "name": "مجمع اهلاك السيارات"
+    },
+    {
+      "id": "coa_lang_manzor_255_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_255",
+      "lang_code": "en",
+      "name": "مجمع اهلاك السيارات"
+    },
+    {
+      "id": "coa_lang_manzor_256_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_256",
+      "lang_code": "ar",
+      "name": "مجمع اهلاك الات والمعدات"
+    },
+    {
+      "id": "coa_lang_manzor_256_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_256",
+      "lang_code": "en",
+      "name": "مجمع اهلاك الات والمعدات"
+    },
+    {
+      "id": "coa_lang_manzor_257_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_257",
+      "lang_code": "ar",
+      "name": "مجمع اهلاك الأثاث والأدوات المكتبية"
+    },
+    {
+      "id": "coa_lang_manzor_257_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_257",
+      "lang_code": "en",
+      "name": "مجمع اهلاك الأثاث والأدوات المكتبية"
+    },
+    {
+      "id": "coa_lang_manzor_258_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_258",
+      "lang_code": "ar",
+      "name": "مجمع اهلاك الأجهزة والبرامج"
+    },
+    {
+      "id": "coa_lang_manzor_258_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_258",
+      "lang_code": "en",
+      "name": "مجمع اهلاك الأجهزة والبرامج"
+    },
+    {
+      "id": "coa_lang_manzor_259_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_259",
+      "lang_code": "ar",
+      "name": "مجمع اهلاك المباني"
+    },
+    {
+      "id": "coa_lang_manzor_259_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_259",
+      "lang_code": "en",
+      "name": "مجمع اهلاك المباني"
+    },
+    {
+      "id": "coa_lang_manzor_2701_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2701",
+      "lang_code": "ar",
+      "name": "مخصص بدل إجازة"
+    },
+    {
+      "id": "coa_lang_manzor_2701_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2701",
+      "lang_code": "en",
+      "name": "مخصص بدل إجازة"
+    },
+    {
+      "id": "coa_lang_manzor_2702_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2702",
+      "lang_code": "ar",
+      "name": "مخصص تذاكر سفر"
+    },
+    {
+      "id": "coa_lang_manzor_2702_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2702",
+      "lang_code": "en",
+      "name": "مخصص تذاكر سفر"
+    },
+    {
+      "id": "coa_lang_manzor_2703_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2703",
+      "lang_code": "ar",
+      "name": "مخصص تامينات اجتماعية"
+    },
+    {
+      "id": "coa_lang_manzor_2703_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2703",
+      "lang_code": "en",
+      "name": "مخصص تامينات اجتماعية"
+    },
+    {
+      "id": "coa_lang_manzor_2704_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2704",
+      "lang_code": "ar",
+      "name": "مخصص تامين طبي"
+    },
+    {
+      "id": "coa_lang_manzor_2704_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2704",
+      "lang_code": "en",
+      "name": "مخصص تامين طبي"
+    },
+    {
+      "id": "coa_lang_manzor_2705_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2705",
+      "lang_code": "ar",
+      "name": "مخصص نهاية خدمة"
+    },
+    {
+      "id": "coa_lang_manzor_2705_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2705",
+      "lang_code": "en",
+      "name": "مخصص نهاية خدمة"
+    },
+    {
+      "id": "coa_lang_manzor_240001_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_240001",
+      "lang_code": "ar",
+      "name": "مصروفات مستحقة - رواتب"
+    },
+    {
+      "id": "coa_lang_manzor_240001_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_240001",
+      "lang_code": "en",
+      "name": "مصروفات مستحقة - رواتب"
+    },
+    {
+      "id": "coa_lang_manzor_1210001_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_1210001",
+      "lang_code": "ar",
+      "name": "حساب بنك الراجحي رقم 1546"
+    },
+    {
+      "id": "coa_lang_manzor_1210001_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_1210001",
+      "lang_code": "en",
+      "name": "حساب بنك الراجحي رقم 1546"
+    },
+    {
+      "id": "coa_lang_manzor_1210002_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_1210002",
+      "lang_code": "ar",
+      "name": "حساب بنك الرياض رقم 2453654129940"
+    },
+    {
+      "id": "coa_lang_manzor_1210002_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_1210002",
+      "lang_code": "en",
+      "name": "حساب بنك الرياض رقم 2453654129940"
+    },
+    {
+      "id": "coa_lang_manzor_1210003_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_1210003",
+      "lang_code": "ar",
+      "name": "الصندوق"
+    },
+    {
+      "id": "coa_lang_manzor_1210003_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_1210003",
+      "lang_code": "en",
+      "name": "الصندوق"
+    },
+    {
+      "id": "coa_lang_manzor_2130001_ar",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2130001",
+      "lang_code": "ar",
+      "name": "ارباح وخسائر مرحلة"
+    },
+    {
+      "id": "coa_lang_manzor_2130001_en",
+      "company_id": "manzor_co",
+      "ref_id": "coa_manzor_2130001",
+      "lang_code": "en",
+      "name": "ارباح وخسائر مرحلة"
+    }
+  ]
+}

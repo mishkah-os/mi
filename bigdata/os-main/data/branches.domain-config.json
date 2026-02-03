@@ -1,0 +1,55 @@
+{
+  "dar": {
+    "name": "Darwish Restaurant",
+    "domain_url": "https://darwish.mas.com.eg",
+    "sync_action": "pos_database_func",
+    "api_key": "Jfr6LV5peRbhs2a6y67CUJdzN9kke64703T1Jv9RZ6V7402S4Y20Mi0qwuGXCy9V681hQTDytntC740pc7IBE0GksO"
+  },
+  "remal": {
+    "name": "Gremal",
+    "domain_url": "https://gremal.mas.com.eg",
+    "sync_action": "pos_database_view",
+    "api_key": "Jfr6LV5peRbhs2a6y67CUJdzN9kke64703T1Jv9RZ6V7402S4Y20Mi0qwuGXCy9V681hQTDytntC740pc7IBE0GksO"
+  },
+  "pt": {
+    "name": "pt-clinic",
+    "domain_url": "https://pt-clinic.mas.com.eg",
+    "sync_action": "pos_database_view",
+    "api_key": "Jfr6LV5peRbhs2a6y67CUJdzN9kke64703T1Jv9RZ6V7402S4Y20Mi0qwuGXCy9V681hQTDytntC740pc7IBE0GksO"
+  },
+  "manzor": {
+    "name": "manzor",
+    "company_name": "شركة المنظور الشامل",
+    "domain_url": "https://manzor.mas.com.eg",
+    "sync_action": "pos_database_view",
+    "api_key": "Jfr6LV5peRbhs2a6y67CUJdzN9kke64703T1Jv9RZ6V7402S4Y20Mi0qwuGXCy9V681hQTDytntC740pc7IBE0GksO"
+  },
+  "fas": {
+    "name": "fas",
+    "company_name": "شركة فاس الأولى و تمويل البناء",
+    "domain_url": "https://fas.mas.com.eg",
+    "sync_action": "pos_database_view",
+    "api_key": "Jfr6LV5peRbhs2a6y67CUJdzN9kke64703T1Jv9RZ6V7402S4Y20Mi0qwuGXCy9V681hQTDytntC740pc7IBE0GksO"
+  },
+  "hematet": {
+    "name": "hematet",
+    "company_name": "هماتيت",
+    "domain_url": "https://hematet.mas.com.eg",
+    "sync_action": "pos_database_view",
+    "api_key": "Jfr6LV5peRbhs2a6y67CUJdzN9kke64703T1Jv9RZ6V7402S4Y20Mi0qwuGXCy9V681hQTDytntC740pc7IBE0GksO"
+  },
+  "amal": {
+    "name": "amal",
+    "company_name": "مكتب أمل العايد",
+    "domain_url": "https://amal.mas.com.eg",
+    "sync_action": "pos_database_view",
+    "api_key": "Jfr6LV5peRbhs2a6y67CUJdzN9kke64703T1Jv9RZ6V7402S4Y20Mi0qwuGXCy9V681hQTDytntC740pc7IBE0GksO"
+  },
+  "peg": {
+    "name": "peg",
+    "company_name": "شركة PEG للاستشارات الهندسية",
+    "domain_url": "https://peg.mas.com.eg",
+    "sync_action": "pos_database_view",
+    "api_key": "Jfr6LV5peRbhs2a6y67CUJdzN9kke64703T1Jv9RZ6V7402S4Y20Mi0qwuGXCy9V681hQTDytntC740pc7IBE0GksO"
+  }
+}

@@ -1,0 +1,1100 @@
+{
+  "version": 1,
+  "meta": {
+    "branchId": "clinic",
+    "moduleId": "pt",
+    "counter": 0,
+    "labCounter": 0
+  },
+  "tables": {
+    "languages": [
+      {
+        "id": "48a5b5ff-ace7-412a-9429-c07a753d9865",
+        "code": "ar",
+        "name": "العربية",
+        "direction": "rtl",
+        "is_default": 1,
+        "is_active": 1
+      },
+      {
+        "id": "8dbeb43a-5221-4d95-8334-551010e9c0fb",
+        "code": "en",
+        "name": "English",
+        "direction": "ltr",
+        "is_default": 0,
+        "is_active": 1
+      }
+    ],
+    "clinic_ui_labels": [
+      {
+        "id": "9e23cedf-5254-41f4-a929-3ed97f2dc1db",
+        "code": "app.title"
+      },
+      {
+        "id": "b9d7e8ed-30ab-4314-8455-e3a536b7f6bc",
+        "code": "nav.dashboard"
+      },
+      {
+        "id": "0e57569c-0dfe-45e9-933b-d4feaf522f33",
+        "code": "nav.patients"
+      },
+      {
+        "id": "cff970b8-e260-45b1-9153-5c734c92cd15",
+        "code": "nav.bookings"
+      },
+      {
+        "id": "b1db76ce-b211-4a89-99b5-12b881cf2505",
+        "code": "nav.settings"
+      },
+      {
+        "id": "b4affc3b-f130-4e0f-94a1-63c901ae0b3b",
+        "code": "label.name"
+      },
+      {
+        "id": "7d9cb36f-2e3f-4fce-aaa9-040971c2044b",
+        "code": "label.phone"
+      },
+      {
+        "id": "7bc5605c-9871-4d2b-8f06-724ab7b27441",
+        "code": "label.service"
+      },
+      {
+        "id": "6e8c7acb-db1e-4958-87d3-cb37459e8bd2",
+        "code": "label.price"
+      },
+      {
+        "id": "4bfca1f7-5dbc-4279-81d7-3adb1b07b086",
+        "code": "action.save"
+      },
+      {
+        "id": "296bcd40-9097-43db-ad95-482f7d6cb2fc",
+        "code": "action.cancel"
+      },
+      {
+        "id": "6b00701e-e115-4a28-8052-9799c623ef3b",
+        "code": "section.appointments"
+      },
+      {
+        "id": "693a47d4-90a5-4826-bc12-ba8075af4170",
+        "code": "section.stats"
+      }
+    ],
+    "clinic_ui_labels_lang": [
+      {
+        "id": "5e29b8f9-6db1-4709-b041-1ab60e8e0676",
+        "clinic_ui_labels_id": "9e23cedf-5254-41f4-a929-3ed97f2dc1db",
+        "lang": "ar",
+        "text": "Title"
+      },
+      {
+        "id": "fc8093ac-e85e-4bef-abcb-f031fd772d5e",
+        "clinic_ui_labels_id": "9e23cedf-5254-41f4-a929-3ed97f2dc1db",
+        "lang": "en",
+        "text": "App title"
+      },
+      {
+        "id": "eb10697d-7e53-41aa-8a9b-c83c17499bb5",
+        "clinic_ui_labels_id": "b9d7e8ed-30ab-4314-8455-e3a536b7f6bc",
+        "lang": "ar",
+        "text": "لوحة التحكم"
+      },
+      {
+        "id": "26ab2618-5311-4f44-b212-2ce1f086b984",
+        "clinic_ui_labels_id": "b9d7e8ed-30ab-4314-8455-e3a536b7f6bc",
+        "lang": "en",
+        "text": "Nav dashboard"
+      },
+      {
+        "id": "97391f25-c4b3-4973-bdad-b8b272019974",
+        "clinic_ui_labels_id": "0e57569c-0dfe-45e9-933b-d4feaf522f33",
+        "lang": "ar",
+        "text": "المرضى"
+      },
+      {
+        "id": "973dacd7-b53d-4fd2-8cfa-61c0f8f35ccc",
+        "clinic_ui_labels_id": "0e57569c-0dfe-45e9-933b-d4feaf522f33",
+        "lang": "en",
+        "text": "Nav patients"
+      },
+      {
+        "id": "ec8be5c4-c8be-4362-8108-10bfb37bdbea",
+        "clinic_ui_labels_id": "cff970b8-e260-45b1-9153-5c734c92cd15",
+        "lang": "ar",
+        "text": "الحجوزات"
+      },
+      {
+        "id": "7f4b3e66-15c7-4262-9b6f-70bbf3147ebb",
+        "clinic_ui_labels_id": "cff970b8-e260-45b1-9153-5c734c92cd15",
+        "lang": "en",
+        "text": "Nav bookings"
+      },
+      {
+        "id": "92d2f74e-5e03-438b-89ea-f7ae1aa607a5",
+        "clinic_ui_labels_id": "b1db76ce-b211-4a89-99b5-12b881cf2505",
+        "lang": "ar",
+        "text": "الإعدادات"
+      },
+      {
+        "id": "320a0113-aeb5-4c68-b3e6-26c8c72e425f",
+        "clinic_ui_labels_id": "b1db76ce-b211-4a89-99b5-12b881cf2505",
+        "lang": "en",
+        "text": "Nav settings"
+      },
+      {
+        "id": "52b3063f-915d-424d-b4b2-55bd200fd1e1",
+        "clinic_ui_labels_id": "b4affc3b-f130-4e0f-94a1-63c901ae0b3b",
+        "lang": "ar",
+        "text": "Name"
+      },
+      {
+        "id": "ebcaaf83-1ef5-42e4-9114-94cb25000a11",
+        "clinic_ui_labels_id": "b4affc3b-f130-4e0f-94a1-63c901ae0b3b",
+        "lang": "en",
+        "text": "Label name"
+      },
+      {
+        "id": "62ce2757-541b-445f-b71f-0bcf39a897ea",
+        "clinic_ui_labels_id": "7d9cb36f-2e3f-4fce-aaa9-040971c2044b",
+        "lang": "ar",
+        "text": "Phone"
+      },
+      {
+        "id": "44ca5c60-0382-4751-92eb-e3b695550563",
+        "clinic_ui_labels_id": "7d9cb36f-2e3f-4fce-aaa9-040971c2044b",
+        "lang": "en",
+        "text": "Label phone"
+      },
+      {
+        "id": "10643545-c5be-48a1-8588-ffa477db0507",
+        "clinic_ui_labels_id": "7bc5605c-9871-4d2b-8f06-724ab7b27441",
+        "lang": "ar",
+        "text": "Service"
+      },
+      {
+        "id": "1511bd5c-9182-4196-bff3-be9296a0c763",
+        "clinic_ui_labels_id": "7bc5605c-9871-4d2b-8f06-724ab7b27441",
+        "lang": "en",
+        "text": "Label service"
+      },
+      {
+        "id": "c416c2fb-d665-468c-80c6-d211d76bc912",
+        "clinic_ui_labels_id": "6e8c7acb-db1e-4958-87d3-cb37459e8bd2",
+        "lang": "ar",
+        "text": "Price"
+      },
+      {
+        "id": "f7f03964-bf76-4c0a-97e9-c1150c632965",
+        "clinic_ui_labels_id": "6e8c7acb-db1e-4958-87d3-cb37459e8bd2",
+        "lang": "en",
+        "text": "Label price"
+      },
+      {
+        "id": "6035d7f4-1750-45b8-9bd4-2e1518fb5fd5",
+        "clinic_ui_labels_id": "4bfca1f7-5dbc-4279-81d7-3adb1b07b086",
+        "lang": "ar",
+        "text": "حفظ"
+      },
+      {
+        "id": "90f28ff9-7fb5-46c2-a0e2-e9438df346ad",
+        "clinic_ui_labels_id": "4bfca1f7-5dbc-4279-81d7-3adb1b07b086",
+        "lang": "en",
+        "text": "Action save"
+      },
+      {
+        "id": "44b0dc41-3986-4f70-bea0-c6724ea04f8a",
+        "clinic_ui_labels_id": "296bcd40-9097-43db-ad95-482f7d6cb2fc",
+        "lang": "ar",
+        "text": "Cancel"
+      },
+      {
+        "id": "dc4bd204-edd5-4e0c-bda7-1c7cd3a77902",
+        "clinic_ui_labels_id": "296bcd40-9097-43db-ad95-482f7d6cb2fc",
+        "lang": "en",
+        "text": "Action cancel"
+      },
+      {
+        "id": "17b0580f-a9f7-424a-a7c3-fd1b3469c4b0",
+        "clinic_ui_labels_id": "6b00701e-e115-4a28-8052-9799c623ef3b",
+        "lang": "ar",
+        "text": "Appointments"
+      },
+      {
+        "id": "fc4465bf-5483-49ce-a6fb-f3f2d69a67e8",
+        "clinic_ui_labels_id": "6b00701e-e115-4a28-8052-9799c623ef3b",
+        "lang": "en",
+        "text": "Section appointments"
+      },
+      {
+        "id": "2abc3b3b-22d9-4792-b4aa-08377724d241",
+        "clinic_ui_labels_id": "693a47d4-90a5-4826-bc12-ba8075af4170",
+        "lang": "ar",
+        "text": "Stats"
+      },
+      {
+        "id": "48e292d8-ea4b-42c2-a0ed-e80fc3c6a5cc",
+        "clinic_ui_labels_id": "693a47d4-90a5-4826-bc12-ba8075af4170",
+        "lang": "en",
+        "text": "Section stats"
+      }
+    ],
+    "companies": [
+      {
+        "id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "tax_number": "300-500-700",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      }
+    ],
+    "companies_lang": [
+      {
+        "id": "19e3680b-5a19-418b-ac23-63260027feb3",
+        "companies_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "lang": "ar",
+        "name": "عيادات إليت كير - Elite Care"
+      },
+      {
+        "id": "5ed267bb-49d6-48cc-a7f3-0becba00073d",
+        "companies_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "lang": "en",
+        "name": "Elite Care Clinics"
+      }
+    ],
+    "branches": [
+      {
+        "id": "66856c26-850e-4f84-aa75-5fe8ed561182",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "code": "MAADI",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      }
+    ],
+    "branches_lang": [
+      {
+        "id": "b0c90412-adbd-4c21-8263-663da17ad317",
+        "branches_id": "66856c26-850e-4f84-aa75-5fe8ed561182",
+        "lang": "ar",
+        "name": "فرع المعادي"
+      },
+      {
+        "id": "34740cd0-d148-4b97-b736-565629a682ca",
+        "branches_id": "66856c26-850e-4f84-aa75-5fe8ed561182",
+        "lang": "en",
+        "name": "Maadi Branch"
+      }
+    ],
+    "clinic_specialties": [
+      {
+        "id": "99508ac6-3397-4dba-9932-f48ef445b07d",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "e90b556f-ad4c-4cdf-84b0-a93bd8f2d22d",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "3e98b08a-ba6b-4c64-b452-9e29f30549c6",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_specialties_lang": [
+      {
+        "id": "21929415-a810-41ba-9c19-90f8ab924f3d",
+        "clinic_specialties_id": "99508ac6-3397-4dba-9932-f48ef445b07d",
+        "lang": "ar",
+        "name": "علاج طبيعي"
+      },
+      {
+        "id": "a7e8d679-4886-49ba-b906-e43e6c0a73dc",
+        "clinic_specialties_id": "99508ac6-3397-4dba-9932-f48ef445b07d",
+        "lang": "en",
+        "name": "Physical Therapy"
+      },
+      {
+        "id": "fdcb5d9f-264a-4dea-a546-a1ecaf1f9469",
+        "clinic_specialties_id": "e90b556f-ad4c-4cdf-84b0-a93bd8f2d22d",
+        "lang": "ar",
+        "name": "تغذية علاجية"
+      },
+      {
+        "id": "f9b49286-6688-4be1-bc42-f62f183165d5",
+        "clinic_specialties_id": "e90b556f-ad4c-4cdf-84b0-a93bd8f2d22d",
+        "lang": "en",
+        "name": "Clinical Nutrition"
+      },
+      {
+        "id": "ab1202db-a555-491d-9d6e-31999978a018",
+        "clinic_specialties_id": "3e98b08a-ba6b-4c64-b452-9e29f30549c6",
+        "lang": "ar",
+        "name": "جلدية وتجميل"
+      },
+      {
+        "id": "486dc37c-4edb-4d3b-a435-90d4fa610935",
+        "clinic_specialties_id": "3e98b08a-ba6b-4c64-b452-9e29f30549c6",
+        "lang": "en",
+        "name": "Dermatology & Cosmetology"
+      }
+    ],
+    "clinic_service_domains": [
+      {
+        "id": "4dd5e37d-4e7d-4ae3-aa50-12cc411450ca",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "code": "DOM-PT",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "c8742b23-9583-4ed8-8360-e9ecbc10b4e1",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "code": "DOM-SLIM",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "e16ea2b8-b7ff-4f1a-b5e9-afd3d8929a6c",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "code": "DOM-LASER",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_service_domains_lang": [
+      {
+        "id": "69ad680f-a06e-4a1b-a397-67769706a42e",
+        "clinic_service_domains_id": "4dd5e37d-4e7d-4ae3-aa50-12cc411450ca",
+        "lang": "ar",
+        "name": "تأهيل وإصابات ملاعب"
+      },
+      {
+        "id": "0898d521-836c-4f96-b8ed-2fb5ac87a5e8",
+        "clinic_service_domains_id": "4dd5e37d-4e7d-4ae3-aa50-12cc411450ca",
+        "lang": "en",
+        "name": "Rehabilitation & Sports Injury"
+      },
+      {
+        "id": "20c5aeca-9836-4bc2-9328-83d958c68b79",
+        "clinic_service_domains_id": "c8742b23-9583-4ed8-8360-e9ecbc10b4e1",
+        "lang": "ar",
+        "name": "تنسيق قوام وتخسيس"
+      },
+      {
+        "id": "ee750abf-943e-4943-b95e-06b58c7fa72c",
+        "clinic_service_domains_id": "c8742b23-9583-4ed8-8360-e9ecbc10b4e1",
+        "lang": "en",
+        "name": "Body Contouring & Slimming"
+      },
+      {
+        "id": "49660393-5e09-4275-8dfb-a093ea0d5bea",
+        "clinic_service_domains_id": "e16ea2b8-b7ff-4f1a-b5e9-afd3d8929a6c",
+        "lang": "ar",
+        "name": "ليزر وعناية بالبشرة"
+      },
+      {
+        "id": "58ffe515-e8cd-42b6-95ad-a041eebbcd8b",
+        "clinic_service_domains_id": "e16ea2b8-b7ff-4f1a-b5e9-afd3d8929a6c",
+        "lang": "en",
+        "name": "Laser & Skin Care"
+      }
+    ],
+    "clinic_types": [
+      {
+        "id": "44197d12-8a1e-4298-a2b4-9f59563338e0",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "standard_duration_minutes": 30,
+        "visit_kind": "consultation",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "8cef002a-14b8-4161-a533-1a2f2e6bc732",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "standard_duration_minutes": 45,
+        "visit_kind": "session",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "0ef84cb8-6a92-4a36-9c82-bbe858d8fd9a",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "standard_duration_minutes": 15,
+        "visit_kind": "session",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_types_lang": [
+      {
+        "id": "62885d59-cf7a-48a7-9e2b-59d9fa61a8cf",
+        "clinic_types_id": "44197d12-8a1e-4298-a2b4-9f59563338e0",
+        "lang": "ar",
+        "name": "كشف / استشارة"
+      },
+      {
+        "id": "27cd572e-fa12-4e20-9e9a-772f3a2a4351",
+        "clinic_types_id": "44197d12-8a1e-4298-a2b4-9f59563338e0",
+        "lang": "en",
+        "name": "Consultation"
+      },
+      {
+        "id": "c80603da-500f-4fd5-9838-aa594e64ba30",
+        "clinic_types_id": "8cef002a-14b8-4161-a533-1a2f2e6bc732",
+        "lang": "ar",
+        "name": "جلسة علاجية"
+      },
+      {
+        "id": "5cd6bcd7-d707-4aae-970c-cb77875ffdc4",
+        "clinic_types_id": "8cef002a-14b8-4161-a533-1a2f2e6bc732",
+        "lang": "en",
+        "name": "Treatment Session"
+      },
+      {
+        "id": "1591a30b-fb9c-4bbf-85df-3ab32cf1c6b3",
+        "clinic_types_id": "0ef84cb8-6a92-4a36-9c82-bbe858d8fd9a",
+        "lang": "ar",
+        "name": "متابعة"
+      },
+      {
+        "id": "9ac75c4f-cfb5-41d3-a40e-1060c4d875c7",
+        "clinic_types_id": "0ef84cb8-6a92-4a36-9c82-bbe858d8fd9a",
+        "lang": "en",
+        "name": "Follow-up"
+      }
+    ],
+    "clinic_rooms": [
+      {
+        "id": "b6dd4466-daec-42cd-b673-335cd6490ed2",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "branch_id": "66856c26-850e-4f84-aa75-5fe8ed561182",
+        "clinic_type": "8cef002a-14b8-4161-a533-1a2f2e6bc732",
+        "room_code": "R-PT-1",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "ba453ebf-773e-46b2-baaf-c668dc41f523",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "branch_id": "66856c26-850e-4f84-aa75-5fe8ed561182",
+        "clinic_type": "8cef002a-14b8-4161-a533-1a2f2e6bc732",
+        "room_code": "R-PT-2",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "19994b77-c418-4e7d-aad0-3bd357a120ae",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "branch_id": "66856c26-850e-4f84-aa75-5fe8ed561182",
+        "clinic_type": "44197d12-8a1e-4298-a2b4-9f59563338e0",
+        "room_code": "R-NUT",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "aef042b1-75c3-4f3a-8f44-8f9d35113aa1",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "branch_id": "66856c26-850e-4f84-aa75-5fe8ed561182",
+        "clinic_type": "44197d12-8a1e-4298-a2b4-9f59563338e0",
+        "room_code": "R-DERM",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "37c9c547-5537-474e-98d5-18e0ccecedc5",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "branch_id": "66856c26-850e-4f84-aa75-5fe8ed561182",
+        "clinic_type": "8cef002a-14b8-4161-a533-1a2f2e6bc732",
+        "room_code": "R-LASER",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_rooms_lang": [
+      {
+        "id": "abc678cf-1658-4049-8e43-3b6cc22a0b44",
+        "clinic_rooms_id": "b6dd4466-daec-42cd-b673-335cd6490ed2",
+        "lang": "ar",
+        "name": "غرفة العلاج الطبيعي 1"
+      },
+      {
+        "id": "8683044d-e5a4-4bd5-9e64-28a72ad88fd7",
+        "clinic_rooms_id": "b6dd4466-daec-42cd-b673-335cd6490ed2",
+        "lang": "en",
+        "name": "Physio Room 1"
+      },
+      {
+        "id": "63401084-8d45-45d2-aa01-0949b40fcbb7",
+        "clinic_rooms_id": "ba453ebf-773e-46b2-baaf-c668dc41f523",
+        "lang": "ar",
+        "name": "غرفة العلاج الطبيعي 2"
+      },
+      {
+        "id": "3bafc6f3-a8ff-42ef-8e41-b3923c55f199",
+        "clinic_rooms_id": "ba453ebf-773e-46b2-baaf-c668dc41f523",
+        "lang": "en",
+        "name": "Physio Room 2"
+      },
+      {
+        "id": "ea2cae44-3e08-4003-817a-3764d070ca27",
+        "clinic_rooms_id": "19994b77-c418-4e7d-aad0-3bd357a120ae",
+        "lang": "ar",
+        "name": "عيادة التغذية"
+      },
+      {
+        "id": "28872e62-6350-441a-a2fa-1edae764f0d4",
+        "clinic_rooms_id": "19994b77-c418-4e7d-aad0-3bd357a120ae",
+        "lang": "en",
+        "name": "Nutrition Clinic"
+      },
+      {
+        "id": "92c33697-51a9-4284-8bcf-08f5b480a933",
+        "clinic_rooms_id": "aef042b1-75c3-4f3a-8f44-8f9d35113aa1",
+        "lang": "ar",
+        "name": "عيادة الجلدية"
+      },
+      {
+        "id": "26c0c5b3-1b8c-4035-b1b9-876316732d6a",
+        "clinic_rooms_id": "aef042b1-75c3-4f3a-8f44-8f9d35113aa1",
+        "lang": "en",
+        "name": "Derma Clinic"
+      },
+      {
+        "id": "30c2c10d-ac1b-46e0-ab1c-87e889d1a44a",
+        "clinic_rooms_id": "37c9c547-5537-474e-98d5-18e0ccecedc5",
+        "lang": "ar",
+        "name": "غرفة الليزر"
+      },
+      {
+        "id": "60bc0f9d-9e0f-491b-a94c-fc0d945355d2",
+        "clinic_rooms_id": "37c9c547-5537-474e-98d5-18e0ccecedc5",
+        "lang": "en",
+        "name": "Laser Room"
+      }
+    ],
+    "clinic_stations": [
+      {
+        "id": "607c40a9-b9ec-43bb-9c35-b6a81c70de58",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "room": "b6dd4466-daec-42cd-b673-335cd6490ed2",
+        "station_code": "R-PT-1-S1",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "e8ddcf75-1db9-454e-901a-675da2f59d09",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "room": "b6dd4466-daec-42cd-b673-335cd6490ed2",
+        "station_code": "R-PT-1-S2",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "84fcd2bf-58e3-4df2-bf4f-902b5e15d08a",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "room": "ba453ebf-773e-46b2-baaf-c668dc41f523",
+        "station_code": "R-PT-2-S1",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "518295c0-ecf7-409f-b7f6-bcece96cdeca",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "room": "ba453ebf-773e-46b2-baaf-c668dc41f523",
+        "station_code": "R-PT-2-S2",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "71239775-b9a5-4160-992c-3cf6250c76c0",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "room": "19994b77-c418-4e7d-aad0-3bd357a120ae",
+        "station_code": "R-NUT-S1",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "3671c204-ac34-4aa5-9f21-a30485e13803",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "room": "19994b77-c418-4e7d-aad0-3bd357a120ae",
+        "station_code": "R-NUT-S2",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "b55e16e1-6c9e-40d2-9499-0d1a8d5fee6c",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "room": "aef042b1-75c3-4f3a-8f44-8f9d35113aa1",
+        "station_code": "R-DERM-S1",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "12c634fb-3ef4-4bf1-bce7-32b69020cc2a",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "room": "aef042b1-75c3-4f3a-8f44-8f9d35113aa1",
+        "station_code": "R-DERM-S2",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "d136adfb-1fad-4967-9505-007330175049",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "room": "37c9c547-5537-474e-98d5-18e0ccecedc5",
+        "station_code": "R-LASER-S1",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "25d62b87-3992-4bb6-bedc-bc20250890e4",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "room": "37c9c547-5537-474e-98d5-18e0ccecedc5",
+        "station_code": "R-LASER-S2",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_stations_lang": [
+      {
+        "id": "f7cd2f04-32b4-41e7-827c-859adb741d08",
+        "clinic_stations_id": "607c40a9-b9ec-43bb-9c35-b6a81c70de58",
+        "lang": "ar",
+        "name": "سرير/كرسي 1"
+      },
+      {
+        "id": "cc384564-9e26-4273-8333-d0467937bc1d",
+        "clinic_stations_id": "607c40a9-b9ec-43bb-9c35-b6a81c70de58",
+        "lang": "en",
+        "name": "Bed/Chair 1"
+      },
+      {
+        "id": "ffb129a2-a512-4de1-9787-a6706fd60ba3",
+        "clinic_stations_id": "e8ddcf75-1db9-454e-901a-675da2f59d09",
+        "lang": "ar",
+        "name": "سرير/كرسي 2"
+      },
+      {
+        "id": "91c3510a-0201-4ad9-af30-7a85bfa79e27",
+        "clinic_stations_id": "e8ddcf75-1db9-454e-901a-675da2f59d09",
+        "lang": "en",
+        "name": "Bed/Chair 2"
+      },
+      {
+        "id": "09f8c377-38e6-41c1-aae4-13dbb90da13c",
+        "clinic_stations_id": "84fcd2bf-58e3-4df2-bf4f-902b5e15d08a",
+        "lang": "ar",
+        "name": "سرير/كرسي 1"
+      },
+      {
+        "id": "490edef2-049d-40a0-8956-a79d94a22995",
+        "clinic_stations_id": "84fcd2bf-58e3-4df2-bf4f-902b5e15d08a",
+        "lang": "en",
+        "name": "Bed/Chair 1"
+      },
+      {
+        "id": "296fbb0f-9ed2-43a2-b208-b2d625577010",
+        "clinic_stations_id": "518295c0-ecf7-409f-b7f6-bcece96cdeca",
+        "lang": "ar",
+        "name": "سرير/كرسي 2"
+      },
+      {
+        "id": "1429bce2-df87-4d18-9276-98bf4ec118df",
+        "clinic_stations_id": "518295c0-ecf7-409f-b7f6-bcece96cdeca",
+        "lang": "en",
+        "name": "Bed/Chair 2"
+      },
+      {
+        "id": "acda2de2-0cda-4bbc-ad63-7655dc07dc70",
+        "clinic_stations_id": "71239775-b9a5-4160-992c-3cf6250c76c0",
+        "lang": "ar",
+        "name": "سرير/كرسي 1"
+      },
+      {
+        "id": "c7071e60-720a-4eba-9d78-4c4bcffa23e4",
+        "clinic_stations_id": "71239775-b9a5-4160-992c-3cf6250c76c0",
+        "lang": "en",
+        "name": "Bed/Chair 1"
+      },
+      {
+        "id": "8e87c6f3-bdcf-4c22-84b8-d4a9a6d99340",
+        "clinic_stations_id": "3671c204-ac34-4aa5-9f21-a30485e13803",
+        "lang": "ar",
+        "name": "سرير/كرسي 2"
+      },
+      {
+        "id": "5dd33c66-b74a-4816-9e43-bf69358d5ab6",
+        "clinic_stations_id": "3671c204-ac34-4aa5-9f21-a30485e13803",
+        "lang": "en",
+        "name": "Bed/Chair 2"
+      },
+      {
+        "id": "d6f32228-6a58-45d1-9f3a-98a306f5f575",
+        "clinic_stations_id": "b55e16e1-6c9e-40d2-9499-0d1a8d5fee6c",
+        "lang": "ar",
+        "name": "سرير/كرسي 1"
+      },
+      {
+        "id": "7dcfbd79-fba8-479b-8bdf-4ad0ba5bca33",
+        "clinic_stations_id": "b55e16e1-6c9e-40d2-9499-0d1a8d5fee6c",
+        "lang": "en",
+        "name": "Bed/Chair 1"
+      },
+      {
+        "id": "de3d2462-5c5a-4402-9d3d-c3fe87f3336a",
+        "clinic_stations_id": "12c634fb-3ef4-4bf1-bce7-32b69020cc2a",
+        "lang": "ar",
+        "name": "سرير/كرسي 2"
+      },
+      {
+        "id": "1d2dd4f3-e4dd-4148-a096-09f995b1b2ea",
+        "clinic_stations_id": "12c634fb-3ef4-4bf1-bce7-32b69020cc2a",
+        "lang": "en",
+        "name": "Bed/Chair 2"
+      },
+      {
+        "id": "f36d1c80-961f-4413-a324-4c931a72520f",
+        "clinic_stations_id": "d136adfb-1fad-4967-9505-007330175049",
+        "lang": "ar",
+        "name": "سرير/كرسي 1"
+      },
+      {
+        "id": "5b46fbd7-c1cc-4c6e-a357-86e4f5513579",
+        "clinic_stations_id": "d136adfb-1fad-4967-9505-007330175049",
+        "lang": "en",
+        "name": "Bed/Chair 1"
+      },
+      {
+        "id": "8d7f2d46-ce90-43d3-8e2b-fd77b319a82c",
+        "clinic_stations_id": "25d62b87-3992-4bb6-bedc-bc20250890e4",
+        "lang": "ar",
+        "name": "سرير/كرسي 2"
+      },
+      {
+        "id": "036a3ca5-d9ec-40fc-9e79-737856fb4e59",
+        "clinic_stations_id": "25d62b87-3992-4bb6-bedc-bc20250890e4",
+        "lang": "en",
+        "name": "Bed/Chair 2"
+      }
+    ],
+    "clinic_devices": [
+      {
+        "id": "58b05936-2108-45b9-87cf-7c7d7b2fd486",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "code": "US",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "5a8e71d6-1802-4851-beaa-8ef0e4eb2fe5",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "code": "TENS",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "e4ac9375-320c-497a-9d17-45b0c2d13f28",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "code": "LAS-AX",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "3d72e617-dc34-4136-8c9b-e9fe3aa04c1a",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "code": "INBODY",
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_devices_lang": [
+      {
+        "id": "f80d0d97-232c-49e0-8fbe-d343698932dd",
+        "clinic_devices_id": "58b05936-2108-45b9-87cf-7c7d7b2fd486",
+        "lang": "ar",
+        "name": "موجات صوتية"
+      },
+      {
+        "id": "bd1e9ac1-462b-46ba-aee7-b1fe1e8eb782",
+        "clinic_devices_id": "58b05936-2108-45b9-87cf-7c7d7b2fd486",
+        "lang": "en",
+        "name": "Ultrasound"
+      },
+      {
+        "id": "1b0e140c-3706-43de-be13-1c7205e3dbfe",
+        "clinic_devices_id": "5a8e71d6-1802-4851-beaa-8ef0e4eb2fe5",
+        "lang": "ar",
+        "name": "تنبيه كهربائي"
+      },
+      {
+        "id": "3a866a04-d2f4-46b1-b4e2-5ed3d61143cd",
+        "clinic_devices_id": "5a8e71d6-1802-4851-beaa-8ef0e4eb2fe5",
+        "lang": "en",
+        "name": "TENS Unit"
+      },
+      {
+        "id": "fd1a352c-be5c-488d-afd1-9725b9cf3a2d",
+        "clinic_devices_id": "e4ac9375-320c-497a-9d17-45b0c2d13f28",
+        "lang": "ar",
+        "name": "ليزر كانديلا"
+      },
+      {
+        "id": "b303f39c-4f01-49ea-b45e-1a59492c75a1",
+        "clinic_devices_id": "e4ac9375-320c-497a-9d17-45b0c2d13f28",
+        "lang": "en",
+        "name": "Candela Laser"
+      },
+      {
+        "id": "8ee7a9b5-3c24-4e09-97c7-6e3a0ed85c38",
+        "clinic_devices_id": "3d72e617-dc34-4136-8c9b-e9fe3aa04c1a",
+        "lang": "ar",
+        "name": "ميزان إنبادي"
+      },
+      {
+        "id": "6ad8227a-5eae-4257-993d-2b5df52424c7",
+        "clinic_devices_id": "3d72e617-dc34-4136-8c9b-e9fe3aa04c1a",
+        "lang": "en",
+        "name": "InBody Scale"
+      }
+    ],
+    "clinic_services": [
+      {
+        "id": "5c70ada0-6403-4a76-87da-f2522eb24612",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "clinic_type": "44197d12-8a1e-4298-a2b4-9f59563338e0",
+        "service_domain": "4dd5e37d-4e7d-4ae3-aa50-12cc411450ca",
+        "code": "PT-EVAL",
+        "base_price": 300,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "is_package": 0,
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1,
+        "default_name": "PT Evaluation"
+      },
+      {
+        "id": "e3850cf5-c033-4acf-aa0d-2ac69f34b161",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "clinic_type": "8cef002a-14b8-4161-a533-1a2f2e6bc732",
+        "service_domain": "4dd5e37d-4e7d-4ae3-aa50-12cc411450ca",
+        "code": "PT-SESS",
+        "base_price": 500,
+        "base_duration_minutes": 60,
+        "slot_minutes": 60,
+        "is_package": 0,
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1,
+        "default_name": "Manual Therapy Session"
+      },
+      {
+        "id": "0e3adf73-1c76-483f-8bcb-1b634c51594a",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "clinic_type": "8cef002a-14b8-4161-a533-1a2f2e6bc732",
+        "service_domain": "4dd5e37d-4e7d-4ae3-aa50-12cc411450ca",
+        "code": "PT-HOME",
+        "base_price": 800,
+        "base_duration_minutes": 60,
+        "slot_minutes": 60,
+        "is_package": 0,
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1,
+        "default_name": "Home PT Session"
+      },
+      {
+        "id": "5991013c-e32c-4c3f-b36f-602c18b592b7",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "clinic_type": "44197d12-8a1e-4298-a2b4-9f59563338e0",
+        "service_domain": "c8742b23-9583-4ed8-8360-e9ecbc10b4e1",
+        "code": "NUT-CONS",
+        "base_price": 400,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "is_package": 0,
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1,
+        "default_name": "Nutrition Consultation + InBody"
+      },
+      {
+        "id": "05a480a3-f7a0-4d85-b9c9-61d332e3bb4a",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "clinic_type": "0ef84cb8-6a92-4a36-9c82-bbe858d8fd9a",
+        "service_domain": "c8742b23-9583-4ed8-8360-e9ecbc10b4e1",
+        "code": "NUT-FOL",
+        "base_price": 150,
+        "base_duration_minutes": 15,
+        "slot_minutes": 15,
+        "is_package": 0,
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1,
+        "default_name": "Weekly Follow-up"
+      },
+      {
+        "id": "def940e7-e64b-43e2-9790-0b5cccab0977",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "clinic_type": "8cef002a-14b8-4161-a533-1a2f2e6bc732",
+        "service_domain": "c8742b23-9583-4ed8-8360-e9ecbc10b4e1",
+        "code": "CRYO-SESS",
+        "base_price": 600,
+        "base_duration_minutes": 45,
+        "slot_minutes": 45,
+        "is_package": 0,
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1,
+        "default_name": "Cryolipolysis Session"
+      },
+      {
+        "id": "791df3c9-fae1-4737-a039-d700769e30e6",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "clinic_type": "44197d12-8a1e-4298-a2b4-9f59563338e0",
+        "service_domain": "e16ea2b8-b7ff-4f1a-b5e9-afd3d8929a6c",
+        "code": "DERM-CONS",
+        "base_price": 350,
+        "base_duration_minutes": 20,
+        "slot_minutes": 20,
+        "is_package": 0,
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1,
+        "default_name": "Dermatology Consultation"
+      },
+      {
+        "id": "2f11de32-66bf-4281-b4c7-40a2f67c2439",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "clinic_type": "8cef002a-14b8-4161-a533-1a2f2e6bc732",
+        "service_domain": "e16ea2b8-b7ff-4f1a-b5e9-afd3d8929a6c",
+        "code": "BOTOX",
+        "base_price": 120,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "is_package": 0,
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1,
+        "default_name": "Botox Injection (Unit)"
+      },
+      {
+        "id": "a46b4603-0965-4036-b31d-044841115fa9",
+        "company_id": "824855b2-3551-4cbd-8ea9-23bcf25c925d",
+        "clinic_type": "8cef002a-14b8-4161-a533-1a2f2e6bc732",
+        "service_domain": "e16ea2b8-b7ff-4f1a-b5e9-afd3d8929a6c",
+        "code": "LAS-BODY",
+        "base_price": 2500,
+        "base_duration_minutes": 90,
+        "slot_minutes": 90,
+        "is_package": 0,
+        "begin_date": "2026-01-01T00:00:00",
+        "is_active": 1,
+        "default_name": "Laser Hair Removal - Full Body"
+      }
+    ],
+    "clinic_services_lang": [
+      {
+        "id": "f8d67be5-0326-4aa2-9dad-c818d19d9690",
+        "clinic_services_id": "5c70ada0-6403-4a76-87da-f2522eb24612",
+        "lang": "ar",
+        "name": "كشف وتقييم علاج طبيعي"
+      },
+      {
+        "id": "ccdb25c8-d8e8-407a-b3a6-8aad6bd67d17",
+        "clinic_services_id": "5c70ada0-6403-4a76-87da-f2522eb24612",
+        "lang": "en",
+        "name": "PT Evaluation"
+      },
+      {
+        "id": "0a584962-df90-4adb-82a8-11e89d2cc511",
+        "clinic_services_id": "e3850cf5-c033-4acf-aa0d-2ac69f34b161",
+        "lang": "ar",
+        "name": "جلسة علاج طبيعي يدوي"
+      },
+      {
+        "id": "a064f0ce-8ded-4281-ac72-fed156415941",
+        "clinic_services_id": "e3850cf5-c033-4acf-aa0d-2ac69f34b161",
+        "lang": "en",
+        "name": "Manual Therapy Session"
+      },
+      {
+        "id": "7992930a-560e-42c8-aa2c-ed7c4b733f71",
+        "clinic_services_id": "0e3adf73-1c76-483f-8bcb-1b634c51594a",
+        "lang": "ar",
+        "name": "جلسة علاج طبيعي منزلي"
+      },
+      {
+        "id": "5ebbbf98-d261-41cb-a401-62e9033b46e5",
+        "clinic_services_id": "0e3adf73-1c76-483f-8bcb-1b634c51594a",
+        "lang": "en",
+        "name": "Home PT Session"
+      },
+      {
+        "id": "1132d5b2-45c8-4961-8664-a87ba25df349",
+        "clinic_services_id": "5991013c-e32c-4c3f-b36f-602c18b592b7",
+        "lang": "ar",
+        "name": "كشف تغذية + InBody"
+      },
+      {
+        "id": "55b0e5ce-7ebe-4213-9208-c2f9e5530c98",
+        "clinic_services_id": "5991013c-e32c-4c3f-b36f-602c18b592b7",
+        "lang": "en",
+        "name": "Nutrition Consultation + InBody"
+      },
+      {
+        "id": "819f1008-5a4f-452d-bbc7-0cb991ae21e5",
+        "clinic_services_id": "05a480a3-f7a0-4d85-b9c9-61d332e3bb4a",
+        "lang": "ar",
+        "name": "متابعة أسبوعية"
+      },
+      {
+        "id": "4a6d794f-bedb-4a46-b0a6-07486be3ab56",
+        "clinic_services_id": "05a480a3-f7a0-4d85-b9c9-61d332e3bb4a",
+        "lang": "en",
+        "name": "Weekly Follow-up"
+      },
+      {
+        "id": "f98dd3c8-8334-4434-9e2a-4076cf140e0e",
+        "clinic_services_id": "def940e7-e64b-43e2-9790-0b5cccab0977",
+        "lang": "ar",
+        "name": "جلسة تجميد دهون (Cryo)"
+      },
+      {
+        "id": "98860faa-4085-4155-b2cf-b6b1ee2fd465",
+        "clinic_services_id": "def940e7-e64b-43e2-9790-0b5cccab0977",
+        "lang": "en",
+        "name": "Cryolipolysis Session"
+      },
+      {
+        "id": "d0f981d6-5f1a-4e18-a5c4-6d45c2889c3e",
+        "clinic_services_id": "791df3c9-fae1-4737-a039-d700769e30e6",
+        "lang": "ar",
+        "name": "كشف جلدية"
+      },
+      {
+        "id": "cec89d0c-52ec-49b9-9cd2-d18f252fe95b",
+        "clinic_services_id": "791df3c9-fae1-4737-a039-d700769e30e6",
+        "lang": "en",
+        "name": "Dermatology Consultation"
+      },
+      {
+        "id": "a28abf6b-8e47-4ac2-a851-a50a10c970e1",
+        "clinic_services_id": "2f11de32-66bf-4281-b4c7-40a2f67c2439",
+        "lang": "ar",
+        "name": "حقن بوتوكس (بالوحدة)"
+      },
+      {
+        "id": "af52d6bc-c641-4efd-861f-b632c00c425c",
+        "clinic_services_id": "2f11de32-66bf-4281-b4c7-40a2f67c2439",
+        "lang": "en",
+        "name": "Botox Injection (Unit)"
+      },
+      {
+        "id": "5eff8d76-4448-4fb3-82f7-025d83cee40b",
+        "clinic_services_id": "a46b4603-0965-4036-b31d-044841115fa9",
+        "lang": "ar",
+        "name": "ليزر إزالة شعر - جسم كامل"
+      },
+      {
+        "id": "7b2a7360-f8eb-45fb-9890-bfd3cc7bb37b",
+        "clinic_services_id": "a46b4603-0965-4036-b31d-044841115fa9",
+        "lang": "en",
+        "name": "Laser Hair Removal - Full Body"
+      }
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "tables": {
+    "sys_companies": [],
+    "sys_branches": [],
+    "sys_users": [],
+    "sys_roles": [],
+    "sys_user_branch_access": []
+  },
+  "lastExternalSeedSync": {
+    "time": "2026-01-04T09:09:42.509Z",
+    "sourceUrl": "https://darwish.mas.com.eg/api/v6/pos_database_func",
+    "tables": [
+      "companies",
+      "branches",
+      "users",
+      "users_groups",
+      "users_groups_relations"
+    ],
+    "results": [
+      {
+        "table": "sys_companies",
+        "target": "shared",
+        "status": "updated",
+        "stats": {
+          "updates": 0,
+          "inserts": 0,
+          "total": 0,
+          "preserved": 0,
+          "ignored": 1
+        }
+      },
+      {
+        "table": "sys_branches",
+        "target": "shared",
+        "status": "updated",
+        "stats": {
+          "updates": 0,
+          "inserts": 0,
+          "total": 0,
+          "preserved": 0,
+          "ignored": 2
+        }
+      },
+      {
+        "table": "sys_users",
+        "target": "shared",
+        "status": "updated",
+        "stats": {
+          "updates": 0,
+          "inserts": 0,
+          "total": 0,
+          "preserved": 0,
+          "ignored": 34
+        }
+      },
+      {
+        "table": "sys_roles",
+        "target": "shared",
+        "status": "updated",
+        "stats": {
+          "updates": 0,
+          "inserts": 0,
+          "total": 0,
+          "preserved": 0,
+          "ignored": 32
+        }
+      },
+      {
+        "table": "sys_user_branch_access",
+        "target": "shared",
+        "status": "updated",
+        "stats": {
+          "updates": 0,
+          "inserts": 0,
+          "total": 0,
+          "preserved": 0,
+          "ignored": 238
+        }
+      }
+    ]
+  }
+}

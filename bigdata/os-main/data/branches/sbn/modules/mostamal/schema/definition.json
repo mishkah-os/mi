@@ -1,0 +1,96 @@
+{
+    "schema": {
+        "tables": [
+            {
+                "name": "sbn_users"
+            },
+            {
+                "name": "sbn_users_lang"
+            },
+            {
+                "name": "sbn_user_roles"
+            },
+            {
+                "name": "sbn_user_roles_lang"
+            },
+            {
+                "name": "sbn_products"
+            },
+            {
+                "name": "sbn_products_lang"
+            },
+            {
+                "name": "sbn_services"
+            },
+            {
+                "name": "sbn_services_lang"
+            },
+            {
+                "name": "sbn_wiki_articles"
+            },
+            {
+                "name": "sbn_wiki_articles_lang"
+            },
+            {
+                "name": "sbn_classifieds"
+            },
+            {
+                "name": "sbn_classifieds_lang"
+            },
+            {
+                "name": "sbn_posts"
+            },
+            {
+                "name": "sbn_posts_lang"
+            },
+            {
+                "name": "sbn_comments"
+            },
+            {
+                "name": "sbn_comments_lang"
+            },
+            {
+                "name": "sbn_hashtags"
+            },
+            {
+                "name": "sbn_hashtags_lang"
+            },
+            {
+                "name": "sbn_reviews"
+            },
+            {
+                "name": "sbn_reviews_lang"
+            },
+            {
+                "name": "sbn_classified_categories"
+            },
+            {
+                "name": "sbn_classified_categories_lang"
+            },
+            {
+                "name": "sbn_marketplace_categories"
+            },
+            {
+                "name": "sbn_marketplace_categories_lang"
+            },
+            {
+                "name": "sbn_service_categories"
+            },
+            {
+                "name": "sbn_service_categories_lang"
+            },
+            {
+                "name": "sbn_knowledge_categories"
+            },
+            {
+                "name": "sbn_knowledge_categories_lang"
+            },
+            {
+                "name": "sbn_notifications"
+            },
+            {
+                "name": "sbn_ui_labels"
+            }
+        ]
+    }
+}

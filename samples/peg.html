@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEG | Engineering Consultants</title>
+
+    <!-- 1. TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Mishkah Core -->
+    <script src="https://ws.mas.com.eg/lib/mishkah.core.js"></script>
+
+    <!-- 3. Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Oswald:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 4. Global Styles -->
+    <style>
+        :root[data-theme='light'] {
+            --bg-body: #f8fafc;
+            /* Slate 50 */
+            --bg-surface: #ffffff;
+            --text-main: #0f172a;
+            /* Slate 900 */
+            --text-muted: #475569;
+            /* Slate 600 */
+            --primary: #0f4c81;
+            /* Classic Blue */
+            --primary-fg: #ffffff;
+            --accent: #f59e0b;
+            /* Amber 500 (Construction accent) */
+            --border: #e2e8f0;
+            /* Slate 200 */
+        }
+
+        :root[data-theme='dark'] {
+            --bg-body: #0f172a;
+            /* Slate 900 */
+            --bg-surface: #1e293b;
+            /* Slate 800 */
+            --text-main: #f8fafc;
+            /* Slate 50 */
+            --text-muted: #94a3b8;
+            /* Slate 400 */
+            --primary: #38bdf8;
+            /* Sky 400 */
+            --primary-fg: #0f172a;
+            --accent: #fbbf24;
+            /* Amber 400 */
+            --border: #334155;
+            /* Slate 700 */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Typography */
+        :root[lang='ar'] body {
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        :root[lang='en'] body {
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        :root[lang='en'] p {
+            font-family: sans-serif;
+            letter-spacing: normal;
+        }
+
+        /* Blueprint Pattern Background */
+        .bg-grid {
+            background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // ==========================================
+        // 1. DATABASE
+        // ==========================================
+        const database = {
+            data: { mobileMenuOpen: false },
+            env: { theme: 'dark', lang: 'ar', dir: 'rtl' },
+            i18n: {
+                dict: {
+                    'brand': { ar: 'PEG', en: 'PEG' },
+                    'brand_full': { ar: 'مجموعة الاستشارات الهندسية التقدمية', en: 'Progressive Engineering Group' },
+
+                    // Nav
+                    'nav_home': { ar: 'الرئيسية', en: 'Home' },
+                    'nav_projects': { ar: 'مشاريعنا', en: 'Projects' },
+                    'nav_services': { ar: 'الخدمات', en: 'Services' },
+                    'nav_contact': { ar: 'اتصل بنا', en: 'Contact' },
+
+                    // Hero
+                    'hero_title': { ar: 'نهندس المستقبل بدقة وإتقان', en: 'Engineering the Future with Precision' },
+                    'hero_desc': { ar: 'نقدم حلولاً هندسية مبتكرة في التصميم المعماري، الإنشائي، وإدارة المشروعات الكبرى.', en: 'Delivering innovative engineering solutions in architectural design, structural engineering, and mega-project management.' },
+                    'hero_cta': { ar: 'استعرض خدماتنا', en: 'Explore Services' },
+                    'hero_xp': { ar: 'أكثر من 20 عاماً من الخبرة', en: 'Over 20 Years of Experience' },
+
+                    // Services
+                    'srv_arch': { ar: 'تصميم معماري', en: 'Architecture' },
+                    'srv_arch_desc': { ar: 'تصاميم عصرية تراعي الوظيفة والجمال والاستدامة.', en: 'Modern designs prioritizing function, aesthetics, and sustainability.' },
+                    'srv_struct': { ar: 'هندسة إنشائية', en: 'Structural Eng.' },
+                    'srv_struct_desc': { ar: 'أنظمة إنشائية آمنة واقتصادية بأحدث الكودات العالمية.', en: 'Safe and economic structural systems using latest global codes.' },
+                    'srv_mep': { ar: 'كهروميكانيكا (MEP)', en: 'MEP Solutions' },
+                    'srv_mep_desc': { ar: 'تصميم شبكات الكهرباء، التكييف، والصرف ومكافحة الحريق.', en: 'Electrical, HVAC, plumbing, and fire fighting systems design.' },
+                    'srv_pm': { ar: 'إدارة مشاريع', en: 'Project Mgmt.' },
+                    'srv_pm_desc': { ar: 'الإشراف على التنفيذ وضبط الجودة والجدول الزمني.', en: 'Construction supervision, quality control, and schedule management.' },
+
+                    // Stats
+                    'stat_proj': { ar: 'مشروع مكتمل', en: 'Projects Done' },
+                    'stat_client': { ar: 'عميل سعيد', en: 'Happy Clients' },
+                    'stat_eng': { ar: 'مهندس خبير', en: 'Expert Engineers' },
+
+                    // Contact
+                    'contact_title': { ar: 'ابنِ رؤيتك معنا', en: 'Build Your Vision With Us' },
+                    'btn_lang': { ar: 'En', en: 'عربي' },
+                    'copyright': { ar: '© 2026 PEG للاستشارات الهندسية.', en: '© 2026 PEG Engineering Consultants.' }
+                }
+            }
+        };
+
+        // ==========================================
+        // 2. ORDERS
+        // ==========================================
+        const orders = {
+            'sys.theme': {
+                on: ['click'], gkeys: ['btn:theme'],
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, env: { ...s.env, theme: s.env.theme === 'light' ? 'dark' : 'light' } }))
+            },
+            'sys.lang': {
+                on: ['click'], gkeys: ['btn:lang'],
+                handler: (e, ctx) => ctx.setState(s => {
+                    const l = s.env.lang === 'ar' ? 'en' : 'ar';
+                    return { ...s, env: { ...s.env, lang: l, dir: l === 'ar' ? 'rtl' : 'ltr' } };
+                })
+            },
+            'ui.menu': {
+                on: ['click'], gkeys: ['btn:menu'],
+                handler: (e, ctx) => ctx.setState(s => { s.data.mobileMenuOpen = !s.data.mobileMenuOpen; return s; })
+            }
+        };
+
+        // ==========================================
+        // 3. BODY
+        // ==========================================
+        const D = Mishkah.DSL;
+
+        function body(db) {
+            const t = (k) => db.i18n.dict[k]?.[db.env.lang] || k;
+
+            // Reusable Components (Inline within body for core-only purity)
+            const NavLink = (label) => D.A({
+                attrs: { href: '#', class: 'font-medium text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors uppercase tracking-wider text-sm' }
+            }, [label]);
+
+            const ServiceCard = (icon, title, desc) => D.Div({
+                attrs: { class: 'bg-[var(--bg-surface)] p-8 border-t-4 border-[var(--primary)] shadow-sm hover:shadow-xl transition-all duration-300 group' }
+            }, [
+                D.Div({ attrs: { class: 'text-5xl mb-6 text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors' } }, [icon]),
+                D.H3({ attrs: { class: 'text-2xl font-bold mb-4 text-[var(--text-main)] font-display' } }, [title]),
+                D.P({ attrs: { class: 'text-[var(--text-muted)] leading-relaxed' } }, [desc])
+            ]);
+
+            const StatBox = (num, label) => D.Div({ attrs: { class: 'text-center p-6 border border-[var(--border)] bg-[var(--bg-surface)]' } }, [
+                D.H4({ attrs: { class: 'text-4xl font-black text-[var(--primary)] mb-2' } }, [num]),
+                D.P({ attrs: { class: 'text-sm font-bold text-[var(--text-muted)] uppercase tracking-widest' } }, [label])
+            ]);
+
+            return D.Div({
+                attrs: {
+                    class: 'min-h-screen flex flex-col font-sans selection:bg-[var(--accent)] selection:text-white',
+                    'data-theme': db.env.theme,
+                    'dir': db.env.dir,
+                    lang: db.env.lang
+                }
+            }, [
+                // Navbar
+                D.Nav({ attrs: { class: 'sticky top-0 z-50 bg-[var(--bg-surface)] border-b border-[var(--border)] shadow-sm' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between' } }, [
+                        // Brand
+                        D.Div({ attrs: { class: 'flex items-center gap-3' } }, [
+                            D.Div({ attrs: { class: 'w-10 h-10 bg-[var(--primary)] flex items-center justify-center text-white font-black text-xl' } }, ['P']),
+                            D.Div({ attrs: { class: 'flex flex-col' } }, [
+                                D.Span({ attrs: { class: 'text-xl font-bold leading-none tracking-tighter' } }, [t('brand')]),
+                                D.Span({ attrs: { class: 'text-[10px] text-[var(--text-muted)] uppercase tracking-widest font-bold' } }, ['Engineering'])
+                            ])
+                        ]),
+
+                        // Desktop Menu
+                        D.Div({ attrs: { class: 'hidden md:flex items-center gap-8' } }, [
+                            NavLink(t('nav_home')),
+                            NavLink(t('nav_services')),
+                            NavLink(t('nav_projects')),
+
+                            D.Div({ attrs: { class: 'w-px h-6 bg-[var(--border)]' } }, []),
+
+                            // Tools
+                            D.Button({ attrs: { gkey: 'btn:lang', class: 'font-bold text-sm text-[var(--primary)]' } }, [t('btn_lang')]),
+                            D.Button({ attrs: { gkey: 'btn:theme', class: 'text-lg' } }, [db.env.theme === 'light' ? '🌙' : '☀️'])
+                        ]),
+
+                        // Mobile Menu Toggle
+                        D.Button({ attrs: { gkey: 'btn:menu', class: 'md:hidden text-2xl' } }, ['☰'])
+                    ])
+                ]),
+
+                // Mobile Menu (Conditional)
+                db.data.mobileMenuOpen ? D.Div({ attrs: { class: 'md:hidden bg-[var(--bg-surface)] border-b border-[var(--border)] p-4' } }, [
+                    D.Div({ attrs: { class: 'flex flex-col gap-4' } }, [
+                        NavLink(t('nav_home')),
+                        NavLink(t('nav_services'))
+                    ])
+                ]) : null,
+
+                // Hero Section
+                D.Header({ attrs: { class: 'relative py-24 md:py-32 bg-grid overflow-hidden border-b border-[var(--border)]' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto px-4 md:px-8 relative z-10' } }, [
+                        D.Div({ attrs: { class: 'max-w-3xl' } }, [
+                            D.Span({ attrs: { class: 'inline-block py-1 px-3 border border-[var(--primary)] text-[var(--primary)] text-xs font-bold uppercase tracking-widest mb-6' } }, [t('brand_full')]),
+                            D.H1({ attrs: { class: 'text-5xl md:text-7xl font-black mb-8 leading-tight' } }, [t('hero_title')]),
+                            D.P({ attrs: { class: 'text-xl text-[var(--text-muted)] mb-10 leading-relaxed max-w-2xl' } }, [t('hero_desc')]),
+
+                            D.Div({ attrs: { class: 'flex gap-4' } }, [
+                                D.Button({ attrs: { class: 'px-8 py-4 bg-[var(--primary)] text-[var(--primary-fg)] font-bold uppercase text-sm tracking-widest hover:bg-[var(--accent)] hover:text-black transition-colors' } }, [t('hero_cta')]),
+                                D.Button({ attrs: { class: 'px-8 py-4 border-2 border-[var(--text-main)] font-bold uppercase text-sm tracking-widest hover:bg-[var(--text-main)] hover:text-[var(--bg-surface)] transition-colors' } }, [t('nav_contact')])
+                            ])
+                        ])
+                    ]),
+                    // Blueprint Decoration
+                    D.Div({ attrs: { class: 'absolute -right-20 top-10 w-96 h-96 border-8 border-[var(--border)] rounded-full opacity-50' } }, []),
+                    D.Div({ attrs: { class: 'absolute right-40 bottom-10 w-64 h-64 border-4 border-[var(--accent)] rounded-full opacity-20' } }, [])
+                ]),
+
+                // Stats Banner
+                D.Section({ attrs: { class: 'bg-[var(--bg-body)]' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto px-4 md:px-8 -mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 relative z-20' } }, [
+                        StatBox('+500', t('stat_proj')),
+                        StatBox('+120', t('stat_client')),
+                        StatBox('+45', t('stat_eng')),
+                        StatBox('2006', 'Est.')
+                    ])
+                ]),
+
+                // Services Section
+                D.Section({ attrs: { class: 'py-24 bg-[var(--bg-body)]' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto px-4 md:px-8' } }, [
+                        D.Div({ attrs: { class: 'flex items-end justify-between mb-16' } }, [
+                            D.Div({}, [
+                                D.H2({ attrs: { class: 'text-4xl font-bold mb-2' } }, [t('nav_services')]),
+                                D.Div({ attrs: { class: 'w-20 h-1.5 bg-[var(--accent)]' } }, [])
+                            ]),
+                            D.A({ attrs: { href: '#', class: 'hidden md:block text-[var(--primary)] font-bold hover:text-[var(--accent)] transition-colors' } }, ['⟶'])
+                        ]),
+
+                        D.Div({ attrs: { class: 'grid md:grid-cols-2 lg:grid-cols-4 gap-6' } }, [
+                            ServiceCard('🏛️', t('srv_arch'), t('srv_arch_desc')),
+                            ServiceCard('🏗️', t('srv_struct'), t('srv_struct_desc')),
+                            ServiceCard('⚡', t('srv_mep'), t('srv_mep_desc')),
+                            ServiceCard('📋', t('srv_pm'), t('srv_pm_desc'))
+                        ])
+                    ])
+                ]),
+
+                // Footer
+                D.Footer({ attrs: { class: 'bg-[var(--bg-surface)] border-t border-[var(--border)] py-12' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-6' } }, [
+                        D.Div({ attrs: { class: 'text-2xl font-black text-[var(--text-main)]' } }, ['PEG']),
+                        D.Div({ attrs: { class: 'text-sm text-[var(--text-muted)]' } }, [t('copyright')])
+                    ])
+                ])
+
+            ]);
+        }
+
+        Mishkah.app.setBody(body);
+        Mishkah.app.create(database, orders).mount('#app');
+    </script>
+</body>
+
+</html>

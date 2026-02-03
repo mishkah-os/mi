@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Mishkah Mobile Demo</title>
+
+    <!-- Design System (Mishkah UI) -->
+    <script src="lib/mishkah-ui.js"></script>
+
+    <!-- Mishkah Store Core Dependencies -->
+    <script src="lib/mishkah.store.js"></script>
+    <script src="lib/mishkah.simple-store.js"></script>
+
+    <!-- Core Framework -->
+    <script src="lib/mishkah-firebase.js"></script>
+    <script src="lib/app-context.js"></script>
+    <script src="lib/mobile-kit.js"></script>
+
+    <style>
+        :root {
+            /* Basic Theme Variables fallback */
+            --background: #ffffff;
+            --foreground: #09090b;
+            --primary: #18181b;
+            --primary-foreground: #fafafa;
+            --secondary: #f4f4f5;
+            --muted-foreground: #71717a;
+            --border: #e4e4e7;
+            --card: #ffffff;
+            --card-foreground: #09090b;
+            --surface-2: #f4f4f5;
+        }
+
+        .dark {
+            --background: #09090b;
+            --foreground: #fafafa;
+            --primary: #fafafa;
+            --primary-foreground: #18181b;
+            --secondary: #27272a;
+            --muted-foreground: #a1a1aa;
+            --border: #27272a;
+            --card: #09090b;
+            --card-foreground: #fafafa;
+            --surface-2: #27272a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const { MishkahFirebase, MobileKit, AppContext } = window;
+
+            // 1. Initialize AppShell
+            const shell = MobileKit.AppShell({ title: 'Standard Mobile Demo' });
+
+            // 2. Initialize Backend (Standard Store)
+            // This now uses WebSocket + IndexedDB under the hood
+            await MishkahFirebase.init({
+                branchId: 'default',
+                moduleId: 'pos'
+            });
+
+            // 3. Load Schema
+            try {
+                console.log('Loading schema (auto-sync)...');
+                // The new loadSchema upgrades the DB connection with schema defs
+                // Ensure backend is running or mock schema available
+                // For demo purpose, we might skip strict schema load if not running full server
+                // await MishkahFirebase.loadSchema('pos'); 
+
+                renderDashboard(shell);
+
+            } catch (err) {
+                console.error("Setup failed", err);
+                shell.setContent(document.createTextNode('Setup Error: ' + err.message));
+            }
+        });
+
+        function renderDashboard(shell) {
+            const { MobileKit, MishkahFirebase } = window;
+
+            const container = document.createElement('div');
+            container.className = "flex flex-col gap-6 pb-20";
+
+            /* --- Section: Terminals List (Realtime) --- */
+
+            const listSection = document.createElement('section');
+            listSection.innerHTML = `<h2 class="text-lg font-bold mb-2 px-2">Live Terminals</h2>`;
+
+            // DataContainer used to use 'get()', now it uses 'onSnapshot()' internally
+            const terminalsList = MobileKit.DataContainer('pos_terminal', (items) => {
+                const list = document.createElement('div');
+                list.className = "flex flex-col gap-2";
+
+                if (!items || items.length === 0) {
+                    list.innerHTML = `<div class="p-4 text-center text-[var(--muted-foreground)] rounded border border-dashed border-[var(--border)]">No terminals.</div>`;
+                    return list;
+                }
+
+                items.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = "p-4 rounded-lg border border-[var(--border)] bg-[var(--card)] shadow-sm flex justify-between items-center";
+                    card.innerHTML = `
+                        <div>
+                            <div class="font-bold">${item.label || item.code || 'Unnamed'}</div>
+                            <div class="text-xs text-[var(--muted-foreground)]">${item.status || 'unknown'}</div>
+                        </div>
+                        <div class="text-2xl opacity-20">🖥</div>
+                    `;
+                    list.appendChild(card);
+                });
+                return list;
+            });
+
+            listSection.appendChild(terminalsList);
+            container.appendChild(listSection);
+
+            /* --- Section: Add Form --- */
+
+            const formSection = document.createElement('section');
+            formSection.className = "p-4 rounded-xl bg-[var(--surface-2)] mx-2";
+            formSection.innerHTML = `<h2 class="text-sm font-bold uppercase tracking-wider mb-4 opacity-70">Add Terminal</h2>`;
+
+            const form = MobileKit.SchemaForm('pos_terminal', async (data) => {
+                console.log('Adding terminal:', data);
+                try {
+                    // Uses store.insert internally
+                    await MishkahFirebase.collection('pos_terminal').add({
+                        ...data,
+                        id: 'term-' + Date.now(),
+                        status: 'active'
+                    });
+                    alert('Added!');
+                } catch (e) {
+                    console.error(e);
+                    alert('Failed: ' + e.message);
+                }
+            });
+
+            formSection.appendChild(form);
+            container.appendChild(formSection);
+
+            shell.setContent(container);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,352 @@
+{
+  "name": "brocker schema v2",
+  "title": "brocker_v2",
+  "description": "Schema-first social real estate v2 with reels, posts, likes, comments, and vertical translations.",
+  "schema": {
+    "tables": [
+      {
+        "name": "users",
+        "label": "users",
+        "comment": "Core user accounts.",
+        "sqlName": "users",
+        "layout": { "x": 0, "y": 0 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          { "name": "phone", "columnName": "phone", "type": "string", "nullable": false, "unique": true },
+          { "name": "status", "columnName": "status", "type": "string", "nullable": false, "defaultValue": "active" },
+          { "name": "created_at", "columnName": "created_at", "type": "timestamp", "nullable": false },
+          { "name": "updated_at", "columnName": "updated_at", "type": "timestamp", "nullable": false }
+        ],
+        "indexes": [
+          { "name": "idx_users_phone", "columns": ["phone"], "unique": true, "method": "btree" }
+        ]
+      },
+      {
+        "name": "users_lang",
+        "label": "users_lang",
+        "comment": "Translations for user profile text.",
+        "sqlName": "users_lang",
+        "layout": { "x": 250, "y": 0 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          {
+            "name": "users_id",
+            "columnName": "users_id",
+            "type": "uuid",
+            "nullable": false,
+            "index": true,
+            "references": { "table": "users", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          { "name": "lang", "columnName": "lang", "type": "string", "nullable": false },
+          { "name": "full_name", "columnName": "full_name", "type": "string", "nullable": false },
+          { "name": "bio", "columnName": "bio", "type": "string", "nullable": true }
+        ],
+        "indexes": [
+          { "name": "uq_users_lang", "columns": ["users_id", "lang"], "unique": true, "method": "btree" }
+        ]
+      },
+      {
+        "name": "user_locations",
+        "label": "user_locations",
+        "comment": "Latest known user locations.",
+        "sqlName": "user_locations",
+        "layout": { "x": 0, "y": 200 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "uuid",
+            "nullable": false,
+            "index": true,
+            "references": { "table": "users", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          { "name": "lat", "columnName": "lat", "type": "decimal", "nullable": false },
+          { "name": "lng", "columnName": "lng", "type": "decimal", "nullable": false },
+          { "name": "place_id", "columnName": "place_id", "type": "string", "nullable": true },
+          { "name": "formatted_address", "columnName": "formatted_address", "type": "string", "nullable": true },
+          { "name": "created_at", "columnName": "created_at", "type": "timestamp", "nullable": false }
+        ],
+        "indexes": [
+          { "name": "idx_user_locations_user", "columns": ["user_id"], "unique": false, "method": "btree" }
+        ]
+      },
+      {
+        "name": "media_assets",
+        "label": "media_assets",
+        "comment": "Images and videos shared across listings, posts, and reels.",
+        "sqlName": "media_assets",
+        "layout": { "x": 0, "y": 400 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          {
+            "name": "owner_id",
+            "columnName": "owner_id",
+            "type": "uuid",
+            "nullable": false,
+            "index": true,
+            "references": { "table": "users", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          { "name": "media_type", "columnName": "media_type", "type": "string", "nullable": false },
+          { "name": "media_url", "columnName": "media_url", "type": "string", "nullable": false },
+          { "name": "media_thumbnail_url", "columnName": "media_thumbnail_url", "type": "string", "nullable": true },
+          { "name": "duration_sec", "columnName": "duration_sec", "type": "decimal", "nullable": true },
+          { "name": "metadata", "columnName": "metadata", "type": "json", "nullable": true },
+          { "name": "created_at", "columnName": "created_at", "type": "timestamp", "nullable": false }
+        ],
+        "indexes": [
+          { "name": "idx_media_assets_owner", "columns": ["owner_id"], "unique": false, "method": "btree" }
+        ]
+      },
+      {
+        "name": "listings",
+        "label": "listings",
+        "comment": "Real estate listings.",
+        "sqlName": "listings",
+        "layout": { "x": 300, "y": 400 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          {
+            "name": "owner_id",
+            "columnName": "owner_id",
+            "type": "uuid",
+            "nullable": false,
+            "index": true,
+            "references": { "table": "users", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          {
+            "name": "primary_media_id",
+            "columnName": "primary_media_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": { "table": "media_assets", "column": "id", "onDelete": "SET NULL", "onUpdate": "CASCADE" }
+          },
+          {
+            "name": "location_id",
+            "columnName": "location_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": { "table": "user_locations", "column": "id", "onDelete": "SET NULL", "onUpdate": "CASCADE" }
+          },
+          { "name": "listing_type", "columnName": "listing_type", "type": "string", "nullable": false },
+          { "name": "price_amount", "columnName": "price_amount", "type": "decimal", "nullable": true },
+          { "name": "currency", "columnName": "currency", "type": "string", "nullable": true },
+          { "name": "status", "columnName": "status", "type": "string", "nullable": false, "defaultValue": "active" },
+          { "name": "created_at", "columnName": "created_at", "type": "timestamp", "nullable": false },
+          { "name": "updated_at", "columnName": "updated_at", "type": "timestamp", "nullable": false }
+        ],
+        "indexes": [
+          { "name": "idx_listings_owner", "columns": ["owner_id"], "unique": false, "method": "btree" }
+        ]
+      },
+      {
+        "name": "listings_lang",
+        "label": "listings_lang",
+        "comment": "Translations for listing title and description.",
+        "sqlName": "listings_lang",
+        "layout": { "x": 600, "y": 400 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          {
+            "name": "listings_id",
+            "columnName": "listings_id",
+            "type": "uuid",
+            "nullable": false,
+            "index": true,
+            "references": { "table": "listings", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          { "name": "lang", "columnName": "lang", "type": "string", "nullable": false },
+          { "name": "headline", "columnName": "headline", "type": "string", "nullable": false },
+          { "name": "excerpt", "columnName": "excerpt", "type": "string", "nullable": true },
+          { "name": "description", "columnName": "description", "type": "string", "nullable": true }
+        ],
+        "indexes": [
+          { "name": "uq_listings_lang", "columns": ["listings_id", "lang"], "unique": true, "method": "btree" }
+        ]
+      },
+      {
+        "name": "posts",
+        "label": "posts",
+        "comment": "Social posts for listings or updates.",
+        "sqlName": "posts",
+        "layout": { "x": 300, "y": 650 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          {
+            "name": "owner_id",
+            "columnName": "owner_id",
+            "type": "uuid",
+            "nullable": false,
+            "index": true,
+            "references": { "table": "users", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          {
+            "name": "media_id",
+            "columnName": "media_id",
+            "type": "uuid",
+            "nullable": true,
+            "references": { "table": "media_assets", "column": "id", "onDelete": "SET NULL", "onUpdate": "CASCADE" }
+          },
+          { "name": "status", "columnName": "status", "type": "string", "nullable": false, "defaultValue": "active" },
+          { "name": "created_at", "columnName": "created_at", "type": "timestamp", "nullable": false }
+        ],
+        "indexes": [
+          { "name": "idx_posts_owner", "columns": ["owner_id"], "unique": false, "method": "btree" }
+        ]
+      },
+      {
+        "name": "posts_lang",
+        "label": "posts_lang",
+        "comment": "Translations for post captions.",
+        "sqlName": "posts_lang",
+        "layout": { "x": 600, "y": 650 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          {
+            "name": "posts_id",
+            "columnName": "posts_id",
+            "type": "uuid",
+            "nullable": false,
+            "index": true,
+            "references": { "table": "posts", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          { "name": "lang", "columnName": "lang", "type": "string", "nullable": false },
+          { "name": "caption", "columnName": "caption", "type": "string", "nullable": true }
+        ],
+        "indexes": [
+          { "name": "uq_posts_lang", "columns": ["posts_id", "lang"], "unique": true, "method": "btree" }
+        ]
+      },
+      {
+        "name": "reels",
+        "label": "reels",
+        "comment": "Short-form video reels.",
+        "sqlName": "reels",
+        "layout": { "x": 300, "y": 900 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          {
+            "name": "owner_id",
+            "columnName": "owner_id",
+            "type": "uuid",
+            "nullable": false,
+            "index": true,
+            "references": { "table": "users", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          {
+            "name": "media_id",
+            "columnName": "media_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": { "table": "media_assets", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          { "name": "status", "columnName": "status", "type": "string", "nullable": false, "defaultValue": "active" },
+          { "name": "created_at", "columnName": "created_at", "type": "timestamp", "nullable": false }
+        ],
+        "indexes": [
+          { "name": "idx_reels_owner", "columns": ["owner_id"], "unique": false, "method": "btree" }
+        ]
+      },
+      {
+        "name": "reels_lang",
+        "label": "reels_lang",
+        "comment": "Translations for reel captions.",
+        "sqlName": "reels_lang",
+        "layout": { "x": 600, "y": 900 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          {
+            "name": "reels_id",
+            "columnName": "reels_id",
+            "type": "uuid",
+            "nullable": false,
+            "index": true,
+            "references": { "table": "reels", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          { "name": "lang", "columnName": "lang", "type": "string", "nullable": false },
+          { "name": "caption", "columnName": "caption", "type": "string", "nullable": true }
+        ],
+        "indexes": [
+          { "name": "uq_reels_lang", "columns": ["reels_id", "lang"], "unique": true, "method": "btree" }
+        ]
+      },
+      {
+        "name": "comments",
+        "label": "comments",
+        "comment": "Lightweight comments on listings, posts, or reels.",
+        "sqlName": "comments",
+        "layout": { "x": 0, "y": 900 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "uuid",
+            "nullable": false,
+            "index": true,
+            "references": { "table": "users", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          { "name": "target_type", "columnName": "target_type", "type": "string", "nullable": false },
+          { "name": "target_id", "columnName": "target_id", "type": "uuid", "nullable": false },
+          { "name": "body", "columnName": "body", "type": "string", "nullable": false },
+          { "name": "created_at", "columnName": "created_at", "type": "timestamp", "nullable": false }
+        ],
+        "indexes": [
+          { "name": "idx_comments_target", "columns": ["target_type", "target_id"], "unique": false, "method": "btree" }
+        ]
+      },
+      {
+        "name": "likes",
+        "label": "likes",
+        "comment": "Lightweight likes on listings, posts, or reels.",
+        "sqlName": "likes",
+        "layout": { "x": 0, "y": 1150 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "uuid",
+            "nullable": false,
+            "index": true,
+            "references": { "table": "users", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          { "name": "target_type", "columnName": "target_type", "type": "string", "nullable": false },
+          { "name": "target_id", "columnName": "target_id", "type": "uuid", "nullable": false },
+          { "name": "created_at", "columnName": "created_at", "type": "timestamp", "nullable": false }
+        ],
+        "indexes": [
+          { "name": "idx_likes_target", "columns": ["target_type", "target_id"], "unique": false, "method": "btree" }
+        ]
+      },
+      {
+        "name": "follows",
+        "label": "follows",
+        "comment": "Follow relationships for brokers and clients.",
+        "sqlName": "follows",
+        "layout": { "x": 300, "y": 1150 },
+        "fields": [
+          { "name": "id", "columnName": "id", "type": "uuid", "nullable": false, "primaryKey": true },
+          {
+            "name": "follower_id",
+            "columnName": "follower_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": { "table": "users", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          {
+            "name": "following_id",
+            "columnName": "following_id",
+            "type": "uuid",
+            "nullable": false,
+            "references": { "table": "users", "column": "id", "onDelete": "CASCADE", "onUpdate": "CASCADE" }
+          },
+          { "name": "created_at", "columnName": "created_at", "type": "timestamp", "nullable": false }
+        ],
+        "indexes": [
+          { "name": "uq_follows", "columns": ["follower_id", "following_id"], "unique": true, "method": "btree" }
+        ]
+      }
+    ]
+  }
+}

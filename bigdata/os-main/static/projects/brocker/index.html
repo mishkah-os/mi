@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brocker Mishkah</title>
+    <meta name="description" content="منصة وسطاء العقارات المعتمدة من Mishkah" />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="manifest" href="/api/pwa/aqar/brocker/manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      :root[data-theme='dark'] {
+        --brocker-body: #030712;
+        --brocker-text: #e2e8f0;
+      }
+      :root[data-theme='light'] {
+        color-scheme: light;
+        --brocker-body: #f8fafc;
+        --brocker-text: #0f172a;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: var(--brocker-body, #030712);
+        color: var(--brocker-text, #e2e8f0);
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+      #app {
+        min-height: 100vh;
+      }
+    </style>
+    <script
+      src="../../lib/mishkah.js"
+      data-auto="true"
+      data-css="tailwind"
+      data-pwa-storage="brocker:pwa:installed"
+      data-stores="true"
+    ></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>

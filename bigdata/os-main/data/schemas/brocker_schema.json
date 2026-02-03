@@ -1,0 +1,3978 @@
+{
+  "name": "aqarat schema",
+  "title": "aqarat",
+  "description": "Comprehensive real estate schema: users, auth, developers, projects, buildings, units, media, reservations, transactions, inquiries, replies, notifications.",
+  "schema": {
+    "tables": [
+      {
+        "name": "users",
+        "label": "users",
+        "comment": "Application users and roles",
+        "sqlName": "users",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "full_name",
+            "columnName": "full_name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "email",
+            "columnName": "email",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "phone",
+            "columnName": "phone",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "password_hash",
+            "columnName": "password_hash",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "role",
+            "columnName": "role",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: developer, agent, buyer, admin",
+            "notes": ""
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "User status",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "user_sessions",
+        "label": "user_sessions",
+        "comment": "Auth sessions per user",
+        "sqlName": "user_sessions",
+        "layout": {
+          "x": 300,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to users",
+            "notes": "",
+            "references": {
+              "table": "users",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "token",
+            "columnName": "token",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Session token",
+            "notes": ""
+          },
+          {
+            "name": "expires_at",
+            "columnName": "expires_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "developers",
+        "label": "developers",
+        "comment": "Real estate developers",
+        "sqlName": "developers",
+        "layout": {
+          "x": 0,
+          "y": 300
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "company_name",
+            "columnName": "company_name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "logo_url",
+            "columnName": "logo_url",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "contact_email",
+            "columnName": "contact_email",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "contact_phone",
+            "columnName": "contact_phone",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "address",
+            "columnName": "address",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "لغة السجل الأصلي",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "projects",
+        "label": "projects",
+        "comment": "Developer projects",
+        "sqlName": "projects",
+        "layout": {
+          "x": 300,
+          "y": 300
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "developer_id",
+            "columnName": "developer_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to developers",
+            "notes": "",
+            "references": {
+              "table": "developers",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "project_name",
+            "columnName": "project_name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "location",
+            "columnName": "location",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "delivery_date",
+            "columnName": "delivery_date",
+            "type": "date",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "project_status",
+            "columnName": "project_status",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: upcoming, under_construction, delivered",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "لغة السجل الأصلي",
+            "notes": ""
+          },
+          {
+            "name": "region_id",
+            "columnName": "region_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to regions",
+            "notes": "",
+            "references": {
+              "table": "regions",
+              "column": "id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "district",
+            "columnName": "district",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "District / neighborhood",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "project_media",
+        "label": "project_media",
+        "comment": "Media associated with projects",
+        "sqlName": "project_media",
+        "layout": {
+          "x": 600,
+          "y": 300
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "project_id",
+            "columnName": "project_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to projects",
+            "notes": "",
+            "references": {
+              "table": "projects",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "media_type",
+            "columnName": "media_type",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: image, video, brochure",
+            "notes": ""
+          },
+          {
+            "name": "url",
+            "columnName": "url",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "buildings",
+        "label": "buildings",
+        "comment": "Buildings within projects",
+        "sqlName": "buildings",
+        "layout": {
+          "x": 0,
+          "y": 600
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "project_id",
+            "columnName": "project_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to projects",
+            "notes": "",
+            "references": {
+              "table": "projects",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "building_name",
+            "columnName": "building_name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "floors_count",
+            "columnName": "floors_count",
+            "type": "integer",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Number of floors",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "units",
+        "label": "units",
+        "comment": "Units within buildings",
+        "sqlName": "units",
+        "layout": {
+          "x": 300,
+          "y": 600
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "building_id",
+            "columnName": "building_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to buildings",
+            "notes": "",
+            "references": {
+              "table": "buildings",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "unit_code",
+            "columnName": "unit_code",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Unit identifier/code",
+            "notes": ""
+          },
+          {
+            "name": "unit_type_id",
+            "columnName": "unit_type_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to unit_types",
+            "notes": "",
+            "references": {
+              "table": "unit_types",
+              "column": "id",
+              "onDelete": "RESTRICT",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "bedrooms",
+            "columnName": "bedrooms",
+            "type": "integer",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "bathrooms",
+            "columnName": "bathrooms",
+            "type": "integer",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "area",
+            "columnName": "area",
+            "type": "decimal",
+            "nullable": false,
+            "scale": 0,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Area in m^2",
+            "notes": ""
+          },
+          {
+            "name": "price",
+            "columnName": "price",
+            "type": "decimal",
+            "nullable": false,
+            "scale": 0,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Unit price",
+            "notes": ""
+          },
+          {
+            "name": "availability_status",
+            "columnName": "availability_status",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: available, reserved, sold",
+            "notes": ""
+          },
+          {
+            "name": "floor_number",
+            "columnName": "floor_number",
+            "type": "integer",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Floor index",
+            "notes": ""
+          },
+          {
+            "name": "view",
+            "columnName": "view",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "View description",
+            "notes": ""
+          },
+          {
+            "name": "finishing_status",
+            "columnName": "finishing_status",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Finishing level",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "لغة السجل الأصلي",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "unit_media",
+        "label": "unit_media",
+        "comment": "Media associated with units",
+        "sqlName": "unit_media",
+        "layout": {
+          "x": 600,
+          "y": 600
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "unit_id",
+            "columnName": "unit_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to units",
+            "notes": "",
+            "references": {
+              "table": "units",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "media_type",
+            "columnName": "media_type",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Media type",
+            "notes": ""
+          },
+          {
+            "name": "url",
+            "columnName": "url",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Media URL",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "priority",
+            "columnName": "priority",
+            "type": "integer",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Display order",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "unit_layouts",
+        "label": "unit_layouts",
+        "comment": "Layouts associated with units",
+        "sqlName": "unit_layouts",
+        "layout": {
+          "x": 900,
+          "y": 600
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "unit_id",
+            "columnName": "unit_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to units",
+            "notes": "",
+            "references": {
+              "table": "units",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "layout_name",
+            "columnName": "layout_name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Layout name",
+            "notes": ""
+          },
+          {
+            "name": "url",
+            "columnName": "url",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Layout URL",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "listings",
+        "label": "listings",
+        "comment": "Listings for units (sale or rent)",
+        "sqlName": "listings",
+        "layout": {
+          "x": 600,
+          "y": 900
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "unit_id",
+            "columnName": "unit_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to units",
+            "notes": "",
+            "references": {
+              "table": "units",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "broker_id",
+            "columnName": "broker_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Primary broker for this listing",
+            "notes": "",
+            "references": {
+              "table": "brokers",
+              "column": "id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "listing_type",
+            "columnName": "listing_type",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: sale, rent",
+            "notes": ""
+          },
+          {
+            "name": "listing_status",
+            "columnName": "listing_status",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: active, reserved, sold, rented, expired",
+            "notes": ""
+          },
+          {
+            "name": "price_amount",
+            "columnName": "price_amount",
+            "type": "decimal",
+            "nullable": false,
+            "scale": 0,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Price amount",
+            "notes": ""
+          },
+          {
+            "name": "currency",
+            "columnName": "currency",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "ISO currency code",
+            "notes": ""
+          },
+          {
+            "name": "price_period",
+            "columnName": "price_period",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "e.g., monthly for rent, one_time for sale",
+            "notes": ""
+          },
+          {
+            "name": "available_from",
+            "columnName": "available_from",
+            "type": "date",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Availability date",
+            "notes": ""
+          },
+          {
+            "name": "security_deposit",
+            "columnName": "security_deposit",
+            "type": "decimal",
+            "nullable": true,
+            "scale": 0,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Rent-only: security deposit",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Creation timestamp",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "لغة السجل الأصلي",
+            "notes": ""
+          },
+          {
+            "name": "headline",
+            "columnName": "headline",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Marketing headline",
+            "notes": ""
+          },
+          {
+            "name": "excerpt",
+            "columnName": "excerpt",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Short description",
+            "notes": ""
+          },
+          {
+            "name": "region_id",
+            "columnName": "region_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Listing region",
+            "notes": "",
+            "references": {
+              "table": "regions",
+              "column": "id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "primary_media_id",
+            "columnName": "primary_media_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Hero media",
+            "notes": "",
+            "references": {
+              "table": "unit_media",
+              "column": "id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "tags",
+            "columnName": "tags",
+            "type": "json",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Tags",
+            "notes": ""
+          },
+          {
+            "name": "highlights",
+            "columnName": "highlights",
+            "type": "json",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Key highlights",
+            "notes": ""
+          },
+          {
+            "name": "featured_order",
+            "columnName": "featured_order",
+            "type": "integer",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Ordering weight",
+            "notes": ""
+          },
+          {
+            "name": "primary_highlight",
+            "columnName": "primary_highlight",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Badge text",
+            "notes": ""
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Last update",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "reservations",
+        "label": "reservations",
+        "comment": "Unit reservations",
+        "sqlName": "reservations",
+        "layout": {
+          "x": 0,
+          "y": 900
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "listing_id",
+            "columnName": "listing_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to listings",
+            "notes": "",
+            "references": {
+              "table": "listings",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "unit_id",
+            "columnName": "unit_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Optional, derivable from listing_id; FK to units",
+            "notes": "",
+            "references": {
+              "table": "units",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to users",
+            "notes": "",
+            "references": {
+              "table": "users",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "reservation_status",
+            "columnName": "reservation_status",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: pending, approved, rejected, expired",
+            "notes": ""
+          },
+          {
+            "name": "reserved_at",
+            "columnName": "reserved_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Reservation creation time",
+            "notes": ""
+          },
+          {
+            "name": "expires_at",
+            "columnName": "expires_at",
+            "type": "timestamp",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Reservation expiry time",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "transactions",
+        "label": "transactions",
+        "comment": "Payments and transaction records",
+        "sqlName": "transactions",
+        "layout": {
+          "x": 300,
+          "y": 900
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "listing_id",
+            "columnName": "listing_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to listings",
+            "notes": "",
+            "references": {
+              "table": "listings",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "reservation_id",
+            "columnName": "reservation_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to reservations",
+            "notes": "",
+            "references": {
+              "table": "reservations",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to users",
+            "notes": "",
+            "references": {
+              "table": "users",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "payment_method",
+            "columnName": "payment_method",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: credit_card, bank_transfer, cash",
+            "notes": ""
+          },
+          {
+            "name": "amount_paid",
+            "columnName": "amount_paid",
+            "type": "decimal",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Payment amount",
+            "notes": ""
+          },
+          {
+            "name": "transaction_status",
+            "columnName": "transaction_status",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: pending, completed, failed",
+            "notes": ""
+          },
+          {
+            "name": "transaction_date",
+            "columnName": "transaction_date",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Transaction timestamp",
+            "notes": ""
+          },
+          {
+            "name": "reference_number",
+            "columnName": "reference_number",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "External reference",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "inquiries",
+        "label": "inquiries",
+        "comment": "User inquiries about projects/units",
+        "sqlName": "inquiries",
+        "layout": {
+          "x": 0,
+          "y": 1200
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to users (nullable)",
+            "notes": "",
+            "references": {
+              "table": "users",
+              "column": "id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "project_id",
+            "columnName": "project_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to projects (nullable)",
+            "notes": "",
+            "references": {
+              "table": "projects",
+              "column": "id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "unit_id",
+            "columnName": "unit_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to units (nullable)",
+            "notes": "",
+            "references": {
+              "table": "units",
+              "column": "id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "listing_id",
+            "columnName": "listing_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to listings (nullable)",
+            "notes": "",
+            "references": {
+              "table": "listings",
+              "column": "id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "message",
+            "columnName": "message",
+            "type": "text",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Inquiry message",
+            "notes": ""
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: new, replied, closed",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Timestamp",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "لغة السجل الأصلي",
+            "notes": ""
+          },
+          {
+            "name": "contact_name",
+            "columnName": "contact_name",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Lead name",
+            "notes": ""
+          },
+          {
+            "name": "contact_phone",
+            "columnName": "contact_phone",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Lead phone",
+            "notes": ""
+          },
+          {
+            "name": "contact_channel",
+            "columnName": "contact_channel",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Preferred channel",
+            "notes": ""
+          },
+          {
+            "name": "preferred_contact_time",
+            "columnName": "preferred_contact_time",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Time preference",
+            "notes": ""
+          },
+          {
+            "name": "notes",
+            "columnName": "notes",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Internal notes",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "inquiry_replies",
+        "label": "inquiry_replies",
+        "comment": "Replies to inquiries",
+        "sqlName": "inquiry_replies",
+        "layout": {
+          "x": 300,
+          "y": 1200
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "inquiry_id",
+            "columnName": "inquiry_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to inquiries",
+            "notes": "",
+            "references": {
+              "table": "inquiries",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to users",
+            "notes": "",
+            "references": {
+              "table": "users",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "reply_message",
+            "columnName": "reply_message",
+            "type": "text",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Reply content",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Timestamp",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "لغة السجل الأصلي",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "notifications",
+        "label": "notifications",
+        "comment": "User notifications",
+        "sqlName": "notifications",
+        "layout": {
+          "x": 0,
+          "y": 1500
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to users",
+            "notes": "",
+            "references": {
+              "table": "users",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Notification title",
+            "notes": ""
+          },
+          {
+            "name": "message",
+            "columnName": "message",
+            "type": "text",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Notification body",
+            "notes": ""
+          },
+          {
+            "name": "notification_type",
+            "columnName": "notification_type",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Type/category of notification",
+            "notes": ""
+          },
+          {
+            "name": "is_read",
+            "columnName": "is_read",
+            "type": "boolean",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Read status",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Creation timestamp",
+            "notes": ""
+          },
+          {
+            "name": "channel",
+            "columnName": "channel",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Delivery channel",
+            "notes": ""
+          },
+          {
+            "name": "payload",
+            "columnName": "payload",
+            "type": "json",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Structured payload",
+            "notes": ""
+          },
+          {
+            "name": "action_url",
+            "columnName": "action_url",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Deep link",
+            "notes": ""
+          },
+          {
+            "name": "priority",
+            "columnName": "priority",
+            "type": "integer",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Queue priority",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "unit_types",
+        "label": "unit_types",
+        "comment": "Catalog of unit types",
+        "sqlName": "unit_types",
+        "layout": {
+          "x": 1200,
+          "y": 600
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "e.g., apartment, villa, studio, duplex, townhouse",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "brokers",
+        "label": "brokers",
+        "comment": "Real estate brokers/agents",
+        "sqlName": "brokers",
+        "layout": {
+          "x": 600,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "full_name",
+            "columnName": "full_name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "email",
+            "columnName": "email",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "phone",
+            "columnName": "phone",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "company_name",
+            "columnName": "company_name",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "license_number",
+            "columnName": "license_number",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Broker license id",
+            "notes": ""
+          },
+          {
+            "name": "user_id",
+            "columnName": "user_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": true,
+            "index": false,
+            "comment": "Optional link to user account",
+            "notes": "",
+            "references": {
+              "table": "users",
+              "column": "id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "region_id",
+            "columnName": "region_id",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Primary service region",
+            "notes": "",
+            "references": {
+              "table": "regions",
+              "column": "id",
+              "onDelete": "SET NULL",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "avatar_url",
+            "columnName": "avatar_url",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Profile photo",
+            "notes": ""
+          },
+          {
+            "name": "cover_url",
+            "columnName": "cover_url",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Cover image",
+            "notes": ""
+          },
+          {
+            "name": "bio",
+            "columnName": "bio",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Public bio",
+            "notes": ""
+          },
+          {
+            "name": "whatsapp",
+            "columnName": "whatsapp",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "WhatsApp contact",
+            "notes": ""
+          },
+          {
+            "name": "otp_channel",
+            "columnName": "otp_channel",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "OTP endpoint",
+            "notes": ""
+          },
+          {
+            "name": "service_regions",
+            "columnName": "service_regions",
+            "type": "json",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Regions served",
+            "notes": ""
+          },
+          {
+            "name": "rating",
+            "columnName": "rating",
+            "type": "decimal",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Average rating",
+            "notes": ""
+          },
+          {
+            "name": "active_since",
+            "columnName": "active_since",
+            "type": "date",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Broker start date",
+            "notes": ""
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Last update",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "unit_features",
+        "label": "unit_features",
+        "comment": "Feature catalog for units",
+        "sqlName": "unit_features",
+        "layout": {
+          "x": 1200,
+          "y": 900
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "e.g., balcony, parking, furnished",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "data_type",
+            "columnName": "data_type",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Expected value type: boolean, integer, decimal, string",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "لغة السجل الأصلي",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "feature_values",
+        "label": "feature_values",
+        "comment": "Values of features per unit",
+        "sqlName": "feature_values",
+        "layout": {
+          "x": 1200,
+          "y": 1200
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "unit_id",
+            "columnName": "unit_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to units",
+            "notes": "",
+            "references": {
+              "table": "units",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "feature_id",
+            "columnName": "feature_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "FK to unit_features",
+            "notes": "",
+            "references": {
+              "table": "unit_features",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "value",
+            "columnName": "value",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Feature value stored as string; interpret using data_type",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Timestamp",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "developers_lang",
+        "label": "developers (ترجمات)",
+        "comment": "Translations for developers",
+        "sqlName": "developers_lang",
+        "layout": {
+          "x": 440,
+          "y": 300
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "uuid",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "developers_id",
+            "columnName": "developers_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "developers",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "company_name",
+            "columnName": "company_name",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "logo_url",
+            "columnName": "logo_url",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "contact_email",
+            "columnName": "contact_email",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "contact_phone",
+            "columnName": "contact_phone",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "address",
+            "columnName": "address",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "رمز اللغة",
+            "notes": ""
+          },
+          {
+            "name": "created_date",
+            "columnName": "created_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "تاريخ الإنشاء",
+            "notes": ""
+          },
+          {
+            "name": "modified_date",
+            "columnName": "modified_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "آخر تعديل",
+            "notes": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "developers_lang_lang_unique",
+            "columns": [
+              "developers_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "projects_lang",
+        "label": "projects (ترجمات)",
+        "comment": "Translations for projects",
+        "sqlName": "projects_lang",
+        "layout": {
+          "x": 740,
+          "y": 300
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "uuid",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "projects_id",
+            "columnName": "projects_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "projects",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "project_name",
+            "columnName": "project_name",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "location",
+            "columnName": "location",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "project_status",
+            "columnName": "project_status",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: upcoming, under_construction, delivered",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "رمز اللغة",
+            "notes": ""
+          },
+          {
+            "name": "created_date",
+            "columnName": "created_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "تاريخ الإنشاء",
+            "notes": ""
+          },
+          {
+            "name": "modified_date",
+            "columnName": "modified_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "آخر تعديل",
+            "notes": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "projects_lang_lang_unique",
+            "columns": [
+              "projects_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "units_lang",
+        "label": "units (ترجمات)",
+        "comment": "Translations for units",
+        "sqlName": "units_lang",
+        "layout": {
+          "x": 740,
+          "y": 600
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "uuid",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "units_id",
+            "columnName": "units_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "units",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "unit_code",
+            "columnName": "unit_code",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Unit identifier/code",
+            "notes": ""
+          },
+          {
+            "name": "availability_status",
+            "columnName": "availability_status",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: available, reserved, sold",
+            "notes": ""
+          },
+          {
+            "name": "view",
+            "columnName": "view",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "View description",
+            "notes": ""
+          },
+          {
+            "name": "finishing_status",
+            "columnName": "finishing_status",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Finishing level",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "رمز اللغة",
+            "notes": ""
+          },
+          {
+            "name": "created_date",
+            "columnName": "created_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "تاريخ الإنشاء",
+            "notes": ""
+          },
+          {
+            "name": "modified_date",
+            "columnName": "modified_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "آخر تعديل",
+            "notes": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "units_lang_lang_unique",
+            "columns": [
+              "units_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "listings_lang",
+        "label": "listings (ترجمات)",
+        "comment": "Translations for listings",
+        "sqlName": "listings_lang",
+        "layout": {
+          "x": 1040,
+          "y": 900
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "uuid",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "listings_id",
+            "columnName": "listings_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "listings",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "listing_type",
+            "columnName": "listing_type",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: sale, rent",
+            "notes": ""
+          },
+          {
+            "name": "listing_status",
+            "columnName": "listing_status",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: active, reserved, sold, rented, expired",
+            "notes": ""
+          },
+          {
+            "name": "currency",
+            "columnName": "currency",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "ISO currency code",
+            "notes": ""
+          },
+          {
+            "name": "price_period",
+            "columnName": "price_period",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "e.g., monthly for rent, one_time for sale",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "رمز اللغة",
+            "notes": ""
+          },
+          {
+            "name": "created_date",
+            "columnName": "created_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "تاريخ الإنشاء",
+            "notes": ""
+          },
+          {
+            "name": "modified_date",
+            "columnName": "modified_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "آخر تعديل",
+            "notes": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "listings_lang_lang_unique",
+            "columns": [
+              "listings_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "unit_features_lang",
+        "label": "unit_features (ترجمات)",
+        "comment": "Translations for unit_features",
+        "sqlName": "unit_features_lang",
+        "layout": {
+          "x": 1640,
+          "y": 900
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "uuid",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "unit_features_id",
+            "columnName": "unit_features_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "unit_features",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "e.g., balcony, parking, furnished",
+            "notes": ""
+          },
+          {
+            "name": "description",
+            "columnName": "description",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "data_type",
+            "columnName": "data_type",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Expected value type: boolean, integer, decimal, string",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "رمز اللغة",
+            "notes": ""
+          },
+          {
+            "name": "created_date",
+            "columnName": "created_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "تاريخ الإنشاء",
+            "notes": ""
+          },
+          {
+            "name": "modified_date",
+            "columnName": "modified_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "آخر تعديل",
+            "notes": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "unit_features_lang_lang_unique",
+            "columns": [
+              "unit_features_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "inquiries_lang",
+        "label": "inquiries (ترجمات)",
+        "comment": "Translations for inquiries",
+        "sqlName": "inquiries_lang",
+        "layout": {
+          "x": 440,
+          "y": 1200
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "uuid",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "inquiries_id",
+            "columnName": "inquiries_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "inquiries",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "message",
+            "columnName": "message",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Inquiry message",
+            "notes": ""
+          },
+          {
+            "name": "status",
+            "columnName": "status",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Allowed: new, replied, closed",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "رمز اللغة",
+            "notes": ""
+          },
+          {
+            "name": "created_date",
+            "columnName": "created_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "تاريخ الإنشاء",
+            "notes": ""
+          },
+          {
+            "name": "modified_date",
+            "columnName": "modified_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "آخر تعديل",
+            "notes": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "inquiries_lang_lang_unique",
+            "columns": [
+              "inquiries_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "inquiry_replies_lang",
+        "label": "inquiry_replies (ترجمات)",
+        "comment": "Translations for inquiry_replies",
+        "sqlName": "inquiry_replies_lang",
+        "layout": {
+          "x": 740,
+          "y": 1200
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "uuid",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "inquiry_replies_id",
+            "columnName": "inquiry_replies_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "inquiry_replies",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "reply_message",
+            "columnName": "reply_message",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Reply content",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "رمز اللغة",
+            "notes": ""
+          },
+          {
+            "name": "created_date",
+            "columnName": "created_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "تاريخ الإنشاء",
+            "notes": ""
+          },
+          {
+            "name": "modified_date",
+            "columnName": "modified_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "آخر تعديل",
+            "notes": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "inquiry_replies_lang_lang_unique",
+            "columns": [
+              "inquiry_replies_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "regions",
+        "label": "regions",
+        "comment": "Geographic areas for filtering projects and listings",
+        "sqlName": "regions",
+        "layout": {
+          "x": 900,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Display name",
+            "notes": ""
+          },
+          {
+            "name": "city",
+            "columnName": "city",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "City name",
+            "notes": ""
+          },
+          {
+            "name": "country",
+            "columnName": "country",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Country code/name",
+            "notes": ""
+          },
+          {
+            "name": "slug",
+            "columnName": "slug",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": true,
+            "index": false,
+            "comment": "URL friendly identifier",
+            "notes": ""
+          },
+          {
+            "name": "priority",
+            "columnName": "priority",
+            "type": "integer",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Ordering priority",
+            "notes": ""
+          },
+          {
+            "name": "is_primary_market",
+            "columnName": "is_primary_market",
+            "type": "boolean",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Whether region is highlighted",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "app_settings",
+        "label": "app_settings",
+        "comment": "Brand, theme and PWA configuration",
+        "sqlName": "app_settings",
+        "layout": {
+          "x": 900,
+          "y": 300
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "واجهة التطبيق",
+            "notes": ""
+          },
+          {
+            "name": "brand_name",
+            "columnName": "brand_name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Brand label",
+            "notes": ""
+          },
+          {
+            "name": "tagline",
+            "columnName": "tagline",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Short slogan",
+            "notes": ""
+          },
+          {
+            "name": "hero_title",
+            "columnName": "hero_title",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Hero headline",
+            "notes": ""
+          },
+          {
+            "name": "hero_subtitle",
+            "columnName": "hero_subtitle",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Hero description",
+            "notes": ""
+          },
+          {
+            "name": "brand_logo",
+            "columnName": "brand_logo",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Logo URL",
+            "notes": ""
+          },
+          {
+            "name": "support_phone",
+            "columnName": "support_phone",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Primary contact",
+            "notes": ""
+          },
+          {
+            "name": "support_whatsapp",
+            "columnName": "support_whatsapp",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "WhatsApp contact",
+            "notes": ""
+          },
+          {
+            "name": "theme_color",
+            "columnName": "theme_color",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Theme color",
+            "notes": ""
+          },
+          {
+            "name": "background_color",
+            "columnName": "background_color",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Background color",
+            "notes": ""
+          },
+          {
+            "name": "pwa_install_required",
+            "columnName": "pwa_install_required",
+            "type": "boolean",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Require installation before access",
+            "notes": ""
+          },
+          {
+            "name": "pwa_install_message",
+            "columnName": "pwa_install_message",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Message for install gate",
+            "notes": ""
+          },
+          {
+            "name": "pwa_storage_key",
+            "columnName": "pwa_storage_key",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "LocalStorage key to skip gate",
+            "notes": ""
+          },
+          {
+            "name": "pwa_manifest_url",
+            "columnName": "pwa_manifest_url",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Manifest endpoint",
+            "notes": ""
+          },
+          {
+            "name": "pwa_icons",
+            "columnName": "pwa_icons",
+            "type": "json",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Icons list",
+            "notes": ""
+          },
+          {
+            "name": "primary_cta_label",
+            "columnName": "primary_cta_label",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "CTA label",
+            "notes": ""
+          },
+          {
+            "name": "primary_cta_link",
+            "columnName": "primary_cta_link",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "CTA link",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Creation date",
+            "notes": ""
+          },
+          {
+            "name": "updated_at",
+            "columnName": "updated_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Update date",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },{
+        "name": "app_settings_lang",
+        "label": "app_settings (ترجمات)",
+        "comment": "Translations for app settings",
+        "sqlName": "app_settings_lang",
+        "layout": {
+          "x": 1200,
+          "y": 450
+        },
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "uuid",
+            "nullable": false,
+            "primaryKey": true
+          },
+          {
+            "name": "app_settings_id",
+            "columnName": "app_settings_id",
+            "type": "string",
+            "nullable": false,
+            "references": {
+              "table": "app_settings",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2
+          },
+          {
+            "name": "brand_name",
+            "columnName": "brand_name",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "tagline",
+            "columnName": "tagline",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "hero_title",
+            "columnName": "hero_title",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "hero_subtitle",
+            "columnName": "hero_subtitle",
+            "type": "text",
+            "nullable": true
+          }
+        ]
+      },
+      {
+        "name": "hero_slides",
+        "label": "hero_slides",
+        "comment": "Hero carousel slides",
+        "sqlName": "hero_slides",
+        "layout": {
+          "x": 900,
+          "y": 600
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "title",
+            "columnName": "title",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Slide title",
+            "notes": ""
+          },
+          {
+            "name": "subtitle",
+            "columnName": "subtitle",
+            "type": "text",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Slide subtitle",
+            "notes": ""
+          },
+          {
+            "name": "media_type",
+            "columnName": "media_type",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "image or video",
+            "notes": ""
+          },
+          {
+            "name": "media_url",
+            "columnName": "media_url",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Asset URL",
+            "notes": ""
+          },
+          {
+            "name": "cta_label",
+            "columnName": "cta_label",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "CTA label",
+            "notes": ""
+          },
+          {
+            "name": "cta_action",
+            "columnName": "cta_action",
+            "type": "string",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "CTA action identifier",
+            "notes": ""
+          },
+          {
+            "name": "priority",
+            "columnName": "priority",
+            "type": "integer",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Display priority",
+            "notes": ""
+          },
+          {
+            "name": "created_at",
+            "columnName": "created_at",
+            "type": "timestamp",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Creation timestamp",
+            "notes": ""
+          }
+        ],
+        "indexes": []
+      },
+      {
+        "name": "regions_lang",
+        "label": "regions (ترجمات)",
+        "comment": "Translations for regions",
+        "sqlName": "regions_lang",
+        "layout": {
+          "x": 1100,
+          "y": 0
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "uuid",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": ""
+          },
+          {
+            "name": "regions_id",
+            "columnName": "regions_id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "",
+            "notes": "",
+            "references": {
+              "table": "regions",
+              "column": "id",
+              "onDelete": "CASCADE",
+              "onUpdate": "CASCADE"
+            }
+          },
+          {
+            "name": "name",
+            "columnName": "name",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Display name",
+            "notes": ""
+          },
+          {
+            "name": "city",
+            "columnName": "city",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "City name",
+            "notes": ""
+          },
+          {
+            "name": "country",
+            "columnName": "country",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Country code/name",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "رمز اللغة",
+            "notes": ""
+          },
+          {
+            "name": "created_date",
+            "columnName": "created_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "تاريخ الإنشاء",
+            "notes": ""
+          },
+          {
+            "name": "modified_date",
+            "columnName": "modified_date",
+            "type": "datetime",
+            "nullable": true,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "آخر تعديل",
+            "notes": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "regions_lang_unique",
+            "columns": [
+              "regions_id",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      },
+      {
+        "name": "ui_labels",
+        "label": "ui_labels",
+        "comment": "UI translation labels",
+        "sqlName": "ui_labels",
+        "layout": {
+          "x": 1200,
+          "y": 300
+        },
+        "classCode": "",
+        "fields": [
+          {
+            "name": "id",
+            "columnName": "id",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": true,
+            "unique": false,
+            "index": false,
+            "comment": "Primary key",
+            "notes": ""
+          },
+          {
+            "name": "key",
+            "columnName": "key",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": true,
+            "comment": "Translation key (e.g. nav.home)",
+            "notes": ""
+          },
+          {
+            "name": "lang",
+            "columnName": "lang",
+            "type": "string",
+            "nullable": false,
+            "maxLength": 2,
+            "primaryKey": false,
+            "unique": false,
+            "index": true,
+            "comment": "Language code (ar, en)",
+            "notes": ""
+          },
+          {
+            "name": "text",
+            "columnName": "text",
+            "type": "text",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "Translated text",
+            "notes": ""
+          },
+          {
+            "name": "kind",
+            "columnName": "kind",
+            "type": "string",
+            "nullable": false,
+            "primaryKey": false,
+            "unique": false,
+            "index": false,
+            "comment": "ui or content",
+            "notes": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "ui_labels_key_lang_unique",
+            "columns": [
+              "key",
+              "lang"
+            ],
+            "unique": true
+          }
+        ]
+      }
+    ]
+  },
+  "layout": {
+    "users": {
+      "x": 0,
+      "y": 0
+    },
+    "user_sessions": {
+      "x": 300,
+      "y": 0
+    },
+    "developers": {
+      "x": 0,
+      "y": 300
+    },
+    "projects": {
+      "x": 300,
+      "y": 300
+    },
+    "project_media": {
+      "x": 600,
+      "y": 300
+    },
+    "buildings": {
+      "x": 0,
+      "y": 600
+    },
+    "units": {
+      "x": 300,
+      "y": 600
+    },
+    "unit_media": {
+      "x": 600,
+      "y": 600
+    },
+    "unit_layouts": {
+      "x": 900,
+      "y": 600
+    },
+    "listings": {
+      "x": 600,
+      "y": 900
+    },
+    "reservations": {
+      "x": 0,
+      "y": 900
+    },
+    "transactions": {
+      "x": 1040,
+      "y": 200
+    },
+    "inquiries": {
+      "x": 0,
+      "y": 1200
+    },
+    "inquiry_replies": {
+      "x": 300,
+      "y": 1200
+    },
+    "notifications": {
+      "x": 0,
+      "y": 1500
+    },
+    "unit_types": {
+      "x": 1200,
+      "y": 600
+    },
+    "brokers": {
+      "x": 600,
+      "y": 0
+    },
+    "unit_features": {
+      "x": 957,
+      "y": 854
+    },
+    "feature_values": {
+      "x": 975,
+      "y": 1134
+    },
+    "developers_lang": {
+      "x": 362,
+      "y": 1466
+    },
+    "projects_lang": {
+      "x": -5,
+      "y": 1807
+    },
+    "units_lang": {
+      "x": 657,
+      "y": 1346
+    },
+    "listings_lang": {
+      "x": 980,
+      "y": 1371
+    },
+    "unit_features_lang": {
+      "x": 1336,
+      "y": 804
+    },
+    "inquiries_lang": {
+      "x": 715,
+      "y": 1849
+    },
+    "inquiry_replies_lang": {
+      "x": 359,
+      "y": 1855
+    },
+    "regions_lang": {
+      "x": 1100,
+      "y": 0
+    },
+    "ui_labels": {
+      "x": 1200,
+      "y": 300
+    }
+  },
+  "canvas": {
+    "zoom": 0.7889194139194138,
+    "mode": "manual"
+  },
+  "classes": []
+}

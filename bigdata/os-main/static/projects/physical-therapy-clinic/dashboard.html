@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة تحكم ERP - مركز العلاج الطبيعي | ERP Dashboard - Physical Therapy Center</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/custom-styles.css">
+
+  <!-- Load Mishkah Libraries -->
+  <script src="../../lib/mishkah-utils.js"></script>
+  <script src="../../lib/mishkah.core.js"></script>
+  <script src="../../lib/mishkah-ui.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    (async function() {
+      const M = Mishkah;
+      const D = M.DSL;
+      const UI = M.UI;
+      const { tw, token } = M.utils.twcss;
+
+      // Application State
+      const db = {
+        env: {
+          lang: 'ar',
+          dir: 'rtl',
+          theme: 'light'
+        },
+        data: {
+          currentPage: 'dashboard',
+          showModal: false,
+          modalType: null,
+          formData: {},
+          patients: [
+            { id: 1, name: 'أحمد محمد عبدالله', phone: '01012345678', email: 'ahmed@example.com', age: 35, gender: 'male', status: 'active', lastVisit: '2024-01-15', totalSessions: 12, totalPaid: 3600, address: 'القاهرة - مدينة نصر', diagnosis: 'آلام الظهر المزمنة' },
+            { id: 2, name: 'فاطمة علي حسن', phone: '01023456789', email: 'fatima@example.com', age: 28, gender: 'female', status: 'active', lastVisit: '2024-01-14', totalSessions: 8, totalPaid: 2400, address: 'الجيزة - الدقي', diagnosis: 'التهاب المفاصل' },
+            { id: 3, name: 'محمود سالم أحمد', phone: '01034567890', email: 'mahmoud@example.com', age: 42, gender: 'male', status: 'completed', lastVisit: '2024-01-10', totalSessions: 15, totalPaid: 4500, address: 'القاهرة - مصر الجديدة', diagnosis: 'إصابة رياضية' },
+            { id: 4, name: 'نور الدين خالد', phone: '01045678901', email: 'nour@example.com', age: 55, gender: 'male', status: 'active', lastVisit: '2024-01-13', totalSessions: 20, totalPaid: 6000, address: 'الإسكندرية - سموحة', diagnosis: 'آلام الرقبة' },
+            { id: 5, name: 'سارة محمد يوسف', phone: '01056789012', email: 'sara@example.com', age: 31, gender: 'female', status: 'pending', lastVisit: '2024-01-09', totalSessions: 5, totalPaid: 1500, address: 'القاهرة - المعادي', diagnosis: 'تأهيل ما بعد الجراحة' },
+            { id: 6, name: 'عمر حسين علي', phone: '01067890123', email: 'omar@example.com', age: 38, gender: 'male', status: 'active', lastVisit: '2024-01-12', totalSessions: 10, totalPaid: 3000, address: 'الجيزة - الهرم', diagnosis: 'آلام الكتف' },
+            { id: 7, name: 'ليلى أحمد سعيد', phone: '01078901234', email: 'layla@example.com', age: 45, gender: 'female', status: 'active', lastVisit: '2024-01-11', totalSessions: 18, totalPaid: 5400, address: 'القاهرة - الزمالك', diagnosis: 'عرق النسا' }
+          ],
+          appointments: [
+            { id: 1, patientId: 1, patientName: 'أحمد محمد عبدالله', date: '2024-01-16', time: '10:00', service: 'علاج طبيعي للظهر', therapist: 'د. مروة حسين', status: 'confirmed', duration: 60, price: 300 },
+            { id: 2, patientId: 2, patientName: 'فاطمة علي حسن', date: '2024-01-16', time: '11:00', service: 'علاج المفاصل', therapist: 'د. أحمد سالم', status: 'pending', duration: 45, price: 250 },
+            { id: 3, patientId: 3, patientName: 'محمود سالم أحمد', date: '2024-01-16', time: '14:00', service: 'علاج رياضي', therapist: 'د. مروة حسين', status: 'confirmed', duration: 60, price: 300 },
+            { id: 4, patientId: 4, patientName: 'نور الدين خالد', date: '2024-01-16', time: '15:30', service: 'علاج الرقبة', therapist: 'د. سارة محمود', status: 'confirmed', duration: 45, price: 250 },
+            { id: 5, patientId: 5, patientName: 'سارة محمد يوسف', date: '2024-01-17', time: '09:00', service: 'تأهيل ما بعد الجراحة', therapist: 'د. أحمد سالم', status: 'pending', duration: 90, price: 400 },
+            { id: 6, patientId: 6, patientName: 'عمر حسين علي', date: '2024-01-17', time: '11:00', service: 'علاج الكتف', therapist: 'د. مروة حسين', status: 'confirmed', duration: 60, price: 300 },
+            { id: 7, patientId: 7, patientName: 'ليلى أحمد سعيد', date: '2024-01-17', time: '13:00', service: 'علاج عرق النسا', therapist: 'د. سارة محمود', status: 'cancelled', duration: 60, price: 300 },
+            { id: 8, patientId: 1, patientName: 'أحمد محمد عبدالله', date: '2024-01-18', time: '10:00', service: 'علاج طبيعي للظهر', therapist: 'د. مروة حسين', status: 'pending', duration: 60, price: 300 }
+          ],
+          sessions: [
+            { id: 1, patientId: 1, patientName: 'أحمد محمد عبدالله', date: '2024-01-15', service: 'علاج طبيعي للظهر', therapist: 'د. مروة حسين', duration: 60, status: 'completed', notes: 'تحسن ملحوظ في مرونة العمود الفقري', nextSession: '2024-01-18', price: 300, paid: true },
+            { id: 2, patientId: 2, patientName: 'فاطمة علي حسن', date: '2024-01-14', service: 'علاج المفاصل', therapist: 'د. أحمد سالم', duration: 45, status: 'completed', notes: 'تقليل الالتهاب بشكل جيد', nextSession: '2024-01-17', price: 250, paid: true },
+            { id: 3, patientId: 3, patientName: 'محمود سالم أحمد', date: '2024-01-13', service: 'علاج رياضي', therapist: 'د. مروة حسين', duration: 60, status: 'completed', notes: 'استعادة 80% من القوة العضلية', nextSession: '2024-01-16', price: 300, paid: false },
+            { id: 4, patientId: 4, patientName: 'نور الدين خالد', date: '2024-01-13', service: 'علاج الرقبة', therapist: 'د. سارة محمود', duration: 45, status: 'completed', notes: 'تحسن في مدى الحركة', nextSession: '2024-01-16', price: 250, paid: true },
+            { id: 5, patientId: 6, patientName: 'عمر حسين علي', date: '2024-01-12', service: 'علاج الكتف', therapist: 'د. مروة حسين', duration: 60, status: 'completed', notes: 'تمارين تقوية ناجحة', nextSession: '2024-01-17', price: 300, paid: true },
+            { id: 6, patientId: 7, patientName: 'ليلى أحمد سعيد', date: '2024-01-11', service: 'علاج عرق النسا', therapist: 'د. سارة محمود', duration: 60, status: 'completed', notes: 'تقليل الألم بنسبة 60%', nextSession: '2024-01-15', price: 300, paid: true }
+          ],
+          staff: [
+            { id: 1, name: 'د. مروة حسين', role: 'رئيس قسم العلاج الطبيعي', specialization: 'العلاج الطبيعي للعمود الفقري', phone: '01066558085', email: 'marwa@clinic.com', joinDate: '2020-01-15', patients: 45, sessionsToday: 8 },
+            { id: 2, name: 'د. أحمد سالم', role: 'أخصائي علاج طبيعي', specialization: 'علاج المفاصل والروماتيزم', phone: '01123456789', email: 'ahmed@clinic.com', joinDate: '2021-03-20', patients: 32, sessionsToday: 5 },
+            { id: 3, name: 'د. سارة محمود', role: 'أخصائي علاج طبيعي', specialization: 'الإصابات الرياضية', phone: '01234567890', email: 'sara@clinic.com', joinDate: '2021-09-10', patients: 28, sessionsToday: 6 },
+            { id: 4, name: 'أ. محمد خالد', role: 'مساعد علاج طبيعي', specialization: 'التأهيل الحركي', phone: '01345678901', email: 'mohamed@clinic.com', joinDate: '2022-02-01', patients: 15, sessionsToday: 4 }
+          ],
+          services: [
+            { id: 1, name: 'علاج طبيعي للظهر', price: 300, duration: 60, category: 'علاج العمود الفقري', active: true },
+            { id: 2, name: 'علاج المفاصل', price: 250, duration: 45, category: 'علاج المفاصل', active: true },
+            { id: 3, name: 'علاج رياضي', price: 300, duration: 60, category: 'الإصابات الرياضية', active: true },
+            { id: 4, name: 'علاج الرقبة', price: 250, duration: 45, category: 'علاج العمود الفقري', active: true },
+            { id: 5, name: 'تأهيل ما بعد الجراحة', price: 400, duration: 90, category: 'تأهيل', active: true },
+            { id: 6, name: 'علاج الكتف', price: 300, duration: 60, category: 'علاج المفاصل', active: true },
+            { id: 7, name: 'علاج عرق النسا', price: 300, duration: 60, category: 'علاج الأعصاب', active: true }
+          ],
+          payments: [
+            { id: 1, patientId: 1, patientName: 'أحمد محمد عبدالله', date: '2024-01-15', amount: 300, service: 'علاج طبيعي للظهر', method: 'نقدي', status: 'completed', invoiceNo: 'INV-001' },
+            { id: 2, patientId: 2, patientName: 'فاطمة علي حسن', date: '2024-01-14', amount: 250, service: 'علاج المفاصل', method: 'بطاقة ائتمان', status: 'completed', invoiceNo: 'INV-002' },
+            { id: 3, patientId: 3, patientName: 'محمود سالم أحمد', date: '2024-01-13', amount: 300, service: 'علاج رياضي', method: 'نقدي', status: 'pending', invoiceNo: 'INV-003' },
+            { id: 4, patientId: 4, patientName: 'نور الدين خالد', date: '2024-01-13', amount: 250, service: 'علاج الرقبة', method: 'تحويل بنكي', status: 'completed', invoiceNo: 'INV-004' },
+            { id: 5, patientId: 6, patientName: 'عمر حسين علي', date: '2024-01-12', amount: 300, service: 'علاج الكتف', method: 'نقدي', status: 'completed', invoiceNo: 'INV-005' }
+          ],
+          stats: {
+            totalPatients: 145,
+            todayAppointments: 12,
+            completedSessions: 1250,
+            revenue: 125000,
+            monthlyRevenue: 45000,
+            pendingPayments: 3500,
+            activeStaff: 4,
+            todaySessions: 23
+          }
+        },
+        i18n: {
+          dict: {
+            'dashboard': { ar: 'لوحة التحكم', en: 'Dashboard' },
+            'patients': { ar: 'المرضى', en: 'Patients' },
+            'appointments': { ar: 'المواعيد', en: 'Appointments' },
+            'sessions': { ar: 'الجلسات', en: 'Sessions' },
+            'reports': { ar: 'التقارير', en: 'Reports' },
+            'settings': { ar: 'الإعدادات', en: 'Settings' },
+            'totalPatients': { ar: 'إجمالي المرضى', en: 'Total Patients' },
+            'todayAppointments': { ar: 'مواعيد اليوم', en: "Today's Appointments" },
+            'completedSessions': { ar: 'الجلسات المكتملة', en: 'Completed Sessions' },
+            'revenue': { ar: 'الإيرادات', en: 'Revenue' },
+            'recentPatients': { ar: 'المرضى الأخيرون', en: 'Recent Patients' },
+            'upcomingAppointments': { ar: 'المواعيد القادمة', en: 'Upcoming Appointments' },
+            'addNew': { ar: 'إضافة جديد', en: 'Add New' },
+            'name': { ar: 'الاسم', en: 'Name' },
+            'phone': { ar: 'الهاتف', en: 'Phone' },
+            'email': { ar: 'البريد الإلكتروني', en: 'Email' },
+            'age': { ar: 'العمر', en: 'Age' },
+            'gender': { ar: 'النوع', en: 'Gender' },
+            'male': { ar: 'ذكر', en: 'Male' },
+            'female': { ar: 'أنثى', en: 'Female' },
+            'address': { ar: 'العنوان', en: 'Address' },
+            'diagnosis': { ar: 'التشخيص', en: 'Diagnosis' },
+            'status': { ar: 'الحالة', en: 'Status' },
+            'lastVisit': { ar: 'آخر زيارة', en: 'Last Visit' },
+            'sessions': { ar: 'الجلسات', en: 'Sessions' },
+            'totalPaid': { ar: 'إجمالي المدفوعات', en: 'Total Paid' },
+            'patient': { ar: 'المريض', en: 'Patient' },
+            'date': { ar: 'التاريخ', en: 'Date' },
+            'time': { ar: 'الوقت', en: 'Time' },
+            'service': { ar: 'الخدمة', en: 'Service' },
+            'therapist': { ar: 'المعالج', en: 'Therapist' },
+            'duration': { ar: 'المدة', en: 'Duration' },
+            'price': { ar: 'السعر', en: 'Price' },
+            'notes': { ar: 'ملاحظات', en: 'Notes' },
+            'nextSession': { ar: 'الجلسة القادمة', en: 'Next Session' },
+            'paid': { ar: 'مدفوع', en: 'Paid' },
+            'unpaid': { ar: 'غير مدفوع', en: 'Unpaid' },
+            'active': { ar: 'نشط', en: 'Active' },
+            'completed': { ar: 'مكتمل', en: 'Completed' },
+            'confirmed': { ar: 'مؤكد', en: 'Confirmed' },
+            'pending': { ar: 'قيد الانتظار', en: 'Pending' },
+            'cancelled': { ar: 'ملغى', en: 'Cancelled' },
+            'allPatients': { ar: 'جميع المرضى', en: 'All Patients' },
+            'allAppointments': { ar: 'جميع المواعيد', en: 'All Appointments' },
+            'sessionHistory': { ar: 'سجل الجلسات', en: 'Session History' },
+            'recentSessions': { ar: 'الجلسات الأخيرة', en: 'Recent Sessions' },
+            'staff': { ar: 'فريق العمل', en: 'Staff' },
+            'role': { ar: 'الوظيفة', en: 'Role' },
+            'specialization': { ar: 'التخصص', en: 'Specialization' },
+            'joinDate': { ar: 'تاريخ الانضمام', en: 'Join Date' },
+            'patientsCount': { ar: 'عدد المرضى', en: 'Patients' },
+            'sessionsToday': { ar: 'جلسات اليوم', en: "Today's Sessions" },
+            'serviceName': { ar: 'اسم الخدمة', en: 'Service Name' },
+            'category': { ar: 'الفئة', en: 'Category' },
+            'amount': { ar: 'المبلغ', en: 'Amount' },
+            'method': { ar: 'طريقة الدفع', en: 'Payment Method' },
+            'invoiceNo': { ar: 'رقم الفاتورة', en: 'Invoice No' },
+            'monthlyRevenue': { ar: 'إيرادات الشهر', en: 'Monthly Revenue' },
+            'pendingPayments': { ar: 'مدفوعات معلقة', en: 'Pending Payments' },
+            'activeStaff': { ar: 'فريق العمل النشط', en: 'Active Staff' },
+            'todaySessions': { ar: 'جلسات اليوم', en: "Today's Sessions" },
+            'financialReports': { ar: 'التقارير المالية', en: 'Financial Reports' },
+            'patientReports': { ar: 'تقارير المرضى', en: 'Patient Reports' },
+            'sessionReports': { ar: 'تقارير الجلسات', en: 'Session Reports' },
+            'payments': { ar: 'المدفوعات', en: 'Payments' },
+            'recentPayments': { ar: 'المدفوعات الأخيرة', en: 'Recent Payments' },
+            'clinicSettings': { ar: 'إعدادات العيادة', en: 'Clinic Settings' },
+            'services': { ar: 'الخدمات', en: 'Services' },
+            'actions': { ar: 'الإجراءات', en: 'Actions' }
+          }
+        }
+      };
+
+      // Translation Helper
+      const t = function(key) {
+        const lang = db.env.lang || 'ar';
+        const dict = db.i18n.dict || {};
+        return dict[key] && dict[key][lang] ? dict[key][lang] : key;
+      };
+
+      // Event Handlers
+      const orders = {
+        'nav:click': {
+          on: ['click'],
+          gkeys: ['nav:click'],
+          handler: function(event, context) {
+            // Use closest() to find the element with data-page, even if user clicked on child span
+            const target = event.target.closest('[data-page]');
+            if (!target) return; // Exit if no data-page found
+
+            const page = target.dataset.page;
+            const state = context.getState();
+            state.data.currentPage = page;
+            context.rebuild();
+          }
+        },
+
+        'lang:switch': {
+          on: ['click'],
+          gkeys: ['lang:switch'],
+          handler: function(event, context) {
+            const target = event.target.closest('[data-lang]');
+            if (!target) return;
+
+            const newLang = target.dataset.lang;
+            const state = context.getState();
+            state.env.lang = newLang;
+            state.env.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.setAttribute('lang', newLang);
+            document.documentElement.setAttribute('dir', state.env.dir);
+            context.rebuild();
+          }
+        },
+
+        'theme:toggle': {
+          on: ['click'],
+          gkeys: ['theme:toggle'],
+          handler: function(event, context) {
+            const state = context.getState();
+            state.env.theme = state.env.theme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', state.env.theme);
+            context.rebuild();
+          }
+        },
+
+        'modal:open': {
+          on: ['click'],
+          gkeys: ['modal:open'],
+          handler: function(event, context) {
+            const target = event.target.closest('[data-modal-type]');
+            if (!target) return;
+
+            const modalType = target.dataset.modalType;
+            const state = context.getState();
+            state.data.showModal = true;
+            state.data.modalType = modalType;
+            context.rebuild();
+          }
+        },
+
+        'modal:close': {
+          on: ['click'],
+          gkeys: ['modal:close'],
+          handler: function(event, context) {
+            const state = context.getState();
+            state.data.showModal = false;
+            state.data.modalType = null;
+            state.data.formData = {};
+            context.rebuild();
+          }
+        },
+
+        'modal:overlay-click': {
+          on: ['click'],
+          gkeys: ['modal:overlay-click'],
+          handler: function(event, context) {
+            if (event.target.dataset.mGkey === 'modal:overlay-click') {
+              const state = context.getState();
+              state.data.showModal = false;
+              state.data.modalType = null;
+              state.data.formData = {};
+              context.rebuild();
+            }
+          }
+        },
+
+        'form:input': {
+          on: ['input', 'change'],
+          gkeys: ['form:input'],
+          handler: function(event, context) {
+            const field = event.target.name;
+            const value = event.target.value;
+            const state = context.getState();
+            if (!state.data.formData) state.data.formData = {};
+            state.data.formData[field] = value;
+          }
+        },
+
+        'form:submit': {
+          on: ['submit'],
+          gkeys: ['form:submit'],
+          handler: function(event, context) {
+            event.preventDefault();
+            const state = context.getState();
+            const modalType = state.data.modalType;
+            const formData = state.data.formData || {};
+
+            // Simple validation
+            if (!formData.name && !formData.patientName) {
+              alert(state.env.lang === 'ar' ? 'الرجاء إدخال الاسم' : 'Please enter name');
+              return;
+            }
+
+            // Generate new ID
+            const newId = Date.now();
+
+            // Add to appropriate array
+            if (modalType === 'patient') {
+              state.data.patients.push({
+                id: newId,
+                name: formData.name || '',
+                phone: formData.phone || '',
+                email: formData.email || '',
+                age: parseInt(formData.age) || 0,
+                gender: formData.gender || 'male',
+                status: 'active',
+                lastVisit: new Date().toISOString().split('T')[0],
+                totalSessions: 0,
+                totalPaid: 0,
+                address: formData.address || '',
+                diagnosis: formData.diagnosis || ''
+              });
+            } else if (modalType === 'appointment') {
+              state.data.appointments.push({
+                id: newId,
+                patientId: parseInt(formData.patientId) || 0,
+                patientName: formData.patientName || '',
+                date: formData.date || '',
+                time: formData.time || '',
+                service: formData.service || '',
+                therapist: formData.therapist || '',
+                status: 'pending',
+                duration: parseInt(formData.duration) || 60,
+                price: parseInt(formData.price) || 300
+              });
+            } else if (modalType === 'session') {
+              state.data.sessions.push({
+                id: newId,
+                patientId: parseInt(formData.patientId) || 0,
+                patientName: formData.patientName || '',
+                date: formData.date || '',
+                service: formData.service || '',
+                therapist: formData.therapist || '',
+                duration: parseInt(formData.duration) || 60,
+                status: 'completed',
+                notes: formData.notes || '',
+                nextSession: formData.nextSession || '',
+                price: parseInt(formData.price) || 300,
+                paid: formData.paid === 'true'
+              });
+            } else if (modalType === 'staff') {
+              state.data.staff.push({
+                id: newId,
+                name: formData.name || '',
+                role: formData.role || '',
+                specialization: formData.specialization || '',
+                phone: formData.phone || '',
+                email: formData.email || '',
+                joinDate: formData.joinDate || new Date().toISOString().split('T')[0],
+                patients: 0,
+                sessionsToday: 0
+              });
+            } else if (modalType === 'service') {
+              state.data.services.push({
+                id: newId,
+                name: formData.name || '',
+                price: parseInt(formData.price) || 0,
+                duration: parseInt(formData.duration) || 60,
+                category: formData.category || '',
+                active: true
+              });
+            }
+
+            // Close modal
+            state.data.showModal = false;
+            state.data.modalType = null;
+            state.data.formData = {};
+            context.rebuild();
+
+            // Show success message
+            alert(state.env.lang === 'ar' ? 'تم الإضافة بنجاح!' : 'Added successfully!');
+          }
+        }
+      };
+
+      // Components
+      function Sidebar(db, D) {
+        const menuItems = [
+          { icon: '📊', page: 'dashboard', label: t('dashboard') },
+          { icon: '👥', page: 'patients', label: t('patients') },
+          { icon: '📅', page: 'appointments', label: t('appointments') },
+          { icon: '💆', page: 'sessions', label: t('sessions') },
+          { icon: '📈', page: 'reports', label: t('reports') },
+          { icon: '⚙️', page: 'settings', label: t('settings') }
+        ];
+
+        return D.Containers.Aside({
+          attrs: { class: tw`w-64 bg-[var(--card)] border-e border-[var(--border)] p-6 fixed h-screen overflow-y-auto ${token('surface')}` }
+        }, [
+          // Header
+          D.Containers.Div({ attrs: { class: tw`mb-8 pb-4 border-b border-[var(--border)]` } }, [
+            D.Text.H2({ attrs: { class: tw`text-lg font-bold text-[var(--primary)]` } }, [
+              '🏥 ' + (db.env.lang === 'ar' ? 'مركز العلاج الطبيعي' : 'Physical Therapy Center')
+            ])
+          ]),
+
+          // Menu
+          D.Lists.Ul({ attrs: { class: tw`${token('vstack')} gap-2` } },
+            menuItems.map(item =>
+              D.Lists.Li({ attrs: { key: item.page } }, [
+                D.Text.A({
+                  attrs: {
+                    class: tw`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 cursor-pointer ${
+                      db.data.currentPage === item.page
+                        ? 'bg-[var(--primary)] text-[var(--primary-foreground)] shadow-md'
+                        : 'hover:bg-[var(--accent)] text-[var(--foreground)]'
+                    }`,
+                    'data-m-gkey': 'nav:click',
+                    'data-page': item.page
+                  }
+                }, [
+                  D.Text.Span({ attrs: { class: tw`text-xl` } }, [item.icon]),
+                  D.Text.Span({ attrs: { class: tw`font-medium` } }, [item.label])
+                ])
+              ])
+            )
+          )
+        ]);
+      }
+
+      function Header(db, D) {
+        return D.Containers.Div({ attrs: { class: tw`${token('split')} mb-8 pb-4 border-b border-[var(--border)]` } }, [
+          D.Text.H1({ attrs: { class: tw`text-3xl font-bold text-[var(--foreground)]` } }, [t(db.data.currentPage)]),
+          D.Containers.Div({ attrs: { class: tw`${token('hstack')} gap-3` } }, [
+            UI.Switcher({
+              attrs: { 'data-m-gkey': 'lang:switch' },
+              value: db.env.lang,
+              options: [
+                { label: 'ع', value: 'ar', attrs: { 'data-lang': 'ar' } },
+                { label: 'EN', value: 'en', attrs: { 'data-lang': 'en' } }
+              ]
+            }),
+            UI.Button({
+              attrs: {
+                'data-m-gkey': 'theme:toggle',
+                title: db.env.theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'
+              },
+              variant: 'ghost',
+              size: 'md'
+            }, [db.env.theme === 'dark' ? '🌞' : '🌙'])
+          ])
+        ]);
+      }
+
+      function StatCard({ icon, title, value, change, changeType }, D) {
+        const changeColors = {
+          positive: 'text-green-600 dark:text-green-400',
+          neutral: 'text-blue-600 dark:text-blue-400',
+          negative: 'text-red-600 dark:text-red-400'
+        };
+
+        return D.Containers.Div({ attrs: { class: tw`${token('card')} p-6 hover:shadow-lg transition-shadow duration-200` } }, [
+          D.Containers.Div({ attrs: { class: tw`${token('split')} mb-4` } }, [
+            D.Text.Span({ attrs: { class: tw`text-sm font-medium ${token('muted')}` } }, [title]),
+            D.Text.Span({ attrs: { class: tw`text-2xl` } }, [icon])
+          ]),
+          D.Containers.Div({ attrs: { class: tw`text-3xl font-bold text-[var(--foreground)] mb-2` } }, [value]),
+          D.Containers.Div({ attrs: { class: tw`text-sm ${changeColors[changeType || 'neutral']}` } }, [change])
+        ]);
+      }
+
+      function StatsGrid(db, D) {
+        return D.Containers.Div({ attrs: { class: tw`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8` } }, [
+          StatCard({
+            icon: '👥',
+            title: t('totalPatients'),
+            value: String(db.data.stats.totalPatients),
+            change: '↑ 12% من الشهر الماضي',
+            changeType: 'positive'
+          }, D),
+          StatCard({
+            icon: '📅',
+            title: t('todayAppointments'),
+            value: String(db.data.stats.todayAppointments),
+            change: '5 مؤكد، 7 قيد الانتظار',
+            changeType: 'neutral'
+          }, D),
+          StatCard({
+            icon: '✅',
+            title: t('completedSessions'),
+            value: String(db.data.stats.completedSessions),
+            change: '↑ 8% من الشهر الماضي',
+            changeType: 'positive'
+          }, D),
+          StatCard({
+            icon: '💰',
+            title: t('revenue'),
+            value: String(db.data.stats.revenue) + ' ج.م',
+            change: '↑ 15% من الشهر الماضي',
+            changeType: 'positive'
+          }, D)
+        ]);
+      }
+
+      function DataTable({ title, headers, rows, onAdd }, D) {
+        return D.Containers.Div({ attrs: { class: tw`${token('card')} mb-6` } }, [
+          // Header
+          D.Containers.Div({ attrs: { class: tw`${token('card/header')}` } }, [
+            D.Text.H2({ attrs: { class: tw`${token('card/title')}` } }, [title]),
+            onAdd ? UI.Button({
+              attrs: {
+                'data-m-gkey': 'modal:open',
+                'data-modal-type': onAdd.type
+              },
+              variant: 'solid',
+              size: 'sm'
+            }, ['+ ' + t('addNew')]) : null
+          ]),
+
+          // Table
+          D.Containers.Div({ attrs: { class: tw`${token('card/content')} overflow-x-auto` } }, [
+            D.Containers.Div({ attrs: { class: tw`min-w-full` } }, [
+              // Table Header
+              D.Containers.Div({ attrs: { class: tw`bg-[var(--surface-1)] border-b-2 border-[var(--border)]` } }, [
+                D.Containers.Div({ attrs: { class: tw`grid gap-4 p-4` + ` grid-cols-${headers.length}` } },
+                  headers.map(header =>
+                    D.Containers.Div({ attrs: { class: tw`text-sm font-semibold text-[var(--foreground)]` } }, [header])
+                  )
+                )
+              ]),
+
+              // Table Body
+              D.Containers.Div({},
+                rows.map((row, idx) =>
+                  D.Containers.Div({
+                    attrs: {
+                      key: idx,
+                      class: tw`border-b border-[var(--border)] hover:bg-[var(--accent)] transition-colors duration-150`
+                    }
+                  }, [
+                    D.Containers.Div({ attrs: { class: tw`grid gap-4 p-4` + ` grid-cols-${headers.length}` } }, row)
+                  ])
+                )
+              )
+            ])
+          ])
+        ]);
+      }
+
+      function Badge({ text, variant }, D) {
+        const variants = {
+          success: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+          warning: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+          danger: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
+          info: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+        };
+
+        return D.Text.Span({
+          attrs: {
+            class: tw`${token('badge')} ${variants[variant] || variants.info}`
+          }
+        }, [text]);
+      }
+
+      function DashboardPage(db, D) {
+        // Patients table
+        const patientsHeaders = [t('name'), t('phone'), t('status'), t('lastVisit'), t('sessions')];
+        const patientsRows = db.data.patients.map(patient => [
+          D.Text.Span({ attrs: { class: tw`font-medium text-[var(--foreground)]` } }, [patient.name]),
+          D.Text.Span({ attrs: { class: tw`${token('muted')}` } }, [patient.phone]),
+          Badge({
+            text: t(patient.status),
+            variant: patient.status === 'active' ? 'success' : 'info'
+          }, D),
+          D.Text.Span({ attrs: { class: tw`${token('muted')}` } }, [patient.lastVisit]),
+          D.Text.Span({ attrs: { class: tw`font-semibold text-[var(--primary)]` } }, [String(patient.totalSessions)])
+        ]);
+
+        // Appointments table
+        const appointmentsHeaders = [t('patient'), t('date'), t('time'), t('service'), t('status')];
+        const appointmentsRows = db.data.appointments.map(appointment => [
+          D.Text.Span({ attrs: { class: tw`font-medium text-[var(--foreground)]` } }, [appointment.patientName]),
+          D.Text.Span({ attrs: { class: tw`${token('muted')}` } }, [appointment.date]),
+          D.Text.Span({ attrs: { class: tw`${token('muted')}` } }, [appointment.time]),
+          D.Text.Span({ attrs: { class: tw`text-[var(--foreground)]` } }, [appointment.service]),
+          Badge({
+            text: t(appointment.status),
+            variant: appointment.status === 'confirmed' ? 'success' : 'warning'
+          }, D)
+        ]);
+
+        return D.Containers.Div({}, [
+          StatsGrid(db, D),
+          DataTable({
+            title: t('recentPatients'),
+            headers: patientsHeaders,
+            rows: patientsRows,
+            onAdd: { type: 'patient' }
+          }, D),
+          DataTable({
+            title: t('upcomingAppointments'),
+            headers: appointmentsHeaders,
+            rows: appointmentsRows,
+            onAdd: { type: 'appointment' }
+          }, D)
+        ]);
+      }
+
+      function PatientsPage(db, D) {
+        const headers = [t('name'), t('phone'), t('email'), t('age'), t('diagnosis'), t('status'), t('lastVisit'), t('totalPaid')];
+        const rows = db.data.patients.map(patient => [
+          D.Text.Span({ attrs: { class: tw`font-medium text-[var(--foreground)]` } }, [patient.name]),
+          D.Text.Span({ attrs: { class: tw`${token('muted')}` } }, [patient.phone]),
+          D.Text.Span({ attrs: { class: tw`${token('muted')} text-xs` } }, [patient.email]),
+          D.Text.Span({ attrs: { class: tw`text-center` } }, [String(patient.age)]),
+          D.Text.Span({ attrs: { class: tw`text-sm` } }, [patient.diagnosis]),
+          Badge({
+            text: t(patient.status),
+            variant: patient.status === 'active' ? 'success' : patient.status === 'completed' ? 'info' : 'warning'
+          }, D),
+          D.Text.Span({ attrs: { class: tw`${token('muted')}` } }, [patient.lastVisit]),
+          D.Text.Span({ attrs: { class: tw`font-semibold text-[var(--primary)]` } }, [String(patient.totalPaid) + ' ج.م'])
+        ]);
+
+        return D.Containers.Div({}, [
+          DataTable({
+            title: t('allPatients'),
+            headers: headers,
+            rows: rows,
+            onAdd: { type: 'patient' }
+          }, D)
+        ]);
+      }
+
+      function AppointmentsPage(db, D) {
+        const headers = [t('patient'), t('date'), t('time'), t('service'), t('therapist'), t('duration'), t('price'), t('status')];
+        const rows = db.data.appointments.map(appointment => [
+          D.Text.Span({ attrs: { class: tw`font-medium text-[var(--foreground)]` } }, [appointment.patientName]),
+          D.Text.Span({ attrs: { class: tw`${token('muted')}` } }, [appointment.date]),
+          D.Text.Span({ attrs: { class: tw`font-semibold text-[var(--primary)]` } }, [appointment.time]),
+          D.Text.Span({ attrs: { class: tw`text-sm` } }, [appointment.service]),
+          D.Text.Span({ attrs: { class: tw`text-sm ${token('muted')}` } }, [appointment.therapist]),
+          D.Text.Span({ attrs: { class: tw`text-center` } }, [String(appointment.duration) + ' دقيقة']),
+          D.Text.Span({ attrs: { class: tw`font-semibold` } }, [String(appointment.price) + ' ج.م']),
+          Badge({
+            text: t(appointment.status),
+            variant: appointment.status === 'confirmed' ? 'success' : appointment.status === 'cancelled' ? 'danger' : 'warning'
+          }, D)
+        ]);
+
+        return D.Containers.Div({}, [
+          DataTable({
+            title: t('allAppointments'),
+            headers: headers,
+            rows: rows,
+            onAdd: { type: 'appointment' }
+          }, D)
+        ]);
+      }
+
+      function SessionsPage(db, D) {
+        const headers = [t('patient'), t('date'), t('service'), t('therapist'), t('duration'), t('notes'), t('nextSession'), t('price'), t('paid')];
+        const rows = db.data.sessions.map(session => [
+          D.Text.Span({ attrs: { class: tw`font-medium text-[var(--foreground)]` } }, [session.patientName]),
+          D.Text.Span({ attrs: { class: tw`${token('muted')}` } }, [session.date]),
+          D.Text.Span({ attrs: { class: tw`text-sm` } }, [session.service]),
+          D.Text.Span({ attrs: { class: tw`text-sm ${token('muted')}` } }, [session.therapist]),
+          D.Text.Span({ attrs: { class: tw`text-center` } }, [String(session.duration) + ' دقيقة']),
+          D.Text.Span({ attrs: { class: tw`text-xs max-w-[200px] truncate` } }, [session.notes]),
+          D.Text.Span({ attrs: { class: tw`${token('muted')} text-sm` } }, [session.nextSession]),
+          D.Text.Span({ attrs: { class: tw`font-semibold` } }, [String(session.price) + ' ج.م']),
+          Badge({
+            text: session.paid ? t('paid') : t('unpaid'),
+            variant: session.paid ? 'success' : 'warning'
+          }, D)
+        ]);
+
+        return D.Containers.Div({}, [
+          DataTable({
+            title: t('sessionHistory'),
+            headers: headers,
+            rows: rows,
+            onAdd: { type: 'session' }
+          }, D)
+        ]);
+      }
+
+      function ReportsPage(db, D) {
+        // Financial Stats Grid
+        const financialStats = D.Containers.Div({ attrs: { class: tw`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8` } }, [
+          StatCard({
+            icon: '💰',
+            title: t('revenue'),
+            value: String(db.data.stats.revenue) + ' ج.م',
+            change: '↑ 15% من الشهر الماضي',
+            changeType: 'positive'
+          }, D),
+          StatCard({
+            icon: '📊',
+            title: t('monthlyRevenue'),
+            value: String(db.data.stats.monthlyRevenue) + ' ج.م',
+            change: 'هذا الشهر',
+            changeType: 'neutral'
+          }, D),
+          StatCard({
+            icon: '⏳',
+            title: t('pendingPayments'),
+            value: String(db.data.stats.pendingPayments) + ' ج.م',
+            change: '3 مدفوعات معلقة',
+            changeType: 'warning'
+          }, D),
+          StatCard({
+            icon: '✅',
+            title: t('completedSessions'),
+            value: String(db.data.stats.completedSessions),
+            change: '↑ 8% من الشهر الماضي',
+            changeType: 'positive'
+          }, D)
+        ]);
+
+        // Recent Payments Table
+        const paymentsHeaders = [t('invoiceNo'), t('patient'), t('date'), t('service'), t('amount'), t('method'), t('status')];
+        const paymentsRows = db.data.payments.map(payment => [
+          D.Text.Span({ attrs: { class: tw`font-mono text-sm font-semibold text-[var(--primary)]` } }, [payment.invoiceNo]),
+          D.Text.Span({ attrs: { class: tw`font-medium` } }, [payment.patientName]),
+          D.Text.Span({ attrs: { class: tw`${token('muted')}` } }, [payment.date]),
+          D.Text.Span({ attrs: { class: tw`text-sm` } }, [payment.service]),
+          D.Text.Span({ attrs: { class: tw`font-semibold text-green-600` } }, [String(payment.amount) + ' ج.م']),
+          D.Text.Span({ attrs: { class: tw`text-sm ${token('muted')}` } }, [payment.method]),
+          Badge({
+            text: t(payment.status),
+            variant: payment.status === 'completed' ? 'success' : 'warning'
+          }, D)
+        ]);
+
+        return D.Containers.Div({}, [
+          financialStats,
+          DataTable({
+            title: t('recentPayments'),
+            headers: paymentsHeaders,
+            rows: paymentsRows
+          }, D)
+        ]);
+      }
+
+      function SettingsPage(db, D) {
+        // Staff Table
+        const staffHeaders = [t('name'), t('role'), t('specialization'), t('phone'), t('email'), t('joinDate'), t('patientsCount'), t('sessionsToday')];
+        const staffRows = db.data.staff.map(staff => [
+          D.Text.Span({ attrs: { class: tw`font-medium text-[var(--foreground)]` } }, [staff.name]),
+          D.Text.Span({ attrs: { class: tw`text-sm ${token('muted')}` } }, [staff.role]),
+          D.Text.Span({ attrs: { class: tw`text-sm` } }, [staff.specialization]),
+          D.Text.Span({ attrs: { class: tw`${token('muted')} text-sm` } }, [staff.phone]),
+          D.Text.Span({ attrs: { class: tw`${token('muted')} text-xs` } }, [staff.email]),
+          D.Text.Span({ attrs: { class: tw`${token('muted')} text-sm` } }, [staff.joinDate]),
+          D.Text.Span({ attrs: { class: tw`text-center font-semibold text-[var(--primary)]` } }, [String(staff.patients)]),
+          D.Text.Span({ attrs: { class: tw`text-center font-semibold` } }, [String(staff.sessionsToday)])
+        ]);
+
+        // Services Table
+        const servicesHeaders = [t('serviceName'), t('category'), t('duration'), t('price'), t('status')];
+        const servicesRows = db.data.services.map(service => [
+          D.Text.Span({ attrs: { class: tw`font-medium text-[var(--foreground)]` } }, [service.name]),
+          D.Text.Span({ attrs: { class: tw`text-sm ${token('muted')}` } }, [service.category]),
+          D.Text.Span({ attrs: { class: tw`text-center` } }, [String(service.duration) + ' دقيقة']),
+          D.Text.Span({ attrs: { class: tw`font-semibold text-[var(--primary)]` } }, [String(service.price) + ' ج.م']),
+          Badge({
+            text: service.active ? t('active') : 'غير نشط',
+            variant: service.active ? 'success' : 'danger'
+          }, D)
+        ]);
+
+        return D.Containers.Div({}, [
+          DataTable({
+            title: t('staff'),
+            headers: staffHeaders,
+            rows: staffRows,
+            onAdd: { type: 'staff' }
+          }, D),
+          DataTable({
+            title: t('services'),
+            headers: servicesHeaders,
+            rows: servicesRows,
+            onAdd: { type: 'service' }
+          }, D)
+        ]);
+      }
+
+      function MainContent(db, D) {
+        let pageContent;
+
+        switch(db.data.currentPage) {
+          case 'dashboard':
+            pageContent = DashboardPage(db, D);
+            break;
+          case 'patients':
+            pageContent = PatientsPage(db, D);
+            break;
+          case 'appointments':
+            pageContent = AppointmentsPage(db, D);
+            break;
+          case 'sessions':
+            pageContent = SessionsPage(db, D);
+            break;
+          case 'reports':
+            pageContent = ReportsPage(db, D);
+            break;
+          case 'settings':
+            pageContent = SettingsPage(db, D);
+            break;
+          default:
+            pageContent = DashboardPage(db, D);
+        }
+
+        return D.Containers.Main({ attrs: { class: tw`flex-1 ms-64 p-8 min-h-screen ${token('surface')}` } }, [
+          Header(db, D),
+          pageContent
+        ]);
+      }
+
+      // Modal Form Component
+      function ModalForm(db, D) {
+        if (!db.data.showModal) return null;
+
+        const modalType = db.data.modalType;
+        const formData = db.data.formData || {};
+
+        // Modal titles
+        const titles = {
+          patient: { ar: 'إضافة مريض جديد', en: 'Add New Patient' },
+          appointment: { ar: 'إضافة موعد جديد', en: 'Add New Appointment' },
+          session: { ar: 'إضافة جلسة جديدة', en: 'Add New Session' },
+          staff: { ar: 'إضافة موظف جديد', en: 'Add New Staff' },
+          service: { ar: 'إضافة خدمة جديدة', en: 'Add New Service' }
+        };
+
+        const title = titles[modalType] ? titles[modalType][db.env.lang] : 'Add New';
+
+        return D.Containers.Div({
+          attrs: {
+            class: 'modal-overlay',
+            'data-m-gkey': 'modal:overlay-click'
+          }
+        }, [
+          D.Containers.Div({
+            attrs: {
+              class: 'modal-content modal-form-card'
+            }
+          }, [
+            // Close Button
+            D.Forms.Button({
+              attrs: {
+                type: 'button',
+                class: 'modal-close-btn',
+                'data-m-gkey': 'modal:close',
+                'aria-label': 'Close'
+              }
+            }, ['×']),
+
+            // Title
+            D.Text.H2({ attrs: { class: 'modal-title' } }, [title]),
+
+            // Form
+            D.Forms.Form({ attrs: { class: 'modal-form', 'data-m-gkey': 'form:submit' } }, [
+              modalType === 'patient' ? PatientForm(formData, D) :
+              modalType === 'appointment' ? AppointmentForm(formData, db, D) :
+              modalType === 'session' ? SessionForm(formData, db, D) :
+              modalType === 'staff' ? StaffForm(formData, D) :
+              modalType === 'service' ? ServiceForm(formData, D) :
+              null,
+
+              // Form Actions
+              D.Containers.Div({ attrs: { class: 'form-actions' } }, [
+                D.Forms.Button({
+                  attrs: {
+                    type: 'button',
+                    class: 'btn btn-secondary',
+                    'data-m-gkey': 'modal:close'
+                  }
+                }, [t('booking.cancel')]),
+                D.Forms.Button({
+                  attrs: {
+                    type: 'submit',
+                    class: 'btn btn-primary'
+                  }
+                }, [db.env.lang === 'ar' ? 'حفظ' : 'Save'])
+              ])
+            ])
+          ])
+        ]);
+      }
+
+      // Form Components
+      function PatientForm(formData, D) {
+        return D.Containers.Div({ attrs: { class: 'form-grid' } }, [
+          FormField({ label: t('name') + ' *', name: 'name', type: 'text', value: formData.name, required: true }, D),
+          FormField({ label: t('phone') + ' *', name: 'phone', type: 'tel', value: formData.phone, required: true }, D),
+          FormField({ label: t('email'), name: 'email', type: 'email', value: formData.email }, D),
+          FormField({ label: t('age'), name: 'age', type: 'number', value: formData.age }, D),
+          FormSelect({ label: t('gender'), name: 'gender', value: formData.gender, options: [
+            { value: 'male', label: t('male') },
+            { value: 'female', label: t('female') }
+          ]}, D),
+          FormField({ label: t('address'), name: 'address', type: 'text', value: formData.address, fullWidth: true }, D),
+          FormField({ label: t('diagnosis'), name: 'diagnosis', type: 'text', value: formData.diagnosis, fullWidth: true }, D)
+        ]);
+      }
+
+      function AppointmentForm(formData, db, D) {
+        return D.Containers.Div({ attrs: { class: 'form-grid' } }, [
+          FormField({ label: t('patient') + ' *', name: 'patientName', type: 'text', value: formData.patientName, required: true }, D),
+          FormField({ label: t('date') + ' *', name: 'date', type: 'date', value: formData.date, required: true }, D),
+          FormField({ label: t('time') + ' *', name: 'time', type: 'time', value: formData.time, required: true }, D),
+          FormField({ label: t('service'), name: 'service', type: 'text', value: formData.service }, D),
+          FormField({ label: t('therapist'), name: 'therapist', type: 'text', value: formData.therapist }, D),
+          FormField({ label: t('duration'), name: 'duration', type: 'number', value: formData.duration || 60 }, D),
+          FormField({ label: t('price'), name: 'price', type: 'number', value: formData.price || 300 }, D)
+        ]);
+      }
+
+      function SessionForm(formData, db, D) {
+        return D.Containers.Div({ attrs: { class: 'form-grid' } }, [
+          FormField({ label: t('patient') + ' *', name: 'patientName', type: 'text', value: formData.patientName, required: true }, D),
+          FormField({ label: t('date') + ' *', name: 'date', type: 'date', value: formData.date, required: true }, D),
+          FormField({ label: t('service'), name: 'service', type: 'text', value: formData.service }, D),
+          FormField({ label: t('therapist'), name: 'therapist', type: 'text', value: formData.therapist }, D),
+          FormField({ label: t('duration'), name: 'duration', type: 'number', value: formData.duration || 60 }, D),
+          FormField({ label: t('price'), name: 'price', type: 'number', value: formData.price || 300 }, D),
+          FormField({ label: t('nextSession'), name: 'nextSession', type: 'date', value: formData.nextSession }, D),
+          FormTextarea({ label: t('notes'), name: 'notes', value: formData.notes, fullWidth: true }, D)
+        ]);
+      }
+
+      function StaffForm(formData, D) {
+        return D.Containers.Div({ attrs: { class: 'form-grid' } }, [
+          FormField({ label: t('name') + ' *', name: 'name', type: 'text', value: formData.name, required: true }, D),
+          FormField({ label: t('role'), name: 'role', type: 'text', value: formData.role }, D),
+          FormField({ label: t('specialization'), name: 'specialization', type: 'text', value: formData.specialization, fullWidth: true }, D),
+          FormField({ label: t('phone'), name: 'phone', type: 'tel', value: formData.phone }, D),
+          FormField({ label: t('email'), name: 'email', type: 'email', value: formData.email }, D),
+          FormField({ label: t('joinDate'), name: 'joinDate', type: 'date', value: formData.joinDate }, D)
+        ]);
+      }
+
+      function ServiceForm(formData, D) {
+        return D.Containers.Div({ attrs: { class: 'form-grid' } }, [
+          FormField({ label: t('serviceName') + ' *', name: 'name', type: 'text', value: formData.name, required: true, fullWidth: true }, D),
+          FormField({ label: t('category'), name: 'category', type: 'text', value: formData.category }, D),
+          FormField({ label: t('duration'), name: 'duration', type: 'number', value: formData.duration || 60 }, D),
+          FormField({ label: t('price'), name: 'price', type: 'number', value: formData.price || 300 }, D)
+        ]);
+      }
+
+      // Helper Components
+      function FormField({ label, name, type, value, required, fullWidth }, D) {
+        return D.Containers.Div({ attrs: { class: fullWidth ? 'form-field form-field-full' : 'form-field' } }, [
+          D.Forms.Label({ attrs: { for: name } }, [label]),
+          D.Inputs.Input({
+            attrs: {
+              type: type || 'text',
+              name: name,
+              id: name,
+              value: value || '',
+              required: required || false,
+              'data-m-gkey': 'form:input',
+              class: 'form-input'
+            }
+          })
+        ]);
+      }
+
+      function FormSelect({ label, name, value, options }, D) {
+        return D.Containers.Div({ attrs: { class: 'form-field' } }, [
+          D.Forms.Label({ attrs: { for: name } }, [label]),
+          D.Inputs.Select({
+            attrs: {
+              name: name,
+              id: name,
+              'data-m-gkey': 'form:input',
+              class: 'form-input'
+            }
+          }, options.map(opt =>
+            D.Inputs.Option({
+              attrs: {
+                value: opt.value,
+                selected: value === opt.value
+              }
+            }, [opt.label])
+          ))
+        ]);
+      }
+
+      function FormTextarea({ label, name, value, fullWidth }, D) {
+        return D.Containers.Div({ attrs: { class: fullWidth ? 'form-field form-field-full' : 'form-field' } }, [
+          D.Forms.Label({ attrs: { for: name } }, [label]),
+          D.Inputs.Textarea({
+            attrs: {
+              name: name,
+              id: name,
+              'data-m-gkey': 'form:input',
+              class: 'form-input',
+              rows: '4'
+            }
+          }, [value || ''])
+        ]);
+      }
+
+      // Main App Body
+      M.app.setBody(function(stateWrapper, D) {
+        const state = stateWrapper;
+
+        return D.Containers.Div({ attrs: { class: tw`flex min-h-screen ${token('surface')}` } }, [
+          Sidebar(state, D),
+          MainContent(state, D),
+          ModalForm(state, D)
+        ]);
+      });
+
+      // Create and Mount App
+      const app = M.app.createApp(db, orders);
+      app.mount('#app');
+
+      console.log('ERP Dashboard loaded successfully!');
+    })();
+  </script>
+</body>
+</html>

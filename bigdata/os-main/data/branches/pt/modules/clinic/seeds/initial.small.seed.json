@@ -1,0 +1,2957 @@
+{
+  "version": 1,
+  "meta": {
+    "branchId": "clinic",
+    "moduleId": "pt",
+    "counter": 0,
+    "labCounter": 0
+  },
+  "tables": {
+    "languages": [
+      {
+        "id": "44d02644-b4f8-40d4-82ca-0758b3caf61e",
+        "code": "ar",
+        "name": "العربية",
+        "direction": "rtl",
+        "is_default": 1,
+        "is_active": 1
+      },
+      {
+        "id": "caab9c4a-37f8-4969-a599-26a5da30e6da",
+        "code": "en",
+        "name": "English",
+        "direction": "ltr",
+        "is_default": 0,
+        "is_active": 1
+      }
+    ],
+    "clinic_ui_labels": [
+      {
+        "id": "10000000-0000-0000-0000-000000000001",
+        "code": "app.title"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000002",
+        "code": "app.subtitle"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000003",
+        "code": "nav.dashboard"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000004",
+        "code": "nav.master"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000005",
+        "code": "nav.patients"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000006",
+        "code": "section.kpis"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000007",
+        "code": "cta.save"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000008",
+        "code": "cta.cancel"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000009",
+        "code": "cta.add"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000010",
+        "code": "label.name"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000011",
+        "code": "label.phone"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000012",
+        "code": "nav.bookings"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000013",
+        "code": "nav.contracts"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000014",
+        "code": "nav.progress"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000015",
+        "code": "section.patientProfile"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000016",
+        "code": "section.contracts"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000017",
+        "code": "section.bookings"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000018",
+        "code": "section.master"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000019",
+        "code": "label.sessions"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000020",
+        "code": "label.slot"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000021",
+        "code": "label.code"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000022",
+        "code": "label.service"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000023",
+        "code": "label.station"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000030",
+        "code": "label.supervising_doctor"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000031",
+        "code": "label.executing_doctor"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000032",
+        "code": "label.referral_doctor"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000033",
+        "code": "label.contract_date"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000034",
+        "code": "label.start_date"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000035",
+        "code": "label.notes"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000036",
+        "code": "label.clinic_type"
+      },
+      {
+        "id": "10000000-0000-0000-0000-000000000037",
+        "code": "label.patient"
+      }
+    ],
+    "clinic_ui_labels_lang": [
+      {
+        "id": "11000000-0000-0000-0000-000000000001",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000001",
+        "lang": "ar",
+        "text": "لوحة تحكم العيادة"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000002",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000002",
+        "lang": "ar",
+        "text": "الجيل القادم من إدارة العيادات الذكية"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000003",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000003",
+        "lang": "ar",
+        "text": "الرئيسية"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000004",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000004",
+        "lang": "ar",
+        "text": "الإعدادات"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000005",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000005",
+        "lang": "ar",
+        "text": "المرضى"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000006",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000006",
+        "lang": "ar",
+        "text": "نظرة عامة"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000007",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000007",
+        "lang": "ar",
+        "text": "حفظ التغييرات"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000008",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000008",
+        "lang": "ar",
+        "text": "إلغاء"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000009",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000009",
+        "lang": "ar",
+        "text": "إضافة سجل"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000010",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000010",
+        "lang": "ar",
+        "text": "الاسم"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000011",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000011",
+        "lang": "ar",
+        "text": "الهاتف"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000012",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000012",
+        "lang": "ar",
+        "text": "الحجوزات"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000013",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000013",
+        "lang": "ar",
+        "text": "التعاقدات"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000014",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000014",
+        "lang": "ar",
+        "text": "التقدم"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000015",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000015",
+        "lang": "ar",
+        "text": "ملف المريض"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000016",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000016",
+        "lang": "ar",
+        "text": "التعاقدات"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000017",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000017",
+        "lang": "ar",
+        "text": "الحجوزات"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000018",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000018",
+        "lang": "ar",
+        "text": "الإعدادات"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000019",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000019",
+        "lang": "ar",
+        "text": "الجلسات"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000020",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000020",
+        "lang": "ar",
+        "text": "عدد"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000021",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000021",
+        "lang": "ar",
+        "text": "كود"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000022",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000022",
+        "lang": "ar",
+        "text": "الخدمة"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000023",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000023",
+        "lang": "ar",
+        "text": "الغرفة"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000030",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000030",
+        "lang": "ar",
+        "text": "الطبيب المشرف"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000031",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000031",
+        "lang": "ar",
+        "text": "الطبيب المنفذ"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000032",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000032",
+        "lang": "ar",
+        "text": "طبيب الإحالة"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000033",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000033",
+        "lang": "ar",
+        "text": "تاريخ العقد"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000034",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000034",
+        "lang": "ar",
+        "text": "تاريخ البدء"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000035",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000035",
+        "lang": "ar",
+        "text": "ملاحظات"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000036",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000036",
+        "lang": "ar",
+        "text": "نوع الكشف"
+      },
+      {
+        "id": "11000000-0000-0000-0000-000000000037",
+        "clinic_ui_labels_id": "10000000-0000-0000-0000-000000000037",
+        "lang": "ar",
+        "text": "العميل"
+      }
+    ],
+    "companies": [
+      {
+        "id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "tax_number": null,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      }
+    ],
+    "companies_lang": [
+      {
+        "id": "390f53eb-2ce9-4617-abae-6c4d97bda021",
+        "companies_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "lang": "ar",
+        "name": "عيادة دكتورة مروة حسين - Marwa Hussein",
+        "created_date": "2025-12-17T06:10:40.217Z"
+      }
+    ],
+    "branches": [
+      {
+        "id": "B83BE2C8-564A-4234-8501-C4E068B4AB2C",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "OBOUR",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      }
+    ],
+    "branches_lang": [
+      {
+        "id": "95f969d8-a334-4a53-ae08-944c1773ded6",
+        "branches_id": "B83BE2C8-564A-4234-8501-C4E068B4AB2C",
+        "lang": "ar",
+        "name": "Obour Branch - فرع العبور",
+        "created_date": "2025-12-17T06:10:40.218Z"
+      }
+    ],
+    "clinic_specialties": [
+      {
+        "id": "6069e5c5-46f6-5019-8679-0c9b81b906ff",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "47e084dd-6f66-509a-be4c-1e65ec635f14",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "0c89f717-4a18-5bd6-afee-e0b76911d281",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_specialties_lang": [
+      {
+        "id": "71e15902-cc7c-4ffd-bc59-77bc9ea17c4a",
+        "clinic_specialties_id": "6069e5c5-46f6-5019-8679-0c9b81b906ff",
+        "lang": "ar",
+        "name": "علاج طبيعي",
+        "created_date": "2025-12-17T06:10:40.218Z"
+      },
+      {
+        "id": "d7265978-7e37-42c0-831d-76181d54a13b",
+        "clinic_specialties_id": "47e084dd-6f66-509a-be4c-1e65ec635f14",
+        "lang": "ar",
+        "name": "تخسيس",
+        "created_date": "2025-12-17T06:10:40.218Z"
+      },
+      {
+        "id": "ef5f96c4-e8fe-4d3d-b312-ef591c59ff49",
+        "clinic_specialties_id": "0c89f717-4a18-5bd6-afee-e0b76911d281",
+        "lang": "ar",
+        "name": "تغذية",
+        "created_date": "2025-12-17T06:10:40.218Z"
+      }
+    ],
+    "clinic_service_domains": [
+      {
+        "id": "d77b2256-0c4d-53c7-ba04-e3135e69f6b9",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "PT",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "SLIM",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "bfc2753d-8520-5694-9828-6daa445d078f",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "REC",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_service_domains_lang": [
+      {
+        "id": "1005da28-b01c-4438-898e-c85933728f6d",
+        "clinic_service_domains_id": "d77b2256-0c4d-53c7-ba04-e3135e69f6b9",
+        "lang": "ar",
+        "name": "Physical Therapy",
+        "created_date": "2025-12-17T06:10:40.219Z"
+      },
+      {
+        "id": "77f8f49d-5d37-43bb-a8d7-8415075015d9",
+        "clinic_service_domains_id": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "lang": "ar",
+        "name": "Slimming",
+        "created_date": "2025-12-17T06:10:40.219Z"
+      },
+      {
+        "id": "f9e3d3d8-77ee-46eb-93a6-91ecab19ca5f",
+        "clinic_service_domains_id": "bfc2753d-8520-5694-9828-6daa445d078f",
+        "lang": "ar",
+        "name": "Recovery",
+        "created_date": "2025-12-17T06:10:40.219Z"
+      }
+    ],
+    "clinic_types": [
+      {
+        "id": "2a3b4c5d-6e7f-8a9b-0c1d-2e2f2g2h2i2j",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "standard_duration_minutes": 30,
+        "visit_kind": "consultation",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "1a2b3c4d-5e6f-7a8b-9c0d-1e1f1g1h1i1j",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "standard_duration_minutes": 30,
+        "visit_kind": "consultation",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "c21e44b7-257e-5ec0-aaed-73b5ca1f38df",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "standard_duration_minutes": 30,
+        "visit_kind": "plan",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "standard_duration_minutes": 30,
+        "visit_kind": "plan",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_types_lang": [
+      {
+        "id": "b1c1d1e1-f1a1-b1c1-d1e1-f1a1b1c1d1e3",
+        "clinic_types_id": "2a3b4c5d-6e7f-8a9b-0c1d-2e2f2g2h2i2j",
+        "lang": "ar",
+        "name": "كشف و استشارة علاج طبيعي",
+        "created_date": "2025-12-30T10:00:00Z"
+      },
+      {
+        "id": "b1c1d1e1-f1a1-b1c1-d1e1-f1a1b1c1d1e4",
+        "clinic_types_id": "2a3b4c5d-6e7f-8a9b-0c1d-2e2f2g2h2i2j",
+        "lang": "en",
+        "name": "PT Consultation",
+        "created_date": "2025-12-30T10:00:00Z"
+      },
+      {
+        "id": "b1c1d1e1-f1a1-b1c1-d1e1-f1a1b1c1d1e1",
+        "clinic_types_id": "1a2b3c4d-5e6f-7a8b-9c0d-1e1f1g1h1i1j",
+        "lang": "ar",
+        "name": "كشف و استشارة تخسيس",
+        "created_date": "2025-12-30T10:00:00Z"
+      },
+      {
+        "id": "b1c1d1e1-f1a1-b1c1-d1e1-f1a1b1c1d1e2",
+        "clinic_types_id": "1a2b3c4d-5e6f-7a8b-9c0d-1e1f1g1h1i1j",
+        "lang": "en",
+        "name": "Slimming Consultation",
+        "created_date": "2025-12-30T10:00:00Z"
+      },
+      {
+        "id": "7512d3f3-9546-40f2-abea-90d06d76fe3c",
+        "clinic_types_id": "c21e44b7-257e-5ec0-aaed-73b5ca1f38df",
+        "lang": "ar",
+        "name": "خطة علاجية علاج طبيعي",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "7512d3f3-9546-40f2-abea-90d06d76fe3d",
+        "clinic_types_id": "c21e44b7-257e-5ec0-aaed-73b5ca1f38df",
+        "lang": "en",
+        "name": "PT Treatment Plan",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "278548ed-f3c5-462c-b1fb-0fbf3511f0b4",
+        "clinic_types_id": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "lang": "ar",
+        "name": "خطة علاجية تخسيس",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "278548ed-f3c5-462c-b1fb-0fbf3511f0b5",
+        "clinic_types_id": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "lang": "en",
+        "name": "Slimming Treatment Plan",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      }
+    ],
+    "clinic_rooms": [
+      {
+        "id": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "branch_id": "B83BE2C8-564A-4234-8501-C4E068B4AB2C",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "room_code": "SLIM-1",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "93841a6a-8b66-5297-8953-997014e286ac",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "branch_id": "B83BE2C8-564A-4234-8501-C4E068B4AB2C",
+        "clinic_type": "c21e44b7-257e-5ec0-aaed-73b5ca1f38df",
+        "room_code": "PT-1",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_rooms_lang": [
+      {
+        "id": "40426d11-166a-4fe5-8bb4-7507e82b85fd",
+        "clinic_rooms_id": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "lang": "ar",
+        "name": "Slimming Room 1",
+        "created_date": "2025-12-17T06:10:40.221Z"
+      },
+      {
+        "id": "cf2d8e34-8872-4c9a-a86c-cf29280608b9",
+        "clinic_rooms_id": "93841a6a-8b66-5297-8953-997014e286ac",
+        "lang": "ar",
+        "name": "PT Room 1",
+        "created_date": "2025-12-17T06:10:40.221Z"
+      }
+    ],
+    "ref_week_days": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      }
+    ],
+    "ref_week_days_lang": [
+      {
+        "id": "24bd93b7-2177-426f-b9a3-2288116e1d57",
+        "ref_week_days_id": 1,
+        "lang": "ar",
+        "name": "السبت",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "a4b684ee-72b1-4837-9511-f2013de975fe",
+        "ref_week_days_id": 2,
+        "lang": "ar",
+        "name": "الأحد",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "7cd6c023-c40a-40c5-a2d4-08c4d922c567",
+        "ref_week_days_id": 3,
+        "lang": "ar",
+        "name": "الإثنين",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "8025a097-9e9e-4f8f-be43-64645341f2cc",
+        "ref_week_days_id": 4,
+        "lang": "ar",
+        "name": "الثلاثاء",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "cbfa9fb8-19de-483e-8a0d-91fab6bbee81",
+        "ref_week_days_id": 5,
+        "lang": "ar",
+        "name": "الأربعاء",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "cbf1d092-95c8-44b4-9b41-953c77fd64c7",
+        "ref_week_days_id": 6,
+        "lang": "ar",
+        "name": "الخميس",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "598b65e5-63a2-4547-b3ce-49865c07820a",
+        "ref_week_days_id": 7,
+        "lang": "ar",
+        "name": "الجمعة",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      }
+    ],
+    "clinic_room_open_hours": [
+      {
+        "id": "9271f601-6e46-5088-8db6-a9333b1b6dac",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "day": 1,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "b131e335-56e5-5221-bd41-0c0070454a74",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "day": 2,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "68b71b82-5003-5394-a63f-e79f846e138e",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "day": 3,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "fd4453f3-8a68-5ed7-987e-98a49b2f8938",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "day": 4,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "5105eb10-1ec1-5a5e-a007-f4dfa4c22d62",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "day": 5,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "8d680f1b-885a-55a6-8bb8-21d29fe1f0b1",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "day": 6,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "b3755e94-bbc6-5630-8a8f-b206d7ab2836",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "day": 7,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "245168e2-6bb4-58bc-9947-8fe0fce2f4a1",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "day": 1,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "0f333a85-3345-54b2-9e8e-6a33ab6584bc",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "day": 2,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "55d744f6-7232-5f5e-b0a4-5ef3eb728cb9",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "day": 3,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "900611bf-10b5-5dc4-ac20-4370f576f528",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "day": 4,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "474ce145-30dc-5859-a033-d68011fa9c6c",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "day": 5,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "a1924701-6094-5e2c-9957-21321e5d858d",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "day": 6,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "d61fce7b-0c02-55f0-9617-a14f57ea2574",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "day": 7,
+        "open_time": "10:00:00",
+        "close_time": "23:00:00",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      }
+    ],
+    "clinic_stations": [
+      {
+        "id": "791ad465-fd4f-5230-ac73-38088268e701",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "station_code": "PT-BED-1",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "947108ef-82c9-548c-af0d-a0e95c584907",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "station_code": "PT-BED-2",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "0f7715c0-bc6f-507b-b8fb-25a8a345e0db",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "station_code": "SLIM-BED-1",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_stations_lang": [
+      {
+        "id": "51493702-dd8f-5878-ae58-1c47038fa283",
+        "clinic_stations_id": "791ad465-fd4f-5230-ac73-38088268e701",
+        "lang": "ar",
+        "name": "سرير علاج طبيعي 1",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "a1e2cdc8-0c14-508a-88ae-bc3f4cec3eb2",
+        "clinic_stations_id": "791ad465-fd4f-5230-ac73-38088268e701",
+        "lang": "en",
+        "name": "PT Bed 1",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "e427e0a9-2a8c-5bc0-93a4-cee77ab2fed1",
+        "clinic_stations_id": "947108ef-82c9-548c-af0d-a0e95c584907",
+        "lang": "ar",
+        "name": "سرير علاج طبيعي 2",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "a96ee05d-f02c-5541-8150-61fb68d87896",
+        "clinic_stations_id": "947108ef-82c9-548c-af0d-a0e95c584907",
+        "lang": "en",
+        "name": "PT Bed 2",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "ceb3a1d8-bc4d-5a15-b01f-47d46a36e110",
+        "clinic_stations_id": "0f7715c0-bc6f-507b-b8fb-25a8a345e0db",
+        "lang": "ar",
+        "name": "سرير تخسيس 1",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "ee5d4901-41fa-5cd4-a005-ae3f56701843",
+        "clinic_stations_id": "0f7715c0-bc6f-507b-b8fb-25a8a345e0db",
+        "lang": "en",
+        "name": "Slim Bed 1",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      }
+    ],
+    "clinic_devices": [
+      {
+        "id": "cbd35891-8bc8-5abb-a219-63eea440e3cc",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "US",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "811c1004-bf37-53f0-ac91-3cb9953e2b88",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "TENS",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "c1f0c9fd-d530-5a60-b507-5b4240635972",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "EMS",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "14fa324e-a4fe-57ca-abcd-5c0baeee96fe",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "INF",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "35cf3826-0495-51c2-883a-b8f9f2a211b8",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "IR",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "d9a4f5d2-b155-5874-a7dc-c7d1bd2bc00e",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "HP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "599eb418-0f30-5da5-a63a-248df99fcb96",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "CP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "387e7aac-e838-509f-a9c3-c0e584aebd73",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "SW",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "6b65e736-edcf-59f0-8f26-f993c178a60c",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "LAS",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "0db0752f-9f01-55d5-a3e2-a4af85eaeb28",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "TEC",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "5375fb9b-cd82-5443-8fc9-fc4e9886876f",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "TRC",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "e3705b72-aead-55df-8869-da9aa3ed9265",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "MAG",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "b487f1ef-6fa2-5741-a89a-3e2fe573a3e6",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "PRESS",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "e1e555cd-ece7-5243-b759-586c7011faf1",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "MAN-MASS",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "8eaaa17f-5d78-5ecc-868d-e70739fef4d2",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "MAN-MOB",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "7d7068d5-59dc-5471-851d-04edde7c3eef",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "MAN-GUN",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "c750c889-9793-5fce-b7df-3cbab3e45b22",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "MAN-IASTM",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "fcc8f6b0-b130-575b-b216-bf321d616c1f",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "MAN-CUP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "a5b3d29c-2184-54e7-a499-b5f734ffacb5",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "MAN-NDL",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "5acd49f3-cf4e-5841-86ca-90410f6ab8af",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "MAN-TAP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "6677484b-97fe-5fb3-8cf9-0da7a4bd459e",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "MAN-EXER",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "ca19c39f-fc5b-5208-9718-023598f0eee8",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "SLM-CAV",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "b772fd1e-db49-5bfe-af96-f59d194e0cb0",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "SLM-RF",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "1d334c8f-7ee9-5a2e-b8b0-23ef8efe2a83",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "SLM-CRYO",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "9705e378-02e1-56e1-8235-a952839a602b",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "code": "SLM-LIPO",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      }
+    ],
+    "clinic_devices_lang": [
+      {
+        "id": "9cce3e82-854c-502a-a617-140ad9dab607",
+        "clinic_devices_id": "cbd35891-8bc8-5abb-a219-63eea440e3cc",
+        "lang": "ar",
+        "name": "موجات صوتية علاجية",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "f648b826-a338-5a62-86d6-39ea8b0cf89e",
+        "clinic_devices_id": "cbd35891-8bc8-5abb-a219-63eea440e3cc",
+        "lang": "en",
+        "name": "Ultrasound Therapy",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "1176bd5e-c2fa-5efb-947b-6a25aa6c6869",
+        "clinic_devices_id": "811c1004-bf37-53f0-ac91-3cb9953e2b88",
+        "lang": "ar",
+        "name": "تنبيه كهربائي (تنس - تسكين)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "9bc35bdc-6ae2-56dc-b34c-a1f660a3ef5b",
+        "clinic_devices_id": "811c1004-bf37-53f0-ac91-3cb9953e2b88",
+        "lang": "en",
+        "name": "TENS",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "cfb6d82a-ecee-5869-878a-9fb6a2931a56",
+        "clinic_devices_id": "c1f0c9fd-d530-5a60-b507-5b4240635972",
+        "lang": "ar",
+        "name": "تنبيه عضلي (فاراديك)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "69b6ab2f-aad1-5bf2-aea4-eea2a85f90a3",
+        "clinic_devices_id": "c1f0c9fd-d530-5a60-b507-5b4240635972",
+        "lang": "en",
+        "name": "EMS / Faradic",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "3a41fbce-7b50-5a56-8b05-dad1792cf7ab",
+        "clinic_devices_id": "14fa324e-a4fe-57ca-abcd-5c0baeee96fe",
+        "lang": "ar",
+        "name": "تيار تداخل (Interferential)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "32edeb08-787b-5da6-a92b-2ad9e03e890c",
+        "clinic_devices_id": "14fa324e-a4fe-57ca-abcd-5c0baeee96fe",
+        "lang": "en",
+        "name": "Interferential Current (IFC)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "b4b452be-c344-5a80-8620-656e5b5d2fc0",
+        "clinic_devices_id": "35cf3826-0495-51c2-883a-b8f9f2a211b8",
+        "lang": "ar",
+        "name": "لمبة أشعة حمراء (IR)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "89100904-b450-5538-ae2e-fed555c8b434",
+        "clinic_devices_id": "35cf3826-0495-51c2-883a-b8f9f2a211b8",
+        "lang": "en",
+        "name": "Infrared Lamp",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "f707149c-9783-5d02-ad23-258b5f6f7a25",
+        "clinic_devices_id": "d9a4f5d2-b155-5874-a7dc-c7d1bd2bc00e",
+        "lang": "ar",
+        "name": "كمادات ساخنة",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "5033eccb-91a9-550b-8cf9-5afcde7ece1c",
+        "clinic_devices_id": "d9a4f5d2-b155-5874-a7dc-c7d1bd2bc00e",
+        "lang": "en",
+        "name": "Hot Packs",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "7b30b10f-76f7-5193-92c3-875a177d38e7",
+        "clinic_devices_id": "599eb418-0f30-5da5-a63a-248df99fcb96",
+        "lang": "ar",
+        "name": "كمادات ثلج / تبريد هوائي",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "fbb3aca0-174a-514b-bb13-f639d4722b7e",
+        "clinic_devices_id": "599eb418-0f30-5da5-a63a-248df99fcb96",
+        "lang": "en",
+        "name": "Ice Packs / Cryo Air",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "389f4c75-89b3-5d7f-aec5-ad6cd2b7e3a4",
+        "clinic_devices_id": "387e7aac-e838-509f-a9c3-c0e584aebd73",
+        "lang": "ar",
+        "name": "موجات تصادمية (شوك ويف)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "4466bd73-1ab3-5a4f-a2fb-5cce9d302fb1",
+        "clinic_devices_id": "387e7aac-e838-509f-a9c3-c0e584aebd73",
+        "lang": "en",
+        "name": "Shockwave Therapy",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "f965f98d-be62-5783-9e7e-b17b719e39a4",
+        "clinic_devices_id": "6b65e736-edcf-59f0-8f26-f993c178a60c",
+        "lang": "ar",
+        "name": "ليزر عالي الشدة",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "9a0ef560-9b04-5172-91bf-a9379bd1ef52",
+        "clinic_devices_id": "6b65e736-edcf-59f0-8f26-f993c178a60c",
+        "lang": "en",
+        "name": "High Intensity Laser (HILT)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "6fd18d77-2714-5dbf-a6d5-cc8644c187e4",
+        "clinic_devices_id": "0db0752f-9f01-55d5-a3e2-a4af85eaeb28",
+        "lang": "ar",
+        "name": "تيكار (Tecar)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "df821d6c-d40f-543a-870a-61e5bd2f3da2",
+        "clinic_devices_id": "0db0752f-9f01-55d5-a3e2-a4af85eaeb28",
+        "lang": "en",
+        "name": "Tecar Therapy",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "d2528fa9-e162-5861-b6af-5d1d7b931fa1",
+        "clinic_devices_id": "5375fb9b-cd82-5443-8fc9-fc4e9886876f",
+        "lang": "ar",
+        "name": "شد فقرات (كمبيوتر)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "2aeb6168-f2c4-5707-8e46-401e5ea7b5e4",
+        "clinic_devices_id": "5375fb9b-cd82-5443-8fc9-fc4e9886876f",
+        "lang": "en",
+        "name": "Cervical/Lumbar Traction",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "8f23c011-47fd-5583-a4f0-4c7f978b40cb",
+        "clinic_devices_id": "e3705b72-aead-55df-8869-da9aa3ed9265",
+        "lang": "ar",
+        "name": "مجال مغناطيسي",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "8cd02571-f9b2-5413-9020-7d58f117e150",
+        "clinic_devices_id": "e3705b72-aead-55df-8869-da9aa3ed9265",
+        "lang": "en",
+        "name": "Magnetotherapy",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "eda544e6-5195-5ff3-94af-b1bcc1c557e2",
+        "clinic_devices_id": "b487f1ef-6fa2-5741-a89a-3e2fe573a3e6",
+        "lang": "ar",
+        "name": "جهاز ضغط هوائي (Recovery)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "ebfd58ac-d004-50eb-8602-73058ae03b33",
+        "clinic_devices_id": "b487f1ef-6fa2-5741-a89a-3e2fe573a3e6",
+        "lang": "en",
+        "name": "Pressotherapy (Air Boots)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "40258e7f-bf79-5f8d-b886-b694257505e2",
+        "clinic_devices_id": "e1e555cd-ece7-5243-b759-586c7011faf1",
+        "lang": "ar",
+        "name": "مساج علاجي يدوي",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "33617e5f-b1ef-5cb2-b9c2-e03858c38156",
+        "clinic_devices_id": "e1e555cd-ece7-5243-b759-586c7011faf1",
+        "lang": "en",
+        "name": "Manual Massage",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "62c29dd7-7f30-5ad8-905f-7cd7a50d182e",
+        "clinic_devices_id": "8eaaa17f-5d78-5ecc-868d-e70739fef4d2",
+        "lang": "ar",
+        "name": "تحريك مفاصل (Mobilization)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "9181d68c-0ced-5bcd-a888-ff0ecb746164",
+        "clinic_devices_id": "8eaaa17f-5d78-5ecc-868d-e70739fef4d2",
+        "lang": "en",
+        "name": "Joint Mobilization",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "3cae02c1-1812-50d3-ad23-0d245a958a6d",
+        "clinic_devices_id": "7d7068d5-59dc-5471-851d-04edde7c3eef",
+        "lang": "ar",
+        "name": "مساج بالمسدس (الدقاق)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "b0135be8-19ba-5eea-9f3a-90d8e6870c2a",
+        "clinic_devices_id": "7d7068d5-59dc-5471-851d-04edde7c3eef",
+        "lang": "en",
+        "name": "Percussion/Massage Gun",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "75e4e053-6b20-510d-ba2f-663e30d150e9",
+        "clinic_devices_id": "c750c889-9793-5fce-b7df-3cbab3e45b22",
+        "lang": "ar",
+        "name": "أدوات معدنية (Graston)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "16dbbc97-94e6-52ce-9d99-01dcec1b97b3",
+        "clinic_devices_id": "c750c889-9793-5fce-b7df-3cbab3e45b22",
+        "lang": "en",
+        "name": "Graston / IASTM",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "6b270cb4-8803-5953-a424-d6a230924382",
+        "clinic_devices_id": "fcc8f6b0-b130-575b-b216-bf321d616c1f",
+        "lang": "ar",
+        "name": "كاسات هواء (حجامة جافة/زحلقة)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "2c29be99-3346-535c-94e6-40fda63917ab",
+        "clinic_devices_id": "fcc8f6b0-b130-575b-b216-bf321d616c1f",
+        "lang": "en",
+        "name": "Cupping (Dry/Gliding)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "64a34014-f87f-52d0-8460-336d8b598f75",
+        "clinic_devices_id": "a5b3d29c-2184-54e7-a499-b5f734ffacb5",
+        "lang": "ar",
+        "name": "إبر جافة",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "473b581f-2ea0-539b-8496-9056c1f67a47",
+        "clinic_devices_id": "a5b3d29c-2184-54e7-a499-b5f734ffacb5",
+        "lang": "en",
+        "name": "Dry Needling",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "470db359-b77b-59e5-8858-112e10016665",
+        "clinic_devices_id": "5acd49f3-cf4e-5841-86ca-90410f6ab8af",
+        "lang": "ar",
+        "name": "لاصق طبي رياضي",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "89eafb8a-f5ab-54e2-abe2-6be1d819a8c9",
+        "clinic_devices_id": "5acd49f3-cf4e-5841-86ca-90410f6ab8af",
+        "lang": "en",
+        "name": "Kinesio Taping",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "417ef95b-50f3-5dcb-b7b1-092a5c45e0cd",
+        "clinic_devices_id": "6677484b-97fe-5fb3-8cf9-0da7a4bd459e",
+        "lang": "ar",
+        "name": "تمارين علاجية (Gym)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "148a5fb4-dc05-52f1-8de9-35ca3225d0cc",
+        "clinic_devices_id": "6677484b-97fe-5fb3-8cf9-0da7a4bd459e",
+        "lang": "en",
+        "name": "Therapeutic Exercises",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "f9cd7c85-a499-5495-8397-1f5a42f848c1",
+        "clinic_devices_id": "ca19c39f-fc5b-5208-9718-023598f0eee8",
+        "lang": "ar",
+        "name": "كافيتيشن (تفتيت دهون)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "2071b8a1-541b-59b0-874e-713b3bef425f",
+        "clinic_devices_id": "ca19c39f-fc5b-5208-9718-023598f0eee8",
+        "lang": "en",
+        "name": "Cavitation",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "c0eda923-2477-5d4d-b841-d6d00afe60f1",
+        "clinic_devices_id": "b772fd1e-db49-5bfe-af96-f59d194e0cb0",
+        "lang": "ar",
+        "name": "راديو فريكونسي (شد جلد)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "ce2450b9-eac3-5269-a2d3-f0fc9d28f856",
+        "clinic_devices_id": "b772fd1e-db49-5bfe-af96-f59d194e0cb0",
+        "lang": "en",
+        "name": "Radio Frequency (RF)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "e4bc296d-a39a-5994-a484-24fdbf0fa9bd",
+        "clinic_devices_id": "1d334c8f-7ee9-5a2e-b8b0-23ef8efe2a83",
+        "lang": "ar",
+        "name": "كرايو (تجميد دهون)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "41171f9b-bc60-5221-a155-098e135950f5",
+        "clinic_devices_id": "1d334c8f-7ee9-5a2e-b8b0-23ef8efe2a83",
+        "lang": "en",
+        "name": "Cryolipolysis",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "79ee4c94-9df9-5355-9904-eb4b46adf71a",
+        "clinic_devices_id": "9705e378-02e1-56e1-8235-a952839a602b",
+        "lang": "ar",
+        "name": "ليزر بارد للتخسيس",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "f6f18361-e26f-5ee7-b674-a1a2bf580e6b",
+        "clinic_devices_id": "9705e378-02e1-56e1-8235-a952839a602b",
+        "lang": "en",
+        "name": "Laser Lipolysis",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      }
+    ],
+    "clinic_services": [
+      {
+        "id": "46111fd8-c4dd-5cd0-aeee-9e018649ff2a",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "2a3b4c5d-6e7f-8a9b-0c1d-2e2f2g2h2i2j",
+        "service_domain": "d77b2256-0c4d-53c7-ba04-e3135e69f6b9",
+        "code": "PHY-01",
+        "base_price": 300,
+        "base_duration_minutes": 20,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Discover Physical Therapy"
+      },
+      {
+        "id": "17fa73a7-54cc-5bb8-93c2-e99c31cb78e7",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "c21e44b7-257e-5ec0-aaed-73b5ca1f38df",
+        "service_domain": "d77b2256-0c4d-53c7-ba04-e3135e69f6b9",
+        "code": "PHY-02",
+        "base_price": 500,
+        "base_duration_minutes": 60,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Physical Therapy Session 1 Part"
+      },
+      {
+        "id": "ff6a993f-8cb0-54ae-9d4c-9d8deded3c25",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "c21e44b7-257e-5ec0-aaed-73b5ca1f38df",
+        "service_domain": "d77b2256-0c4d-53c7-ba04-e3135e69f6b9",
+        "code": "PHY-03",
+        "base_price": 700,
+        "base_duration_minutes": 90,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Physical Therapy Session 2 Part"
+      },
+      {
+        "id": "e410e819-e816-57ec-b4e0-738b11903b8e",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "c21e44b7-257e-5ec0-aaed-73b5ca1f38df",
+        "service_domain": "d77b2256-0c4d-53c7-ba04-e3135e69f6b9",
+        "code": "PHY-04",
+        "base_price": 850,
+        "base_duration_minutes": 120,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Physical Therapy Session 3 Part"
+      },
+      {
+        "id": "5198e7e3-88b6-5f05-9ca7-78b091f3f7b0",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "c21e44b7-257e-5ec0-aaed-73b5ca1f38df",
+        "service_domain": "d77b2256-0c4d-53c7-ba04-e3135e69f6b9",
+        "code": "PHY-05",
+        "base_price": 1000,
+        "base_duration_minutes": 150,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Physical Therapy Session 4 Part"
+      },
+      {
+        "id": "e69e6ce3-0776-5157-9b2d-10fd8f6a9042",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "c21e44b7-257e-5ec0-aaed-73b5ca1f38df",
+        "service_domain": "d77b2256-0c4d-53c7-ba04-e3135e69f6b9",
+        "code": "PHY-SW",
+        "base_price": 600,
+        "base_duration_minutes": 15,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Shockwave"
+      },
+      {
+        "id": "dc66a28b-d658-5667-96c0-1ce85d6c4d02",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "c21e44b7-257e-5ec0-aaed-73b5ca1f38df",
+        "service_domain": "d77b2256-0c4d-53c7-ba04-e3135e69f6b9",
+        "code": "PHY-TR",
+        "base_price": 600,
+        "base_duration_minutes": 60,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Traction"
+      },
+      {
+        "id": "5bb8dd5d-0c8d-5a74-b4d1-e55b9ac97f06",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "1a2b3c4d-5e6f-7a8b-9c0d-1e1f1g1h1i1j",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-01",
+        "base_price": 500,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "كشف تغذية + InBody"
+      },
+      {
+        "id": "e4034da4-0661-5e5d-9fd4-e9844bc5a05d",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "1a2b3c4d-5e6f-7a8b-9c0d-1e1f1g1h1i1j",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-02",
+        "base_price": 150,
+        "base_duration_minutes": 20,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Weekly Follow-up"
+      },
+      {
+        "id": "f9f79ae8-abfb-5103-8eeb-11806b416c0e",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-03",
+        "base_price": 1000,
+        "base_duration_minutes": 20,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Clatue a 360 1 Session"
+      },
+      {
+        "id": "6f9d7663-15de-56d5-b409-a1bbc71af770",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-04",
+        "base_price": 5000,
+        "base_duration_minutes": 20,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "C6 = Clatue a 360 6 Session"
+      },
+      {
+        "id": "331a7543-eb02-5f3b-a1b0-d19e2157fba4",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-06",
+        "base_price": 9000,
+        "base_duration_minutes": 15,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "C12 = Clatue a 360 12 Sessions"
+      },
+      {
+        "id": "72f99859-d41b-59f0-891f-8c8a6350fb95",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-07",
+        "base_price": 1000,
+        "base_duration_minutes": 15,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "EMS"
+      },
+      {
+        "id": "5586b792-0677-5686-bd84-c24ae8b16e2d",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-08",
+        "base_price": 5500,
+        "base_duration_minutes": 45,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "EMS8 Include 8 RF + 8 Shockwave"
+      },
+      {
+        "id": "2d171a47-b150-5f80-b38f-90b09231f932",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-09",
+        "base_price": 6500,
+        "base_duration_minutes": 45,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "EMS12 Include 12 RF + 12 Shockwave"
+      },
+      {
+        "id": "c3a36e34-a01f-52ae-8c38-1de17879a439",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-10",
+        "base_price": 5000,
+        "base_duration_minutes": 45,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "MC1 = 3 Meso + 3 Clatue + 3 Cavitation + 3 Shockwave"
+      },
+      {
+        "id": "c5d3baf0-a4b9-56f6-b9c8-e12285f24302",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-11",
+        "base_price": 8500,
+        "base_duration_minutes": 45,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "MC2 = 6 Meso + 6 Clatue + 6 Cavitation + 6 Shockwave"
+      },
+      {
+        "id": "4270f893-a4dc-53f0-bddf-66604060d84a",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-12",
+        "base_price": 10000,
+        "base_duration_minutes": 45,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "MC3 = 8 Meso + 8 Clatue + 8 Cavitation + 8 Shockwave"
+      },
+      {
+        "id": "2ed1092b-c95d-5377-8733-1352e0981bb4",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-13",
+        "base_price": 12500,
+        "base_duration_minutes": 45,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "MC4 = 10 Meso + 10 Clatue + 10 Cavitation + 10 Shockwave"
+      },
+      {
+        "id": "9815a042-5e2d-56d3-9787-31d1b9400eba",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-14",
+        "base_price": 7500,
+        "base_duration_minutes": 45,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "MC5 = 3 Firming Meso + 3 Cavitation + 3 Shockwave + 8 RF"
+      },
+      {
+        "id": "ea284c40-46c5-5ae7-9abb-1b2fe7ffc9a6",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-17",
+        "base_price": 400,
+        "base_duration_minutes": 60,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Cavitation + RF + Laser"
+      },
+      {
+        "id": "b642bb5a-dde0-59c0-acf6-4b76fb462cdd",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-18",
+        "base_price": 500,
+        "base_duration_minutes": 90,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Cavitation + RF + Laser + MS"
+      },
+      {
+        "id": "555d63e5-3a18-557d-86f6-783b9797f744",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "NUT-IB",
+        "base_price": 150,
+        "base_duration_minutes": 5,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "InBody Only"
+      },
+      {
+        "id": "6ba3e248-0c65-547d-8795-80415439a165",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "SLM-LOC",
+        "base_price": 250,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Cavitation/Cryo"
+      },
+      {
+        "id": "2d3033b6-e740-5db5-b544-9a2132786605",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "SLM-MS1",
+        "base_price": 3000,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "ProSlim"
+      },
+      {
+        "id": "7ddc65d0-c8b1-53a5-9d8d-1855d3584ddb",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "SLM-MS2",
+        "base_price": 1500,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Firming 5 m"
+      },
+      {
+        "id": "f94b62fc-0541-56b5-9b00-16f8b992b467",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "SLM-MS3",
+        "base_price": 3000,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Firming 10 m"
+      },
+      {
+        "id": "3fca92ff-3f95-5f5e-a53b-0209d451f718",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "SLM-MS4",
+        "base_price": 1000,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Mesotherapy 1"
+      },
+      {
+        "id": "96725d42-e8a7-592b-8f16-852d941957c6",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "SLM-MS5",
+        "base_price": 1000,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Ozumpk"
+      },
+      {
+        "id": "90df8c8f-c547-5c2d-9215-5a438c720081",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "373470b4-6bfe-5de9-b96a-3c4e73293cb8",
+        "code": "SLM-MS6",
+        "base_price": 3500,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Ozumpk"
+      },
+      {
+        "id": "50581f51-e9ef-5721-904d-5b07c137b07c",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "bfc2753d-8520-5694-9828-6daa445d078f",
+        "code": "REC-HJM",
+        "base_price": 500,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Cupping"
+      },
+      {
+        "id": "f7fd3e57-1166-5cff-b603-cbf98d8773c0",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "bfc2753d-8520-5694-9828-6daa445d078f",
+        "code": "REC-MSG",
+        "base_price": 1750,
+        "base_duration_minutes": 75,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Massage Gun/Boots"
+      },
+      {
+        "id": "cd3bf0d0-9bc4-5135-8ed6-b0e8cb686a00",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "clinic_type": "0715dc76-870a-5418-ba1e-0ac0a0af77cf",
+        "service_domain": "bfc2753d-8520-5694-9828-6daa445d078f",
+        "code": "REC-pain",
+        "base_price": 1000,
+        "base_duration_minutes": 30,
+        "slot_minutes": 30,
+        "min_duration_with_others": null,
+        "is_package": 0,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1,
+        "default_name": "Pain Free"
+      }
+    ],
+    "clinic_services_lang": [
+      {
+        "id": "b489bf75-8464-5c6d-908e-69034bddf369",
+        "clinic_services_id": "46111fd8-c4dd-5cd0-aeee-9e018649ff2a",
+        "lang": "ar",
+        "name": "كشف وتقييم علاج طبيعي",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "05aa9e25-ce39-556e-aeba-2f6fb764889f",
+        "clinic_services_id": "46111fd8-c4dd-5cd0-aeee-9e018649ff2a",
+        "lang": "en",
+        "name": "Discover Physical Therapy",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "362a078c-cce4-5085-9053-3322f67ec7f9",
+        "clinic_services_id": "17fa73a7-54cc-5bb8-93c2-e99c31cb78e7",
+        "lang": "ar",
+        "name": "جلسة علاج طبيعي (منطقة واحدة)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "410cb494-4c78-5fdc-b50d-d32a75a70d25",
+        "clinic_services_id": "17fa73a7-54cc-5bb8-93c2-e99c31cb78e7",
+        "lang": "en",
+        "name": "Physical Therapy Session 1 Part",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "576c9022-39cd-5a4b-8c88-979ec7946016",
+        "clinic_services_id": "ff6a993f-8cb0-54ae-9d4c-9d8deded3c25",
+        "lang": "ar",
+        "name": "جلسة علاج طبيعي (منطقتين)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "22eb1ca9-5fb9-5d87-96d9-40c5efccce50",
+        "clinic_services_id": "ff6a993f-8cb0-54ae-9d4c-9d8deded3c25",
+        "lang": "en",
+        "name": "Physical Therapy Session 2 Part",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "9b0e0015-fabe-5734-a5dc-d6e9f2c92abc",
+        "clinic_services_id": "e410e819-e816-57ec-b4e0-738b11903b8e",
+        "lang": "ar",
+        "name": "جلسة علاج طبيعي (3 مناطق)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "55bec3ce-35c6-57bd-8de7-fac9672a3298",
+        "clinic_services_id": "e410e819-e816-57ec-b4e0-738b11903b8e",
+        "lang": "en",
+        "name": "Physical Therapy Session 3 Part",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "05e5e17f-4297-5748-8cf2-bac149f90cd2",
+        "clinic_services_id": "5198e7e3-88b6-5f05-9ca7-78b091f3f7b0",
+        "lang": "ar",
+        "name": "جلسة علاج طبيعي (4 مناطق)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "0e506205-716c-5510-aea6-c37c72ca438f",
+        "clinic_services_id": "5198e7e3-88b6-5f05-9ca7-78b091f3f7b0",
+        "lang": "en",
+        "name": "Physical Therapy Session 4 Part",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "2bdac783-37bd-53e7-b497-de8be00b94b0",
+        "clinic_services_id": "e69e6ce3-0776-5157-9b2d-10fd8f6a9042",
+        "lang": "ar",
+        "name": "جلسة موجات تصادمية",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "0130d2f5-038d-5236-a352-0211c67fa413",
+        "clinic_services_id": "e69e6ce3-0776-5157-9b2d-10fd8f6a9042",
+        "lang": "en",
+        "name": "Shockwave",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "f6a6e1a8-cc20-58ac-a740-04ae2d08dee8",
+        "clinic_services_id": "dc66a28b-d658-5667-96c0-1ce85d6c4d02",
+        "lang": "ar",
+        "name": "جلسة شد فقرات",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "f14a4852-52b8-510d-978d-700b2d2708f9",
+        "clinic_services_id": "dc66a28b-d658-5667-96c0-1ce85d6c4d02",
+        "lang": "en",
+        "name": "Traction",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "10831c2a-5262-5dde-bba6-7fad66163ae1",
+        "clinic_services_id": "5bb8dd5d-0c8d-5a74-b4d1-e55b9ac97f06",
+        "lang": "ar",
+        "name": "كشف تغذية + InBody",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "d24ef0f4-cced-5ef1-992c-b0c88e1d1e8d",
+        "clinic_services_id": "e4034da4-0661-5e5d-9fd4-e9844bc5a05d",
+        "lang": "ar",
+        "name": "متابعة أسبوعية + InBody",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "1b0275a3-3be2-5e2b-834b-cd7954d46cec",
+        "clinic_services_id": "e4034da4-0661-5e5d-9fd4-e9844bc5a05d",
+        "lang": "en",
+        "name": "Weekly Follow-up",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "e43b43de-ab1b-5f8d-a542-fbd96eeb874e",
+        "clinic_services_id": "f9f79ae8-abfb-5103-8eeb-11806b416c0e",
+        "lang": "en",
+        "name": "Clatue a 360 1 Session",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "9d60e9b2-15e0-55a1-b928-bbf709e5624d",
+        "clinic_services_id": "6f9d7663-15de-56d5-b409-a1bbc71af770",
+        "lang": "en",
+        "name": "C6 = Clatue a 360 6 Session",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "03552f1c-b8cc-5501-b24a-dc58bca8cf03",
+        "clinic_services_id": "331a7543-eb02-5f3b-a1b0-d19e2157fba4",
+        "lang": "en",
+        "name": "C12 = Clatue a 360 12 Sessions",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "d3c32fdb-3bf7-5a6e-b962-4ce510fc704d",
+        "clinic_services_id": "72f99859-d41b-59f0-891f-8c8a6350fb95",
+        "lang": "en",
+        "name": "EMS",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "a27f944a-b135-5874-9c54-cf81e859c91e",
+        "clinic_services_id": "5586b792-0677-5686-bd84-c24ae8b16e2d",
+        "lang": "en",
+        "name": "EMS8 Include 8 RF + 8 Shockwave",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "a55a35e4-e0e7-5ff4-90cd-0b778a15b254",
+        "clinic_services_id": "2d171a47-b150-5f80-b38f-90b09231f932",
+        "lang": "en",
+        "name": "EMS12 Include 12 RF + 12 Shockwave",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "9d530526-e1c1-5f8c-b0d8-b4acf3f5bd49",
+        "clinic_services_id": "c3a36e34-a01f-52ae-8c38-1de17879a439",
+        "lang": "en",
+        "name": "MC1 = 3 Meso + 3 Clatue + 3 Cavitation + 3 Shockwave",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "998ec392-98f2-521d-a9c7-377938700337",
+        "clinic_services_id": "c5d3baf0-a4b9-56f6-b9c8-e12285f24302",
+        "lang": "en",
+        "name": "MC2 = 6 Meso + 6 Clatue + 6 Cavitation + 6 Shockwave",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "601f10bc-16a4-528c-ad9d-19985dbbb5f5",
+        "clinic_services_id": "4270f893-a4dc-53f0-bddf-66604060d84a",
+        "lang": "en",
+        "name": "MC3 = 8 Meso + 8 Clatue + 8 Cavitation + 8 Shockwave",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "930b8f80-1b3c-5752-a89f-c3d57a56e78a",
+        "clinic_services_id": "2ed1092b-c95d-5377-8733-1352e0981bb4",
+        "lang": "en",
+        "name": "MC4 = 10 Meso + 10 Clatue + 10 Cavitation + 10 Shockwave",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "0f60c03d-7bdf-50b4-9df2-22e47425028e",
+        "clinic_services_id": "9815a042-5e2d-56d3-9787-31d1b9400eba",
+        "lang": "en",
+        "name": "MC5 = 3 Firming Meso + 3 Cavitation + 3 Shockwave + 8 RF",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "f54bb0c7-a36c-5b63-a171-a7a6e01a81ff",
+        "clinic_services_id": "ea284c40-46c5-5ae7-9abb-1b2fe7ffc9a6",
+        "lang": "en",
+        "name": "Cavitation + RF + Laser",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "73805e75-8f03-534d-be16-09a9d18d6bac",
+        "clinic_services_id": "b642bb5a-dde0-59c0-acf6-4b76fb462cdd",
+        "lang": "en",
+        "name": "Cavitation + RF + Laser + MS",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "fd00a730-36ea-59e1-9e8a-47f83e5fe1af",
+        "clinic_services_id": "555d63e5-3a18-557d-86f6-783b9797f744",
+        "lang": "ar",
+        "name": "تحليل مكونات الجسم",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "938362c1-4baa-5232-afc2-2ee302bd275f",
+        "clinic_services_id": "555d63e5-3a18-557d-86f6-783b9797f744",
+        "lang": "en",
+        "name": "InBody Only",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "f183c1fd-a24e-5abe-b749-880ce08601c8",
+        "clinic_services_id": "6ba3e248-0c65-547d-8795-80415439a165",
+        "lang": "ar",
+        "name": "جلسة أجهزة موضعية",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "fb7c5265-ffbf-59a3-b987-e02e08923075",
+        "clinic_services_id": "6ba3e248-0c65-547d-8795-80415439a165",
+        "lang": "en",
+        "name": "Cavitation/Cryo",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "17967519-0ddc-5f3b-9041-62c521342e07",
+        "clinic_services_id": "2d3033b6-e740-5db5-b544-9a2132786605",
+        "lang": "en",
+        "name": "ProSlim",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "429484eb-8454-5685-ae56-6919717c6c31",
+        "clinic_services_id": "7ddc65d0-c8b1-53a5-9d8d-1855d3584ddb",
+        "lang": "en",
+        "name": "Firming 5 m",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "5cb58ee4-86d0-59f1-a342-2c0e1aaaca5b",
+        "clinic_services_id": "f94b62fc-0541-56b5-9b00-16f8b992b467",
+        "lang": "en",
+        "name": "Firming 10 m",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "d7d7e0ef-9ff5-51e6-919c-b2e4f2df0434",
+        "clinic_services_id": "3fca92ff-3f95-5f5e-a53b-0209d451f718",
+        "lang": "en",
+        "name": "Mesotherapy 1",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "1c5ef9f8-db4f-50db-93f1-1c43ba1e59e8",
+        "clinic_services_id": "96725d42-e8a7-592b-8f16-852d941957c6",
+        "lang": "en",
+        "name": "Ozumpk",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "d6c7e20a-f118-5348-a182-a7e10a4a23c2",
+        "clinic_services_id": "90df8c8f-c547-5c2d-9215-5a438c720081",
+        "lang": "en",
+        "name": "Ozumpk",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "872735f2-0b28-53fa-8d0f-c4a655ca21a0",
+        "clinic_services_id": "50581f51-e9ef-5721-904d-5b07c137b07c",
+        "lang": "ar",
+        "name": "حجامة علاجية (كاسات هواء/دموية)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "c79ac463-1752-5ac1-a395-1e9c7287e148",
+        "clinic_services_id": "50581f51-e9ef-5721-904d-5b07c137b07c",
+        "lang": "en",
+        "name": "Cupping",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "d0357810-065b-5579-9cbc-abadd556b615",
+        "clinic_services_id": "f7fd3e57-1166-5cff-b603-cbf98d8773c0",
+        "lang": "ar",
+        "name": "جلسة ريكفري",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "82d2bb52-6ed1-5790-95b6-3dca6582eed3",
+        "clinic_services_id": "f7fd3e57-1166-5cff-b603-cbf98d8773c0",
+        "lang": "en",
+        "name": "Massage Gun/Boots",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "705fad01-9367-510e-8e45-9e91bf875226",
+        "clinic_services_id": "cd3bf0d0-9bc4-5135-8ed6-b0e8cb686a00",
+        "lang": "ar",
+        "name": "علاج الالم",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "8e6eab0d-a73c-5e8a-96eb-085d86bf575d",
+        "clinic_services_id": "cd3bf0d0-9bc4-5135-8ed6-b0e8cb686a00",
+        "lang": "en",
+        "name": "Pain Free",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      }
+    ],
+    "clinic_service_packages": [
+      {
+        "id": "6814939c-bcea-50de-8ca7-5dbf68d992cd",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "service": "17fa73a7-54cc-5bb8-93c2-e99c31cb78e7",
+        "package_code": "PHY-02_PKG",
+        "default_name": "Physical Therapy Session 1 Part Package",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "efefec30-18a3-5f5d-8871-8c36f166edb9",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "service": "ff6a993f-8cb0-54ae-9d4c-9d8deded3c25",
+        "package_code": "PHY-03_PKG",
+        "default_name": "Physical Therapy Session 2 Part Package",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "4f9be227-2f15-5bfb-881a-e25d9186192a",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "service": "e410e819-e816-57ec-b4e0-738b11903b8e",
+        "package_code": "PHY-04_PKG",
+        "default_name": "Physical Therapy Session 3 Part Package",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "4c82a7c4-efa0-5a0b-9c8c-6a40f0a21704",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "service": "5198e7e3-88b6-5f05-9ca7-78b091f3f7b0",
+        "package_code": "PHY-05_PKG",
+        "default_name": "Physical Therapy Session 4 Part Package",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "f94d798a-43d5-5199-a9c5-ecc5a4238053",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "service": "e69e6ce3-0776-5157-9b2d-10fd8f6a9042",
+        "package_code": "PHY-SW_PKG",
+        "default_name": "Shockwave Package",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      }
+    ],
+    "clinic_service_packages_lang": [
+      {
+        "id": "9fec9b9a-a38a-5bd4-87f4-ade84c006133",
+        "clinic_service_packages_id": "6814939c-bcea-50de-8ca7-5dbf68d992cd",
+        "lang": "ar",
+        "name": "باقة جلسة علاج طبيعي (منطقة واحدة)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "16ae8782-afde-5962-a6f2-7b4157836a53",
+        "clinic_service_packages_id": "6814939c-bcea-50de-8ca7-5dbf68d992cd",
+        "lang": "en",
+        "name": "Physical Therapy Session 1 Part Package",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "1408c9ff-14af-5b29-b0e9-fe548692cfd2",
+        "clinic_service_packages_id": "efefec30-18a3-5f5d-8871-8c36f166edb9",
+        "lang": "ar",
+        "name": "باقة جلسة علاج طبيعي (منطقتين)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "2b467d04-eb02-5f3c-a2eb-baeec1614e2d",
+        "clinic_service_packages_id": "efefec30-18a3-5f5d-8871-8c36f166edb9",
+        "lang": "en",
+        "name": "Physical Therapy Session 2 Part Package",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "1750c528-d82c-57fc-b47f-fea84c2c463b",
+        "clinic_service_packages_id": "4f9be227-2f15-5bfb-881a-e25d9186192a",
+        "lang": "ar",
+        "name": "باقة جلسة علاج طبيعي (3 مناطق)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "3c0af866-8951-55cd-ba64-45bdba1d825b",
+        "clinic_service_packages_id": "4f9be227-2f15-5bfb-881a-e25d9186192a",
+        "lang": "en",
+        "name": "Physical Therapy Session 3 Part Package",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "85b7fe86-a5df-5aad-a0c9-913652356618",
+        "clinic_service_packages_id": "4c82a7c4-efa0-5a0b-9c8c-6a40f0a21704",
+        "lang": "ar",
+        "name": "باقة جلسة علاج طبيعي (4 مناطق)",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "978a8d3d-d244-511f-9d87-32b4a95d1535",
+        "clinic_service_packages_id": "4c82a7c4-efa0-5a0b-9c8c-6a40f0a21704",
+        "lang": "en",
+        "name": "Physical Therapy Session 4 Part Package",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "58fc5bbe-949d-5ecc-b086-d5cec34ac78d",
+        "clinic_service_packages_id": "f94d798a-43d5-5199-a9c5-ecc5a4238053",
+        "lang": "ar",
+        "name": "باقة جلسة موجات تصادمية",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "e7be3bd7-9c31-5833-b33f-7823f68f97c8",
+        "clinic_service_packages_id": "f94d798a-43d5-5199-a9c5-ecc5a4238053",
+        "lang": "en",
+        "name": "Shockwave Package",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      }
+    ],
+    "clinic_service_package_tiers": [
+      {
+        "id": "9af90d55-b68b-5a2b-871f-50760f0cd7f8",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "package": "6814939c-bcea-50de-8ca7-5dbf68d992cd",
+        "tier_code": "PHY-02_6",
+        "sessions_count": 6,
+        "price_per_session": 450,
+        "price_total": 2700,
+        "discount_percent": 10,
+        "default_name": "6 Sessions - 2700 EGP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "578a9bcc-2e24-54c8-a8c6-45805b419a2d",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "package": "6814939c-bcea-50de-8ca7-5dbf68d992cd",
+        "tier_code": "PHY-02_12",
+        "sessions_count": 12,
+        "price_per_session": 416.6666666666667,
+        "price_total": 5000,
+        "discount_percent": 16.67,
+        "default_name": "12 Sessions - 5000 EGP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "bf45323c-7da0-55d4-8313-1f808b03c5c5",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "package": "efefec30-18a3-5f5d-8871-8c36f166edb9",
+        "tier_code": "PHY-03_6",
+        "sessions_count": 6,
+        "price_per_session": 666.6666666666666,
+        "price_total": 4000,
+        "discount_percent": 4.76,
+        "default_name": "6 Sessions - 4000 EGP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "518fe6db-751a-5273-9256-c30359e49220",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "package": "efefec30-18a3-5f5d-8871-8c36f166edb9",
+        "tier_code": "PHY-03_12",
+        "sessions_count": 12,
+        "price_per_session": 583.3333333333334,
+        "price_total": 7000,
+        "discount_percent": 16.67,
+        "default_name": "12 Sessions - 7000 EGP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "d92fe40f-d3ef-52ab-9baf-92c6bef7b3ea",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "package": "4f9be227-2f15-5bfb-881a-e25d9186192a",
+        "tier_code": "PHY-04_6",
+        "sessions_count": 6,
+        "price_per_session": 708.3333333333334,
+        "price_total": 4250,
+        "discount_percent": 16.67,
+        "default_name": "6 Sessions - 4250 EGP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "47026699-8261-5fb8-8699-d23b4f52c854",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "package": "4f9be227-2f15-5bfb-881a-e25d9186192a",
+        "tier_code": "PHY-04_12",
+        "sessions_count": 12,
+        "price_per_session": 666.6666666666666,
+        "price_total": 8000,
+        "discount_percent": 21.57,
+        "default_name": "12 Sessions - 8000 EGP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "6d73c88c-345b-58bd-9dd1-c3d34a43a216",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "package": "4c82a7c4-efa0-5a0b-9c8c-6a40f0a21704",
+        "tier_code": "PHY-05_6",
+        "sessions_count": 6,
+        "price_per_session": 833.3333333333334,
+        "price_total": 5000,
+        "discount_percent": 16.67,
+        "default_name": "6 Sessions - 5000 EGP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "5ce4f5e0-f1bb-5e15-a4dd-f49e3e8bf345",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "package": "4c82a7c4-efa0-5a0b-9c8c-6a40f0a21704",
+        "tier_code": "PHY-05_12",
+        "sessions_count": 12,
+        "price_per_session": 791.6666666666666,
+        "price_total": 9500,
+        "discount_percent": 20.83,
+        "default_name": "12 Sessions - 9500 EGP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "b6b3da33-9891-50a7-84b4-59e7a980bc57",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "package": "f94d798a-43d5-5199-a9c5-ecc5a4238053",
+        "tier_code": "PHY-SW_6",
+        "sessions_count": 6,
+        "price_per_session": 500,
+        "price_total": 3000,
+        "discount_percent": 16.67,
+        "default_name": "6 Sessions - 3000 EGP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      },
+      {
+        "id": "97d43a3f-0e86-5e1a-b4e8-312336f7d5ba",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "package": "f94d798a-43d5-5199-a9c5-ecc5a4238053",
+        "tier_code": "PHY-SW_12",
+        "sessions_count": 12,
+        "price_per_session": 500,
+        "price_total": 6000,
+        "discount_percent": 16.67,
+        "default_name": "12 Sessions - 6000 EGP",
+        "is_active": 1,
+        "begin_date": "2025-12-16T10:00:00"
+      }
+    ],
+    "clinic_service_package_tiers_lang": [
+      {
+        "id": "d9015c3c-5522-540f-bbae-89f11edde6e3",
+        "clinic_service_package_tiers_id": "9af90d55-b68b-5a2b-871f-50760f0cd7f8",
+        "lang": "ar",
+        "name": "6 جلسات - الإجمالي 2700 ج",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "e34a9f07-6f23-57d5-a2e3-4223ca57d28f",
+        "clinic_service_package_tiers_id": "9af90d55-b68b-5a2b-871f-50760f0cd7f8",
+        "lang": "en",
+        "name": "6 Sessions - Total 2700 EGP",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "b87d1e18-5e93-5801-a752-bdddf5923e25",
+        "clinic_service_package_tiers_id": "578a9bcc-2e24-54c8-a8c6-45805b419a2d",
+        "lang": "ar",
+        "name": "12 جلسات - الإجمالي 5000 ج",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "2a350710-85f8-53cc-a92d-560dd620c269",
+        "clinic_service_package_tiers_id": "578a9bcc-2e24-54c8-a8c6-45805b419a2d",
+        "lang": "en",
+        "name": "12 Sessions - Total 5000 EGP",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "3111b1ba-8053-50b4-870e-f39580b5f38e",
+        "clinic_service_package_tiers_id": "bf45323c-7da0-55d4-8313-1f808b03c5c5",
+        "lang": "ar",
+        "name": "6 جلسات - الإجمالي 4000 ج",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "e8ba5d7f-cb36-5d0c-b6a5-5ff6d33f04ec",
+        "clinic_service_package_tiers_id": "bf45323c-7da0-55d4-8313-1f808b03c5c5",
+        "lang": "en",
+        "name": "6 Sessions - Total 4000 EGP",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "8a1fb373-9723-5227-9735-d2cfc40914db",
+        "clinic_service_package_tiers_id": "518fe6db-751a-5273-9256-c30359e49220",
+        "lang": "ar",
+        "name": "12 جلسات - الإجمالي 7000 ج",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "eb26a85c-912e-52d0-becd-3552604a8bf3",
+        "clinic_service_package_tiers_id": "518fe6db-751a-5273-9256-c30359e49220",
+        "lang": "en",
+        "name": "12 Sessions - Total 7000 EGP",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "6bba051f-4bb1-5a8e-8668-2c3b61bc1d57",
+        "clinic_service_package_tiers_id": "d92fe40f-d3ef-52ab-9baf-92c6bef7b3ea",
+        "lang": "ar",
+        "name": "6 جلسات - الإجمالي 4250 ج",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "f1bc2dba-cb57-59fe-b064-4ddf1175b95a",
+        "clinic_service_package_tiers_id": "d92fe40f-d3ef-52ab-9baf-92c6bef7b3ea",
+        "lang": "en",
+        "name": "6 Sessions - Total 4250 EGP",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "809e13e2-5831-56eb-b975-c8b7bc825842",
+        "clinic_service_package_tiers_id": "47026699-8261-5fb8-8699-d23b4f52c854",
+        "lang": "ar",
+        "name": "12 جلسات - الإجمالي 8000 ج",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "11f8d464-529c-5328-8afe-e094a6dec908",
+        "clinic_service_package_tiers_id": "47026699-8261-5fb8-8699-d23b4f52c854",
+        "lang": "en",
+        "name": "12 Sessions - Total 8000 EGP",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "4c4a93e0-97b7-5d5c-8b84-096159653fae",
+        "clinic_service_package_tiers_id": "6d73c88c-345b-58bd-9dd1-c3d34a43a216",
+        "lang": "ar",
+        "name": "6 جلسات - الإجمالي 5000 ج",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "25c7dcda-960e-5e46-ad8a-ba6f4c9b4b2e",
+        "clinic_service_package_tiers_id": "6d73c88c-345b-58bd-9dd1-c3d34a43a216",
+        "lang": "en",
+        "name": "6 Sessions - Total 5000 EGP",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "e5c4535b-1d0c-53d2-be73-180263c9df85",
+        "clinic_service_package_tiers_id": "5ce4f5e0-f1bb-5e15-a4dd-f49e3e8bf345",
+        "lang": "ar",
+        "name": "12 جلسات - الإجمالي 9500 ج",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "b19f977a-c30a-5b87-9ac4-7c10fe400f48",
+        "clinic_service_package_tiers_id": "5ce4f5e0-f1bb-5e15-a4dd-f49e3e8bf345",
+        "lang": "en",
+        "name": "12 Sessions - Total 9500 EGP",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "e22117bf-3ce2-5900-9aeb-6732cbc1d36f",
+        "clinic_service_package_tiers_id": "b6b3da33-9891-50a7-84b4-59e7a980bc57",
+        "lang": "ar",
+        "name": "6 جلسات - الإجمالي 3000 ج",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "132e0b9b-462a-5dd5-a96d-e60d80834ed2",
+        "clinic_service_package_tiers_id": "b6b3da33-9891-50a7-84b4-59e7a980bc57",
+        "lang": "en",
+        "name": "6 Sessions - Total 3000 EGP",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "084d4977-513c-52bf-b226-cfc47554196f",
+        "clinic_service_package_tiers_id": "97d43a3f-0e86-5e1a-b4e8-312336f7d5ba",
+        "lang": "ar",
+        "name": "12 جلسات - الإجمالي 6000 ج",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "6938e410-d503-57e1-aff5-9de2fd2c66a2",
+        "clinic_service_package_tiers_id": "97d43a3f-0e86-5e1a-b4e8-312336f7d5ba",
+        "lang": "en",
+        "name": "12 Sessions - Total 6000 EGP",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      }
+    ],
+    "clinic_doctors": [
+      {
+        "id": "119d08de-8770-5a6a-8a5c-af5a513efb4b",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "user": "9838c784-b204-5706-a860-6507797793e7",
+        "specialty": "6069e5c5-46f6-5019-8679-0c9b81b906ff",
+        "default_room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "default_name": "Dr. Marwa Hussein",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "8319a0e6-b99f-58d0-90c2-ec5444b44384",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "user": "b7792a61-1697-50d1-9a8e-6c4d5706a1fd",
+        "specialty": "6069e5c5-46f6-5019-8679-0c9b81b906ff",
+        "default_room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "default_name": "Dr. Reem",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "482ddf2d-a501-5f6d-87e4-2784ebb912a9",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "user": "d6b32144-7230-5f6b-86e6-1026463396c3",
+        "specialty": "6069e5c5-46f6-5019-8679-0c9b81b906ff",
+        "default_room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "default_name": "Dr. Maryam 1",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "358a904e-85a7-5774-814c-b95148aa6fdf",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "user": "dc13b8dc-0da3-50a8-ac03-0aed6c5a77d2",
+        "specialty": "6069e5c5-46f6-5019-8679-0c9b81b906ff",
+        "default_room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "default_name": "Maryam 2",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "24dfb889-0f70-5ebf-8c1a-10a07298551d",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "user": "c84b3f67-813d-5e1d-8d53-46b7e5decbd6",
+        "specialty": "6069e5c5-46f6-5019-8679-0c9b81b906ff",
+        "default_room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "default_name": "Dr. Menna",
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_doctor_schedule_templates": [
+      {
+        "id": "9c38cb03-400d-5c71-8c8b-f6ed84ce7348",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "doctor": "119d08de-8770-5a6a-8a5c-af5a513efb4b",
+        "valid_from": "2025-01-01",
+        "is_default": 1,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "f63fe99f-46bc-5e13-b300-43c3989d8f9e",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "doctor": "8319a0e6-b99f-58d0-90c2-ec5444b44384",
+        "valid_from": "2025-01-01",
+        "is_default": 1,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "7cf3c311-68ee-55d4-9e5a-c77f9c458afa",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "doctor": "482ddf2d-a501-5f6d-87e4-2784ebb912a9",
+        "valid_from": "2025-01-01",
+        "is_default": 1,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "2563dba5-13dd-5d25-a898-b4b4a0d7a2e1",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "doctor": "358a904e-85a7-5774-814c-b95148aa6fdf",
+        "valid_from": "2025-01-01",
+        "is_default": 1,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      },
+      {
+        "id": "d057a3c1-c579-5bea-986e-efae2e6c4a93",
+        "company_id": "35BA090E-2828-41ED-9C66-054979646F36",
+        "doctor": "24dfb889-0f70-5ebf-8c1a-10a07298551d",
+        "valid_from": "2025-01-01",
+        "is_default": 1,
+        "begin_date": "2025-12-16T10:00:00",
+        "is_active": 1
+      }
+    ],
+    "clinic_doctor_schedule_templates_lang": [
+      {
+        "id": "78d30d56-c51f-5f88-af93-cd723bd7ade5",
+        "clinic_doctor_schedule_templates_id": "9c38cb03-400d-5c71-8c8b-f6ed84ce7348",
+        "lang": "ar",
+        "name": "مواعيد مروة",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "1cc64b15-0a8f-53de-84c2-64ccfa837ed1",
+        "clinic_doctor_schedule_templates_id": "9c38cb03-400d-5c71-8c8b-f6ed84ce7348",
+        "lang": "en",
+        "name": "Marwa Schedule",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "f955a76b-dd9a-51e9-92a8-1a760ad0035e",
+        "clinic_doctor_schedule_templates_id": "f63fe99f-46bc-5e13-b300-43c3989d8f9e",
+        "lang": "ar",
+        "name": "مواعيد ريم",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "02c9b7c8-4718-5d2c-95c8-1b60cc5cdc4c",
+        "clinic_doctor_schedule_templates_id": "f63fe99f-46bc-5e13-b300-43c3989d8f9e",
+        "lang": "en",
+        "name": "Reem Schedule",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "e799a098-188e-518c-a751-6b297e0b3b01",
+        "clinic_doctor_schedule_templates_id": "7cf3c311-68ee-55d4-9e5a-c77f9c458afa",
+        "lang": "ar",
+        "name": "مواعيد مريم 1",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "5032efed-d8d9-5a29-bc2e-1401a17416b9",
+        "clinic_doctor_schedule_templates_id": "7cf3c311-68ee-55d4-9e5a-c77f9c458afa",
+        "lang": "en",
+        "name": "Maryam 1 Schedule",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "eece4497-e17c-5091-a260-5a40ddd05ce6",
+        "clinic_doctor_schedule_templates_id": "2563dba5-13dd-5d25-a898-b4b4a0d7a2e1",
+        "lang": "ar",
+        "name": "مواعيد مريم 2",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "170a4b75-4690-5b05-824a-1e803a11f9d0",
+        "clinic_doctor_schedule_templates_id": "2563dba5-13dd-5d25-a898-b4b4a0d7a2e1",
+        "lang": "en",
+        "name": "Maryam 2 Schedule",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "7b8250f9-949a-5761-a92e-de6ed73d43cc",
+        "clinic_doctor_schedule_templates_id": "d057a3c1-c579-5bea-986e-efae2e6c4a93",
+        "lang": "ar",
+        "name": "مواعيد منة",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      },
+      {
+        "id": "3feacff8-4505-53ad-8d90-197d1a6f0437",
+        "clinic_doctor_schedule_templates_id": "d057a3c1-c579-5bea-986e-efae2e6c4a93",
+        "lang": "en",
+        "name": "Menna Schedule",
+        "created_date": "2025-12-17T06:10:40.220Z"
+      }
+    ],
+    "clinic_doctor_schedule_template_lines": [
+      {
+        "id": "59de3435-ad4f-5969-ae98-2be76402eaf7",
+        "template": "9c38cb03-400d-5c71-8c8b-f6ed84ce7348",
+        "day": 1,
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "shift_start": "17:00:00",
+        "shift_end": "21:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "1834622e-8db5-5130-a499-7a265dea4243",
+        "template": "9c38cb03-400d-5c71-8c8b-f6ed84ce7348",
+        "day": 3,
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "shift_start": "17:00:00",
+        "shift_end": "21:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "5f4b23bf-35a6-5cde-94fe-3ad89b372fea",
+        "template": "9c38cb03-400d-5c71-8c8b-f6ed84ce7348",
+        "day": 5,
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "shift_start": "17:00:00",
+        "shift_end": "21:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "89443c26-82af-5566-8e97-ff152e278fc4",
+        "template": "9c38cb03-400d-5c71-8c8b-f6ed84ce7348",
+        "day": 6,
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "shift_start": "17:00:00",
+        "shift_end": "21:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "a7beb95f-7d3c-5b66-9703-d8250378945b",
+        "template": "f63fe99f-46bc-5e13-b300-43c3989d8f9e",
+        "day": 2,
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "shift_start": "14:00:00",
+        "shift_end": "20:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "385e3576-c831-5cb5-ade4-7b942af6adc0",
+        "template": "f63fe99f-46bc-5e13-b300-43c3989d8f9e",
+        "day": 4,
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "shift_start": "14:00:00",
+        "shift_end": "20:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "afdf2747-31fd-5a85-a824-c0bef47c3f08",
+        "template": "f63fe99f-46bc-5e13-b300-43c3989d8f9e",
+        "day": 6,
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "shift_start": "14:00:00",
+        "shift_end": "20:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "76322afb-9935-57b7-9315-b22f115f6539",
+        "template": "7cf3c311-68ee-55d4-9e5a-c77f9c458afa",
+        "day": 1,
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "shift_start": "13:00:00",
+        "shift_end": "18:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "8ad28734-603f-514c-b02c-6f8d1dbdf1aa",
+        "template": "7cf3c311-68ee-55d4-9e5a-c77f9c458afa",
+        "day": 3,
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "shift_start": "13:00:00",
+        "shift_end": "18:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "00c05eed-b6ec-5abf-834c-62adf3bf9e55",
+        "template": "7cf3c311-68ee-55d4-9e5a-c77f9c458afa",
+        "day": 5,
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "shift_start": "13:00:00",
+        "shift_end": "18:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "443a964c-a353-5b42-9311-15e863713fe2",
+        "template": "2563dba5-13dd-5d25-a898-b4b4a0d7a2e1",
+        "day": 1,
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "shift_start": "17:00:00",
+        "shift_end": "23:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "f18a3128-bfa9-5dfc-bd0f-f0b66d468acc",
+        "template": "2563dba5-13dd-5d25-a898-b4b4a0d7a2e1",
+        "day": 3,
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "shift_start": "17:00:00",
+        "shift_end": "23:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "b023e272-6121-5e8d-b411-96b94552e68c",
+        "template": "2563dba5-13dd-5d25-a898-b4b4a0d7a2e1",
+        "day": 5,
+        "room": "93841a6a-8b66-5297-8953-997014e286ac",
+        "shift_start": "17:00:00",
+        "shift_end": "23:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "1b0cf8cb-fa93-55b8-b234-77da5d7b287a",
+        "template": "d057a3c1-c579-5bea-986e-efae2e6c4a93",
+        "day": 2,
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "shift_start": "16:00:00",
+        "shift_end": "22:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "f78368b9-ae71-5c68-9c1b-e99ef9c4b485",
+        "template": "d057a3c1-c579-5bea-986e-efae2e6c4a93",
+        "day": 4,
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "shift_start": "16:00:00",
+        "shift_end": "22:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      },
+      {
+        "id": "2c74260a-acbe-5bd3-8673-d612f2d405bd",
+        "template": "d057a3c1-c579-5bea-986e-efae2e6c4a93",
+        "day": 6,
+        "room": "3869d3bd-4f8f-5488-9826-b7aa64743ee4",
+        "shift_start": "16:00:00",
+        "shift_end": "22:00:00",
+        "slot_minutes_override": 30,
+        "is_active": 1
+      }
+    ]
+  }
+}

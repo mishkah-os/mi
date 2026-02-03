@@ -1,0 +1,199 @@
+<style>
+    .bt_bb_column_content {
+        direction: rtl;
+    }
+    .btArticleCategories:before {
+    font-family: FontAwesome;
+    margin: 0;
+    display: inline-block;
+    font-size: 1rem;
+    -webkit-transition: color 200msease;
+    -moz-transition: color 200ms ease;
+    transition: color 200msease;
+   
+}
+.btWithSidebar .btContentHolder .btContent {
+    width: 100%;
+}
+.btArticleComments:before {
+    font-family: FontAwesome;
+    margin: 0;
+    display: inline-block;
+    font-size: 1rem;
+    -webkit-transition: color 200msease;
+    -moz-transition: color 200ms ease;
+    transition: color 200msease;
+
+}
+
+@media (max-width: 768px) {
+    .bt_bb_column {
+        width: 100% !important;
+        
+        padding: 10px;
+        max-width:100% !important
+    }
+
+    .bt_bb_headline_subheadline {
+        font-size: 1.1em;
+        line-height: 1.6em;
+    }
+
+    .bt_bb_icon {
+        margin-bottom: 10px;
+    }
+
+    .bt_bb_headline h2 {
+        font-size: 1.5em;
+    }
+}
+@media (max-width: 480px) {
+    .bt_bb_headline_subheadline {
+        text-align: center !important;
+        padding: 0 15px;
+    }
+    .head{
+    text-align:center !important
+    }
+    .bt_bb_column_content_inner {
+        padding: 0 10px;
+    }
+}
+
+</style>
+<div class="btContentWrap btClear">
+    <section
+        class="bt_bb_section gutter bt_bb_vertical_align_top btPageHeadline bt_bb_background_image bt_bb_background_overlay_light_solid bt_bb_parallax btLightSkin "
+        style="background-image:url(https://celeste.bold-themes.com/main-demo/wp-content/uploads/sites/3/2016/07/bg-headline-01.jpg)"
+        data-parallax="0.8" data-parallax-offset="-200">
+        <div class="bt_bb_port port">
+            <div class="bt_bb_cell">
+                <div class="bt_bb_cell_inner">
+                    <div class="bt_bb_row">
+                        <div class="bt_bb_column">
+                            <div class="bt_bb_column_content">
+                                <header
+                                    class="bt_bb_headline bt_bb_dash_bottom bt_bb_superheadline bt_bb_subheadline bt_bb_size_large head"
+                                    data-bt-override-class="null" style="text-align: center !important;">
+                                   
+                                    <h1><span class="bt_bb_headline_content"><span>مدونه</span></span></h1>
+                                    
+                                </header>
+                            </div><!-- /rowItemContent -->
+                        </div><!-- /rowItem -->
+                    </div><!-- /boldRow -->
+                </div><!-- boldCellInner -->
+            </div><!-- boldCell -->
+        </div><!-- port -->
+    </section>
+    <div class="btContentHolder" style="direction: rtl;">
+
+        <div class="btContent" >
+            <article id="Article"
+                class="btPostSingleItemStandard btPostListStandard gutter btArticleListItem animate bt_bb_animation_fade_in bt_bb_animation_move_up btHasAuthorInfo post-2759 post type-post status-publish format-standard has-post-thumbnail hentry category-life tag-business tag-life tag-procrastination">
+                
+                       <!--<div class="articleSideGutter">
+                            <div class="asgItem avatar"><a
+                                    href="https://celeste.bold-themes.com/main-demo/author/celeste/"><img alt=''
+                                        src='https://secure.gravatar.com/avatar/46df469fe889ce5b252c36e57f982f57?s=144&#038;d=mm&#038;r=g'
+                                        class='avatar avatar-144 photo' height='144' width='144' /></a></div>
+                            <div class="asgItem title"><span><span class="btArticleAuthor"><a
+                                            href="https://celeste.bold-themes.com/main-demo/author/celeste/"
+                                            class="btArticleAuthorURL">by Celeste Miller</a></span></span></div>
+                            <div class="asgItem date"><small>January 12, 2018</small></div>
+                        </div>--> 
+                        
+                    </div><!-- /btContent -->
+                </div><!-- /port -->
+            </article>
+            <div class="btPagination boldSection gutter ">
+                <div class="port">
+                    <div class="paging onRight">
+                        <p class="pageNext"><a href="https://celeste.bold-themes.com/main-demo/blog/page/2/">Older
+                                Posts</a></p>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /boldthemes_content -->
+       
+    </div><!-- /contentHolder -->
+
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+<script>
+    var company_id='D0641A94-1463-4E2B-9180-ABD6BBCF955F';
+   var post_category='12b89a65d3d640fda89969093ca5409b';
+      get_user_profile()
+      function get_user_profile() {
+  $.post("../../r/j", { tb: "coach_life_get_post", tbtype: "view",cols:"ID,main_photo,title,post_details,company_id,post_category,post_outline",parm:"('"+company_id+"','"+post_category+"')" },
+function (data) {
+console.log(data);
+    data.forEach(e => {
+ $("#Article").append(`
+ <div class="port">
+<div class="btArticleContentHolder" >
+<div class="btArticleMedia " >
+                            <div class="btMediaBox"><img
+                                    src= ${e.main_photo}
+                                    alt="" /></div>
+                        </div><!-- /btArticleMedia -->
+                        <div class="btArticleHeadline">
+                            <header class="bt_bb_headline bt_bb_dash_bottom bt_bb_superheadline bt_bb_size_medium"
+                                data-bt-override-class="null">
+                                <div class="bt_bb_headline_superheadline_outside"><span
+                                        class="bt_bb_headline_superheadline"><span class="btArticleCategories"><a
+                                                href=""
+                                                class="btArticleCategory life">Life</a></span><a
+                                            href=""
+                                            class="btArticleComments">0</a></span></div>
+                                <h2><span class="bt_bb_headline_content"><span><a
+                                                href="/WEB/index?id=9cd9a4d8025046e78457778c36a1f56dsingle_blog&blog_id=${e.ID}"
+                                                target="_self" >${e.title}</a></span></span></h2>
+                            </header>
+                        </div><!-- /btArticleHeadline -->
+                        <div class="btArticleContent">
+                            <p>${e.post_outline}</p>
+                        </div>
+                        <div class="btArticleShareEtc">
+                            <div class="btShareColumn">
+                                <div
+                                    class="bt_bb_icon btIcoFacebook bt_bb_style_filled bt_bb_size_xsmall bt_bb_shape_circle">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://celeste.bold-themes.com/main-demo/2018/01/12/thoughts-on-procrastination/"
+                                        target="_self" data-ico-fa="&#xf09a;" class="bt_bb_icon_holder"></a></div>
+                                <div
+                                    class="bt_bb_icon btIcoTwitter bt_bb_style_filled bt_bb_size_xsmall bt_bb_shape_circle">
+                                    <a href="https://twitter.com/intent/tweet?text=https://celeste.bold-themes.com/main-demo/2018/01/12/thoughts-on-procrastination/"
+                                        target="_self" data-ico-fa="&#xf099;" class="bt_bb_icon_holder"></a></div>
+                                <div
+                                    class="bt_bb_icon btIcoLinkedin bt_bb_style_filled bt_bb_size_xsmall bt_bb_shape_circle">
+                                    <a href="https://www.linkedin.com/shareArticle?url=https://celeste.bold-themes.com/main-demo/2018/01/12/thoughts-on-procrastination/"
+                                        target="_self" data-ico-fa="&#xf0e1;" class="bt_bb_icon_holder"></a></div>
+                            </div><!-- /btTags -->
+                           <div class="btReadMoreColumn">
+                           <div class="bt_bb_button bt_bb_icon_position_right bt_bb_style_filled bt_bb_size_normal" data-bt-override-class="{}">
+                           <a href="/WEB/index?id=9cd9a4d8025046e78457778c36a1f56dsingle_blog&blog_id=${e.ID}" target="_self" class="bt_bb_link" title="CONTINUE READING">
+                            <span data-ico-fa="" class="bt_bb_icon_holder" style="display: contents;"></span>
+                           <span class="bt_bb_button_text"> قراه المزيد</span>
+                          </a></div></div>
+                        </div><!-- /btArticleShareEtc -->
+`);})
+ });
+}
+</script>
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var body = document.body;
+        var classesToAdd = "blog theme-celeste bt_bb_plugin_active bt_bb_fe_preview_toggle woocommerce-no-js btHeadingStyle_default btMenuRightEnabled btStickyEnabled btLightSkin btBelowMenu noBodyPreloader btSquareButtons btTransparentDarkHeader btWithSidebar btSidebarRight";
+        classesToAdd.split(" ").forEach(function (cls) {
+            if (!body.classList.contains(cls)) {
+                body.classList.add(cls);
+            }
+        });
+    });
+
+</script>

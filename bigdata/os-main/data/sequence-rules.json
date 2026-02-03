@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "defaults": {
+    "clinic": {
+      "branches": {
+        "code": {
+          "prefix": "BR",
+          "start": 1,
+          "padding": 4,
+          "delimiter": "-"
+        }
+      },
+      "clinic_patients": {
+        "patient_code": {
+          "prefix": "PAT",
+          "start": 1,
+          "padding": 5,
+          "delimiter": "-"
+        }
+      },
+      "clinic_service_domains": {
+        "code": {
+          "prefix": "DOM",
+          "start": 1,
+          "padding": 3,
+          "delimiter": "-"
+        }
+      },
+      "clinic_services": {
+        "code": {
+          "prefix": "SRV",
+          "start": 1,
+          "padding": 4,
+          "delimiter": "-"
+        }
+      },
+      "clinic_devices": {
+        "code": {
+          "prefix": "DEV",
+          "start": 1,
+          "padding": 4,
+          "delimiter": "-"
+        }
+      },
+      "clinic_items": {
+        "code": {
+          "prefix": "ITM",
+          "start": 1,
+          "padding": 4,
+          "delimiter": "-"
+        }
+      },
+      "clinic_rooms": {
+        "room_code": {
+          "prefix": "ROOM",
+          "start": 1,
+          "padding": 3,
+          "delimiter": "-"
+        }
+      },
+      "clinic_stations": {
+        "station_code": {
+          "prefix": "STN",
+          "start": 1,
+          "padding": 4,
+          "delimiter": "-"
+        }
+      },
+      "ref_genders": {
+        "code": {
+          "prefix": "GEN",
+          "start": 1,
+          "padding": 2,
+          "delimiter": "-"
+        }
+      },
+      "clinic_activity_factors": {
+        "code": {
+          "prefix": "ACT",
+          "start": 1,
+          "padding": 3,
+          "delimiter": "-"
+        }
+      },
+      "clinic_occupations": {
+        "code": {
+          "prefix": "OCC",
+          "start": 1,
+          "padding": 3,
+          "delimiter": "-"
+        }
+      },
+      "clinic_marital_statuses": {
+        "code": {
+          "prefix": "MAR",
+          "start": 1,
+          "padding": 3,
+          "delimiter": "-"
+        }
+      },
+      "clinic_food_addiction_types": {
+        "code": {
+          "prefix": "FAD",
+          "start": 1,
+          "padding": 3,
+          "delimiter": "-"
+        }
+      },
+      "clinic_complaint_types": {
+        "code": {
+          "prefix": "CPT",
+          "start": 1,
+          "padding": 3,
+          "delimiter": "-"
+        }
+      },
+      "clinic_medical_conditions": {
+        "code": {
+          "prefix": "MEDC",
+          "start": 1,
+          "padding": 4,
+          "delimiter": "-"
+        }
+      },
+      "clinic_medications": {
+        "code": {
+          "prefix": "MEDI",
+          "start": 1,
+          "padding": 4,
+          "delimiter": "-"
+        }
+      },
+      "clinic_surgery_types": {
+        "code": {
+          "prefix": "SURG",
+          "start": 1,
+          "padding": 4,
+          "delimiter": "-"
+        }
+      },
+      "clinic_measurement_types": {
+        "code": {
+          "prefix": "MSR",
+          "start": 1,
+          "padding": 4,
+          "delimiter": "-"
+        }
+      }
+    },
+    "pos": {
+      "order_header": {
+        "id": {
+          "prefix": "POS",
+          "start": 1,
+          "padding": 6,
+          "counterField": "invoiceSequence",
+          "reset": "daily",
+          "dateFormat": "YYYYMMDD"
+        }
+      },
+      "order_schedule": {
+        "id": {
+          "prefix": "SCH",
+          "start": 1,
+          "padding": 4,
+          "delimiter": "-"
+        }
+      }
+    }
+  },
+  "branches": {
+    "dar": {
+      "pos": {
+        "order_header": {
+          "id": {
+            "prefix": "DAR",
+            "start": 1,
+            "padding": 6,
+            "counterField": "invoiceSequence",
+            "reset": "daily",
+            "dateFormat": "YYYYMMDD"
+          }
+        },
+        "order_schedule": {
+          "id": {
+            "prefix": "DAR-SCH",
+            "start": 1,
+            "padding": 4,
+            "delimiter": "-"
+          }
+        }
+      }
+    },
+    "remal": {
+      "pos": {
+        "order_header": {
+          "id": {
+            "prefix": "REM",
+            "start": 1,
+            "padding": 6,
+            "counterField": "invoiceSequence",
+            "reset": "daily",
+            "dateFormat": "YYYYMMDD"
+          }
+        },
+        "order_schedule": {
+          "id": {
+            "prefix": "REM-SCH",
+            "start": 1,
+            "padding": 4,
+            "delimiter": "-"
+          }
+        }
+      }
+    }
+  }
+}

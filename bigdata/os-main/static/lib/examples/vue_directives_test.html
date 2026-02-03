@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mishkah Vue - Directives Test</title>
+    <script src="../mishkah.core.js"></script>
+    <script src="../mishkah-vue.js"></script>
+    <script src="../mishkah-vue-jsx.js"></script>
+    <style>
+        body {
+            background: #111;
+            color: #fff;
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .box {
+            border: 1px solid #444;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        input {
+            background: #222;
+            border: 1px solid #555;
+            color: #fff;
+            padding: 5px;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .success {
+            color: #4ade80;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/mishkah-vue">
+        const App = {
+            data() {
+                return {
+                    showSecret: false,
+                    inputText: 'Initial Value',
+                    counter: 0
+                }
+            },
+            methods: {
+                toggle() {
+                    this.showSecret = !this.showSecret;
+                },
+                increment(e) {
+                    // Test @click.prevent existence (if anchor)
+                    this.counter++;
+                }
+            },
+            render() { // Using render with JSX syntax inside the script block
+                return (
+                    <div class="box">
+                        <h1>Directives Test</h1>
+                        
+                        {/* Test v-model */}
+                        <div class="box">
+                            <h3>v-model</h3>
+                            <input v-model={this.inputText} />
+                            <p>Value: <span id="model-value">{this.inputText}</span></p>
+                        </div>
+
+                        {/* Test v-if */}
+                        <div class="box">
+                            <h3>v-if</h3>
+                            <button onClick={this.toggle}>Toggle Secret</button>
+                            <div v-if={this.showSecret} id="secret-box" class="success">
+                                This is a secret message!
+                            </div>
+                            <div v-if={!this.showSecret} id="hint-box">
+                                Click toggle to see secret.
+                            </div>
+                        </div>
+
+                        {/* Test Modifiers */}
+                        <div class="box">
+                            <h3>Modifiers</h3>
+                            <p>Counter: <span id="counter">{this.counter}</span></p>
+                            <a href="#" onClick={this.increment} id="plain-link">Plain Link (jumps)</a><br/>
+                            <a href="#" onClick.prevent={this.increment} id="prevent-link">Prevent Link</a>
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        Mishkah.Vue.createApp(App).mount('#app');
+    </script>
+</body>
+
+</html>

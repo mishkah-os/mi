@@ -1,0 +1,359 @@
+{
+  "Mishkah IIFE Setup": {
+    "prefix": "mk-init",
+    "body": [
+      "(async function() {",
+      "  const M = Mishkah;",
+      "  const D = M.DSL;",
+      "  const UI = M.UI;",
+      "  const U = M.utils;",
+      "  const { tw, token } = U.twcss || {};",
+      "",
+      "  const db = {",
+      "    env: { lang: '${1:ar}', theme: '${2:light}' },",
+      "    data: {",
+      "      $3",
+      "    }",
+      "  };",
+      "",
+      "  const orders = {",
+      "    '${4:namespace}:${5:action}': function(event, context) {",
+      "      $6",
+      "    }",
+      "  };",
+      "",
+      "  M.app.setBody((stateWrapper, D) => {",
+      "    const state = stateWrapper.data;",
+      "    return D.Containers.Div({}, [$7]);",
+      "  });",
+      "",
+      "  M.app.createApp(db, orders).mount('#app');",
+      "})();"
+    ],
+    "description": "Mishkah IIFE setup with full structure"
+  },
+
+  "Mishkah HTML Page": {
+    "prefix": "mk-html",
+    "body": [
+      "<!DOCTYPE html>",
+      "<html lang=\"${1:ar}\" dir=\"${2:rtl}\">",
+      "<head>",
+      "  <meta charset=\"UTF-8\">",
+      "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+      "  <title>${3:Mishkah App}</title>",
+      "  <script src=\"../../static/lib/mishkah-utils.js\"></script>",
+      "  <script src=\"../../static/lib/mishkah.core.js\"></script>",
+      "  <script src=\"../../static/lib/mishkah-ui.js\"></script>",
+      "</head>",
+      "<body>",
+      "  <div id=\"app\"></div>",
+      "",
+      "  <script>",
+      "    (async function() {",
+      "      const M = Mishkah;",
+      "      const D = M.DSL;",
+      "",
+      "      const db = {",
+      "        env: { lang: '${1:ar}' },",
+      "        data: {}",
+      "      };",
+      "",
+      "      M.app.setBody((stateWrapper, D) => {",
+      "        return D.Containers.Div({}, ['${4:Hello Mishkah}']);",
+      "      });",
+      "",
+      "      M.app.createApp(db, {}).mount('#app');",
+      "    })();",
+      "  </script>",
+      "</body>",
+      "</html>"
+    ],
+    "description": "Complete Mishkah HTML page template"
+  },
+
+  "Mishkah Form": {
+    "prefix": "mk-form",
+    "body": [
+      "D.Forms.Form({ events: { gkey: '${1:form}:submit' } }, [",
+      "  D.Forms.Label({}, ['${2:الاسم}:']),",
+      "  D.Inputs.Input({",
+      "    attrs: {",
+      "      type: '${3:text}',",
+      "      name: '${4:name}',",
+      "      value: state.form.${4:name},",
+      "      gkey: '${1:form}:input'",
+      "    }",
+      "  }),",
+      "",
+      "  D.Forms.Button({ attrs: { type: 'submit' } }, ['${5:حفظ}'])",
+      "])"
+    ],
+    "description": "Mishkah form with input and button"
+  },
+
+  "Mishkah Table": {
+    "prefix": "mk-table",
+    "body": [
+      "D.Tables.Table({ attrs: { class: '${1:data-table}' } }, [",
+      "  D.Tables.Thead({}, [",
+      "    D.Tables.Tr({}, [",
+      "      D.Tables.Th({}, ['${2:Column 1}']),",
+      "      D.Tables.Th({}, ['${3:Column 2}']),",
+      "      D.Tables.Th({}, ['${4:Actions}'])",
+      "    ])",
+      "  ]),",
+      "  D.Tables.Tbody({}, state.${5:items}.map(item =>",
+      "    D.Tables.Tr({}, [",
+      "      D.Tables.Td({}, [item.${6:prop1}]),",
+      "      D.Tables.Td({}, [item.${7:prop2}]),",
+      "      D.Tables.Td({}, [",
+      "        D.Forms.Button({",
+      "          attrs: {",
+      "            gkey: '${8:action}',",
+      "            'data-id': item.id",
+      "          }",
+      "        }, ['${9:حذف}'])",
+      "      ])",
+      "    ])",
+      "  ))",
+      "])"
+    ],
+    "description": "Mishkah table with dynamic rows"
+  },
+
+  "Mishkah Button": {
+    "prefix": "mk-button",
+    "body": [
+      "D.Forms.Button({",
+      "  attrs: {",
+      "    type: '${1:button}',",
+      "    class: '${2:btn-primary}',",
+      "    gkey: '${3:namespace}:${4:action}'",
+      "  }",
+      "}, ['${5:حفظ}'])"
+    ],
+    "description": "Mishkah button with gkey"
+  },
+
+  "Mishkah Input": {
+    "prefix": "mk-input",
+    "body": [
+      "D.Inputs.Input({",
+      "  attrs: {",
+      "    type: '${1:text}',",
+      "    name: '${2:fieldName}',",
+      "    value: state.${3:fieldName},",
+      "    placeholder: '${4:Enter value}',",
+      "    gkey: '${5:form}:input'",
+      "  }",
+      "})"
+    ],
+    "description": "Mishkah input field"
+  },
+
+  "Mishkah Select": {
+    "prefix": "mk-select",
+    "body": [
+      "D.Inputs.Select({",
+      "  attrs: {",
+      "    name: '${1:category}',",
+      "    gkey: '${2:form}:select'",
+      "  }",
+      "}, [",
+      "  D.Inputs.Option({ attrs: { value: '' } }, ['${3:اختر...}']),",
+      "  ...state.${4:options}.map(opt =>",
+      "    D.Inputs.Option({",
+      "      attrs: {",
+      "        value: opt.id,",
+      "        selected: state.${1:category} === opt.id",
+      "      }",
+      "    }, [opt.name])",
+      "  )",
+      "])"
+    ],
+    "description": "Mishkah select dropdown"
+  },
+
+  "Mishkah List": {
+    "prefix": "mk-list",
+    "body": [
+      "D.Lists.Ul({ attrs: { class: '${1:list}' } }, ",
+      "  state.${2:items}.map(item =>",
+      "    D.Lists.Li({}, [",
+      "      ${3:item.name}",
+      "    ])",
+      "  )",
+      ")"
+    ],
+    "description": "Mishkah unordered list"
+  },
+
+  "Mishkah Card": {
+    "prefix": "mk-card",
+    "body": [
+      "D.Containers.Div({ attrs: { class: 'card' } }, [",
+      "  D.Text.H3({ attrs: { class: 'card-title' } }, ['${1:Title}']),",
+      "  D.Text.P({ attrs: { class: 'card-content' } }, ['${2:Content}']),",
+      "  D.Containers.Div({ attrs: { class: 'card-footer' } }, [",
+      "    D.Forms.Button({",
+      "      attrs: { gkey: '${3:card}:action' }",
+      "    }, ['${4:Action}'])",
+      "  ])",
+      "])"
+    ],
+    "description": "Mishkah card component structure"
+  },
+
+  "Mishkah Modal": {
+    "prefix": "mk-modal",
+    "body": [
+      "state.showModal ? D.Containers.Div({",
+      "  attrs: {",
+      "    class: 'modal-overlay',",
+      "    gkey: '${1:modal}:close'",
+      "  }",
+      "}, [",
+      "  D.Containers.Div({",
+      "    attrs: { class: 'modal-content' },",
+      "    events: {",
+      "      click: function(e) { e.stopPropagation(); }",
+      "    }",
+      "  }, [",
+      "    D.Text.H2({}, ['${2:Modal Title}']),",
+      "    D.Text.P({}, ['${3:Modal content}']),",
+      "    D.Containers.Div({ attrs: { class: 'modal-actions' } }, [",
+      "      D.Forms.Button({",
+      "        attrs: { gkey: '${1:modal}:cancel' }",
+      "      }, ['${4:إلغاء}']),",
+      "      D.Forms.Button({",
+      "        attrs: { gkey: '${1:modal}:confirm' }",
+      "      }, ['${5:تأكيد}'])",
+      "    ])",
+      "  ])",
+      "]) : null"
+    ],
+    "description": "Mishkah modal dialog"
+  },
+
+  "Mishkah Event Handler": {
+    "prefix": "mk-handler",
+    "body": [
+      "'${1:namespace}:${2:action}': function(event, context) {",
+      "  $3",
+      "  context.rebuild();",
+      "}"
+    ],
+    "description": "Mishkah event handler in orders"
+  },
+
+  "Mishkah Async Handler": {
+    "prefix": "mk-async",
+    "body": [
+      "'${1:namespace}:${2:action}': async function(event, context) {",
+      "  context.db.data.loading = true;",
+      "  context.rebuild();",
+      "",
+      "  try {",
+      "    ${3:// Async operation}",
+      "    const result = await ${4:fetchData}();",
+      "    context.db.data.${5:data} = result;",
+      "    context.db.data.loading = false;",
+      "  } catch (error) {",
+      "    context.db.data.error = error.message;",
+      "    context.db.data.loading = false;",
+      "  }",
+      "",
+      "  context.rebuild();",
+      "}"
+    ],
+    "description": "Mishkah async event handler with loading state"
+  },
+
+  "Mishkah HTMLx Template": {
+    "prefix": "mk-htmlx",
+    "body": [
+      "<template id=\"${1:my-component}\">",
+      "  <style>",
+      "    .${1:my-component} {",
+      "      ${2:padding: 1rem;}",
+      "    }",
+      "  </style>",
+      "",
+      "  <div class=\"${1:my-component}\">",
+      "    <h2>{{data.${3:title}}}</h2>",
+      "    <p>{{data.${4:description}}}</p>",
+      "    <button data-m-key=\"${1:my-component}:${5:action}\">",
+      "      ${6:Click me}",
+      "    </button>",
+      "  </div>",
+      "",
+      "  <script type=\"application/json\" data-m-path=\"data\">",
+      "    {",
+      "      \"${3:title}\": \"${7:Title}\",",
+      "      \"${4:description}\": \"${8:Description}\"",
+      "    }",
+      "  </script>",
+      "",
+      "  <script>",
+      "    function ${1:myComponent}Mount(app, helpers) {",
+      "      console.log('Component mounted!');",
+      "      $9",
+      "    }",
+      "  </script>",
+      "  <script data-after-mount=\"${1:myComponent}Mount\"></script>",
+      "</template>"
+    ],
+    "description": "Complete HTMLx template"
+  },
+
+  "Mishkah Conditional Render": {
+    "prefix": "mk-if",
+    "body": [
+      "state.${1:condition} ? ",
+      "  D.${2:Text}.${3:P}({}, ['${4:True content}']) ",
+      ": ",
+      "  ${5:null}"
+    ],
+    "description": "Mishkah conditional rendering"
+  },
+
+  "Mishkah Map": {
+    "prefix": "mk-map",
+    "body": [
+      "state.${1:items}.map(${2:item} =>",
+      "  D.${3:Containers}.${4:Div}({}, [",
+      "    $5",
+      "  ])",
+      ")"
+    ],
+    "description": "Mishkah array mapping"
+  },
+
+  "Mishkah Filter Render": {
+    "prefix": "mk-filter",
+    "body": [
+      "state.${1:items}",
+      "  .filter(${2:item} => ${3:item.active})",
+      "  .map(${2:item} =>",
+      "    D.${4:Lists}.${5:Li}({}, [${2:item}.${6:name}])",
+      "  )"
+    ],
+    "description": "Mishkah filter and map"
+  },
+
+  "Mishkah Loading State": {
+    "prefix": "mk-loading",
+    "body": [
+      "state.loading ? ",
+      "  D.Text.P({ attrs: { class: 'loading' } }, ['${1:جاري التحميل...}'])",
+      ": state.error ?",
+      "  D.Text.P({ attrs: { class: 'error' } }, [state.error])",
+      ": ",
+      "  D.Containers.Div({}, [",
+      "    ${2:// Content}",
+      "  ])"
+    ],
+    "description": "Mishkah loading/error/content pattern"
+  }
+}

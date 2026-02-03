@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mishkah Vue - Advanced API Test</title>
+    <style>
+        body {
+            font-family: system-ui;
+            background: #111;
+            color: #fff;
+            padding: 40px;
+        }
+
+        .box {
+            border: 1px solid #444;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            background: #222;
+        }
+
+        .log-box {
+            font-family: monospace;
+            background: #000;
+            padding: 10px;
+            border: 1px solid #333;
+            color: #0f0;
+            min-height: 100px;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 5px 10px;
+            background: #3b82f6;
+            border: none;
+            color: white;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script src="../mishkah.core.js"></script>
+    <script src="../mishkah-vue.js"></script>
+    <script src="../mishkah-vue-jsx.js"></script>
+
+    <script type="text/mishkah-vue">
+        const { createApp } = Mishkah.Vue;
+
+        // Child Component using Options API
+        const ChildComp = {
+            props: ['msg'],
+            template() {
+                return (
+                    <div class="box">
+                        <h3>Child Component</h3>
+                        <p>Props: {this.msg || 'No Msg'}</p>
+                        <button onclick={this.sendToParent}>Emit Event to Parent</button>
+                        <div style="margin-top:10px;border-top:1px dashed #555;padding-top:10px">
+                            <strong>Slot Content:</strong>
+                            {this.$slots.default ? this.$slots.default() : <em>No Slots</em>}
+                        </div>
+                    </div>
+                );
+            },
+            methods: {
+                sendToParent() {
+                    console.log('Child: Emitting custom-event');
+                    this.$emit('custom-event', 'Data from Child ' + Math.random().toFixed(2));
+                }
+            },
+            created() {
+                console.log('Child Created');
+            },
+            mounted() {
+                console.log('Child Mounted');
+            }
+        };
+
+        const App = {
+            data() {
+                return {
+                    parentMsg: 'Initial Parent Message',
+                    logs: []
+                }
+            },
+            methods: {
+                handleCustomEvent(payload) {
+                    this.log('Received event from Child: ' + payload);
+                },
+                log(msg) {
+                    // Force update by replacing array (simple engine reactivity fix)
+                    this.logs = [].concat(this.logs, [msg]);
+                    console.log('App Log:', msg);
+                },
+                accessRef() {
+                    console.log('AccessRef called');
+                    if (this.$refs.myInput) {
+                        this.log('Ref accessed: value = ' + this.$refs.myInput.value);
+                        this.$refs.myInput.focus();
+                    } else {
+                        console.warn('Ref not found in accessRef');
+                        this.log('Ref not found!');
+                    }
+                }
+            },
+            components: {
+                ChildComp // Mishkah Vue handles components in h() usually, need to pass it or use locally?
+                // In standalone, we pass the object directly in JSX usually. 
+            },
+            beforeCreate() {
+                // console.log('App beforeCreate'); // Can't log to 'logs' yet, data not init
+            },
+            created() {
+                this.log('App Created (Hook)');
+            },
+            beforeMount() {
+                this.log('App BeforeMount (Hook)');
+            },
+            mounted() {
+                this.log('App Mounted (Hook)');
+                if (this.$refs.myTitle) {
+                    this.$refs.myTitle.style.color = 'orange';
+                    this.log('Ref "myTitle" found and styled orange');
+                }
+            },
+            template() {
+                return (
+                    <div class="box">
+                        <h1 ref="myTitle">Parent Component (Advanced Test)</h1>
+                        
+                        <div class="box">
+                            <h4>Refs Test</h4>
+                            <input ref="myInput" value="Ref Input Value" style="color:black" />
+                            <button onclick={this.accessRef}>Check Ref</button>
+                        </div>
+
+                        <ChildComp 
+                            msg={this.parentMsg} 
+                            onCustomEvent={this.handleCustomEvent}
+                        >
+                            <p style="color:cyan">This is content passed to child slot!</p>
+                        </ChildComp>
+
+                        <div class="log-box">
+                            {this.logs.map(l => <div>&gt; {l}</div>)}
+                        </div>
+                    </div>
+                );
+            }
+        };
+
+        createApp(App).mount('#app');
+    </script>
+</body>
+
+</html>

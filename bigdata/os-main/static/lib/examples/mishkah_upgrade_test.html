@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mishkah Core Upgrade Test Bench</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+
+        .test-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .status {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .pass {
+            color: green;
+        }
+
+        .fail {
+            color: red;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #2563eb;
+        }
+
+        code {
+            background: #eee;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+    <!-- Load the UPGRADED Core here -->
+    <script src="../mishkah.core.js"></script>
+</head>
+
+<body>
+    <h1>Mishkah Core Upgrade Test Bench 🧪</h1>
+    <div id="app"></div>
+
+    <script>
+        // ==========================================
+        // Test Logic
+        // ==========================================
+
+        const db = {
+            showSecondButton: true,
+            counter: 0
+        };
+
+        const orders = {
+            'toggle': {
+                on: ['click'],
+                gkeys: ['btn:toggle'],
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, showSecondButton: !s.showSecondButton }))
+            },
+            'inc': {
+                on: ['click'],
+                gkeys: ['btn:inc'], // Testing top-level gkey
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, counter: s.counter + 1 }))
+            }
+        };
+
+        function App(state) {
+            // 1. Test Flat DSL & Exposed h
+            const D = Mishkah.DSL;
+            const h = Mishkah.h;
+
+            if (!h) return D.Div({}, ['❌ Error: h() is not exposed!']);
+            if (!D.Div) return h('div', {}, {}, ['❌ Error: Flat DSL (D.Div) not working!']);
+
+            return D.Div({ attrs: { class: 'container' } }, [
+
+                // Test 1: Flat DSL
+                D.Div({ attrs: { class: 'test-card' } }, [
+                    D.H3({}, ['Test 1: Flat DSL & h()']),
+                    D.P({}, ['✅ If you see this, D.Div and D.H3 are working directly.']),
+                    h('p', 'Text', { attrs: { style: 'color: blue' } }, ['✅ If you see this, h() is working.'])
+                ]),
+
+                // Test 2: Void Tags Protection
+                D.Div({ attrs: { class: 'test-card' } }, [
+                    D.H3({}, ['Test 2: Void Tags Protection']),
+                    D.P({}, ['Below is an input with children passed in code. Children should NOT appear in DOM.']),
+                    D.Input({
+                        attrs: { placeholder: 'I should be empty', class: 'btn' }
+                    }, [
+                        D.Span({}, ['❌ FAIL: I should not exist!'])
+                    ])
+                ]),
+
+                // Test 3: Top-level Props (gkey)
+                D.Div({ attrs: { class: 'test-card' } }, [
+                    D.H3({}, ['Test 3: Top-level Props']),
+                    D.Button({
+                        gkey: 'btn:inc', // Direct gkey!
+                        attrs: { class: 'btn' }
+                    }, ['Increment Counter: ' + state.counter]),
+                    D.P({}, ['(Click button to verify gkey works outside attrs)'])
+                ]),
+
+                // Test 4: Null Handling (The Big One)
+                D.Div({ attrs: { class: 'test-card' } }, [
+                    D.H3({}, ['Test 4: Null Handling & DOM Stability']),
+                    D.Button({ gkey: 'btn:toggle', attrs: { class: 'btn' } }, ['Toggle Middle Button']),
+                    D.Div({ attrs: { style: 'margin-top: 10px; display: flex; gap: 10px;' } }, [
+                        D.Button({ attrs: { class: 'btn', style: 'background: gray' } }, ['Fixed Left']),
+
+                        // This should become a comment node when false, NOT disappear from DOM tree index
+                        state.showSecondButton ?
+                            D.Button({ attrs: { class: 'btn', style: 'background: green' } }, ['Dynamic Middle']) :
+                            null,
+
+                        D.Button({ attrs: { class: 'btn', style: 'background: gray' } }, ['Fixed Right'])
+                    ]),
+                    D.P({}, ['Inspect DOM: When "Dynamic Middle" is hidden, you should see <!--null-placeholder--> between Left and Right buttons.'])
+                ])
+            ]);
+        }
+
+        // Initialize
+        Mishkah.app.setBody(App);
+        const app = Mishkah.app.createApp(db, orders);
+        app.mount('#app');
+
+    </script>
+</body>
+
+</html>

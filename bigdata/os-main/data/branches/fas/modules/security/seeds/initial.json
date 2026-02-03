@@ -1,0 +1,88 @@
+{
+    "sys_companies": [
+        {
+            "id": "peg_co",
+            "name": "شركة PEG للاستشارات الهندسية",
+            "tax_id": "751-918-717",
+            "commercial_reg": "206381",
+            "domain_url": "peg.mas.com.eg",
+            "logo_url": "assets/logos/peg_logo.png",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00.000Z"
+        }
+    ],
+    "sys_companies_lang": [
+        {
+            "id": "peg_co_en",
+            "ref_id": "peg_co",
+            "lang_code": "en",
+            "name": "PEG Engineering Consultants",
+            "address": "81 Joseph Tito St, New Nozha, Cairo"
+        }
+    ],
+    "sys_branches": [
+        {
+            "id": "peg_hq",
+            "company_id": "peg_co",
+            "code": "CAIRO_HQ",
+            "name": "المقر الرئيسي - القاهرة",
+            "type": "HQ",
+            "is_active": true,
+            "address": "81 ش جوزيف تيتو، النزهة الجديدة، القاهرة"
+        }
+    ],
+    "sys_branches_lang": [
+        {
+            "id": "peg_hq_en",
+            "ref_id": "peg_hq",
+            "lang_code": "en",
+            "name": "Cairo HQ",
+            "address": "81 Joseph Tito St, New Nozha, Cairo"
+        }
+    ],
+    "sys_roles": [
+        {
+            "id": "role_super",
+            "name": "Super Admin",
+            "description": "صلاحيات كاملة",
+            "is_superadmin": true
+        },
+        {
+            "id": "role_acct",
+            "name": "Accountant",
+            "description": "محاسب مالي",
+            "is_superadmin": false
+        }
+    ],
+    "sys_roles_lang": [
+        {
+            "id": "role_acct_en",
+            "ref_id": "role_acct",
+            "lang_code": "en",
+            "name": "Accountant",
+            "description": "Financial Accountant"
+        }
+    ],
+    "sys_users": [
+        {
+            "id": "u_admin",
+            "username": "admin",
+            "full_name": "مدير النظام",
+            "//_comment": "Password is 'admin123' (scrypt hash)",
+            "password_hash": "scrypt$16384$8$1$c2FsdF9leGFtcGxl$eHh4X2Rlcml2ZWRfaGFzaF94eHg=",
+            "role_id": "role_super",
+            "license_status": 1,
+            "default_branch_id": "peg_hq",
+            "default_lang": "ar",
+            "created_date": "2025-01-01T00:00:00.000Z"
+        }
+    ],
+    "sys_user_branch_access": [
+        {
+            "id": "access_01",
+            "user_id": "u_admin",
+            "branch_id": "peg_hq",
+            "can_post": true
+        }
+    ]
+}

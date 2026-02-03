@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mishkah Angular Layer Test</title>
+    <style>
+        body {
+            font-family: system-ui;
+            padding: 20px;
+        }
+
+        .card {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+            background: #dd0031;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #c3002f;
+        }
+    </style>
+    <script src="../mishkah.core.js"></script>
+    <script src="../mishkah-react.js"></script>
+    <script src="../mishkah-angular.js"></script>
+</head>
+
+<body>
+
+    <div id="app-angular"></div>
+
+    <script>
+        const { bootstrap, html } = Mishkah.Angular;
+
+        // Angular-like Component Class
+        class CounterComponent {
+            // Metadata
+            static selector = 'app-counter';
+
+            // Template (using html tag function)
+            // Note: We use standard onclick for now, but structure is Angular-like
+            static template = function () {
+                return html`
+                    <div class="card">
+                        <h2>Angular-Lite Component 🛡️</h2>
+                        <p>Count: <strong>${this.count}</strong></p>
+                        <div style="display: flex; gap: 10px;">
+                            <button onclick="${this.inc}">Increment (+)</button>
+                            <button onclick="${this.dec}" style="background: #555;">Decrement (-)</button>
+                        </div>
+                        <p><em>${this.message}</em></p>
+                    </div>
+                `;
+            }
+
+            // State
+            count = 0;
+            message = 'Initializing...';
+
+            // Methods
+            inc() {
+                this.count++;
+                this.message = 'Incremented!';
+            }
+
+            dec() {
+                this.count--;
+                this.message = 'Decremented!';
+            }
+
+            // Lifecycle
+            onInit() {
+                console.log('Angular Component Initialized');
+                setTimeout(() => {
+                    this.message = 'Ready (Loaded via onInit)';
+                }, 1000);
+            }
+
+            onDestroy() {
+                console.log('Angular Component Destroyed');
+            }
+        }
+
+        // Bootstrap
+        bootstrap(CounterComponent, '#app-angular');
+
+    </script>
+</body>
+
+</html>

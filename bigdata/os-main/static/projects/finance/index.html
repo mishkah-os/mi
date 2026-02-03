@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finance Control | Mishkah REST</title>
+  <meta name="description" content="لوحة تحكم عصرية لإدارة النظام المالي" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <script>
+    (function () {
+      // Read branch name from localStorage user session
+      var branchName = null;
+      try {
+        var userJson = localStorage.getItem('mishkah_user');
+        if (userJson) {
+          var userData = JSON.parse(userJson);
+          // Use brname (branch name like "fas", "pt", etc.)
+          branchName = userData.brname || null;
+        }
+      } catch (e) {
+        console.warn('[Init] Failed to read branch from localStorage:', e);
+      }
+
+      // Fallback to URL params or default
+      if (!branchName) {
+        var params = new URLSearchParams(window.location.search);
+        branchName = params.get('brname') || params.get('branch') || 'peg';
+      }
+
+      // Set configuration for dashboard (used by dashboard.js)
+      window.DASHBOARD_CONFIG = {
+        moduleId: 'finance',
+        branch: branchName
+      };
+
+      // Keep for backward compatibility (mishkah-rest.js uses these)
+      window.MISHKAH_BRANCH = branchName;
+      window.MODULE_ID = 'finance';
+
+      window.tailwind = {
+        config: {
+          darkMode: 'class'
+        }
+      };
+    }());
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body data-theme="light">
+  <div class="page-shell">
+    <div id="user-widget" class="user-widget-container"></div>
+    <main class="app-surface">
+      <div id="app" class="app-mount"></div>
+    </main>
+  </div>
+  <link rel="stylesheet" href="dash.css">
+
+  <script src="../../lib/mishkah-utils.js"></script>
+  <script src="../../lib/mishkah.core.js"></script>
+  <script src="../../lib/mishkah-ui.js"></script>
+
+  <script src="../../lib/mishkah-rest.js"></script>
+
+  <script src="./auth-manager.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await window.AuthManager.init();
+      const hasSession = await window.AuthManager.checkSession();
+      if (hasSession) {
+        console.log('User logged in:', window.AuthManager.currentUser);
+        // Render user widget
+        if (window.renderUserWidget) {
+          window.renderUserWidget();
+        }
+      } else {
+        console.log('No session found, waiting for manual login');
+      }
+    });
+  </script>
+  <script src="./UniversalComp.js"></script>
+  <script src="./components/schema-crud.js"></script>
+  <script src="./print.js"></script>
+  <script src="./screens/screen-home.js"></script>
+  <script src="./screens/screen-accounts.js"></script>
+  <script src="./screens/screen-journals.js"></script>
+  <script src="./user-widget.js"></script>
+  <script src="./dashboard.js"></script>
+
+</body>
+
+</html>

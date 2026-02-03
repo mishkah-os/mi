@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="utf-8" />
+    <title>3D Pattern Visualization - DNA Explorer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        window.MishkahAutoConfig = {
+            css: 'mi',
+            paths: {
+                utils: '/lib/mishkah-utils.js',
+                core: '/lib/mishkah.core.js',
+                ui: '/lib/mishkah-ui.js',
+                htmlx: '/lib/mishkah-htmlx.js',
+                css: '/lib/mishkah-css.css'
+            },
+            plotly: { cdn: 'https://cdn.plot.ly/plotly-2.29.1.min.js' }
+        };
+    </script>
+    <script src="/lib/mishkah.js" data-htmlx data-css="mi"></script>
+    <script src="/lib/mishkah-plotly.js"></script>
+    <script src="/js/api.js"></script>
+</head>
+
+<body class="bg-[var(--background)] text-[var(--foreground)]">
+    <div id="app"></div>
+
+    <template id="viz-page">
+        <script type="application/json" data-m-env>
+      {"theme": "dark", "lang": "ar", "dir": "rtl"}
+    </script>
+
+        <script type="application/json" data-m-data>
+      {
+        "selectedPattern": null,
+        "patterns": [],
+        "vizData": null
+      }
+    </script>
+
+        <div data-m-scope="viz-page" class="flex h-screen flex-col">
+            <!-- Header -->
+            <header
+                class="flex items-center justify-between border-b border-[var(--border)] bg-[var(--card)] px-6 py-4">
+                <div>
+                    <h1 class="text-2xl font-bold">📊 3D Pattern Visualization</h1>
+                    <p class="text-sm text-[var(--muted-foreground)]">استكشاف الأنماط الهندسية ثلاثية الأبعاد</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a href="/" class="rounded-lg px-4 py-2 hover:bg-[var(--accent)]">← Back</a>
+                    <theme-switcher themes="dark,light"></theme-switcher>
+                    <lang-switcher langs="ar,en"></lang-switcher>
+                </div>
+            </header>
+
+            <!-- Controls -->
+            <div class="border-b border-[var(--border)] bg-[var(--surface-1)] p-4">
+                <div class="flex items-center gap-4">
+                    <label class="flex items-center gap-2">
+                        <span class="text-sm font-medium">Select Pattern:</span>
+                        <select id="pattern-selector"
+                            class="rounded-lg border border-[var(--border)] bg-[var(--card)] px-3 py-2">
+                            <option value="">-- Choose Pattern --</option>
+                        </select>
+                    </label>
+                    <button id="load-viz-btn"
+                        class="rounded-lg bg-[var(--primary)] px-4 py-2 font-medium text-[var(--primary-foreground)]">
+                        Load Visualization
+                    </button>
+                </div>
+            </div>
+
+            <!-- Visualization Area -->
+            <main class="flex-1 overflow-auto p-6">
+                <div id="plot-container" class="h-full rounded-xl border border-[var(--border)] bg-[var(--card)] p-4">
+                    <!-- Plotly plot will render here -->
+                    <div id="plotly-3d" style="width: 100%; height: 100%;"></div>
+                </div>
+            </main>
+        </div>
+
+        <script>
+            let app = null;
+
+            // Load patterns list
+            async function loadPatterns() {
+                try {
+                    const patterns = await API.patterns.list();
+                    const selector = document.getElementById('pattern-selector');
+
+                    patterns.forEach(pattern => {
+                        const option = document.createElement('option');
+                        option.value = pattern.id;
+                        option.textContent = `Pattern #${pattern.id} - ${pattern.pattern_type || 'Unknown'}`;
+                        selector.appendChild(option);
+                    });
+
+                    if (app) {
+                        app.setState(state => {
+                            state.data.patterns = patterns;
+                            return state;
+                        });
+                    }
+                } catch (err) {
+                    console.error('Failed to load patterns:', err);
+                }
+            }
+
+            // Load and display 3D visualization
+            async function loadVisualization() {
+                const selector = document.getElementById('pattern-selector');
+                const patternId = selector.value;
+
+                if (!patternId) {
+                    alert('Please select a pattern first');
+                    return;
+                }
+
+                try {
+                    const vizData = await API.patterns.getViz(patternId);
+
+                    // Prepare Plotly data
+                    const trace = {
+                        x: vizData.x,
+                        y: vizData.y,
+                        z: vizData.z,
+                        mode: 'markers',
+                        type: 'scatter3d',
+                        marker: {
+                            size: 3,
+                            color: vizData.z,  // Color by z value
+                            colorscale: 'Viridis',
+                            showscale: true,
+                            colorbar: {
+                                title: 'Value',
+                                len: 0.7
+                            }
+                        }
+                    };
+
+                    const layout = {
+                        title: `Pattern #${patternId} - 3D Weight Distribution`,
+                        autosize: true,
+                        scene: {
+                            xaxis: { title: 'X Coordinate' },
+                            yaxis: { title: 'Y Coordinate' },
+                            zaxis: { title: 'Weight Value' }
+                        },
+                        paper_bgcolor: 'var(--card)',
+                        plot_bgcolor: 'var(--card)',
+                        font: { color: 'var(--foreground)' }
+                    };
+
+                    const config = {
+                        responsive: true,
+                        displayModeBar: true
+                    };
+
+                    // Render using Plotly directly
+                    if (window.Plotly) {
+                        Plotly.newPlot('plotly-3d', [trace], layout, config);
+                    }
+                } catch (err) {
+                    console.error('Failed to load visualization:', err);
+                    alert('Failed to load visualization: ' + err.message);
+                }
+            }
+
+            // Auto-init
+            if (window.MishkahAuto && typeof window.MishkahAuto.ready === 'function') {
+                window.MishkahAuto.ready(function (M) {
+                    if (M && M.app && typeof M.app.make === 'function') {
+                        app = M.app.make();
+                        loadPatterns();
+
+                        // Bind events
+                        const loadBtn = document.getElementById('load-viz-btn');
+                        if (loadBtn) {
+                            loadBtn.addEventListener('click', loadVisualization);
+                        }
+                    }
+                });
+            }
+        </script>
+    </template>
+</body>
+
+</html>

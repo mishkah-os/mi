@@ -1,0 +1,370 @@
+@using System.Data
+@using Newtonsoft.Json
+@using Mas.com.eg.Models
+@using System.Threading.Tasks
+@using System.Net.Http
+@using System.IO
+@using System.Collections.Specialized
+@using System.Collections.Generic
+@using System.Linq
+@using System.Text
+
+@{
+
+    @functions{
+
+
+        static async Task<string> SendPostRequestAsync(string url, string jsonPayload)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                Uri uriCurr = new Uri(url);
+                string hostUrl = uriCurr.Host.ToString();
+                string protocol = uriCurr.Scheme.ToString();
+
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Accept", "*/*");
+                client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br, zstd");
+                client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9,ar;q=0.8");
+                client.DefaultRequestHeaders.Add("Cookie", "UserUniid=" + DBHelper.UserUni());
+                client.DefaultRequestHeaders.Add("Origin", protocol + "://" + hostUrl);
+                client.DefaultRequestHeaders.Add("Priority", "u=1");
+                client.DefaultRequestHeaders.Add("Referer", protocol + "://" + hostUrl);
+                client.DefaultRequestHeaders.Add("Sec-Ch-Ua", "\"Chromium\";v=\"128\", \"NotABrand\";v=\"24\", \"Google Chrome\";v=\"128\"");
+                client.DefaultRequestHeaders.Add("Sec-Ch-Ua-Mobile", "?1");
+                client.DefaultRequestHeaders.Add("Sec-Ch-Ua-Platform", "\"Android\"");
+                client.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "empty");
+                client.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
+                client.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-origin");
+                client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36");
+                client.Timeout = TimeSpan.FromMinutes(120);
+
+
+                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync(url, content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    string responseContent = await response.Content.ReadAsStringAsync();
+
+                    return responseContent;
+                }
+                else
+                {
+                    response.EnsureSuccessStatusCode();
+                    string successfulResponse = await response.Content.ReadAsStringAsync();
+                    return successfulResponse;
+                }
+
+
+            }
+        }
+
+        public string sendMails(string emails, string title, string body)
+        {
+            string[] emails_arr = emails.Split(',');
+            string resultall = "";
+
+            foreach (string email in emails_arr)
+            {
+                string url = "https://test.mas.com.eg/r/sendemail?email=" + email + "&title=" + title + "&body=" + body;
+                using (var client = new HttpClient())
+                {
+                    var response = client.GetStringAsync(url).Result;
+                    resultall += "{\"mail\":\"" + email + "\",\"result\":\"" + response + "\"},";
+                }
+            }
+
+            return "[" + resultall.TrimEnd(',') + "]";
+        }
+
+
+
+
+    }
+    Layout = null;
+
+
+    //string contentType = "application/json; charset=utf-8";
+    string contentType = "text/plain; charset=utf-8";
+    string dataResult = "";
+    string id = invoice.GetPar("id", Request);
+
+    if (id == "" || id == null && ViewBag.id != null && ViewBag.id != "")
+    {
+        id = ViewBag.id;
+    }
+    if (id == "save")
+    {
+        string data = invoice.GetPar("data", Request);
+
+        dataResult = invoice.save(data);
+        contentType = "application/json; charset=utf-8";
+
+
+
+    }
+    else if (id == "masmail")
+    {
+        string mails = invoice.GetPar("mails", Request);
+        string title = invoice.GetPar("title", Request);
+        string body = invoice.GetPar("body", Request);
+        dataResult = sendMails(mails, title, body);
+
+
+    }
+    else if (id == "get")
+    {
+
+
+        // string objecttypes = "SYSTEM_TABLE,VIEW,SQL_TABLE_VALUED_FUNCTION,DEFAULT_CONSTRAINT,SQL_STORED_PROCEDURE,FOREIGN_KEY_CONSTRAINT,SERVICE_QUEUE,SQL_INLINE_TABLE_VALUED_FUNCTION,CHECK_CONSTRAINT,USER_TABLE,PRIMARY_KEY_CONSTRAINT,INTERNAL_TABLE,SQL_TRIGGER,SQL_SCALAR_FUNCTION,UNIQUE_CONSTRAINT";
+        // string object_type = "USER_TABLE,VIEW,SQL_STORED_PROCEDURE,SQL_INLINE_TABLE_VALUED_FUNCTION,SQL_TABLE_VALUED_FUNCTION,SQL_SCALAR_FUNCTION";
+        string name = invoice.GetPar("name", Request);
+        string top = invoice.GetPar("top", Request);
+        string page = invoice.GetPar("page", Request);
+        string cond = invoice.GetPar("cond", Request);
+        string cols = invoice.GetPar("cols", Request);
+        string order = invoice.GetPar("order", Request);
+
+        dataResult = invoice.getJson(name, top, page, cond, cols, order, Request, DBHelper.CompId(), DBHelper.UserLang(""));
+
+        contentType = "application/json; charset=utf-8";
+
+
+    }
+    else if (id == "proc")
+    {
+
+
+        string name = invoice.GetPar("name", Request);
+        string parms = invoice.GetPar("parms", Request);
+
+        List<dynamic> paramArraydynamic = JsonConvert.DeserializeObject<List<dynamic>>(parms);
+
+
+        if (paramArraydynamic == null)
+        {
+
+            paramArraydynamic = new List<dynamic>();
+        }
+
+        try
+        {
+
+            string[] paramArray = new string[paramArraydynamic.Count];
+
+            // Loop through the list and convert each item to a JSON string
+            for (int i = 0; i < paramArraydynamic.Count; i++)
+            {
+                paramArray[i] = JsonConvert.SerializeObject(paramArraydynamic[i]);
+            }
+            // string[] paramArray = JsonConvert.DeserializeObject<string[]>(parms);
+
+            if (paramArray == null)
+            {
+                paramArray = new string[0];  // Avoid null references by initializing to an empty array
+            }
+
+
+
+            dataResult = JsonConvert.SerializeObject(invoice.Proc_DataTable(name, paramArray), Formatting.Indented);
+
+            contentType = "application/json; charset=utf-8";
+
+        }
+        catch (Exception ex)
+        {
+            var resErr = new
+            {
+                error = ex.Message,
+                parms = parms,
+                contentType = Request.ContentType.ToLower().Replace(" ", "").Trim().Split(';')[0],
+                name = name,
+                requestData = invoice.request_data(HttpContext.Current.Request)
+
+            };
+            dataResult = JsonConvert.SerializeObject(resErr, Formatting.Indented);
+
+            contentType = "application/json; charset=utf-8";
+        }
+
+
+
+
+
+
+    }
+    else if (id == "fun")
+    {
+
+
+        string name = invoice.GetPar("name", Request);
+        string parms = invoice.GetPar("parms", Request);
+
+        List<dynamic> paramArraydynamic = JsonConvert.DeserializeObject<List<dynamic>>(parms);
+
+
+        if (paramArraydynamic == null)
+        {
+
+            paramArraydynamic = new List<dynamic>();
+        }
+
+        try
+        {
+
+            string[] paramArray = new string[paramArraydynamic.Count];
+
+            // Loop through the list and convert each item to a JSON string
+            for (int i = 0; i < paramArraydynamic.Count; i++)
+            {
+                paramArray[i] = JsonConvert.SerializeObject(paramArraydynamic[i]);
+            }
+            // string[] paramArray = JsonConvert.DeserializeObject<string[]>(parms);
+
+            if (paramArray == null)
+            {
+                paramArray = new string[0];  // Avoid null references by initializing to an empty array
+            }
+
+
+
+            dataResult = JsonConvert.SerializeObject(invoice.fun_DataTable(name, paramArray), Formatting.Indented);
+
+            contentType = "application/json; charset=utf-8";
+
+        }
+        catch (Exception ex)
+        {
+            var resErr = new
+            {
+                error = ex.Message,
+                parms = parms,
+                contentType = Request.ContentType.ToLower().Replace(" ", "").Trim().Split(';')[0],
+                name = name,
+                requestData = invoice.request_data(HttpContext.Current.Request)
+
+            };
+            dataResult = JsonConvert.SerializeObject(resErr, Formatting.Indented);
+
+            contentType = "application/json; charset=utf-8";
+        }
+
+
+
+
+
+
+    }
+    else if (id == "delete")
+    {
+
+
+        string name = invoice.GetPar("name", Request);
+        string rowid = invoice.GetPar("rowid", Request);
+
+
+        dataResult = JsonConvert.SerializeObject(invoice.delete(name, rowid), Formatting.Indented);
+
+        contentType = "application/json; charset=utf-8";
+
+
+    }
+    else if (id == "getapi")
+    {
+        string name = invoice.GetPar("name", Request);
+        string top = invoice.GetPar("top", Request);
+        string page = invoice.GetPar("page", Request);
+        string cond = invoice.GetPar("cond", Request);
+        string cols = invoice.GetPar("cols", Request);
+
+        var postDataOB = new
+        {
+
+            id = "get",
+            name = name,
+            top = top,
+            page = page,
+            cond = cond,
+            cols = cols,
+            compid = DBHelper.CompId(),
+            brid = DBHelper.UserBranshID(""),
+            constr = Hash.base64.Encode(DBHelper.conStrEnc("read")),
+            apikey = "5e00ad6b-734f-4a70-b12a-1da4c45ea560",
+            conddata = invoice.ConvertFormToJsonSingle("cond", Request)
+        };
+
+        string postData = JsonConvert.SerializeObject(postDataOB, Formatting.Indented);
+        dataResult = DBHelper.PostData("http://api.mas.com.eg/Data/v1", postData);
+
+
+    }
+    else if (id == "rdata")
+    {
+        var respdata = new
+        {
+            RawUrl = Request.RawUrl,
+            Url = Request.Url,
+            Host = Request.Url.Host,
+            IdnHost = Request.Url.IdnHost,
+            AbsolutePath = Request.Url.AbsolutePath,
+            AbsoluteUri = Request.Url.AbsoluteUri,
+            Authority = Request.Url.Authority,
+            DnsSafeHost = Request.Url.DnsSafeHost,
+            HostNameType = Request.Url.HostNameType,
+            Fragment = Request.Url.Fragment,
+            OriginalString = Request.Url.OriginalString,
+            PathAndQuery = Request.Url.PathAndQuery,
+            Query = Request.Url.Query,
+            IsFile = Request.Url.IsFile,
+            UrlObject = JsonConvert.SerializeObject(Request.Url, Formatting.Indented),
+            LocalPath = Request.Url.LocalPath,
+            Scheme = Request.Url.Scheme,
+            UrlReferrer = Request.UrlReferrer,
+            FilePath = Request.FilePath,
+            CurrentExecutionFilePath = Request.CurrentExecutionFilePath,
+            AnonymousID = Request.AnonymousID,
+            CurrentExecutionFilePathExtension = Request.CurrentExecutionFilePathExtension,
+            Path = Request.Path,
+            PathInfo = Request.PathInfo,
+            PhysicalPath = Request.PhysicalPath,
+            reqdata = invoice.request_data(Request),
+
+        };
+        dataResult = JsonConvert.SerializeObject(respdata, Formatting.Indented);
+
+    }
+    else if (id == "f")
+    {
+
+        string fpath = invoice.GetPar("fpath", Request);
+
+        if (fpath != "")
+        {
+
+            invoice.FileGet(HttpContext.Current, fpath);
+        }
+
+    }
+    else if (id == "taxcallback")
+    {
+        dataResult = JsonConvert.SerializeObject(new { success = "success" }, Formatting.Indented);
+
+
+    }
+
+    if (id != "f")
+    {
+        Response.ContentType = contentType;
+
+        Response.Write(dataResult);
+        HttpContext.Current.Response.Flush(); // Sends all currently buffered output to the client.
+        HttpContext.Current.Response.SuppressContent = true;  // Gets or sets a value indicating whether to send HTTP content to the client.
+        HttpContext.Current.ApplicationInstance.CompleteRequest();
+    }
+
+
+
+}
+

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mishkah Vue - Simple Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: system-ui;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 40px
+        }
+
+        .card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            max-width: 600px
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            color: #3b82f6
+        }
+
+        .counter {
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 24px 0;
+            color: #3b82f6
+        }
+
+        button {
+            padding: 12px 24px;
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin: 8px
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            transition: all 0.2s
+        }
+
+        button.secondary {
+            background: #6366f1
+        }
+
+        p {
+            margin: 12px 0;
+            font-size: 1.1rem
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <!-- Core -->
+    <script src="../mishkah.core.js"></script>
+    <!-- NEW ENGINE -->
+    <script src="../mishkah-vue.js"></script>
+    <!-- NEW TRANSFORMER -->
+    <script src="../mishkah-vue-jsx.js"></script>
+    <script type="text/mishkah-vue">
+        const { createApp, ref, computed, onMounted, h } = Mishkah.Vue;
+
+        Mishkah.Vue.initMishkah({
+            env: { lang: 'ar', dir: 'rtl', theme: 'dark' },
+            i18n: {
+                dict: {
+                    ar: {
+                        title: 'اختبار Vue بسيط',
+                        counter: 'العداد',
+                        increment: 'زيادة',
+                        decrement: 'نقص',
+                        reset: 'إعادة ضبط',
+                        current_count: 'القيمة الحالية',
+                        double: 'ضعف القيمة'
+                    },
+                    en: {
+                        title: 'Simple Vue Test',
+                        counter: 'Counter',
+                        increment: 'Increment',
+                        decrement: 'Decrement',
+                        reset: 'Reset',
+                        current_count: 'Current Count',
+                        double: 'Double'
+                    }
+                }
+            }
+        });
+
+        const app = createApp({
+            setup() {
+                const count = ref(0);
+                const doubleCount = computed(() => count.value * 2);
+
+                onMounted(() => {
+                    console.log('✅ Vue app mounted!');
+                    console.log('Count:', count.value);
+                    console.log('Double:', doubleCount.value);
+                });
+
+                return {
+                    count,
+                    doubleCount,
+                    increment: () => count.value++,
+                    decrement: () => count.value--,
+                    reset: () => count.value = 0
+                };
+            },
+
+            template() {
+                return h('div', { className: 'card' }, [
+                    h('h1', {}, 'تطبيق مشكاة Vue ✨'),
+                    h('div', { className: 'counter' }, String(this.count)),
+                    h('p', {}, `القيمة الحالية: ${this.count}`),
+                    h('p', {}, `ضعف القيمة: ${this.doubleCount}`),
+                    h('div', {}, [
+                        h('button', { onclick: this.increment }, '+ زيادة'),
+                        h('button', { onclick: this.decrement }, '- نقص'),
+                        h('button', { onclick: this.reset, className: 'secondary' }, 'إعادة ضبط')
+                    ])
+                ]);
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-htmlx="quick-dashboard" data-css-library="mi" data-theme="dark" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mishkah Quick Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script>
+  window.MishkahAutoConfig = {
+    css: 'mi',  // Default CSS library - prevents fetch of env.css.default
+    paths: {
+      utils: '/lib/mishkah-utils.js',
+      core: '/lib/mishkah.core.js',
+      ui: '/lib/mishkah-ui.js',
+      htmlx: '/lib/mishkah-htmlx.js',
+      acorn: '/vendor/acorn.min.js',
+      acornWalk: '/vendor/acorn-walk.min.js',
+      css: '/lib/mishkah-css.css'
+    },
+    chart: { cdn: '/vendor/chart.umd.min.js' }
+  };
+</script>
+<script src="/lib/mishkah.js" data-htmlx data-css="env"></script>
+  <script>
+    // Auto-init for data-htmlx (os repo doesn't support this natively)
+    (function() {
+      if (window.MishkahAuto && typeof window.MishkahAuto.ready === 'function') {
+        window.MishkahAuto.ready(function(M) {
+          var htmlxAttr = document.documentElement.getAttribute('data-htmlx');
+          if (htmlxAttr && M && M.app && typeof M.app.make === 'function') {
+            M.app.make();
+          }
+        });
+      }
+    })();
+  </script>
+  </head>
+  <body class="bg-[var(--background)] text-[var(--foreground)]">
+    <template id="quick-dashboard">
+      <script type="application/json" data-m-env data-m-path="env">
+        {
+          "theme": "dark",
+          "lang": "ar",
+          "dir": "rtl",
+          "currency": "SAR",
+          "fonts": {
+            "ar": "Almarai",
+            "en": "Inter",
+            "display": "Almarai",
+            "fallbacks": ["Cairo", "Noto Naskh Arabic", "Amiri"]
+          },
+          "css": ["mishkah"],
+          "tailwind": true
+        }
+      </script>
+
+      <script type="application/json" data-m-data data-m-path="i18n.strings">
+        {
+          "quick.title": { "ar": "بورصة نيويورك - NYSE", "en": "New York Stock Exchange - NYSE" },
+          "quick.tagline": { "ar": "رصد مباشر لأسعار الأسهم", "en": "Live stock prices monitoring" },
+          "quick.metrics.revenue": { "ar": "القيمة السوقية", "en": "Market Cap" },
+          "quick.metrics.orders": { "ar": "عدد الصفقات", "en": "Trade Volume" },
+          "quick.trend": { "ar": "أداء الأسبوع", "en": "Weekly trend" },
+          "quick.sales.title": { "ar": "أسعار الأسهم", "en": "Stock Prices" },
+          "quick.sales.subtitle": {
+            "ar": "بالدولار لكل شهر خلال العام الحالي",
+            "en": "Monthly prices in USD for the current year"
+          },
+          "quick.sales.unit": { "ar": "القيم بالدولار", "en": "Values in USD" },
+          "quick.sales.latest": { "ar": "آخر شهر", "en": "Last month" },
+          "quick.sales.yearly": { "ar": "متوسط العام", "en": "Year average" },
+          "quick.sales.legend": { "ar": "يتم عرض الأرقام كأسعار إغلاق الشهر بالدولار", "en": "Numbers shown as month-end closing prices in USD" },
+          "quick.sales.randomize": { "ar": "بيانات حية", "en": "Live Data" },
+          "quick.sales.table": { "ar": "جدول الأسعار الشهري", "en": "Monthly price table" },
+          "quick.sales.product": { "ar": "السهم", "en": "Stock" },
+          "quick.sales.totalRow": { "ar": "متوسط السنة", "en": "Year average" },
+          "quick.timer": { "ar": "الوقت المتبقي", "en": "Time left" },
+          "quick.items.espresso": { "ar": "أبل (AAPL)", "en": "Apple Inc (AAPL)" },
+          "quick.items.cortado": { "ar": "مايكروسوفت (MSFT)", "en": "Microsoft (MSFT)" },
+          "quick.items.flatwhite": { "ar": "جوجل (GOOGL)", "en": "Alphabet Inc (GOOGL)" },
+          "quick.items.cheesecake": { "ar": "أمازون (AMZN)", "en": "Amazon (AMZN)" },
+          "quick.items.cinnamon": { "ar": "تيسلا (TSLA)", "en": "Tesla Inc (TSLA)" }
+        }
+      </script>
+
+      <script type="application/json" data-m-data data-m-path="data">
+        {
+          "metrics": { "revenue": 0, "orders": 0 },
+          "analytics": {
+            "unit": "$",
+            "unitLabelKey": "quick.sales.unit",
+            "months": {
+              "ar": [
+                "يناير",
+                "فبراير",
+                "مارس",
+                "أبريل",
+                "مايو",
+                "يونيو",
+                "يوليو",
+                "أغسطس",
+                "سبتمبر",
+                "أكتوبر",
+                "نوفمبر",
+                "ديسمبر"
+              ],
+              "en": [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec"
+              ]
+            },
+            "monthIndex": 11,
+            "series": [
+              { "id": "espresso", "nameKey": "quick.items.espresso", "color": "#f97316", "values": [] },
+              { "id": "cortado", "nameKey": "quick.items.cortado", "color": "#38bdf8", "values": [] },
+              { "id": "flatwhite", "nameKey": "quick.items.flatwhite", "color": "#a855f7", "values": [] },
+              { "id": "cheesecake", "nameKey": "quick.items.cheesecake", "color": "#facc15", "values": [] },
+              { "id": "cinnamon", "nameKey": "quick.items.cinnamon", "color": "#22c55e", "values": [] }
+            ],
+            "chart": { "type": "line", "height": 320, "titleKey": "quick.sales.title" },
+            "autoSimulate": true
+          },
+          "timer": { "seconds": 270 },
+          "catalog": [
+            { "id": "espresso", "nameKey": "quick.items.espresso", "price": 185 },
+            { "id": "cortado", "nameKey": "quick.items.cortado", "price": 380 },
+            { "id": "flatwhite", "nameKey": "quick.items.flatwhite", "price": 142 },
+            { "id": "cheesecake", "nameKey": "quick.items.cheesecake", "price": 175 },
+            { "id": "cinnamon", "nameKey": "quick.items.cinnamon", "price": 245 }
+          ],
+          "liveData": { "enabled": false, "interval": null },
+          "ui": { "countdownTemplate": "⏱️ {{time}}", "salesLegendKey": "quick.sales.legend" }
+        }
+      </script>
+
+      <section
+        data-m-scope="quick-dashboard"
+        class="mx-auto flex min-h-screen max-w-5xl flex-col gap-6 bg-[var(--background)] p-6 sm:p-10"
+      >
+        <header class="flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-[var(--border)] bg-[var(--card)] px-6 py-5 shadow-[var(--shadow)]">
+          <div class="space-y-1">
+            <h1 class="text-2xl font-semibold">{trans('quick.title')}</h1>
+            <p class="text-sm text-[var(--muted-foreground)]">{trans('quick.tagline')}</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <theme-switcher class="hero-switcher" themes="dark,light"></theme-switcher>
+            <lang-switcher class="hero-switcher" langs="ar,en"></lang-switcher>
+          </div>
+        </header>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <section class="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[var(--shadow)]">
+            <p class="text-sm text-[var(--muted-foreground)]">{trans('quick.metrics.revenue')}</p>
+            <strong class="mt-1 block text-3xl font-semibold text-[var(--primary)]">
+              {formatCurrency(state.data.metrics.revenue, state.env.currency || 'SAR', state.env.lang)}
+            </strong>
+          </section>
+          <section class="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[var(--shadow)]">
+            <p class="text-sm text-[var(--muted-foreground)]">{trans('quick.metrics.orders')}</p>
+            <strong class="mt-1 block text-3xl font-semibold text-[var(--accent)]">
+              {state.data.metrics.orders}
+            </strong>
+          </section>
+        </div>
+
+        <figure class="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[var(--shadow)]">
+          <header class="mb-4 flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <figcaption class="text-sm font-medium text-[var(--muted-foreground)]">
+                {trans('quick.sales.title')}
+              </figcaption>
+              <p class="mt-1 text-xs text-[var(--muted-foreground)]">{trans('quick.sales.subtitle')}</p>
+            </div>
+            <div class="flex flex-wrap items-center justify-end gap-2">
+              <span class="text-xs text-[var(--muted-foreground)]">
+                {trans(state.data.analytics.unitLabelKey || 'quick.sales.unit')}
+              </span>
+              <label class="flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-xs font-medium text-[var(--foreground)] shadow-[var(--shadow)] transition hover:shadow-lg cursor-pointer">
+                <input
+                  type="checkbox"
+                  class="w-4 h-4 cursor-pointer accent-green-500"
+                  checked="{state.data.liveData && state.data.liveData.enabled ? 'checked' : ''}"
+                  onclick="toggleLiveData(event, ctx)"
+                />
+                <span class="select-none">{trans('quick.sales.randomize')}</span>
+                <span class="text-[10px] text-[var(--muted-foreground)]" x-if="state.data.liveData && state.data.liveData.enabled">●</span>
+              </label>
+            </div>
+          </header>
+          <canvas
+            data-chart-auto="line"
+            data-chart-type="line"
+            data-chart-bind="data.analytics"
+            data-chart-height="{state.data.analytics.chart && state.data.analytics.chart.height ? state.data.analytics.chart.height : 320}"
+            style="min-height:{state.data.analytics.chart && state.data.analytics.chart.height ? state.data.analytics.chart.height : 320}px;height:{state.data.analytics.chart && state.data.analytics.chart.height ? state.data.analytics.chart.height : 320}px;max-height:{state.data.analytics.chart && state.data.analytics.chart.height ? state.data.analytics.chart.height : 320}px;"
+            id="quick-sales-chart"
+          ></canvas>
+          <p
+            class="mt-3 text-xs text-[var(--muted-foreground)]"
+            x-if="state.data.ui && state.data.ui.salesLegendKey"
+          >
+            {trans(state.data.ui.salesLegendKey)}
+          </p>
+          <div class="mt-5 grid gap-3 lg:grid-cols-2">
+            <article
+              x-for="series in state.data.analytics.series"
+              key="series.id"
+              class="flex items-center justify-between rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 shadow-[var(--shadow)]"
+            >
+              <div class="flex items-start gap-3">
+                <span
+                  class="mt-1 inline-block h-3 w-3 rounded-full bg-[var(--primary)]"
+                  data-series-swatch
+                  data-series-id="{series.id}"
+                ></span>
+                <div>
+                  <strong class="text-sm font-semibold">{trans(series.nameKey)}</strong>
+                  <p class="text-xs text-[var(--muted-foreground)]">
+                    {trans('quick.sales.latest')}: {currentAnalyticsMonth(state)} — {formatThousands(latestValue(series), state.data.analytics.unit, state.env && state.env.lang)}
+                  </p>
+                </div>
+              </div>
+              <div class="text-right">
+                <strong class="block text-sm font-semibold text-[var(--primary)]">
+                  {formatThousands(sumSeries(series), state.data.analytics.unit, state.env && state.env.lang)}
+                </strong>
+                <span class="text-xs text-[var(--muted-foreground)]">{trans('quick.sales.yearly')}</span>
+              </div>
+            </article>
+          </div>
+        </figure>
+
+        <div class="flex items-center justify-between rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[var(--shadow)]">
+          <span class="text-sm text-[var(--muted-foreground)]">{trans('quick.timer')}</span>
+          <strong
+            class="text-2xl font-semibold"
+            data-countdown="{state.data.timer.seconds}"
+            data-countdown-template="{state.data.ui.countdownTemplate}"
+          ></strong>
+        </div>
+
+        <section class="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[var(--shadow)]">
+          <header class="mb-4 flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h2 class="text-xl font-semibold">{trans('quick.sales.table')}</h2>
+              <p class="mt-1 text-xs text-[var(--muted-foreground)]">{trans('quick.sales.subtitle')}</p>
+            </div>
+          </header>
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[640px] border-separate border-spacing-y-2 text-sm">
+              <thead>
+                <tr class="text-[var(--muted-foreground)]">
+                  <th class="whitespace-nowrap px-4 py-2 text-right font-medium">{trans('quick.sales.product')}</th>
+                  <th
+                    x-for="month in (state.data.analytics.table && state.data.analytics.table.months) || []"
+                    key="month"
+                    class="px-2 py-2 text-center font-medium"
+                  >
+                    {month}
+                  </th>
+                  <th class="px-3 py-2 text-center font-medium">{trans('quick.sales.totalRow')}</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--foreground)]">
+                <tr
+                  x-for="row in (state.data.analytics.table && state.data.analytics.table.rows) || []"
+                  key="row.id"
+                  class="bg-[var(--surface)]"
+                >
+                  <th scope="row" class="whitespace-nowrap px-4 py-3 text-right font-medium">
+                    <span
+                      class="ml-2 inline-block h-3 w-3 -translate-y-px rounded-full bg-[var(--primary)]"
+                      data-series-swatch
+                      data-series-id="{row.id}"
+                    ></span>
+                    <span>{trans(row.nameKey)}</span>
+                  </th>
+                  <td
+                    x-for="cell in row.cells || []"
+                    key="cell.index"
+                    class="px-2 py-2 text-center font-medium text-[var(--primary)]"
+                  >
+                    {formatThousands(cell.value, state.data.analytics.unit, state.env && state.env.lang)}
+                  </td>
+                  <td class="px-3 py-2 text-center font-semibold text-[var(--primary)]">
+                    {formatThousands(row.total, state.data.analytics.unit, state.env && state.env.lang)}
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="text-[var(--accent)]">
+                  <th class="whitespace-nowrap px-4 py-3 text-right font-semibold">{trans('quick.sales.totalRow')}</th>
+                  <td
+                    x-for="cell in (state.data.analytics.table && state.data.analytics.table.totals) || []"
+                    key="cell.index"
+                    class="px-2 py-2 text-center font-semibold"
+                  >
+                    {formatThousands(cell.value, state.data.analytics.unit, state.env && state.env.lang)}
+                  </td>
+                  <td class="px-3 py-2 text-center font-semibold">
+                    {formatThousands(state.data.analytics.table ? state.data.analytics.table.yearlyTotal : 0, state.data.analytics.unit, state.env && state.env.lang)}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <script>
+        function toCsv(list) {
+          if (!Array.isArray(list)) return '';
+          return list
+            .map(function (value) {
+              return value == null ? '' : String(value).trim();
+            })
+            .filter(function (value) {
+              return value.length > 0;
+            })
+            .join(',');
+        }
+
+        function resolveCatalog(state) {
+          var data = state && state.data ? state.data : null;
+          var catalog = data && Array.isArray(data.catalog) ? data.catalog : null;
+          if (catalog && catalog.length) {
+            return catalog.slice();
+          }
+          return [];
+        }
+
+        function buildCatalogMap(list) {
+          var map = Object.create(null);
+          if (!Array.isArray(list)) return map;
+          for (var i = 0; i < list.length; i += 1) {
+            var item = list[i];
+            if (!item || !item.id) continue;
+            map[item.id] = item;
+          }
+          return map;
+        }
+
+        function computeAveragePrice(map) {
+          if (!map) return 20;
+          var total = 0;
+          var count = 0;
+          for (var key in map) {
+            if (!Object.prototype.hasOwnProperty.call(map, key)) continue;
+            var entry = map[key];
+            var price = Number(entry && entry.price);
+            if (Number.isFinite(price) && price > 0) {
+              total += price;
+              count += 1;
+            }
+          }
+          if (!count) return 20;
+          return total / count;
+        }
+
+        function ensureSeriesBlueprint(analytics, catalogList, prevAnalytics) {
+          var blueprint = [];
+          var seen = Object.create(null);
+          var pushEntry = function (entry) {
+            if (!entry || !entry.id || seen[entry.id]) return;
+            seen[entry.id] = true;
+            blueprint.push({
+              id: entry.id,
+              nameKey: entry.nameKey || entry.id,
+              color: entry.color || null
+            });
+          };
+          if (analytics && Array.isArray(analytics.series)) {
+            for (var i = 0; i < analytics.series.length; i += 1) {
+              pushEntry(analytics.series[i]);
+            }
+          }
+          if (prevAnalytics && Array.isArray(prevAnalytics.series)) {
+            for (var j = 0; j < prevAnalytics.series.length; j += 1) {
+              pushEntry(prevAnalytics.series[j]);
+            }
+          }
+          if (Array.isArray(catalogList)) {
+            for (var k = 0; k < catalogList.length; k += 1) {
+              pushEntry(catalogList[k]);
+            }
+          }
+          return blueprint;
+        }
+
+        function buildSalesTable(seriesList, months) {
+          var safeMonths = Array.isArray(months) ? months.slice() : [];
+          var rows = [];
+          var totals = [];
+          for (var i = 0; i < safeMonths.length; i += 1) {
+            totals.push({ index: i, value: 0 });
+          }
+          var yearly = 0;
+          if (Array.isArray(seriesList)) {
+            for (var s = 0; s < seriesList.length; s += 1) {
+              var series = seriesList[s];
+              if (!series || !series.id) continue;
+              var values = ensureSeriesLength(series.values, safeMonths.length);
+              var cells = [];
+              var sum = 0;
+              for (var m = 0; m < safeMonths.length; m += 1) {
+                var numeric = Number(values[m]);
+                if (!Number.isFinite(numeric)) numeric = 0;
+                numeric = Math.round(numeric * 10) / 10;
+                if (totals[m]) totals[m].value += numeric;
+                sum += numeric;
+                cells.push({ index: m, value: numeric });
+              }
+              yearly += sum;
+              rows.push({
+                id: series.id,
+                nameKey: series.nameKey || series.id,
+                color: series.color || null,
+                cells: cells,
+                total: Math.round(sum * 10) / 10
+              });
+            }
+          }
+          for (var t = 0; t < totals.length; t += 1) {
+            totals[t].value = Math.round(totals[t].value * 10) / 10;
+          }
+          return {
+            months: safeMonths,
+            rows: rows,
+            totals: totals,
+            yearlyTotal: Math.round(yearly * 10) / 10
+          };
+        }
+
+        function ensureLanguage(lang) {
+          if (typeof lang === 'string' && lang) {
+            var normalized = lang.toLowerCase();
+            return normalized === 'ar' ? 'ar' : normalized === 'en' ? 'en' : normalized;
+          }
+          return 'ar';
+        }
+
+        function cloneState(prev) {
+          try {
+            return JSON.parse(JSON.stringify(prev || {}));
+          } catch (err) {
+            if (!prev || typeof prev !== 'object') return {};
+            return Array.isArray(prev) ? prev.slice() : Object.assign({}, prev);
+          }
+        }
+
+        function commit(ctx, producer, after) {
+          if (!ctx) return;
+          if (typeof ctx.commit === 'function') {
+            return ctx.commit(producer, after);
+          }
+          if (typeof ctx.setState !== 'function') return;
+          ctx.setState(function (prev) {
+            var next = cloneState(prev);
+            if (typeof producer === 'function') {
+              producer(next, prev || {});
+            }
+            return next;
+          });
+          if (typeof after === 'function') {
+            window.setTimeout(function () {
+              try {
+                after(ctx.getState ? ctx.getState() : null, ctx);
+              } catch (err) {
+                console.error('[Mishkah] commit after hook failed', err);
+              }
+            }, 0);
+          }
+        }
+
+        function formatCurrency(amount, currency, lang) {
+          var safeLang = ensureLanguage(lang);
+          var code = currency && typeof currency === 'string' ? currency : 'SAR';
+          var numeric = Number(amount);
+          if (!Number.isFinite(numeric)) numeric = 0;
+          try {
+            return new Intl.NumberFormat(safeLang === 'ar' ? 'ar-SA' : 'en-US', {
+              style: 'currency',
+              currency: code,
+              maximumFractionDigits: 2
+            }).format(numeric);
+          } catch (err) {
+            var fixed = numeric.toFixed(2);
+            return safeLang === 'ar' ? fixed + ' ' + code : code + ' ' + fixed;
+          }
+        }
+
+        function ensureSalesPalette() {
+          var root = typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : null);
+          var palette = root && root.__mkQuickDashboardPalette;
+          if (!Array.isArray(palette) || !palette.length) {
+            palette = '#38bdf8,#f97316,#a855f7,#22c55e,#facc15,#ef4444'.split(',');
+            if (root) root.__mkQuickDashboardPalette = palette;
+          }
+          return palette;
+        }
+
+        function ensureQuickHydrationState() {
+          var root = typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : null);
+          var state = root && root.__mkQuickDashboardHydration;
+          if (!state || typeof state !== 'object') {
+            state = {
+              timer: null,
+              attempts: 0,
+              maxAttempts: 120,
+              ctx: null,
+              snapshot: undefined
+            };
+            if (root) root.__mkQuickDashboardHydration = state;
+          } else {
+            if (!Number.isFinite(state.maxAttempts) || state.maxAttempts <= 0) {
+              state.maxAttempts = 120;
+            }
+            if (!Object.prototype.hasOwnProperty.call(state, 'snapshot')) {
+              state.snapshot = undefined;
+            }
+          }
+          return state;
+        }
+
+        function markAutoConnection(auto) {
+          if (!auto) return false;
+          var root = typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : null);
+          var bucket = root && root.__mkQuickDashboardAutoConnections;
+          if (!bucket) {
+            if (typeof WeakSet === 'function') {
+              bucket = { kind: 'weak', store: new WeakSet() };
+            } else {
+              bucket = { kind: 'list', store: [] };
+            }
+            if (root) root.__mkQuickDashboardAutoConnections = bucket;
+          }
+          if (bucket.kind === 'weak' && bucket.store) {
+            if (bucket.store.has(auto)) return false;
+            bucket.store.add(auto);
+            return true;
+          }
+          if (bucket.store && typeof bucket.store.push === 'function') {
+            if (bucket.store.indexOf(auto) !== -1) return false;
+            bucket.store.push(auto);
+            return true;
+          }
+          return !auto.__mkQuickDashboardConnected;
+        }
+
+        function runQuickDashboardHydration(ctx, snapshot) {
+          ensureHelperBindings(snapshot);
+          var context = ctx || window.MishkahAuto || null;
+          var state = snapshot;
+          if (state == null && typeof resolveAutoState === 'function') {
+            state = resolveAutoState(context);
+          }
+          if (!state && context && typeof context.getState === 'function') {
+            try {
+              state = context.getState();
+            } catch (errState) {
+              state = context.state || state;
+            }
+          }
+          if (!state && context && context.state) {
+            state = context.state;
+          }
+          ensureHelperBindings(state);
+          var hydrated = false;
+          try {
+            hydrated = syncSalesChart(state, context);
+          } catch (err) {
+            console.warn('[Mishkah] quick dashboard chart hydration failed', err);
+          }
+          if (state) {
+            ensureCountdownLoop(state);
+          }
+          return !!hydrated;
+        }
+
+        function queueQuickDashboardHydration(options) {
+          var quickHydration = ensureQuickHydrationState();
+          var opts = options || {};
+          if (opts.ctx) {
+            var nextCtx = opts.ctx;
+            var currentCtx = quickHydration.ctx;
+            var nextHasState = nextCtx && typeof nextCtx.getState === 'function';
+            var currentHasState = currentCtx && typeof currentCtx.getState === 'function';
+            if (!currentCtx || (nextHasState && !currentHasState)) {
+              quickHydration.ctx = nextCtx;
+            } else if (!currentHasState && !nextHasState) {
+              quickHydration.ctx = nextCtx;
+            } else if (nextHasState && currentHasState) {
+              quickHydration.ctx = nextCtx;
+            }
+          }
+          if (Object.prototype.hasOwnProperty.call(opts, 'snapshot')) {
+            quickHydration.snapshot = ensureHelperBindings(opts.snapshot);
+          }
+          var immediate = opts.immediate === true;
+          var delay = immediate ? 0 : Math.min(240, 12 + quickHydration.attempts * 18);
+          if (quickHydration.timer) {
+            if (!immediate) return;
+            window.clearTimeout(quickHydration.timer);
+            quickHydration.timer = null;
+          }
+          quickHydration.timer = window.setTimeout(function () {
+            quickHydration.timer = null;
+            var snapshot = ensureHelperBindings(quickHydration.snapshot);
+            quickHydration.snapshot = undefined;
+            var ok = runQuickDashboardHydration(quickHydration.ctx, snapshot);
+            if (ok) {
+              quickHydration.attempts = 0;
+              return;
+            }
+            if (quickHydration.attempts < quickHydration.maxAttempts) {
+              quickHydration.attempts += 1;
+              queueQuickDashboardHydration({ ctx: quickHydration.ctx });
+            }
+          }, delay);
+        }
+
+        function numericList(values) {
+          var list = [];
+          if (!Array.isArray(values)) return list;
+          for (var i = 0; i < values.length; i += 1) {
+            var value = Number(values[i]);
+            if (Number.isFinite(value)) {
+              list.push(value);
+            }
+          }
+          return list;
+        }
+
+        function averageOf(list) {
+          if (!list.length) return NaN;
+          var total = 0;
+          for (var i = 0; i < list.length; i += 1) {
+            total += list[i];
+          }
+          return total / list.length;
+        }
+
+        function translateKey(ctx, key, state) {
+          if (!key) return '';
+          if (ctx && typeof ctx.trans === 'function') {
+            try {
+              return ctx.trans(key);
+            } catch (_err) {}
+          }
+          if (ctx && ctx.app && typeof ctx.app.trans === 'function') {
+            try {
+              return ctx.app.trans(key);
+            } catch (_err2) {}
+          }
+          var lang = state && state.env ? state.env.lang : null;
+          var strings = state && state.i18n && state.i18n.strings ? state.i18n.strings : null;
+          if (strings && strings[key]) {
+            var entry = strings[key];
+            if (lang && entry[lang]) return entry[lang];
+            if (entry.en) return entry.en;
+            for (var entryKey in entry) {
+              if (Object.prototype.hasOwnProperty.call(entry, entryKey)) {
+                return entry[entryKey];
+              }
+            }
+          }
+          var host = window.Mishkah || window.Mishka || null;
+          if (host && host.i18n && typeof host.i18n.translate === 'function') {
+            try {
+              return host.i18n.translate(key, lang);
+            } catch (_err3) {}
+          }
+          return key;
+        }
+
+        function resolveAnalytics(state) {
+          var data = state && state.data ? state.data.analytics : null;
+          return data && typeof data === 'object' ? data : null;
+        }
+
+        function resolveMonths(state, analytics) {
+          var lang = ensureLanguage(state && state.env && state.env.lang);
+          var monthsSource = analytics && analytics.months ? analytics.months : null;
+          var list = [];
+          if (Array.isArray(monthsSource)) {
+            list = monthsSource.slice();
+          } else if (monthsSource && typeof monthsSource === 'object') {
+            if (lang && Array.isArray(monthsSource[lang])) {
+              list = monthsSource[lang].slice();
+            } else if (Array.isArray(monthsSource.default)) {
+              list = monthsSource.default.slice();
+            }
+          }
+          if (!list.length) {
+            list = (lang === 'ar'
+              ? ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+              : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            ).slice();
+          }
+          return list
+            .map(function (label) {
+              return label == null ? '' : String(label).trim();
+            })
+            .filter(function (label) {
+              return label.length > 0;
+            });
+        }
+
+        function currentAnalyticsMonth(state) {
+          var analytics = resolveAnalytics(state);
+          if (!analytics) return '';
+          var months = resolveMonths(state, analytics);
+          if (!months.length) return '';
+          var index = typeof analytics.monthIndex === 'number' ? analytics.monthIndex : months.length - 1;
+          if (index < 0 || index >= months.length) index = months.length - 1;
+          return months[index] || '';
+        }
+
+        function latestValue(series) {
+          var values = numericList(series && series.values);
+          if (!values.length) return 0;
+          return values[values.length - 1];
+        }
+
+        function sumSeries(series) {
+          var values = numericList(series && series.values);
+          if (!values.length) return 0;
+          var total = 0;
+          for (var i = 0; i < values.length; i += 1) {
+            total += values[i];
+          }
+          return Math.round(total * 10) / 10;
+        }
+
+        function formatThousands(value, unit, lang) {
+          var numeric = Number(value);
+          if (!Number.isFinite(numeric)) numeric = 0;
+          var safeLang = ensureLanguage(lang);
+          var formatted;
+          try {
+            formatted = new Intl.NumberFormat(safeLang === 'ar' ? 'ar-SA' : 'en-US', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }).format(numeric);
+          } catch (err) {
+            formatted = numeric.toFixed(2);
+          }
+          var suffix = unit || '$';
+          if (suffix && typeof suffix === 'string') {
+            var lower = suffix.toLowerCase();
+            if (lower === 'k' || lower === 'thousand') {
+              suffix = '$';
+            }
+          }
+          return suffix + formatted;
+        }
+
+        function ensureHelperBindings(target) {
+          if (!target || typeof target !== 'object') return target;
+          var helpers = target.helpers;
+          if (!helpers || typeof helpers !== 'object') {
+            helpers = {};
+            target.helpers = helpers;
+          }
+          var registry = {
+            formatCurrency: formatCurrency,
+            currentAnalyticsMonth: currentAnalyticsMonth,
+            latestValue: latestValue,
+            sumSeries: sumSeries,
+            formatThousands: formatThousands
+          };
+          for (var key in registry) {
+            if (!Object.prototype.hasOwnProperty.call(registry, key)) continue;
+            var fn = registry[key];
+            if (typeof fn !== 'function') continue;
+            helpers[key] = fn;
+            target[key] = fn;
+          }
+          return target;
+        }
+
+        function hexToRgba(color, alpha) {
+          if (!color || typeof color !== 'string') return null;
+          if (color.indexOf('#') === 0) {
+            var hex = color.slice(1);
+            if (hex.length === 3) {
+              hex = hex.split('').map(function (char) { return char + char; }).join('');
+            }
+            var value = parseInt(hex, 16);
+            if (Number.isNaN(value)) return null;
+            var r = (value >> 16) & 255;
+            var g = (value >> 8) & 255;
+            var b = value & 255;
+            return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+          }
+          if (color.indexOf('rgba') === 0) {
+            return color.replace(/rgba\(([^)]+)\)/, function (_, values) {
+              var parts = values.split(',').map(function (part) { return part.trim(); });
+              while (parts.length < 4) parts.push('1');
+              parts[3] = String(alpha);
+              return 'rgba(' + parts.join(',') + ')';
+            });
+          }
+          if (color.indexOf('rgb') === 0) {
+            return color.replace(/rgb\(([^)]+)\)/, function (_, values) {
+              return 'rgba(' + values + ',' + alpha + ')';
+            });
+          }
+          return null;
+        }
+
+        function pickPaletteColor(index) {
+          var palette = ensureSalesPalette();
+          if (!palette.length) return '#38bdf8';
+          return palette[index % palette.length];
+        }
+
+        function ensureSeriesLength(values, count) {
+          var list = numericList(values);
+          var safeCount = Number(count);
+          if (!Number.isFinite(safeCount) || safeCount <= 0) return list;
+          if (list.length > safeCount) {
+            list.length = safeCount;
+          } else if (list.length < safeCount) {
+            var filler = list.length ? list[list.length - 1] : 0;
+            while (list.length < safeCount) {
+              list.push(filler);
+            }
+          }
+          return list;
+        }
+
+        function buildSalesDatasets(seriesList, months, ctx, state) {
+          var datasets = [];
+          if (!Array.isArray(seriesList)) return datasets;
+          var count = months.length || 0;
+          for (var i = 0; i < seriesList.length; i += 1) {
+            var entry = seriesList[i] || {};
+            var values = ensureSeriesLength(entry.values, count);
+            if (!values.length) continue;
+            var color = entry.color || pickPaletteColor(i);
+            var label = translateKey(ctx, entry.nameKey || entry.id, state);
+            var background = hexToRgba(color, 0.18) || color;
+            datasets.push({
+              label: label || (entry.id ? String(entry.id) : 'Series ' + (i + 1)),
+              data: values,
+              borderColor: color,
+              backgroundColor: background,
+              pointBackgroundColor: color,
+              pointBorderColor: color,
+              tension: 0.35,
+              fill: false,
+              pointRadius: 3,
+              pointHoverRadius: 4
+            });
+          }
+          return datasets;
+        }
+
+        function generateSalesSeries(previousValues, count, metrics, catalogItem) {
+          var prevList = numericList(previousValues);
+          var safeCount = Math.max(1, Number(count) || prevList.length || 12);
+          var baseline = prevList.length ? prevList[prevList.length - 1] : averageOf(prevList);
+          if (!Number.isFinite(baseline) || baseline <= 0) {
+            var basePrice = catalogItem && Number.isFinite(Number(catalogItem.price)) ? Number(catalogItem.price) : 18;
+            baseline = basePrice * 0.6 + Math.random() * 6;
+          }
+          var revenue = metrics && Number(metrics.revenue);
+          if (Number.isFinite(revenue) && revenue > 0) {
+            var normalized = revenue / 1000 / safeCount;
+            if (Number.isFinite(normalized) && normalized > 0) {
+              baseline = (baseline * 0.55) + (normalized * 0.45);
+            }
+          }
+          var values = [];
+          var current = baseline * (0.85 + Math.random() * 0.3);
+          for (var i = 0; i < safeCount; i += 1) {
+            var drift = (Math.random() - 0.5) * Math.max(baseline * 0.28, 2.5);
+            current = Math.max(2.5, current + drift);
+            if (catalogItem && Number.isFinite(Number(catalogItem.price))) {
+              current = Math.max(current, Number(catalogItem.price) * 0.35);
+            }
+            values.push(Math.round(current * 10) / 10);
+          }
+          return values;
+        }
+
+        function applyLegendSwatches(state) {
+          var analytics = resolveAnalytics(state);
+          if (!analytics || !Array.isArray(analytics.series) || !analytics.series.length) return;
+          var nodes = document.querySelectorAll('[data-series-swatch]');
+          if (!nodes || !nodes.length) return;
+          var colorMap = Object.create(null);
+          for (var i = 0; i < analytics.series.length; i += 1) {
+            var entry = analytics.series[i];
+            if (!entry || !entry.id) continue;
+            colorMap[entry.id] = entry.color || pickPaletteColor(i) || 'var(--primary)';
+          }
+          for (var j = 0; j < nodes.length; j += 1) {
+            var node = nodes[j];
+            if (!node || !node.getAttribute) continue;
+            var id = node.getAttribute('data-series-id');
+            var color = (id && colorMap[id]) || pickPaletteColor(j) || 'var(--primary)';
+            try {
+              node.style.backgroundColor = color;
+            } catch (_err) {
+              node.setAttribute('data-series-color', color);
+            }
+          }
+        }
+
+        function syncSalesChart(state, ctx) {
+          var context = ctx || window.MishkahAuto || null;
+          if (!state && context && typeof context.getState === 'function') {
+            try {
+              state = context.getState();
+            } catch (err) {
+              state = null;
+            }
+          }
+          if (!state && context && context.state) {
+            state = context.state;
+          }
+          var analytics = resolveAnalytics(state);
+          if (!analytics) return false;
+          var canvas = document.getElementById('quick-sales-chart');
+          if (!canvas) return false;
+          var host = window.Mishkah || window.Mishka || null;
+          var chartApi = host && host.UI ? host.UI.Chart : null;
+          applyLegendSwatches(state);
+          if (!chartApi) {
+            return false;
+          }
+
+          var months = resolveMonths(state, analytics);
+          var datasets = buildSalesDatasets(analytics.series || [], months, context, state);
+          if (!datasets.length) return false;
+
+          if (typeof toCsv === 'function') {
+            canvas.setAttribute('data-chart-labels', toCsv(months));
+          }
+
+          var chartMeta = analytics.chart && typeof analytics.chart === 'object' ? analytics.chart : {};
+          var type = chartMeta.type || canvas.getAttribute('data-chart-type') || canvas.getAttribute('data-chart-auto') || 'line';
+          var options = chartMeta.options && typeof chartMeta.options === 'object' ? cloneState(chartMeta.options) : {};
+          if (!options.plugins) options.plugins = {};
+          if (!options.plugins.legend) options.plugins.legend = { position: 'top' };
+          if (options.maintainAspectRatio == null) options.maintainAspectRatio = false;
+          if (options.responsive == null) options.responsive = true;
+
+          var data = { labels: months.slice(), datasets: datasets };
+          if (chartMeta.height) {
+            canvas.setAttribute('data-chart-height', chartMeta.height);
+          }
+          if (chartMeta.titleKey) {
+            canvas.setAttribute('data-chart-title', translateKey(context, chartMeta.titleKey, state));
+            canvas.setAttribute('data-chart-title-key', chartMeta.titleKey);
+          }
+
+          var resolvedHeight = Number(chartMeta.height);
+          if (!Number.isFinite(resolvedHeight) || resolvedHeight <= 0) {
+            var attrHeight = Number(canvas.getAttribute('data-chart-height'));
+            if (Number.isFinite(attrHeight) && attrHeight > 0) {
+              resolvedHeight = attrHeight;
+            }
+          }
+          if (!Number.isFinite(resolvedHeight) || resolvedHeight <= 0) {
+            resolvedHeight = 320;
+          }
+          resolvedHeight = Math.max(160, Math.round(resolvedHeight));
+          canvas.setAttribute('height', resolvedHeight);
+          canvas.setAttribute('data-chart-height', resolvedHeight);
+          try {
+            canvas.height = resolvedHeight;
+          } catch (_errHeight) {}
+          if (canvas.style) {
+            canvas.style.height = resolvedHeight + 'px';
+            canvas.style.minHeight = resolvedHeight + 'px';
+            canvas.style.maxHeight = resolvedHeight + 'px';
+            if (!canvas.style.width) canvas.style.width = '100%';
+            if (!canvas.style.display) canvas.style.display = 'block';
+          } else {
+            canvas.setAttribute('style', 'height:' + resolvedHeight + 'px;min-height:' + resolvedHeight + 'px;max-height:' + resolvedHeight + 'px;width:100%;display:block;');
+          }
+
+          var payload = typeof chartApi.buildPayload === 'function'
+            ? chartApi.buildPayload(type, data, options)
+            : { type: type, data: data, options: options };
+          var encoded = typeof chartApi.encodePayload === 'function'
+            ? chartApi.encodePayload(payload)
+            : JSON.stringify(payload);
+          canvas.setAttribute('data-m-chart', encoded);
+
+          var ensured = null;
+          if (typeof chartApi.ensureLibrary === 'function') {
+            try {
+              ensured = chartApi.ensureLibrary();
+            } catch (_errEnsure) {
+              ensured = null;
+            }
+          }
+          var hydrate = function () {
+            if (typeof chartApi.hydrate === 'function') {
+              chartApi.hydrate(canvas.parentNode || document);
+            }
+            if (typeof chartApi.freeze === 'function') {
+              chartApi.freeze(canvas.parentNode || canvas);
+            }
+          };
+          if (ensured && typeof ensured.then === 'function') {
+            ensured.then(hydrate).catch(hydrate);
+            return true;
+          }
+          hydrate();
+          return true;
+        }
+
+        function ensureCountdownLoop(state) {
+          var node = document.querySelector('[data-countdown]');
+          if (!node) return;
+          var seconds = state && state.data && state.data.timer ? Number(state.data.timer.seconds) : NaN;
+          if (!Number.isFinite(seconds) || seconds <= 0) seconds = 270;
+          if (state && state.data && state.data.ui && state.data.ui.countdownTemplate) {
+            node.setAttribute('data-countdown-template', state.data.ui.countdownTemplate);
+          }
+          node.dataset.countdownBaseline = String(seconds);
+          if (!node.__mkCountdownLoop) {
+            node.__mkCountdownLoop = true;
+            node.addEventListener('countdown:finished', function () {
+              var baseline = Number(node.dataset.countdownBaseline);
+              if (!Number.isFinite(baseline) || baseline <= 0) baseline = seconds;
+              window.requestAnimationFrame(function () {
+                node.setAttribute('data-countdown', baseline);
+              });
+            });
+          }
+          var current = Number(node.getAttribute('data-countdown'));
+          if (!Number.isFinite(current) || Math.abs(current - seconds) > 0.5) {
+            node.setAttribute('data-countdown', seconds);
+          }
+        }
+
+        function randomizeSalesReport(event, ctx, opts) {
+          if (event && typeof event.preventDefault === 'function') {
+            event.preventDefault();
+          }
+          var options = opts && typeof opts === 'object' && !Array.isArray(opts) ? opts : {};
+          var context = ctx || options.ctx || window.MishkahAuto || null;
+          if (!context) return false;
+
+          var snapshot = ensureHelperBindings(options.snapshot || null);
+          if (!snapshot && typeof resolveAutoState === 'function') {
+            snapshot = ensureHelperBindings(resolveAutoState(context));
+          }
+          if (!snapshot && context) {
+            if (typeof context.getState === 'function') {
+              try {
+                snapshot = ensureHelperBindings(context.getState());
+              } catch (_errGetState) {
+                snapshot = ensureHelperBindings(context.state || null);
+              }
+            } else if (context.state) {
+              snapshot = ensureHelperBindings(context.state);
+            }
+          }
+
+          var analyticsState = resolveAnalytics(snapshot);
+          if (analyticsState && analyticsState.autoSimulate === false && options.force !== true) {
+            if (options.bootstrap && snapshot) {
+              ensureCountdownLoop(snapshot);
+              queueQuickDashboardHydration({ ctx: context, snapshot: snapshot, immediate: true });
+            }
+            return true;
+          }
+
+          var hasValues = false;
+          if (analyticsState && Array.isArray(analyticsState.series)) {
+            for (var s = 0; s < analyticsState.series.length; s += 1) {
+              var seriesEntry = analyticsState.series[s];
+              if (!seriesEntry || !Array.isArray(seriesEntry.values)) continue;
+              if (numericList(seriesEntry.values).length) {
+                hasValues = true;
+                break;
+              }
+            }
+          }
+          if (options.bootstrap && hasValues && options.force !== true) {
+            if (snapshot) {
+              ensureCountdownLoop(snapshot);
+              queueQuickDashboardHydration({ ctx: context, snapshot: snapshot, immediate: true });
+            }
+            return true;
+          }
+
+          var performed = false;
+          commit(context, function (next, prev) {
+            next.data = next.data || {};
+            var analytics = next.data.analytics && typeof next.data.analytics === 'object' ? next.data.analytics : {};
+            next.data.analytics = analytics;
+            ensureHelperBindings(next);
+
+            if (analytics.autoSimulate === false && options.force !== true) {
+              return;
+            }
+
+            var prevAnalytics = prev && prev.data && typeof prev.data.analytics === 'object' ? prev.data.analytics : null;
+            var reusePrevious = options.reusePrevious === true;
+            var months = resolveMonths(prev || next, analytics);
+            if (!months.length) {
+              months = resolveMonths(next, analytics);
+            }
+            var monthCount = months.length || 12;
+            var catalogList = resolveCatalog(next);
+            if (!catalogList.length && prev && prev.data) {
+              catalogList = resolveCatalog(prev);
+            }
+            var catalogMap = buildCatalogMap(catalogList);
+            var blueprint = ensureSeriesBlueprint(analytics, catalogList, prevAnalytics);
+            if (!blueprint.length) return;
+            var prevMap = Object.create(null);
+            if (prevAnalytics && Array.isArray(prevAnalytics.series)) {
+              for (var p = 0; p < prevAnalytics.series.length; p += 1) {
+                var entryPrev = prevAnalytics.series[p];
+                if (entryPrev && entryPrev.id) {
+                  prevMap[entryPrev.id] = entryPrev;
+                }
+              }
+            }
+            var metricsSource = next.data.metrics && typeof next.data.metrics === 'object' ? next.data.metrics : null;
+            if ((!metricsSource || typeof metricsSource !== 'object') && prev && prev.data && typeof prev.data.metrics === 'object') {
+              metricsSource = prev.data.metrics;
+            }
+            var updatedSeries = [];
+            for (var index = 0; index < blueprint.length; index += 1) {
+              var base = blueprint[index];
+              if (!base || !base.id) continue;
+              var reference = prevMap[base.id];
+              var color = base.color || (reference && reference.color) || pickPaletteColor(index);
+              var shouldReuseValues = reusePrevious || options.bootstrap === true;
+              var seedValues = shouldReuseValues && reference ? reference.values : null;
+              var values = generateSalesSeries(seedValues, monthCount, metricsSource, catalogMap[base.id]);
+              updatedSeries.push({
+                id: base.id,
+                nameKey: base.nameKey || base.id,
+                color: color,
+                values: values
+              });
+            }
+            if (!updatedSeries.length) return;
+
+            analytics.series = updatedSeries;
+            analytics.monthIndex = monthCount - 1;
+            analytics.unit = analytics.unit || 'K';
+            analytics.unitLabelKey = analytics.unitLabelKey || 'quick.sales.unit';
+            analytics.chart = analytics.chart || {};
+            if (!analytics.chart.type) analytics.chart.type = 'line';
+            if (!analytics.chart.height) analytics.chart.height = 320;
+            if (!analytics.chart.titleKey) analytics.chart.titleKey = 'quick.sales.title';
+            analytics.autoSimulate = analytics.autoSimulate === false ? false : true;
+            analytics.updatedAt = new Date().toISOString();
+
+            var table = buildSalesTable(updatedSeries, months);
+            analytics.table = table;
+
+            next.data.metrics = next.data.metrics || {};
+            var averagePrice = computeAveragePrice(catalogMap);
+            var yearlyK = table.yearlyTotal || 0;
+            var revenueVariance = 0.9 + Math.random() * 0.25;
+            var revenue = Math.max(0, yearlyK * 1000 * revenueVariance);
+            var orderBase = revenue / Math.max(averagePrice, 1);
+            var orderVariance = 0.85 + Math.random() * 0.3;
+
+            next.data.metrics.revenue = Math.round(revenue);
+            next.data.metrics.orders = Math.max(1, Math.round(orderBase * orderVariance));
+
+            performed = true;
+          }, function (latest) {
+            var nextSnapshot = ensureHelperBindings(latest || null);
+            if (nextSnapshot) {
+              ensureCountdownLoop(nextSnapshot);
+            }
+            if (performed || (options.bootstrap && nextSnapshot)) {
+              queueQuickDashboardHydration({ ctx: context, snapshot: nextSnapshot, immediate: true });
+            }
+          });
+
+          return performed;
+        }
+
+        function resolveAutoState(source) {
+          var auto = source || window.MishkahAuto || null;
+          if (!auto) return null;
+          if (typeof auto.getState === 'function') {
+            try {
+              return auto.getState();
+            } catch (err) {
+              return auto.state || null;
+            }
+          }
+          return auto.state || null;
+        }
+
+        function connectAutoState(auto) {
+          if (!auto || typeof auto.onState !== 'function') return;
+          var fresh = true;
+          try {
+            fresh = markAutoConnection(auto);
+          } catch (_errMark) {
+            fresh = !auto.__mkQuickDashboardConnected;
+          }
+          if (!fresh) return;
+          auto.__mkQuickDashboardConnected = true;
+
+          var prevTheme = null;
+          auto.onState(function (snapshot) {
+            var resolved = ensureHelperBindings(snapshot || null);
+            ensureCountdownLoop(resolved);
+
+            var currentTheme = resolved && resolved.env && resolved.env.theme;
+            if (prevTheme !== null && prevTheme !== currentTheme) {
+              window.setTimeout(function() {
+                queueQuickDashboardHydration({ ctx: auto, snapshot: resolved, immediate: true });
+              }, 50);
+            } else {
+              queueQuickDashboardHydration({ ctx: auto, snapshot: resolved, immediate: true });
+            }
+            prevTheme = currentTheme;
+          });
+        }
+
+        function onAutoReady(callback) {
+          if (typeof callback !== 'function') return;
+          var auto = window.MishkahAuto || null;
+          if (auto && typeof auto.ready === 'function') {
+            var result = auto.ready(function () {
+              callback(window.MishkahAuto || auto || null);
+            });
+            if (result && typeof result.catch === 'function') {
+              result.catch(function () {
+                callback(window.MishkahAuto || auto || null);
+              });
+            }
+            return;
+          }
+          if (auto && typeof auto.ready !== 'function') {
+            callback(auto);
+            return;
+          }
+          window.addEventListener(
+            'mishkah:auto-ready',
+            function handleAutoReady() {
+              window.removeEventListener('mishkah:auto-ready', handleAutoReady);
+              callback(window.MishkahAuto || null);
+            },
+            { once: true }
+          );
+        }
+
+        function toggleLiveData(event, ctx) {
+          if (event && typeof event.preventDefault === 'function') {
+            event.preventDefault();
+          }
+          var context = ctx || window.MishkahAuto || null;
+          if (!context) return;
+
+          commit(context, function (next, prev) {
+            next.data = next.data || {};
+            next.data.liveData = next.data.liveData || { enabled: false, interval: null };
+
+            var wasEnabled = prev.data && prev.data.liveData && prev.data.liveData.enabled;
+            next.data.liveData.enabled = !wasEnabled;
+
+            if (next.data.liveData.enabled && !next.data.liveData.interval) {
+              var intervalId = window.setInterval(function() {
+                randomizeSalesReport(null, context, { force: true, reusePrevious: false });
+              }, 1000);
+              next.data.liveData.interval = intervalId;
+            } else if (!next.data.liveData.enabled && next.data.liveData.interval) {
+              window.clearInterval(next.data.liveData.interval);
+              next.data.liveData.interval = null;
+            }
+          }, function (latest) {
+            if (latest && latest.data && latest.data.liveData && latest.data.liveData.enabled) {
+              randomizeSalesReport(null, context, { force: true, reusePrevious: false });
+            }
+          });
+        }
+
+        function quickDashboardMount(app, helpers) {
+          var ctx = app || (helpers && helpers.app) || window.MishkahAuto || null;
+          if (ctx) {
+            connectAutoState(ctx);
+          }
+          var auto = window.MishkahAuto || null;
+          if (auto && auto !== ctx) {
+            connectAutoState(auto);
+          }
+          var initial = resolveAutoState(ctx);
+          if (!initial && ctx && typeof ctx.getState === 'function') {
+            try {
+              initial = ctx.getState();
+            } catch (_errInitial) {
+              initial = ctx.state || null;
+            }
+          }
+          if (!initial && auto && typeof auto.getState === 'function') {
+            try {
+              initial = auto.getState();
+            } catch (_errAuto) {
+              initial = auto.state || null;
+            }
+          }
+          initial = ensureHelperBindings(initial || null);
+          var seeded = randomizeSalesReport(null, ctx || auto, { snapshot: initial || null, bootstrap: true });
+          if (!seeded) {
+            if (initial) {
+              ensureCountdownLoop(initial);
+            }
+            queueQuickDashboardHydration({ ctx: ctx || auto, snapshot: initial || null, immediate: true });
+          }
+          onAutoReady(function (instance) {
+            var target = instance || window.MishkahAuto || ctx || null;
+            connectAutoState(target);
+            var snapshot = ensureHelperBindings(resolveAutoState(target) || initial || null);
+            var seededUpdate = randomizeSalesReport(null, target || ctx, { snapshot: snapshot, bootstrap: true });
+            if (!seededUpdate) {
+              if (snapshot) {
+                ensureCountdownLoop(snapshot);
+              }
+              queueQuickDashboardHydration({ ctx: target || ctx, snapshot: snapshot, immediate: true });
+            }
+          });
+          if (initial) {
+            ensureCountdownLoop(initial);
+          }
+          queueQuickDashboardHydration({ ctx: ctx || auto, snapshot: initial || null, immediate: true });
+          onAutoReady(function (instance) {
+            var target = instance || window.MishkahAuto || ctx || null;
+            connectAutoState(target);
+            var snapshot = ensureHelperBindings(resolveAutoState(target) || initial || null);
+            queueQuickDashboardHydration({ ctx: target || ctx, snapshot: snapshot, immediate: true });
+          });
+        }
+
+        // __init__ hook - called automatically by HTMLx after mount
+        function __init__(app, helpers) {
+          setTimeout(function() {
+            quickDashboardMount(app, helpers);
+          }, 16);
+        }
+      </script>
+    </template>
+  </body>
+</html>

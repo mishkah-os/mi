@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mishkah Dynamic CRUD Testing</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <style>
+    :root {
+      --app-chrome-offset: 200px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #e5e7eb;
+      padding: 0;
+      margin: 0;
+      height: 100vh;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    body.sql-resizing {
+      cursor: row-resize;
+      user-select: none;
+    }
+
+    .container {
+      width: 100%;
+      margin: 0;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      overflow: hidden;
+      height: 100%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      flex: 1 0 auto;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 48px;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+
+    .tabs-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 6px 18px 10px;
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      flex-wrap: wrap;
+    }
+
+    .connection-bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .connection-bar input,
+    .connection-bar select,
+    .connection-bar button {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      border: 1px solid #d1d5db;
+    }
+
+    .connection-bar select {
+      min-width: 150px;
+      background: white;
+    }
+
+    .connection-bar button {
+      background: #667eea;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .connection-bar button:hover {
+      background: #5568d3;
+    }
+
+    .connection-bar button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .status.connected {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .status.disconnected {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .tabs-bar {
+      display: flex;
+      gap: 8px;
+      padding: 0;
+      flex: 1 1 auto;
+      min-width: 200px;
+    }
+
+    .tab {
+      padding: 6px 14px;
+      border: none;
+      background: #f3f4f6;
+      color: #374151;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+      font-size: 13px;
+    }
+
+    .tab.active {
+      background: #111827;
+      color: white;
+      box-shadow: 0 4px 12px rgba(17, 24, 39, 0.15);
+    }
+
+    .panel-wrapper {
+      flex: 0 0 auto;
+      height: calc(100vh - var(--app-chrome-offset));
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #f3f4f6;
+      padding: 12px 16px 16px;
+      gap: 12px;
+    }
+
+    .view-panel {
+      display: none !important;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      border-radius: 16px;
+      background: white;
+    }
+
+    .view-panel.active {
+      display: flex !important;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    }
+
+    .main-content {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #f9fafb;
+      border-left: 1px solid #e5e7eb;
+      padding: 16px;
+      overflow-y: auto;
+      min-height: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .table-list {
+      list-style: none;
+    }
+
+    .table-item {
+      padding: 10px 12px;
+      margin-bottom: 4px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 14px;
+      color: #374151;
+    }
+
+    .table-item:hover {
+      background: #e5e7eb;
+    }
+
+    .table-item.active {
+      background: #667eea;
+      color: white;
+      font-weight: 500;
+    }
+
+    .content-area {
+      flex: 1;
+      padding: 16px 24px;
+      overflow: auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sql-panel {
+      flex: 1;
+      flex-direction: column;
+      padding: 16px;
+      gap: 16px;
+      background: transparent;
+      overflow: hidden;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .sql-admin-layout {
+      display: flex;
+      flex: 1;
+      gap: 16px;
+      min-height: 0;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .sql-sidebar {
+      width: 280px;
+      flex: 0 0 280px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .sql-sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .sql-sidebar h3 {
+      margin: 0;
+      font-size: 14px;
+      color: #111827;
+    }
+
+    .sql-tree {
+      flex: 1;
+      overflow-y: auto;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sql-tree-group {
+      margin-bottom: 16px;
+    }
+
+    .sql-tree-group h4 {
+      font-size: 12px;
+      font-weight: 700;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 4px;
+    }
+
+    .sql-tree-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sql-tree-item {
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #111827;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .sql-tree-item:hover {
+      background: #f3f4f6;
+    }
+
+    .sql-tree-item small {
+      color: #6b7280;
+      font-size: 11px;
+    }
+
+    .sql-workspace {
+      flex: 1;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      gap: 12px;
+      height: 100%;
+    }
+
+    .sql-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sql-toolbar h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #111827;
+    }
+
+    .sql-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sql-editor {
+      --sql-editor-height: 260px;
+      flex: 0 0 auto;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #0d1117;
+      height: var(--sql-editor-height);
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sql-editor .CodeMirror {
+      flex: 1;
+      height: 100%;
+      font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      direction: ltr;
+    }
+
+    .sql-resizer {
+      flex: 0 0 auto;
+      height: 12px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: row-resize;
+      position: relative;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .sql-resizer::after {
+      content: '';
+      width: 80px;
+      height: 2px;
+      border-radius: 999px;
+      background: #9ca3af;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
+    }
+
+    .sql-resizer:hover,
+    .sql-resizer.dragging {
+      background: #c7d2fe;
+      box-shadow: inset 0 0 0 1px #a5b4fc;
+    }
+
+    .sql-results {
+      flex: 1 1 auto;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 12px;
+      background: #f9fafb;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .sql-results .table-container {
+      flex: 1;
+      width: 100%;
+      min-height: 0;
+      overflow: auto;
+      border-radius: 8px;
+      background: white;
+      scrollbar-gutter: stable both-edges;
+    }
+
+    .sql-placeholder {
+      text-align: center;
+      color: #6b7280;
+      padding: 30px 10px;
+      font-size: 14px;
+    }
+
+    .sql-placeholder strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+
+    .sql-results table {
+      width: max-content;
+      min-width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .sql-results th,
+    .sql-results td {
+      border: 1px solid #e5e7eb;
+      padding: 6px 10px;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .sql-results thead {
+      background: #eef2ff;
+    }
+
+    .sql-meta {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+
+    .sql-context-menu {
+      position: fixed;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+      min-width: 200px;
+      z-index: 10000;
+      display: none;
+    }
+
+    .sql-context-menu.visible {
+      display: block;
+    }
+
+    .sql-context-menu button {
+      width: 100%;
+      padding: 10px 14px;
+      border: none;
+      background: transparent;
+      text-align: right;
+      font-size: 13px;
+      cursor: pointer;
+      color: #111827;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+
+    .sql-context-menu button:hover {
+      background: #f3f4f6;
+    }
+
+    .sql-context-menu small {
+      color: #6b7280;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .toolbar h2 {
+      font-size: 20px;
+      color: #111827;
+    }
+
+    .toolbar .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: white;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: #f9fafb;
+    }
+
+    .btn-primary {
+      background: #667eea;
+      color: white;
+      border-color: #667eea;
+    }
+
+    .btn-primary:hover {
+      background: #5568d3;
+    }
+
+    .btn-success {
+      background: #10b981;
+      color: white;
+      border-color: #10b981;
+    }
+
+    .btn-success:hover {
+      background: #059669;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead {
+      background: #f9fafb;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    th {
+      padding: 12px;
+      text-align: right;
+      font-weight: 600;
+      color: #374151;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    tbody tr:hover {
+      background: #f9fafb;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="datetime-local"],
+    textarea {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: inherit;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .fk-field {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .fk-value {
+      flex: 1;
+    }
+
+    .fk-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #6b7280;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e5e7eb;
+      border-top-color: #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #6b7280;
+    }
+
+    .empty-state svg {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 16px;
+      opacity: 0.3;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      padding: 12px 20px;
+      background: #111827;
+      color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+    }
+
+    .toast.success {
+      background: #10b981;
+    }
+
+    .toast.error {
+      background: #ef4444;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .pagination button {
+      padding: 6px 12px;
+      border: 1px solid #d1d5db;
+      background: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .pagination span {
+      font-size: 14px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>🔥 Mishkah Dynamic CRUD</h1>
+    </div>
+
+    <div class="tabs-row">
+      <div class="tabs-bar">
+        <button class="tab active" type="button" data-tab="crud">🧩 CRUD</button>
+        <button class="tab" type="button" data-tab="sqlite">🗄️ SQLite Admin</button>
+      </div>
+
+      <div class="connection-bar">
+        <select id="branchId">
+          <option value="">-- اختر الفرع --</option>
+        </select>
+        <select id="moduleId">
+          <option value="">-- اختر الموديول --</option>
+        </select>
+        <button id="connectBtn" disabled>🔌 اتصال</button>
+        <div class="status disconnected" id="statusIndicator">
+          <span class="status-dot"></span>
+          <span>غير متصل</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-wrapper">
+      <div class="main-content view-panel active" id="crudPanel" data-panel="crud">
+        <div class="sidebar">
+          <h3>الجداول المتاحة</h3>
+          <ul class="table-list" id="tablesList">
+            <li class="table-item">⏳ جاري التحميل...</li>
+          </ul>
+        </div>
+
+        <div class="content-area">
+          <div id="contentArea">
+            <div class="empty-state">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+              </svg>
+              <h3>اختر جدول للبدء</h3>
+              <p>اختر جدول من القائمة الجانبية لعرض البيانات</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sql-panel view-panel" id="sqlPanel" data-panel="sqlite">
+        <div class="sql-admin-layout">
+          <div class="sql-sidebar">
+            <div class="sql-sidebar-header">
+              <h3>عناصر قاعدة البيانات</h3>
+              <button class="btn" id="refreshSchemaBtn" style="padding: 6px 12px; font-size: 12px;">🔄 تحديث</button>
+            </div>
+            <p style="font-size: 12px; color: #6b7280; margin-bottom: 10px;">استخدم الزر الأيمن للحصول على CREATE أو استعلام جاهز</p>
+            <ul class="sql-tree" id="sqlObjectsTree">
+              <li class="sql-placeholder">جاري تحميل عناصر SQLite...</li>
+            </ul>
+          </div>
+
+          <div class="sql-workspace">
+            <div class="sql-toolbar">
+              <h3>محرر الاستعلام</h3>
+              <div class="sql-actions">
+                <button class="btn" id="refreshAutocompleteBtn">♻️ تحديث الإكمال</button>
+                <button class="btn btn-primary" id="runSqlBtn">▶️ تنفيذ الاستعلام (Ctrl + Enter)</button>
+              </div>
+            </div>
+            <div class="sql-editor" id="sqlEditorContainer">
+              <textarea id="sqlEditor" placeholder="SELECT * FROM order_header LIMIT 10;"></textarea>
+            </div>
+            <div class="sql-resizer" id="sqlResizer" role="separator" aria-orientation="horizontal" aria-label="تغيير حجم مساحة التحرير والنتائج"></div>
+            <div class="sql-results" id="sqlResults">
+              <div class="sql-placeholder">
+                <strong>منطقة نتائج الاستعلام</strong>
+                أدخل استعلام SQL ثم اضغط تشغيل لعرض البيانات من قاعدة SQLite
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/sql/sql.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/lib/mishkah.store.js"></script>
+  <script src="/lib/mishkah.crud.js"></script>
+  <script src="/crud.js"></script>
+  <div id="sqlContextMenu" class="sql-context-menu"></div>
+</body>
+</html>

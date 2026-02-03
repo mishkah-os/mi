@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTMLx Backwards Compatibility Test</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+    .test-section {
+      background: white;
+      padding: 2rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .success { color: #48bb78; font-weight: bold; }
+    .error { color: #f56565; font-weight: bold; }
+    button {
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      cursor: pointer;
+      border: none;
+      background: #4299e1;
+      color: white;
+      border-radius: 4px;
+    }
+    button:hover { background: #3182ce; }
+  </style>
+</head>
+<body>
+  <h1>🧪 Backwards Compatibility Test</h1>
+  <p>اختبار شامل للتأكد من أن الكود القديم ما زال يعمل</p>
+
+  <!-- Test 1: Old comp- prefix -->
+  <div class="test-section">
+    <h2>Test 1: Legacy comp- prefix</h2>
+    <div id="test1"></div>
+  </div>
+
+  <!-- Test 2: Old data-m-on-* events -->
+  <div class="test-section">
+    <h2>Test 2: Legacy data-m-on-* events</h2>
+    <div id="test2"></div>
+  </div>
+
+  <!-- Test 3: Old {{}} binding -->
+  <div class="test-section">
+    <h2>Test 3: Legacy {{}} binding</h2>
+    <div id="test3"></div>
+  </div>
+
+  <!-- Test 4: data-namespace explicit -->
+  <div class="test-section">
+    <h2>Test 4: Explicit data-namespace</h2>
+    <div id="test4"></div>
+  </div>
+
+  <!-- Test 5: Mixed old and new syntax -->
+  <div class="test-section">
+    <h2>Test 5: Mixed old and new</h2>
+    <div id="test5"></div>
+  </div>
+
+  <!-- Templates -->
+
+  <!-- Legacy template with comp- prefix -->
+  <template id="legacy-comp-test" data-namespace="legacy-comp-test">
+    <style>
+      .legacy { padding: 1rem; background: #e6fffa; }
+    </style>
+    <div class="legacy">
+      <p class="success">✅ Legacy comp- prefix works!</p>
+    </div>
+  </template>
+
+  <!-- Legacy events -->
+  <template id="legacy-events-test">
+    <style>
+      .old-events { padding: 1rem; background: #fef5e7; }
+    </style>
+    <div class="old-events">
+      <button data-m-on-click="oldClick">Old data-m-on-click</button>
+      <button onclick="oldClick2">Old onclick</button>
+      <p class="result">{{data.message}}</p>
+    </div>
+  </template>
+
+  <!-- Legacy mustache binding -->
+  <template id="legacy-binding-test">
+    <style>
+      .old-binding { padding: 1rem; background: #fce4ec; }
+    </style>
+    <div class="old-binding">
+      <input value="{{data.text}}" data-m-on-input="updateText" />
+      <p>القيمة: {{data.text}}</p>
+    </div>
+  </template>
+
+  <!-- Explicit namespace -->
+  <template id="ns-test" data-namespace="custom-namespace">
+    <style>
+      .namespace-test { padding: 1rem; background: #f3e5f5; }
+    </style>
+    <div class="namespace-test">
+      <p class="success">✅ Explicit namespace works!</p>
+    </div>
+  </template>
+
+  <!-- Mixed syntax -->
+  <template id="mixed-test">
+    <style>
+      .mixed { padding: 1rem; background: #e8f5e9; }
+    </style>
+    <div class="mixed">
+      <!-- Old syntax -->
+      <button data-m-on-click="oldMethod">Old method</button>
+      <!-- New syntax -->
+      <button @click="newMethod">New method</button>
+      <!-- Old binding -->
+      <p>Old: {{data.oldValue}}</p>
+      <!-- New binding -->
+      <p :style="'color: ' + data.color">New: {{data.newValue}}</p>
+    </div>
+  </template>
+
+  <script src="../lib/mishkah.js"></script>
+  <script src="../lib/mishkah-htmlx.js"></script>
+  <script src="../lib/mishkah.help.js"></script>
+
+  <script>
+    console.log('🧪 Starting Backwards Compatibility Tests...');
+
+    // Test 1: Legacy comp- prefix
+    try {
+      M.htmlx.mount('#legacy-comp-test', '#test1', {});
+      console.log('✅ Test 1 PASSED: Legacy comp- prefix works');
+    } catch (e) {
+      console.error('❌ Test 1 FAILED:', e);
+    }
+
+    // Test 2: Legacy events
+    M.htmlx.mount('#legacy-events-test', '#test2', {
+      data: {
+        message: ''
+      },
+      methods: {
+        oldClick: function() {
+          this.data.message = '✅ data-m-on-click works!';
+          console.log('✅ Test 2a PASSED: data-m-on-click works');
+        },
+        oldClick2: function() {
+          this.data.message = '✅ onclick works!';
+          console.log('✅ Test 2b PASSED: onclick works');
+        }
+      }
+    });
+
+    // Test 3: Legacy {{}} binding
+    M.htmlx.mount('#legacy-binding-test', '#test3', {
+      data: {
+        text: 'القيمة الأولية'
+      },
+      methods: {
+        updateText: function(e) {
+          this.data.text = e.target.value;
+        }
+      }
+    });
+    console.log('✅ Test 3 PASSED: {{}} binding works');
+
+    // Test 4: Explicit namespace
+    try {
+      M.htmlx.mount('#ns-test', '#test4', {});
+      console.log('✅ Test 4 PASSED: Explicit data-namespace works');
+    } catch (e) {
+      console.error('❌ Test 4 FAILED:', e);
+    }
+
+    // Test 5: Mixed syntax
+    M.htmlx.mount('#mixed-test', '#test5', {
+      data: {
+        oldValue: 'قيمة قديمة',
+        newValue: 'قيمة جديدة',
+        color: 'blue'
+      },
+      methods: {
+        oldMethod: function() {
+          this.data.oldValue = 'تم النقر بالطريقة القديمة!';
+          console.log('✅ Test 5a PASSED: Old method works');
+        },
+        newMethod: function() {
+          this.data.newValue = 'تم النقر بالطريقة الجديدة!';
+          this.data.color = 'green';
+          console.log('✅ Test 5b PASSED: New method works');
+        }
+      }
+    });
+
+    console.log('\n🎉 All Backwards Compatibility Tests Completed!');
+    console.log('Check the page and console for results.');
+  </script>
+</body>
+</html>

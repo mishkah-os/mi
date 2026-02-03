@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passanty Crawfish | Seafood Excellence</title>
+
+    <!-- 1. TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Mishkah Core -->
+    <script src="https://ws.mas.com.eg/lib/mishkah.core.js"></script>
+
+    <!-- 3. Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- 4. Global Styles -->
+    <style>
+        :root[data-theme='light'] {
+            --bg-body: #f8fafc;
+            --bg-surface: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #0284c7;
+            --accent: #f97316;
+            --border: #e2e8f0;
+        }
+
+        :root[data-theme='dark'] {
+            /* Deep Sea Palette */
+            --bg-body: #020c1b;
+            --bg-surface: #112240;
+            --text-main: #e6f1ff;
+            --text-muted: #8892b0;
+            --primary: #64ffda;
+            --accent: #ff7f50;
+            --border: #233554;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            background-image: radial-gradient(circle at 50% 0%, #112952 0%, var(--bg-body) 60%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+
+        .font-cairo { font-family: 'Cairo', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* Shell Animation */
+        .shell-enter { animation: zoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes zoomIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Glass Nav */
+        .glass {
+            background: rgba(2, 12, 27, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // ==========================================
+        // 1. DATA MOCK & SERVER LOGIC
+        // ==========================================
+        
+        // Mock Data based on your JSON
+        const MOCK_PRODUCTS = [
+            {
+                "ID": "0F5B6417-2235-4B2C-8908-319F84031CE2",
+                "item_name": "Live crawfish",
+                "item_photo": "../../UploadFiles/Karim_passanty/Karim_passanty/7777_20052023175422305.jpg",
+                "price": 18,
+                "item_type": "Crawfish",
+                "description": "Live freshwater lobster has been processed and sorted into sizes according to demand\nAnd packaged in boxes of insulating foam with ice to ensure that they arrive alive and with the best quality to any country around the world.",
+                "gallery": [
+                    { "photo_path": "../../UploadFiles/Hussein_Fathy/Hussein_Fathy/crawfish-shipping-image_01032023132134682.jpg" },
+                    { "photo_path": "../../UploadFiles/Karim_passanty/Karim_passanty/WhatsApp_Image_2023-05-20_20052023184318758.jpeg" },
+                    { "photo_path": "../../UploadFiles/Karim_passanty/Karim_passanty/WhatsApp_Image_2023-05-20_20052023184706381.jpeg" }
+                ]
+            },
+            {
+                "ID": "D4E1AB30-FF1E-4624-A587-88149FE2E9D2",
+                "item_name": "frozen whole crawfish",
+                "item_photo": "../../UploadFiles/Karim_passanty/Karim_passanty/88888885555_20052023174719484.jpeg",
+                "price": 18,
+                "item_type": "Frozen",
+                "description": "High quality frozen whole crawfish, preserved to maintain freshness and taste.",
+                "gallery": []
+            },
+            {
+                "ID": "3FA4457B-A210-40EC-ABF8-B96624D4F2A6",
+                "item_name": "Peeled Tail Meat",
+                "item_photo": "../../UploadFiles/Karim_passanty/Karim_passanty/55555_20052023173456644.jpg",
+                "price": 18,
+                "item_type": "Meat",
+                "description": "Premium peeled crawfish tail meat, ready for cooking and serving.",
+                "gallery": []
+            },
+            {
+                "ID": "5E573603-34CD-4F05-BC54-BC0056E48B41",
+                "item_name": "whole tails",
+                "item_photo": "../../UploadFiles/Karim_passanty/Karim_passanty/ايااي_20052023173421232.png",
+                "price": 18,
+                "item_type": "Tails",
+                "description": "Whole crawfish tails, perfect for seafood platters and specialized dishes.",
+                "gallery": []
+            }
+        ];
+
+        // Pure JS Fetch Logic (Replaces jQuery.post)
+        async function fetchProductsFromAPI() {
+            try {
+                // Determine base path - mocking the Cookie logic
+                const compId = document.cookie.replace(/(?:(?:^|.*;\s*)CompId\s*\=\s*([^;]*).*$)|^.*$/, "$1") || 'default';
+                
+                const response = await fetch("../../r/j", {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        tb: "EC_items_list",
+                        tbtype: "view",
+                        cols: "ID,item_name,item_photo,price,item_type",
+                        parm: `('crawfish','en','${compId}')`
+                    })
+                });
+
+                if (!response.ok) throw new Error("Server Error");
+                const data = await response.json();
+                return data.length > 0 ? data : MOCK_PRODUCTS; // Fallback if empty array
+            } catch (error) {
+                console.warn("API unavailable, using Fallback Data", error);
+                return MOCK_PRODUCTS; // Fallback on error
+            }
+        }
+
+        // ==========================================
+        // 2. DATABASE INIT
+        // ==========================================
+        var database = {
+            data: {
+                mobileMenuOpen: false,
+                activeProduct: null, // Holds the currently viewed product object
+                activeImage: null    // Holds the currently selected image in gallery
+            },
+            env: {
+                theme: 'dark', // Default Dark (Deep Sea)
+                lang: 'en',    // Default English
+                dir: 'ltr'
+            },
+            content: {
+                contact: {
+                    phone: "0103 313 3944",
+                    email: "info@passanty.com.eg",
+                    address: {
+                        en: "Egypt – Qalyubia - Obour city, 13741 High School St.",
+                        ar: "مصر – القليوبية – مدينة العبور، شارع الثانوية بنين"
+                    }
+                },
+                hero: {
+                    title: { en: "Premium Seafood Delivered", ar: "أجود المأكولات البحرية" },
+                    subtitle: { en: "Experience the freshest Crawfish and seafood from our dock to your table.", ar: "نضمن لك أفضل استاكوزا وأسماك طازجة تصلك يومياً من الميناء إليك." },
+                    cta: { en: "View Products", ar: "تصفح منتجاتنا" }
+                },
+                about: {
+                    title: { en: "About Passanty", ar: "عن باسانتي" },
+                    desc: { 
+                        en: "We guarantee you the best Crawfish, delivered daily to our dock, prepared to your liking. Our focus is on serving the absolute freshest fish and Crawfish.",
+                        ar: "نحن نضمن لك أفضل استاكوزا، يتم توصيلها يومياً إلى رصيفنا، ومجهزة حسب رغبتك. تركيزنا ينصب على تقديم الأسماك والاستاكوزا الطازجة تماماً."
+                    },
+                    // Using server path if available, or fallback to mock image if needed. Using first product image as placeholder for about
+                    img: "../../UploadFiles/Karim_passanty/Karim_passanty/88888885555_20052023174719484.jpeg"
+                },
+                products: MOCK_PRODUCTS // Initialize with MOCK, will update if API works
+            },
+            i18n: {
+                dict: {
+                    'nav_home': { en: 'Home', ar: 'الرئيسية' },
+                    'nav_products': { en: 'Products', ar: 'منتجاتنا' },
+                    'nav_about': { en: 'About Us', ar: 'من نحن' },
+                    'nav_contact': { en: 'Contact', ar: 'تواصل معنا' },
+                    'btn_details': { en: 'View Details', ar: 'التفاصيل' },
+                    'btn_close': { en: 'Close', ar: 'إغلاق' },
+                    'contact_title': { en: 'Get in Touch', ar: 'تواصل معنا' },
+                    'footer_rights': { en: 'All Rights Reserved © 2026 Passanty.', ar: 'جميع الحقوق محفوظة © 2026 باسانتي.' },
+                    'price_unit': { en: '$', ar: '$' }
+                }
+            }
+        };
+
+        // ==========================================
+        // 3. ORDERS
+        // ==========================================
+        var orders = {
+            'sys.init': {
+                on: ['mount'],
+                handler: async (e, ctx) => {
+                    // Try fetching real data on load
+                    const products = await fetchProductsFromAPI();
+                    ctx.setState(s => ({ ...s, content: { ...s.content, products: products } }));
+                }
+            },
+            'sys.theme': {
+                on: ['click'], gkeys: ['btn:theme'],
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, env: { ...s.env, theme: s.env.theme === 'light' ? 'dark' : 'light' } }))
+            },
+            'sys.lang': {
+                on: ['click'], gkeys: ['btn:lang'],
+                handler: (e, ctx) => ctx.setState(s => {
+                    const l = s.env.lang === 'fr' ? 'ar' : 'en'; 
+                    const isAr = l === 'ar';
+                    return { ...s, env: { ...s.env, lang: isAr ? 'ar' : 'en', dir: isAr ? 'rtl' : 'ltr' } };
+                })
+            },
+            'sys.menu': {
+                on: ['click'], gkeys: ['btn:menu'],
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, data: { ...s.data, mobileMenuOpen: !s.data.mobileMenuOpen } }))
+            },
+            'product.open': {
+                on: ['click'], gkeys: ['act:openProduct'],
+                handler: (e, ctx) => {
+                    const el = e.target.closest('[data-id]');
+                    if (!el) return;
+                    const id = el.dataset.id; // ID is string in JSON
+                    const prod = ctx.db.content.products.find(p => p.ID === id);
+                    if (prod) {
+                        ctx.setState(s => ({ 
+                            ...s, 
+                            data: { 
+                                ...s.data, 
+                                activeProduct: prod,
+                                activeImage: prod.item_photo // Reset main image
+                            } 
+                        }));
+                    }
+                }
+            },
+            'product.close': {
+                on: ['click'], gkeys: ['act:closeProduct'],
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, data: { ...s.data, activeProduct: null, activeImage: null } }))
+            },
+            'gallery.set': {
+                on: ['click'], gkeys: ['act:setImage'],
+                handler: (e, ctx) => {
+                    const src = e.target.getAttribute('src');
+                    ctx.setState(s => ({ ...s, data: { ...s.data, activeImage: src } }));
+                }
+            }
+        };
+
+        // ==========================================
+        // 4. DSL BODY
+        // ==========================================
+        function body(db) {
+            const D = Mishkah.DSL;
+            const t = (k) => db.i18n.dict[k]?.[db.env.lang] || k;
+            const content = (obj) => typeof obj === 'object' ? (obj?.[db.env.lang] || obj?.['en'] || '') : obj;
+            const isRtl = db.env.dir === 'rtl';
+
+            // Top Bar
+            const TopBar = () => D.Div({
+                attrs: { class: 'bg-[var(--bg-surface)] text-[var(--text-muted)] text-xs py-2 border-b border-[var(--border)] hidden md:block' }
+            }, [
+                D.Div({ attrs: { class: 'max-w-7xl mx-auto px-6 flex justify-between items-center' } }, [
+                    D.Div({ attrs: { class: 'flex gap-6' } }, [
+                        D.Span({}, [D.I({ attrs: { class: 'fas fa-map-marker-alt text-[var(--accent)] mx-1' } }), content(db.content.contact.address)]),
+                        D.Span({}, [D.I({ attrs: { class: 'fas fa-phone text-[var(--accent)] mx-1' } }), db.content.contact.phone])
+                    ]),
+                    D.Div({ attrs: { class: 'flex gap-4' } }, [
+                        D.A({ attrs: { href: '#', class: 'hover:text-[var(--primary)]' } }, [D.I({ attrs: { class: 'fab fa-facebook-f' } })]),
+                        D.A({ attrs: { href: '#', class: 'hover:text-[var(--primary)]' } }, [D.I({ attrs: { class: 'fab fa-instagram' } })])
+                    ])
+                ])
+            ]);
+
+            // Navbar
+            const Navbar = () => D.Nav({
+                attrs: { class: 'sticky top-0 z-50 glass h-20 shadow-lg' }
+            }, [
+                D.Div({ attrs: { class: 'max-w-7xl mx-auto px-6 h-full flex justify-between items-center' } }, [
+                    // Logo
+                    D.Div({ attrs: { class: 'flex items-center gap-3' } }, [
+                        D.Div({ attrs: { class: 'w-10 h-10 bg-[var(--accent)] rounded-full flex items-center justify-center text-white font-bold text-xl' } }, ['P']),
+                        D.Div({ attrs: { class: 'flex flex-col' } }, [
+                            D.H1({ attrs: { class: 'text-xl font-bold font-serif leading-none tracking-wide' } }, ['PASSANTY']),
+                            D.Span({ attrs: { class: 'text-[10px] text-[var(--primary)] uppercase tracking-[0.2em]' } }, ['Crawfish'])
+                        ])
+                    ]),
+                    // Menu
+                    D.Div({ attrs: { class: 'hidden md:flex items-center gap-8 font-semibold text-sm uppercase tracking-wider' } }, [
+                        D.A({ attrs: { href: '#hero', class: 'hover:text-[var(--primary)] transition-colors' } }, [t('nav_home')]),
+                        D.A({ attrs: { href: '#products', class: 'hover:text-[var(--primary)] transition-colors' } }, [t('nav_products')]),
+                        D.A({ attrs: { href: '#about', class: 'hover:text-[var(--primary)] transition-colors' } }, [t('nav_about')]),
+                        D.A({ attrs: { href: '#contact', class: 'hover:text-[var(--primary)] transition-colors' } }, [t('nav_contact')])
+                    ]),
+                    // Tools
+                    D.Div({ attrs: { class: 'flex items-center gap-3' } }, [
+                        D.Button({ attrs: { gkey: 'btn:lang', class: 'px-3 py-1 border border-[var(--border)] rounded text-xs font-bold hover:bg-[var(--border)] transition-colors' } }, [db.env.lang === 'ar' ? 'EN' : 'AR']),
+                        D.Button({ attrs: { gkey: 'btn:theme', class: 'w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--border)] transition-colors' } }, [db.env.theme === 'light' ? '🌙' : '☀️']),
+                        D.Button({ attrs: { gkey: 'btn:menu', class: 'md:hidden text-2xl' } }, [D.I({ attrs: { class: 'fas fa-bars' } })])
+                    ])
+                ])
+            ]);
+
+            // Hero
+            const Hero = () => D.Section({
+                attrs: { id: 'hero', class: 'relative h-[600px] flex items-center justify-center text-center overflow-hidden' }
+            }, [
+                D.Div({ attrs: { class: 'absolute inset-0 z-0' } }, [
+                    D.Img({ 
+                        // Using a product image as bg, blurred/darkened
+                        attrs: { 
+                            src: db.content.products[0].item_photo,
+                            class: 'w-full h-full object-cover brightness-[0.3] blur-sm scale-110' 
+                        } 
+                    })
+                ]),
+                D.Div({ attrs: { class: 'relative z-10 max-w-4xl px-4' } }, [
+                    D.Span({ attrs: { class: 'text-[var(--accent)] font-bold tracking-[0.3em] uppercase mb-4 block animate-bounce' } }, ['Est. 2023']),
+                    D.H2({ attrs: { class: 'text-5xl md:text-7xl font-bold font-serif text-white mb-6 leading-tight' } }, [content(db.content.hero.title)]),
+                    D.P({ attrs: { class: 'text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto font-light' } }, [content(db.content.hero.subtitle)]),
+                    D.A({ attrs: { href: '#products', class: 'inline-block px-8 py-3 bg-[var(--accent)] text-white font-bold rounded-full hover:bg-[var(--primary)] transition-all shadow-lg hover:shadow-[0_0_20px_rgba(249,115,22,0.5)]' } }, [content(db.content.hero.cta)])
+                ])
+            ]);
+
+            // Products Grid
+            const Products = () => D.Section({
+                attrs: { id: 'products', class: 'py-20 px-4 bg-[var(--bg-surface)]' }
+            }, [
+                D.Div({ attrs: { class: 'max-w-7xl mx-auto' } }, [
+                    D.Div({ attrs: { class: 'text-center mb-16' } }, [
+                        D.H2({ attrs: { class: 'text-4xl font-serif font-bold mb-4' } }, [t('nav_products')]),
+                        D.Div({ attrs: { class: 'w-20 h-1 bg-[var(--accent)] mx-auto rounded-full' } }, [])
+                    ]),
+                    D.Div({ attrs: { class: 'grid md:grid-cols-2 lg:grid-cols-4 gap-8' } }, 
+                        db.content.products.map(prod => D.Div({
+                            attrs: { 
+                                class: 'group bg-[var(--bg-body)] rounded-xl overflow-hidden shadow-lg border border-[var(--border)] hover:border-[var(--primary)] transition-all cursor-pointer',
+                                'data-id': prod.ID,
+                                gkey: 'act:openProduct'
+                            }
+                        }, [
+                            D.Div({ attrs: { class: 'relative h-60 overflow-hidden' } }, [
+                                D.Img({ 
+                                    attrs: { 
+                                        src: prod.item_photo, 
+                                        onerror: "this.src='https://placehold.co/400x300?text=No+Image'", // Safety fallback
+                                        class: 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-110' 
+                                    } 
+                                }),
+                                D.Div({ attrs: { class: 'absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors' } }, [])
+                            ]),
+                            D.Div({ attrs: { class: 'p-6 text-center' } }, [
+                                D.Span({ attrs: { class: 'text-xs font-bold text-[var(--accent)] uppercase tracking-widest' } }, [prod.item_type || 'Seafood']),
+                                D.H3({ attrs: { class: 'text-xl font-bold mt-2 mb-4 group-hover:text-[var(--primary)] transition-colors line-clamp-1' } }, [prod.item_name]),
+                                D.P({ attrs: { class: 'text-[var(--primary)] font-bold mb-4' } }, [`${t('price_unit')}${prod.price}`]),
+                                D.Button({ attrs: { class: 'text-sm font-bold border-b-2 border-[var(--border)] pb-1 group-hover:border-[var(--primary)] transition-all' } }, [t('btn_details')])
+                            ])
+                        ]))
+                    )
+                ])
+            ]);
+
+            // Product Shell (Overlay) with Gallery
+            const ProductShell = (prod) => {
+                const gallery = prod.gallery || [];
+                const mainImage = db.data.activeImage || prod.item_photo;
+
+                return D.Div({
+                    attrs: { class: 'fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm shell-enter' }
+                }, [
+                    D.Div({ attrs: { class: 'bg-[var(--bg-surface)] w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl grid md:grid-cols-2 border border-[var(--border)] relative max-h-[90vh] overflow-y-auto' } }, [
+                        // Close Button
+                        D.Button({ 
+                            attrs: { gkey: 'act:closeProduct', class: 'absolute top-4 right-4 z-20 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-[var(--accent)] transition-colors' } 
+                        }, [D.I({ attrs: { class: 'fas fa-times' } })]),
+                        
+                        // Image Area
+                        D.Div({ attrs: { class: 'bg-[var(--bg-body)] p-4 flex flex-col gap-4' } }, [
+                            // Main Image
+                            D.Div({ attrs: { class: 'w-full h-64 md:h-96 rounded-xl overflow-hidden shadow-inner' } }, [
+                                D.Img({ attrs: { src: mainImage, class: 'w-full h-full object-cover' } })
+                            ]),
+                            // Gallery Grid
+                            gallery.length > 0 ? D.Div({ attrs: { class: 'flex gap-2 overflow-x-auto pb-2' } }, [
+                                D.Img({ attrs: { src: prod.item_photo, gkey: 'act:setImage', class: `w-20 h-20 object-cover rounded-lg cursor-pointer border-2 ${mainImage === prod.item_photo ? 'border-[var(--accent)]' : 'border-transparent'}` } }),
+                                ...gallery.map(g => D.Img({ 
+                                    attrs: { 
+                                        src: g.photo_path, 
+                                        gkey: 'act:setImage',
+                                        class: `w-20 h-20 object-cover rounded-lg cursor-pointer border-2 ${mainImage === g.photo_path ? 'border-[var(--accent)]' : 'border-transparent'}`
+                                    } 
+                                }))
+                            ]) : null
+                        ]),
+                        
+                        // Details Area
+                        D.Div({ attrs: { class: 'p-8 md:p-12 flex flex-col justify-center' } }, [
+                            D.Span({ attrs: { class: 'text-[var(--primary)] font-bold uppercase tracking-widest mb-2 block' } }, [prod.item_type || 'Product']),
+                            D.H2({ attrs: { class: 'text-3xl md:text-4xl font-serif font-bold mb-4' } }, [prod.item_name]),
+                            D.P({ attrs: { class: 'text-2xl font-bold text-[var(--accent)] mb-6' } }, [`${t('price_unit')}${prod.price}`]),
+                            
+                            D.Div({ attrs: { class: 'prose prose-invert text-[var(--text-muted)] text-sm leading-relaxed mb-8' } }, [
+                                (prod.description || '').split('\n').map(line => D.P({}, [line]))
+                            ]),
+                            
+                            D.A({ 
+                                attrs: { href: '#contact', gkey: 'act:closeProduct', class: 'mt-auto w-full text-center py-4 bg-[var(--primary)] text-[var(--primary-fg)] font-bold rounded-xl hover:brightness-110 transition-all' } 
+                            }, [t('nav_contact')])
+                        ])
+                    ])
+                ]);
+            };
+
+            // About Section
+            const About = () => D.Section({
+                attrs: { id: 'about', class: 'py-20 px-4' }
+            }, [
+                D.Div({ attrs: { class: 'max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center' } }, [
+                    D.Div({ attrs: { class: 'relative' } }, [
+                        D.Div({ attrs: { class: 'absolute inset-0 bg-[var(--accent)] transform rotate-3 rounded-2xl opacity-20' } }, []),
+                        D.Img({ attrs: { src: db.content.about.img, class: 'relative rounded-2xl shadow-2xl w-full h-auto transform -rotate-2 hover:rotate-0 transition-all duration-500' } })
+                    ]),
+                    D.Div({}, [
+                        D.H3({ attrs: { class: 'text-[var(--primary)] font-bold uppercase tracking-widest mb-2' } }, [content(db.content.about.title)]),
+                        D.H2({ attrs: { class: 'text-3xl md:text-4xl font-serif font-bold mb-6' } }, [isRtl ? 'نحن نقدم الأفضل' : 'We Serve The Best']),
+                        D.P({ attrs: { class: 'text-[var(--text-muted)] leading-loose mb-6' } }, [content(db.content.about.desc)]),
+                        D.Div({ attrs: { class: 'flex gap-8' } }, [
+                            D.Div({ attrs: { class: 'text-center' } }, [
+                                D.Span({ attrs: { class: 'block text-3xl font-bold text-[var(--accent)]' } }, ['100%']),
+                                D.Span({ attrs: { class: 'text-xs uppercase text-[var(--text-muted)]' } }, [isRtl ? 'طازج' : 'Fresh'])
+                            ]),
+                            D.Div({ attrs: { class: 'text-center' } }, [
+                                D.Span({ attrs: { class: 'block text-3xl font-bold text-[var(--accent)]' } }, ['24/7']),
+                                D.Span({ attrs: { class: 'text-xs uppercase text-[var(--text-muted)]' } }, [isRtl ? 'دعم' : 'Support'])
+                            ])
+                        ])
+                    ])
+                ])
+            ]);
+
+            // Contact Section
+            const Contact = () => D.Section({
+                attrs: { id: 'contact', class: 'py-20 px-4' }
+            }, [
+                D.Div({ attrs: { class: 'max-w-4xl mx-auto bg-[var(--bg-surface)] rounded-3xl p-8 md:p-12 border border-[var(--border)] shadow-xl text-center' } }, [
+                    D.H2({ attrs: { class: 'text-3xl font-serif font-bold mb-8' } }, [t('contact_title')]),
+                    D.Div({ attrs: { class: 'grid md:grid-cols-3 gap-8' } }, [
+                        D.Div({ attrs: { class: 'flex flex-col items-center gap-3' } }, [
+                            D.Div({ attrs: { class: 'w-12 h-12 bg-[var(--bg-body)] rounded-full flex items-center justify-center text-[var(--accent)] text-xl' } }, [D.I({ attrs: { class: 'fas fa-phone' } })]),
+                            D.Span({ attrs: { class: 'font-bold dir-ltr' } }, [db.content.contact.phone])
+                        ]),
+                        D.Div({ attrs: { class: 'flex flex-col items-center gap-3' } }, [
+                            D.Div({ attrs: { class: 'w-12 h-12 bg-[var(--bg-body)] rounded-full flex items-center justify-center text-[var(--accent)] text-xl' } }, [D.I({ attrs: { class: 'fas fa-envelope' } })]),
+                            D.Span({ attrs: { class: 'font-bold' } }, [db.content.contact.email])
+                        ]),
+                        D.Div({ attrs: { class: 'flex flex-col items-center gap-3' } }, [
+                            D.Div({ attrs: { class: 'w-12 h-12 bg-[var(--bg-body)] rounded-full flex items-center justify-center text-[var(--accent)] text-xl' } }, [D.I({ attrs: { class: 'fas fa-map-marker-alt' } })]),
+                            D.Span({ attrs: { class: 'font-bold text-sm' } }, [content(db.content.contact.address)])
+                        ])
+                    ])
+                ])
+            ]);
+
+            // Footer
+            const Footer = () => D.Footer({
+                attrs: { class: 'bg-[#00050a] border-t border-[var(--border)] py-8 text-center text-[var(--text-muted)] text-sm' }
+            }, [
+                t('footer_rights')
+            ]);
+
+            // --- RENDER ---
+            return D.Div({
+                attrs: { 
+                    class: 'min-h-screen flex flex-col font-cairo',
+                    'data-theme': db.env.theme,
+                    'dir': db.env.dir,
+                    lang: db.env.lang
+                }
+            }, [
+                TopBar(),
+                Navbar(),
+                Hero(),
+                Products(),
+                About(),
+                Contact(),
+                Footer(),
+                
+                db.data.activeProduct ? ProductShell(db.data.activeProduct) : null,
+                
+                db.data.mobileMenuOpen ? D.Div({ attrs: { class: 'fixed inset-0 z-[60] bg-black/95 flex items-center justify-center backdrop-blur-md' } }, [
+                    D.Button({ attrs: { gkey: 'btn:menu', class: 'absolute top-6 right-6 text-3xl text-white' } }, [D.I({ attrs: { class: 'fas fa-times' } })]),
+                    D.Div({ attrs: { class: 'flex flex-col gap-8 text-center text-2xl font-serif font-bold text-white' } }, [
+                        D.A({ attrs: { href: '#hero', gkey: 'btn:menu' } }, [t('nav_home')]),
+                        D.A({ attrs: { href: '#products', gkey: 'btn:menu' } }, [t('nav_products')]),
+                        D.A({ attrs: { href: '#about', gkey: 'btn:menu' } }, [t('nav_about')]),
+                        D.A({ attrs: { href: '#contact', gkey: 'btn:menu' } }, [t('nav_contact')])
+                    ])
+                ]) : null
+            ]);
+        }
+
+        // ==========================================
+        // 5. LAUNCH
+        // ==========================================
+        Mishkah.app.setBody(body);
+        Mishkah.app.create(database, orders).mount('#app');
+
+    </script>
+</body>
+</html>

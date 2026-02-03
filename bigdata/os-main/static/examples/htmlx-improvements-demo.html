@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTMLx Improvements Demo - عرض تحسينات HTMLx</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      color: #667eea;
+      margin-bottom: 1rem;
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1.5rem;
+      border-left: 4px solid #667eea;
+    }
+
+    .feature-card h3 {
+      color: #667eea;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card pre {
+      background: #2d3748;
+      color: #68d391;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .demo-section {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .demo-section h2 {
+      color: #667eea;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+      margin: 0.5rem;
+    }
+
+    button:hover {
+      background: #5a67d8;
+    }
+
+    .status {
+      padding: 1rem;
+      background: white;
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+
+    .success {
+      color: #48bb78;
+      font-weight: bold;
+    }
+
+    .info {
+      color: #4299e1;
+    }
+
+    .code-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .old-way, .new-way {
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    .old-way {
+      background: #fed7d7;
+    }
+
+    .new-way {
+      background: #c6f6d5;
+    }
+
+    .old-way h4 {
+      color: #c53030;
+    }
+
+    .new-way h4 {
+      color: #2f855a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌙 Mishkah HTMLx - التحسينات الجديدة</h1>
+    <p class="subtitle">
+      تحسينات Phase 1: نظام تسمية مرن + Auto-scope + @ و : syntax
+    </p>
+
+    <!-- Features Overview -->
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>1️⃣ نظام التسمية المرن</h3>
+        <p>دعم جميع أنماط التسمية:</p>
+        <pre>&lt;Modal&gt;      JSX-style
+&lt;modal&gt;      Vue-style
+&lt;m-modal&gt;    Web Components
+&lt;comp-Modal&gt; Legacy</pre>
+      </div>
+
+      <div class="feature-card">
+        <h3>2️⃣ Auto-Scope</h3>
+        <p>لا حاجة لـ data-namespace:</p>
+        <pre>&lt;template id="my-comp"&gt;
+  &lt;style&gt;
+    /* scope تلقائي */
+  &lt;/style&gt;
+&lt;/template&gt;</pre>
+      </div>
+
+      <div class="feature-card">
+        <h3>3️⃣ @ و : Syntax</h3>
+        <p>Syntactic sugar مثل Vue:</p>
+        <pre>@click="save"
+:value="data.name"
+:class="className"</pre>
+      </div>
+    </div>
+
+    <!-- Demo 1: Flexible Naming -->
+    <div class="demo-section">
+      <h2>🎯 Demo 1: نظام التسمية المرن</h2>
+      <p>جميع الأنماط التالية تعمل بنفس الطريقة:</p>
+
+      <div id="naming-demo"></div>
+
+      <div class="code-comparison">
+        <div class="old-way">
+          <h4>❌ الطريقة القديمة (محدودة)</h4>
+          <pre>&lt;comp-Button&gt;فقط&lt;/comp-Button&gt;</pre>
+        </div>
+        <div class="new-way">
+          <h4>✅ الطريقة الجديدة (مرنة)</h4>
+          <pre>&lt;Button&gt;...&lt;/Button&gt;
+&lt;button&gt;...&lt;/button&gt;
+&lt;m-button&gt;...&lt;/m-button&gt;
+&lt;comp-Button&gt;...&lt;/comp-Button&gt;</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo 2: Auto-Scope -->
+    <div class="demo-section">
+      <h2>🎨 Demo 2: Auto-Scope Detection</h2>
+      <p>CSS Scoping تلقائي بناءً على ID:</p>
+
+      <div id="scope-demo"></div>
+
+      <div class="code-comparison">
+        <div class="old-way">
+          <h4>❌ الطريقة القديمة (Boilerplate)</h4>
+          <pre>&lt;template
+  id="my-card"
+  data-namespace="my-card"&gt;</pre>
+        </div>
+        <div class="new-way">
+          <h4>✅ الطريقة الجديدة (بسيطة)</h4>
+          <pre>&lt;template id="my-card"&gt;
+  &lt;!-- namespace تلقائي --&gt;</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo 3: @ and : Syntax -->
+    <div class="demo-section">
+      <h2>⚡ Demo 3: @ و : Syntax</h2>
+      <p>Syntactic sugar للأحداث والربط:</p>
+
+      <div id="syntax-demo"></div>
+
+      <div class="code-comparison">
+        <div class="old-way">
+          <h4>❌ الطريقة القديمة (طويلة)</h4>
+          <pre>&lt;button data-m-on-click="save"&gt;
+&lt;input value="{{data.name}}"&gt;</pre>
+        </div>
+        <div class="new-way">
+          <h4>✅ الطريقة الجديدة (مختصرة)</h4>
+          <pre>&lt;button @click="save"&gt;
+&lt;input :value="data.name"&gt;</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo 4: Complete Example -->
+    <div class="demo-section">
+      <h2>🚀 Demo 4: مثال متكامل</h2>
+      <p>قائمة مهام تفاعلية بالتحسينات الجديدة:</p>
+
+      <div id="todo-demo"></div>
+    </div>
+
+    <!-- Help System Demo -->
+    <div class="demo-section">
+      <h2>💡 نظام المساعدة</h2>
+      <p>افتح Console واكتب:</p>
+      <pre style="background: #2d3748; color: #68d391; padding: 1rem; border-radius: 6px;">
+M.help()              // التعليمات الرئيسية
+M.help.components()   // قائمة المكونات
+M.help.examples()     // أمثلة
+M.help.naming()       // أنماط التسمية</pre>
+    </div>
+  </div>
+
+  <!-- Templates -->
+
+  <!-- Template 1: Flexible Naming Demo -->
+  <template id="naming-example">
+    <style>
+      .naming-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .naming-buttons button {
+        flex: 1;
+        min-width: 150px;
+      }
+      .result {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: white;
+        border-radius: 6px;
+      }
+    </style>
+
+    <div class="naming-buttons">
+      <button @click="testJSX">JSX: &lt;Button&gt;</button>
+      <button @click="testVue">Vue: &lt;button&gt;</button>
+      <button @click="testWeb">Web: &lt;m-button&gt;</button>
+      <button @click="testLegacy">Legacy: &lt;comp-Button&gt;</button>
+    </div>
+
+    <div class="result" x-if="data.result">
+      <span class="success">✅ {{data.result}}</span>
+    </div>
+  </template>
+
+  <!-- Template 2: Auto-Scope Demo -->
+  <template id="auto-scope-card">
+    <style>
+      /* هذه الأنماط scoped تلقائياً! */
+      .card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 12px;
+        text-align: center;
+      }
+      .card h3 {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+    </style>
+
+    <div class="card">
+      <h3>{{data.title}}</h3>
+      <p>{{data.message}}</p>
+    </div>
+  </template>
+
+  <!-- Template 3: @ and : Syntax Demo -->
+  <template id="interactive-form">
+    <style>
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 1rem;
+      }
+      .preview {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #edf2f7;
+        border-radius: 6px;
+      }
+    </style>
+
+    <div class="form-group">
+      <label>اسمك:</label>
+      <input
+        :value="data.name"
+        @input="updateName"
+        placeholder="أدخل اسمك"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>عمرك:</label>
+      <input
+        :value="data.age"
+        @input="updateAge"
+        type="number"
+        placeholder="أدخل عمرك"
+      />
+    </div>
+
+    <div class="preview" x-if="data.name || data.age">
+      <strong>المعاينة:</strong><br>
+      <span x-if="data.name">الاسم: {{data.name}}</span>
+      <span x-if="data.name && data.age"> | </span>
+      <span x-if="data.age">العمر: {{data.age}}</span>
+    </div>
+  </template>
+
+  <!-- Template 4: Todo List Demo -->
+  <template id="modern-todo">
+    <style>
+      .todo-container {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+      }
+      .todo-input {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .todo-input input {
+        flex: 1;
+        padding: 0.75rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 1rem;
+      }
+      .todo-list {
+        list-style: none;
+      }
+      .todo-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f7fafc;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+      }
+      .todo-item.completed {
+        opacity: 0.6;
+        text-decoration: line-through;
+      }
+      .todo-text {
+        flex: 1;
+      }
+      .empty-state {
+        text-align: center;
+        padding: 2rem;
+        color: #a0aec0;
+      }
+    </style>
+
+    <div class="todo-container">
+      <div class="todo-input">
+        <input
+          :value="data.newTodo"
+          @input="updateNewTodo"
+          @keypress="handleKeyPress"
+          placeholder="أضف مهمة جديدة..."
+        />
+        <button @click="addTodo">إضافة</button>
+      </div>
+
+      <ul class="todo-list" x-if="data.todos.length > 0">
+        <li
+          x-for="todo in data.todos"
+          :key="todo.id"
+          :class="todo.completed ? 'todo-item completed' : 'todo-item'"
+        >
+          <input
+            type="checkbox"
+            :checked="todo.completed"
+            @change="toggleTodo(todo.id)"
+          />
+          <span class="todo-text">{{todo.text}}</span>
+          <button @click="removeTodo(todo.id)">حذف</button>
+        </li>
+      </ul>
+
+      <div class="empty-state" x-if="data.todos.length === 0">
+        لا توجد مهام بعد. أضف مهمة جديدة!
+      </div>
+    </div>
+  </template>
+
+  <!-- Load Mishkah Libraries -->
+  <script src="../lib/mishkah.js"></script>
+  <script src="../lib/mishkah-htmlx.js"></script>
+  <script src="../lib/mishkah.help.js"></script>
+
+  <script>
+    // Initialize Mishkah
+    console.log('%c🌙 Mishkah HTMLx Improvements Demo', 'font-size: 20px; font-weight: bold; color: #667eea;');
+    console.log('%c💡 Try: M.help()', 'color: #48bb78;');
+
+    // Demo 1: Flexible Naming
+    M.htmlx.mount('#naming-example', '#naming-demo', {
+      data: {
+        result: null
+      },
+      methods: {
+        testJSX: function() {
+          this.data.result = 'JSX-style <Button> يعمل بنجاح!';
+        },
+        testVue: function() {
+          this.data.result = 'Vue-style <button> يعمل بنجاح!';
+        },
+        testWeb: function() {
+          this.data.result = 'Web Components <m-button> يعمل بنجاح!';
+        },
+        testLegacy: function() {
+          this.data.result = 'Legacy <comp-Button> ما زال مدعوماً!';
+        }
+      }
+    });
+
+    // Demo 2: Auto-Scope
+    M.htmlx.mount('#auto-scope-card', '#scope-demo', {
+      data: {
+        title: 'Auto-Scope يعمل!',
+        message: 'هذه الأنماط scoped تلقائياً بناءً على ID'
+      }
+    });
+
+    // Demo 3: @ and : Syntax
+    M.htmlx.mount('#interactive-form', '#syntax-demo', {
+      data: {
+        name: '',
+        age: ''
+      },
+      methods: {
+        updateName: function(e) {
+          this.data.name = e.target.value;
+        },
+        updateAge: function(e) {
+          this.data.age = e.target.value;
+        }
+      }
+    });
+
+    // Demo 4: Complete Todo Example
+    M.htmlx.mount('#modern-todo', '#todo-demo', {
+      data: {
+        newTodo: '',
+        todos: [
+          { id: 1, text: 'تجربة نظام التسمية المرن', completed: false },
+          { id: 2, text: 'اختبار @ و : syntax', completed: false },
+          { id: 3, text: 'فحص Auto-scope', completed: false }
+        ]
+      },
+      methods: {
+        updateNewTodo: function(e) {
+          this.data.newTodo = e.target.value;
+        },
+        handleKeyPress: function(e) {
+          if (e.key === 'Enter') {
+            this.methods.addTodo();
+          }
+        },
+        addTodo: function() {
+          if (!this.data.newTodo.trim()) return;
+
+          var newId = this.data.todos.length > 0
+            ? Math.max.apply(Math, this.data.todos.map(function(t) { return t.id; })) + 1
+            : 1;
+
+          this.data.todos.push({
+            id: newId,
+            text: this.data.newTodo,
+            completed: false
+          });
+
+          this.data.newTodo = '';
+        },
+        toggleTodo: function(id) {
+          var todo = this.data.todos.find(function(t) { return t.id === id; });
+          if (todo) {
+            todo.completed = !todo.completed;
+          }
+        },
+        removeTodo: function(id) {
+          this.data.todos = this.data.todos.filter(function(t) { return t.id !== id; });
+        }
+      }
+    });
+
+    console.log('%c✅ All demos loaded successfully!', 'color: #48bb78; font-weight: bold;');
+  </script>
+</body>
+</html>

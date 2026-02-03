@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JC Guide Travel | Egypt Tours</title>
+
+    <!-- 1. TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Mishkah Core -->
+    <script src="https://ws.mas.com.eg/lib/mishkah.core.js"></script>
+
+    <!-- 3. Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Satisfy&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- 4. Global Styles -->
+    <style>
+        :root[data-theme='light'] {
+            --bg-body: #ffffff;
+            --bg-gradient: linear-gradient(to bottom, #ffffff, #f0f2f5);
+            --bg-surface: #ffffff;
+            --text-main: #222222;
+            --text-muted: #666666;
+            --primary: #008080; /* Teal Darker for contrast */
+            --primary-light: #3fd0d4;
+            --primary-fg: #ffffff;
+            --accent: #d4af37;
+            --border: #e5e7eb;
+            --topbar-bg: #1a202c;
+            --topbar-text: #e2e8f0;
+        }
+
+        :root[data-theme='dark'] {
+            /* Chic Navy Gradient */
+            --bg-body: #020c1b;
+            --bg-gradient: linear-gradient(135deg, #020c1b 0%, #0a192f 100%);
+            --bg-surface: #112240;
+            --text-main: #ccd6f6;
+            --text-muted: #8892b0;
+            --primary: #64ffda; /* Neon Teal */
+            --primary-light: #64ffda;
+            --primary-fg: #0a192f;
+            --accent: #ffd700;
+            --border: #233554;
+            --topbar-bg: #020c1b;
+            --topbar-text: #8892b0;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-attachment: fixed; /* Parallax effect for bg */
+            color: var(--text-main);
+            transition: background 0.3s, color 0.3s;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+
+        .font-script { font-family: 'Satisfy', cursive; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        /* Shell Animation */
+        .shell-enter { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Slider Transitions */
+        .slide-active { opacity: 1; z-index: 10; transform: scale(1); transition: all 1.5s ease; }
+        .slide-hidden { opacity: 0; z-index: 1; transform: scale(1.1); transition: all 1.5s ease; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+        
+        .glass-nav {
+            background: rgba(17, 34, 64, 0.85); /* Navy transparent */
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // ==========================================
+        // 1. DATABASE
+        // ==========================================
+        var database = {
+            data: {
+                mobileMenuOpen: false,
+                activeTour: null,
+                currentSlide: 0
+            },
+            env: {
+                theme: 'dark', 
+                lang: 'fr',
+                dir: 'ltr'
+            },
+            content: {
+                slides: [
+                    {
+                        img: 'https://jcguidetravel.com/wp-content/uploads/2019/12/assouan-2.jpeg',
+                        sub: { fr: 'Bienvenue en Égypte', ar: 'مرحباً بكم في مصر' },
+                        title: { fr: 'La Magie du Nil', ar: 'سحر النيل الخالد' },
+                        desc: { fr: 'Des croisières inoubliables entre Louxor et Assouan.', ar: 'رحلات نيلية لا تنسى بين الأقصر وأسوان.' }
+                    },
+                    {
+                        img: 'https://jcguidetravel.com/wp-content/uploads/2019/11/homeSlider.jpg',
+                        sub: { fr: 'Découvrez l\'Histoire', ar: 'اكتشف التاريخ' },
+                        title: { fr: 'Les Pyramides Éternelles', ar: 'الأهرامات الخالدة' },
+                        desc: { fr: 'Visitez les merveilles du monde antique avec des guides experts.', ar: 'زر عجائب العالم القديم مع مرشدين محترفين.' }
+                    },
+                    {
+                        img: 'https://jcguidetravel.com/wp-content/uploads/2019/11/redSea.jpg',
+                        sub: { fr: 'Détente & Aventure', ar: 'استجمام ومغامرة' },
+                        title: { fr: 'La Mer Rouge', ar: 'جمال البحر الأحمر' },
+                        desc: { fr: 'Plongée, safari et plages de sable blanc.', ar: 'غطس، سفاري، وشواطئ رملية بيضاء.' }
+                    }
+                ],
+                tours: [
+                    {
+                        id: 1,
+                        img: 'https://jcguidetravel.com/wp-content/uploads/2019/11/redSea.jpg',
+                        title: { fr: 'Egypte Pharaons et Mer Rouge en Famille', ar: 'مصر الفرعونية والبحر الأحمر للعائلات' },
+                        duration: { fr: '10 Jours', ar: '١٠ أيام' },
+                        price: '€670',
+                        category: { fr: 'Circuit 10 Jours', ar: 'برنامج ١٠ أيام' },
+                        description: { 
+                            fr: "Un voyage complet combinant culture et détente. Commencez par Le Caire et ses pyramides, descendez vers Louxor pour les temples, et finissez en beauté sur les plages d'Hurghada.",
+                            ar: "رحلة متكاملة تجمع بين الثقافة والاستجمام. ابدأ بالقاهرة والأهرامات، اتجه جنوباً لمعابد الأقصر، واختتم رحلتك على شواطئ الغردقة الساحرة."
+                        },
+                        includes: ['Hôtels 5 étoiles', 'Vols internes', 'Guide francophone', 'Repas inclus']
+                    },
+                    {
+                        id: 2,
+                        img: 'https://jcguidetravel.com/wp-content/uploads/2019/11/resturant.jpg',
+                        title: { fr: 'Dîner-croisière sur le Nil', ar: 'عشاء نيللي وكروز' },
+                        duration: { fr: '1 Soirée', ar: 'أمسية واحدة' },
+                        price: '€29',
+                        category: { fr: 'Excursion', ar: 'رحلة قصيرة' },
+                        description: {
+                            fr: "Une soirée magique au Caire. Naviguez sur le Nil tout en dégustant un délicieux dîner buffet, accompagné d'un spectacle folklorique égyptien.",
+                            ar: "أمسية ساحرة في القاهرة. أبحر في النيل واستمتع بعشاء بوفيه فاخر مع عروض الفلكلور المصري والرقص الشرقي."
+                        },
+                        includes: ['Dîner Buffet', 'Spectacle', 'Transport privé']
+                    },
+                    {
+                        id: 3,
+                        img: 'https://jcguidetravel.com/wp-content/uploads/2019/11/pyramidssphinx.jpg',
+                        title: { fr: 'Visitez les Pyramides de Gizeh', ar: 'زيارة أهرامات الجيزة' },
+                        duration: { fr: '1 Jour', ar: 'يوم واحد' },
+                        price: '€57',
+                        category: { fr: 'Excursion', ar: 'رحلة قصيرة' },
+                        description: {
+                            fr: "L'excursion incontournable. Visitez les grandes pyramides de Khéops, Khéphren et Mykérinos, ainsi que le mystérieux Sphinx.",
+                            ar: "الرحلة الأساسية في مصر. زيارة أهرامات خوفو وخفرع ومنقرع، وتمثال أبو الهول العظيم."
+                        },
+                        includes: ['Entrées', 'Guide privé', 'Transport climatisé']
+                    },
+                    {
+                        id: 4,
+                        img: 'https://jcguidetravel.com/wp-content/uploads/2019/11/abousimple.jpg',
+                        title: { fr: 'Grand Circuit: Caire / Assouan / Louxor', ar: 'البرنامج الكبير: القاهرة / أسوان / الأقصر' },
+                        duration: { fr: '15 Jours', ar: '١٥ يوم' },
+                        price: '€1200',
+                        category: { fr: 'Circuit 15 Jours', ar: 'برنامج ١٥ يوم' },
+                        description: {
+                            fr: "L'immersion totale. D'Abou Simbel au sud jusqu'à Alexandrie au nord, découvrez toutes les facettes de l'Égypte antique et moderne.",
+                            ar: "الغوص الكامل في التاريخ. من أبو سمبل جنوباً إلى الإسكندرية شمالاً، اكتشف كل جوانب مصر القديمة والحديثة."
+                        },
+                        includes: ['Croisière Nil', 'Vols', 'Pension complète', 'Tous les sites']
+                    },
+                    {
+                        id: 5,
+                        img: 'https://jcguidetravel.com/wp-content/uploads/2019/11/19_2018-636656222059635745-963.jpg',
+                        title: { fr: 'Safari Quad aux Pyramides', ar: 'سفاري بيتش باجي بالأهرامات' },
+                        duration: { fr: '4 Heures', ar: '٤ ساعات' },
+                        price: '€40',
+                        category: { fr: 'Aventure', ar: 'مغامرة' },
+                        description: {
+                            fr: "Pour les amateurs de sensations fortes. Conduisez un quad dans le désert avec une vue imprenable sur les pyramides.",
+                            ar: "لعشاق الإثارة. قُد البيتش باجي في الصحراء مع إطلالة بانورامية لا مثيل لها على الأهرامات."
+                        },
+                        includes: ['Location Quad', 'Guide', 'Boissons']
+                    }
+                ]
+            },
+            i18n: {
+                dict: {
+                    'contact_top': { fr: 'Besoin d\'aide? Appelez-nous: ', ar: 'تحتاج مساعدة؟ اتصل بنا: ' },
+                    'nav_home': { fr: 'Accueil', ar: 'الرئيسية' },
+                    'nav_tours': { fr: 'Nos Circuits', ar: 'برامجنا' },
+                    'nav_about': { fr: 'À Propos', ar: 'عن الشركة' },
+                    'nav_contact': { fr: 'Contact', ar: 'اتصل بنا' },
+                    'btn_explore': { fr: 'Explorer', ar: 'استكشف' },
+                    'btn_details': { fr: 'Détails', ar: 'التفاصيل' },
+                    'btn_book': { fr: 'Réserver', ar: 'حجز الآن' },
+                    'btn_back': { fr: 'Retour', ar: 'رجوع' },
+                    'sec_featured': { fr: 'Nos Meilleures Offres', ar: 'أفضل العروض' },
+                    'sec_featured_sub': { fr: 'Voyages Privés & Sur Mesure', ar: 'رحلات خاصة ومصممة لك' },
+                    'price_from': { fr: 'À partir de', ar: 'يبدأ من' },
+                    'inc_title': { fr: 'Ce qui est inclus:', ar: 'ما يشمله العرض:' },
+                    'copyright': { fr: '© 2026 JC Guide Travel. Tous droits réservés.', ar: '© 2026 JC Guide Travel. جميع الحقوق محفوظة.' }
+                }
+            }
+        };
+
+        // ==========================================
+        // 2. ORDERS
+        // ==========================================
+        var orders = {
+            'sys.theme': {
+                on: ['click'], gkeys: ['btn:theme'],
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, env: { ...s.env, theme: s.env.theme === 'light' ? 'dark' : 'light' } }))
+            },
+            'sys.lang': {
+                on: ['click'], gkeys: ['btn:lang'],
+                handler: (e, ctx) => ctx.setState(s => {
+                    const l = s.env.lang === 'fr' ? 'ar' : 'fr';
+                    return { ...s, env: { ...s.env, lang: l, dir: l === 'ar' ? 'rtl' : 'ltr' } };
+                })
+            },
+            'sys.menu': {
+                on: ['click'], gkeys: ['btn:menu'],
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, data: { ...s.data, mobileMenuOpen: !s.data.mobileMenuOpen } }))
+            },
+            'tour.open': {
+                on: ['click'], gkeys: ['act:openTour'],
+                handler: (e, ctx) => {
+                    // FIX: Use closest() to ensure we get the data-id even if clicking children
+                    const el = e.target.closest('[data-id]');
+                    if (!el) return;
+                    
+                    const id = parseInt(el.dataset.id);
+                    const tour = ctx.db.content.tours.find(t => t.id === id);
+                    if (tour) {
+                        ctx.setState(s => ({ ...s, data: { ...s.data, activeTour: tour } }));
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }
+            },
+            'tour.close': {
+                on: ['click'], gkeys: ['act:closeTour'],
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, data: { ...s.data, activeTour: null } }))
+            },
+            'slider.next': {
+                on: ['click'], gkeys: ['slide:next'],
+                handler: (e, ctx) => ctx.setState(s => ({
+                    ...s, data: { ...s.data, currentSlide: (s.data.currentSlide + 1) % s.content.slides.length }
+                }))
+            },
+            'slider.prev': {
+                on: ['click'], gkeys: ['slide:prev'],
+                handler: (e, ctx) => ctx.setState(s => ({
+                    ...s, data: { ...s.data, currentSlide: (s.data.currentSlide - 1 + s.content.slides.length) % s.content.slides.length }
+                }))
+            }
+        };
+
+        // ==========================================
+        // 3. DSL BODY
+        // ==========================================
+        function body(db) {
+            const D = Mishkah.DSL;
+            const t = (k) => db.i18n.dict[k]?.[db.env.lang] || k;
+            const content = (obj) => obj?.[db.env.lang] || obj?.['fr'] || '';
+            const isRtl = db.env.dir === 'rtl';
+
+            // --- COMPONENTS ---
+
+            const TopBar = () => D.Div({
+                attrs: { class: 'bg-[var(--topbar-bg)] text-[var(--topbar-text)] text-xs py-2 px-4 hidden md:block border-b border-white/5' }
+            }, [
+                D.Div({ attrs: { class: 'max-w-7xl mx-auto flex justify-between items-center' } }, [
+                    D.Div({ attrs: { class: 'flex gap-6' } }, [
+                        D.Span({}, [D.I({ attrs: { class: 'fas fa-phone-alt mr-2 text-[var(--primary)]' } }), '002-01017100994']),
+                        D.Span({}, [D.I({ attrs: { class: 'fas fa-envelope mr-2 text-[var(--primary)]' } }), 'info@jcguidetravel.com'])
+                    ]),
+                    D.Div({ attrs: { class: 'flex gap-4' } }, [
+                        D.A({ attrs: { href: '#', class: 'hover:text-white transition-colors' } }, [D.I({ attrs: { class: 'fab fa-facebook-f' } })]),
+                        D.A({ attrs: { href: '#', class: 'hover:text-white transition-colors' } }, [D.I({ attrs: { class: 'fab fa-instagram' } })]),
+                        D.A({ attrs: { href: '#', class: 'hover:text-white transition-colors' } }, [D.I({ attrs: { class: 'fab fa-whatsapp' } })])
+                    ])
+                ])
+            ]);
+
+            const Navbar = () => D.Nav({
+                attrs: { class: 'sticky top-0 z-50 glass-nav h-20 shadow-lg' }
+            }, [
+                D.Div({ attrs: { class: 'max-w-7xl mx-auto px-4 h-full flex justify-between items-center' } }, [
+                    // Logo + Name (Now Visible on Mobile)
+                    D.Div({ attrs: { class: 'flex items-center gap-3' } }, [
+                        D.Img({ attrs: { src: 'https://jcguidetravel.com/wp-content/uploads/2019/11/logo-4.png', class: 'h-12 md:h-14 w-auto drop-shadow-md' } }),
+                        D.Div({ attrs: { class: 'flex flex-col' } }, [
+                            D.H1({ attrs: { class: 'text-lg md:text-xl font-bold font-serif leading-none text-[var(--text-main)]' } }, ['JC Guide']),
+                            D.P({ attrs: { class: 'text-[9px] md:text-[10px] tracking-widest uppercase text-[var(--primary)] hidden sm:block' } }, ['Travel Egypt'])
+                        ])
+                    ]),
+
+                    // Desktop Links
+                    D.Div({ attrs: { class: 'hidden md:flex items-center gap-8 font-semibold text-sm uppercase tracking-wide' } }, [
+                        D.A({ attrs: { href: '#', class: 'text-[var(--primary)]' } }, [t('nav_home')]),
+                        D.A({ attrs: { href: '#', class: 'hover:text-[var(--primary)] transition-colors' } }, [t('nav_tours')]),
+                        D.A({ attrs: { href: '#', class: 'hover:text-[var(--primary)] transition-colors' } }, [t('nav_about')]),
+                        D.A({ attrs: { href: '#', class: 'hover:text-[var(--primary)] transition-colors' } }, [t('nav_contact')])
+                    ]),
+
+                    // Tools
+                    D.Div({ attrs: { class: 'flex items-center gap-3' } }, [
+                        D.Button({ attrs: { gkey: 'btn:lang', class: 'px-3 py-1 border border-[var(--border)] rounded hover:bg-[var(--bg-surface)] text-xs font-bold' } }, [db.env.lang === 'fr' ? 'AR' : 'FR']),
+                        D.Button({ attrs: { gkey: 'btn:theme', class: 'w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--bg-surface)]' } }, [db.env.theme === 'light' ? '🌙' : '☀️']),
+                        D.Button({ attrs: { gkey: 'btn:menu', class: 'md:hidden text-2xl' } }, [D.I({ attrs: { class: 'fas fa-bars' } })])
+                    ])
+                ])
+            ]);
+
+            const HeroSlider = () => D.Section({
+                attrs: { class: 'relative h-[85vh] w-full overflow-hidden bg-black' }
+            }, [
+                // Slides
+                ...db.content.slides.map((slide, index) => D.Div({
+                    attrs: { class: `absolute inset-0 w-full h-full bg-cover bg-center ${index === db.data.currentSlide ? 'slide-active' : 'slide-hidden'}`, style: `background-image: url('${slide.img}')` }
+                }, [
+                    D.Div({ attrs: { class: 'absolute inset-0 bg-black/40' } }, []),
+                    D.Div({ attrs: { class: 'absolute inset-0 flex flex-col items-center justify-center text-center px-4 text-white' } }, [
+                        D.Span({ attrs: { class: 'font-script text-3xl md:text-5xl text-[var(--primary)] mb-4 animate-bounce' } }, [content(slide.sub)]),
+                        D.H2({ attrs: { class: 'font-serif text-5xl md:text-7xl font-bold mb-6 tracking-tight drop-shadow-lg' } }, [content(slide.title)]),
+                        D.P({ attrs: { class: 'text-lg md:text-xl max-w-2xl opacity-90 mb-10 font-light' } }, [content(slide.desc)]),
+                        D.Button({ 
+                            attrs: { class: 'px-8 py-3 bg-[var(--primary)] text-[var(--primary-fg)] font-bold rounded-full hover:bg-white hover:text-black transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(100,255,218,0.3)]' } 
+                        }, [t('btn_explore')])
+                    ])
+                ])),
+                
+                // Controls
+                D.Button({ attrs: { gkey: 'slide:prev', class: 'absolute top-1/2 left-4 -translate-y-1/2 w-12 h-12 rounded-full border border-white/30 text-white hover:bg-[var(--primary)] hover:border-[var(--primary)] flex items-center justify-center z-20 transition-all backdrop-blur-sm' } }, [D.I({ attrs: { class: 'fas fa-chevron-left' } })]),
+                D.Button({ attrs: { gkey: 'slide:next', class: 'absolute top-1/2 right-4 -translate-y-1/2 w-12 h-12 rounded-full border border-white/30 text-white hover:bg-[var(--primary)] hover:border-[var(--primary)] flex items-center justify-center z-20 transition-all backdrop-blur-sm' } }, [D.I({ attrs: { class: 'fas fa-chevron-right' } })]),
+                
+                // Dots
+                D.Div({ attrs: { class: 'absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20' } }, 
+                    db.content.slides.map((_, i) => D.Div({ attrs: { class: `w-3 h-3 rounded-full transition-all ${i === db.data.currentSlide ? 'bg-[var(--primary)] w-8' : 'bg-white/50'}` } }))
+                )
+            ]);
+
+            const TourCard = (tour) => D.Div({
+                attrs: { 
+                    class: 'group bg-[var(--bg-surface)] rounded-2xl overflow-hidden border border-[var(--border)] shadow-lg hover:shadow-2xl hover:border-[var(--primary)] transition-all duration-500 cursor-pointer flex flex-col',
+                    'data-id': tour.id,
+                    gkey: 'act:openTour'
+                }
+            }, [
+                D.Div({ attrs: { class: 'relative h-64 overflow-hidden' } }, [
+                    D.Img({ attrs: { src: tour.img, class: 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-110' } }),
+                    D.Div({ attrs: { class: 'absolute top-4 left-4' } }, [
+                        D.Span({ attrs: { class: 'bg-[var(--primary)] text-[var(--primary-fg)] text-xs font-bold px-3 py-1 rounded-full shadow-md' } }, [content(tour.category)])
+                    ]),
+                    D.Div({ attrs: { class: 'absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[var(--bg-surface)] to-transparent' } }, [])
+                ]),
+                D.Div({ attrs: { class: 'p-6 flex flex-col flex-grow' } }, [
+                    D.Div({ attrs: { class: 'flex justify-between items-center mb-3 text-sm text-[var(--text-muted)]' } }, [
+                        D.Span({}, [D.I({ attrs: { class: 'far fa-clock mr-1' } }), content(tour.duration)]),
+                        D.Span({ attrs: { class: 'text-[var(--accent)] font-bold' } }, ['★★★★★'])
+                    ]),
+                    D.H3({ attrs: { class: 'text-xl font-bold font-serif mb-3 group-hover:text-[var(--primary)] transition-colors' } }, [content(tour.title)]),
+                    D.P({ attrs: { class: 'text-sm text-[var(--text-muted)] line-clamp-2 mb-4' } }, [content(tour.description)]),
+                    
+                    D.Div({ attrs: { class: 'mt-auto pt-4 border-t border-[var(--border)] flex items-center justify-between' } }, [
+                        D.Div({}, [
+                            D.Span({ attrs: { class: 'text-[10px] uppercase text-[var(--text-muted)] block' } }, [t('price_from')]),
+                            D.Span({ attrs: { class: 'text-xl font-bold text-[var(--primary)]' } }, [tour.price])
+                        ]),
+                        D.Button({ attrs: { class: 'text-sm font-bold text-[var(--text-main)] group-hover:text-[var(--primary)] transition-colors' } }, [t('btn_details') + (isRtl ? ' ←' : ' →')])
+                    ])
+                ])
+            ]);
+
+            const Shell = (tour) => D.Div({
+                attrs: { class: 'fixed inset-0 z-[100] bg-[var(--bg-body)] overflow-y-auto shell-enter custom-scrollbar' }
+            }, [
+                D.Div({ attrs: { class: 'fixed top-0 left-0 w-full z-10 p-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent' } }, [
+                    D.Button({ 
+                        attrs: { gkey: 'act:closeTour', class: 'bg-black/20 backdrop-blur-md text-white px-6 py-2 rounded-full font-bold hover:bg-[var(--primary)] transition-colors border border-white/20 shadow-lg' } 
+                    }, [D.I({ attrs: { class: isRtl ? 'fas fa-arrow-right mr-2' : 'fas fa-arrow-left mr-2' } }), t('btn_back')]),
+                    D.Span({ attrs: { class: 'text-white font-serif text-lg hidden md:block drop-shadow-md' } }, [content(tour.title)])
+                ]),
+                
+                D.Div({ attrs: { class: 'relative h-[60vh] md:h-[70vh] w-full' } }, [
+                    D.Img({ attrs: { src: tour.img, class: 'w-full h-full object-cover fixed top-0 w-full h-[70vh] -z-10 opacity-60' } }),
+                    D.Div({ attrs: { class: 'absolute inset-0 bg-gradient-to-t from-[var(--bg-body)] via-[var(--bg-body)]/60 to-transparent' } }, []),
+                    D.Div({ attrs: { class: 'absolute bottom-0 w-full p-6 md:p-16 max-w-5xl mx-auto' } }, [
+                        D.Span({ attrs: { class: 'text-[var(--primary)] font-bold tracking-widest uppercase mb-2 block' } }, [content(tour.category)]),
+                        D.H1({ attrs: { class: 'text-4xl md:text-6xl font-bold font-serif mb-6 leading-tight' } }, [content(tour.title)]),
+                        D.Div({ attrs: { class: 'flex flex-wrap gap-4 md:gap-8 text-sm md:text-lg font-medium' } }, [
+                            D.Span({}, [D.I({ attrs: { class: 'far fa-clock mr-2 text-[var(--accent)]' } }), content(tour.duration)]),
+                            D.Span({}, [D.I({ attrs: { class: 'fas fa-tag mr-2 text-[var(--accent)]' } }), tour.price])
+                        ])
+                    ])
+                ]),
+
+                D.Div({ attrs: { class: 'relative bg-[var(--bg-body)] z-0 min-h-screen -mt-10 rounded-t-[3rem] border-t border-[var(--border)] shadow-[0_-10px_40px_rgba(0,0,0,0.5)]' } }, [
+                    D.Div({ attrs: { class: 'max-w-5xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-12' } }, [
+                        D.Div({ attrs: { class: 'md:col-span-2 space-y-10' } }, [
+                            D.Div({}, [
+                                D.P({ attrs: { class: 'text-xl leading-relaxed text-[var(--text-main)] font-light' } }, [content(tour.description)])
+                            ]),
+                            D.Div({}, [
+                                D.H3({ attrs: { class: 'text-2xl font-serif font-bold mb-6 text-[var(--primary)]' } }, [t('inc_title')]),
+                                D.Ul({ attrs: { class: 'grid sm:grid-cols-2 gap-4' } }, 
+                                    (tour.includes || []).map(inc => D.Li({ attrs: { class: 'flex items-center gap-3 bg-[var(--bg-surface)] p-4 rounded-xl border border-[var(--border)]' } }, [
+                                        D.I({ attrs: { class: 'fas fa-check-circle text-[var(--primary)] text-xl' } }),
+                                        D.Span({ attrs: { class: 'font-medium' } }, [inc])
+                                    ]))
+                                )
+                            ])
+                        ]),
+                        D.Div({ attrs: { class: 'md:col-span-1' } }, [
+                            D.Div({ attrs: { class: 'bg-[var(--bg-surface)] p-8 rounded-3xl border border-[var(--border)] sticky top-24 shadow-2xl' } }, [
+                                D.H3({ attrs: { class: 'text-2xl font-bold mb-6 text-center' } }, [t('btn_book')]),
+                                D.Form({ attrs: { class: 'space-y-4' } }, [
+                                    D.Input({ attrs: { type: 'text', placeholder: 'Nom complet', class: 'w-full bg-[var(--bg-body)] border border-[var(--border)] rounded-lg p-4 outline-none focus:border-[var(--primary)] text-[var(--text-main)]' } }),
+                                    D.Input({ attrs: { type: 'email', placeholder: 'Email', class: 'w-full bg-[var(--bg-body)] border border-[var(--border)] rounded-lg p-4 outline-none focus:border-[var(--primary)] text-[var(--text-main)]' } }),
+                                    D.Button({ attrs: { class: 'w-full bg-[var(--primary)] text-[var(--primary-fg)] font-bold py-4 rounded-lg hover:brightness-110 transition-all text-lg shadow-lg' } }, [t('btn_book')])
+                                ]),
+                                D.P({ attrs: { class: 'text-center text-xs text-[var(--text-muted)] mt-4' } }, ['Réponse sous 24h garantie'])
+                            ])
+                        ])
+                    ])
+                ])
+            ]);
+
+            return D.Div({
+                attrs: {
+                    class: 'min-h-screen flex flex-col',
+                    'data-theme': db.env.theme,
+                    'dir': db.env.dir,
+                    lang: db.env.lang
+                }
+            }, [
+                db.data.activeTour ? Shell(db.data.activeTour) : D.Div({}, [
+                    TopBar(),
+                    Navbar(),
+                    HeroSlider(),
+                    D.Section({ attrs: { class: 'py-24 px-4 bg-transparent' } }, [
+                        D.Div({ attrs: { class: 'max-w-7xl mx-auto' } }, [
+                            D.Div({ attrs: { class: 'text-center mb-16' } }, [
+                                D.Span({ attrs: { class: 'font-script text-3xl text-[var(--primary)] mb-2 block' } }, [t('sec_featured_sub')]),
+                                D.H2({ attrs: { class: 'text-4xl md:text-5xl font-serif font-bold' } }, [t('sec_featured')]),
+                                D.Div({ attrs: { class: 'w-24 h-1 bg-[var(--accent)] mx-auto mt-6' } }, [])
+                            ]),
+                            D.Div({ attrs: { class: 'grid md:grid-cols-2 lg:grid-cols-3 gap-8' } }, 
+                                db.content.tours.map(tour => TourCard(tour))
+                            )
+                        ])
+                    ]),
+                    D.Footer({ attrs: { class: 'bg-[#00050a] text-white/60 py-12 border-t border-white/5' } }, [
+                        D.Div({ attrs: { class: 'max-w-7xl mx-auto px-4 text-center' } }, [
+                            D.Img({ attrs: { src: 'https://jcguidetravel.com/wp-content/uploads/2019/11/logo-4.png', class: 'h-16 w-auto mx-auto mb-6 opacity-80' } }),
+                            D.P({ attrs: { class: 'mb-8 max-w-md mx-auto' } }, [t('brand_tagline')]),
+                            D.Div({ attrs: { class: 'flex justify-center gap-6 mb-8 text-xl' } }, [
+                                D.A({ attrs: { href: '#', class: 'hover:text-[var(--primary)]' } }, [D.I({ attrs: { class: 'fab fa-facebook' } })]),
+                                D.A({ attrs: { href: '#', class: 'hover:text-[var(--primary)]' } }, [D.I({ attrs: { class: 'fab fa-instagram' } })]),
+                                D.A({ attrs: { href: '#', class: 'hover:text-[var(--primary)]' } }, [D.I({ attrs: { class: 'fab fa-twitter' } })])
+                            ]),
+                            D.P({ attrs: { class: 'text-sm' } }, [t('copyright')])
+                        ])
+                    ])
+                ]),
+                db.data.mobileMenuOpen ? D.Div({ attrs: { class: 'fixed inset-0 z-[60] bg-black/95 flex items-center justify-center backdrop-blur-md' } }, [
+                    D.Button({ attrs: { gkey: 'btn:menu', class: 'absolute top-6 right-6 text-3xl text-white' } }, [D.I({ attrs: { class: 'fas fa-times' } })]),
+                    D.Div({ attrs: { class: 'flex flex-col gap-8 text-center text-2xl font-serif font-bold text-white' } }, [
+                        D.A({ attrs: { href: '#' } }, [t('nav_home')]),
+                        D.A({ attrs: { href: '#' } }, [t('nav_tours')]),
+                        D.A({ attrs: { href: '#' } }, [t('nav_contact')])
+                    ])
+                ]) : null
+            ]);
+        }
+
+        Mishkah.app.setBody(body);
+        Mishkah.app.create(database, orders).mount('#app');
+
+        // --- Auto Slider Timer ---
+        setInterval(() => {
+            const nextBtn = document.querySelector('[gkey="slide:next"]');
+            if (nextBtn) nextBtn.click();
+        }, 4000);
+
+    </script>
+</body>
+</html>

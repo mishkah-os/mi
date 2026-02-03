@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>قائمة الطعام - Menu</title>
+
+    <!-- Dependencies -->
+    <script src="lib/mishkah-ui.js"></script>
+    <script src="lib/mishkah.store.js"></script>
+    <script src="lib/mishkah.simple-store.js"></script>
+    <script src="lib/app-context.js"></script>
+
+    <style>
+        :root {
+            --bg: #fafafa;
+            --fg: #1a1a1a;
+            --primary: #16a34a;
+            --primary-fg: #ffffff;
+            --card-bg: #ffffff;
+            --border: #e5e7eb;
+            --cart-badge: #ef4444;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark {
+            --bg: #0a0a0a;
+            --fg: #fafafa;
+            --card-bg: #1a1a1a;
+            --border: #27272a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: var(--primary);
+            color: var(--primary-fg);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--cart-badge);
+            color: white;
+            border-radius: 10px;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            min-width: 20px;
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .menu-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .item-details {
+            padding: 0.75rem;
+        }
+
+        .item-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .item-price {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .add-btn {
+            width: 100%;
+            background: var(--primary);
+            color: var(--primary-fg);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Cart Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 200;
+            align-items: flex-end;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            width: 100%;
+            max-height: 80vh;
+            border-radius: 16px 16px 0 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--fg);
+        }
+
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .qty-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .total-section {
+            padding: 1rem;
+            border-top: 2px solid var(--border);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--primary-fg);
+            border: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        /* Checkout Form */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg);
+            color: var(--fg);
+            font-size: 1rem;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🍽️ قائمة الطعام</h1>
+        <button class="cart-btn" onclick="toggleCart()">
+            🛒
+            <span class="cart-badge" id="cart-count">0</span>
+        </button>
+    </header>
+
+    <main class="menu-grid" id="menu-grid">
+        <!-- Menu items will be inserted here -->
+    </main>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛒 سلة المشتريات</h2>
+                <button class="close-btn" onclick="toggleCart()">×</button>
+            </div>
+            <div class="modal-body" id="cart-items">
+                <div class="empty-cart">السلة فارغة</div>
+            </div>
+            <div style="padding: 1rem;">
+                <div class="total-section">
+                    <span>المجموع:</span>
+                    <span id="cart-total">0.00 ر.س</span>
+                </div>
+                <button class="checkout-btn" onclick="showCheckout()">إتمام الطلب</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkout-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📦 إتمام الطلب</h2>
+                <button class="close-btn" onclick="closeCheckout()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="orderType" value="takeaway" checked onchange="toggleDeliveryForm()">
+                        <span>🥡 تيك أواي</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="orderType" value="delivery" onchange="toggleDeliveryForm()">
+                        <span>🚚 توصيل</span>
+                    </label>
+                </div>
+
+                <div id="delivery-form" style="display: none;">
+                    <div class="form-group">
+                        <label>الاسم *</label>
+                        <input type="text" id="customer-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>رقم الهاتف *</label>
+                        <input type="tel" id="customer-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>العنوان *</label>
+                        <textarea id="customer-address" rows="3" required></textarea>
+                    </div>
+                </div>
+
+                <button class="checkout-btn" onclick="submitOrder()">تأكيد الطلب</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (async function () {
+            'use strict';
+
+            // State
+            let cart = [];
+            let menuItems = [];
+            let db = null;
+
+            // Initialize
+            async function init() {
+                try {
+                    // Connect to Mishkah Store
+                    db = window.createDB({
+                        branchId: 'default',
+                        moduleId: 'pos',
+                        autoConnect: true
+                    });
+
+                    await db.connect();
+                    console.log('[Menu App] Connected to M.Store');
+
+                    // Watch menu items
+                    db.watch('menu_item', (items) => {
+                        menuItems = items.filter(i => i.isActive !== false);
+                        renderMenu();
+                    });
+
+                } catch (err) {
+                    console.error('[Menu App] Init error:', err);
+                    alert('خطأ في الاتصال بالخادم');
+                }
+            }
+
+            // Render Menu
+            function renderMenu() {
+                const grid = document.getElementById('menu-grid');
+                grid.innerHTML = '';
+
+                menuItems.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'menu-item';
+                    card.innerHTML = `
+                <div class="item-image">${item.emoji || '🍽️'}</div>
+                <div class="item-details">
+                    <div class="item-name">${item.nameAr || item.name || 'صنف'}</div>
+                    <div class="item-price">${(item.basePrice || 0).toFixed(2)} ر.س</div>
+                    <button class="add-btn" onclick="addToCart('${item.id}')">إضافة +</button>
+                </div>
+            `;
+                    grid.appendChild(card);
+                });
+            }
+
+            // Cart Functions
+            window.addToCart = function (itemId) {
+                const item = menuItems.find(i => i.id === itemId);
+                if (!item) return;
+
+                const existing = cart.find(c => c.itemId === itemId);
+                if (existing) {
+                    existing.quantity++;
+                } else {
+                    cart.push({
+                        itemId: item.id,
+                        name: item.nameAr || item.name,
+                        price: item.basePrice || 0,
+                        quantity: 1
+                    });
+                }
+                updateCart();
+            };
+
+            window.updateQuantity = function (itemId, delta) {
+                const item = cart.find(c => c.itemId === itemId);
+                if (!item) return;
+
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(c => c.itemId !== itemId);
+                }
+                updateCart();
+            };
+
+            function updateCart() {
+                document.getElementById('cart-count').textContent = cart.reduce((sum, i) => sum + i.quantity, 0);
+
+                const container = document.getElementById('cart-items');
+                if (cart.length === 0) {
+                    container.innerHTML = '<div class="empty-cart">السلة فارغة</div>';
+                    document.getElementById('cart-total').textContent = '0.00 ر.س';
+                    return;
+                }
+
+                container.innerHTML = cart.map(item => `
+            <div class="cart-item">
+                <div>
+                    <div style="font-weight: 600;">${item.name}</div>
+                    <div style="color: var(--primary);">${item.price.toFixed(2)} ر.س</div>
+                </div>
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="updateQuantity('${item.itemId}', -1)">-</button>
+                    <span style="min-width: 20px; text-align: center;">${item.quantity}</span>
+                    <button class="qty-btn" onclick="updateQuantity('${item.itemId}', 1)">+</button>
+                </div>
+            </div>
+        `).join('');
+
+                const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+                document.getElementById('cart-total').textContent = total.toFixed(2) + ' ر.س';
+            }
+
+            window.toggleCart = function () {
+                const modal = document.getElementById('cart-modal');
+                modal.classList.toggle('active');
+            };
+
+            window.showCheckout = function () {
+                if (cart.length === 0) {
+                    alert('السلة فارغة!');
+                    return;
+                }
+                document.getElementById('cart-modal').classList.remove('active');
+                document.getElementById('checkout-modal').classList.add('active');
+            };
+
+            window.closeCheckout = function () {
+                document.getElementById('checkout-modal').classList.remove('active');
+            };
+
+            window.toggleDeliveryForm = function () {
+                const type = document.querySelector('input[name="orderType"]:checked').value;
+                document.getElementById('delivery-form').style.display = type === 'delivery' ? 'block' : 'none';
+            };
+
+            window.submitOrder = async function () {
+                const type = document.querySelector('input[name="orderType"]:checked').value;
+
+                let customerData = null;
+                if (type === 'delivery') {
+                    const name = document.getElementById('customer-name').value.trim();
+                    const phone = document.getElementById('customer-phone').value.trim();
+                    const address = document.getElementById('customer-address').value.trim();
+
+                    if (!name || !phone || !address) {
+                        alert('يرجى ملء جميع البيانات');
+                        return;
+                    }
+                    customerData = { name, phone, address };
+                }
+
+                try {
+                    // Create customer profile (if delivery)
+                    let customerId = 'guest-' + Date.now();
+                    if (customerData) {
+                        const customer = await db.save('customer_profiles', {
+                            customerId,
+                            name: customerData.name,
+                            primaryPhone: customerData.phone,
+                            payload: { deliveryAddress: customerData.address }
+                        });
+                        customerId = customer.customerId || customerId;
+                    }
+
+                    // Create order_schedule
+                    const scheduleId = 'sched-' + Date.now();
+                    const scheduledAt = new Date(Date.now() + 30 * 60 * 1000).toISOString(); // +30 mins
+                    const endsAt = new Date(Date.now() + 90 * 60 * 1000).toISOString(); // +90 mins
+
+                    await db.save('order_schedule', {
+                        id: scheduleId,
+                        customerId,
+                        type,
+                        scheduledAt,
+                        endsAt,
+                        duration: 60,
+                        status: 'pending',
+                        payload: customerData || {},
+                        notes: type === 'takeaway' ? 'Takeaway order from menu app' : 'Delivery order from menu app'
+                    });
+
+                    // Create order_schedule_line items
+                    for (const item of cart) {
+                        await db.save('order_schedule_line', {
+                            id: 'line-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
+                            scheduleId,
+                            itemId: item.itemId,
+                            itemName: item.name,
+                            quantity: item.quantity,
+                            unitPrice: item.price,
+                            lineTotal: item.price * item.quantity
+                        });
+                    }
+
+                    // Success
+                    alert('✅ تم إرسال الطلب بنجاح!');
+                    cart = [];
+                    updateCart();
+                    closeCheckout();
+
+                } catch (err) {
+                    console.error('[Menu App] Submit error:', err);
+                    alert('حدث خطأ في إرسال الطلب');
+                }
+            };
+
+            // Start
+            init();
+        })();
+    </script>
+
+</body>
+
+</html>

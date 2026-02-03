@@ -1,0 +1,4443 @@
+{
+  "version": 1,
+  "meta": {
+    "branchId": "dar",
+    "moduleId": "pos",
+    "counter": 0,
+    "labCounter": 0
+  },
+  "tables": {
+    "settings": {
+      "tax_rate": 0.14,
+      "service_charge_rate": 0.12,
+      "default_delivery_fee": 30,
+      "currency": {
+        "code": "EGP",
+        "display": "symbol",
+        "name": {
+          "en": "Egyptian Pound",
+          "ar": "الجنيه المصري"
+        },
+        "symbols": {
+          "en": "E£",
+          "ar": "ج.م"
+        }
+      },
+      "sync": {
+        "branch_id": "branch-main",
+        "branch_name": {
+          "ar": "الفرع الرئيسي",
+          "en": "Main branch"
+        },
+        "channel": "branch-main",
+        "ws_endpoint": "/ws",
+        "http_endpoint": "/api/branches/branch-main/modules/pos/events",
+        "token": null,
+        "central_only": false,
+        "allow_indexeddb_fallback": true
+      }
+    },
+    "shift_settings": {
+      "opening_float": 500,
+      "pin": "1122",
+      "pin_length": 4,
+      "default_pin": "1122"
+    },
+    "payment_methods": [
+      {
+        "id": "insta",
+        "icon": "📱",
+        "name": {
+          "ar": "انستا",
+          "en": "insta"
+        },
+        "type": "wallet",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3"
+      },
+      {
+        "id": "visa",
+        "icon": "💳",
+        "name": {
+          "ar": "فيزا",
+          "en": "visa"
+        },
+        "type": "card",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3"
+      },
+      {
+        "id": "wallet",
+        "icon": "📱",
+        "name": {
+          "ar": "محفظة إلكترونية ",
+          "en": "wallet"
+        },
+        "type": "wallet",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3"
+      },
+      {
+        "id": "cash",
+        "icon": "💵",
+        "name": {
+          "ar": "نقدا",
+          "en": "cash"
+        },
+        "type": "cash",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3"
+      }
+    ],
+    "customer_profiles": [
+      {
+        "createdAt": 1708240000000,
+        "email": null,
+        "id": "CUST-MK2WRBNV-A",
+        "name": "أحمد خالد",
+        "notes": null,
+        "phone": null,
+        "preferredLanguage": null,
+        "updatedAt": 1708240000000,
+        "phones": [
+          "01000011223",
+          "01234567890"
+        ],
+        "addresses": []
+      },
+      {
+        "createdAt": 1708240000000,
+        "email": null,
+        "id": "CUST-MK2WRBNV-B",
+        "name": "سارة مصطفى",
+        "notes": null,
+        "phone": null,
+        "preferredLanguage": null,
+        "updatedAt": 1708240000000,
+        "phones": [
+          "01055667788"
+        ],
+        "addresses": []
+      },
+      {
+        "createdAt": 1708240000000,
+        "email": null,
+        "id": "CUST-MK2WRBNV-C",
+        "name": "Mohamed Adel",
+        "notes": null,
+        "phone": null,
+        "preferredLanguage": null,
+        "updatedAt": 1708240000000,
+        "phones": [
+          "01122334455"
+        ],
+        "addresses": []
+      },
+      {
+        "createdAt": 1768919451805,
+        "email": null,
+        "id": "CUST-MKMOYWF1",
+        "name": "محمد حسن",
+        "notes": null,
+        "phone": "01090780494",
+        "preferredLanguage": null,
+        "updatedAt": 1768919451805
+      },
+      {
+        "createdAt": 1768921387204,
+        "email": null,
+        "id": "CUST-MKMQ4DS4",
+        "name": "مسلم",
+        "notes": null,
+        "phone": "01122558899",
+        "preferredLanguage": null,
+        "updatedAt": 1768921387204
+      },
+      {
+        "createdAt": 1768921388063,
+        "email": null,
+        "id": "CUST-MKMQ4EFZ",
+        "name": "محمد احمد",
+        "notes": null,
+        "phone": "0124555685",
+        "preferredLanguage": null,
+        "updatedAt": 1768921388063
+      },
+      {
+        "createdAt": 1768921416878,
+        "email": null,
+        "id": "CUST-MKMQ50OE",
+        "name": "منه احمد",
+        "notes": null,
+        "phone": "01275580866",
+        "preferredLanguage": null,
+        "updatedAt": 1768921416878
+      },
+      {
+        "createdAt": 1768921474461,
+        "email": null,
+        "id": "CUST-MKMQ693X",
+        "name": "علي محمد",
+        "notes": null,
+        "phone": "01122373564",
+        "preferredLanguage": null,
+        "updatedAt": 1768921474461
+      },
+      {
+        "createdAt": 1768921477302,
+        "email": null,
+        "id": "CUST-MKMQ6BAU",
+        "name": "محمد احمد",
+        "notes": null,
+        "phone": "012545484",
+        "preferredLanguage": null,
+        "updatedAt": 1768921477302
+      },
+      {
+        "createdAt": 1768921596950,
+        "email": null,
+        "id": "CUST-MKMQ8VME",
+        "name": "منه احمدحسن",
+        "notes": null,
+        "phone": "01275580866",
+        "preferredLanguage": null,
+        "updatedAt": 1768921596950
+      },
+      {
+        "createdAt": 1768921598588,
+        "email": null,
+        "id": "CUST-MKMQ8WVW",
+        "name": "مصطفي جمال",
+        "notes": null,
+        "phone": "01122373698",
+        "preferredLanguage": null,
+        "updatedAt": 1768921598588
+      },
+      {
+        "createdAt": 1768921603631,
+        "email": null,
+        "id": "CUST-MKMQ90RZ",
+        "name": "اسلام محمد",
+        "notes": null,
+        "phone": "01254544544",
+        "preferredLanguage": null,
+        "updatedAt": 1768921603631
+      },
+      {
+        "createdAt": 1768922359087,
+        "email": null,
+        "id": "CUST-MKMQP7OV",
+        "name": "منه احمد",
+        "notes": null,
+        "phone": "01275580866",
+        "preferredLanguage": null,
+        "updatedAt": 1768922359087
+      },
+      {
+        "createdAt": 1768922590631,
+        "email": null,
+        "id": "CUST-MKMQU6CN",
+        "name": "هيفا محمد",
+        "notes": null,
+        "phone": "01145520266",
+        "preferredLanguage": null,
+        "updatedAt": 1768922590631
+      },
+      {
+        "createdAt": 1768922696388,
+        "email": null,
+        "id": "CUST-MKMQWFYC",
+        "name": "مؤمن",
+        "notes": null,
+        "phone": "01090780494",
+        "preferredLanguage": null,
+        "updatedAt": 1768922696388
+      },
+      {
+        "createdAt": 1768923235716,
+        "email": null,
+        "id": "CUST-MKMR803O",
+        "name": "اسامة",
+        "notes": null,
+        "phone": "012545554",
+        "preferredLanguage": null,
+        "updatedAt": 1768923235716
+      },
+      {
+        "createdAt": 1768928334562,
+        "email": null,
+        "id": "CUST-MKMU9AEA",
+        "name": "مصطفى محمود",
+        "notes": null,
+        "phone": "01212570267",
+        "preferredLanguage": null,
+        "updatedAt": 1768928334562
+      },
+      {
+        "createdAt": 1768928399201,
+        "email": null,
+        "id": "CUST-MKMUAO9T",
+        "name": "مصطفى محمود",
+        "notes": null,
+        "phone": "01212570267",
+        "preferredLanguage": null,
+        "updatedAt": 1768928399201
+      },
+      {
+        "createdAt": 1768939284471,
+        "email": null,
+        "id": "CUST-MKN0RZEF",
+        "name": "مصطفي خالد محمد الحسيني",
+        "notes": null,
+        "phone": "01211495629",
+        "preferredLanguage": null,
+        "updatedAt": 1768939284471
+      }
+    ],
+    "customer_addresses": [
+      {
+        "apartment": null,
+        "areaId": "nasr_city",
+        "building": null,
+        "customerId": "CUST-MK2WRBNV-A",
+        "floor": null,
+        "id": "ADDR-MK2WRBNV-1",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": "",
+        "street": "عمارات الشركة، شارع الطيران، مدينة نصر",
+        "customer_id": "CUST-MK2WRBNV-A",
+        "area_id": "nasr_city",
+        "is_primary": true
+      },
+      {
+        "apartment": null,
+        "areaId": "heliopolis",
+        "building": null,
+        "customerId": "CUST-MK2WRBNV-A",
+        "floor": null,
+        "id": "ADDR-MK2WRBNV-2",
+        "isPrimary": false,
+        "label": "العمل",
+        "notes": "التسليم عند البوابة",
+        "street": "شارع عمر بن الخطاب، هليوبوليس",
+        "customer_id": "CUST-MK2WRBNV-A",
+        "area_id": "heliopolis",
+        "is_primary": false
+      },
+      {
+        "apartment": null,
+        "areaId": "maadi",
+        "building": null,
+        "customerId": "CUST-MK2WRBNV-B",
+        "floor": null,
+        "id": "ADDR-MK2WRBNV-3",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": "الطابق الثالث",
+        "street": "شارع 9، المعادي الجديدة",
+        "customer_id": "CUST-MK2WRBNV-B",
+        "area_id": "maadi",
+        "is_primary": true
+      },
+      {
+        "apartment": null,
+        "areaId": "fifth_settlement",
+        "building": null,
+        "customerId": "CUST-MK2WRBNV-C",
+        "floor": null,
+        "id": "ADDR-MK2WRBNV-4",
+        "isPrimary": true,
+        "label": "Home",
+        "notes": "",
+        "street": "بيت الوطن، التجمع الخامس",
+        "customer_id": "CUST-MK2WRBNV-C",
+        "area_id": "fifth_settlement",
+        "is_primary": true
+      },
+      {
+        "apartment": null,
+        "areaId": "heliopolis",
+        "building": null,
+        "customerId": "CUST-MKMOYWF1",
+        "floor": null,
+        "id": "ADDR-mkmoywf1-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": null,
+        "street": null
+      },
+      {
+        "apartment": null,
+        "areaId": "heliopolis",
+        "building": null,
+        "customerId": "CUST-MKMQ4DS4",
+        "floor": null,
+        "id": "ADDR-mkmq4ds4-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": null,
+        "street": null
+      },
+      {
+        "apartment": null,
+        "areaId": "heliopolis",
+        "building": null,
+        "customerId": "CUST-MKMQ4EFZ",
+        "floor": null,
+        "id": "ADDR-mkmq4efz-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": null,
+        "street": " ش احمد عرابي "
+      },
+      {
+        "apartment": null,
+        "areaId": "shoubra",
+        "building": null,
+        "customerId": "CUST-MKMQ50OE",
+        "floor": null,
+        "id": "ADDR-mkmq50oe-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": "امام مصنع الكرتون ف ضهر البنزيمه",
+        "street": "مساكن الجباسات "
+      },
+      {
+        "apartment": null,
+        "areaId": "shoubra",
+        "building": null,
+        "customerId": "CUST-MKMQ693X",
+        "floor": null,
+        "id": "ADDR-mkmq693x-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": "امام هايبر الروضة",
+        "street": "بهتيم "
+      },
+      {
+        "apartment": null,
+        "areaId": "heliopolis",
+        "building": null,
+        "customerId": "CUST-MKMQ6BAU",
+        "floor": null,
+        "id": "ADDR-mkmq6bau-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": null,
+        "street": "ش احمد عرابي "
+      },
+      {
+        "apartment": null,
+        "areaId": "shoubra",
+        "building": null,
+        "customerId": "CUST-MKMQ8VME",
+        "floor": null,
+        "id": "ADDR-mkmq8vme-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": "بنزيمه موبيل",
+        "street": "مساكن الجباسات"
+      },
+      {
+        "apartment": null,
+        "areaId": "rehab",
+        "building": null,
+        "customerId": "CUST-MKMQ8WVW",
+        "floor": null,
+        "id": "ADDR-mkmq8wvw-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": "امام البرج",
+        "street": "ش الرحاب"
+      },
+      {
+        "apartment": null,
+        "areaId": "heliopolis",
+        "building": null,
+        "customerId": "CUST-MKMQ90RZ",
+        "floor": null,
+        "id": "ADDR-mkmq90rz-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": null,
+        "street": "ش معتز "
+      },
+      {
+        "apartment": null,
+        "areaId": "shoubra",
+        "building": null,
+        "customerId": "CUST-MKMQP7OV",
+        "floor": null,
+        "id": "ADDR-mkmqp7ov-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": "بنزينه",
+        "street": "مساكن الجبسات"
+      },
+      {
+        "apartment": null,
+        "areaId": "heliopolis",
+        "building": null,
+        "customerId": "CUST-MKMQU6CN",
+        "floor": null,
+        "id": "ADDR-mkmqu6cn-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": "بنزينه",
+        "street": "ملف"
+      },
+      {
+        "apartment": null,
+        "areaId": "heliopolis",
+        "building": null,
+        "customerId": "CUST-MKMQWFYC",
+        "floor": null,
+        "id": "ADDR-mkmqwfyc-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": null,
+        "street": null
+      },
+      {
+        "apartment": null,
+        "areaId": "heliopolis",
+        "building": null,
+        "customerId": "CUST-MKMR803O",
+        "floor": null,
+        "id": "ADDR-mkmr803o-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": null,
+        "street": "ش عباس العقاد "
+      },
+      {
+        "apartment": null,
+        "areaId": "shoubra",
+        "building": null,
+        "customerId": "CUST-MKMU9AEA",
+        "floor": null,
+        "id": "ADDR-mkmu9aea-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": "سوبر ماركت تبارك",
+        "street": "5 ح ابوحمد من شارع الشربيني منشية الحريه"
+      },
+      {
+        "apartment": null,
+        "areaId": "shoubra",
+        "building": null,
+        "customerId": "CUST-MKMUAO9T",
+        "floor": null,
+        "id": "ADDR-mkmuao9t-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": "سوبر ماركت تبارك",
+        "street": "5ح ابوحمد من شارع الشربيني منشية الحريه"
+      },
+      {
+        "apartment": null,
+        "areaId": "shoubra",
+        "building": null,
+        "customerId": "CUST-MKN0RZEF",
+        "floor": null,
+        "id": "ADDR-mkn0rzef-0",
+        "isPrimary": true,
+        "label": "المنزل",
+        "notes": "امام مصنع ال 5 نجوم",
+        "street": "39 ش صلاح سالم المنشية الجديدة - الدور 2 - شقة 4"
+      }
+    ],
+    "kitchen_sections": [
+      {
+        "id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "section_name": {
+          "ar": "شاشة السخن",
+          "en": "Hot Line"
+        },
+        "description": {
+          "ar": "الشوربات واليخنات والسندويتشات والأطباق المطهية.\r\n",
+          "en": "Soups, stews, sandwiches and cooked meals."
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3"
+      },
+      {
+        "id": "34476cab-abec-47fc-ac37-34faa4ab4092",
+        "section_name": {
+          "ar": "شاشة البوفيه",
+          "en": "Buffet & Drinks"
+        },
+        "description": {
+          "ar": "الحلويات والمشروبات والأصناف الباردة",
+          "en": "Desserts, beverages and cold items."
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3"
+      },
+      {
+        "id": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "section_name": {
+          "ar": "شاشه المندي",
+          "en": "Mandi & Kabsa"
+        },
+        "description": {
+          "ar": "أطباق المندي والكبسة والأرز في الصواني ",
+          "en": "Traditional mandi, kabsa and rice based trays."
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3"
+      },
+      {
+        "id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "section_name": {
+          "ar": "شاشة المشاوي",
+          "en": "Grill Station"
+        },
+        "description": {
+          "ar": "كل اللحوم المشوية التي يجهزها فريق المشويات",
+          "en": "All grilled meats prepared by the butchery team."
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3"
+      }
+    ],
+    "category_sections": [
+      {
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "category_id": "5ecd0660-01ad-4038-8ba6-eef5d77d6254",
+        "section_id": "34476cab-abec-47fc-ac37-34faa4ab4092"
+      },
+      {
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "section_id": "c61d5bc4-1429-42b6-b250-f9254a176848"
+      },
+      {
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "category_id": "CF44B6AEE120414796208411A11D82BD",
+        "section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "category_id": "ea4c54e8-e140-4283-8890-4cc81bc19663",
+        "section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "category_id": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "section_id": "67ba4d64-42c0-4f93-90e9-12ded7b70c87"
+      }
+    ],
+    "order_types": [
+      {
+        "id": "dine_in",
+        "type_name": {
+          "en": "Dine-in",
+          "ar": "صالة"
+        },
+        "description": {
+          "en": "Table service orders managed inside the restaurant.",
+          "ar": "طلبات الصالة التي تُدار داخل المطعم."
+        },
+        "workflow": "multi-step",
+        "allows_save": true,
+        "allows_finalize_later": true,
+        "allows_line_additions": true,
+        "allows_returns": true
+      },
+      {
+        "id": "delivery",
+        "type_name": {
+          "en": "Delivery",
+          "ar": "دليفري"
+        },
+        "description": {
+          "en": "Orders delivered to customers with a single-step closure.",
+          "ar": "طلبات التوصيل التي تُغلق في خطوة واحدة."
+        },
+        "workflow": "single-step",
+        "allows_save": false,
+        "allows_finalize_later": false,
+        "allows_line_additions": false,
+        "allows_returns": false
+      },
+      {
+        "id": "takeaway",
+        "type_name": {
+          "en": "Takeaway",
+          "ar": "تيك أواي"
+        },
+        "description": {
+          "en": "Counter pickup orders paid on capture.",
+          "ar": "طلبات التيك أواي تُدفع وتُغلق في نفس الخطوة."
+        },
+        "workflow": "single-step",
+        "allows_save": false,
+        "allows_finalize_later": false,
+        "allows_line_additions": false,
+        "allows_returns": false
+      }
+    ],
+    "order_statuses": [
+      {
+        "id": "open",
+        "status_name": {
+          "en": "Open",
+          "ar": "مفتوح"
+        }
+      },
+      {
+        "id": "held",
+        "status_name": {
+          "en": "On Hold",
+          "ar": "معلّق"
+        }
+      },
+      {
+        "id": "finalized",
+        "status_name": {
+          "en": "Finalized",
+          "ar": "منتهي"
+        }
+      },
+      {
+        "id": "closed",
+        "status_name": {
+          "en": "Closed",
+          "ar": "مغلق"
+        }
+      }
+    ],
+    "order_payment_states": [
+      {
+        "id": "unpaid",
+        "payment_name": {
+          "en": "Unpaid",
+          "ar": "غير مدفوع"
+        }
+      },
+      {
+        "id": "partial",
+        "payment_name": {
+          "en": "Partially Paid",
+          "ar": "مدفوع جزئيًا"
+        }
+      },
+      {
+        "id": "paid",
+        "payment_name": {
+          "en": "Paid",
+          "ar": "مدفوع"
+        }
+      }
+    ],
+    "order_stages": [
+      {
+        "id": "new",
+        "stage_name": {
+          "en": "New",
+          "ar": "جديد"
+        },
+        "description": {
+          "en": "Order is created and waiting to be sent to the kitchen.",
+          "ar": "تم إنشاء الطلب وينتظر الإرسال إلى المطبخ."
+        },
+        "sequence": 1,
+        "lock_line_edits": false
+      },
+      {
+        "id": "preparing",
+        "stage_name": {
+          "en": "Preparing",
+          "ar": "جاري التجهيز"
+        },
+        "description": {
+          "en": "Kitchen started preparing the order items.",
+          "ar": "المطبخ بدأ في تجهيز أصناف الطلب."
+        },
+        "sequence": 2,
+        "lock_line_edits": true
+      },
+      {
+        "id": "prepared",
+        "stage_name": {
+          "en": "Prepared",
+          "ar": "تم التجهيز"
+        },
+        "description": {
+          "en": "Items are ready and waiting for dispatch.",
+          "ar": "الأصناف جاهزة وتنتظر التسليم."
+        },
+        "sequence": 3,
+        "lock_line_edits": true
+      },
+      {
+        "id": "delivering",
+        "stage_name": {
+          "en": "Delivering",
+          "ar": "جاري التسليم"
+        },
+        "description": {
+          "en": "Order is on the way to the guest.",
+          "ar": "الطلب في الطريق إلى العميل."
+        },
+        "sequence": 4,
+        "lock_line_edits": true
+      },
+      {
+        "id": "delivered",
+        "stage_name": {
+          "en": "Delivered",
+          "ar": "تم التسليم"
+        },
+        "description": {
+          "en": "Order was delivered or served.",
+          "ar": "تم تسليم الطلب أو تقديمه."
+        },
+        "sequence": 5,
+        "lock_line_edits": true
+      },
+      {
+        "id": "paid",
+        "stage_name": {
+          "en": "Paid",
+          "ar": "تم الدفع"
+        },
+        "description": {
+          "en": "Payment has been captured for the order.",
+          "ar": "تم تحصيل قيمة الطلب."
+        },
+        "sequence": 6,
+        "lock_line_edits": true
+      },
+      {
+        "id": "closed",
+        "stage_name": {
+          "en": "Closed",
+          "ar": "تم الإغلاق"
+        },
+        "description": {
+          "en": "Order was audited and closed after shift end.",
+          "ar": "تمت مراجعة الطلب وإغلاقه بعد نهاية الوردية."
+        },
+        "sequence": 7,
+        "lock_line_edits": true
+      }
+    ],
+    "order_line_statuses": [
+      {
+        "id": "draft",
+        "status_name": {
+          "en": "Draft",
+          "ar": "مسودة"
+        }
+      },
+      {
+        "id": "queued",
+        "status_name": {
+          "en": "Queued",
+          "ar": "بانتظار التحضير"
+        }
+      },
+      {
+        "id": "preparing",
+        "status_name": {
+          "en": "Preparing",
+          "ar": "جاري التحضير"
+        }
+      },
+      {
+        "id": "ready",
+        "status_name": {
+          "en": "Ready",
+          "ar": "جاهز"
+        }
+      },
+      {
+        "id": "served",
+        "status_name": {
+          "en": "Served",
+          "ar": "مُقدّم"
+        }
+      }
+    ],
+    "ui_texts": [
+      {
+        "key": "reservations_title",
+        "text": {
+          "ar": "الحجوزات",
+          "en": "Reservations"
+        }
+      },
+      {
+        "key": "reservations_pending",
+        "text": {
+          "ar": "قيد الانتظار",
+          "en": "Pending"
+        }
+      },
+      {
+        "key": "reservations_converted",
+        "text": {
+          "ar": "تم التحويل",
+          "en": "Converted"
+        }
+      },
+      {
+        "key": "reservations_cancelled",
+        "text": {
+          "ar": "ملغي",
+          "en": "Cancelled"
+        }
+      },
+      {
+        "key": "reservations_all",
+        "text": {
+          "ar": "الكل",
+          "en": "All"
+        }
+      },
+      {
+        "key": "reservations_no_schedules",
+        "text": {
+          "ar": "لا توجد حجوزات",
+          "en": "No Schedules"
+        }
+      },
+      {
+        "key": "reservations_will_show_here",
+        "text": {
+          "ar": "سيتم عرض الحجوزات هنا",
+          "en": "Schedules will appear here"
+        }
+      },
+      {
+        "key": "reservations_edit",
+        "text": {
+          "ar": "تعديل",
+          "en": "Edit"
+        }
+      },
+      {
+        "key": "reservations_confirm",
+        "text": {
+          "ar": "تأكيد",
+          "en": "Confirm"
+        }
+      },
+      {
+        "key": "reservations_view",
+        "text": {
+          "ar": "عرض",
+          "en": "View"
+        }
+      },
+      {
+        "key": "order_type_now",
+        "text": {
+          "ar": "⚡ أوردرات فورية",
+          "en": "⚡ Immediate Orders"
+        }
+      },
+      {
+        "key": "order_type_schedule",
+        "text": {
+          "ar": "📅 حجز أوردرات",
+          "en": "📅 Scheduled Orders"
+        }
+      }
+    ],
+    "__deprecated_employees": [
+      {
+        "id": "e7a8f0b4",
+        "pin_code": "1122",
+        "full_name": "أحمد محمود",
+        "role": "cashier",
+        "allowed_discount_rate": 0.1
+      },
+      {
+        "id": "f3c9d8e1",
+        "pin_code": "3344",
+        "full_name": "سارة علي",
+        "role": "cashier",
+        "allowed_discount_rate": 0.1
+      },
+      {
+        "id": "a1b2c3d4",
+        "pin_code": "9999",
+        "full_name": "خالد إبراهيم",
+        "role": "manager",
+        "allowed_discount_rate": 0.25
+      },
+      {
+        "id": "b5c6d7e8",
+        "pin_code": "5566",
+        "full_name": "فاطمة حسن",
+        "role": "kitchen_staff",
+        "allowed_discount_rate": 0
+      },
+      {
+        "id": "c9d0e1f2",
+        "pin_code": "7788",
+        "full_name": "يوسف كريم",
+        "role": "delivery_driver",
+        "allowed_discount_rate": 0
+      }
+    ],
+    "tableLocks": [],
+    "reservations": [
+      {
+        "id": "res-001",
+        "customerName": "محمد سامي",
+        "phone": "01000200300",
+        "partySize": 4,
+        "scheduledAt": "2024-02-18T19:00:00Z",
+        "holdUntil": "2024-02-18T19:20:00Z",
+        "tableIds": [
+          "T7"
+        ],
+        "status": "booked",
+        "note": "عيد ميلاد"
+      },
+      {
+        "id": "res-002",
+        "customerName": "Sarah Ahmed",
+        "phone": "01133344455",
+        "partySize": 2,
+        "scheduledAt": "2024-02-18T20:30:00Z",
+        "holdUntil": "2024-02-18T20:50:00Z",
+        "tableIds": [
+          "T5",
+          "T6"
+        ],
+        "status": "booked",
+        "note": "جلسة هادئة"
+      },
+      {
+        "id": "res-003",
+        "customerName": "شركة بريميوم",
+        "phone": "01266677788",
+        "partySize": 10,
+        "scheduledAt": "2024-02-19T13:00:00Z",
+        "holdUntil": "2024-02-19T13:15:00Z",
+        "tableIds": [
+          "T16"
+        ],
+        "status": "seated",
+        "note": "اجتماع عمل"
+      }
+    ],
+    "auditEvents": [
+      {
+        "id": "audit-001",
+        "userId": "a1b2c3d4",
+        "action": "table.state",
+        "refType": "table",
+        "refId": "T19",
+        "at": "2024-02-15T10:00:00Z",
+        "meta": {
+          "state": "disactive"
+        }
+      }
+    ],
+    "delivery_drivers": [
+      {
+        "id": 1,
+        "name": "محمود عبد العزيز",
+        "phone": "01012345678",
+        "vehicle_id": "موتوسيكل - أ ب ج 123"
+      },
+      {
+        "id": 2,
+        "name": "كريم السيد",
+        "phone": "01198765432",
+        "vehicle_id": "موتوسيكل - س ص ع 456"
+      },
+      {
+        "id": 3,
+        "name": "علي حسن",
+        "phone": "01234567890",
+        "vehicle_id": "سيارة - ف ق ل 789"
+      }
+    ],
+    "add_ons": [
+      {
+        "id": 101,
+        "name": {
+          "en": "Extra Mozzarella",
+          "ar": "جبنة موتزاريلا زيادة"
+        },
+        "price_change": 15
+      },
+      {
+        "id": 102,
+        "name": {
+          "en": "Extra Tahini Sauce",
+          "ar": "صوص طحينة إضافي"
+        },
+        "price_change": 8
+      },
+      {
+        "id": 103,
+        "name": {
+          "en": "Extra Roumy Cheese",
+          "ar": "جبنة رومي زيادة"
+        },
+        "price_change": 12
+      },
+      {
+        "id": 104,
+        "name": {
+          "en": "Extra Rice",
+          "ar": "أرز إضافي"
+        },
+        "price_change": 25
+      }
+    ],
+    "removals": [
+      {
+        "id": 201,
+        "name": {
+          "en": "Without Pickles",
+          "ar": "بدون مخلل"
+        },
+        "price_change": 0
+      },
+      {
+        "id": 202,
+        "name": {
+          "en": "Without Onions",
+          "ar": "بدون بصل"
+        },
+        "price_change": 0
+      },
+      {
+        "id": 203,
+        "name": {
+          "en": "Without Tomatoes",
+          "ar": "بدون طماطم"
+        },
+        "price_change": 0
+      }
+    ],
+    "stores": {
+      "orders": [],
+      "shifts": [],
+      "orderLines": [],
+      "orderNotes": [],
+      "orderStatusLogs": [],
+      "posMeta": [],
+      "syncLog": []
+    },
+    "menu_categories": [
+      {
+        "id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "category_name": {
+          "en": "Appetizers",
+          "ar": "المقبلات"
+        },
+        "section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "المقبلات",
+        "nameEn": "Appetizers",
+        "sectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "id": "17E1117979A94AEC93B71C80ADDF1561",
+        "category_name": {
+          "en": "Salad",
+          "ar": "السلطات"
+        },
+        "section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "السلطات",
+        "nameEn": "Salad",
+        "sectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "category_name": {
+          "en": "Casserole",
+          "ar": "الطواجن"
+        },
+        "section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "الطواجن",
+        "nameEn": "Casserole",
+        "sectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "id": "5ecd0660-01ad-4038-8ba6-eef5d77d6254",
+        "category_name": {
+          "en": "Juices and drinks",
+          "ar": "عصائر و مشروبات باردة"
+        },
+        "section_id": "34476cab-abec-47fc-ac37-34faa4ab4092",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "عصائر و مشروبات باردة",
+        "nameEn": "Juices and drinks",
+        "sectionId": "34476cab-abec-47fc-ac37-34faa4ab4092"
+      },
+      {
+        "id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "category_name": {
+          "en": "Grills",
+          "ar": "المشويات"
+        },
+        "section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "المشويات",
+        "nameEn": "Grills",
+        "sectionId": "c61d5bc4-1429-42b6-b250-f9254a176848"
+      },
+      {
+        "id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "category_name": {
+          "en": "Rice and Pasta",
+          "ar": "الأرز والمكرونة"
+        },
+        "section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "الأرز والمكرونة",
+        "nameEn": "Rice and Pasta",
+        "sectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "id": "CF44B6AEE120414796208411A11D82BD",
+        "category_name": {
+          "en": "Soup",
+          "ar": "الشورب"
+        },
+        "section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "الشورب",
+        "nameEn": "Soup",
+        "sectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "id": "ea4c54e8-e140-4283-8890-4cc81bc19663",
+        "category_name": {
+          "en": "Fattah",
+          "ar": "الفتة"
+        },
+        "section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "الفتة",
+        "nameEn": "Fattah",
+        "sectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "id": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "category_name": {
+          "en": "mandy",
+          "ar": "المندي"
+        },
+        "section_id": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "المندي",
+        "nameEn": "mandy",
+        "sectionId": "67ba4d64-42c0-4f93-90e9-12ded7b70c87"
+      }
+    ],
+    "menu_items": [
+      {
+        "id": "04b2b3c7-be56-4066-940f-2675fb740247",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 501
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سباجيتي_بالصلصة_17092025141157948.jpg"
+        },
+        "item_name": {
+          "en": "اسباجيتي بالصلصة 65",
+          "ar": "اسباجيتي بالصلصة 55"
+        },
+        "item_description": {
+          "en": "اسباجيتي بالصلصة 65",
+          "ar": "اسباجيتي بالصلصة 55"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "اسباجيتي بالصلصة 55",
+        "nameEn": "اسباجيتي بالصلصة 65",
+        "descriptionAr": "اسباجيتي بالصلصة 55",
+        "descriptionEn": "اسباجيتي بالصلصة 65",
+        "basePrice": 501,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سباجيتي_بالصلصة_17092025141157948.jpg"
+      },
+      {
+        "id": "05d98de6-7bb6-48dc-930a-642144514159",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 324
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/شيش_طاووق_16092025151612868.jpg"
+        },
+        "item_name": {
+          "en": "شيش طاووق",
+          "ar": "شيش طاووق"
+        },
+        "item_description": {
+          "en": "شيش طاووق",
+          "ar": "شيش طاووق"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "شيش طاووق",
+        "nameEn": "شيش طاووق",
+        "descriptionAr": "شيش طاووق",
+        "descriptionEn": "شيش طاووق",
+        "basePrice": 324,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/شيش_طاووق_16092025151612868.jpg"
+      },
+      {
+        "id": "060E11D89BF042D4A89B76EAFB025D01",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 152
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/طاجن_بامية_باللحمة_16092025173555457.jpg"
+        },
+        "item_name": {
+          "en": "بامية باللحمة الضاني",
+          "ar": "بامية باللحمة الضاني"
+        },
+        "item_description": {
+          "en": "بامية باللحمة الضاني",
+          "ar": "بامية باللحمة الضاني"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "بامية باللحمة الضاني",
+        "nameEn": "بامية باللحمة الضاني",
+        "descriptionAr": "بامية باللحمة الضاني",
+        "descriptionEn": "بامية باللحمة الضاني",
+        "basePrice": 152,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/طاجن_بامية_باللحمة_16092025173555457.jpg"
+      },
+      {
+        "id": "09cc9ae6-402c-4cb3-95e8-0c0b0902bb9a",
+        "category_id": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchen_section_id": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "pricing": {
+          "base": 38
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/دجاج_مندي_15092025190627064.jpg"
+        },
+        "item_name": {
+          "en": "دجاج كاملة مندي",
+          "ar": "دجاج كاملة مندي"
+        },
+        "item_description": {
+          "en": "دجاج كاملة مندي",
+          "ar": "دجاج كاملة مندي"
+        },
+        "basePrice": 38,
+        "categoryId": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchenSectionId": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/دجاج_مندي_15092025190627064.jpg"
+      },
+      {
+        "id": "0ff8cd4a-005b-4a44-9187-c50eaaa84643",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 580
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/مبكبكة_باللحمة_الضاني_-_ا_17092025151055041.jpg"
+        },
+        "item_name": {
+          "en": "مبكبكة باللحمة الضاني / الشمبري",
+          "ar": "مبكبكة باللحمة الضاني / الشمبري"
+        },
+        "item_description": {
+          "en": "مبكبكة باللحمة الضاني / الشمبري",
+          "ar": "مبكبكة باللحمة الضاني / الشمبري"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "مبكبكة باللحمة الضاني / الشمبري",
+        "nameEn": "مبكبكة باللحمة الضاني / الشمبري",
+        "descriptionAr": "مبكبكة باللحمة الضاني / الشمبري",
+        "descriptionEn": "مبكبكة باللحمة الضاني / الشمبري",
+        "basePrice": 580,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/مبكبكة_باللحمة_الضاني_-_ا_17092025151055041.jpg"
+      },
+      {
+        "id": "157997A151BC4C4CBF40FC0724718662",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 76
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ورقة_كبدة_16092025141942685.jpg"
+        },
+        "item_name": {
+          "en": "ورقة كبدة",
+          "ar": "ورقة كبدة"
+        },
+        "item_description": {
+          "en": "ورقة كبدة",
+          "ar": "ورقة كبدة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ورقة كبدة",
+        "nameEn": "ورقة كبدة",
+        "descriptionAr": "ورقة كبدة",
+        "descriptionEn": "ورقة كبدة",
+        "basePrice": 76,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ورقة_كبدة_16092025141942685.jpg"
+      },
+      {
+        "id": "17435D48A4A546E696AAAB3B974A9B03",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 645
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/فرد-حمام-محشي_16092025142058970.jpg"
+        },
+        "item_name": {
+          "en": "فرد حمام محشي",
+          "ar": "فرد حمام محشي"
+        },
+        "item_description": {
+          "en": "فرد حمام محشي",
+          "ar": "فرد حمام محشي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "فرد حمام محشي",
+        "nameEn": "فرد حمام محشي",
+        "descriptionAr": "فرد حمام محشي",
+        "descriptionEn": "فرد حمام محشي",
+        "basePrice": 645,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/فرد-حمام-محشي_16092025142058970.jpg"
+      },
+      {
+        "id": "1ce2e699-9e55-4d4f-86b8-e90a446f385b",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 12
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/مكرونة_نيجريسكو_17092025150650369.jpg"
+        },
+        "item_name": {
+          "en": "مكرونة نيجريسكو",
+          "ar": "مكرونة نيجريسكو"
+        },
+        "item_description": {
+          "en": "مكرونة نيجريسكو",
+          "ar": "مكرونة نيجريسكو"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "مكرونة نيجريسكو",
+        "nameEn": "مكرونة نيجريسكو",
+        "descriptionAr": "مكرونة نيجريسكو",
+        "descriptionEn": "مكرونة نيجريسكو",
+        "basePrice": 12,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/مكرونة_نيجريسكو_17092025150650369.jpg"
+      },
+      {
+        "id": "22330C99983E483EA748660133546BB5",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 720
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/طاجن-عكاوي-1_15092025141536326.png"
+        },
+        "item_name": {
+          "en": "طحينة",
+          "ar": "طحينة"
+        },
+        "item_description": {
+          "en": "طحينة",
+          "ar": "طحينة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "طحينة",
+        "nameEn": "طحينة",
+        "descriptionAr": "طحينة",
+        "descriptionEn": "طحينة",
+        "basePrice": 720,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/طاجن-عكاوي-1_15092025141536326.png"
+      },
+      {
+        "id": "23a3f9df-d213-4215-9e38-30e6b0d350b5",
+        "category_id": "ea4c54e8-e140-4283-8890-4cc81bc19663",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 28
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فتة_كوارع_17092025152616830.jpg"
+        },
+        "item_name": {
+          "en": "فتة كوارع",
+          "ar": "فتة كوارع"
+        },
+        "item_description": {
+          "en": "فتة كوارع",
+          "ar": "فتة كوارع"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "فتة كوارع",
+        "nameEn": "فتة كوارع",
+        "descriptionAr": "فتة كوارع",
+        "descriptionEn": "فتة كوارع",
+        "basePrice": 28,
+        "categoryId": "ea4c54e8-e140-4283-8890-4cc81bc19663",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فتة_كوارع_17092025152616830.jpg"
+      },
+      {
+        "id": "23EFFEA6AF914C59B27E98C76ED0E350",
+        "category_id": "5ecd0660-01ad-4038-8ba6-eef5d77d6254",
+        "kitchen_section_id": "34476cab-abec-47fc-ac37-34faa4ab4092",
+        "pricing": {
+          "base": 861
+        },
+        "item_name": {
+          "en": "مياة معدنية *600 مللى ",
+          "ar": "مياة معدنية *600 مللى "
+        },
+        "item_description": {
+          "en": "مياة معدنية *600 مللى ",
+          "ar": "مياة معدنية *600 مللى "
+        },
+        "media": {
+          "image": ""
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "مياة معدنية *600 مللى ",
+        "nameEn": "مياة معدنية *600 مللى ",
+        "descriptionAr": "مياة معدنية *600 مللى ",
+        "descriptionEn": "مياة معدنية *600 مللى ",
+        "basePrice": 861,
+        "categoryId": "5ecd0660-01ad-4038-8ba6-eef5d77d6254",
+        "kitchenSectionId": "34476cab-abec-47fc-ac37-34faa4ab4092"
+      },
+      {
+        "id": "246299ec-debe-4e9d-9fb9-eb113b6026bc",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 87
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/باسمتي_سادة_17092025135937947.jpg"
+        },
+        "item_name": {
+          "en": "ارز باسمتي سادة",
+          "ar": "ارز باسمتي سادة"
+        },
+        "item_description": {
+          "en": "ارز باسمتي سادة",
+          "ar": "ارز باسمتي سادة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ارز باسمتي سادة",
+        "nameEn": "ارز باسمتي سادة",
+        "descriptionAr": "ارز باسمتي سادة",
+        "descriptionEn": "ارز باسمتي سادة",
+        "basePrice": 87,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/باسمتي_سادة_17092025135937947.jpg"
+      },
+      {
+        "id": "253dcaa6-ddc5-4eea-bdeb-d81e36e25a1b",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 320
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ارز_معمر_بالفراخ_17092025140951377.jpg"
+        },
+        "item_name": {
+          "en": "ارز معمر بالفراخ",
+          "ar": "ارز معمر بالفراخ"
+        },
+        "item_description": {
+          "en": "ارز معمر بالفراخ",
+          "ar": "ارز معمر بالفراخ"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ارز معمر بالفراخ",
+        "nameEn": "ارز معمر بالفراخ",
+        "descriptionAr": "ارز معمر بالفراخ",
+        "descriptionEn": "ارز معمر بالفراخ",
+        "basePrice": 320,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ارز_معمر_بالفراخ_17092025140951377.jpg"
+      },
+      {
+        "id": "2B51504E5F52442599137563447D56B8",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 866
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ثومية_17092025180833707.jpg"
+        },
+        "item_name": {
+          "en": "ثومية",
+          "ar": "ثومية"
+        },
+        "item_description": {
+          "en": "ثومية",
+          "ar": "ثومية"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ثومية",
+        "nameEn": "ثومية",
+        "descriptionAr": "ثومية",
+        "descriptionEn": "ثومية",
+        "basePrice": 866,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ثومية_17092025180833707.jpg"
+      },
+      {
+        "id": "2D45E484D3014257B9871C827AAA55E4",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 143
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/مخاصى_و_كلاوى_16092025142150110.jpg"
+        },
+        "item_name": {
+          "en": "كلاوي ومخاصي",
+          "ar": "كلاوي ومخاصي"
+        },
+        "item_description": {
+          "en": "كلاوي ومخاصي",
+          "ar": "كلاوي ومخاصي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "كلاوي ومخاصي",
+        "nameEn": "كلاوي ومخاصي",
+        "descriptionAr": "كلاوي ومخاصي",
+        "descriptionEn": "كلاوي ومخاصي",
+        "basePrice": 143,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/مخاصى_و_كلاوى_16092025142150110.jpg"
+      },
+      {
+        "id": "31A7A1D70788433B87D47CE9BE09BAD0",
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 813
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/محشي_مشكل_17092025161945392.jpg"
+        },
+        "item_name": {
+          "en": "محشي مشكل",
+          "ar": "محشي مشكل"
+        },
+        "item_description": {
+          "en": "محشي مشكل",
+          "ar": "محشي مشكل"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "محشي مشكل",
+        "nameEn": "محشي مشكل",
+        "descriptionAr": "محشي مشكل",
+        "descriptionEn": "محشي مشكل",
+        "basePrice": 813,
+        "categoryId": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/محشي_مشكل_17092025161945392.jpg"
+      },
+      {
+        "id": "32ACB7E2BEE54F698D062F93F6860301",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 517
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/كفتة_ضاني_16092025142332528.jpg"
+        },
+        "item_name": {
+          "en": "كفتة ضاني",
+          "ar": "كفتة ضاني"
+        },
+        "item_description": {
+          "en": "كفتة ضاني",
+          "ar": "كفتة ضاني"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "كفتة ضاني",
+        "nameEn": "كفتة ضاني",
+        "descriptionAr": "كفتة ضاني",
+        "descriptionEn": "كفتة ضاني",
+        "basePrice": 517,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/كفتة_ضاني_16092025142332528.jpg"
+      },
+      {
+        "id": "348393a1-0e12-41a7-9c33-9bd3de2cded4",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 337
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/مبكبكة_بالموزة_الضاني_17092025151253885.jpeg"
+        },
+        "item_name": {
+          "en": "مبكبكة بالموزة الضاني",
+          "ar": "مبكبكة بالموزة الضاني"
+        },
+        "item_description": {
+          "en": "مبكبكة بالموزة الضاني",
+          "ar": "مبكبكة بالموزة الضاني"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "مبكبكة بالموزة الضاني",
+        "nameEn": "مبكبكة بالموزة الضاني",
+        "descriptionAr": "مبكبكة بالموزة الضاني",
+        "descriptionEn": "مبكبكة بالموزة الضاني",
+        "basePrice": 337,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/مبكبكة_بالموزة_الضاني_17092025151253885.jpeg"
+      },
+      {
+        "id": "36521D1FCD2248EA95994E2464CEAC3A",
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 84
+        },
+        "item_name": {
+          "en": "رقاق باللحمة المفرومة",
+          "ar": "رقاق باللحمة المفرومة"
+        },
+        "item_description": {
+          "en": "رقاق باللحمة المفرومة",
+          "ar": "رقاق باللحمة المفرومة"
+        },
+        "media": {
+          "image": ""
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "رقاق باللحمة المفرومة",
+        "nameEn": "رقاق باللحمة المفرومة",
+        "descriptionAr": "رقاق باللحمة المفرومة",
+        "descriptionEn": "رقاق باللحمة المفرومة",
+        "basePrice": 84,
+        "categoryId": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "id": "41328805-90bd-4bf3-a2e1-6f520f0e2d14",
+        "category_id": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchen_section_id": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "pricing": {
+          "base": 268
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ربع_تيس_مندي_15092025184505455.jpg"
+        },
+        "item_name": {
+          "en": "1/4 تيس مندي",
+          "ar": "1/4 تيس مندي"
+        },
+        "item_description": {
+          "en": "1/4 تيس مندي",
+          "ar": "1/4 تيس مندي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "1/4 تيس مندي",
+        "nameEn": "1/4 تيس مندي",
+        "descriptionAr": "1/4 تيس مندي",
+        "descriptionEn": "1/4 تيس مندي",
+        "basePrice": 268,
+        "categoryId": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchenSectionId": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ربع_تيس_مندي_15092025184505455.jpg"
+      },
+      {
+        "id": "4191dee2-2392-4c0a-88e7-9c96a1682df0",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 5
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/برياني_سادة_17092025140117302.jpg"
+        },
+        "item_name": {
+          "en": "برياني سادة",
+          "ar": "برياني سادة"
+        },
+        "item_description": {
+          "en": "برياني سادة",
+          "ar": "برياني سادة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "برياني سادة",
+        "nameEn": "برياني سادة",
+        "descriptionAr": "برياني سادة",
+        "descriptionEn": "برياني سادة",
+        "basePrice": 5,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/برياني_سادة_17092025140117302.jpg"
+      },
+      {
+        "id": "44600bcc-b0a2-4f45-b934-6f882d444b96",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 340
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/رز_معمر_سادة_17092025140312593.jpg"
+        },
+        "item_name": {
+          "en": "ارز معمر سادة",
+          "ar": "ارز معمر سادة"
+        },
+        "item_description": {
+          "en": "ارز معمر سادة",
+          "ar": "ارز معمر سادة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ارز معمر سادة",
+        "nameEn": "ارز معمر سادة",
+        "descriptionAr": "ارز معمر سادة",
+        "descriptionEn": "ارز معمر سادة",
+        "basePrice": 340,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/رز_معمر_سادة_17092025140312593.jpg"
+      },
+      {
+        "id": "484526DA12E24B9690FEF6B1F0590A0B",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 837
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/فرخة_مشوية_16092025110929691.jpg"
+        },
+        "item_name": {
+          "en": "فراخ مشوية",
+          "ar": "فراخ مشوية"
+        },
+        "item_description": {
+          "en": "فراخ مشوية",
+          "ar": "فراخ مشوية"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "فراخ مشوية",
+        "nameEn": "فراخ مشوية",
+        "descriptionAr": "فراخ مشوية",
+        "descriptionEn": "فراخ مشوية",
+        "basePrice": 837,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/فرخة_مشوية_16092025110929691.jpg"
+      },
+      {
+        "id": "48A3DDD886DD4D81A7862CC9E0187836",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 731
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/face_cover_photo_15092025141516312.jpg"
+        },
+        "item_name": {
+          "en": "باذنجان مخلل",
+          "ar": "باذنجان مخلل"
+        },
+        "item_description": {
+          "en": "باذنجان مخلل",
+          "ar": "باذنجان مخلل"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "باذنجان مخلل",
+        "nameEn": "باذنجان مخلل",
+        "descriptionAr": "باذنجان مخلل",
+        "descriptionEn": "باذنجان مخلل",
+        "basePrice": 731,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/face_cover_photo_15092025141516312.jpg"
+      },
+      {
+        "id": "4B727BCBF0DA472FA156AD7FEB64E084",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 26
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/تورلي_16092025153726420.jpg"
+        },
+        "item_name": {
+          "en": "تورلي باللحمة الضاني",
+          "ar": "تورلي باللحمة الضاني"
+        },
+        "item_description": {
+          "en": "تورلي باللحمة الضاني",
+          "ar": "تورلي باللحمة الضاني"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "تورلي باللحمة الضاني",
+        "nameEn": "تورلي باللحمة الضاني",
+        "descriptionAr": "تورلي باللحمة الضاني",
+        "descriptionEn": "تورلي باللحمة الضاني",
+        "basePrice": 26,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/تورلي_16092025153726420.jpg"
+      },
+      {
+        "id": "4fc5ffe7-bf87-4c4d-9270-5ad431ffefa2",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 36
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فاصولياء_بيضا_باللحمة_17092025132319666.jpg"
+        },
+        "item_name": {
+          "en": "فاصولياء بيضاء باللحمة",
+          "ar": "فاصولياء بيضاء باللحمة"
+        },
+        "item_description": {
+          "en": "فاصولياء بيضاء باللحمة",
+          "ar": "فاصولياء بيضاء باللحمة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "فاصولياء بيضاء باللحمة",
+        "nameEn": "فاصولياء بيضاء باللحمة",
+        "descriptionAr": "فاصولياء بيضاء باللحمة",
+        "descriptionEn": "فاصولياء بيضاء باللحمة",
+        "basePrice": 36,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فاصولياء_بيضا_باللحمة_17092025132319666.jpg"
+      },
+      {
+        "id": "58745ECD28C94B5AB3C2A00423C07443",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 771
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/طرب_عجالي_16092025110933627.jpg"
+        },
+        "item_name": {
+          "en": "طرب عجالي",
+          "ar": "طرب عجالي"
+        },
+        "item_description": {
+          "en": "طرب عجالي",
+          "ar": "طرب عجالي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "طرب عجالي",
+        "nameEn": "طرب عجالي",
+        "descriptionAr": "طرب عجالي",
+        "descriptionEn": "طرب عجالي",
+        "basePrice": 771,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/طرب_عجالي_16092025110933627.jpg"
+      },
+      {
+        "id": "58ACF4ED464A4F7DB3B5D7AF3AB6F378",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 71
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ورقة_لحمة_16092025110937012.jpg"
+        },
+        "item_name": {
+          "en": "ورقة لحمة",
+          "ar": "ورقة لحمة"
+        },
+        "item_description": {
+          "en": "ورقة لحمة",
+          "ar": "ورقة لحمة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ورقة لحمة",
+        "nameEn": "ورقة لحمة",
+        "descriptionAr": "ورقة لحمة",
+        "descriptionEn": "ورقة لحمة",
+        "basePrice": 71,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ورقة_لحمة_16092025110937012.jpg"
+      },
+      {
+        "id": "5BBF99B4D9F94B2C8155C3E82E3354A8",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 567
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/كول_سلو_17092025181027077.jpg"
+        },
+        "item_name": {
+          "en": "كلو سلو",
+          "ar": "كلو سلو"
+        },
+        "item_description": {
+          "en": "كلو سلو",
+          "ar": "كلو سلو"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "كلو سلو",
+        "nameEn": "كلو سلو",
+        "descriptionAr": "كلو سلو",
+        "descriptionEn": "كلو سلو",
+        "basePrice": 567,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/كول_سلو_17092025181027077.jpg"
+      },
+      {
+        "id": "5E5E982385C1483686493059DFEB265D",
+        "category_id": "CF44B6AEE120414796208411A11D82BD",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 158
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/لسان_عصفور_17092025153924136.jpg"
+        },
+        "item_name": {
+          "en": "لسان عصفور",
+          "ar": "لسان عصفور"
+        },
+        "item_description": {
+          "en": "لسان عصفور",
+          "ar": "لسان عصفور"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "لسان عصفور",
+        "nameEn": "لسان عصفور",
+        "descriptionAr": "لسان عصفور",
+        "descriptionEn": "لسان عصفور",
+        "basePrice": 158,
+        "categoryId": "CF44B6AEE120414796208411A11D82BD",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/لسان_عصفور_17092025153924136.jpg"
+      },
+      {
+        "id": "60301604-d257-4e4c-8614-995554eea195",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 40
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/دبابيس_16092025152032343.jpg"
+        },
+        "item_name": {
+          "en": "دبابيس فراخ",
+          "ar": "دبابيس فراخ"
+        },
+        "item_description": {
+          "en": "دبابيس فراخ",
+          "ar": "دبابيس فراخ"
+        }
+      },
+      {
+        "id": "6094B864B09B4F90912C84A800F886C9",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 747
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/فريك_باللحمة_الضاني_(1)_16092025170615979.jpg"
+        },
+        "item_name": {
+          "en": "فريك باللحمة الضاني",
+          "ar": "فريك باللحمة الضاني"
+        },
+        "item_description": {
+          "en": "فريك باللحمة الضاني",
+          "ar": "فريك باللحمة الضاني"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "فريك باللحمة الضاني",
+        "nameEn": "فريك باللحمة الضاني",
+        "descriptionAr": "فريك باللحمة الضاني",
+        "descriptionEn": "فريك باللحمة الضاني",
+        "basePrice": 747,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/فريك_باللحمة_الضاني_(1)_16092025170615979.jpg"
+      },
+      {
+        "id": "64757CC825B347538B008F2DD6CDEAE4",
+        "category_id": "5ecd0660-01ad-4038-8ba6-eef5d77d6254",
+        "kitchen_section_id": "34476cab-abec-47fc-ac37-34faa4ab4092",
+        "pricing": {
+          "base": 385
+        },
+        "item_name": {
+          "en": "سفن اب دايت *320 مللى  ",
+          "ar": "سفن اب دايت *320 مللى  "
+        },
+        "item_description": {
+          "en": "سفن اب دايت *320 مللى  ",
+          "ar": "سفن اب دايت *320 مللى  "
+        },
+        "media": {
+          "image": ""
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "سفن اب دايت *320 مللى  ",
+        "nameEn": "سفن اب دايت *320 مللى  ",
+        "descriptionAr": "سفن اب دايت *320 مللى  ",
+        "descriptionEn": "سفن اب دايت *320 مللى  ",
+        "basePrice": 385,
+        "categoryId": "5ecd0660-01ad-4038-8ba6-eef5d77d6254",
+        "kitchenSectionId": "34476cab-abec-47fc-ac37-34faa4ab4092"
+      },
+      {
+        "id": "65AC8F98788B4D0EA70CD8BB2D742910",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 135
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/كباب_16092025110941706.png"
+        },
+        "item_name": {
+          "en": "كباب صافي",
+          "ar": "كباب صافي"
+        },
+        "item_description": {
+          "en": "كباب صافي",
+          "ar": "كباب صافي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "كباب صافي",
+        "nameEn": "كباب صافي",
+        "descriptionAr": "كباب صافي",
+        "descriptionEn": "كباب صافي",
+        "basePrice": 135,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/كباب_16092025110941706.png"
+      },
+      {
+        "id": "6795dca3-e8a7-4848-bbb5-5fca71ba8135",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 204
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/مسقعة_بالبشاميل_17092025132837859.jpg"
+        },
+        "item_name": {
+          "en": "مسقعة بالبشاميل",
+          "ar": "مسقعة بالبشاميل"
+        },
+        "item_description": {
+          "en": "مسقعة بالبشاميل",
+          "ar": "مسقعة بالبشاميل"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "مسقعة بالبشاميل",
+        "nameEn": "مسقعة بالبشاميل",
+        "descriptionAr": "مسقعة بالبشاميل",
+        "descriptionEn": "مسقعة بالبشاميل",
+        "basePrice": 204,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/مسقعة_بالبشاميل_17092025132837859.jpg"
+      },
+      {
+        "id": "6991e6f7-6c32-40ee-b390-2135f4962945",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 373
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ارز_معمر_باللحمة_17092025140738273.jpg"
+        },
+        "item_name": {
+          "en": "ارز معمر باللحمة",
+          "ar": "ارز معمر باللحمة"
+        },
+        "item_description": {
+          "en": "ارز معمر باللحمة",
+          "ar": "ارز معمر باللحمة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ارز معمر باللحمة",
+        "nameEn": "ارز معمر باللحمة",
+        "descriptionAr": "ارز معمر باللحمة",
+        "descriptionEn": "ارز معمر باللحمة",
+        "basePrice": 373,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ارز_معمر_باللحمة_17092025140738273.jpg"
+      },
+      {
+        "id": "6B747E4E934F477C9C761D59E44E198E",
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 42
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سمبوسك_17092025162209872.jpg"
+        },
+        "item_name": {
+          "en": "سمبوسك (جبنة - لحمة مفرومة - بازلاء خضراء)",
+          "ar": "سمبوسك (جبنة - لحمة مفرومة - بازلاء خضراء)"
+        },
+        "item_description": {
+          "en": "سمبوسك (جبنة - لحمة مفرومة - بازلاء خضراء)",
+          "ar": "سمبوسك (جبنة - لحمة مفرومة - بازلاء خضراء)"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "سمبوسك (جبنة - لحمة مفرومة - بازلاء خضراء)",
+        "nameEn": "سمبوسك (جبنة - لحمة مفرومة - بازلاء خضراء)",
+        "descriptionAr": "سمبوسك (جبنة - لحمة مفرومة - بازلاء خضراء)",
+        "descriptionEn": "سمبوسك (جبنة - لحمة مفرومة - بازلاء خضراء)",
+        "basePrice": 42,
+        "categoryId": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سمبوسك_17092025162209872.jpg"
+      },
+      {
+        "id": "6c03d084-c502-4c44-a5b1-81873a54e1c6",
+        "category_id": "ea4c54e8-e140-4283-8890-4cc81bc19663",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 575
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فتة_سادة_17092025151441987.jpg"
+        },
+        "item_name": {
+          "en": "فتة سادة",
+          "ar": "فتة سادة"
+        },
+        "item_description": {
+          "en": "فتة سادة",
+          "ar": "فتة سادة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "فتة سادة",
+        "nameEn": "فتة سادة",
+        "descriptionAr": "فتة سادة",
+        "descriptionEn": "فتة سادة",
+        "basePrice": 575,
+        "categoryId": "ea4c54e8-e140-4283-8890-4cc81bc19663",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فتة_سادة_17092025151441987.jpg"
+      },
+      {
+        "id": "6f7a361b-7879-4449-a8d3-2b02bf4cc904",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 674
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/كبدة_باللية_16092025175457981.jpg"
+        },
+        "item_name": {
+          "en": "كبدة باللية",
+          "ar": "كبدة باللية"
+        },
+        "item_description": {
+          "en": "كبدة باللية",
+          "ar": "كبدة باللية"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "كبدة باللية",
+        "nameEn": "كبدة باللية",
+        "descriptionAr": "كبدة باللية",
+        "descriptionEn": "كبدة باللية",
+        "basePrice": 674,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/كبدة_باللية_16092025175457981.jpg"
+      },
+      {
+        "id": "70EBC0110EC74D4F888184504EAF3B27",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 313
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/كبدة_16092025112215150.jpeg"
+        },
+        "item_name": {
+          "en": "كبدة ضاني",
+          "ar": "كبدة ضاني"
+        },
+        "item_description": {
+          "en": "كبدة ضاني",
+          "ar": "كبدة ضاني"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "كبدة ضاني",
+        "nameEn": "كبدة ضاني",
+        "descriptionAr": "كبدة ضاني",
+        "descriptionEn": "كبدة ضاني",
+        "basePrice": 313,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/كبدة_16092025112215150.jpeg"
+      },
+      {
+        "id": "71102800-5e0e-4481-81f9-7e899bbdf735",
+        "category_id": "CF44B6AEE120414796208411A11D82BD",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 236
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/شوربة_عدس_27092025193620715.jpg"
+        },
+        "item_name": {
+          "en": "شوربة عدس",
+          "ar": "شوربة عدس"
+        },
+        "item_description": {
+          "en": "شوربة عدس",
+          "ar": "شوربة عدس"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "شوربة عدس",
+        "nameEn": "شوربة عدس",
+        "descriptionAr": "شوربة عدس",
+        "descriptionEn": "شوربة عدس",
+        "basePrice": 236,
+        "categoryId": "CF44B6AEE120414796208411A11D82BD",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/شوربة_عدس_27092025193620715.jpg"
+      },
+      {
+        "id": "788A4608818D457090A5F47338062A66",
+        "category_id": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchen_section_id": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "pricing": {
+          "base": 552
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ثمن_مندي_تيس_15092025185321989.jpg"
+        },
+        "item_name": {
+          "en": "1/8 تيس مندي",
+          "ar": "1/8 تيس مندي"
+        },
+        "item_description": {
+          "en": "1/8 تيس مندي",
+          "ar": "1/8 تيس مندي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "1/8 تيس مندي",
+        "nameEn": "1/8 تيس مندي",
+        "descriptionAr": "1/8 تيس مندي",
+        "descriptionEn": "1/8 تيس مندي",
+        "basePrice": 552,
+        "categoryId": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchenSectionId": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ثمن_مندي_تيس_15092025185321989.jpg"
+      },
+      {
+        "id": "7997963C6C62451196AEA351838CF3EB",
+        "category_id": "CF44B6AEE120414796208411A11D82BD",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 628
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/شوربة_كوراع_17092025154918557.jpeg"
+        },
+        "item_name": {
+          "en": "شوربة كوارع",
+          "ar": "شوربة كوارع"
+        },
+        "item_description": {
+          "en": "شوربة كوارع",
+          "ar": "شوربة كوارع"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "شوربة كوارع",
+        "nameEn": "شوربة كوارع",
+        "descriptionAr": "شوربة كوارع",
+        "descriptionEn": "شوربة كوارع",
+        "basePrice": 628,
+        "categoryId": "CF44B6AEE120414796208411A11D82BD",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/شوربة_كوراع_17092025154918557.jpeg"
+      },
+      {
+        "id": "7A0CC02C7E4849E080D8B6A0B06CB44D",
+        "category_id": "5ecd0660-01ad-4038-8ba6-eef5d77d6254",
+        "kitchen_section_id": "34476cab-abec-47fc-ac37-34faa4ab4092",
+        "pricing": {
+          "base": 61
+        },
+        "item_name": {
+          "en": "ريد بول كلاسيك *250 مللى /24 عدد",
+          "ar": "ريد بول كلاسيك *250 مللى /24 عدد"
+        },
+        "item_description": {
+          "en": "ريد بول كلاسيك *250 مللى /24 عدد",
+          "ar": "ريد بول كلاسيك *250 مللى /24 عدد"
+        },
+        "media": {
+          "image": ""
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ريد بول كلاسيك *250 مللى /24 عدد",
+        "nameEn": "ريد بول كلاسيك *250 مللى /24 عدد",
+        "descriptionAr": "ريد بول كلاسيك *250 مللى /24 عدد",
+        "descriptionEn": "ريد بول كلاسيك *250 مللى /24 عدد",
+        "basePrice": 61,
+        "categoryId": "5ecd0660-01ad-4038-8ba6-eef5d77d6254",
+        "kitchenSectionId": "34476cab-abec-47fc-ac37-34faa4ab4092"
+      },
+      {
+        "id": "7e113265-7545-47f9-9c9e-648a43033a92",
+        "category_id": "ea4c54e8-e140-4283-8890-4cc81bc19663",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 75
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فتة_لحم_17092025151704032.jpg"
+        },
+        "item_name": {
+          "en": "فتة لحم",
+          "ar": "فتة لحم"
+        },
+        "item_description": {
+          "en": "فتة لحم",
+          "ar": "فتة لحم"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "فتة لحم",
+        "nameEn": "فتة لحم",
+        "descriptionAr": "فتة لحم",
+        "descriptionEn": "فتة لحم",
+        "basePrice": 75,
+        "categoryId": "ea4c54e8-e140-4283-8890-4cc81bc19663",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فتة_لحم_17092025151704032.jpg"
+      },
+      {
+        "id": "7ecdc2b7-c130-4a87-95f6-badf7334bb7e",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 212
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ملوخية_سادة_17092025131408410.jpg"
+        },
+        "item_name": {
+          "en": "ملوخية سادة",
+          "ar": "ملوخية سادة"
+        },
+        "item_description": {
+          "en": "ملوخية سادة",
+          "ar": "ملوخية سادة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ملوخية سادة",
+        "nameEn": "ملوخية سادة",
+        "descriptionAr": "ملوخية سادة",
+        "descriptionEn": "ملوخية سادة",
+        "basePrice": 212,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ملوخية_سادة_17092025131408410.jpg"
+      },
+      {
+        "id": "7F398DDAD1A14A1F8A5CC359183BEC2C",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 854
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/بطاطس_باللحمة_17092025131352505.jpg"
+        },
+        "item_name": {
+          "en": "بطاطس باللحمة",
+          "ar": "بطاطس باللحمة"
+        },
+        "item_description": {
+          "en": "بطاطس باللحمة",
+          "ar": "بطاطس باللحمة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "بطاطس باللحمة",
+        "nameEn": "بطاطس باللحمة",
+        "descriptionAr": "بطاطس باللحمة",
+        "descriptionEn": "بطاطس باللحمة",
+        "basePrice": 854,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/بطاطس_باللحمة_17092025131352505.jpg"
+      },
+      {
+        "id": "802EB21D758F4D208068387C61D17D5A",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 556
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سلطة-زبادي-بالخيار_17092025181111150.jpg"
+        },
+        "item_name": {
+          "en": "سلطة زبادي",
+          "ar": "سلطة زبادي"
+        },
+        "item_description": {
+          "en": "سلطة زبادي",
+          "ar": "سلطة زبادي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "سلطة زبادي",
+        "nameEn": "سلطة زبادي",
+        "descriptionAr": "سلطة زبادي",
+        "descriptionEn": "سلطة زبادي",
+        "basePrice": 556,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سلطة-زبادي-بالخيار_17092025181111150.jpg"
+      },
+      {
+        "id": "8139E5B67DC14D1AA5AB4641C258842E",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 46
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/فراخ_شيش_16092025112220910.jpg"
+        },
+        "item_name": {
+          "en": "فراخ شيش",
+          "ar": "فراخ شيش"
+        },
+        "item_description": {
+          "en": "فراخ شيش",
+          "ar": "فراخ شيش"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "فراخ شيش",
+        "nameEn": "فراخ شيش",
+        "descriptionAr": "فراخ شيش",
+        "descriptionEn": "فراخ شيش",
+        "basePrice": 46,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/فراخ_شيش_16092025112220910.jpg"
+      },
+      {
+        "id": "821C5F06C3974635ACD61F046501FBE6",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 66
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سلطة_بطاطس_17092025181213511.jpg"
+        },
+        "item_name": {
+          "en": "سلطة بطاطس",
+          "ar": "سلطة بطاطس"
+        },
+        "item_description": {
+          "en": "سلطة بطاطس",
+          "ar": "سلطة بطاطس"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "سلطة بطاطس",
+        "nameEn": "سلطة بطاطس",
+        "descriptionAr": "سلطة بطاطس",
+        "descriptionEn": "سلطة بطاطس",
+        "basePrice": 66,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سلطة_بطاطس_17092025181213511.jpg"
+      },
+      {
+        "id": "841F09136E0D4000AE0EE4DA828B44C1",
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 611
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/بطاطس_مقلية_17092025162306877.jpg"
+        },
+        "item_name": {
+          "en": "بطاطس مقلية",
+          "ar": "بطاطس مقلية"
+        },
+        "item_description": {
+          "en": "بطاطس مقلية",
+          "ar": "بطاطس مقلية"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "بطاطس مقلية",
+        "nameEn": "بطاطس مقلية",
+        "descriptionAr": "بطاطس مقلية",
+        "descriptionEn": "بطاطس مقلية",
+        "basePrice": 611,
+        "categoryId": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/بطاطس_مقلية_17092025162306877.jpg"
+      },
+      {
+        "id": "87114fe2-8999-4876-a838-3ef0e97829dc",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 350
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ارز_معمر_بالحمام_17092025140924187.jpg"
+        },
+        "item_name": {
+          "en": "ارز معمر بالحمام",
+          "ar": "ارز معمر بالحمام"
+        },
+        "item_description": {
+          "en": "ارز معمر بالحمام",
+          "ar": "ارز معمر بالحمام"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ارز معمر بالحمام",
+        "nameEn": "ارز معمر بالحمام",
+        "descriptionAr": "ارز معمر بالحمام",
+        "descriptionEn": "ارز معمر بالحمام",
+        "basePrice": 350,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ارز_معمر_بالحمام_17092025140924187.jpg"
+      },
+      {
+        "id": "8809a1c4-6711-4971-9a41-730d34b54d2f",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 28
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ملوخية_بالفراخ_17092025131234065.jpg"
+        },
+        "item_name": {
+          "en": "ملوخية بالفراخ",
+          "ar": "ملوخية بالفراخ"
+        },
+        "item_description": {
+          "en": "ملوخية بالفراخ",
+          "ar": "ملوخية بالفراخ"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ملوخية بالفراخ",
+        "nameEn": "ملوخية بالفراخ",
+        "descriptionAr": "ملوخية بالفراخ",
+        "descriptionEn": "ملوخية بالفراخ",
+        "basePrice": 28,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ملوخية_بالفراخ_17092025131234065.jpg"
+      },
+      {
+        "id": "8A34ECCF3259496D8A9486877B151C3A",
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 8
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/كبيبة_17092025162402593.jpg"
+        },
+        "item_name": {
+          "en": "كبيبة",
+          "ar": "كبيبة"
+        },
+        "item_description": {
+          "en": "كبيبة",
+          "ar": "كبيبة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "كبيبة",
+        "nameEn": "كبيبة",
+        "descriptionAr": "كبيبة",
+        "descriptionEn": "كبيبة",
+        "basePrice": 8,
+        "categoryId": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/كبيبة_17092025162402593.jpg"
+      },
+      {
+        "id": "8C8F90DA88FB44EEBDDE06D202DC25F8",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 643
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/كفتة_16092025112227894.jpg"
+        },
+        "item_name": {
+          "en": "كفتة عجالي",
+          "ar": "كفتة عجالي"
+        },
+        "item_description": {
+          "en": "كفتة عجالي",
+          "ar": "كفتة عجالي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "كفتة عجالي",
+        "nameEn": "كفتة عجالي",
+        "descriptionAr": "كفتة عجالي",
+        "descriptionEn": "كفتة عجالي",
+        "basePrice": 643,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/كفتة_16092025112227894.jpg"
+      },
+      {
+        "id": "8CDB27CDF9864307B031DEE0C1EB54B7",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 410
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/طاجن-ورق-عنب-بالكوارع_16092025172951918.jpg"
+        },
+        "item_name": {
+          "en": "ورق عنب بالكوارع",
+          "ar": "ورق عنب بالكوارع"
+        },
+        "item_description": {
+          "en": "ورق عنب بالكوارع",
+          "ar": "ورق عنب بالكوارع"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ورق عنب بالكوارع",
+        "nameEn": "ورق عنب بالكوارع",
+        "descriptionAr": "ورق عنب بالكوارع",
+        "descriptionEn": "ورق عنب بالكوارع",
+        "basePrice": 410,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/طاجن-ورق-عنب-بالكوارع_16092025172951918.jpg"
+      },
+      {
+        "id": "8F1ADDDD66524EBDA47B6F0B6BB43385",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 838
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سلطة_زيتون_17092025181318769.jpg"
+        },
+        "item_name": {
+          "en": "سلطة زيتون",
+          "ar": "سلطة زيتون"
+        },
+        "item_description": {
+          "en": "سلطة زيتون",
+          "ar": "سلطة زيتون"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "سلطة زيتون",
+        "nameEn": "سلطة زيتون",
+        "descriptionAr": "سلطة زيتون",
+        "descriptionEn": "سلطة زيتون",
+        "basePrice": 838,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سلطة_زيتون_17092025181318769.jpg"
+      },
+      {
+        "id": "8F5621FB70864741BA9397B5C0A94049",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 44
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/طرب_ضاني_16092025112314463.jpg"
+        },
+        "item_name": {
+          "en": "طرب ضاني",
+          "ar": "طرب ضاني"
+        },
+        "item_description": {
+          "en": "طرب ضاني",
+          "ar": "طرب ضاني"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "طرب ضاني",
+        "nameEn": "طرب ضاني",
+        "descriptionAr": "طرب ضاني",
+        "descriptionEn": "طرب ضاني",
+        "basePrice": 44,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/طرب_ضاني_16092025112314463.jpg"
+      },
+      {
+        "id": "9177079f-d774-4f9e-80e8-bd6f09d30dde",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 1
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/صوص_دقوس_17092025163014023.jpg"
+        },
+        "item_name": {
+          "en": "صوص الدقوس الحار",
+          "ar": "صوص الدقوس الحار"
+        },
+        "item_description": {
+          "en": "صوص الدقوس الحار",
+          "ar": "صوص الدقوس الحار"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "صوص الدقوس الحار",
+        "nameEn": "صوص الدقوس الحار",
+        "descriptionAr": "صوص الدقوس الحار",
+        "descriptionEn": "صوص الدقوس الحار",
+        "basePrice": 1,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/صوص_دقوس_17092025163014023.jpg"
+      },
+      {
+        "id": "9714F3F23ADA4BC2A6A48D1D0293576A",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 538
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/نيفا_ضاني_16092025112944963.jpg"
+        },
+        "item_name": {
+          "en": "نيفة ضاني",
+          "ar": "نيفة ضاني"
+        },
+        "item_description": {
+          "en": "نيفة ضاني",
+          "ar": "نيفة ضاني"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "نيفة ضاني",
+        "nameEn": "نيفة ضاني",
+        "descriptionAr": "نيفة ضاني",
+        "descriptionEn": "نيفة ضاني",
+        "basePrice": 538,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/نيفا_ضاني_16092025112944963.jpg"
+      },
+      {
+        "id": "97573f85-fa75-4379-a8ae-f342db4f1f0f",
+        "category_id": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchen_section_id": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "pricing": {
+          "base": 12
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/نص_تيس_مندي_15092025185010875.jpg"
+        },
+        "item_name": {
+          "en": "1/2 تيس مندي",
+          "ar": "1/2 تيس مندي"
+        },
+        "item_description": {
+          "en": "1/2 تيس مندي",
+          "ar": "1/2 تيس مندي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "1/2 تيس مندي",
+        "nameEn": "1/2 تيس مندي",
+        "descriptionAr": "1/2 تيس مندي",
+        "descriptionEn": "1/2 تيس مندي",
+        "basePrice": 12,
+        "categoryId": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchenSectionId": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/نص_تيس_مندي_15092025185010875.jpg"
+      },
+      {
+        "id": "9a0d0056-00b8-437a-992e-92612dae376c",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 671
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فاصولياء_بيضاء_بالكوارع_17092025132706127.jpg"
+        },
+        "item_name": {
+          "en": "كوارع بالفاصولياء البضاء",
+          "ar": "كوارع بالفاصولياء البضاء"
+        },
+        "item_description": {
+          "en": "كوارع بالفاصولياء البضاء",
+          "ar": "كوارع بالفاصولياء البضاء"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "كوارع بالفاصولياء البضاء",
+        "nameEn": "كوارع بالفاصولياء البضاء",
+        "descriptionAr": "كوارع بالفاصولياء البضاء",
+        "descriptionEn": "كوارع بالفاصولياء البضاء",
+        "basePrice": 671,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فاصولياء_بيضاء_بالكوارع_17092025132706127.jpg"
+      },
+      {
+        "id": "9FFF97AFCA0A4630BA06FA25C071B06E",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 58
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/سجق_ضاني_16092025113053555.jpeg"
+        },
+        "item_name": {
+          "en": "سجق ضاني",
+          "ar": "سجق ضاني"
+        },
+        "item_description": {
+          "en": "سجق ضاني",
+          "ar": "سجق ضاني"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "سجق ضاني",
+        "nameEn": "سجق ضاني",
+        "descriptionAr": "سجق ضاني",
+        "descriptionEn": "سجق ضاني",
+        "basePrice": 58,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/سجق_ضاني_16092025113053555.jpeg"
+      },
+      {
+        "id": "A0C89D2A78DA4F1B9397DF7ED152B69E",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 572
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/عكاوي_بالبصل_16092025173123039.jpeg"
+        },
+        "item_name": {
+          "en": "عكاوي بالبصل",
+          "ar": "عكاوي بالبصل"
+        },
+        "item_description": {
+          "en": "عكاوي بالبصل",
+          "ar": "عكاوي بالبصل"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "عكاوي بالبصل",
+        "nameEn": "عكاوي بالبصل",
+        "descriptionAr": "عكاوي بالبصل",
+        "descriptionEn": "عكاوي بالبصل",
+        "basePrice": 572,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/عكاوي_بالبصل_16092025173123039.jpeg"
+      },
+      {
+        "id": "A665C2A3EE774B4DA918BA8FF80CD5C4",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 666
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سلطة_خضراء_17092025182044258.jpg"
+        },
+        "item_name": {
+          "en": "سلطة خضراء",
+          "ar": "سلطة خضراء"
+        },
+        "item_description": {
+          "en": "سلطة خضراء",
+          "ar": "سلطة خضراء"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "سلطة خضراء",
+        "nameEn": "سلطة خضراء",
+        "descriptionAr": "سلطة خضراء",
+        "descriptionEn": "سلطة خضراء",
+        "basePrice": 666,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سلطة_خضراء_17092025182044258.jpg"
+      },
+      {
+        "id": "a7064cf3-5f56-42c1-bdd4-cfeb86dc4282",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 374
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ستيك_16092025152005527.jpeg"
+        },
+        "item_name": {
+          "en": "استيك",
+          "ar": "استيك"
+        },
+        "item_description": {
+          "en": "استيك",
+          "ar": "استيك"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "استيك",
+        "nameEn": "استيك",
+        "descriptionAr": "استيك",
+        "descriptionEn": "استيك",
+        "basePrice": 374,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ستيك_16092025152005527.jpeg"
+      },
+      {
+        "id": "AA08A6C676674C61818854FE7BDC8A7D",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 387
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سلطة_طماطم_17092025181729733.jpg"
+        },
+        "item_name": {
+          "en": "سلطة طماطم",
+          "ar": "سلطة طماطم"
+        },
+        "item_description": {
+          "en": "سلطة طماطم",
+          "ar": "سلطة طماطم"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "سلطة طماطم",
+        "nameEn": "سلطة طماطم",
+        "descriptionAr": "سلطة طماطم",
+        "descriptionEn": "سلطة طماطم",
+        "basePrice": 387,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/سلطة_طماطم_17092025181729733.jpg"
+      },
+      {
+        "id": "ABFDE31A6ABA4F648C8C9C71C224EE0B",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 16
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ريش_ضاني_16092025113148930.jpg"
+        },
+        "item_name": {
+          "en": "ريش ضاني",
+          "ar": "ريش ضاني"
+        },
+        "item_description": {
+          "en": "ريش ضاني",
+          "ar": "ريش ضاني"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ريش ضاني",
+        "nameEn": "ريش ضاني",
+        "descriptionAr": "ريش ضاني",
+        "descriptionEn": "ريش ضاني",
+        "basePrice": 16,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ريش_ضاني_16092025113148930.jpg"
+      },
+      {
+        "id": "add49f5a-fc6b-4dfa-a85d-ac80a4528e63",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 636
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/كباب_حلة_16092025174351649.jpg"
+        },
+        "item_name": {
+          "en": "كباب حلة",
+          "ar": "كباب حلة"
+        },
+        "item_description": {
+          "en": "كباب حلة",
+          "ar": "كباب حلة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "كباب حلة",
+        "nameEn": "كباب حلة",
+        "descriptionAr": "كباب حلة",
+        "descriptionEn": "كباب حلة",
+        "basePrice": 636,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/كباب_حلة_16092025174351649.jpg"
+      },
+      {
+        "id": "b4621617-258d-42fc-8cc9-0931dde744a0",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 521
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/مبكبكة_سادة_17092025150805184.jpg"
+        },
+        "item_name": {
+          "en": "مبكبكة سادة",
+          "ar": "مبكبكة سادة"
+        },
+        "item_description": {
+          "en": "مبكبكة سادة",
+          "ar": "مبكبكة سادة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "مبكبكة سادة",
+        "nameEn": "مبكبكة سادة",
+        "descriptionAr": "مبكبكة سادة",
+        "descriptionEn": "مبكبكة سادة",
+        "basePrice": 521,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/مبكبكة_سادة_17092025150805184.jpg"
+      },
+      {
+        "id": "b4b6918d-1d41-4967-acff-c80821d20972",
+        "category_id": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchen_section_id": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "pricing": {
+          "base": 276
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/نصدجاج_مندي_15092025190553284.jpg"
+        },
+        "item_name": {
+          "en": "1/2 دجاج مندي",
+          "ar": "1/2 دجاج مندي"
+        },
+        "item_description": {
+          "en": "1/2 دجاج مندي",
+          "ar": "1/2 دجاج مندي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "1/2 دجاج مندي",
+        "nameEn": "1/2 دجاج مندي",
+        "descriptionAr": "1/2 دجاج مندي",
+        "descriptionEn": "1/2 دجاج مندي",
+        "basePrice": 276,
+        "categoryId": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchenSectionId": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/نصدجاج_مندي_15092025190553284.jpg"
+      },
+      {
+        "id": "b7993fad-25c0-4c81-996f-2f349c81ede1",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 7
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ملوخية_بالكوارع_17092025130352024.jpg"
+        },
+        "item_name": {
+          "en": "ملوخية بالكوارع",
+          "ar": "ملوخية بالكوارع"
+        },
+        "item_description": {
+          "en": "ملوخية بالكوارع",
+          "ar": "ملوخية بالكوارع"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ملوخية بالكوارع",
+        "nameEn": "ملوخية بالكوارع",
+        "descriptionAr": "ملوخية بالكوارع",
+        "descriptionEn": "ملوخية بالكوارع",
+        "basePrice": 7,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ملوخية_بالكوارع_17092025130352024.jpg"
+      },
+      {
+        "id": "B9F8D5325B444F7DA4FE19A153EF5E6A",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 522
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/مشكل_16092025113608684.jpg"
+        },
+        "item_name": {
+          "en": "مشكل",
+          "ar": "مشكل"
+        },
+        "item_description": {
+          "en": "مشكل",
+          "ar": "مشكل"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "مشكل",
+        "nameEn": "مشكل",
+        "descriptionAr": "مشكل",
+        "descriptionEn": "مشكل",
+        "basePrice": 522,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/مشكل_16092025113608684.jpg"
+      },
+      {
+        "id": "BA5DC617220B4A2DA3C5F01209ED0D30",
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 45
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ورق_عنب_17092025161838225.jpg"
+        },
+        "item_name": {
+          "en": "ورقعنب",
+          "ar": "ورقعنب"
+        },
+        "item_description": {
+          "en": "ورقعنب",
+          "ar": "ورقعنب"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ورقعنب",
+        "nameEn": "ورقعنب",
+        "descriptionAr": "ورقعنب",
+        "descriptionEn": "ورقعنب",
+        "basePrice": 45,
+        "categoryId": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ورق_عنب_17092025161838225.jpg"
+      },
+      {
+        "id": "be49d74d-84cf-4794-aae1-f2b38741c895",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 558
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/سجق_شرقي_16092025175828556.jpg"
+        },
+        "item_name": {
+          "en": "سجق شرقي",
+          "ar": "سجق شرقي"
+        },
+        "item_description": {
+          "en": "سجق شرقي",
+          "ar": "سجق شرقي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "سجق شرقي",
+        "nameEn": "سجق شرقي",
+        "descriptionAr": "سجق شرقي",
+        "descriptionEn": "سجق شرقي",
+        "basePrice": 558,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/سجق_شرقي_16092025175828556.jpg"
+      },
+      {
+        "id": "c5d7f04e-4384-4875-909a-cdcd20351330",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 754
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ورق_عنب_بالعكاوي_16092025175209085.jpg"
+        },
+        "item_name": {
+          "en": "ورق عنب بالعكاوي",
+          "ar": "ورق عنب بالعكاوي"
+        },
+        "item_description": {
+          "en": "ورق عنب بالعكاوي",
+          "ar": "ورق عنب بالعكاوي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ورق عنب بالعكاوي",
+        "nameEn": "ورق عنب بالعكاوي",
+        "descriptionAr": "ورق عنب بالعكاوي",
+        "descriptionEn": "ورق عنب بالعكاوي",
+        "basePrice": 754,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ورق_عنب_بالعكاوي_16092025175209085.jpg"
+      },
+      {
+        "id": "C5ED8A044DC34C5EAA76487B8CD7030B",
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 406
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ممبار_17092025161456394.jpeg"
+        },
+        "item_name": {
+          "en": "ممبار",
+          "ar": "ممبار"
+        },
+        "item_description": {
+          "en": "ممبار",
+          "ar": "ممبار"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ممبار",
+        "nameEn": "ممبار",
+        "descriptionAr": "ممبار",
+        "descriptionEn": "ممبار",
+        "basePrice": 406,
+        "categoryId": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ممبار_17092025161456394.jpeg"
+      },
+      {
+        "id": "c80aecee-6e8d-4086-a3cd-ed5cff577164",
+        "category_id": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchen_section_id": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "pricing": {
+          "base": 732
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ربعدجاج_مندي_15092025190516856.jpg"
+        },
+        "item_name": {
+          "en": "1/4 دجاج مندي",
+          "ar": "1/4 دجاج مندي"
+        },
+        "item_description": {
+          "en": "1/4 دجاج مندي",
+          "ar": "1/4 دجاج مندي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "1/4 دجاج مندي",
+        "nameEn": "1/4 دجاج مندي",
+        "descriptionAr": "1/4 دجاج مندي",
+        "descriptionEn": "1/4 دجاج مندي",
+        "basePrice": 732,
+        "categoryId": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchenSectionId": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ربعدجاج_مندي_15092025190516856.jpg"
+      },
+      {
+        "id": "D16D2B5542034E9CBE92AE1319B4FE9D",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 46
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ورقة_سجق_16092025142517674.jpg"
+        },
+        "item_name": {
+          "en": "ورقة سجق",
+          "ar": "ورقة سجق"
+        },
+        "item_description": {
+          "en": "ورقة سجق",
+          "ar": "ورقة سجق"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ورقة سجق",
+        "nameEn": "ورقة سجق",
+        "descriptionAr": "ورقة سجق",
+        "descriptionEn": "ورقة سجق",
+        "basePrice": 46,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/ورقة_سجق_16092025142517674.jpg"
+      },
+      {
+        "id": "d41bb1a6-a7f5-4b8a-8cd3-b6542a60534d",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 385
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/خضار_مشكل_17092025131636471.jpg"
+        },
+        "item_name": {
+          "en": "خضار مشكل",
+          "ar": "خضار مشكل"
+        },
+        "item_description": {
+          "en": "خضار مشكل",
+          "ar": "خضار مشكل"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "خضار مشكل",
+        "nameEn": "خضار مشكل",
+        "descriptionAr": "خضار مشكل",
+        "descriptionEn": "خضار مشكل",
+        "basePrice": 385,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/خضار_مشكل_17092025131636471.jpg"
+      },
+      {
+        "id": "D5626B317CDC4AFE947ED855978BB483",
+        "category_id": "CF44B6AEE120414796208411A11D82BD",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 367
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/شوربة_حمام_17092025155955512.jpg"
+        },
+        "item_name": {
+          "en": "شوربةحمام",
+          "ar": "شوربةحمام"
+        },
+        "item_description": {
+          "en": "شوربةحمام",
+          "ar": "شوربةحمام"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "شوربةحمام",
+        "nameEn": "شوربةحمام",
+        "descriptionAr": "شوربةحمام",
+        "descriptionEn": "شوربةحمام",
+        "basePrice": 367,
+        "categoryId": "CF44B6AEE120414796208411A11D82BD",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/شوربة_حمام_17092025155955512.jpg"
+      },
+      {
+        "id": "d67ecea2-35e1-4f05-b40c-20c6663dd800",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 270
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ملوخية-باللحمة_17092025130453853.jpg"
+        },
+        "item_name": {
+          "en": "ملوخية باللحمة",
+          "ar": "ملوخية باللحمة"
+        },
+        "item_description": {
+          "en": "ملوخية باللحمة",
+          "ar": "ملوخية باللحمة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ملوخية باللحمة",
+        "nameEn": "ملوخية باللحمة",
+        "descriptionAr": "ملوخية باللحمة",
+        "descriptionEn": "ملوخية باللحمة",
+        "basePrice": 270,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ملوخية-باللحمة_17092025130453853.jpg"
+      },
+      {
+        "id": "DD5B87EB346749BFBB1302EC90627EDB",
+        "category_id": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchen_section_id": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "pricing": {
+          "base": 440
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/نفر_مندي_لحم_15092025185317525.jpg"
+        },
+        "item_name": {
+          "en": "نفر مندي لحم",
+          "ar": "نفر مندي لحم"
+        },
+        "item_description": {
+          "en": "نفر مندي لحم",
+          "ar": "نفر مندي لحم"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "نفر مندي لحم",
+        "nameEn": "نفر مندي لحم",
+        "descriptionAr": "نفر مندي لحم",
+        "descriptionEn": "نفر مندي لحم",
+        "basePrice": 440,
+        "categoryId": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchenSectionId": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/نفر_مندي_لحم_15092025185317525.jpg"
+      },
+      {
+        "id": "DE4AB3233FE24F4B9F400AAE5A55740B",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 245
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/طاجن_لحمة_بالبصل_16092025163741996.jpg"
+        },
+        "item_name": {
+          "en": "بصل باللحمة الضاني",
+          "ar": "بصل باللحمة الضاني"
+        },
+        "item_description": {
+          "en": "بصل باللحمة الضاني",
+          "ar": "بصل باللحمة الضاني"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "بصل باللحمة الضاني",
+        "nameEn": "بصل باللحمة الضاني",
+        "descriptionAr": "بصل باللحمة الضاني",
+        "descriptionEn": "بصل باللحمة الضاني",
+        "basePrice": 245,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/طاجن_لحمة_بالبصل_16092025163741996.jpg"
+      },
+      {
+        "id": "E224EA6AF5D24FF6AB9EB2ECBDCAE339",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 160
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ارز_بالشعرية_17092025135830306.jpg"
+        },
+        "item_name": {
+          "en": "ارز بالشعرية",
+          "ar": "ارز بالشعرية"
+        },
+        "item_description": {
+          "en": "ارز بالشعرية",
+          "ar": "ارز بالشعرية"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "ارز بالشعرية",
+        "nameEn": "ارز بالشعرية",
+        "descriptionAr": "ارز بالشعرية",
+        "descriptionEn": "ارز بالشعرية",
+        "basePrice": 160,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/ارز_بالشعرية_17092025135830306.jpg"
+      },
+      {
+        "id": "ea2e1755-97a5-46e0-896b-483af1b9034b",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 827
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/كرنب_بالاستيك_17092025133057940.jpg"
+        },
+        "item_name": {
+          "en": "كرنب بشرائح ستيك",
+          "ar": "كرنب بشرائح ستيك"
+        },
+        "item_description": {
+          "en": "كرنب بشرائح ستيك",
+          "ar": "كرنب بشرائح ستيك"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "كرنب بشرائح ستيك",
+        "nameEn": "كرنب بشرائح ستيك",
+        "descriptionAr": "كرنب بشرائح ستيك",
+        "descriptionEn": "كرنب بشرائح ستيك",
+        "basePrice": 827,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/كرنب_بالاستيك_17092025133057940.jpg"
+      },
+      {
+        "id": "ec9503e7-b069-48b6-85cd-b275fb85d9be",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 20
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فاصولياء_بيضا_سادة_17092025131858326.jpg"
+        },
+        "item_name": {
+          "en": "فاصوليا بيضاء سادة",
+          "ar": "فاصوليا بيضاء سادة"
+        },
+        "item_description": {
+          "en": "فاصوليا بيضاء سادة",
+          "ar": "فاصوليا بيضاء سادة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "فاصوليا بيضاء سادة",
+        "nameEn": "فاصوليا بيضاء سادة",
+        "descriptionAr": "فاصوليا بيضاء سادة",
+        "descriptionEn": "فاصوليا بيضاء سادة",
+        "basePrice": 20,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فاصولياء_بيضا_سادة_17092025131858326.jpg"
+      },
+      {
+        "id": "F0098A17F91448178496215D46249434",
+        "category_id": "CF44B6AEE120414796208411A11D82BD",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 23
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/شوربة_خضار_17092025160039066.jpg"
+        },
+        "item_name": {
+          "en": "شوربة خضار",
+          "ar": "شوربة خضار"
+        },
+        "item_description": {
+          "en": "شوربة خضار",
+          "ar": "شوربة خضار"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "شوربة خضار",
+        "nameEn": "شوربة خضار",
+        "descriptionAr": "شوربة خضار",
+        "descriptionEn": "شوربة خضار",
+        "basePrice": 23,
+        "categoryId": "CF44B6AEE120414796208411A11D82BD",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/شوربة_خضار_17092025160039066.jpg"
+      },
+      {
+        "id": "f21ff3c0-480a-446f-a806-6d930d3cf6d7",
+        "category_id": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchen_section_id": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "pricing": {
+          "base": 818
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/تيس_كامل_مندي_15092025190405284.jpg"
+        },
+        "item_name": {
+          "en": "تيس كامل مندي",
+          "ar": "تيس كامل مندي"
+        },
+        "item_description": {
+          "en": "تيس كامل مندي",
+          "ar": "تيس كامل مندي"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "تيس كامل مندي",
+        "nameEn": "تيس كامل مندي",
+        "descriptionAr": "تيس كامل مندي",
+        "descriptionEn": "تيس كامل مندي",
+        "basePrice": 818,
+        "categoryId": "F9785744F0004F6AB1C108C0E3DE87D4",
+        "kitchenSectionId": "67ba4d64-42c0-4f93-90e9-12ded7b70c87",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/تيس_كامل_مندي_15092025190405284.jpg"
+      },
+      {
+        "id": "f2b4d007-f3d5-4426-963b-b7a189041177",
+        "category_id": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchen_section_id": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "pricing": {
+          "base": 4
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/بانيه_مشوي_16092025152150611.jpg"
+        },
+        "item_name": {
+          "en": "صدور بانيه مشوية",
+          "ar": "صدور بانيه مشوية"
+        },
+        "item_description": {
+          "en": "صدور بانيه مشوية",
+          "ar": "صدور بانيه مشوية"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "صدور بانيه مشوية",
+        "nameEn": "صدور بانيه مشوية",
+        "descriptionAr": "صدور بانيه مشوية",
+        "descriptionEn": "صدور بانيه مشوية",
+        "basePrice": 4,
+        "categoryId": "80AAC2AC551B4BFCA39607CE4F0A8CF2",
+        "kitchenSectionId": "c61d5bc4-1429-42b6-b250-f9254a176848",
+        "image": "https://darwish.mas.com.eg/UploadFiles/user1/user1/بانيه_مشوي_16092025152150611.jpg"
+      },
+      {
+        "id": "F47A6741E3584882ADA1EF90CCB7FA55",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 652
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/خيار_مخلل_17092025181517962.jpg"
+        },
+        "item_name": {
+          "en": "خيار مخلل",
+          "ar": "خيار مخلل"
+        },
+        "item_description": {
+          "en": "خيار مخلل",
+          "ar": "خيار مخلل"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "خيار مخلل",
+        "nameEn": "خيار مخلل",
+        "descriptionAr": "خيار مخلل",
+        "descriptionEn": "خيار مخلل",
+        "basePrice": 652,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/خيار_مخلل_17092025181517962.jpg"
+      },
+      {
+        "id": "f6f47b3a-b77a-4333-a433-f4187a2ab07a",
+        "category_id": "ea4c54e8-e140-4283-8890-4cc81bc19663",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 80
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فتة_موزة_17092025151946241.jpeg"
+        },
+        "item_name": {
+          "en": "فتة موزة",
+          "ar": "فتة موزة"
+        },
+        "item_description": {
+          "en": "فتة موزة",
+          "ar": "فتة موزة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "فتة موزة",
+        "nameEn": "فتة موزة",
+        "descriptionAr": "فتة موزة",
+        "descriptionEn": "فتة موزة",
+        "basePrice": 80,
+        "categoryId": "ea4c54e8-e140-4283-8890-4cc81bc19663",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/فتة_موزة_17092025151946241.jpeg"
+      },
+      {
+        "id": "FCC1FE285CE34388ADD434E0A61196DD",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 73
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/طريقة-عمل-بابا-غنوج_17092025181601199.png"
+        },
+        "item_name": {
+          "en": "بابا غنوج",
+          "ar": "بابا غنوج"
+        },
+        "item_description": {
+          "en": "بابا غنوج",
+          "ar": "بابا غنوج"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "بابا غنوج",
+        "nameEn": "بابا غنوج",
+        "descriptionAr": "بابا غنوج",
+        "descriptionEn": "بابا غنوج",
+        "basePrice": 73,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/طريقة-عمل-بابا-غنوج_17092025181601199.png"
+      },
+      {
+        "id": "fe3ec19c-89b1-4b52-bd21-23ee0ebceac2",
+        "category_id": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": 808
+        },
+        "media": {
+          "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/مكرونةباشاميل_17092025141406284.jpg"
+        },
+        "item_name": {
+          "en": "مكرونة باشاميل",
+          "ar": "مكرونة باشاميل"
+        },
+        "item_description": {
+          "en": "مكرونة باشاميل",
+          "ar": "مكرونة باشاميل"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "مكرونة باشاميل",
+        "nameEn": "مكرونة باشاميل",
+        "descriptionAr": "مكرونة باشاميل",
+        "descriptionEn": "مكرونة باشاميل",
+        "basePrice": 808,
+        "categoryId": "8B4DD88028014EA3ABFDB1964D82202D",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "https://darwish.mas.com.eg/UploadFiles/moumin_jamal/moumin_jamal/مكرونةباشاميل_17092025141406284.jpg"
+      },
+      {
+        "id": "02b93b10-868e-40e7-bf8e-a0f47faed19e",
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": null
+        },
+        "media": {
+          "image": ""
+        },
+        "item_name": {
+          "en": "محشي كوسة",
+          "ar": "محشي كوسة"
+        },
+        "item_description": {
+          "en": "محشي كوسة",
+          "ar": "محشي كوسة"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "محشي كوسة",
+        "nameEn": "محشي كوسة",
+        "descriptionAr": "محشي كوسة",
+        "descriptionEn": "محشي كوسة",
+        "basePrice": 0,
+        "categoryId": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "id": "5c803aa1-b3d1-431e-aec4-f0b1f2dc2a67",
+        "category_id": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": null
+        },
+        "media": {
+          "image": ""
+        },
+        "item_name": {
+          "en": "مسقعة بالباشاميل والموتزاريلا",
+          "ar": "مسقعة بالباشاميل والموتزاريلا"
+        },
+        "item_description": {
+          "en": "مسقعة بالباشاميل والموتزاريلا",
+          "ar": "مسقعة بالباشاميل والموتزاريلا"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "مسقعة بالباشاميل والموتزاريلا",
+        "nameEn": "مسقعة بالباشاميل والموتزاريلا",
+        "descriptionAr": "مسقعة بالباشاميل والموتزاريلا",
+        "descriptionEn": "مسقعة بالباشاميل والموتزاريلا",
+        "basePrice": 0,
+        "categoryId": "4AA74FE9AF23457E874FBF53F15DAFD3",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "id": "81e4152f-a84c-40be-aa8a-d3f358842da8",
+        "category_id": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": null
+        },
+        "media": {
+          "image": "/UploadFiles/moumin_jamal/moumin_jamal/بنجر_27112025195213941.jpeg"
+        },
+        "item_name": {
+          "en": "سلطة بنجر",
+          "ar": "سلطة بنجر"
+        },
+        "item_description": {
+          "en": "سلطة بنجر",
+          "ar": "سلطة بنجر"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "سلطة بنجر",
+        "nameEn": "سلطة بنجر",
+        "descriptionAr": "سلطة بنجر",
+        "descriptionEn": "سلطة بنجر",
+        "basePrice": 0,
+        "categoryId": "17E1117979A94AEC93B71C80ADDF1561",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "/UploadFiles/moumin_jamal/moumin_jamal/بنجر_27112025195213941.jpeg"
+      },
+      {
+        "id": "94dca117-9db4-4347-ab70-63e3a5050ade",
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": null
+        },
+        "media": {
+          "image": "/UploadFiles/moumin_jamal/moumin_jamal/مشكل_مقبلات_27112025193840283.jpg"
+        },
+        "item_name": {
+          "en": "مشكل مقبلات",
+          "ar": "مشكل مقبلات"
+        },
+        "item_description": {
+          "en": "مشكل مقبلات",
+          "ar": "مشكل مقبلات"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "مشكل مقبلات",
+        "nameEn": "مشكل مقبلات",
+        "descriptionAr": "مشكل مقبلات",
+        "descriptionEn": "مشكل مقبلات",
+        "basePrice": 0,
+        "categoryId": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "image": "/UploadFiles/moumin_jamal/moumin_jamal/مشكل_مقبلات_27112025193840283.jpg"
+      },
+      {
+        "id": "95fe02f4-397f-47d9-863b-510842034254",
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": null
+        },
+        "media": {
+          "image": ""
+        },
+        "item_name": {
+          "en": "محشي باذنجان",
+          "ar": "محشي باذنجان"
+        },
+        "item_description": {
+          "en": "محشي باذنجان",
+          "ar": "محشي باذنجان"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "محشي باذنجان",
+        "nameEn": "محشي باذنجان",
+        "descriptionAr": "محشي باذنجان",
+        "descriptionEn": "محشي باذنجان",
+        "basePrice": 0,
+        "categoryId": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "id": "af4bdd59-15fd-401b-8a2c-d5ca52126e37",
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": null
+        },
+        "media": {
+          "image": ""
+        },
+        "item_name": {
+          "en": "محشي فلفل",
+          "ar": "محشي فلفل"
+        },
+        "item_description": {
+          "en": "محشي فلفل",
+          "ar": "محشي فلفل"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "محشي فلفل",
+        "nameEn": "محشي فلفل",
+        "descriptionAr": "محشي فلفل",
+        "descriptionEn": "محشي فلفل",
+        "basePrice": 0,
+        "categoryId": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      },
+      {
+        "id": "f653b392-08cd-4260-b5c5-acdaca2b15ae",
+        "category_id": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchen_section_id": "1e7a48ec-425a-4268-81db-c8f3fd4d432e",
+        "pricing": {
+          "base": null
+        },
+        "media": {
+          "image": ""
+        },
+        "item_name": {
+          "en": "محشي كرنب",
+          "ar": "محشي كرنب"
+        },
+        "item_description": {
+          "en": "محشي كرنب",
+          "ar": "محشي كرنب"
+        },
+        "company_id": "027AE34D-DEF0-40D8-AC9F-2FBCBCEEDCE3",
+        "nameAr": "محشي كرنب",
+        "nameEn": "محشي كرنب",
+        "descriptionAr": "محشي كرنب",
+        "descriptionEn": "محشي كرنب",
+        "basePrice": 0,
+        "categoryId": "0CDCD17AE3A741D089FA17B8F1EEB57F",
+        "kitchenSectionId": "1e7a48ec-425a-4268-81db-c8f3fd4d432e"
+      }
+    ],
+    "dining_tables": [
+      {
+        "id": "T01",
+        "name": "طاولة 1",
+        "displayOrder": 1,
+        "seats": 4,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T02",
+        "name": "طاولة 2",
+        "displayOrder": 2,
+        "seats": 6,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T03",
+        "name": "طاولة 3",
+        "displayOrder": 3,
+        "seats": 8,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T04",
+        "name": "طاولة 4",
+        "displayOrder": 4,
+        "seats": 2,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T05",
+        "name": "طاولة 5",
+        "displayOrder": 5,
+        "seats": 4,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T06",
+        "name": "طاولة 6",
+        "displayOrder": 6,
+        "seats": 6,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T07",
+        "name": "طاولة 7",
+        "displayOrder": 7,
+        "seats": 8,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T08",
+        "name": "طاولة 8",
+        "displayOrder": 8,
+        "seats": 2,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T09",
+        "name": "طاولة 9",
+        "displayOrder": 9,
+        "seats": 4,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T10",
+        "name": "طاولة 10",
+        "displayOrder": 10,
+        "seats": 6,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T11",
+        "name": "طاولة 11",
+        "displayOrder": 11,
+        "seats": 8,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T12",
+        "name": "طاولة 12",
+        "displayOrder": 12,
+        "seats": 2,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T13",
+        "name": "طاولة 13",
+        "displayOrder": 13,
+        "seats": 4,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T14",
+        "name": "طاولة 14",
+        "displayOrder": 14,
+        "seats": 6,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T15",
+        "name": "طاولة 15",
+        "displayOrder": 15,
+        "seats": 8,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T16",
+        "name": "طاولة 16",
+        "displayOrder": 16,
+        "seats": 2,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T17",
+        "name": "طاولة 17",
+        "displayOrder": 17,
+        "seats": 4,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T18",
+        "name": "طاولة 18",
+        "displayOrder": 18,
+        "seats": 6,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T19",
+        "name": "طاولة 19",
+        "displayOrder": 19,
+        "seats": 8,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T20",
+        "name": "طاولة 20",
+        "displayOrder": 20,
+        "seats": 2,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T21",
+        "name": "طاولة 21",
+        "displayOrder": 21,
+        "seats": 4,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T22",
+        "name": "طاولة 22",
+        "displayOrder": 22,
+        "seats": 6,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T23",
+        "name": "طاولة 23",
+        "displayOrder": 23,
+        "seats": 8,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T24",
+        "name": "طاولة 24",
+        "displayOrder": 24,
+        "seats": 2,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T25",
+        "name": "طاولة 25",
+        "displayOrder": 25,
+        "seats": 4,
+        "zone": "terrace",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T26",
+        "name": "طاولة 26",
+        "displayOrder": 26,
+        "seats": 6,
+        "zone": "terrace",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T27",
+        "name": "طاولة 27",
+        "displayOrder": 27,
+        "seats": 8,
+        "zone": "terrace",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T28",
+        "name": "طاولة 28",
+        "displayOrder": 28,
+        "seats": 2,
+        "zone": "terrace",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T29",
+        "name": "طاولة 29",
+        "displayOrder": 29,
+        "seats": 4,
+        "zone": "terrace",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T30",
+        "name": "طاولة 30",
+        "displayOrder": 30,
+        "seats": 6,
+        "zone": "terrace",
+        "state": "active",
+        "note": null,
+        "version": 1
+      }
+    ],
+    "users_branches": []
+  },
+  "lastExternalSeedSync": {
+    "time": "2026-01-04T09:09:42.498Z",
+    "sourceUrl": "https://darwish.mas.com.eg/api/v6/pos_database_func",
+    "tables": [
+      "kitchen_sections",
+      "category_sections",
+      "categories",
+      "items",
+      "payment_methods",
+      "users_branches"
+    ],
+    "results": [
+      {
+        "table": "kitchen_sections",
+        "target": "module",
+        "status": "updated",
+        "stats": {
+          "updates": 4,
+          "inserts": 0,
+          "total": 4,
+          "preserved": 0,
+          "ignored": 0
+        }
+      },
+      {
+        "table": "category_sections",
+        "target": "module",
+        "status": "updated",
+        "stats": {
+          "updates": 0,
+          "inserts": 0,
+          "total": 9,
+          "preserved": 9,
+          "ignored": 9
+        }
+      },
+      {
+        "table": "menu_categories",
+        "target": "module",
+        "status": "updated",
+        "stats": {
+          "updates": 9,
+          "inserts": 0,
+          "total": 9,
+          "preserved": 0,
+          "ignored": 0
+        }
+      },
+      {
+        "table": "menu_items",
+        "target": "module",
+        "status": "updated",
+        "stats": {
+          "updates": 93,
+          "inserts": 7,
+          "total": 101,
+          "preserved": 1,
+          "ignored": 0
+        }
+      },
+      {
+        "table": "payment_methods",
+        "target": "module",
+        "status": "updated",
+        "stats": {
+          "updates": 4,
+          "inserts": 0,
+          "total": 4,
+          "preserved": 0,
+          "ignored": 0
+        }
+      },
+      {
+        "table": "users_branches",
+        "target": "module",
+        "status": "updated",
+        "stats": {
+          "updates": 0,
+          "inserts": 0,
+          "total": 0,
+          "preserved": 0,
+          "ignored": 48
+        }
+      }
+    ]
+  }
+}

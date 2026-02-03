@@ -1,0 +1,3052 @@
+{
+  "version": 1,
+  "meta": {
+    "branchId": "dar",
+    "moduleId": "pos",
+    "counter": 0,
+    "labCounter": 0
+  },
+  "tables": {
+    "settings": {
+      "tax_rate": 0.14,
+      "service_charge_rate": 0.12,
+      "default_delivery_fee": 30,
+      "currency": {
+        "code": "EGP",
+        "display": "symbol",
+        "name": {
+          "en": "Egyptian Pound",
+          "ar": "الجنيه المصري"
+        },
+        "symbols": {
+          "en": "E£",
+          "ar": "ج.م"
+        }
+      },
+      "sync": {
+        "branch_id": "branch-main",
+        "branch_name": {
+          "ar": "الفرع الرئيسي",
+          "en": "Main branch"
+        },
+        "channel": "branch-main",
+        "ws_endpoint": "/ws",
+        "http_endpoint": "/api/branches/branch-main/modules/pos/events",
+        "token": null,
+        "central_only": false,
+        "allow_indexeddb_fallback": true
+      }
+    },
+    "shift_settings": {
+      "opening_float": 500,
+      "pin": "2580",
+      "pin_length": 4
+    },
+    "payment_methods": [
+      {
+        "id": "cash",
+        "icon": "💵",
+        "name": {
+          "ar": "نقدا",
+          "en": "cash"
+        },
+        "type": "cash"
+      },
+      {
+        "id": "insta",
+        "icon": "📱",
+        "name": {
+          "ar": "انستا",
+          "en": "insta"
+        },
+        "type": "wallet"
+      },
+      {
+        "id": "visa",
+        "icon": "💳",
+        "name": {
+          "ar": "فيزا",
+          "en": "visa"
+        },
+        "type": "card"
+      },
+      {
+        "id": "wallet",
+        "icon": "📱",
+        "name": {
+          "ar": "محفظة إلكترونية ",
+          "en": "wallet"
+        },
+        "type": "wallet"
+      }
+    ],
+    "kitchen_sections": [
+      {
+        "id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "section_name": {
+          "ar": "الكافية",
+          "en": "cafe"
+        },
+        "description": {
+          "ar": null,
+          "en": null
+        }
+      }
+    ],
+    "category_sections": [
+      {
+        "category_id": "00e286e7-6f3b-4561-965b-c53eac0455b8",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "1f1a6de1-8a4d-47c3-80f1-593a1bcfae6e",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "20ff8703-bb8e-498e-8ec2-f0f72b8afd4e",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "325cea29-9341-4982-b06b-f4420b76f6c4",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "7083da2f-6873-49d2-ba71-fb4704701691",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "78b0ce30-eb82-4153-b3cc-01d2bf4a4dab",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "85130880-3aea-498f-b8ad-485be44c0616",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "92acd8ff-5cf3-464b-9884-f8674498d236",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "a9a4b6fe-773d-4b60-a769-175b3bf54d3b",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "abb8148c-7338-4e47-9d2a-a19fda02b1c9",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "bdaef927-0a40-4ed9-b553-3a094309228f",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "ca78ee05-db8a-4543-bcc1-1ae588962316",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "category_id": "f362ce2a-fbe2-4e52-bec2-2264970eb6b3",
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      }
+    ],
+    "order_types": [
+      {
+        "id": "dine_in",
+        "type_name": {
+          "en": "Dine-in",
+          "ar": "صالة"
+        },
+        "description": {
+          "en": "Table service orders managed inside the restaurant.",
+          "ar": "طلبات الصالة التي تُدار داخل المطعم."
+        },
+        "workflow": "multi-step",
+        "allows_save": true,
+        "allows_finalize_later": true,
+        "allows_line_additions": true,
+        "allows_returns": true
+      },
+      {
+        "id": "delivery",
+        "type_name": {
+          "en": "Delivery",
+          "ar": "دليفري"
+        },
+        "description": {
+          "en": "Orders delivered to customers with a single-step closure.",
+          "ar": "طلبات التوصيل التي تُغلق في خطوة واحدة."
+        },
+        "workflow": "single-step",
+        "allows_save": false,
+        "allows_finalize_later": false,
+        "allows_line_additions": false,
+        "allows_returns": false
+      },
+      {
+        "id": "takeaway",
+        "type_name": {
+          "en": "Takeaway",
+          "ar": "تيك أواي"
+        },
+        "description": {
+          "en": "Counter pickup orders paid on capture.",
+          "ar": "طلبات التيك أواي تُدفع وتُغلق في نفس الخطوة."
+        },
+        "workflow": "single-step",
+        "allows_save": false,
+        "allows_finalize_later": false,
+        "allows_line_additions": false,
+        "allows_returns": false
+      }
+    ],
+    "order_statuses": [
+      {
+        "id": "open",
+        "status_name": {
+          "en": "Open",
+          "ar": "مفتوح"
+        }
+      },
+      {
+        "id": "held",
+        "status_name": {
+          "en": "On Hold",
+          "ar": "معلّق"
+        }
+      },
+      {
+        "id": "finalized",
+        "status_name": {
+          "en": "Finalized",
+          "ar": "منتهي"
+        }
+      },
+      {
+        "id": "closed",
+        "status_name": {
+          "en": "Closed",
+          "ar": "مغلق"
+        }
+      }
+    ],
+    "order_payment_states": [
+      {
+        "id": "unpaid",
+        "payment_name": {
+          "en": "Unpaid",
+          "ar": "غير مدفوع"
+        }
+      },
+      {
+        "id": "partial",
+        "payment_name": {
+          "en": "Partially Paid",
+          "ar": "مدفوع جزئيًا"
+        }
+      },
+      {
+        "id": "paid",
+        "payment_name": {
+          "en": "Paid",
+          "ar": "مدفوع"
+        }
+      }
+    ],
+    "order_stages": [
+      {
+        "id": "new",
+        "stage_name": {
+          "en": "New",
+          "ar": "جديد"
+        },
+        "description": {
+          "en": "Order is created and waiting to be sent to the kitchen.",
+          "ar": "تم إنشاء الطلب وينتظر الإرسال إلى المطبخ."
+        },
+        "sequence": 1,
+        "lock_line_edits": false
+      },
+      {
+        "id": "preparing",
+        "stage_name": {
+          "en": "Preparing",
+          "ar": "جاري التجهيز"
+        },
+        "description": {
+          "en": "Kitchen started preparing the order items.",
+          "ar": "المطبخ بدأ في تجهيز أصناف الطلب."
+        },
+        "sequence": 2,
+        "lock_line_edits": true
+      },
+      {
+        "id": "prepared",
+        "stage_name": {
+          "en": "Prepared",
+          "ar": "تم التجهيز"
+        },
+        "description": {
+          "en": "Items are ready and waiting for dispatch.",
+          "ar": "الأصناف جاهزة وتنتظر التسليم."
+        },
+        "sequence": 3,
+        "lock_line_edits": true
+      },
+      {
+        "id": "delivering",
+        "stage_name": {
+          "en": "Delivering",
+          "ar": "جاري التسليم"
+        },
+        "description": {
+          "en": "Order is on the way to the guest.",
+          "ar": "الطلب في الطريق إلى العميل."
+        },
+        "sequence": 4,
+        "lock_line_edits": true
+      },
+      {
+        "id": "delivered",
+        "stage_name": {
+          "en": "Delivered",
+          "ar": "تم التسليم"
+        },
+        "description": {
+          "en": "Order was delivered or served.",
+          "ar": "تم تسليم الطلب أو تقديمه."
+        },
+        "sequence": 5,
+        "lock_line_edits": true
+      },
+      {
+        "id": "paid",
+        "stage_name": {
+          "en": "Paid",
+          "ar": "تم الدفع"
+        },
+        "description": {
+          "en": "Payment has been captured for the order.",
+          "ar": "تم تحصيل قيمة الطلب."
+        },
+        "sequence": 6,
+        "lock_line_edits": true
+      },
+      {
+        "id": "closed",
+        "stage_name": {
+          "en": "Closed",
+          "ar": "تم الإغلاق"
+        },
+        "description": {
+          "en": "Order was audited and closed after shift end.",
+          "ar": "تمت مراجعة الطلب وإغلاقه بعد نهاية الوردية."
+        },
+        "sequence": 7,
+        "lock_line_edits": true
+      }
+    ],
+    "order_line_statuses": [
+      {
+        "id": "draft",
+        "status_name": {
+          "en": "Draft",
+          "ar": "مسودة"
+        }
+      },
+      {
+        "id": "queued",
+        "status_name": {
+          "en": "Queued",
+          "ar": "بانتظار التحضير"
+        }
+      },
+      {
+        "id": "preparing",
+        "status_name": {
+          "en": "Preparing",
+          "ar": "جاري التحضير"
+        }
+      },
+      {
+        "id": "ready",
+        "status_name": {
+          "en": "Ready",
+          "ar": "جاهز"
+        }
+      },
+      {
+        "id": "served",
+        "status_name": {
+          "en": "Served",
+          "ar": "مُقدّم"
+        }
+      }
+    ],
+    "employees": [
+      {
+        "id": "e7a8f0b4",
+        "pin_code": "1122",
+        "full_name": "أحمد محمود",
+        "role": "cashier",
+        "allowed_discount_rate": 0.1
+      },
+      {
+        "id": "f3c9d8e1",
+        "pin_code": "3344",
+        "full_name": "سارة علي",
+        "role": "cashier",
+        "allowed_discount_rate": 0.1
+      },
+      {
+        "id": "a1b2c3d4",
+        "pin_code": "9999",
+        "full_name": "خالد إبراهيم",
+        "role": "manager",
+        "allowed_discount_rate": 0.25
+      },
+      {
+        "id": "b5c6d7e8",
+        "pin_code": "5566",
+        "full_name": "فاطمة حسن",
+        "role": "kitchen_staff",
+        "allowed_discount_rate": 0
+      },
+      {
+        "id": "c9d0e1f2",
+        "pin_code": "7788",
+        "full_name": "يوسف كريم",
+        "role": "delivery_driver",
+        "allowed_discount_rate": 0
+      }
+    ],
+    "tableLocks": [],
+    "reservations": [
+      {
+        "id": "res-001",
+        "customerName": "محمد سامي",
+        "phone": "01000200300",
+        "partySize": 4,
+        "scheduledAt": "2024-02-18T19:00:00Z",
+        "holdUntil": "2024-02-18T19:20:00Z",
+        "tableIds": [
+          "T7"
+        ],
+        "status": "booked",
+        "note": "عيد ميلاد"
+      },
+      {
+        "id": "res-002",
+        "customerName": "Sarah Ahmed",
+        "phone": "01133344455",
+        "partySize": 2,
+        "scheduledAt": "2024-02-18T20:30:00Z",
+        "holdUntil": "2024-02-18T20:50:00Z",
+        "tableIds": [
+          "T5",
+          "T6"
+        ],
+        "status": "booked",
+        "note": "جلسة هادئة"
+      },
+      {
+        "id": "res-003",
+        "customerName": "شركة بريميوم",
+        "phone": "01266677788",
+        "partySize": 10,
+        "scheduledAt": "2024-02-19T13:00:00Z",
+        "holdUntil": "2024-02-19T13:15:00Z",
+        "tableIds": [
+          "T16"
+        ],
+        "status": "seated",
+        "note": "اجتماع عمل"
+      }
+    ],
+    "auditEvents": [
+      {
+        "id": "audit-001",
+        "userId": "a1b2c3d4",
+        "action": "table.state",
+        "refType": "table",
+        "refId": "T19",
+        "at": "2024-02-15T10:00:00Z",
+        "meta": {
+          "state": "disactive"
+        }
+      }
+    ],
+    "delivery_drivers": [
+      {
+        "id": 1,
+        "name": "محمود عبد العزيز",
+        "phone": "01012345678",
+        "vehicle_id": "موتوسيكل - أ ب ج 123"
+      },
+      {
+        "id": 2,
+        "name": "كريم السيد",
+        "phone": "01198765432",
+        "vehicle_id": "موتوسيكل - س ص ع 456"
+      },
+      {
+        "id": 3,
+        "name": "علي حسن",
+        "phone": "01234567890",
+        "vehicle_id": "سيارة - ف ق ل 789"
+      }
+    ],
+    "add_ons": [
+      {
+        "id": 101,
+        "name": {
+          "en": "Extra Mozzarella",
+          "ar": "جبنة موتزاريلا زيادة"
+        },
+        "price_change": 15
+      },
+      {
+        "id": 102,
+        "name": {
+          "en": "Extra Tahini Sauce",
+          "ar": "صوص طحينة إضافي"
+        },
+        "price_change": 8
+      },
+      {
+        "id": 103,
+        "name": {
+          "en": "Extra Roumy Cheese",
+          "ar": "جبنة رومي زيادة"
+        },
+        "price_change": 12
+      },
+      {
+        "id": 104,
+        "name": {
+          "en": "Extra Rice",
+          "ar": "أرز إضافي"
+        },
+        "price_change": 25
+      }
+    ],
+    "removals": [
+      {
+        "id": 201,
+        "name": {
+          "en": "Without Pickles",
+          "ar": "بدون مخلل"
+        },
+        "price_change": 0
+      },
+      {
+        "id": 202,
+        "name": {
+          "en": "Without Onions",
+          "ar": "بدون بصل"
+        },
+        "price_change": 0
+      },
+      {
+        "id": 203,
+        "name": {
+          "en": "Without Tomatoes",
+          "ar": "بدون طماطم"
+        },
+        "price_change": 0
+      }
+    ],
+    "stores": {
+      "orders": [],
+      "shifts": [],
+      "orderLines": [],
+      "orderNotes": [],
+      "orderStatusLogs": [],
+      "posMeta": [],
+      "syncLog": []
+    },
+    "menu_categories": [
+      {
+        "id": "00e286e7-6f3b-4561-965b-c53eac0455b8",
+        "category_name": {
+          "en": "Raw matrial",
+          "ar": "خامات ومستلزمات"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "1f1a6de1-8a4d-47c3-80f1-593a1bcfae6e",
+        "category_name": {
+          "en": "Ice Cream",
+          "ar": "آيس كريم"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "20ff8703-bb8e-498e-8ec2-f0f72b8afd4e",
+        "category_name": {
+          "en": "Cold Drinks",
+          "ar": "مشروبات باردة"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "325cea29-9341-4982-b06b-f4420b76f6c4",
+        "category_name": {
+          "en": "Sandwishes",
+          "ar": "ساندويتشات"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "category_name": {
+          "en": "Desserts",
+          "ar": "حلويات"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "category_name": {
+          "en": "Hot Drinks",
+          "ar": "مشروبات ساخنة "
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "7083da2f-6873-49d2-ba71-fb4704701691",
+        "category_name": {
+          "en": "Fresh Juices",
+          "ar": "عصائر فريش"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "78b0ce30-eb82-4153-b3cc-01d2bf4a4dab",
+        "category_name": {
+          "en": "Cocktails",
+          "ar": "كوكتيلات"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "85130880-3aea-498f-b8ad-485be44c0616",
+        "category_name": {
+          "en": "milk shakes",
+          "ar": "ميلك شيك"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "92acd8ff-5cf3-464b-9884-f8674498d236",
+        "category_name": {
+          "en": "Yogurt",
+          "ar": "زبادي"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "a9a4b6fe-773d-4b60-a769-175b3bf54d3b",
+        "category_name": {
+          "en": "Soft Drinks",
+          "ar": "مشروبات غازية"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "abb8148c-7338-4e47-9d2a-a19fda02b1c9",
+        "category_name": {
+          "en": "Smoothies",
+          "ar": "سموذي"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "bdaef927-0a40-4ed9-b553-3a094309228f",
+        "category_name": {
+          "en": "menu items",
+          "ar": "قائمة المنيو"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "ca78ee05-db8a-4543-bcc1-1ae588962316",
+        "category_name": {
+          "en": "Frappuccino",
+          "ar": "فرابتشينو"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      },
+      {
+        "id": "f362ce2a-fbe2-4e52-bec2-2264970eb6b3",
+        "category_name": {
+          "en": "Mojito",
+          "ar": "موهيتو"
+        },
+        "section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1"
+      }
+    ],
+    "menu_items": [
+      {
+        "id": "18B4791D-9ED7-433F-AFC7-E3BEAD3C0BD8",
+        "category_id": "1f1a6de1-8a4d-47c3-80f1-593a1bcfae6e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 143
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/oreo_28102025095520816.png"
+        },
+        "item_name": {
+          "en": "Madness Oreo",
+          "ar": "اوريو"
+        },
+        "item_description": {
+          "en": "Madness Oreo",
+          "ar": "اوريو"
+        }
+      },
+      {
+        "id": "281EC502-9D4D-4E1E-9A42-71824462FE8D",
+        "category_id": "1f1a6de1-8a4d-47c3-80f1-593a1bcfae6e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 138
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/banana_boat_28102025100120575.jpg"
+        },
+        "item_name": {
+          "en": "Banana Boat",
+          "ar": "بانانا بوت"
+        },
+        "item_description": {
+          "en": "Banana Boat",
+          "ar": "بانانا بوت"
+        }
+      },
+      {
+        "id": "303C9495-3BAD-46C5-BCA3-DFF115929FDD",
+        "category_id": "1f1a6de1-8a4d-47c3-80f1-593a1bcfae6e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/madnessss_28102025100513554.jpg"
+        },
+        "item_name": {
+          "en": "Madness Fruits",
+          "ar": "فواكه"
+        },
+        "item_description": {
+          "en": "Madness Fruits",
+          "ar": "فواكه"
+        }
+      },
+      {
+        "id": "828141D1-CE69-4631-9F83-B5EE002CB97B",
+        "category_id": "1f1a6de1-8a4d-47c3-80f1-593a1bcfae6e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/ice_28102025103017614.jpg"
+        },
+        "item_name": {
+          "en": "Classic",
+          "ar": "كلاسيك"
+        },
+        "item_description": {
+          "en": "Classic",
+          "ar": "كلاسيك"
+        }
+      },
+      {
+        "id": "71A26F57-5B26-413B-ABEA-F07010536A79",
+        "category_id": "20ff8703-bb8e-498e-8ec2-f0f72b8afd4e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 115
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/ice_mocha_28102025102413998.jpg"
+        },
+        "item_name": {
+          "en": "Ice Mocha",
+          "ar": "آيس موكا"
+        },
+        "item_description": {
+          "en": "Ice Mocha",
+          "ar": "آيس موكا"
+        }
+      },
+      {
+        "id": "77B18FD0-4821-454B-8934-F3ED0743B97A",
+        "category_id": "20ff8703-bb8e-498e-8ec2-f0f72b8afd4e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/ice_latte_28102025102550649.jpg"
+        },
+        "item_name": {
+          "en": "Ice Latte",
+          "ar": "آيس لاتيه"
+        },
+        "item_description": {
+          "en": "Ice Latte",
+          "ar": "آيس لاتيه"
+        }
+      },
+      {
+        "id": "84C9BD22-4D8A-4894-B0B4-4FC800969941",
+        "category_id": "20ff8703-bb8e-498e-8ec2-f0f72b8afd4e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 97
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/ice_tea_28102025103057207.jfif"
+        },
+        "item_name": {
+          "en": "Ice Tea",
+          "ar": "آيس تي"
+        },
+        "item_description": {
+          "en": "Ice Tea",
+          "ar": "آيس تي"
+        }
+      },
+      {
+        "id": "87F487A6-7480-443E-AB00-6CF91A61C6CE",
+        "category_id": "20ff8703-bb8e-498e-8ec2-f0f72b8afd4e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/iced_choco_28102025103405862.webp"
+        },
+        "item_name": {
+          "en": "Ice Chocolate",
+          "ar": "آيس شوكولاتة"
+        },
+        "item_description": {
+          "en": "Ice Chocolate",
+          "ar": "آيس شوكولاتة"
+        }
+      },
+      {
+        "id": "92983BF6-D151-4273-BB16-0744E9DE7C7A",
+        "category_id": "20ff8703-bb8e-498e-8ec2-f0f72b8afd4e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 104
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/fla_28102025104101107.jpg"
+        },
+        "item_name": {
+          "en": "Flavored Ice Tea",
+          "ar": "آيس تي بنكهات"
+        },
+        "item_description": {
+          "en": "Flavored Ice Tea",
+          "ar": "آيس تي بنكهات"
+        }
+      },
+      {
+        "id": "AF2D8B37-B890-4558-A5DA-F703B62F22EB",
+        "category_id": "20ff8703-bb8e-498e-8ec2-f0f72b8afd4e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/caramellll_28102025104659125.jpg"
+        },
+        "item_name": {
+          "en": "Ice Caramel mechato",
+          "ar": "ميكاتو آيس كراميل"
+        },
+        "item_description": {
+          "en": "Ice Caramel mechato",
+          "ar": "ميكاتو آيس كراميل"
+        }
+      },
+      {
+        "id": "C7042280-14A3-499A-A2DF-5229B47E5C75",
+        "category_id": "20ff8703-bb8e-498e-8ec2-f0f72b8afd4e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": null
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/iced-spanish-latte-recipe_28102025105128681.jpg"
+        },
+        "item_name": {
+          "en": "Ice Spanich latteh",
+          "ar": "آيس اسبانيش لاتيه"
+        },
+        "item_description": {
+          "en": "Ice Spanich latteh",
+          "ar": "آيس اسبانيش لاتيه"
+        }
+      },
+      {
+        "id": "CC47A8F3-9DA2-403A-8A77-893E02AD5D60",
+        "category_id": "20ff8703-bb8e-498e-8ec2-f0f72b8afd4e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/capppp_28102025105201209.webp"
+        },
+        "item_name": {
+          "en": "Ice Cappuccino",
+          "ar": "آيس كابتشينو"
+        },
+        "item_description": {
+          "en": "Ice Cappuccino",
+          "ar": "آيس كابتشينو"
+        }
+      },
+      {
+        "id": "EBF0608B-D343-4506-9652-8E752DDB4748",
+        "category_id": "20ff8703-bb8e-498e-8ec2-f0f72b8afd4e",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 115
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/images_(3)_28102025111115769.jfif"
+        },
+        "item_name": {
+          "en": "Ice Latte Pistachio",
+          "ar": "آيس لاتيه بستاشيو"
+        },
+        "item_description": {
+          "en": "Ice Latte Pistachio",
+          "ar": "آيس لاتيه بستاشيو"
+        }
+      },
+      {
+        "id": "174BD681-86FF-481F-8C01-6144A2F76250",
+        "category_id": "325cea29-9341-4982-b06b-f4420b76f6c4",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 295
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/roast_beef_28102025095415082.webp"
+        },
+        "item_name": {
+          "en": "Roast Beef",
+          "ar": "روست بيف"
+        },
+        "item_description": {
+          "en": "Roast Beef",
+          "ar": "روست بيف"
+        }
+      },
+      {
+        "id": "3C2931D9-C916-441D-B663-48F1A95EE753",
+        "category_id": "325cea29-9341-4982-b06b-f4420b76f6c4",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 195
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/cheese_28102025100725509.jpg"
+        },
+        "item_name": {
+          "en": "Triple Cheese",
+          "ar": "تربل تشيز"
+        },
+        "item_description": {
+          "en": "Triple Cheese",
+          "ar": "تربل تشيز"
+        }
+      },
+      {
+        "id": "57B19837-694A-418F-BF76-2F96CAB2AFE0",
+        "category_id": "325cea29-9341-4982-b06b-f4420b76f6c4",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 207
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/tuna_28102025101412537.jpg"
+        },
+        "item_name": {
+          "en": "Tuna",
+          "ar": "تونة"
+        },
+        "item_description": {
+          "en": "Tuna",
+          "ar": "تونة"
+        }
+      },
+      {
+        "id": "6F0A67EE-202A-4A2B-AD46-59498E91A927",
+        "category_id": "325cea29-9341-4982-b06b-f4420b76f6c4",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 207
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/tc_28102025102328484.jpg"
+        },
+        "item_name": {
+          "en": "TC Croissant",
+          "ar": "كرواسون تي سي"
+        },
+        "item_description": {
+          "en": "TC Croissant",
+          "ar": "كرواسون تي سي"
+        }
+      },
+      {
+        "id": "786BF06C-BB63-430B-AD0A-8103529AB0FF",
+        "category_id": "325cea29-9341-4982-b06b-f4420b76f6c4",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 313
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/fajita_28102025102649275.jpg"
+        },
+        "item_name": {
+          "en": "Meat Fajita",
+          "ar": "فاهيتا لحم"
+        },
+        "item_description": {
+          "en": "Meat Fajita",
+          "ar": "فاهيتا لحم"
+        }
+      },
+      {
+        "id": "E3F1FDE5-8343-4098-9C0B-0D86DB60B64B",
+        "category_id": "325cea29-9341-4982-b06b-f4420b76f6c4",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 225
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Slow-cooker-bbq-chicken-s_28102025110918534.jpg"
+        },
+        "item_name": {
+          "en": "Chicken Barbecue",
+          "ar": "تشكن باربكيو"
+        },
+        "item_description": {
+          "en": "Chicken Barbecue",
+          "ar": "تشكن باربكيو"
+        }
+      },
+      {
+        "id": "F0F42839-7648-4FF2-ACC9-E28B68F50632",
+        "category_id": "325cea29-9341-4982-b06b-f4420b76f6c4",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 207
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/images_(5)_28102025111450486.jfif"
+        },
+        "item_name": {
+          "en": "Smoked Turkey",
+          "ar": "تركي مدخن"
+        },
+        "item_description": {
+          "en": "Smoked Turkey",
+          "ar": "تركي مدخن"
+        }
+      },
+      {
+        "id": "09E2A03D-A243-45F0-81FF-2DE2086146BD",
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 173
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/waffle_28102025094820452.jpg"
+        },
+        "item_name": {
+          "en": "Waffle",
+          "ar": "وافل"
+        },
+        "item_description": {
+          "en": "Waffle",
+          "ar": "وافل"
+        }
+      },
+      {
+        "id": "2DCB3DAB-F43D-4EF1-8E70-A37A171A9875",
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 161
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/molten_cake_28102025100150004.jpg"
+        },
+        "item_name": {
+          "en": "Molten Cake",
+          "ar": "مولتن كيك"
+        },
+        "item_description": {
+          "en": "Molten Cake",
+          "ar": "مولتن كيك"
+        }
+      },
+      {
+        "id": "5B1F0C63-203A-4E5B-BF27-DDF630B65E55",
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 184
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/cheesecake_28102025101440038.jpg"
+        },
+        "item_name": {
+          "en": "Cheese Cake",
+          "ar": "تشيز كيك"
+        },
+        "item_description": {
+          "en": "Cheese Cake",
+          "ar": "تشيز كيك"
+        }
+      },
+      {
+        "id": "6A5FF72D-BD81-45E8-B9DF-19A7CBC8698B",
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 161
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/redve_28102025102123617.webp"
+        },
+        "item_name": {
+          "en": "Red Velvet Cake",
+          "ar": "ريد فلفت كيك"
+        },
+        "item_description": {
+          "en": "Red Velvet Cake",
+          "ar": "ريد فلفت كيك"
+        }
+      },
+      {
+        "id": "727F6FBE-9BB5-42D1-81F1-4B9BCD59CCDD",
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 98
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/danish_28102025102504152.jpg"
+        },
+        "item_name": {
+          "en": "Danish",
+          "ar": "دانش"
+        },
+        "item_description": {
+          "en": "Danish",
+          "ar": "دانش"
+        }
+      },
+      {
+        "id": "8787316A-7AAE-4F9A-BB21-2674BB1ACF73",
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 156
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/triple-chocolate-cake-4_28102025103232407.jpg"
+        },
+        "item_name": {
+          "en": "Fudge Cake",
+          "ar": "فدج كيك"
+        },
+        "item_description": {
+          "en": "Fudge Cake",
+          "ar": "فدج كيك"
+        }
+      },
+      {
+        "id": "8DD9C174-4A00-4DCA-A979-7CF28E5D936C",
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 115
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Millefeuille_Image_compre_28102025103653336.webp"
+        },
+        "item_name": {
+          "en": "Mille Feuille",
+          "ar": "ميل فوي"
+        },
+        "item_description": {
+          "en": "Mille Feuille",
+          "ar": "ميل فوي"
+        }
+      },
+      {
+        "id": "94344713-A1FA-4534-8112-3CAD4A074E03",
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 156
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Brownies_WD0144social-e16_28102025104158389.jpg"
+        },
+        "item_name": {
+          "en": "Brownies Cake",
+          "ar": "براونيز كيك"
+        },
+        "item_description": {
+          "en": "Brownies Cake",
+          "ar": "براونيز كيك"
+        }
+      },
+      {
+        "id": "A4EA6AD8-1EA5-401A-BFDE-6B6DDA99638F",
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 58
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/coro_28102025104437469.jpg"
+        },
+        "item_name": {
+          "en": "Crossant or Pate",
+          "ar": "كرواسون أو باتيه"
+        },
+        "item_description": {
+          "en": "Crossant or Pate",
+          "ar": "كرواسون أو باتيه"
+        }
+      },
+      {
+        "id": "AE92E968-2126-42C2-BA47-B67FE83B63FA",
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 58
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/eng_28102025104604310.jpg"
+        },
+        "item_name": {
+          "en": "English Cake",
+          "ar": "انجلش كيك"
+        },
+        "item_description": {
+          "en": "English Cake",
+          "ar": "انجلش كيك"
+        }
+      },
+      {
+        "id": "EED33C2D-C1EA-4452-AC57-12613748639D",
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 115
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/ecl_28102025111228076.jpg"
+        },
+        "item_name": {
+          "en": "Eclair",
+          "ar": "إكلير"
+        },
+        "item_description": {
+          "en": "Eclair",
+          "ar": "إكلير"
+        }
+      },
+      {
+        "id": "F686C2B9-3B42-4E8A-AC4F-3C0D6BF02FD5",
+        "category_id": "4551822f-f9bc-4541-b87a-f9b025640e13",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 104
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/new_28102025111526428.webp"
+        },
+        "item_name": {
+          "en": "New ZealandCrossant",
+          "ar": "كرواسون نيوزيلندي"
+        },
+        "item_description": {
+          "en": "New ZealandCrossant",
+          "ar": "كرواسون نيوزيلندي"
+        }
+      },
+      {
+        "id": "073AB84D-5756-45D5-8075-50C3DB3BA85B",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 57
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/turkish_28102025094639119.webp"
+        },
+        "item_name": {
+          "en": "Turkish Coffee",
+          "ar": "قهوة تركي"
+        },
+        "item_description": {
+          "en": "Turkish Coffee",
+          "ar": "قهوة تركي"
+        }
+      },
+      {
+        "id": "11FF2940-A2D0-421C-B651-214EB6FF0FB2",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 86
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/machiato_28102025095033567.webp"
+        },
+        "item_name": {
+          "en": "Macchiato",
+          "ar": "ماكياتو"
+        },
+        "item_description": {
+          "en": "Macchiato",
+          "ar": "ماكياتو"
+        }
+      },
+      {
+        "id": "13246487-8AA1-4107-9CD8-7564090DD5D8",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": null
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/spanish_28102025095207908.webp"
+        },
+        "item_name": {
+          "en": "Spanich latteh",
+          "ar": "اسبانيش لاتيه"
+        },
+        "item_description": {
+          "en": "Spanich latteh",
+          "ar": "اسبانيش لاتيه"
+        }
+      },
+      {
+        "id": "15A11BD2-81B5-4936-BB0B-4CE244646560",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 86
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/capp_28102025095247420.jpg"
+        },
+        "item_name": {
+          "en": "Cappuccino",
+          "ar": "كابتشينو"
+        },
+        "item_description": {
+          "en": "Cappuccino",
+          "ar": "كابتشينو"
+        }
+      },
+      {
+        "id": "19BD8466-6293-4F6A-9DCA-F05A46DC9989",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 86
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/espresso_28102025095649076.png"
+        },
+        "item_name": {
+          "en": "Double Espresso",
+          "ar": "دبل إسبريسو"
+        },
+        "item_description": {
+          "en": "Double Espresso",
+          "ar": "دبل إسبريسو"
+        }
+      },
+      {
+        "id": "3C229585-192B-4231-B933-93457A55C513",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 110
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/cortado_28102025100645798.webp"
+        },
+        "item_name": {
+          "en": "Cortado",
+          "ar": "كورتادو"
+        },
+        "item_description": {
+          "en": "Cortado",
+          "ar": "كورتادو"
+        }
+      },
+      {
+        "id": "43F3161B-3527-4556-81C1-ABAC203A9D2D",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 69
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/nescafe_28102025100831476.jpg"
+        },
+        "item_name": {
+          "en": "Nescafe",
+          "ar": "نسكافيه"
+        },
+        "item_description": {
+          "en": "Nescafe",
+          "ar": "نسكافيه"
+        }
+      },
+      {
+        "id": "4DA0E62B-756E-4083-B58E-0BEEFC0EE74A",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 69
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/cider_28102025101110635.jfif"
+        },
+        "item_name": {
+          "en": "Hot Cider",
+          "ar": "سيدر ساخن"
+        },
+        "item_description": {
+          "en": "Hot Cider",
+          "ar": "سيدر ساخن"
+        }
+      },
+      {
+        "id": "503B3D9D-3F13-4FFE-94D4-3B9A3B8E3B06",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 104
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/latte_28102025101258396.webp"
+        },
+        "item_name": {
+          "en": "Cafe Latte",
+          "ar": "كافيه لاتيه"
+        },
+        "item_description": {
+          "en": "Cafe Latte",
+          "ar": "كافيه لاتيه"
+        }
+      },
+      {
+        "id": "80CB42A4-3C29-4E35-8255-FA491B04C515",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 69
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/hot_choc_28102025102846462.jpg"
+        },
+        "item_name": {
+          "en": "Hot Chocolate",
+          "ar": "شوكولاتة ساخنة"
+        },
+        "item_description": {
+          "en": "Hot Chocolate",
+          "ar": "شوكولاتة ساخنة"
+        }
+      },
+      {
+        "id": "87B865D3-0CEA-41AC-9F72-6893C86CD401",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 92
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Nutella-Hot-Coffee-2-1_28102025103322489.jpg"
+        },
+        "item_name": {
+          "en": "Nutella Coffee",
+          "ar": "قهوة نوتيلا"
+        },
+        "item_description": {
+          "en": "Nutella Coffee",
+          "ar": "قهوة نوتيلا"
+        }
+      },
+      {
+        "id": "8A027B4E-0B70-4E6C-B7B5-DAC8836E5E3B",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 104
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/mocha_28102025103451794.webp"
+        },
+        "item_name": {
+          "en": "Mocha",
+          "ar": "موكا"
+        },
+        "item_description": {
+          "en": "Mocha",
+          "ar": "موكا"
+        }
+      },
+      {
+        "id": "A565ADCE-CE4F-4FC6-AC6E-F7C4076B8F98",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 69
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/espresso-shot-crema-in-wh_28102025104501651.webp"
+        },
+        "item_name": {
+          "en": "Espresso",
+          "ar": "إسبريسو"
+        },
+        "item_description": {
+          "en": "Espresso",
+          "ar": "إسبريسو"
+        }
+      },
+      {
+        "id": "B2F50CDA-7166-4E04-AD7D-054135B013E1",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 86
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/hazelnut_latte_28102025104805813.webp"
+        },
+        "item_name": {
+          "en": "Hazelnut Coffee",
+          "ar": "قهوة بالبندق"
+        },
+        "item_description": {
+          "en": "Hazelnut Coffee",
+          "ar": "قهوة بالبندق"
+        }
+      },
+      {
+        "id": "C42711F8-3B9B-41B7-802D-1B7A3EF5337E",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 42
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Does-Green-Tea-Reduce-the_28102025105105344.webp"
+        },
+        "item_name": {
+          "en": "Green Tea",
+          "ar": "شاي أخضر"
+        },
+        "item_description": {
+          "en": "Green Tea",
+          "ar": "شاي أخضر"
+        }
+      },
+      {
+        "id": "DACA1360-8AA1-43ED-91FF-9CCC7EE1D038",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 115
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/flat-white-d8ada0f_28102025105635838.jpg"
+        },
+        "item_name": {
+          "en": "Flat White",
+          "ar": "فلات وايت"
+        },
+        "item_description": {
+          "en": "Flat White",
+          "ar": "فلات وايت"
+        }
+      },
+      {
+        "id": "DF09C05C-EE5C-4BF7-B516-4C58195C3420",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 86
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/fremch_28102025110657706.jpg"
+        },
+        "item_name": {
+          "en": "French Coffee",
+          "ar": "قهوة فرنسية"
+        },
+        "item_description": {
+          "en": "French Coffee",
+          "ar": "قهوة فرنسية"
+        }
+      },
+      {
+        "id": "E410347E-F886-4C6D-8896-1FFDC408A925",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 46
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/tea_28102025110945862.jpg"
+        },
+        "item_name": {
+          "en": "Tea",
+          "ar": "شاي"
+        },
+        "item_description": {
+          "en": "Tea",
+          "ar": "شاي"
+        }
+      },
+      {
+        "id": "EF00E343-AA68-401B-B665-7B02D9435AA8",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 104
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Avacado-Smoothie-scaled_28102025111318941.webp"
+        },
+        "item_name": {
+          "en": "Avocado",
+          "ar": "أفوكادو"
+        },
+        "item_description": {
+          "en": "Avocado",
+          "ar": "أفوكادو"
+        }
+      },
+      {
+        "id": "FC7C1AEB-9FD8-4720-8773-9D201942F233",
+        "category_id": "5fbde423-b760-469a-a238-d82b7ef6c9af",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 69
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/mix_28102025111608463.jpg"
+        },
+        "item_name": {
+          "en": "Mix Herbs",
+          "ar": "أعشاب مُشكَّلة"
+        },
+        "item_description": {
+          "en": "Mix Herbs",
+          "ar": "أعشاب مُشكَّلة"
+        }
+      },
+      {
+        "id": "03C32CAA-D70E-417A-9513-6BF9A836CE1A",
+        "category_id": "7083da2f-6873-49d2-ba71-fb4704701691",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 86
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/guava_28102025094537917.jpg"
+        },
+        "item_name": {
+          "en": "Guava",
+          "ar": "جوافة"
+        },
+        "item_description": {
+          "en": "Guava",
+          "ar": "جوافة"
+        }
+      },
+      {
+        "id": "362DD3DE-D784-40BA-B637-59D41A8B3B61",
+        "category_id": "7083da2f-6873-49d2-ba71-fb4704701691",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 110
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/mango_ju_28102025100610258.jfif"
+        },
+        "item_name": {
+          "en": "Mango",
+          "ar": "مانجو"
+        },
+        "item_description": {
+          "en": "Mango",
+          "ar": "مانجو"
+        }
+      },
+      {
+        "id": "48CF335B-8A28-4001-8B58-069678B614A1",
+        "category_id": "7083da2f-6873-49d2-ba71-fb4704701691",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 86
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/lemon_28102025101043974.jpg"
+        },
+        "item_name": {
+          "en": "Lemon",
+          "ar": "ليمون"
+        },
+        "item_description": {
+          "en": "Lemon",
+          "ar": "ليمون"
+        }
+      },
+      {
+        "id": "6C966AF1-7E8C-49C5-8B6D-8FEBF95F65EC",
+        "category_id": "7083da2f-6873-49d2-ba71-fb4704701691",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 86
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/orange_28102025102154341.jpeg"
+        },
+        "item_name": {
+          "en": "Orange",
+          "ar": "برتقال"
+        },
+        "item_description": {
+          "en": "Orange",
+          "ar": "برتقال"
+        }
+      },
+      {
+        "id": "9EB9D54B-5E46-4E6E-BC0D-AC4E35BCE1A9",
+        "category_id": "7083da2f-6873-49d2-ba71-fb4704701691",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 86
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/strawberry-juice-recipe-w_28102025104328457.jpg"
+        },
+        "item_name": {
+          "en": "Strawberry",
+          "ar": "فراولة"
+        },
+        "item_description": {
+          "en": "Strawberry",
+          "ar": "فراولة"
+        }
+      },
+      {
+        "id": "BC3E8903-90D5-499C-9208-1E6B268D40F9",
+        "category_id": "7083da2f-6873-49d2-ba71-fb4704701691",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 86
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Fresh-Drinks-for-Summer_28102025104913637.jpeg"
+        },
+        "item_name": {
+          "en": "Lemon Mint",
+          "ar": "ليمون بالنعناع"
+        },
+        "item_description": {
+          "en": "Lemon Mint",
+          "ar": "ليمون بالنعناع"
+        }
+      },
+      {
+        "id": "D866FA1E-CCFB-4120-A1FF-531ABDFAC876",
+        "category_id": "7083da2f-6873-49d2-ba71-fb4704701691",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 110
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/banana-juice-recipe_28102025105522697.jpg"
+        },
+        "item_name": {
+          "en": "Banana With Milk",
+          "ar": "موز بالحليب"
+        },
+        "item_description": {
+          "en": "Banana With Milk",
+          "ar": "موز بالحليب"
+        }
+      },
+      {
+        "id": "DD81872F-A5E3-4E72-AAA0-AD4AEC3E393F",
+        "category_id": "7083da2f-6873-49d2-ba71-fb4704701691",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 104
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/pomegranate-juice-1_28102025105707800.jpg"
+        },
+        "item_name": {
+          "en": "Pomegranate",
+          "ar": "رمان"
+        },
+        "item_description": {
+          "en": "Pomegranate",
+          "ar": "رمان"
+        }
+      },
+      {
+        "id": "15E1C284-7FF7-49CE-AB02-2509CA5EF71B",
+        "category_id": "78b0ce30-eb82-4153-b3cc-01d2bf4a4dab",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/mango_28102025095344803.webp"
+        },
+        "item_name": {
+          "en": "Mango Monkey ",
+          "ar": "مانجو مونكي"
+        },
+        "item_description": {
+          "en": "Mango Monkey ",
+          "ar": "مانجو مونكي"
+        }
+      },
+      {
+        "id": "2ED005D4-E9FB-44A8-A77A-99432F61F63A",
+        "category_id": "78b0ce30-eb82-4153-b3cc-01d2bf4a4dab",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/g_power_28102025100324891.webp"
+        },
+        "item_name": {
+          "en": "G Power ",
+          "ar": "جي باور"
+        },
+        "item_description": {
+          "en": "G Power ",
+          "ar": "جي باور"
+        }
+      },
+      {
+        "id": "41A92051-1869-4AD3-85A9-A9F036A9AFCC",
+        "category_id": "78b0ce30-eb82-4153-b3cc-01d2bf4a4dab",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/pina_28102025100752076.jpg"
+        },
+        "item_name": {
+          "en": "Pina Colada ",
+          "ar": "بينا كولادا"
+        },
+        "item_description": {
+          "en": "Pina Colada ",
+          "ar": "بينا كولادا"
+        }
+      },
+      {
+        "id": "4F9B22D3-5AB0-491A-B00C-C14AB2F27B42",
+        "category_id": "78b0ce30-eb82-4153-b3cc-01d2bf4a4dab",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/cheery_28102025101140855.webp"
+        },
+        "item_name": {
+          "en": "Cherry Cola",
+          "ar": "كولا بالكرز"
+        },
+        "item_description": {
+          "en": "Cherry Cola",
+          "ar": "كولا بالكرز"
+        }
+      },
+      {
+        "id": "6008D1C3-3A44-4A12-AB4D-A8EA1F59619A",
+        "category_id": "78b0ce30-eb82-4153-b3cc-01d2bf4a4dab",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/florida_28102025101904786.jfif"
+        },
+        "item_name": {
+          "en": "Florida ",
+          "ar": "فلوريدا"
+        },
+        "item_description": {
+          "en": "Florida ",
+          "ar": "فلوريدا"
+        }
+      },
+      {
+        "id": "90C2777D-73D8-43A7-91BA-2D008CB70CF0",
+        "category_id": "78b0ce30-eb82-4153-b3cc-01d2bf4a4dab",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Cucumber-Mint-Vodka-Cockt_28102025103927260.jpg"
+        },
+        "item_name": {
+          "en": "Mint Slices",
+          "ar": "شرائح نعناع"
+        },
+        "item_description": {
+          "en": "Mint Slices",
+          "ar": "شرائح نعناع"
+        }
+      },
+      {
+        "id": "9267EEFF-F6DF-4FF3-853A-95A2FA76A4BB",
+        "category_id": "78b0ce30-eb82-4153-b3cc-01d2bf4a4dab",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Blue-Hawaiian-cocktail-rh_28102025104007801.jpg"
+        },
+        "item_name": {
+          "en": "Hawaii ",
+          "ar": "هاواي"
+        },
+        "item_description": {
+          "en": "Hawaii ",
+          "ar": "هاواي"
+        }
+      },
+      {
+        "id": "E0C8D4C2-F72F-4E49-A1DD-8D40F271FB34",
+        "category_id": "78b0ce30-eb82-4153-b3cc-01d2bf4a4dab",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/images_(2)_28102025110810813.jfif"
+        },
+        "item_name": {
+          "en": "Strawberry Daz ",
+          "ar": "ستروبيري داز"
+        },
+        "item_description": {
+          "en": "Strawberry Daz ",
+          "ar": "ستروبيري داز"
+        }
+      },
+      {
+        "id": "EC9E390A-3DDF-4BB8-BC65-F92C50F5AFC5",
+        "category_id": "78b0ce30-eb82-4153-b3cc-01d2bf4a4dab",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/sun_28102025111145847.jpg"
+        },
+        "item_name": {
+          "en": "Sun Rise ",
+          "ar": "صن رايز"
+        },
+        "item_description": {
+          "en": "Sun Rise ",
+          "ar": "صن رايز"
+        }
+      },
+      {
+        "id": "6427AD51-B25F-4325-9634-9BD0A59B9D9D",
+        "category_id": "85130880-3aea-498f-b8ad-485be44c0616",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/oreo_milk_28102025102042256.jpg"
+        },
+        "item_name": {
+          "en": "Oreo",
+          "ar": "اوريو"
+        },
+        "item_description": {
+          "en": "Oreo",
+          "ar": "اوريو"
+        }
+      },
+      {
+        "id": "7AF3BF8E-31D9-4BF8-B266-1B2586A71C13",
+        "category_id": "85130880-3aea-498f-b8ad-485be44c0616",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/blueberry_28102025102736951.jpg"
+        },
+        "item_name": {
+          "en": "Blueberry",
+          "ar": "توت أزرق"
+        },
+        "item_description": {
+          "en": "Blueberry",
+          "ar": "توت أزرق"
+        }
+      },
+      {
+        "id": "8785964F-1792-4042-B25E-E5839FEB9FEA",
+        "category_id": "85130880-3aea-498f-b8ad-485be44c0616",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/coffee-caramel-milkshakes_28102025103203329.jpg"
+        },
+        "item_name": {
+          "en": "Caramel",
+          "ar": "كراميل"
+        },
+        "item_description": {
+          "en": "Caramel",
+          "ar": "كراميل"
+        }
+      },
+      {
+        "id": "8EAD62DF-9CBE-4802-8712-ED315B90E577",
+        "category_id": "85130880-3aea-498f-b8ad-485be44c0616",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/malsters_shake_28102025103758573.webp"
+        },
+        "item_name": {
+          "en": "Maltesers",
+          "ar": "مالتيزرز"
+        },
+        "item_description": {
+          "en": "Maltesers",
+          "ar": "مالتيزرز"
+        }
+      },
+      {
+        "id": "9C7D97D1-EC58-4B82-891B-DB87ED11A9A3",
+        "category_id": "85130880-3aea-498f-b8ad-485be44c0616",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 126
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Snickers-milkshake-12_28102025104244228.webp"
+        },
+        "item_name": {
+          "en": "Snickers",
+          "ar": "سنيكرز"
+        },
+        "item_description": {
+          "en": "Snickers",
+          "ar": "سنيكرز"
+        }
+      },
+      {
+        "id": "CFE6A7F4-1397-4654-A421-D77D573970E3",
+        "category_id": "85130880-3aea-498f-b8ad-485be44c0616",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Vanilla-Milkshake-1.2-720_28102025105412760.jpg"
+        },
+        "item_name": {
+          "en": "Vanilla",
+          "ar": "فانيليا"
+        },
+        "item_description": {
+          "en": "Vanilla",
+          "ar": "فانيليا"
+        }
+      },
+      {
+        "id": "D86CA236-6BD5-4F8D-BB63-465F69877994",
+        "category_id": "85130880-3aea-498f-b8ad-485be44c0616",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 126
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/twinkies-milkshake-recipe_28102025105615097.jpg"
+        },
+        "item_name": {
+          "en": "Twinkies",
+          "ar": "توينكز"
+        },
+        "item_description": {
+          "en": "Twinkies",
+          "ar": "توينكز"
+        }
+      },
+      {
+        "id": "DFFA3901-C409-4EF4-9AD0-408743FD5C28",
+        "category_id": "85130880-3aea-498f-b8ad-485be44c0616",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 126
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/images_(1)_28102025110736522.jfif"
+        },
+        "item_name": {
+          "en": "Brownies",
+          "ar": "براونيز"
+        },
+        "item_description": {
+          "en": "Brownies",
+          "ar": "براونيز"
+        }
+      },
+      {
+        "id": "EFC424AC-92F0-4BC4-88D4-ECBA7597B360",
+        "category_id": "85130880-3aea-498f-b8ad-485be44c0616",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Chocolate-Milkshake-Recip_28102025111347022.jpg"
+        },
+        "item_name": {
+          "en": "Chocolate",
+          "ar": "شوكولاتة"
+        },
+        "item_description": {
+          "en": "Chocolate",
+          "ar": "شوكولاتة"
+        }
+      },
+      {
+        "id": "459652B8-60C1-4000-9CAE-E0562D2DACE0",
+        "category_id": "92acd8ff-5cf3-464b-9884-f8674498d236",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/yoghurt_28102025101013177.jfif"
+        },
+        "item_name": {
+          "en": "Fruits Yogurt",
+          "ar": "زبادي بالفواكه"
+        },
+        "item_description": {
+          "en": "Fruits Yogurt",
+          "ar": "زبادي بالفواكه"
+        }
+      },
+      {
+        "id": "C340783B-24D5-427B-B1A1-896478AE0BB3",
+        "category_id": "92acd8ff-5cf3-464b-9884-f8674498d236",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/MotherCulture_Attie009_28102025105041105.webp"
+        },
+        "item_name": {
+          "en": "Honey Yogurt",
+          "ar": "زبادي بالعسل"
+        },
+        "item_description": {
+          "en": "Honey Yogurt",
+          "ar": "زبادي بالعسل"
+        }
+      },
+      {
+        "id": "09794928-33EC-4429-A6B4-80C21FB65552",
+        "category_id": "a9a4b6fe-773d-4b60-a769-175b3bf54d3b",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 63
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/fayrouz_28102025094725037.jpg"
+        },
+        "item_name": {
+          "en": "Fayrouz",
+          "ar": "فيروز"
+        },
+        "item_description": {
+          "en": "Fayrouz",
+          "ar": "فيروز"
+        }
+      },
+      {
+        "id": "0D891CC5-3E3A-4CE6-80BD-53CFCF19C4CE",
+        "category_id": "a9a4b6fe-773d-4b60-a769-175b3bf54d3b",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 35
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/waterr_28102025094949073.webp"
+        },
+        "item_name": {
+          "en": "Mineral Water S",
+          "ar": "مياه معدنية صغيرة"
+        },
+        "item_description": {
+          "en": "Mineral Water S",
+          "ar": "مياه معدنية صغيرة"
+        }
+      },
+      {
+        "id": "1B20EE8E-B3C1-494A-93D0-FEC9B7C23182",
+        "category_id": "a9a4b6fe-773d-4b60-a769-175b3bf54d3b",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 63
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/shw_28102025095853248.jpg"
+        },
+        "item_name": {
+          "en": "Schweppes",
+          "ar": "شويبس"
+        },
+        "item_description": {
+          "en": "Schweppes",
+          "ar": "شويبس"
+        }
+      },
+      {
+        "id": "26ABF1DB-AA48-4274-BF6C-CDC5F5A9A410",
+        "category_id": "a9a4b6fe-773d-4b60-a769-175b3bf54d3b",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 150
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/redbull_28102025100032010.jpg"
+        },
+        "item_name": {
+          "en": "Redbull",
+          "ar": "ريد بول"
+        },
+        "item_description": {
+          "en": "Redbull",
+          "ar": "ريد بول"
+        }
+      },
+      {
+        "id": "534C525F-30C2-4699-88AF-F23ED01A5A13",
+        "category_id": "a9a4b6fe-773d-4b60-a769-175b3bf54d3b",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 52
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/soft_28102025101342068.jfif"
+        },
+        "item_name": {
+          "en": "Soft Drinks",
+          "ar": "مشروبات غازية"
+        },
+        "item_description": {
+          "en": "Soft Drinks",
+          "ar": "مشروبات غازية"
+        }
+      },
+      {
+        "id": "5FBC7CC7-F336-474D-AA8D-4DE9E3B1C5BD",
+        "category_id": "a9a4b6fe-773d-4b60-a769-175b3bf54d3b",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 46
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/large_wa_28102025101834555.jpg"
+        },
+        "item_name": {
+          "en": "Mineral Water L",
+          "ar": "مياه معدنية كبيرة"
+        },
+        "item_description": {
+          "en": "Mineral Water L",
+          "ar": "مياه معدنية كبيرة"
+        }
+      },
+      {
+        "id": "B9051E6D-1319-4DF0-B1B4-0E606A40B9D4",
+        "category_id": "a9a4b6fe-773d-4b60-a769-175b3bf54d3b",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 75
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/moussy_28102025104850495.jfif"
+        },
+        "item_name": {
+          "en": "Moussy",
+          "ar": "موسي"
+        },
+        "item_description": {
+          "en": "Moussy",
+          "ar": "موسي"
+        }
+      },
+      {
+        "id": "CE6F3D62-7EAD-457C-9DCB-D32B5A56E203",
+        "category_id": "a9a4b6fe-773d-4b60-a769-175b3bf54d3b",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 75
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/tonicc_28102025105346072.jpg"
+        },
+        "item_name": {
+          "en": "Tonic",
+          "ar": "تونيك"
+        },
+        "item_description": {
+          "en": "Tonic",
+          "ar": "تونيك"
+        }
+      },
+      {
+        "id": "E68E037D-21E1-4F46-B7FD-63F80A6C0B68",
+        "category_id": "a9a4b6fe-773d-4b60-a769-175b3bf54d3b",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 86
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/61ptQ1FyXlL._AC_UF350,350_28102025111046911.jpg"
+        },
+        "item_name": {
+          "en": "Sparkling Water",
+          "ar": "مياه غازية"
+        },
+        "item_description": {
+          "en": "Sparkling Water",
+          "ar": "مياه غازية"
+        }
+      },
+      {
+        "id": "1932758C-8876-4FDF-9610-5AB3C71778E1",
+        "category_id": "abb8148c-7338-4e47-9d2a-a19fda02b1c9",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/watermelon_28102025095557126.jfif"
+        },
+        "item_name": {
+          "en": "Watermelon",
+          "ar": "بطيخ"
+        },
+        "item_description": {
+          "en": "Watermelon",
+          "ar": "بطيخ"
+        }
+      },
+      {
+        "id": "1D1E57AA-63D6-4939-9637-BB545212C6DB",
+        "category_id": "abb8148c-7338-4e47-9d2a-a19fda02b1c9",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/strawberry_28102025095954343.jpg"
+        },
+        "item_name": {
+          "en": "Strawberry",
+          "ar": "فراولة"
+        },
+        "item_description": {
+          "en": "Strawberry",
+          "ar": "فراولة"
+        }
+      },
+      {
+        "id": "3542EE1D-90D8-4733-9303-1E7A9B87AC07",
+        "category_id": "abb8148c-7338-4e47-9d2a-a19fda02b1c9",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/passion_28102025100543639.jpg"
+        },
+        "item_name": {
+          "en": "Passion Fruit",
+          "ar": "باشون فروت"
+        },
+        "item_description": {
+          "en": "Passion Fruit",
+          "ar": "باشون فروت"
+        }
+      },
+      {
+        "id": "634D21BD-0D93-4374-B3D9-1C7A564B92AC",
+        "category_id": "abb8148c-7338-4e47-9d2a-a19fda02b1c9",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/peach_28102025102007926.jfif"
+        },
+        "item_name": {
+          "en": "Peach",
+          "ar": "خوخ"
+        },
+        "item_description": {
+          "en": "Peach",
+          "ar": "خوخ"
+        }
+      },
+      {
+        "id": "90B1F6FC-FFC8-469A-AB81-225E5D8669E5",
+        "category_id": "abb8148c-7338-4e47-9d2a-a19fda02b1c9",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 108
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/mango-smoothie-recipe-a_a_28102025103846044.jpeg"
+        },
+        "item_name": {
+          "en": "Mango",
+          "ar": "مانجو"
+        },
+        "item_description": {
+          "en": "Mango",
+          "ar": "مانجو"
+        }
+      },
+      {
+        "id": "AB6AADBD-32A2-48A8-AEEA-6AB0C73F1CC3",
+        "category_id": "abb8148c-7338-4e47-9d2a-a19fda02b1c9",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Raspberry-Smoothie-Get-In_28102025104532825.jpg"
+        },
+        "item_name": {
+          "en": "Raspberry",
+          "ar": "توت أحمر"
+        },
+        "item_description": {
+          "en": "Raspberry",
+          "ar": "توت أحمر"
+        }
+      },
+      {
+        "id": "B1FFC8F2-72EC-443E-9B2F-6260225D3D06",
+        "category_id": "abb8148c-7338-4e47-9d2a-a19fda02b1c9",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/bluee_28102025104728328.jpg"
+        },
+        "item_name": {
+          "en": "Blueberry",
+          "ar": "توت أزرق"
+        },
+        "item_description": {
+          "en": "Blueberry",
+          "ar": "توت أزرق"
+        }
+      },
+      {
+        "id": "D712A5F3-7126-46F9-88CF-C6FF888B0EDD",
+        "category_id": "abb8148c-7338-4e47-9d2a-a19fda02b1c9",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 104
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/images_28102025105447190.jfif"
+        },
+        "item_name": {
+          "en": "Pink Lemon ",
+          "ar": "ليمون وردي"
+        },
+        "item_description": {
+          "en": "Pink Lemon ",
+          "ar": "ليمون وردي"
+        }
+      },
+      {
+        "id": "FFE4963A-15E7-4C2D-A836-0C7FDDD4579F",
+        "category_id": "abb8148c-7338-4e47-9d2a-a19fda02b1c9",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 104
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/blue_28102025111705911.jpg"
+        },
+        "item_name": {
+          "en": "Blue Lemon",
+          "ar": "ليمون أزرق"
+        },
+        "item_description": {
+          "en": "Blue Lemon",
+          "ar": "ليمون أزرق"
+        }
+      },
+      {
+        "id": "131A24F9-1744-4CD6-8CE8-222F1A48F70B",
+        "category_id": "ca78ee05-db8a-4543-bcc1-1ae588962316",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 104
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/frappe_28102025095115164.jfif"
+        },
+        "item_name": {
+          "en": "Classic",
+          "ar": "كلاسيك"
+        },
+        "item_description": {
+          "en": "Classic",
+          "ar": "كلاسيك"
+        }
+      },
+      {
+        "id": "5B98FA45-B92A-4485-85EC-138C954BA4CE",
+        "category_id": "ca78ee05-db8a-4543-bcc1-1ae588962316",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/lotus_28102025101537555.webp"
+        },
+        "item_name": {
+          "en": "Lotus",
+          "ar": "لوتس"
+        },
+        "item_description": {
+          "en": "Lotus",
+          "ar": "لوتس"
+        }
+      },
+      {
+        "id": "6CA15BAF-0D6C-4FE8-84DF-E2022184BC76",
+        "category_id": "ca78ee05-db8a-4543-bcc1-1ae588962316",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 111
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/caramel_28102025102241460.jpg"
+        },
+        "item_name": {
+          "en": "Caramel",
+          "ar": "كراميل"
+        },
+        "item_description": {
+          "en": "Caramel",
+          "ar": "كراميل"
+        }
+      },
+      {
+        "id": "8B87A5A3-10FB-4724-9405-936D34C860B0",
+        "category_id": "ca78ee05-db8a-4543-bcc1-1ae588962316",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 111
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/vanilla_28102025103519356.jpg"
+        },
+        "item_name": {
+          "en": "Vanilla",
+          "ar": "فانيليا"
+        },
+        "item_description": {
+          "en": "Vanilla",
+          "ar": "فانيليا"
+        }
+      },
+      {
+        "id": "BFE967A4-29E0-4611-8469-5C3E6D1D2DB5",
+        "category_id": "ca78ee05-db8a-4543-bcc1-1ae588962316",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 115
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Nutella-Frappuccino-The-F_28102025104943059.jpg"
+        },
+        "item_name": {
+          "en": "Nutella",
+          "ar": "نوتيلا"
+        },
+        "item_description": {
+          "en": "Nutella",
+          "ar": "نوتيلا"
+        }
+      },
+      {
+        "id": "FD5C9891-9934-48E6-B819-5009AE0388CE",
+        "category_id": "ca78ee05-db8a-4543-bcc1-1ae588962316",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 109
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/images_(6)_28102025111636266.jfif"
+        },
+        "item_name": {
+          "en": "Mocha",
+          "ar": "موكا"
+        },
+        "item_description": {
+          "en": "Mocha",
+          "ar": "موكا"
+        }
+      },
+      {
+        "id": "0258B36A-6D8D-4421-83F2-A02F9789FE13",
+        "category_id": "f362ce2a-fbe2-4e52-bec2-2264970eb6b3",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/mohito_28102025094228699.jpg"
+        },
+        "item_name": {
+          "en": "Classic Mojito ",
+          "ar": "موهيتو كلاسيك"
+        },
+        "item_description": {
+          "en": "Classic Mojito ",
+          "ar": "موهيتو كلاسيك"
+        }
+      },
+      {
+        "id": "1A226629-A79D-4B55-92A1-488C997FC6C2",
+        "category_id": "f362ce2a-fbe2-4e52-bec2-2264970eb6b3",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/ras_28102025095800732.webp"
+        },
+        "item_name": {
+          "en": "Raspberry Mojito ",
+          "ar": "موهيتو توت أحمر"
+        },
+        "item_description": {
+          "en": "Raspberry Mojito ",
+          "ar": "موهيتو توت أحمر"
+        }
+      },
+      {
+        "id": "7B0EFB8D-C0B9-4BAF-B10A-4BEF770231E3",
+        "category_id": "f362ce2a-fbe2-4e52-bec2-2264970eb6b3",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/Blueberry-Mojito-4_28102025102808146.jpg"
+        },
+        "item_name": {
+          "en": "Blueberry Mojito ",
+          "ar": "موهيتو توت أزرق"
+        },
+        "item_description": {
+          "en": "Blueberry Mojito ",
+          "ar": "موهيتو توت أزرق"
+        }
+      },
+      {
+        "id": "F02D89D5-0A89-476C-A625-34980F38684D",
+        "category_id": "f362ce2a-fbe2-4e52-bec2-2264970eb6b3",
+        "kitchen_section_id": "cf1b0fe1ce26489a9cc34cffa61d86c1",
+        "pricing": {
+          "base": 120
+        },
+        "media": {
+          "image": "https://gremal.mas.com.eg/UploadFiles/helmy_MAS/helmy_MAS/images_(4)_28102025111416413.jfif"
+        },
+        "item_name": {
+          "en": "Passion Fruit Mojito ",
+          "ar": "موهيتو باشون فروت"
+        },
+        "item_description": {
+          "en": "Passion Fruit Mojito ",
+          "ar": "موهيتو باشون فروت"
+        }
+      }
+    ],
+    "dining_tables": [
+      {
+        "id": "T01",
+        "name": "طاولة 1",
+        "displayOrder": 1,
+        "seats": 4,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T02",
+        "name": "طاولة 2",
+        "displayOrder": 2,
+        "seats": 6,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T03",
+        "name": "طاولة 3",
+        "displayOrder": 3,
+        "seats": 8,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T04",
+        "name": "طاولة 4",
+        "displayOrder": 4,
+        "seats": 2,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T05",
+        "name": "طاولة 5",
+        "displayOrder": 5,
+        "seats": 4,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T06",
+        "name": "طاولة 6",
+        "displayOrder": 6,
+        "seats": 6,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T07",
+        "name": "طاولة 7",
+        "displayOrder": 7,
+        "seats": 8,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T08",
+        "name": "طاولة 8",
+        "displayOrder": 8,
+        "seats": 2,
+        "zone": "indoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T09",
+        "name": "طاولة 9",
+        "displayOrder": 9,
+        "seats": 4,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T10",
+        "name": "طاولة 10",
+        "displayOrder": 10,
+        "seats": 6,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T11",
+        "name": "طاولة 11",
+        "displayOrder": 11,
+        "seats": 8,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T12",
+        "name": "طاولة 12",
+        "displayOrder": 12,
+        "seats": 2,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T13",
+        "name": "طاولة 13",
+        "displayOrder": 13,
+        "seats": 4,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T14",
+        "name": "طاولة 14",
+        "displayOrder": 14,
+        "seats": 6,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T15",
+        "name": "طاولة 15",
+        "displayOrder": 15,
+        "seats": 8,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T16",
+        "name": "طاولة 16",
+        "displayOrder": 16,
+        "seats": 2,
+        "zone": "outdoor",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T17",
+        "name": "طاولة 17",
+        "displayOrder": 17,
+        "seats": 4,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T18",
+        "name": "طاولة 18",
+        "displayOrder": 18,
+        "seats": 6,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T19",
+        "name": "طاولة 19",
+        "displayOrder": 19,
+        "seats": 8,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T20",
+        "name": "طاولة 20",
+        "displayOrder": 20,
+        "seats": 2,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T21",
+        "name": "طاولة 21",
+        "displayOrder": 21,
+        "seats": 4,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T22",
+        "name": "طاولة 22",
+        "displayOrder": 22,
+        "seats": 6,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T23",
+        "name": "طاولة 23",
+        "displayOrder": 23,
+        "seats": 8,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T24",
+        "name": "طاولة 24",
+        "displayOrder": 24,
+        "seats": 2,
+        "zone": "vip",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T25",
+        "name": "طاولة 25",
+        "displayOrder": 25,
+        "seats": 4,
+        "zone": "terrace",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T26",
+        "name": "طاولة 26",
+        "displayOrder": 26,
+        "seats": 6,
+        "zone": "terrace",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T27",
+        "name": "طاولة 27",
+        "displayOrder": 27,
+        "seats": 8,
+        "zone": "terrace",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T28",
+        "name": "طاولة 28",
+        "displayOrder": 28,
+        "seats": 2,
+        "zone": "terrace",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T29",
+        "name": "طاولة 29",
+        "displayOrder": 29,
+        "seats": 4,
+        "zone": "terrace",
+        "state": "active",
+        "note": null,
+        "version": 1
+      },
+      {
+        "id": "T30",
+        "name": "طاولة 30",
+        "displayOrder": 30,
+        "seats": 6,
+        "zone": "terrace",
+        "state": "active",
+        "note": null,
+        "version": 1
+      }
+    ]
+  }
+}

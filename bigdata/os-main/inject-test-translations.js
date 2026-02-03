@@ -1,0 +1,69 @@
+/**
+ * Inject test translations into brocker module
+ */
+
+import fs from 'fs';
+import path from 'path';
+
+const dataPath = path.join(process.cwd(), 'data/branches/aqar/modules/brocker/live/data.json');
+
+// Read current data
+const currentData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+
+// Add test translations
+const testTranslations = {
+  projects_lang: [
+    {
+      id: 'lang-proj-nour-ar',
+      projects_id: 'proj-nour-heights',
+      lang: 'ar',
+      project_name: 'مشروع نور هايتس',
+      description: 'مجمع سكني فاخر في التجمع الخامس',
+      location: 'التجمع الخامس - شارع النوادي',
+      project_status: 'تحت الإنشاء',
+      created_date: '2023-04-01T09:00:00Z'
+    },
+    {
+      id: 'lang-proj-nour-en',
+      projects_id: 'proj-nour-heights',
+      lang: 'en',
+      project_name: 'Nour Heights Project',
+      description: 'Luxury residential complex in New Cairo',
+      location: 'Fifth Settlement - Al Nawadi Street',
+      project_status: 'Under Construction',
+      created_date: '2023-04-01T09:00:00Z'
+    }
+  ],
+  regions_lang: [
+    {
+      id: 'lang-region-cairo-ar',
+      regions_id: 'region-new-cairo',
+      lang: 'ar',
+      name: 'القاهرة الجديدة',
+      city: 'القاهرة',
+      country: 'مصر',
+      created_date: '2023-01-01T00:00:00Z'
+    },
+    {
+      id: 'lang-region-cairo-en',
+      regions_id: 'region-new-cairo',
+      lang: 'en',
+      name: 'New Cairo',
+      city: 'Cairo',
+      country: 'Egypt',
+      created_date: '2023-01-01T00:00:00Z'
+    }
+  ]
+};
+
+// Merge with current data
+currentData.tables.projects_lang = testTranslations.projects_lang;
+currentData.tables.regions_lang = testTranslations.regions_lang;
+
+// Write back
+fs.writeFileSync(dataPath, JSON.stringify(currentData, null, 2));
+
+console.log('✅ Test translations injected successfully!');
+console.log('   - Added 2 projects_lang records (ar + en)');
+console.log('   - Added 2 regions_lang records (ar + en)');
+console.log('\nRestart the server to load new data.');

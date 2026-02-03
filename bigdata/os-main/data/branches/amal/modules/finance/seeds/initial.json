@@ -1,0 +1,1021 @@
+{
+  "fin_chart_of_accounts": [
+    {
+      "id": "coa_amal_1",
+      "company_id": "amal_co",
+      "parent_id": null,
+      "code": "1",
+      "name": "الاصول",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_amal_2",
+      "company_id": "amal_co",
+      "parent_id": null,
+      "code": "2",
+      "name": "الخصوم",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_amal_4",
+      "company_id": "amal_co",
+      "parent_id": null,
+      "code": "4",
+      "name": "الايرادات",
+      "account_type": "REVENUE",
+      "report_type": "PL",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_amal_3",
+      "company_id": "amal_co",
+      "parent_id": null,
+      "code": "3",
+      "name": "المصروفات",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 1,
+      "is_group": true
+    },
+    {
+      "id": "coa_amal_11",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_1",
+      "code": "11",
+      "name": "الاصول المتداولة",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_amal_12",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_1",
+      "code": "12",
+      "name": "الاصول الثابتة",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_amal_21",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_2",
+      "code": "21",
+      "name": "الخصوم المتداولة",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_amal_22",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_2",
+      "code": "22",
+      "name": "حقوق الملكية",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 2,
+      "is_group": true
+    },
+    {
+      "id": "coa_amal_41",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_4",
+      "code": "41",
+      "name": "ايرادات النشاط",
+      "account_type": "REVENUE",
+      "report_type": "PL",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_42",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_4",
+      "code": "42",
+      "name": "إيرادات أخرى",
+      "account_type": "REVENUE",
+      "report_type": "PL",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_111",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_11",
+      "code": "111",
+      "name": "النقد وما فى حكمة",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 3,
+      "is_group": true
+    },
+    {
+      "id": "coa_amal_113",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_11",
+      "code": "113",
+      "name": "أرصدة مدينة أخرى",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": false,
+      "is_active": true,
+      "level": 3,
+      "is_group": true
+    },
+    {
+      "id": "coa_amal_114",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_11",
+      "code": "114",
+      "name": "مصروفات مقدمة",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_121",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_12",
+      "code": "121",
+      "name": "سيارات",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_122",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_12",
+      "code": "122",
+      "name": "الات ومعدات",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_123",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_12",
+      "code": "123",
+      "name": "اثاث وأدوات مكتبية",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_124",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_12",
+      "code": "124",
+      "name": "أجهزة وبرامج",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_211",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_21",
+      "code": "211",
+      "name": "دائنون تجاريون",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_212",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_21",
+      "code": "212",
+      "name": "أطراف ذات علاقة",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_213",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_21",
+      "code": "213",
+      "name": "مصروفات مستحقة",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_214",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_21",
+      "code": "214",
+      "name": "ارصدة دائنة اخري",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_215",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_21",
+      "code": "215",
+      "name": "مخصصات",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_216",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_21",
+      "code": "216",
+      "name": "مجمع اهلاك",
+      "account_type": "LIABILITIES",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_221",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_22",
+      "code": "221",
+      "name": "رأس المال",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_222",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_22",
+      "code": "222",
+      "name": "ارباح وخسائر متراكمة واحتياطيات",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_223",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_22",
+      "code": "223",
+      "name": "جاري المالك",
+      "account_type": "EQUITY",
+      "report_type": "BS",
+      "normal_balance": "C",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_311",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_3",
+      "code": "311",
+      "name": "مصروفات التشغيل",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_312",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_3",
+      "code": "312",
+      "name": "مصروفات أولية",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_313",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_3",
+      "code": "313",
+      "name": "مصروفات عمومية وإدارية",
+      "account_type": "EXPENSE",
+      "report_type": "PL",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 2,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_1121",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_11",
+      "code": "1121",
+      "name": "عملاء",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 3,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_1131",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_113",
+      "code": "1131",
+      "name": "عهد",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_1132",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_113",
+      "code": "1132",
+      "name": "سلف",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_1110002",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_111",
+      "code": "1110002",
+      "name": "بنك الإنماء",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_1110003",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_111",
+      "code": "1110003",
+      "name": "حساب احتياطي بنك الإنماء",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    },
+    {
+      "id": "coa_amal_1110004",
+      "company_id": "amal_co",
+      "parent_id": "coa_amal_111",
+      "code": "1110004",
+      "name": "حساب الراجحي",
+      "account_type": "ASSETS",
+      "report_type": "BS",
+      "normal_balance": "D",
+      "currency_id": "curr_egp",
+      "is_transactional": true,
+      "is_active": true,
+      "level": 4,
+      "is_group": false
+    }
+  ],
+  "fin_chart_of_accounts_lang": [
+    {
+      "id": "coa_lang_amal_1_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1",
+      "lang_code": "ar",
+      "name": "الاصول"
+    },
+    {
+      "id": "coa_lang_amal_1_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1",
+      "lang_code": "en",
+      "name": "الاصول"
+    },
+    {
+      "id": "coa_lang_amal_2_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_2",
+      "lang_code": "ar",
+      "name": "الخصوم"
+    },
+    {
+      "id": "coa_lang_amal_2_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_2",
+      "lang_code": "en",
+      "name": "الخصوم"
+    },
+    {
+      "id": "coa_lang_amal_4_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_4",
+      "lang_code": "ar",
+      "name": "الايرادات"
+    },
+    {
+      "id": "coa_lang_amal_4_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_4",
+      "lang_code": "en",
+      "name": "الايرادات"
+    },
+    {
+      "id": "coa_lang_amal_3_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_3",
+      "lang_code": "ar",
+      "name": "المصروفات"
+    },
+    {
+      "id": "coa_lang_amal_3_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_3",
+      "lang_code": "en",
+      "name": "المصروفات"
+    },
+    {
+      "id": "coa_lang_amal_11_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_11",
+      "lang_code": "ar",
+      "name": "الاصول المتداولة"
+    },
+    {
+      "id": "coa_lang_amal_11_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_11",
+      "lang_code": "en",
+      "name": "الاصول المتداولة"
+    },
+    {
+      "id": "coa_lang_amal_12_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_12",
+      "lang_code": "ar",
+      "name": "الاصول الثابتة"
+    },
+    {
+      "id": "coa_lang_amal_12_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_12",
+      "lang_code": "en",
+      "name": "الاصول الثابتة"
+    },
+    {
+      "id": "coa_lang_amal_21_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_21",
+      "lang_code": "ar",
+      "name": "الخصوم المتداولة"
+    },
+    {
+      "id": "coa_lang_amal_21_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_21",
+      "lang_code": "en",
+      "name": "الخصوم المتداولة"
+    },
+    {
+      "id": "coa_lang_amal_22_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_22",
+      "lang_code": "ar",
+      "name": "حقوق الملكية"
+    },
+    {
+      "id": "coa_lang_amal_22_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_22",
+      "lang_code": "en",
+      "name": "حقوق الملكية"
+    },
+    {
+      "id": "coa_lang_amal_41_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_41",
+      "lang_code": "ar",
+      "name": "ايرادات النشاط"
+    },
+    {
+      "id": "coa_lang_amal_41_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_41",
+      "lang_code": "en",
+      "name": "ايرادات النشاط"
+    },
+    {
+      "id": "coa_lang_amal_42_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_42",
+      "lang_code": "ar",
+      "name": "إيرادات أخرى"
+    },
+    {
+      "id": "coa_lang_amal_42_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_42",
+      "lang_code": "en",
+      "name": "إيرادات أخرى"
+    },
+    {
+      "id": "coa_lang_amal_111_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_111",
+      "lang_code": "ar",
+      "name": "النقد وما فى حكمة"
+    },
+    {
+      "id": "coa_lang_amal_111_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_111",
+      "lang_code": "en",
+      "name": "النقد وما فى حكمة"
+    },
+    {
+      "id": "coa_lang_amal_113_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_113",
+      "lang_code": "ar",
+      "name": "أرصدة مدينة أخرى"
+    },
+    {
+      "id": "coa_lang_amal_113_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_113",
+      "lang_code": "en",
+      "name": "أرصدة مدينة أخرى"
+    },
+    {
+      "id": "coa_lang_amal_114_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_114",
+      "lang_code": "ar",
+      "name": "مصروفات مقدمة"
+    },
+    {
+      "id": "coa_lang_amal_114_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_114",
+      "lang_code": "en",
+      "name": "مصروفات مقدمة"
+    },
+    {
+      "id": "coa_lang_amal_121_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_121",
+      "lang_code": "ar",
+      "name": "سيارات"
+    },
+    {
+      "id": "coa_lang_amal_121_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_121",
+      "lang_code": "en",
+      "name": "سيارات"
+    },
+    {
+      "id": "coa_lang_amal_122_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_122",
+      "lang_code": "ar",
+      "name": "الات ومعدات"
+    },
+    {
+      "id": "coa_lang_amal_122_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_122",
+      "lang_code": "en",
+      "name": "الات ومعدات"
+    },
+    {
+      "id": "coa_lang_amal_123_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_123",
+      "lang_code": "ar",
+      "name": "اثاث وأدوات مكتبية"
+    },
+    {
+      "id": "coa_lang_amal_123_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_123",
+      "lang_code": "en",
+      "name": "اثاث وأدوات مكتبية"
+    },
+    {
+      "id": "coa_lang_amal_124_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_124",
+      "lang_code": "ar",
+      "name": "أجهزة وبرامج"
+    },
+    {
+      "id": "coa_lang_amal_124_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_124",
+      "lang_code": "en",
+      "name": "أجهزة وبرامج"
+    },
+    {
+      "id": "coa_lang_amal_211_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_211",
+      "lang_code": "ar",
+      "name": "دائنون تجاريون"
+    },
+    {
+      "id": "coa_lang_amal_211_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_211",
+      "lang_code": "en",
+      "name": "دائنون تجاريون"
+    },
+    {
+      "id": "coa_lang_amal_212_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_212",
+      "lang_code": "ar",
+      "name": "أطراف ذات علاقة"
+    },
+    {
+      "id": "coa_lang_amal_212_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_212",
+      "lang_code": "en",
+      "name": "أطراف ذات علاقة"
+    },
+    {
+      "id": "coa_lang_amal_213_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_213",
+      "lang_code": "ar",
+      "name": "مصروفات مستحقة"
+    },
+    {
+      "id": "coa_lang_amal_213_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_213",
+      "lang_code": "en",
+      "name": "مصروفات مستحقة"
+    },
+    {
+      "id": "coa_lang_amal_214_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_214",
+      "lang_code": "ar",
+      "name": "ارصدة دائنة اخري"
+    },
+    {
+      "id": "coa_lang_amal_214_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_214",
+      "lang_code": "en",
+      "name": "ارصدة دائنة اخري"
+    },
+    {
+      "id": "coa_lang_amal_215_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_215",
+      "lang_code": "ar",
+      "name": "مخصصات"
+    },
+    {
+      "id": "coa_lang_amal_215_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_215",
+      "lang_code": "en",
+      "name": "مخصصات"
+    },
+    {
+      "id": "coa_lang_amal_216_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_216",
+      "lang_code": "ar",
+      "name": "مجمع اهلاك"
+    },
+    {
+      "id": "coa_lang_amal_216_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_216",
+      "lang_code": "en",
+      "name": "مجمع اهلاك"
+    },
+    {
+      "id": "coa_lang_amal_221_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_221",
+      "lang_code": "ar",
+      "name": "رأس المال"
+    },
+    {
+      "id": "coa_lang_amal_221_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_221",
+      "lang_code": "en",
+      "name": "رأس المال"
+    },
+    {
+      "id": "coa_lang_amal_222_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_222",
+      "lang_code": "ar",
+      "name": "ارباح وخسائر متراكمة واحتياطيات"
+    },
+    {
+      "id": "coa_lang_amal_222_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_222",
+      "lang_code": "en",
+      "name": "ارباح وخسائر متراكمة واحتياطيات"
+    },
+    {
+      "id": "coa_lang_amal_223_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_223",
+      "lang_code": "ar",
+      "name": "جاري المالك"
+    },
+    {
+      "id": "coa_lang_amal_223_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_223",
+      "lang_code": "en",
+      "name": "جاري المالك"
+    },
+    {
+      "id": "coa_lang_amal_311_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_311",
+      "lang_code": "ar",
+      "name": "مصروفات التشغيل"
+    },
+    {
+      "id": "coa_lang_amal_311_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_311",
+      "lang_code": "en",
+      "name": "مصروفات التشغيل"
+    },
+    {
+      "id": "coa_lang_amal_312_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_312",
+      "lang_code": "ar",
+      "name": "مصروفات أولية"
+    },
+    {
+      "id": "coa_lang_amal_312_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_312",
+      "lang_code": "en",
+      "name": "مصروفات أولية"
+    },
+    {
+      "id": "coa_lang_amal_313_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_313",
+      "lang_code": "ar",
+      "name": "مصروفات عمومية وإدارية"
+    },
+    {
+      "id": "coa_lang_amal_313_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_313",
+      "lang_code": "en",
+      "name": "مصروفات عمومية وإدارية"
+    },
+    {
+      "id": "coa_lang_amal_1121_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1121",
+      "lang_code": "ar",
+      "name": "عملاء"
+    },
+    {
+      "id": "coa_lang_amal_1121_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1121",
+      "lang_code": "en",
+      "name": "عملاء"
+    },
+    {
+      "id": "coa_lang_amal_1131_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1131",
+      "lang_code": "ar",
+      "name": "عهد"
+    },
+    {
+      "id": "coa_lang_amal_1131_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1131",
+      "lang_code": "en",
+      "name": "عهد"
+    },
+    {
+      "id": "coa_lang_amal_1132_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1132",
+      "lang_code": "ar",
+      "name": "سلف"
+    },
+    {
+      "id": "coa_lang_amal_1132_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1132",
+      "lang_code": "en",
+      "name": "سلف"
+    },
+    {
+      "id": "coa_lang_amal_1110002_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1110002",
+      "lang_code": "ar",
+      "name": "بنك الإنماء"
+    },
+    {
+      "id": "coa_lang_amal_1110002_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1110002",
+      "lang_code": "en",
+      "name": "بنك الإنماء"
+    },
+    {
+      "id": "coa_lang_amal_1110003_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1110003",
+      "lang_code": "ar",
+      "name": "حساب احتياطي بنك الإنماء"
+    },
+    {
+      "id": "coa_lang_amal_1110003_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1110003",
+      "lang_code": "en",
+      "name": "حساب احتياطي بنك الإنماء"
+    },
+    {
+      "id": "coa_lang_amal_1110004_ar",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1110004",
+      "lang_code": "ar",
+      "name": "حساب الراجحي"
+    },
+    {
+      "id": "coa_lang_amal_1110004_en",
+      "company_id": "amal_co",
+      "ref_id": "coa_amal_1110004",
+      "lang_code": "en",
+      "name": "حساب الراجحي"
+    }
+  ]
+}

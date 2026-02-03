@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../mishkah.core.js"></script>
+</head>
+
+<body>
+    <h1>DSL Debugger</h1>
+    <script>
+        console.log('--- Debugging Mishkah DSL ---');
+        const D = Mishkah.DSL;
+        const keys = Object.keys(D);
+        console.log('Total keys:', keys.length);
+
+        // Check specifically for Header/header
+        console.log('Has Header?', 'Header' in D);
+        console.log('Has header?', 'header' in D);
+
+        // Dump all keys
+        document.body.innerHTML += '<pre>' + JSON.stringify(keys.sort(), null, 2) + '</pre>';
+
+        if (!D.header) {
+            document.body.innerHTML += '<h2 style="color:red">FAIL: D.header is undefined</h2>';
+        } else {
+            document.body.innerHTML += '<h2 style="color:green">SUCCESS: D.header exists</h2>';
+        }
+    </script>
+</body>
+
+</html>

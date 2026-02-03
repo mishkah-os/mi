@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>V2 (WebSocket) — نقطة البيع للمطاعم</title>
+
+
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+
+    html,
+    body {
+      height: 100%;
+      min-height: 100vh;
+      width: 100vw;
+      margin: 0;
+      overflow: hidden;
+      background: var(--background, #0f1115);
+    }
+
+    body {
+      font-family: "Tajawal", "Cairo", system-ui, sans-serif;
+      touch-action: manipulation;
+      display: flex;
+      min-height: 100vh;
+      width: 100vw;
+    }
+
+    #app {
+      flex: 1 1 auto;
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+    }
+
+    .pos-shell {
+      flex: 1 1 auto;
+      width: 100vw;
+    }
+  </style>
+  <script src="../lib/mishkah-utils.js"></script>
+  <script src="../lib/mishkah.core.js"></script>
+  <script src="../lib/mishkah-ui.js"></script>
+  <script src="../lib/mishkah-schema.js"></script>
+  <script src="../lib/mishkah.store.js"></script>
+  <script src="../lib/mishkah.simple-store.js"></script>
+  <script src="./pos-simple-loader.js"></script>
+  <script src="./schedule-module-dsl.js"></script>
+  <!-- ❌ pos-mini-db.js REMOVED - using pure mishkah-store -->
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+
+    // Always use localStorage.mishkah_user.brname for branch ID
+    let BRANCH_ID = '';
+    try {
+      const userData = JSON.parse(localStorage.mishkah_user || '{}');
+      BRANCH_ID = (userData.brname || '').trim();
+    } catch (e) {
+      console.error('Failed to parse localStorage.mishkah_user:', e);
+    }
+
+    const MODULE_ID = 'pos';
+
+    if (BRANCH_ID) {
+      window.__POS_BRANCH_ID__ = BRANCH_ID;
+    }
+
+    if (!BRANCH_ID) {
+      document.body.innerHTML = `
+        <main
+          style="
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            color: #f8fafc;
+            text-align:center;
+          "
+        >
+          يرجى اختيار الفرع
+        </main>
+      `;
+    } else {
+      const status = {
+        status: 'loading',
+        startedAt: Date.now(),
+        finishedAt: null,
+        error: null,
+        keys: [],
+        branchId: BRANCH_ID
+      };
+
+      window.__POS_DATA_STATUS__ = status;
+
+      // ✅ Direct mishkah-store initialization (like kds.js)
+      (async function initPosV2() {
+        try {
+          // 0. Fetch session data from server
+
+          try {
+            const sessionResponse = await fetch('/api/session', {
+              credentials: 'include'
+            });
+            if (sessionResponse.ok) {
+              const sessionData = await sessionResponse.json();
+              window.__POS_SESSION__ = sessionData;
+
+            } else {
+              console.warn('⚠️ [POS V2] Session fetch failed:', sessionResponse.status, sessionResponse.statusText);
+              window.__POS_SESSION__ = {};
+            }
+          } catch (sessionErr) {
+            console.warn('⚠️ [POS V2] Session fetch error:', sessionErr);
+            window.__POS_SESSION__ = {};
+          }
+
+          // 1. Fetch schema directly from API
+          const schemaParams = new URLSearchParams({
+            branch: BRANCH_ID,
+            module: MODULE_ID
+          });
+          const schemaResponse = await fetch(window.basedomain + `/api/schema?${schemaParams.toString()}`);
+          const schemaPayload = await schemaResponse.json();
+          const moduleEntry = schemaPayload?.modules?.[MODULE_ID];
+
+          if (!moduleEntry || !moduleEntry.schema) {
+            throw new Error(`Schema for module "${MODULE_ID}" not found`);
+          }
+
+          window.__POS_MODULE_ENTRY__ = moduleEntry;
+
+          // 2. Define tables to watch
+          const tables = [
+            // ✅ CRITICAL: order_header and order_line for static KDS tabs (prep, expo, handoff)
+            'order_header',
+            'order_line',
+            'order_payment',
+            'pos_shift',
+            'menu_items',
+            'menu_categories',
+            'dining_tables',
+            'delivery_drivers',
+            'payment_methods',
+            'customer_profiles',
+            // ✅ Job order tables (for dynamic KDS station tabs)
+            'job_order_header',
+            'job_order_detail',
+            'job_order_detail_modifier',
+            'job_order_status_history',  // ✅ CRITICAL: for status tracking
+            'job_order_batch',  // ✅ CRITICAL: for batch grouping in KDS
+            'kitchen_sections',
+            'category_sections'
+            , 'order_schedule'
+            , 'order_schedule_line'
+            , 'order_schedule_tables'
+            , 'order_schedule_payment',
+            'ui_texts'
+            // ✅ Added for dynamic translations
+          ];
+
+          // 3. Load initial data from REST API FIRST (to bootstrap store)
+          let initialTables = {};
+          const loadFromRestApi = async () => {
+            try {
+              initialTables = await window.loadPosData(BRANCH_ID, MODULE_ID);
+              window.database = initialTables;
+              status.status = Object.keys(initialTables).length > 0 ? 'ready' : 'idle';
+              status.keys = Object.keys(initialTables);
+            } catch (error) {
+              console.error('❌ [POS V2] REST API load failed:', error);
+              window.database = {};
+              status.status = 'error';
+              initialTables = {};
+            }
+          };
+
+          await loadFromRestApi();
+
+          // 4. Use createDBAuto directly with bootstrapData
+          const db = window.createDBAuto(moduleEntry.schema, tables, {
+            branchId: BRANCH_ID,
+            moduleId: MODULE_ID,
+            role: 'pos-v2',
+            autoReconnect: true,
+            historyLimit: 200,
+            logger: console,
+            bootstrapData: initialTables // ✅ Pass initial data to avoid redundant fetch
+          });
+
+          window.__POS_DB__ = db;
+
+          await db.ready();
+          status.finishedAt = Date.now();
+
+          // 5. Setup watchers to update window.database in real-time
+          const registeredNames = typeof db.getRegisteredNames === 'function'
+            ? db.getRegisteredNames()
+            : Object.keys(db.config?.objects || {});
+
+          registeredNames.forEach(name => {
+            if (name === 'pos_database') return;
+            db.watch(name, (rows, meta) => {
+              const tableName = meta?.table || name;
+              if (!window.database) window.database = {};
+              window.database[tableName] = rows;
+              // console.log(`🔄 [POS V2] Table "${tableName}" updated:`, rows.length, 'rows');
+            });
+          });
+
+          // 6. Load posv2.js (with cache-busting timestamp)
+
+          const script = document.createElement('script');
+          script.src = `./posv3.js?v=${Date.now()}`; // ✅ Force reload (bypass cache)
+          document.head.appendChild(script);
+
+        } catch (error) {
+          console.error('❌ [POS V2] Initialization failed:', error);
+          window.database = {};
+          status.status = 'error';
+          status.error = error;
+          status.finishedAt = Date.now();
+        }
+      })();
+    }
+  </script>
+</body>
+
+</html>

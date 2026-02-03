@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عيادات دكتورة مروة حسين للعلاج الطبيعي | Dr. Marwa Hussein Physical Therapy Clinics</title>
+  <meta name="description" content="عيادات متخصصة في العلاج الطبيعي وإعادة التأهيل | Specialized Physical Therapy and Rehabilitation Clinics">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/custom-styles.css?v=2025.11.21">
+
+  <!-- Load Mishkah Libraries -->
+  <script src="../../lib/mishkah-utils.js?v=2025.11.21"></script>
+  <script src="../../lib/mishkah.core.js?v=2025.11.21"></script>
+  <script src="../../lib/mishkah-ui.js?v=2025.11.21"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- Main Application Script -->
+  <script>
+    (async function() {
+      const M = Mishkah;
+      const D = M.DSL;
+      const UI = M.UI;
+      const { tw, token } = M.utils.twcss;
+
+      // Application State
+      const db = {
+        env: {
+          lang: 'ar',
+          dir: 'rtl',
+          theme: 'light'
+        },
+        data: {
+          currentPage: 'home',
+          showBookingForm: false,
+          currentSlide: 0,
+          slides: [
+            {
+              id: 1,
+              title_ar: 'رعاية صحية متميزة',
+              title_en: 'Exceptional Healthcare',
+              subtitle_ar: 'نقدم أحدث تقنيات العلاج الطبيعي',
+              subtitle_en: 'We provide the latest physical therapy techniques',
+              cta_ar: 'احجز موعدك الآن',
+              cta_en: 'Book Your Appointment',
+              image: 'https://paspapt.com/wp-content/uploads/2022/08/manual-physical-therapy-nyc.jpg'
+            },
+            {
+              id: 2,
+              title_ar: 'خبرة 15 عاماً',
+              title_en: '15 Years of Experience',
+              subtitle_ar: 'فريق طبي محترف ومتخصص',
+              subtitle_en: 'Professional and specialized medical team',
+              cta_ar: 'تعرف على فريقنا',
+              cta_en: 'Meet Our Team',
+              image: 'https://paadultschool.org/wp-content/uploads/2021/03/Certified-Physical-Therapy-Aide-Voucher-Included_GES189-1024x512.jpg'
+            },
+            {
+              id: 3,
+              title_ar: 'تعافي سريع وفعال',
+              title_en: 'Fast and Effective Recovery',
+              subtitle_ar: 'برامج علاجية مخصصة لكل حالة',
+              subtitle_en: 'Customized treatment programs for each case',
+              cta_ar: 'اكتشف خدماتنا',
+              cta_en: 'Discover Our Services',
+              image: 'https://images.bizbuysell.com/shared/listings/232/2329315/edbddc6a-eda1-4f07-b14a-6c6a87bc48e2-W768.jpg'
+            }
+          ],
+          services: [
+            {
+              id: 1,
+              name_ar: 'العلاج الطبيعي للعمود الفقري',
+              name_en: 'Spinal Physical Therapy',
+              description_ar: 'علاج متخصص لآلام الظهر والرقبة وتصحيح القوام',
+              description_en: 'Specialized treatment for back and neck pain and posture correction',
+              icon: '🦴'
+            },
+            {
+              id: 2,
+              name_ar: 'العلاج الطبيعي للمفاصل',
+              name_en: 'Joint Physical Therapy',
+              description_ar: 'علاج التهابات المفاصل وإصابات الأربطة',
+              description_en: 'Treatment of arthritis and ligament injuries',
+              icon: '🦵'
+            },
+            {
+              id: 3,
+              name_ar: 'العلاج الطبيعي الرياضي',
+              name_en: 'Sports Physical Therapy',
+              description_ar: 'تأهيل الإصابات الرياضية والوقاية منها',
+              description_en: 'Sports injury rehabilitation and prevention',
+              icon: '⚽'
+            },
+            {
+              id: 4,
+              name_ar: 'العلاج الطبيعي للأطفال',
+              name_en: 'Pediatric Physical Therapy',
+              description_ar: 'علاج مشاكل النمو الحركي عند الأطفال',
+              description_en: 'Treatment of developmental motor problems in children',
+              icon: '👶'
+            },
+            {
+              id: 5,
+              name_ar: 'العلاج الطبيعي لكبار السن',
+              name_en: 'Geriatric Physical Therapy',
+              description_ar: 'علاج خاص لكبار السن لتحسين الحركة والتوازن',
+              description_en: 'Special treatment for elderly to improve mobility and balance',
+              icon: '👴'
+            },
+            {
+              id: 6,
+              name_ar: 'العلاج بالتمارين العلاجية',
+              name_en: 'Therapeutic Exercise',
+              description_ar: 'برامج تمارين مخصصة لكل حالة',
+              description_en: 'Customized exercise programs for each case',
+              icon: '🏋️'
+            }
+          ],
+          doctors: [
+            {
+              id: 1,
+              name_ar: 'د. مروة حسين',
+              name_en: 'Dr. Marwa Hussein',
+              specialization_ar: 'أخصائية العلاج الطبيعي وإعادة التأهيل',
+              specialization_en: 'Physical Therapy and Rehabilitation Specialist',
+              experience: 15,
+              bio_ar: 'خبرة 15 عاماً في مجال العلاج الطبيعي وإعادة التأهيل، حاصلة على دكتوراه في العلاج الطبيعي',
+              bio_en: '15 years of experience in physical therapy and rehabilitation, PhD holder in Physical Therapy',
+              image: 'images/doctor-1.jpg'
+            }
+          ],
+          bookingForm: {
+            firstName: '',
+            lastName: '',
+            phone: '',
+            email: '',
+            serviceId: '',
+            preferredDate: '',
+            preferredTime: '',
+            notes: '',
+            bookingStep: 1,
+            selectedDate: null,
+            selectedTime: null
+          },
+          // Mock booked appointments (some slots are already taken)
+          bookedSlots: [
+            { date: '2024-01-16', time: '17:00' },
+            { date: '2024-01-16', time: '18:30' },
+            { date: '2024-01-17', time: '17:30' },
+            { date: '2024-01-17', time: '19:00' },
+            { date: '2024-01-18', time: '17:00' },
+            { date: '2024-01-18', time: '18:00' },
+            { date: '2024-01-19', time: '20:00' }
+          ],
+          testimonials: [
+            {
+              id: 1,
+              name_ar: 'أحمد محمد',
+              name_en: 'Ahmed Mohamed',
+              text_ar: 'تجربة رائعة مع الدكتورة مروة، علاج احترافي ونتائج ممتازة',
+              text_en: 'Wonderful experience with Dr. Marwa, professional treatment and excellent results',
+              rating: 5
+            },
+            {
+              id: 2,
+              name_ar: 'فاطمة علي',
+              name_en: 'Fatima Ali',
+              text_ar: 'أفضل عيادة علاج طبيعي جربتها، فريق متعاون وخدمة متميزة',
+              text_en: 'Best physical therapy clinic I have tried, cooperative team and distinguished service',
+              rating: 5
+            },
+            {
+              id: 3,
+              name_ar: 'محمود سالم',
+              name_en: 'Mahmoud Salem',
+              text_ar: 'شفيت من آلام الظهر المزمنة بفضل العلاج المتخصص',
+              text_en: 'I recovered from chronic back pain thanks to the specialized treatment',
+              rating: 5
+            }
+          ]
+        },
+        i18n: {
+          dict: {
+            // Navigation
+            'nav.home': { ar: 'الرئيسية', en: 'Home' },
+            'nav.services': { ar: 'الخدمات', en: 'Services' },
+            'nav.about': { ar: 'من نحن', en: 'About Us' },
+            'nav.contact': { ar: 'اتصل بنا', en: 'Contact Us' },
+            'nav.book': { ar: 'احجز الآن', en: 'Book Now' },
+
+            // Hero Section
+            'hero.title': { ar: 'عيادات دكتورة مروة حسين', en: 'Dr. Marwa Hussein Clinics' },
+            'hero.subtitle': { ar: 'للعلاج الطبيعي وإعادة التأهيل', en: 'For Physical Therapy and Rehabilitation' },
+            'hero.description': { ar: 'نقدم أحدث تقنيات العلاج الطبيعي بأيدي خبراء متخصصين', en: 'We provide the latest physical therapy techniques by specialized experts' },
+            'hero.cta': { ar: 'احجز موعدك الآن', en: 'Book Your Appointment' },
+
+            // Services Section
+            'services.title': { ar: 'خدماتنا', en: 'Our Services' },
+            'services.subtitle': { ar: 'نقدم مجموعة متكاملة من خدمات العلاج الطبيعي', en: 'We offer a comprehensive range of physical therapy services' },
+
+            // About Section
+            'about.title': { ar: 'من نحن', en: 'About Us' },
+            'about.description': { ar: 'عيادات متخصصة في العلاج الطبيعي وإعادة التأهيل تحت إشراف الدكتورة مروة حسين. نلتزم بتقديم أفضل رعاية صحية باستخدام أحدث التقنيات والأساليب العلاجية.', en: 'Specialized clinics in physical therapy and rehabilitation under the supervision of Dr. Marwa Hussein. We are committed to providing the best healthcare using the latest technologies and therapeutic methods.' },
+            'about.experience': { ar: 'سنوات من الخبرة', en: 'Years of Experience' },
+            'about.patients': { ar: 'مريض سعيد', en: 'Happy Patients' },
+            'about.success': { ar: 'نسبة نجاح', en: 'Success Rate' },
+
+            // Testimonials
+            'testimonials.title': { ar: 'آراء المرضى', en: 'Patient Reviews' },
+            'testimonials.subtitle': { ar: 'ماذا يقول مرضانا عنا', en: 'What our patients say about us' },
+
+            // Contact Section
+            'contact.title': { ar: 'اتصل بنا', en: 'Contact Us' },
+            'contact.phone': { ar: 'الهاتف', en: 'Phone' },
+            'contact.email': { ar: 'البريد الإلكتروني', en: 'Email' },
+            'contact.address': { ar: 'العنوان', en: 'Address' },
+            'contact.hours': { ar: 'ساعات العمل', en: 'Working Hours' },
+
+            // Booking Form
+            'booking.title': { ar: 'احجز موعدك', en: 'Book Your Appointment' },
+            'booking.firstName': { ar: 'الاسم الأول', en: 'First Name' },
+            'booking.lastName': { ar: 'الاسم الأخير', en: 'Last Name' },
+            'booking.phone': { ar: 'رقم الهاتف', en: 'Phone Number' },
+            'booking.email': { ar: 'البريد الإلكتروني', en: 'Email' },
+            'booking.service': { ar: 'الخدمة المطلوبة', en: 'Required Service' },
+            'booking.selectService': { ar: 'اختر الخدمة', en: 'Select Service' },
+            'booking.date': { ar: 'التاريخ المفضل', en: 'Preferred Date' },
+            'booking.time': { ar: 'الوقت المفضل', en: 'Preferred Time' },
+            'booking.notes': { ar: 'ملاحظات', en: 'Notes' },
+            'booking.submit': { ar: 'إرسال الطلب', en: 'Submit Request' },
+            'booking.cancel': { ar: 'إلغاء', en: 'Cancel' },
+            'booking.success': { ar: 'تم إرسال طلبك بنجاح! سنتواصل معك قريباً', en: 'Your request has been sent successfully! We will contact you soon' },
+
+            // Footer
+            'footer.rights': { ar: 'جميع الحقوق محفوظة', en: 'All Rights Reserved' },
+            'footer.clinic': { ar: 'عيادات دكتورة مروة حسين للعلاج الطبيعي', en: 'Dr. Marwa Hussein Physical Therapy Clinics' }
+          }
+        }
+      };
+
+      // Translation Helper
+      const t = function(key) {
+        const lang = db.env.lang || 'ar';
+        const dict = db.i18n.dict || {};
+        return dict[key] && dict[key][lang] ? dict[key][lang] : key;
+      };
+
+      // Get translated field
+      const tf = function(obj, field) {
+        const lang = db.env.lang || 'ar';
+        return obj[field + '_' + lang] || obj[field] || '';
+      };
+
+      // Generate available dates (next 5 days, excluding Friday and Saturday)
+      const generateAvailableDates = function() {
+        const dates = [];
+        const today = new Date();
+        let daysAdded = 0;
+        let currentDay = 0;
+
+        while (daysAdded < 5) {
+          const date = new Date(today);
+          date.setDate(today.getDate() + currentDay);
+          const dayOfWeek = date.getDay();
+
+          // Skip Friday (5) and Saturday (6)
+          if (dayOfWeek !== 5 && dayOfWeek !== 6) {
+            const dayNames = {
+              ar: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+              en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+            };
+            const monthNames = {
+              ar: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+              en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            };
+
+            dates.push({
+              date: date,
+              dateString: date.toISOString().split('T')[0],
+              dayName: {
+                ar: dayNames.ar[dayOfWeek],
+                en: dayNames.en[dayOfWeek]
+              },
+              dayNumber: date.getDate(),
+              monthYear: {
+                ar: monthNames.ar[date.getMonth()] + ' ' + date.getFullYear(),
+                en: monthNames.en[date.getMonth()] + ' ' + date.getFullYear()
+              }
+            });
+            daysAdded++;
+          }
+          currentDay++;
+        }
+
+        return dates;
+      };
+
+      // Generate time slots (5:00 PM to 9:00 PM, every 30 minutes)
+      const generateTimeSlots = function() {
+        const slots = [];
+        const startHour = 17; // 5 PM
+        const endHour = 21;   // 9 PM
+
+        for (let hour = startHour; hour < endHour; hour++) {
+          for (let minute = 0; minute < 60; minute += 30) {
+            const timeString = String(hour).padStart(2, '0') + ':' + String(minute).padStart(2, '0');
+            const displayTime = {
+              ar: (hour > 12 ? hour - 12 : hour) + ':' + String(minute).padStart(2, '0') + ' ' + (hour >= 12 ? 'مساءً' : 'صباحاً'),
+              en: (hour > 12 ? hour - 12 : hour) + ':' + String(minute).padStart(2, '0') + ' ' + (hour >= 12 ? 'PM' : 'AM')
+            };
+            slots.push({
+              time: timeString,
+              display: displayTime
+            });
+          }
+        }
+
+        return slots;
+      };
+
+      // Check if a time slot is booked
+      const isSlotBooked = function(dateString, time, bookedSlots) {
+        return bookedSlots.some(slot => slot.date === dateString && slot.time === time);
+      };
+
+      // Event Handlers - Proper format for mishkah-core
+      const orders = {
+        'lang:switch': {
+          on: ['click'],
+          gkeys: ['lang:switch'],
+          handler: function(event, context) {
+            const target = event.target.closest('[data-lang]');
+            if (!target) return;
+
+            const newLang = target.dataset.lang;
+            const state = context.getState();
+            state.env.lang = newLang;
+            state.env.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.setAttribute('lang', newLang);
+            document.documentElement.setAttribute('dir', state.env.dir);
+            context.rebuild();
+          }
+        },
+
+        'theme:toggle': {
+          on: ['click'],
+          gkeys: ['theme:toggle'],
+          handler: function(event, context) {
+            const state = context.getState();
+            state.env.theme = state.env.theme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', state.env.theme);
+            context.rebuild();
+          }
+        },
+
+        'nav:click': {
+          on: ['click'],
+          gkeys: ['nav:click'],
+          handler: function(event, context) {
+            // Use closest() to find the element with data-page, even if user clicked on child span
+            const target = event.target.closest('[data-page]');
+            if (!target) return; // Exit if no data-page found
+
+            const page = target.dataset.page;
+            const state = context.getState();
+            state.data.currentPage = page;
+
+            // Scroll to section
+            const section = document.getElementById(page);
+            if (section) {
+              section.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            context.rebuild();
+          }
+        },
+
+        'booking:open': {
+          on: ['click'],
+          gkeys: ['booking:open'],
+          handler: function(event, context) {
+            const state = context.getState();
+            state.data.showBookingForm = true;
+            context.rebuild();
+          }
+        },
+
+        'booking:overlay-click': {
+          on: ['click'],
+          gkeys: ['booking:overlay-click'],
+          handler: function(event, context) {
+            // Only close if clicking directly on overlay, not on its children
+            if (event.target.dataset.mGkey === 'booking:overlay-click') {
+              const state = context.getState();
+              state.data.showBookingForm = false;
+              context.rebuild();
+            }
+          }
+        },
+
+        'booking:esc-key': {
+          on: ['keydown'],
+          gkeys: ['booking:esc-key'],
+          handler: function(event, context) {
+            if (event.key === 'Escape' || event.keyCode === 27) {
+              const state = context.getState();
+              if (state.data.showBookingForm) {
+                state.data.showBookingForm = false;
+                context.rebuild();
+              }
+            }
+          }
+        },
+
+        'booking:close': {
+          on: ['click'],
+          gkeys: ['booking:close'],
+          handler: function(event, context) {
+            const state = context.getState();
+            state.data.showBookingForm = false;
+            state.data.bookingForm = {
+              firstName: '',
+              lastName: '',
+              phone: '',
+              email: '',
+              serviceId: '',
+              preferredDate: '',
+              preferredTime: '',
+              notes: '',
+              bookingStep: 1,
+              selectedDate: null,
+              selectedTime: null
+            };
+            context.rebuild();
+          }
+        },
+
+        'booking:select-date': {
+          on: ['click'],
+          gkeys: ['booking:select-date'],
+          handler: function(event, context) {
+            const target = event.target.closest('[data-date]');
+            if (!target) return;
+
+            const dateString = target.dataset.date;
+            const state = context.getState();
+            state.data.bookingForm.selectedDate = dateString;
+            state.data.bookingForm.bookingStep = 2;
+            context.rebuild();
+          }
+        },
+
+        'booking:select-time': {
+          on: ['click'],
+          gkeys: ['booking:select-time'],
+          handler: function(event, context) {
+            const target = event.target.closest('[data-time]');
+            if (!target) return;
+
+            const time = target.dataset.time;
+            const state = context.getState();
+            state.data.bookingForm.selectedTime = time;
+            state.data.bookingForm.bookingStep = 3;
+            context.rebuild();
+          }
+        },
+
+        'booking:back-step': {
+          on: ['click'],
+          gkeys: ['booking:back-step'],
+          handler: function(event, context) {
+            const state = context.getState();
+            if (state.data.bookingForm.bookingStep > 1) {
+              state.data.bookingForm.bookingStep--;
+              if (state.data.bookingForm.bookingStep === 1) {
+                state.data.bookingForm.selectedDate = null;
+                state.data.bookingForm.selectedTime = null;
+              } else if (state.data.bookingForm.bookingStep === 2) {
+                state.data.bookingForm.selectedTime = null;
+              }
+            }
+            context.rebuild();
+          }
+        },
+
+        'booking:input': {
+          on: ['input', 'change'],
+          gkeys: ['booking:input'],
+          handler: function(event, context) {
+            const field = event.target.name;
+            const value = event.target.value;
+            const state = context.getState();
+            state.data.bookingForm[field] = value;
+          }
+        },
+
+        'booking:submit': {
+          on: ['submit'],
+          gkeys: ['booking:submit'],
+          handler: async function(event, context) {
+            event.preventDefault();
+            const state = context.getState();
+            const form = state.data.bookingForm;
+
+            // Validate
+            if (!form.firstName || !form.lastName || !form.phone) {
+              alert(state.env.lang === 'ar' ? 'الرجاء ملء جميع الحقول المطلوبة' : 'Please fill all required fields');
+              return;
+            }
+
+            if (!form.selectedDate || !form.selectedTime) {
+              alert(state.env.lang === 'ar' ? 'الرجاء اختيار التاريخ والوقت' : 'Please select date and time');
+              return;
+            }
+
+            // Prepare booking data
+            const bookingData = {
+              firstName: form.firstName,
+              lastName: form.lastName,
+              phone: form.phone,
+              email: form.email,
+              serviceId: form.serviceId,
+              date: form.selectedDate,
+              time: form.selectedTime,
+              notes: form.notes
+            };
+
+            // Here you would send the data to your backend
+            console.log('Booking submitted:', bookingData);
+
+            // Add to booked slots
+            state.data.bookedSlots.push({
+              date: form.selectedDate,
+              time: form.selectedTime
+            });
+
+            // Show success message
+            alert(t('booking.success'));
+
+            // Close form and reset
+            state.data.showBookingForm = false;
+            state.data.bookingForm = {
+              firstName: '',
+              lastName: '',
+              phone: '',
+              email: '',
+              serviceId: '',
+              preferredDate: '',
+              preferredTime: '',
+              notes: '',
+              bookingStep: 1,
+              selectedDate: null,
+              selectedTime: null
+            };
+            context.rebuild();
+          }
+        },
+
+        'slider:next': {
+          on: ['click'],
+          gkeys: ['slider:next'],
+          handler: function(event, context) {
+            const state = context.getState();
+            state.data.currentSlide = (state.data.currentSlide + 1) % state.data.slides.length;
+            context.rebuild();
+          }
+        },
+
+        'slider:prev': {
+          on: ['click'],
+          gkeys: ['slider:prev'],
+          handler: function(event, context) {
+            const state = context.getState();
+            state.data.currentSlide = state.data.currentSlide === 0
+              ? state.data.slides.length - 1
+              : state.data.currentSlide - 1;
+            context.rebuild();
+          }
+        },
+
+        'slider:goto': {
+          on: ['click'],
+          gkeys: ['slider:goto'],
+          handler: function(event, context) {
+            const target = event.target.closest('[data-slide-index]');
+            if (!target) return;
+
+            const slideIndex = parseInt(target.dataset.slideIndex);
+            const state = context.getState();
+            state.data.currentSlide = slideIndex;
+            context.rebuild();
+          }
+        }
+      };
+
+      // Components
+      function Navbar(db, D) {
+        return D.Containers.Nav({
+          attrs: {
+            class: tw`bg-[var(--card)] shadow-md sticky top-0 z-50 border-b border-[var(--border)]`
+          }
+        }, [
+          D.Containers.Div({
+            attrs: {
+              class: tw`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4`
+            }
+          }, [
+            // Logo
+            D.Containers.Div({ attrs: { class: tw`flex-shrink-0` } }, [
+              D.Text.H2({
+                attrs: {
+                  class: tw`text-xl sm:text-2xl font-bold text-[var(--primary)]`
+                }
+              }, [t('hero.title')])
+            ]),
+
+            // Navigation Links
+            D.Containers.Div({
+              attrs: {
+                class: tw`hidden md:flex items-center gap-6 flex-1 justify-center`
+              }
+            }, [
+              D.Text.A({
+                attrs: {
+                  href: '#home',
+                  'data-m-gkey': 'nav:click',
+                  'data-page': 'home',
+                  class: tw`font-medium transition-colors duration-200 px-3 py-2 rounded-lg ${
+                    db.data.currentPage === 'home'
+                      ? 'text-[var(--primary)] bg-[var(--accent)]'
+                      : 'text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[var(--accent)]'
+                  }`
+                }
+              }, [t('nav.home')]),
+              D.Text.A({
+                attrs: {
+                  href: '#services',
+                  'data-m-gkey': 'nav:click',
+                  'data-page': 'services',
+                  class: tw`font-medium transition-colors duration-200 px-3 py-2 rounded-lg ${
+                    db.data.currentPage === 'services'
+                      ? 'text-[var(--primary)] bg-[var(--accent)]'
+                      : 'text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[var(--accent)]'
+                  }`
+                }
+              }, [t('nav.services')]),
+              D.Text.A({
+                attrs: {
+                  href: '#about',
+                  'data-m-gkey': 'nav:click',
+                  'data-page': 'about',
+                  class: tw`font-medium transition-colors duration-200 px-3 py-2 rounded-lg ${
+                    db.data.currentPage === 'about'
+                      ? 'text-[var(--primary)] bg-[var(--accent)]'
+                      : 'text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[var(--accent)]'
+                  }`
+                }
+              }, [t('nav.about')]),
+              D.Text.A({
+                attrs: {
+                  href: '#contact',
+                  'data-m-gkey': 'nav:click',
+                  'data-page': 'contact',
+                  class: tw`font-medium transition-colors duration-200 px-3 py-2 rounded-lg ${
+                    db.data.currentPage === 'contact'
+                      ? 'text-[var(--primary)] bg-[var(--accent)]'
+                      : 'text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[var(--accent)]'
+                  }`
+                }
+              }, [t('nav.contact')]),
+              UI.Button({
+                attrs: { 'data-m-gkey': 'booking:open' },
+                variant: 'solid',
+                size: 'sm'
+              }, [t('nav.book')])
+            ]),
+
+            // Language Switcher & Theme Toggle
+            D.Containers.Div({ attrs: { class: tw`${token('hstack')} gap-2` } }, [
+              UI.Switcher({
+                attrs: { 'data-m-gkey': 'lang:switch' },
+                value: db.env.lang,
+                options: [
+                  { label: 'ع', value: 'ar', attrs: { 'data-lang': 'ar' } },
+                  { label: 'EN', value: 'en', attrs: { 'data-lang': 'en' } }
+                ]
+              }),
+              UI.Button({
+                attrs: {
+                  'data-m-gkey': 'theme:toggle',
+                  title: db.env.theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'
+                },
+                variant: 'ghost',
+                size: 'sm'
+              }, [db.env.theme === 'dark' ? '🌞' : '🌙'])
+            ])
+          ])
+        ]);
+      }
+
+      function HeroSection(db, D) {
+        const currentSlide = db.data.slides[db.data.currentSlide];
+        const slidesCount = db.data.slides.length;
+
+        return D.Containers.Section({
+          attrs: {
+            id: 'home',
+            class: 'hero-slider-container'
+          }
+        }, [
+          // Slider Content with Background Image
+          D.Containers.Div({
+            attrs: {
+              class: tw`relative min-h-[85vh] flex items-center justify-center px-4 py-20 overflow-hidden`,
+              style: 'background-image: url(' + currentSlide.image + '); background-size: cover; background-position: center; background-repeat: no-repeat;'
+            }
+          }, [
+            // Dark Overlay for better text readability
+            D.Containers.Div({
+              attrs: {
+                class: 'hero-overlay',
+                style: 'position: absolute; inset: 0; background: linear-gradient(135deg, rgba(8, 145, 178, 0.85) 0%, rgba(6, 95, 115, 0.75) 100%); z-index: 1;'
+              }
+            }),
+
+            // Slide Content (with animation)
+            D.Containers.Div({
+              attrs: {
+                key: currentSlide.id,
+                class: 'slide-content max-w-5xl mx-auto text-center',
+                style: 'position: relative; z-index: 2;'
+              }
+            }, [
+              // Title
+              D.Text.H1({
+                attrs: {
+                  class: 'slide-title text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6'
+                }
+              }, [tf(currentSlide, 'title')]),
+
+              // Subtitle
+              D.Text.P({
+                attrs: {
+                  class: 'slide-subtitle text-xl sm:text-2xl lg:text-3xl text-white/95 font-medium max-w-3xl mx-auto mb-10'
+                }
+              }, [tf(currentSlide, 'subtitle')]),
+
+              // CTA Button
+              D.Forms.Button({
+                attrs: {
+                  class: 'btn btn-hero',
+                  'data-m-gkey': 'booking:open'
+                }
+              }, [tf(currentSlide, 'cta') + ' →'])
+            ]),
+
+            // Navigation Arrows
+            D.Containers.Div({ attrs: { class: 'slider-controls' } }, [
+              // Previous Button
+              D.Forms.Button({
+                attrs: {
+                  class: 'slider-arrow slider-arrow-prev',
+                  'data-m-gkey': 'slider:prev',
+                  'aria-label': 'Previous Slide'
+                }
+              }, ['‹']),
+
+              // Next Button
+              D.Forms.Button({
+                attrs: {
+                  class: 'slider-arrow slider-arrow-next',
+                  'data-m-gkey': 'slider:next',
+                  'aria-label': 'Next Slide'
+                }
+              }, ['›'])
+            ]),
+
+            // Dots Indicator
+            D.Containers.Div({
+              attrs: {
+                class: 'slider-dots'
+              }
+            }, db.data.slides.map((slide, index) =>
+              D.Forms.Button({
+                attrs: {
+                  key: slide.id,
+                  class: `slider-dot ${index === db.data.currentSlide ? 'active' : ''}`,
+                  'data-m-gkey': 'slider:goto',
+                  'data-slide-index': String(index),
+                  'aria-label': `Go to slide ${index + 1}`
+                }
+              }, [])
+            ))
+          ])
+        ]);
+      }
+
+      function ServicesSection(db, D) {
+        return D.Containers.Section({
+          attrs: {
+            id: 'services',
+            class: tw`py-20 px-4 bg-[var(--background)]`
+          }
+        }, [
+          D.Containers.Div({ attrs: { class: tw`max-w-7xl mx-auto` } }, [
+            D.Containers.Div({ attrs: { class: tw`text-center mb-16` } }, [
+              D.Text.H2({
+                attrs: {
+                  class: tw`text-3xl sm:text-4xl font-bold text-[var(--foreground)] mb-4`
+                }
+              }, [t('services.title')]),
+              D.Text.P({
+                attrs: {
+                  class: tw`text-lg text-[var(--muted-foreground)] max-w-2xl mx-auto`
+                }
+              }, [t('services.subtitle')])
+            ]),
+            D.Containers.Div({
+              attrs: {
+                class: tw`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8`
+              }
+            },
+              db.data.services.map(function(service) {
+                return D.Containers.Div({
+                  attrs: {
+                    key: service.id,
+                    class: tw`${token('card')} p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1`
+                  }
+                }, [
+                  D.Text.Span({
+                    attrs: {
+                      class: tw`text-5xl mb-4 block`
+                    }
+                  }, [service.icon]),
+                  D.Text.H3({
+                    attrs: {
+                      class: tw`text-xl font-bold text-[var(--foreground)] mb-3`
+                    }
+                  }, [tf(service, 'name')]),
+                  D.Text.P({
+                    attrs: {
+                      class: tw`text-[var(--muted-foreground)]`
+                    }
+                  }, [tf(service, 'description')])
+                ]);
+              })
+            )
+          ])
+        ]);
+      }
+
+      function AboutSection(db, D) {
+        return D.Containers.Section({ attrs: { id: 'about', class: 'about-section' } }, [
+          D.Containers.Div({ attrs: { class: 'section-header' } }, [
+            D.Text.H2({ attrs: { class: 'section-title' } }, [t('about.title')])
+          ]),
+          D.Containers.Div({ attrs: { class: 'about-content' } }, [
+            D.Containers.Div({ attrs: { class: 'about-text' } }, [
+              D.Text.P({}, [t('about.description')])
+            ]),
+            D.Containers.Div({ attrs: { class: 'about-stats' } }, [
+              D.Containers.Div({ attrs: { class: 'stat' } }, [
+                D.Text.H3({}, ['15+']),
+                D.Text.P({}, [t('about.experience')])
+              ]),
+              D.Containers.Div({ attrs: { class: 'stat' } }, [
+                D.Text.H3({}, ['5000+']),
+                D.Text.P({}, [t('about.patients')])
+              ]),
+              D.Containers.Div({ attrs: { class: 'stat' } }, [
+                D.Text.H3({}, ['98%']),
+                D.Text.P({}, [t('about.success')])
+              ])
+            ])
+          ])
+        ]);
+      }
+
+      function TestimonialsSection(db, D) {
+        return D.Containers.Section({ attrs: { class: 'testimonials-section' } }, [
+          D.Containers.Div({ attrs: { class: 'section-header' } }, [
+            D.Text.H2({ attrs: { class: 'section-title' } }, [t('testimonials.title')]),
+            D.Text.P({ attrs: { class: 'section-subtitle' } }, [t('testimonials.subtitle')])
+          ]),
+          D.Containers.Div({ attrs: { class: 'testimonials-grid' } },
+            db.data.testimonials.map(function(testimonial) {
+              return D.Containers.Div({ attrs: { class: 'testimonial-card', key: testimonial.id } }, [
+                D.Containers.Div({ attrs: { class: 'testimonial-rating' } }, [
+                  D.Text.Span({}, ['⭐'.repeat(testimonial.rating)])
+                ]),
+                D.Text.P({ attrs: { class: 'testimonial-text' } }, [tf(testimonial, 'text')]),
+                D.Text.Strong({ attrs: { class: 'testimonial-name' } }, [tf(testimonial, 'name')])
+              ]);
+            })
+          )
+        ]);
+      }
+
+      function ContactSection(db, D) {
+        const addressAr = 'مدينة العبور - الحي التاسع - ميديكال ديستنيشن - الدور الثاني S51';
+        const addressEn = 'Obour City - 9th District - Medical Destination - 2nd Floor S51';
+        const mapUrl = 'https://maps.google.com/maps/search/مدينة%20العبور%20-%20الحي%20التاسع%20-%20ميديكال%20ديستنيشن%20-%20الدور%20الثاني%20S51';
+
+        return D.Containers.Section({ attrs: { id: 'contact', class: 'contact-section' } }, [
+          D.Containers.Div({ attrs: { class: 'section-header' } }, [
+            D.Text.H2({ attrs: { class: 'section-title' } }, [t('contact.title')])
+          ]),
+          D.Containers.Div({ attrs: { class: 'contact-grid' } }, [
+            D.Containers.Div({ attrs: { class: 'contact-item' } }, [
+              D.Text.Span({ attrs: { class: 'contact-icon' } }, ['📞']),
+              D.Text.H3({}, [t('contact.phone')]),
+              D.Text.A({ attrs: { href: 'tel:+201066558085', style: 'text-decoration: none; color: inherit;' } }, ['+20 10 66558085'])
+            ]),
+            D.Containers.Div({ attrs: { class: 'contact-item' } }, [
+              D.Text.Span({ attrs: { class: 'contact-icon' } }, ['✉️']),
+              D.Text.H3({}, [t('contact.email')]),
+              D.Text.A({ attrs: { href: 'mailto:info@marwaclinic.com', style: 'text-decoration: none; color: inherit;' } }, ['info@marwaclinic.com'])
+            ]),
+            D.Containers.Div({ attrs: { class: 'contact-item' } }, [
+              D.Text.Span({ attrs: { class: 'contact-icon' } }, ['📍']),
+              D.Text.H3({}, [t('contact.address')]),
+              D.Text.A({
+                attrs: {
+                  href: mapUrl,
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                  style: 'text-decoration: none; color: inherit;'
+                }
+              }, [db.env.lang === 'ar' ? addressAr : addressEn])
+            ]),
+            D.Containers.Div({ attrs: { class: 'contact-item' } }, [
+              D.Text.Span({ attrs: { class: 'contact-icon' } }, ['🕐']),
+              D.Text.H3({}, [t('contact.hours')]),
+              D.Text.P({}, [db.env.lang === 'ar' ? 'السبت - الخميس: 8 صباحاً - 8 مساءً' : 'Saturday - Thursday: 8 AM - 8 PM'])
+            ])
+          ]),
+          // Google Maps Embed
+          D.Containers.Div({ attrs: { class: 'map-container', style: 'margin-top: 2rem; border-radius: 8px; overflow: hidden; height: 400px;' } }, [
+            D.Media.Iframe({
+              attrs: {
+                src: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.123456789!2d31.4554!3d30.2163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDEyJzU4LjciTiAzMcKwMjcnMTkuNCJF!5e0!3m2!1sen!2seg!4v1234567890',
+                width: '100%',
+                height: '100%',
+                style: 'border:0;',
+                allowfullscreen: '',
+                loading: 'lazy',
+                referrerpolicy: 'no-referrer-when-downgrade'
+              }
+            })
+          ])
+        ]);
+      }
+
+      function BookingForm(db, D) {
+        if (!db.data.showBookingForm) return null;
+
+        const lang = db.env.lang;
+        const bookingStep = db.data.bookingForm.bookingStep || 1;
+        const availableDates = generateAvailableDates();
+        const timeSlots = generateTimeSlots();
+        const selectedDate = db.data.bookingForm.selectedDate;
+        const selectedTime = db.data.bookingForm.selectedTime;
+
+        // Step 1: Select Date
+        const DateSelectionStep = function() {
+          return D.Containers.Div({ attrs: { class: 'appointment-booking-container' } }, [
+            D.Text.H3({ attrs: { class: 'times-section-title' } }, [
+              lang === 'ar' ? 'اختر التاريخ المناسب' : 'Select a Date'
+            ]),
+            D.Containers.Div({ attrs: { class: 'dates-grid' } },
+              availableDates.map(function(dateObj) {
+                return D.Containers.Div({
+                  attrs: {
+                    key: dateObj.dateString,
+                    class: 'date-card' + (selectedDate === dateObj.dateString ? ' selected' : ''),
+                    'data-m-gkey': 'booking:select-date',
+                    'data-date': dateObj.dateString
+                  }
+                }, [
+                  D.Text.Span({ attrs: { class: 'date-day-name' } }, [dateObj.dayName[lang]]),
+                  D.Text.Span({ attrs: { class: 'date-day-number' } }, [String(dateObj.dayNumber)]),
+                  D.Text.Span({ attrs: { class: 'date-month-year' } }, [dateObj.monthYear[lang]])
+                ]);
+              })
+            )
+          ]);
+        };
+
+        // Step 2: Select Time
+        const TimeSelectionStep = function() {
+          if (!selectedDate) return null;
+
+          const selectedDateObj = availableDates.find(d => d.dateString === selectedDate);
+          const dateDisplay = selectedDateObj
+            ? (selectedDateObj.dayName[lang] + ' ' + selectedDateObj.dayNumber + ' ' + selectedDateObj.monthYear[lang])
+            : selectedDate;
+
+          return D.Containers.Div({ attrs: { class: 'appointment-booking-container' } }, [
+            D.Containers.Div({ attrs: { class: 'booking-summary' } }, [
+              D.Text.Span({ attrs: { class: 'booking-summary-title' } }, [
+                lang === 'ar' ? '📅 التاريخ المحدد' : '📅 Selected Date'
+              ]),
+              D.Text.Span({ attrs: { class: 'booking-summary-value', style: 'font-size: 1.125rem;' } }, [dateDisplay])
+            ]),
+
+            D.Containers.Div({ attrs: { class: 'times-section' } }, [
+              D.Text.H3({ attrs: { class: 'times-section-title' } }, [
+                lang === 'ar' ? 'اختر الوقت المناسب' : 'Select a Time'
+              ]),
+              D.Containers.Div({ attrs: { class: 'times-grid' } },
+                timeSlots.map(function(slot) {
+                  const isBooked = isSlotBooked(selectedDate, slot.time, db.data.bookedSlots);
+                  const isSelected = selectedTime === slot.time;
+                  const classes = 'time-slot' +
+                    (isBooked ? ' booked' : '') +
+                    (isSelected ? ' selected' : '');
+
+                  return D.Containers.Div({
+                    attrs: {
+                      key: slot.time,
+                      class: classes,
+                      'data-m-gkey': isBooked ? '' : 'booking:select-time',
+                      'data-time': slot.time
+                    }
+                  }, [
+                    D.Text.Span({}, [slot.display[lang]])
+                  ]);
+                })
+              )
+            ]),
+
+            D.Containers.Div({ attrs: { class: 'form-actions', style: 'margin-top: 2rem;' } }, [
+              D.Forms.Button({
+                attrs: {
+                  type: 'button',
+                  class: 'btn btn-secondary',
+                  'data-m-gkey': 'booking:back-step'
+                }
+              }, [lang === 'ar' ? '← رجوع' : '← Back'])
+            ])
+          ]);
+        };
+
+        // Step 3: Contact Information
+        const ContactInfoStep = function() {
+          if (!selectedDate || !selectedTime) return null;
+
+          const selectedDateObj = availableDates.find(d => d.dateString === selectedDate);
+          const selectedTimeObj = timeSlots.find(t => t.time === selectedTime);
+          const dateDisplay = selectedDateObj
+            ? (selectedDateObj.dayName[lang] + ' ' + selectedDateObj.dayNumber + ' ' + selectedDateObj.monthYear[lang])
+            : selectedDate;
+
+          return D.Containers.Div({ attrs: { class: 'appointment-booking-container' } }, [
+            D.Containers.Div({ attrs: { class: 'booking-summary' } }, [
+              D.Text.Span({ attrs: { class: 'booking-summary-title' } }, [
+                lang === 'ar' ? 'ملخص الحجز' : 'Booking Summary'
+              ]),
+              D.Containers.Div({ attrs: { class: 'booking-summary-details' } }, [
+                D.Containers.Div({ attrs: { class: 'booking-summary-item' } }, [
+                  D.Text.Span({ attrs: { class: 'booking-summary-label' } }, [
+                    lang === 'ar' ? 'التاريخ:' : 'Date:'
+                  ]),
+                  D.Text.Span({ attrs: { class: 'booking-summary-value' } }, [dateDisplay])
+                ]),
+                D.Containers.Div({ attrs: { class: 'booking-summary-item' } }, [
+                  D.Text.Span({ attrs: { class: 'booking-summary-label' } }, [
+                    lang === 'ar' ? 'الوقت:' : 'Time:'
+                  ]),
+                  D.Text.Span({ attrs: { class: 'booking-summary-value' } }, [
+                    selectedTimeObj ? selectedTimeObj.display[lang] : selectedTime
+                  ])
+                ])
+              ])
+            ]),
+
+            D.Forms.Form({ attrs: { class: 'booking-form', 'data-m-gkey': 'booking:submit', style: 'margin-top: 2rem;' } }, [
+              D.Containers.Div({ attrs: { class: 'form-row' } }, [
+                D.Containers.Div({ attrs: { class: 'form-group' } }, [
+                  D.Forms.Label({}, [t('booking.firstName') + ' *']),
+                  D.Inputs.Input({
+                    attrs: {
+                      type: 'text',
+                      name: 'firstName',
+                      value: db.data.bookingForm.firstName,
+                      required: true,
+                      'data-m-gkey': 'booking:input',
+                      class: 'form-input'
+                    }
+                  })
+                ]),
+                D.Containers.Div({ attrs: { class: 'form-group' } }, [
+                  D.Forms.Label({}, [t('booking.lastName') + ' *']),
+                  D.Inputs.Input({
+                    attrs: {
+                      type: 'text',
+                      name: 'lastName',
+                      value: db.data.bookingForm.lastName,
+                      required: true,
+                      'data-m-gkey': 'booking:input',
+                      class: 'form-input'
+                    }
+                  })
+                ])
+              ]),
+
+              D.Containers.Div({ attrs: { class: 'form-row' } }, [
+                D.Containers.Div({ attrs: { class: 'form-group' } }, [
+                  D.Forms.Label({}, [t('booking.phone') + ' *']),
+                  D.Inputs.Input({
+                    attrs: {
+                      type: 'tel',
+                      name: 'phone',
+                      value: db.data.bookingForm.phone,
+                      required: true,
+                      'data-m-gkey': 'booking:input',
+                      class: 'form-input'
+                    }
+                  })
+                ]),
+                D.Containers.Div({ attrs: { class: 'form-group' } }, [
+                  D.Forms.Label({}, [t('booking.email')]),
+                  D.Inputs.Input({
+                    attrs: {
+                      type: 'email',
+                      name: 'email',
+                      value: db.data.bookingForm.email,
+                      'data-m-gkey': 'booking:input',
+                      class: 'form-input'
+                    }
+                  })
+                ])
+              ]),
+
+              D.Containers.Div({ attrs: { class: 'form-group' } }, [
+                D.Forms.Label({}, [t('booking.service')]),
+                D.Inputs.Select({
+                  attrs: {
+                    name: 'serviceId',
+                    'data-m-gkey': 'booking:input',
+                    class: 'form-input'
+                  }
+                }, [
+                  D.Inputs.Option({ attrs: { value: '' } }, [t('booking.selectService')]),
+                  ...db.data.services.map(function(service) {
+                    return D.Inputs.Option({
+                      attrs: {
+                        value: service.id,
+                        selected: db.data.bookingForm.serviceId == service.id
+                      }
+                    }, [tf(service, 'name')]);
+                  })
+                ])
+              ]),
+
+              D.Containers.Div({ attrs: { class: 'form-group' } }, [
+                D.Forms.Label({}, [t('booking.notes')]),
+                D.Inputs.Textarea({
+                  attrs: {
+                    name: 'notes',
+                    rows: 4,
+                    'data-m-gkey': 'booking:input',
+                    class: 'form-input'
+                  }
+                }, [db.data.bookingForm.notes])
+              ]),
+
+              D.Containers.Div({ attrs: { class: 'form-actions' } }, [
+                D.Forms.Button({
+                  attrs: {
+                    type: 'button',
+                    class: 'btn btn-secondary',
+                    'data-m-gkey': 'booking:back-step'
+                  }
+                }, [lang === 'ar' ? '← رجوع' : '← Back']),
+                D.Forms.Button({
+                  attrs: {
+                    type: 'submit',
+                    class: 'btn btn-primary'
+                  }
+                }, [t('booking.submit') + ' ✓'])
+              ])
+            ])
+          ]);
+        };
+
+        // Determine which step to show
+        let stepContent;
+        if (bookingStep === 1) {
+          stepContent = DateSelectionStep();
+        } else if (bookingStep === 2) {
+          stepContent = TimeSelectionStep();
+        } else if (bookingStep === 3) {
+          stepContent = ContactInfoStep();
+        }
+
+        // Step indicator
+        const StepIndicator = function() {
+          const steps = [
+            { number: 1, label: { ar: 'التاريخ', en: 'Date' } },
+            { number: 2, label: { ar: 'الوقت', en: 'Time' } },
+            { number: 3, label: { ar: 'البيانات', en: 'Info' } }
+          ];
+
+          return D.Containers.Div({ attrs: { class: 'booking-step-indicator' } },
+            steps.map(function(step) {
+              const isActive = bookingStep === step.number;
+              const isCompleted = bookingStep > step.number;
+              const classes = 'booking-step' +
+                (isActive ? ' active' : '') +
+                (isCompleted ? ' completed' : '');
+
+              return D.Containers.Div({
+                attrs: { key: step.number, class: classes }
+              }, [
+                D.Text.Span({ attrs: { class: 'booking-step-number' } }, [String(step.number)]),
+                D.Text.Span({ attrs: { class: 'booking-step-text' } }, [step.label[lang]])
+              ]);
+            })
+          );
+        };
+
+        return D.Containers.Div({
+          attrs: {
+            class: 'modal-overlay',
+            'data-m-gkey': 'booking:overlay-click'
+          }
+        }, [
+          D.Containers.Div({
+            attrs: {
+              class: 'modal-content booking-modal',
+              style: 'max-width: 900px; padding: 2.5rem;'
+            }
+          }, [
+            // Close Button (X)
+            D.Forms.Button({
+              attrs: {
+                type: 'button',
+                class: 'modal-close-btn',
+                'data-m-gkey': 'booking:close',
+                'aria-label': 'Close'
+              }
+            }, ['×']),
+
+            D.Text.H2({ attrs: { class: 'modal-title' } }, [t('booking.title')]),
+
+            StepIndicator(),
+
+            stepContent
+          ])
+        ]);
+      }
+
+      function Footer(db, D) {
+        return D.Containers.Footer({ attrs: { class: 'footer' } }, [
+          D.Containers.Div({ attrs: { class: 'footer-content' } }, [
+            D.Text.P({}, [t('footer.rights') + ' © 2024 ' + t('footer.clinic')])
+          ])
+        ]);
+      }
+
+      // Main App Body
+      M.app.setBody(function(stateWrapper, D) {
+        const state = stateWrapper;
+
+        return D.Containers.Div({ attrs: { class: 'app-container' } }, [
+          Navbar(state, D),
+          D.Containers.Main({}, [
+            HeroSection(state, D),
+            ServicesSection(state, D),
+            AboutSection(state, D),
+            TestimonialsSection(state, D),
+            ContactSection(state, D)
+          ]),
+          BookingForm(state, D),
+          Footer(state, D)
+        ].filter(Boolean));
+      });
+
+      // Create and Mount App
+      const app = M.app.createApp(db, orders);
+      app.mount('#app');
+
+      console.log('Physical Therapy Clinic website loaded successfully!');
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Mishkah DevTools & Live Examples</title>
+
+    <!-- Zero Config - Just Works™ -->
+    <script>
+        window.MishkahAutoConfig = { css: 'mi' };
+    </script>
+    <script src="../lib/mishkah.js" data-htmlx data-css="mi"></script>
+    <script src="../lib/mishkah-ui-devtools.js"></script>
+</head>
+
+<body class="bg-[var(--background)] text-[var(--foreground)]">
+    <div id="app"></div>
+
+    <template id="devtools-demo">
+        <!-- ============================================ -->
+        <!-- ENV: البيئة -->
+        <!-- ============================================ -->
+        <script type="application/json" data-m-env data-m-path="env">
+      {
+        "theme": "dark",
+        "lang": "ar",
+        "title": "Mishkah DevTools",
+        "subtitle": "أدوات التطوير والأمثلة التفاعلية"
+      }
+    </script>
+
+        <!-- ============================================ -->
+        <!-- DATA: البيانات -->
+        <!-- ============================================ -->
+        <script type="application/json" data-m-data data-m-path="data">
+      {
+        "counter": 0,
+        "todos": [
+          { "id": 1, "text": "تعلم Mishkah", "done": true },
+          { "id": 2, "text": "بناء تطبيق رائع", "done": false }
+        ],
+        "newTodo": "",
+        "metrics": [
+          { "label": "Components Loaded", "value": 7, "unit": "", "color": "#667eea" },
+          { "label": "Render Time", "value": 12, "unit": "ms", "color": "#22c55e" },
+          { "label": "State Changes", "value": 0, "unit": "", "color": "#f97316" }
+        ],
+        "events": [],
+        "currentTab": "intro",
+        "examples": {
+          "counter": {
+            "title": "Counter Example",
+            "description": "مثال بسيط على Reactivity",
+            "code": "<button data-m-order=\"increment\">+</button>\n<span>{state.data.counter}</span>\n<button data-m-order=\"decrement\">-</button>"
+          },
+          "todo": {
+            "title": "Todo List",
+            "description": "مثال على x-for و x-if",
+            "code": "<div x-for=\"todo in state.data.todos\" key=\"todo.id\">\n  <span>{todo.text}</span>\n</div>"
+          }
+        }
+      }
+    </script>
+
+        <!-- ============================================ -->
+        <!-- TEMPLATE: الواجهة -->
+        <!-- ============================================ -->
+        <div data-m-scope="devtools-demo" class="min-h-screen p-4 sm:p-8">
+            <!-- Header -->
+            <header class="mb-8 rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[var(--shadow)]">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <h1 class="text-3xl font-bold text-[var(--primary)]">
+                            🧪 {state.env.title}
+                        </h1>
+                        <p class="mt-2 text-[var(--muted-foreground)]">
+                            {state.env.subtitle}
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <theme-switcher class="hero-switcher" themes="dark,light"></theme-switcher>
+                        <lang-switcher class="hero-switcher" langs="ar,en"></lang-switcher>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Metrics Panel -->
+            <div class="mb-8 grid gap-4 sm:grid-cols-3">
+                <div x-for="metric in state.data.metrics" key="metric.label"
+                    class="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[var(--shadow)]">
+                    <p class="text-sm text-[var(--muted-foreground)]">{metric.label}</p>
+                    <strong class="mt-2 block text-3xl font-bold" x-bind:style="'color: ' + metric.color">
+                        {metric.value}{metric.unit}
+                    </strong>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="mb-4 flex gap-2 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-2">
+                <button data-m-order="switchTab" data-tab="intro"
+                    x-bind:class="state.data.currentTab === 'intro' ? 'rounded-xl bg-[var(--primary)] px-4 py-2 font-medium text-white' : 'rounded-xl px-4 py-2 text-[var(--muted-foreground)] hover:bg-[var(--surface-1)]'">
+                    مقدمة
+                </button>
+                <button data-m-order="switchTab" data-tab="examples"
+                    x-bind:class="state.data.currentTab === 'examples' ? 'rounded-xl bg-[var(--primary)] px-4 py-2 font-medium text-white' : 'rounded-xl px-4 py-2 text-[var(--muted-foreground)] hover:bg-[var(--surface-1)]'">
+                    أمثلة حية
+                </button>
+                <button data-m-order="switchTab" data-tab="inspector"
+                    x-bind:class="state.data.currentTab === 'inspector' ? 'rounded-xl bg-[var(--primary)] px-4 py-2 font-medium text-white' : 'rounded-xl px-4 py-2 text-[var(--muted-foreground)] hover:bg-[var(--surface-1)]'">
+                    State Inspector
+                </button>
+                <button data-m-order="switchTab" data-tab="events"
+                    x-bind:class="state.data.currentTab === 'events' ? 'rounded-xl bg-[var(--primary)] px-4 py-2 font-medium text-white' : 'rounded-xl px-4 py-2 text-[var(--muted-foreground)] hover:bg-[var(--surface-1)]'">
+                    Event Timeline
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+
+            <!-- Intro Tab -->
+            <div x-if="state.data.currentTab === 'intro'" class="space-y-6">
+                <div class="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8">
+                    <h2 class="mb-4 text-2xl font-bold text-[var(--primary)]">
+                        مرحباً بك في Mishkah!
+                    </h2>
+                    <p class="mb-4 text-lg leading-relaxed">
+                        Mishkah هو إطار عمل JavaScript حديث يجمع بين بساطة Vue وقوة React وأناقة Web Components.
+                    </p>
+
+                    <div class="mt-6 rounded-2xl bg-[var(--surface-1)] p-6">
+                        <h3 class="mb-3 text-xl font-semibold text-[var(--accent)]">
+                            ✨ الميزات الرئيسية
+                        </h3>
+                        <ul class="space-y-2 text-[var(--foreground)]">
+                            <li>🎯 <strong>0-Config</strong> - يعمل فوراً بدون إعدادات معقدة</li>
+                            <li>⚡ <strong>Reactive</strong> - تحديثات تلقائية للواجهة</li>
+                            <li>🎨 <strong>HTMLx</strong> - قوالب HTMLشبيهة بـ Vue</li>
+                            <li>🔧 <strong>DSL</strong> - بناء Components بـ Pure JavaScript</li>
+                            <li>🌐 <strong>i18n Built-in</strong> - دعم متعدد اللغات من البداية</li>
+                            <li>🎭 <strong>Theme System</strong> - تبديل السمات بسهولة</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 rounded-2xl border-2 border-[var(--primary)] bg-[var(--primary)]/5 p-6">
+                        <h3 class="mb-3 text-xl font-semibold">📝 مثال بسيط</h3>
+                        <pre class="overflow-x-auto rounded-xl bg-[var(--surface-2)] p-4 text-sm"><code>&lt;script type="application/json" data-m-data data-m-path="data"&gt;
+  { "message": "مرحباً بالعالم!" }
+&lt;/script&gt;
+
+&lt;div data-m-scope="app"&gt;
+  &lt;h1&gt;{state.data.message}&lt;/h1&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Examples Tab -->
+            <div x-if="state.data.currentTab === 'examples'" class="space-y-6">
+
+                <!-- Counter Example -->
+                <div class="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8">
+                    <h3 class="mb-4 text-2xl font-bold text-[var(--primary)]">
+                        🔢 Counter - Reactivity Example
+                    </h3>
+                    <p class="mb-6 text-[var(--muted-foreground)]">
+                        اضغط على الأزرار وشاهد كيف يتحدث الـ state تلقائياً
+                    </p>
+
+                    <div class="mb-6 flex items-center justify-center gap-4 rounded-2xl bg-[var(--surface-1)] p-8">
+                        <button data-m-order="decrementCounter"
+                            class="rounded-xl border-2 border-[var(--primary)] bg-[var(--primary)] px-6 py-3 text-2xl font-bold text-white hover:bg-[var(--primary)]/80">
+                            -
+                        </button>
+                        <span class="min-w-[4rem] text-center text-5xl font-bold text-[var(--primary)]">
+                            {state.data.counter}
+                        </span>
+                        <button data-m-order="incrementCounter"
+                            class="rounded-xl border-2 border-[var(--primary)] bg-[var(--primary)] px-6 py-3 text-2xl font-bold text-white hover:bg-[var(--primary)]/80">
+                            +
+                        </button>
+                    </div>
+
+                    <details class="rounded-2xl bg-[var(--surface-1)] p-4">
+                        <summary class="cursor-pointer font-semibold text-[var(--accent)]">
+                            📄 Source Code
+                        </summary>
+                        <pre class="mt-4 overflow-x-auto rounded-xl bg-[var(--surface-2)] p-4 text-sm"><code>&lt;button data-m-order="incrementCounter"&gt;+&lt;/button&gt;
+&lt;span&gt;{state.data.counter}&lt;/span&gt;
+&lt;button data-m-order="decrementCounter"&gt;-&lt;/button&gt;
+
+&lt;script&gt;
+  orders: {
+    incrementCounter: {
+      on: ['click'],
+      handler: (e, app) =&gt; {
+        app.setState(s =&gt; {
+          s.data.counter++;
+          return s;
+        });
+      }
+    }
+  }
+&lt;/script&gt;</code></pre>
+                    </details>
+                </div>
+
+                <!-- Todo List Example -->
+                <div class="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8">
+                    <h3 class="mb-4 text-2xl font-bold text-[var(--primary)]">
+                        ✅ Todo List - x-for & x-if Example
+                    </h3>
+                    <p class="mb-6 text-[var(--muted-foreground)]">
+                        مثال على استخدام التوجيهات (directives) في HTMLx
+                    </p>
+
+                    <!-- Add Todo Form -->
+                    <div class="mb-6 flex gap-2">
+                        <input type="text" placeholder="مهمة جديدة..." data-m-order="updateNewTodo"
+                            x-bind:value="state.data.newTodo"
+                            class="flex-1 rounded-xl border border-[var(--border)] bg-[var(--surface-1)] px-4 py-3 text-[var(--foreground)]" />
+                        <button data-m-order="addTodo"
+                            class="rounded-xl bg-[var(--primary)] px-6 py-3 font-semibold text-white hover:bg-[var(--primary)]/80">
+                            إضافة
+                        </button>
+                    </div>
+
+                    <!-- Todo Items -->
+                    <div class="space-y-2">
+                        <div x-if="state.data.todos.length === 0"
+                            class="rounded-2xl bg-[var(--surface-1)] p-8 text-center text-[var(--muted-foreground)]">
+                            لا توجد مهام. ابدأ بإضافة مهمة جديدة!
+                        </div>
+
+                        <div x-if="state.data.todos.length > 0" class="space-y-2">
+                            <div x-for="todo in state.data.todos" key="todo.id"
+                                class="flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-[var(--surface-1)] p-4">
+                                <input type="checkbox" x-bind:checked="todo.done" data-m-order="toggleTodo"
+                                    x-bind:data-todo-id="todo.id" class="h-5 w-5 rounded" />
+                                <span
+                                    x-bind:class="todo.done ? 'flex-1 text-[var(--muted-foreground)] line-through' : 'flex-1'">
+                                    {todo.text}
+                                </span>
+                                <button data-m-order="deleteTodo" x-bind:data-todo-id="todo.id"
+                                    class="rounded-lg bg-red-500/20 px-3 py-1 text-sm text-red-500 hover:bg-red-500/30">
+                                    حذف
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inspector Tab -->
+            <div x-if="state.data.currentTab === 'inspector'"
+                class="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8">
+                <h3 class="mb-6 text-2xl font-bold text-[var(--primary)]">
+                    🔍 State Inspector
+                </h3>
+                <p class="mb-6 text-[var(--muted-foreground)]">
+                    هذا هو الـ state الحالي للتطبيق. كل تغيير في البيانات يؤدي لتحديث الواجهة تلقائياً.
+                </p>
+
+                <div class="rounded-2xl bg-[var(--surface-1)] p-6">
+                    <pre class="overflow-x-auto text-sm"><code>{JSON.stringify(state.data, null, 2)}</code></pre>
+                </div>
+
+                <div class="mt-6 rounded-2xl border-2 border-[var(--accent)] bg-[var(--accent)]/5 p-6">
+                    <h4 class="mb-3 font-semibold text-[var(--accent)]">💡 ملاحظة</h4>
+                    <p class="text-sm">
+                        جرب التفاعل مع الأمثلة في تبويب "أمثلة حية" ثم ارجع هنا لترى كيف تغير الـ state!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Events Tab -->
+            <div x-if="state.data.currentTab === 'events'"
+                class="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8">
+                <h3 class="mb-6 text-2xl font-bold text-[var(--primary)]">
+                    ⏱️ Event Timeline
+                </h3>
+                <p class="mb-6 text-[var(--muted-foreground)]">
+                    سجل بجميع الأحداث التي حدثت في التطبيق
+                </p>
+
+                <div x-if="state.data.events.length === 0"
+                    class="rounded-2xl bg-[var(--surface-1)] p-12 text-center text-[var(--muted-foreground)]">
+                    لا توجد أحداث بعد. ابدأ بالتفاعل مع التطبيق!
+                </div>
+
+                <div x-if="state.data.events.length > 0" class="space-y-3">
+                    <div x-for="event in state.data.events" key="event.time"
+                        class="rounded-2xl border-l-4 border-[var(--primary)] bg-[var(--surface-1)] p-4">
+                        <div class="mb-2 flex items-center justify-between">
+                            <span class="font-semibold text-[var(--primary)]">{event.type}</span>
+                            <span class="text-xs text-[var(--muted-foreground)]">{event.time}</span>
+                        </div>
+                        <p class="text-sm">{event.message}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ============================================ -->
+        <!-- LOGIC: العمليات -->
+        <!-- ============================================ -->
+        <script>
+            // Helper: Add event to timeline
+            function addEvent(type, message) {
+                return function (state) {
+                    var now = new Date();
+                    var time = now.getHours().toString().padStart(2, '0') + ':' +
+                        now.getMinutes().toString().padStart(2, '0') + ':' +
+                        now.getSeconds().toString().padStart(2, '0');
+
+                    state.data.events.push({
+                        type: type,
+                        message: message,
+                        time: time
+                    });
+
+                    // Keep only last 20 events
+                    if (state.data.events.length > 20) {
+                        state.data.events = state.data.events.slice(-20);
+                    }
+
+                    // Update metrics
+                    state.data.metrics[2].value = state.data.events.length;
+
+                    return state;
+                };
+            }
+
+            // Helper: Clone state immutably
+            function cloneState(state) {
+                try {
+                    return JSON.parse(JSON.stringify(state));
+                } catch (e) {
+                    return state;
+                }
+            }
+        </script>
+    </template>
+
+    <!-- ============================================ -->
+    <!-- APP INITIALIZATION -->
+    <!-- ============================================ -->
+    <script>
+        MishkahAuto.ready(function (M) {
+            console.log('🌙 Mishkah ready!');
+
+            M.app.make({}, {
+                mount: '#app',
+                orders: {
+                    // Tab Switching
+                    switchTab: {
+                        on: ['click'],
+                        handler: function (e, app) {
+                            var tab = e.target.dataset.tab;
+                            if (!tab) return;
+
+                            app.setState(function (s) {
+                                s.data.currentTab = tab;
+                                s.data.events.push({
+                                    type: 'Navigation',
+                                    message: 'تم الانتقال إلى تبويب: ' + tab,
+                                    time: new Date().toLocaleTimeString('ar-SA')
+                                });
+                                return s;
+                            });
+                        }
+                    },
+
+                    // Counter
+                    incrementCounter: {
+                        on: ['click'],
+                        handler: function (e, app) {
+                            app.setState(function (s) {
+                                s.data.counter++;
+                                s.data.metrics[2].value++;
+                                s.data.events.push({
+                                    type: 'Counter',
+                                    message: 'زيادة العداد إلى ' + s.data.counter,
+                                    time: new Date().toLocaleTimeString('ar-SA')
+                                });
+                                return s;
+                            });
+                        }
+                    },
+
+                    decrementCounter: {
+                        on: ['click'],
+                        handler: function (e, app) {
+                            app.setState(function (s) {
+                                s.data.counter--;
+                                s.data.metrics[2].value++;
+                                s.data.events.push({
+                                    type: 'Counter',
+                                    message: 'تقليل العداد إلى ' + s.data.counter,
+                                    time: new Date().toLocaleTimeString('ar-SA')
+                                });
+                                return s;
+                            });
+                        }
+                    },
+
+                    // Todo List
+                    updateNewTodo: {
+                        on: ['input'],
+                        handler: function (e, app) {
+                            app.setState(function (s) {
+                                s.data.newTodo = e.target.value;
+                                return s;
+                            });
+                        }
+                    },
+
+                    addTodo: {
+                        on: ['click'],
+                        handler: function (e, app) {
+                            app.setState(function (s) {
+                                var text = s.data.newTodo.trim();
+                                if (!text) return s;
+
+                                var newId = s.data.todos.length > 0
+                                    ? Math.max.apply(null, s.data.todos.map(function (t) { return t.id; })) + 1
+                                    : 1;
+
+                                s.data.todos.push({
+                                    id: newId,
+                                    text: text,
+                                    done: false
+                                });
+                                s.data.newTodo = '';
+                                s.data.metrics[2].value++;
+                                s.data.events.push({
+                                    type: 'Todo',
+                                    message: 'أضيفت مهمة جديدة: ' + text,
+                                    time: new Date().toLocaleTimeString('ar-SA')
+                                });
+                                return s;
+                            });
+                        }
+                    },
+
+                    toggleTodo: {
+                        on: ['change'],
+                        handler: function (e, app) {
+                            var todoId = parseInt(e.target.dataset.todoId, 10);
+                            app.setState(function (s) {
+                                var todo = s.data.todos.find(function (t) { return t.id === todoId; });
+                                if (todo) {
+                                    todo.done = !todo.done;
+                                    s.data.metrics[2].value++;
+                                    s.data.events.push({
+                                        type: 'Todo',
+                                        message: (todo.done ? 'تم إنجاز' : 'إلغاء إنجاز') + ': ' + todo.text,
+                                        time: new Date().toLocaleTimeString('ar-SA')
+                                    });
+                                }
+                                return s;
+                            });
+                        }
+                    },
+
+                    deleteTodo: {
+                        on: ['click'],
+                        handler: function (e, app) {
+                            var todoId = parseInt(e.target.dataset.todoId, 10);
+                            app.setState(function (s) {
+                                var todo = s.data.todos.find(function (t) { return t.id === todoId; });
+                                var text = todo ? todo.text : '';
+                                s.data.todos = s.data.todos.filter(function (t) { return t.id !== todoId; });
+                                s.data.metrics[2].value++;
+                                s.data.events.push({
+                                    type: 'Todo',
+                                    message: 'حُذفت المهمة: ' + text,
+                                    time: new Date().toLocaleTimeString('ar-SA')
+                                });
+                                return s;
+                            });
+                        }
+                    }
+                }
+            }).then(function (app) {
+                console.log('✅ App mounted successfully!');
+
+                // Add initial event
+                app.setState(function (s) {
+                    s.data.events.push({
+                        type: 'System',
+                        message: 'تم تشغيل Mishkah بنجاح!',
+                        time: new Date().toLocaleTimeString('ar-SA')
+                    });
+                    return s;
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

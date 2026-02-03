@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mishkah Vue - Complete Test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--color-background, #0a0a0a);
+      color: var(--color-foreground, #fff);
+      padding: 20px;
+      transition: all 0.3s
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto
+    }
+
+    .card {
+      background: var(--color-card, #1a1a1a);
+      border: 1px solid var(--color-border, #333);
+      border-radius: var(--radius-md, 12px);
+      padding: var(--spacing-lg, 24px);
+      margin-bottom: var(--spacing-md, 16px)
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-lg, 24px)
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: var(--spacing-sm, 8px)
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: var(--spacing-md, 16px);
+      color: var(--color-primary, #3b82f6)
+    }
+
+    .controls {
+      display: flex;
+      gap: var(--spacing-sm, 8px);
+      flex-wrap: wrap
+    }
+
+    button {
+      padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
+      background: var(--color-primary, #3b82f6);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm, 8px);
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s
+    }
+
+    button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px)
+    }
+
+    button.secondary {
+      background: var(--color-accent, #6366f1)
+    }
+
+    input {
+      padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
+      background: var(--color-input, #2a2a2a);
+      color: var(--color-foreground, #fff);
+      border: 1px solid var(--color-border, #333);
+      border-radius: var(--radius-sm, 8px);
+      font-size: 1rem;
+      width: 200px
+    }
+
+    .counter {
+      font-size: 3rem;
+      font-weight: bold;
+      text-align: center;
+      margin: var(--spacing-lg, 24px) 0;
+      color: var(--color-primary, #3b82f6)
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-md, 16px)
+    }
+
+    .stat {
+      text-align: center;
+      padding: var(--spacing-md, 16px);
+      background: var(--color-card, #1a1a1a);
+      border-radius: var(--radius-md, 12px)
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--color-primary, #3b82f6)
+    }
+
+    .stat-label {
+      color: var(--color-muted, #888);
+      margin-top: var(--spacing-sm, 8px)
+    }
+
+    .list {
+      list-style: none
+    }
+
+    .list-item {
+      padding: var(--spacing-md, 16px);
+      background: var(--color-card, #1a1a1a);
+      border-radius: var(--radius-sm, 8px);
+      margin-bottom: var(--spacing-sm, 8px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--color-accent, #6366f1);
+      border-radius: var(--radius-full, 9999px);
+      font-size: 0.875rem
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script src="../mishkah.core.js"></script>
+  <!-- NEW ENGINE -->
+  <script src="../mishkah-vue.js"></script>
+  <!-- NEW TRANSFORMER -->
+  <script src="../mishkah-vue-jsx.js"></script>
+  <script type="text/mishkah-vue">
+        const { createApp, ref, reactive, computed, watch, onMounted, useDatabase, useI18n, useTheme } = Mishkah.Vue;
+
+        const i18nDict = {
+            ar: {
+                app_title: 'تطبيق مشكاة Vue',
+                subtitle: 'اختبار شامل لجميع المزايا',
+                counter: 'العداد',
+                increment: '+زيادة',
+                decrement: '-نقص',
+                reset: 'إعادة ضبط',
+                set_to: 'تعيين إلى',
+                toggle_lang: 'تبديل اللغة',
+                toggle_theme: 'تبديل الثيم',
+                database: 'قاعدة البيانات',
+                theme_tokens: 'رموز الثيم',
+                current_lang: 'اللغة الحالية',
+                current_theme: 'الثيم الحالي',
+                local_state: 'حالة محلية (سريعة)',
+                global_state: 'حالة عامة (sync)',
+                users_count: 'عدد المستخدمين',
+                tasks_count: 'عدد المهام',
+                settings: 'الإعدادات'
+            },
+            en: {
+                app_title: 'Mishkah Vue App',
+                subtitle: 'Complete Feature Test',
+                counter: 'Counter',
+                increment: '+Increment',
+                decrement: '-Decrement',
+                reset: 'Reset',
+                set_to: 'Set to',
+                toggle_lang: 'Toggle Language',
+                toggle_theme: 'Toggle Theme',
+                database: 'Database',
+                theme_tokens: 'Theme Tokens',
+                current_lang: 'Current Language',
+                current_theme: 'Current Theme',
+                local_state: 'Local State (Fast)',
+                global_state: 'Global State (Sync)',
+                users_count: 'Users Count',
+                tasks_count: 'Tasks Count',
+                settings: 'Settings'
+            }
+        };
+
+        Mishkah.Vue.initMishkah({
+            env: { lang: 'ar', dir: 'rtl', theme: 'dark' },
+            i18n: { dict: i18nDict },
+            users: [{ id: 1, name: 'أحمد' }, { id: 2, name: 'فاطمة' }, { id: 3, name: 'محمد' }],
+            tasks: [{ id: 1, title: 'مهمة 1', done: false }, { id: 2, title: 'مهمة 2', done: true }]
+        });
+
+        const app = createApp({
+            setup() {
+                const count = ref(0);
+                const input = ref('100');
+                const { data, get } = useDatabase();
+                const { t, lang, dir, toggleLang } = useI18n();
+                const { theme, tokens, vars, toggleTheme } = useTheme();
+
+                const doubleCount = computed(() => count.value * 2);
+                const users = computed(() => data.value?.users || []);
+                const tasks = computed(() => data.value?.tasks || []);
+
+                watch(count, (newVal, oldVal) => {
+                    console.log('Count changed:', oldVal, '->', newVal);
+                });
+
+                onMounted(() => {
+                    console.log('Vue app mounted!');
+                    console.log('Database:', data.value);
+                    console.log('Theme tokens:', tokens);
+                });
+
+                const increment = () => count.value++;
+                const decrement = () => count.value--;
+                const resetCount = () => count.value = 0;
+                const setCount = () => {
+                    const val = parseInt(input.value);
+                    if (!isNaN(val)) count.value = val;
+                };
+
+                return {
+                    count,
+                    input,
+                    doubleCount,
+                    users,
+                    tasks,
+                    t,
+                    lang,
+                    dir,
+                    theme,
+                    tokens,
+                    vars,
+                    increment,
+                    decrement,
+                    resetCount,
+                    setCount,
+                    toggleLang,
+                    toggleTheme
+                };
+            },
+
+            template() {
+                return (
+      <div class="container">
+        <div class="header">
+          <div>
+            <h1>{this.t('app_title')}</h1>
+            <p style="color:var(--color-muted,#888)">{this.t('subtitle')}</p>
+          </div>
+          <div class="controls">
+            <button class="secondary" onclick={this.toggleLang}>{this.t('toggle_lang')}</button>
+            <button class="secondary" onclick={this.toggleTheme}>{this.t('toggle_theme')}</button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h2>{this.t('local_state')}</h2>
+          <div class="counter">{this.count}</div>
+          <div style="text-align:center;color:var(--color-muted,#888);margin-bottom:1rem">
+            {this.t('counter')} × 2 = {this.doubleCount}
+          </div>
+          <div class="controls" style="justify-content:center">
+            <button onclick={this.increment}>{this.t('increment')}</button>
+            <button onclick={this.decrement}>{this.t('decrement')}</button>
+            <button onclick={this.resetCount}>{this.t('reset')}</button>
+          </div>
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:1rem">
+            <input 
+              type="number" 
+              value={this.input.value}
+              oninput={(e) => this.input.value = e.target.value}
+              placeholder="100"
+            />
+            <button onclick={this.setCount}>{this.t('set_to')}</button>
+          </div>
+        </div>
+        
+        <div class="grid">
+          <div class="card">
+            <h2>{this.t('global_state')}</h2>
+            <div class="stat">
+              <div class="stat-value">{this.lang}</div>
+              <div class="stat-label">{this.t('current_lang')}</div>
+            </div>
+            <div class="stat" style="margin-top:1rem">
+              <div class="stat-value">{this.theme}</div>
+              <div class="stat-label">{this.t('current_theme')}</div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <h2>{this.t('database')}</h2>
+            <div class="stat">
+              <div class="stat-value">{this.users.length}</div>
+              <div class="stat-label">{this.t('users_count')}</div>
+            </div>
+            <div class="stat" style="margin-top:1rem">
+              <div class="stat-value">{this.tasks.length}</div>
+              <div class="stat-label">{this.t('tasks_count')}</div>
+            </div>
+            <ul class="list" style="margin-top:1rem">
+              {this.users.map(u => (
+                <li class="list-item" key={u.id}>
+                  <span>{u.name}</span>
+                  <span class="badge">ID: {u.id}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h2>{this.t('theme_tokens')}</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">
+            {Object.keys(this.vars).slice(0, 12).map(k => (
+              <div key={k} style="padding:12px;background:var(--color-card,#1a1a1a);border-radius:8px">
+                <div style="font-family:monospace;font-size:0.875rem;color:var(--color-muted,#888)">{k}</div>
+                <div style="margin-top:4px;font-weight:bold">{this.vars[k]}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+                );
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

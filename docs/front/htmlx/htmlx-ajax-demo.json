@@ -1,0 +1,89 @@
+{
+  "guide": {
+    "ar": {
+      "status": "ready",
+      "summary": "هذا المثال يوضح كيف يمكن ربط data-m-ajax بالبيانات دون كتابة أوامر إضافية.",
+      "steps": [
+        {
+          "title": "عرّف الخريطة العالمية",
+          "body": "استعمل data-m-ajax-map لتسجيل العنوان وخيارات الطلب مرة واحدة فقط."
+        },
+        {
+          "title": "اربط الحقول",
+          "body": "أضف data-m-ajax إلى وسوم البيانات وحدد المسار المطلوب مثل guide.{{env.lang}}." 
+        },
+        {
+          "title": "ادمج النتائج",
+          "body": "اختر وضع الدمج المناسب — merge للحفاظ على البيانات السابقة أو replace للاستبدال الكامل."
+        }
+      ],
+      "resources": [
+        {
+          "label": "وثائق Mishkah Utils — Net.ajax",
+          "url": "https://mishkah.dev/docs/utils/net"
+        },
+        {
+          "label": "دليل HTMLx",
+          "url": "https://mishkah.dev/docs/htmlx"
+        }
+      ]
+    },
+    "en": {
+      "status": "ready",
+      "summary": "This example demonstrates how declarative data-m-ajax feeds hydrate panels without extra orders.",
+      "steps": [
+        {
+          "title": "Register the global map",
+          "body": "Use data-m-ajax-map to store the endpoint and options once."
+        },
+        {
+          "title": "Attach to data blocks",
+          "body": "Add data-m-ajax on your data scripts and point to guide.{{env.lang}}."
+        },
+        {
+          "title": "Merge the response",
+          "body": "Pick the merge mode — merge keeps existing keys while replace swaps the entire node."
+        }
+      ],
+      "resources": [
+        {
+          "label": "Mishkah Utils — Net.ajax",
+          "url": "https://mishkah.dev/docs/utils/net"
+        },
+        {
+          "label": "HTMLx handbook",
+          "url": "https://mishkah.dev/docs/htmlx"
+        }
+      ]
+    }
+  },
+  "digest": {
+    "lastSync": "2024-05-30T08:00:00Z",
+    "items": [
+      {
+        "id": "net-ajax",
+        "title": {
+          "ar": "واجهات Net.ajax",
+          "en": "Net.ajax endpoints"
+        },
+        "badge": "core"
+      },
+      {
+        "id": "maps",
+        "title": {
+          "ar": "خرائط البيانات المعلنة",
+          "en": "Declarative data maps"
+        },
+        "badge": "docs"
+      },
+      {
+        "id": "placeholders",
+        "title": {
+          "ar": "استخدام {{env.lang}} كمتغير",
+          "en": "Using {{env.lang}} as a variable"
+        },
+        "badge": "tips"
+      }
+    ]
+  }
+}

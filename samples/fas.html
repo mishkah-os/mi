@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فاس الأولى | FAS Al-Oula</title>
+
+    <!-- 1. TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Mishkah Core -->
+    <script src="https://ws.mas.com.eg/lib/mishkah.core.js"></script>
+
+    <!-- 3. Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Outfit:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 4. Global Styles -->
+    <style>
+        :root[data-theme='light'] {
+            --bg-body: #f8fafc;
+            --bg-surface: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --primary: #1e3a8a;
+            /* Riyadh Navy */
+            --primary-fg: #ffffff;
+            --accent: #d97706;
+            /* Amber/Gold */
+            --border: #e2e8f0;
+        }
+
+        :root[data-theme='dark'] {
+            --bg-body: #0f172a;
+            --bg-surface: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            /* Bright Blue */
+            --primary-fg: #ffffff;
+            --accent: #fbbf24;
+            /* Amber */
+            --border: #334155;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Typography */
+        :root[lang='ar'] body {
+            font-family: 'Almarai', sans-serif;
+        }
+
+        :root[lang='en'] body {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Skyline Pattern */
+        .skyline-bg {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(var(--primary), 0.03) 10px, rgba(var(--primary), 0.03) 20px);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // ==========================================
+        // 1. DATABASE
+        // ==========================================
+        const database = {
+            data: { mobileMenuOpen: false },
+            env: { theme: 'light', lang: 'ar', dir: 'rtl' },
+            i18n: {
+                dict: {
+                    'brand': { ar: 'فاس الأولى', en: 'FAS Al-Oula' },
+                    'brand_sub': { ar: 'وتمويل البناء', en: '& Building Finance' },
+
+                    // Nav
+                    'nav_home': { ar: 'الرئيسية', en: 'Home' },
+                    'nav_services': { ar: 'خدماتنا', en: 'Services' },
+                    'nav_finance': { ar: 'حلول التمويل', en: 'Finance Solutions' },
+                    'nav_contact': { ar: 'اتصل بنا', en: 'Contact' },
+
+                    // Hero
+                    'hero_title': { ar: 'نُشيّد المستقبل بأسس راسخة', en: 'Building the Future on Solid Foundations' },
+                    'hero_desc': { ar: 'شريكك الاستراتيجي في الاستشارات الهندسية وحلول تمويل البناء المتكاملة في المملكة.', en: 'Your strategic partner for engineering consultancy and integrated building finance solutions in the Kingdom.' },
+                    'hero_cta': { ar: 'ابدأ مشروعك', en: 'Start Project' },
+                    'hero_contact': { ar: 'تواصل معنا', en: 'Contact Us' },
+
+                    // Services
+                    'srv_consult': { ar: 'استشارات هندسية', en: 'Engineering Consultancy' },
+                    'srv_consult_desc': { ar: 'دراسات جدوى وتصاميم معمارية وإنشائية بأعلى المعايير.', en: 'Feasibility studies, architectural and structural designs to highest standards.' },
+                    'srv_finance': { ar: 'تمويل البناء', en: 'Construction Finance' },
+                    'srv_finance_desc': { ar: 'حلول تمويلية مرنة للمطورين والأفراد لتحقيق مشاريعهم.', en: 'Flexible financing solutions for developers and individuals.' },
+                    'srv_manage': { ar: 'إدارة التطوير', en: 'Development Mgmt' },
+                    'srv_manage_desc': { ar: 'إدارة شاملة لمراحل التطوير العقاري من الفكرة إلى التنفيذ.', en: 'Comprehensive management of real estate development from concept to execution.' },
+
+                    // Contact
+                    'addr_title': { ar: 'العنوان', en: 'Address' },
+                    'addr_val': { ar: 'الرياض، حي الملقا، طريق أنس بن مالك، 5966', en: 'Riyadh, Al-Malqa Dist, Anas Bin Malik Rd, 5966' },
+                    'contact_header': { ar: 'جاهزون لخدمتك', en: 'Ready to Serve You' },
+
+                    'copyright': { ar: '© 2026 شركة فاس الأولى وتمويل البناء.', en: '© 2026 FAS Al-Oula & Building Finance.' }
+                }
+            }
+        };
+
+        // ==========================================
+        // 2. ORDERS
+        // ==========================================
+        const orders = {
+            'sys.theme': {
+                on: ['click'], gkeys: ['btn:theme'],
+                handler: (e, ctx) => ctx.setState(s => ({ ...s, env: { ...s.env, theme: s.env.theme === 'light' ? 'dark' : 'light' } }))
+            },
+            'sys.lang': {
+                on: ['click'], gkeys: ['btn:lang'],
+                handler: (e, ctx) => ctx.setState(s => {
+                    const l = s.env.lang === 'ar' ? 'en' : 'ar';
+                    return { ...s, env: { ...s.env, lang: l, dir: l === 'ar' ? 'rtl' : 'ltr' } };
+                })
+            },
+            'ui.menu': {
+                on: ['click'], gkeys: ['btn:menu'],
+                handler: (e, ctx) => ctx.setState(s => { s.data.mobileMenuOpen = !s.data.mobileMenuOpen; return s; })
+            }
+        };
+
+        // ==========================================
+        // 3. BODY
+        // ==========================================
+        const D = Mishkah.DSL;
+
+        function body(db) {
+            const t = (k) => db.i18n.dict[k]?.[db.env.lang] || k;
+
+            const NavLink = (label) => D.A({
+                attrs: { href: '#', class: 'text-sm font-bold text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors' }
+            }, [label]);
+
+            const ServiceCard = (icon, title, desc) => D.Div({
+                attrs: { class: 'bg-[var(--bg-surface)] p-8 rounded-xl border border-[var(--border)] shadow-sm hover:shadow-lg hover:border-[var(--accent)] transition-all group' }
+            }, [
+                D.Div({ attrs: { class: 'w-14 h-14 bg-[var(--bg-body)] rounded-lg flex items-center justify-center text-3xl mb-6 text-[var(--primary)]' } }, [icon]),
+                D.H3({ attrs: { class: 'text-xl font-bold mb-3 text-[var(--text-main)]' } }, [title]),
+                D.P({ attrs: { class: 'text-[var(--text-muted)] text-sm leading-relaxed' } }, [desc])
+            ]);
+
+            return D.Div({
+                attrs: {
+                    class: 'min-h-screen flex flex-col',
+                    'data-theme': db.env.theme,
+                    'dir': db.env.dir,
+                    lang: db.env.lang
+                }
+            }, [
+                // Navbar
+                D.Nav({ attrs: { class: 'sticky top-0 z-50 bg-[var(--bg-surface)]/90 backdrop-blur border-b border-[var(--border)]' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto px-6 h-20 flex items-center justify-between' } }, [
+                        // Brand
+                        D.Div({ attrs: { class: 'flex items-center gap-3' } }, [
+                            D.Div({ attrs: { class: 'w-10 h-10 bg-[var(--primary)] rounded-tr-xl rounded-bl-xl flex items-center justify-center text-white font-black text-xl' } }, ['F']),
+                            D.Div({ attrs: { class: 'flex flex-col' } }, [
+                                D.Span({ attrs: { class: 'font-extrabold text-lg leading-none' } }, [t('brand')]),
+                                D.Span({ attrs: { class: 'text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wide' } }, [t('brand_sub')])
+                            ])
+                        ]),
+
+                        // Desktop Links
+                        D.Div({ attrs: { class: 'hidden md:flex items-center gap-8' } }, [
+                            NavLink(t('nav_home')),
+                            NavLink(t('nav_services')),
+                            NavLink(t('nav_finance')),
+                            NavLink(t('nav_contact')),
+                        ]),
+
+                        // Right Actions
+                        D.Div({ attrs: { class: 'flex items-center gap-4' } }, [
+                            D.Button({ attrs: { gkey: 'btn:lang', class: 'font-bold text-xs px-2 py-1 border border-[var(--border)] rounded hover:bg-[var(--bg-body)]' } }, [db.env.lang === 'ar' ? 'EN' : 'عربي']),
+                            D.Button({ attrs: { gkey: 'btn:theme', class: 'text-lg opacity-70 hover:opacity-100' } }, [db.env.theme === 'light' ? '🌙' : '☀️']),
+                            D.Button({ attrs: { gkey: 'btn:menu', class: 'md:hidden text-xl' } }, ['☰'])
+                        ])
+                    ])
+                ]),
+
+                // Mobile Menu
+                db.data.mobileMenuOpen ? D.Div({ attrs: { class: 'md:hidden bg-[var(--bg-surface)] border-b border-[var(--border)] p-4 space-y-3' } }, [
+                    D.A({ attrs: { href: '#', class: 'block font-bold text-[var(--text-main)]' } }, [t('nav_home')]),
+                    D.A({ attrs: { href: '#', class: 'block font-bold text-[var(--text-main)]' } }, [t('nav_services')]),
+                    D.A({ attrs: { href: '#', class: 'block font-bold text-[var(--text-main)]' } }, [t('nav_finance')]),
+                ]) : null,
+
+                // Hero Section
+                D.Header({ attrs: { class: 'py-20 md:py-32 bg-[var(--bg-body)] skyline-bg relative overflow-hidden' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10' } }, [
+                        D.Div({}, [
+                            D.Span({ attrs: { class: 'inline-block px-3 py-1 bg-[var(--accent)]/10 text-[var(--accent)] text-xs font-bold rounded-full mb-6' } }, [t('brand_sub')]),
+                            D.H1({ attrs: { class: 'text-5xl md:text-6xl font-black mb-6 leading-tight text-[var(--text-main)]' } }, [t('hero_title')]),
+                            D.P({ attrs: { class: 'text-lg text-[var(--text-muted)] mb-10 leading-relaxed' } }, [t('hero_desc')]),
+                            D.Div({ attrs: { class: 'flex gap-4' } }, [
+                                D.A({ attrs: { href: '#', class: 'px-8 py-3 bg-[var(--primary)] text-white font-bold rounded-lg hover:bg-[var(--text-main)] transition-colors shadow-lg shadow-blue-900/20' } }, [t('hero_cta')]),
+                                D.A({ attrs: { href: '#', class: 'px-8 py-3 bg-white text-[var(--text-main)] border border-[var(--border)] font-bold rounded-lg hover:bg-[var(--bg-body)] transition-colors' } }, [t('hero_contact')])
+                            ])
+                        ]),
+                        // Visual Abstract
+                        D.Div({ attrs: { class: 'relative h-96 hidden md:block' } }, [
+                            D.Div({ attrs: { class: 'absolute top-0 left-10 w-64 h-80 bg-[var(--primary)] rounded-2xl opacity-10 transform rotate-6' } }, []),
+                            D.Div({ attrs: { class: 'absolute top-10 left-0 w-64 h-80 bg-[var(--accent)] rounded-2xl opacity-10 transform -rotate-6' } }, []),
+                            D.Div({ attrs: { class: 'absolute inset-0 flex items-center justify-center' } }, [
+                                D.Div({ attrs: { class: 'text-9xl opacity-20 filter grayscale' } }, ['🏢'])
+                            ])
+                        ])
+                    ])
+                ]),
+
+                // Services
+                D.Section({ attrs: { class: 'py-24 bg-[var(--bg-surface)]' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto px-6' } }, [
+                        D.Div({ attrs: { class: 'text-center mb-16' } }, [
+                            D.H2({ attrs: { class: 'text-3xl font-bold mb-4' } }, [t('nav_services')]),
+                            D.Div({ attrs: { class: 'w-16 h-1 bg-[var(--accent)] mx-auto rounded-full' } }, [])
+                        ]),
+                        D.Div({ attrs: { class: 'grid md:grid-cols-3 gap-8' } }, [
+                            ServiceCard('📐', t('srv_consult'), t('srv_consult_desc')),
+                            ServiceCard('💰', t('srv_finance'), t('srv_finance_desc')),
+                            ServiceCard('🏗️', t('srv_manage'), t('srv_manage_desc'))
+                        ])
+                    ])
+                ]),
+
+                // Contact Strip
+                D.Section({ attrs: { class: 'py-20 bg-[var(--primary)] text-white' } }, [
+                    D.Div({ attrs: { class: 'max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8' } }, [
+                        D.Div({}, [
+                            D.H2({ attrs: { class: 'text-3xl font-bold mb-2' } }, [t('contact_header')]),
+                            D.P({ attrs: { class: 'opacity-80' } }, [t('addr_val')])
+                        ]),
+                        D.A({ attrs: { href: '#', class: 'px-8 py-3 bg-white text-[var(--primary)] font-bold rounded-lg hover:bg-[var(--accent)] hover:text-white transition-colors' } }, [t('hero_contact')])
+                    ])
+                ]),
+
+                // Footer
+                D.Footer({ attrs: { class: 'bg-[var(--bg-body)] py-8 text-center text-sm text-[var(--text-muted)] border-t border-[var(--border)]' } }, [
+                    t('copyright')
+                ])
+            ]);
+        }
+
+        Mishkah.app.setBody(body);
+        Mishkah.app.create(database, orders).mount('#app');
+    </script>
+</body>
+
+</html>

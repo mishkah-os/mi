@@ -1,0 +1,478 @@
+{
+    "modules": [
+        {
+            "id": "security",
+            "name": "Security Module",
+            "description": "Unified Authentication & Authorization System",
+            "version": "2.0.0",
+            "author": "Mishkah ERP",
+            "dependencies": []
+        }
+    ],
+    "tables_meta": [
+        {
+            "name": "sys_companies",
+            "icon": "🏢",
+            "settings": {
+                "group": "security_core"
+            }
+        },
+        {
+            "name": "sys_branches",
+            "icon": "🌳",
+            "settings": {
+                "group": "security_core"
+            }
+        },
+        {
+            "name": "sys_users",
+            "icon": "👤",
+            "settings": {
+                "group": "security_users",
+                "secret_fields": [
+                    "password_hash",
+                    "otp_secret"
+                ]
+            }
+        },
+        {
+            "name": "sys_roles",
+            "icon": "🛡️",
+            "settings": {
+                "group": "security_roles"
+            }
+        },
+        {
+            "name": "sys_role_permissions",
+            "icon": "🔐",
+            "settings": {
+                "group": "security_roles"
+            }
+        },
+        {
+            "name": "sys_user_branch_access",
+            "icon": "🌍",
+            "settings": {
+                "group": "security_users"
+            }
+        }
+    ],
+    "tables": [
+        {
+            "name": "sys_companies",
+            "label": "الشركات",
+            "label_en": "Companies",
+            "module_id": "security",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true
+                },
+                {
+                    "name": "name",
+                    "type": "text",
+                    "required": true,
+                    "unique": true
+                },
+                {
+                    "name": "tax_id",
+                    "type": "text",
+                    "label": "الرقم الضريبي"
+                },
+                {
+                    "name": "commercial_reg",
+                    "type": "text",
+                    "label": "السجل التجاري"
+                },
+                {
+                    "name": "domain_url",
+                    "type": "text",
+                    "label": "رابط النطاق",
+                    "unique": true,
+                    "comment": "e.g. peg.mas.com.eg"
+                },
+                {
+                    "name": "logo_url",
+                    "type": "text"
+                },
+                {
+                    "name": "is_active",
+                    "type": "boolean",
+                    "defaultValue": true
+                },
+                {
+                    "name": "created_date",
+                    "type": "datetime"
+                }
+            ]
+        },
+        {
+            "name": "sys_companies_lang",
+            "label": "ترجمة الشركات",
+            "label_en": "Companies Translation",
+            "module_id": "security",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true
+                },
+                {
+                    "name": "ref_id",
+                    "type": "text",
+                    "required": true,
+                    "references": {
+                        "table": "sys_companies",
+                        "onDelete": "CASCADE"
+                    }
+                },
+                {
+                    "name": "lang_code",
+                    "type": "text",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "text",
+                    "required": true
+                },
+                {
+                    "name": "address",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "name": "sys_branches",
+            "label": "الفروع الداخلية",
+            "label_en": "Internal Branches",
+            "module_id": "security",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true
+                },
+                {
+                    "name": "company_id",
+                    "type": "text",
+                    "required": true,
+                    "references": {
+                        "table": "sys_companies"
+                    }
+                },
+                {
+                    "name": "code",
+                    "type": "text",
+                    "required": true,
+                    "unique": true
+                },
+                {
+                    "name": "name",
+                    "type": "text",
+                    "required": true
+                },
+                {
+                    "name": "type",
+                    "type": "text",
+                    "options": [
+                        "HQ",
+                        "STORE",
+                        "WAREHOUSE",
+                        "CLINIC"
+                    ],
+                    "defaultValue": "STORE"
+                },
+                {
+                    "name": "is_active",
+                    "type": "boolean",
+                    "defaultValue": true
+                },
+                {
+                    "name": "address",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "name": "sys_branches_lang",
+            "label": "ترجمة الفروع",
+            "label_en": "Branches Translation",
+            "module_id": "security",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true
+                },
+                {
+                    "name": "ref_id",
+                    "type": "text",
+                    "required": true,
+                    "references": {
+                        "table": "sys_branches",
+                        "onDelete": "CASCADE"
+                    }
+                },
+                {
+                    "name": "lang_code",
+                    "type": "text",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "text",
+                    "required": true
+                },
+                {
+                    "name": "address",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "name": "sys_roles",
+            "label": "الأدوار الوظيفية",
+            "label_en": "Roles",
+            "module_id": "security",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true
+                },
+                {
+                    "name": "name",
+                    "type": "text",
+                    "required": true,
+                    "unique": true
+                },
+                {
+                    "name": "description",
+                    "type": "text"
+                },
+                {
+                    "name": "is_superadmin",
+                    "type": "boolean",
+                    "defaultValue": false,
+                    "comment": "If true, bypasses all checks"
+                }
+            ]
+        },
+        {
+            "name": "sys_roles_lang",
+            "label": "ترجمة الأدوار",
+            "label_en": "Roles Translation",
+            "module_id": "security",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true
+                },
+                {
+                    "name": "ref_id",
+                    "type": "text",
+                    "required": true,
+                    "references": {
+                        "table": "sys_roles",
+                        "onDelete": "CASCADE"
+                    }
+                },
+                {
+                    "name": "lang_code",
+                    "type": "text",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "text",
+                    "required": true
+                },
+                {
+                    "name": "description",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "name": "sys_users",
+            "label": "المستخدمين",
+            "label_en": "Users",
+            "module_id": "security",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true
+                },
+                {
+                    "name": "username",
+                    "type": "text",
+                    "required": true,
+                    "unique": true
+                },
+                {
+                    "name": "full_name",
+                    "type": "text",
+                    "required": true
+                },
+                {
+                    "name": "password_hash",
+                    "type": "text",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "text"
+                },
+                {
+                    "name": "mobile",
+                    "type": "text"
+                },
+                {
+                    "name": "role_id",
+                    "type": "text",
+                    "references": {
+                        "table": "sys_roles"
+                    }
+                },
+                {
+                    "name": "license_status",
+                    "type": "integer",
+                    "required": true,
+                    "defaultValue": 1,
+                    "options": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "comment": "1=Active/Licensed, 2=Retired/ReviewOnly, 3=Banned"
+                },
+                {
+                    "name": "default_branch_id",
+                    "type": "text",
+                    "references": {
+                        "table": "sys_branches"
+                    }
+                },
+                {
+                    "name": "default_lang",
+                    "type": "text",
+                    "defaultValue": "ar"
+                },
+                {
+                    "name": "default_theme",
+                    "type": "text",
+                    "defaultValue": "light"
+                },
+                {
+                    "name": "created_date",
+                    "type": "datetime"
+                },
+                {
+                    "name": "last_login",
+                    "type": "datetime"
+                },
+                {
+                    "name": "failed_attempts",
+                    "type": "integer",
+                    "defaultValue": 0
+                },
+                {
+                    "name": "pin_code",
+                    "type": "text",
+                    "comment": "Used for POS quick access locally"
+                }
+            ]
+        },
+        {
+            "name": "sys_user_branch_access",
+            "label": "صلاحيات الفروع",
+            "label_en": "Branch Access",
+            "module_id": "security",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true
+                },
+                {
+                    "name": "user_id",
+                    "type": "text",
+                    "required": true,
+                    "references": {
+                        "table": "sys_users"
+                    }
+                },
+                {
+                    "name": "branch_id",
+                    "type": "text",
+                    "required": true,
+                    "references": {
+                        "table": "sys_branches"
+                    }
+                },
+                {
+                    "name": "can_post",
+                    "type": "boolean",
+                    "defaultValue": false,
+                    "comment": "Allow posting journals in this branch"
+                }
+            ]
+        },
+        {
+            "name": "sys_role_permissions",
+            "label": "صلاحيات الشاشات",
+            "label_en": "Screen Permissions",
+            "module_id": "security",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "text",
+                    "primaryKey": true
+                },
+                {
+                    "name": "role_id",
+                    "type": "text",
+                    "required": true,
+                    "references": {
+                        "table": "sys_roles"
+                    }
+                },
+                {
+                    "name": "screen_code",
+                    "type": "text",
+                    "required": true,
+                    "comment": "e.g., fin_journal, clinic_booking"
+                },
+                {
+                    "name": "can_view",
+                    "type": "boolean",
+                    "defaultValue": false
+                },
+                {
+                    "name": "can_insert",
+                    "type": "boolean",
+                    "defaultValue": false
+                },
+                {
+                    "name": "can_update",
+                    "type": "boolean",
+                    "defaultValue": false
+                },
+                {
+                    "name": "can_delete",
+                    "type": "boolean",
+                    "defaultValue": false
+                },
+                {
+                    "name": "can_print",
+                    "type": "boolean",
+                    "defaultValue": false
+                }
+            ]
+        }
+    ]
+}

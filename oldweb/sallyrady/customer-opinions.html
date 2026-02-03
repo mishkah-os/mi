@@ -1,0 +1,336 @@
+<!-- أولاً نربط ملفات jQuery و Slick -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<!-- تعديل الـ CSS -->
+<style>
+    .btContentWrap.btClear {
+        direction: rtl !important;
+    }
+    .thanks-title {
+        font-size: 32px;
+        color: #501f5b;
+        font-weight: bold;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        letter-spacing: 2px;
+        text-align: center;
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    /* أهم حاجة نخلي السلايدر كله relative */
+    .slider-wrapper {
+        position: relative;
+        padding-bottom: 60px; /* مساحة كافية للنقاط */
+    }
+
+    .slick-dots {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+    }
+
+    /* تخصيص شكل النقاط */
+    .slick-dots li button:before {
+        font-size: 12px;
+        color: #501f5b;
+        opacity: 0.75;
+    }
+
+    .slick-dots li.slick-active button:before {
+        color: #FF6F61;
+        opacity: 1;
+    }
+
+    /* للموبايل ضبط المسافات */
+    @media (max-width: 768px) {
+        .slider-wrapper {
+            padding-bottom: 50px;
+        }
+        .slick-dots {
+            bottom: 0;
+        }
+    }
+    @media (max-width: 768px) {
+    .bt_bb_column {
+        width: 100% !important;
+        
+        padding: 10px;
+        max-width:100% !important
+    }
+
+    .bt_bb_headline_subheadline {
+        font-size: 1.1em;
+        line-height: 1.6em;
+    }
+
+    .bt_bb_icon {
+        margin-bottom: 10px;
+    }
+
+    .bt_bb_headline h2 {
+        font-size: 1.5em;
+    }
+}
+@media (max-width: 480px) {
+    .bt_bb_headline_subheadline {
+        text-align: center !important;
+        padding: 0 15px;
+    }
+
+    .bt_bb_column_content_inner {
+        padding: 0 10px;
+    }
+}
+</style>
+
+
+<!-- HTML الخاص بالسكشن -->
+<div class="btContentWrap btClear">
+    <section
+        class="bt_bb_section gutter bt_bb_vertical_align_top btPageHeadline bt_bb_background_image bt_bb_background_overlay_light_solid bt_bb_parallax btLightSkin"
+        style="background-image: url(/UploadFiles/web/ecommerce_coash/images/about.jpg)"
+        data-parallax="0.8" data-parallax-offset="-200">
+        <div class="bt_bb_port port">
+            <div class="bt_bb_cell">
+                <div class="bt_bb_cell_inner">
+                    <div class="bt_bb_row">
+                        <div class="bt_bb_column" style="direction: rtl;">
+                            <div class="bt_bb_column_content">
+                                <header
+                                    class="bt_bb_headline bt_bb_dash_bottom bt_bb_superheadline bt_bb_subheadline bt_bb_size_large" style="text-align: center !important;">
+                                    <h1><span class="bt_bb_headline_content"><span>آراء العملاء</span></span></h1>
+                                    
+                                </header>
+                            </div>
+                        </div>
+                    </div> <!-- /row -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- السلايدر -->
+    <section id="bt_bb_section680937930f34e"
+        class="bt_bb_section bt_bb_color_scheme_6 bt_bb_layout_boxed_right_1200 bt_bb_vertical_align_top bt_bb_bottom_spacing_medium bt_bb_top_negative_margin_extra_large bt_bb_highlighted_no" style=" max-width:100% !important; height:auto;"
+        >
+        <div class="bt_bb_port">
+            <div class="bt_bb_cell" style="padding-left:0 !important">
+                <div class="bt_bb_cell_inner">
+                    <div class="bt_bb_row" data-bt-override-class="{}" data-structure="7-5">
+                        <div class="bt_bb_row_holder">
+                            <div class="bt_bb_column col-xl-5 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal bt_bb_animation_fade_in animate bt_bb_highlighted_no animated"
+                                 >
+                                <div class="bt_bb_column_content">
+                                    <div class="bt_bb_column_content_inner">
+                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_normal"
+                                                                data-bt-override-class="null"></div>
+                                    <div class=" bt_bb_row_inner" data-bt-override-class="{}"
+                                                                data-structure="12">
+                                                                <div class="bt_bb_row_inner_holder">
+                                                                    <div class="bt_bb_column_inner col-xxl-12 col-xl-12 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_double bt_bb_highlighted_no"
+                                                                        data-width="12" data-bt-override-class="{}">
+                                                                        <div class="bt_bb_column_inner_content">
+                                                                            <div class="bt_bb_text">
+                                                                               
+                                                                                    <p><strong class="thanks-title">تشكرات</strong>
+                                                                                    </p>
+                                                                            
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_normal"
+                                                                data-bt-override-class="null"></div>
+                                        <div class="slider-wrapper">
+    <div id="slick" class="bt_bb_content_slider"></div>
+</div>
+
+                                    </div>
+                                </div>
+                            </div> <!-- /column -->
+                        </div> <!-- /row_holder -->
+                    </div> <!-- /row -->
+                </div>
+            </div>
+        </div>
+    </section>
+      <section id="bt_bb_section6809379309eee"
+        class="bt_bb_section bt_bb_color_scheme_6 bt_bb_layout_boxed_right_1200 bt_bb_vertical_align_top bt_bb_bottom_spacing_medium bt_bb_top_negative_margin_extra_large bt_bb_highlighted_no" style=" max-width:100% !important; height:auto;"
+        >
+        <div class="bt_bb_port">
+            <div class="bt_bb_cell" style="padding-left:0 !important">
+                <div class="bt_bb_cell_inner">
+                    <div class="bt_bb_row" data-bt-override-class="{}" data-structure="7-5">
+                        <div class="bt_bb_row_holder">
+                            <div class="bt_bb_column col-xl-5 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_normal bt_bb_animation_fade_in animate bt_bb_highlighted_no animated"
+                                 >
+                                <div class="bt_bb_column_content">
+                                    <div class="bt_bb_column_content_inner">
+                                    <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_normal"
+                                                                data-bt-override-class="null"></div>
+                                    <div class=" bt_bb_row_inner" data-bt-override-class="{}"
+                                                                data-structure="12">
+                                                                <div class="bt_bb_row_inner_holder">
+                                                                    <div class="bt_bb_column_inner col-xxl-12 col-xl-12 bt_bb_vertical_align_top bt_bb_align_left bt_bb_padding_double bt_bb_highlighted_no"
+                                                                        data-width="12" data-bt-override-class="{}">
+                                                                        <div class="bt_bb_column_inner_content">
+                                                                            <div class="bt_bb_text">
+                                                                               
+                                                                                    <p><strong class="thanks-title">عشوائي</strong>
+                                                                                    </p>
+                                                                            
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="bt_bb_separator bt_bb_border_style_none bt_bb_bottom_spacing_normal"
+                                                                data-bt-override-class="null"></div>
+                                       <div class="slider-wrapper">
+    <div id="slick2" class="bt_bb_content_slider"></div>
+</div>
+
+                                    </div>
+                                </div>
+                            </div> <!-- /column -->
+                        </div> <!-- /row_holder -->
+                    </div> <!-- /row -->
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- سكريبت تحميل الصور وتشغيل السلايدر -->
+<script>
+    $(document).ready(function () {
+        var company_id = 'D0641A94-1463-4E2B-9180-ABD6BBCF955F';
+        $.post("../../r/j", {
+            tb: "web_coach_get_gallery",
+            tbtype: "view",
+            cols: "ID,photo_url,type",
+            parm: "('" + company_id + "','" + "planner" + "')"
+        }, function (data) {
+            console.log(data);
+            data.forEach((e, index) => {
+                $("#slick").append(`
+                    <div>
+                        <div class="bt_bb_content_slider_item_content content">
+                            <div class="bt_bb_image">
+                                 <img src="${e.photo_url}" alt="صورة" style="width:100%; height:auto; border-radius: 15px;">
+                            </div>
+                        </div>
+                    </div>
+                `);
+            });
+
+         $('#slick').slick({
+    centerMode: true,
+    centerPadding: '60px',
+    slidesToShow: 3,
+    lazyLoad: 'progressive',
+    cssEase: 'ease-out',
+    speed: 800,
+    accessibility: true,
+    arrows: true,
+    adaptiveHeight: true,
+    dots: true,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    rtl: true,
+    responsive: [
+        {
+            breakpoint: 1024, // لما العرض يبقى أقل من 1024px
+            settings: {
+                slidesToShow: 2,
+                centerPadding: '40px'
+            }
+        },
+        {
+            breakpoint: 768, // لما العرض يبقى أقل من 768px (موبايل تابلت)
+            settings: {
+                slidesToShow: 1,
+                centerPadding: '20px'
+            }
+        },
+        {
+            breakpoint: 480, // لما العرض يبقى أقل من 480px (موبايل صغير جداً)
+            settings: {
+                slidesToShow: 1,
+                centerPadding: '10px'
+            }
+        }
+    ]
+});
+
+        });
+        $.post("../../r/j", {
+            tb: "web_coach_get_gallery",
+            tbtype: "view",
+            cols: "ID,photo_url,type",
+            parm: "('" + company_id + "','" + "random" + "')"
+        }, function (data) {
+            console.log(data);
+            data.forEach((e, index) => {
+                $("#slick2").append(`
+                    <div>
+                        <div class="bt_bb_content_slider_item_content content">
+                            <div class="bt_bb_image">
+                                 <img src="${e.photo_url}" alt="صورة" style="width:100%; height:auto; border-radius: 15px;">
+                            </div>
+                        </div>
+                    </div>
+                `);
+            });
+
+            $('#slick2').slick({
+    centerMode: true,
+    centerPadding: '60px',
+    slidesToShow: 3,
+    lazyLoad: 'progressive',
+    cssEase: 'ease-out',
+    speed: 800,
+    accessibility: true,
+    arrows: true,
+    adaptiveHeight: true,
+    dots: true,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    rtl: true,
+    responsive: [
+        {
+            breakpoint: 1024, // لما العرض يبقى أقل من 1024px
+            settings: {
+                slidesToShow: 2,
+                centerPadding: '40px'
+            }
+        },
+        {
+            breakpoint: 768, // لما العرض يبقى أقل من 768px (موبايل تابلت)
+            settings: {
+                slidesToShow: 1,
+                centerPadding: '20px'
+            }
+        },
+        {
+            breakpoint: 480, // لما العرض يبقى أقل من 480px (موبايل صغير جداً)
+            settings: {
+                slidesToShow: 1,
+                centerPadding: '10px'
+            }
+        }
+    ]
+});
+
+        });
+ 
+   });
+</script>

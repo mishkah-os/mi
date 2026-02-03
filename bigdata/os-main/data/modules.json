@@ -1,0 +1,89 @@
+{
+  "modules": {
+    "scratchpad": {
+      "label": "Scratchpad",
+      "schemaPath": "schema/definition.json",
+      "schemaFallbackPath": "data/schemas/test_schema.json",
+      "seedPath": "seeds/initial.json",
+      "livePath": "live/data.json",
+      "historyPath": "history",
+      "tables": [],
+      "description": "Lightweight scratchpad module powered by schema engine."
+    },
+    "pos": {
+      "label": "POS",
+      "schemaPath": "schema/definition.json",
+      "schemaFallbackPath": "data/schemas/pos_schema.json",
+      "seedPath": "seeds/initial.json",
+      "seedFallbackPath": "data/seeds/pos-mock-data.json",
+      "livePath": "live/data.json",
+      "historyPath": "history",
+      "tables": [],
+      "description": "Serialized POS dataset for front/back sync."
+    },
+    "gym": {
+      "label": "Gym Management",
+      "schemaPath": "schema/definition.json",
+      "schemaFallbackPath": "data/schemas/gym_schema.json",
+      "seedPath": "seeds/initial.json",
+      "livePath": "live/data.json",
+      "historyPath": "history",
+      "tables": [],
+      "description": "Gym management system for memberships, services, and POS."
+    },
+    "brocker": {
+      "label": "Brocker PWA",
+      "schemaFallbackPath": "data/schemas/brocker_schema.json",
+      "seedFallbackPath": "data/seeds/brocker-mock-data.json",
+      "livePath": "live/data.json",
+      "historyPath": "history",
+      "tables": [],
+      "description": "Real estate broker-first dataset powering the Mishkah PWA experience."
+    },
+    "mostamal": {
+      "label": "Mostamal Hawa (SBN)",
+      "schemaFallbackPath": "data/schemas/sbn_schema.json",
+      "seedFallbackPath": "data/seeds/sbn_seeds.json",
+      "livePath": "live/data.json",
+      "historyPath": "history",
+      "tables": [],
+      "description": "Social Business Network - Marketplace, Services, and Knowledge sharing platform."
+    },
+    "clinic": {
+      "label": "Clinic",
+      "seedPath": "seeds/initial.json",
+      "livePath": "live/data.json",
+      "schemaPath": "schema/definition.json",
+      "schemaFallbackPath": "data/schemas/clinic_schema.json",
+      "historyPath": "history",
+      "tables": [],
+      "description": "Clinic ERP module (PT + Slimming) using Vertical Slots Grid + Bookings Intersection + Contracts/Packages + Ledger + Incentives + Notifications + Audit."
+    },
+    "security": {
+      "label": "Enterprise Security",
+      "engine": "cpp",
+      "schemaFallbackPath": "data/schemas/security_schema.json",
+      "seedPath": "seeds/initial.json",
+      "livePath": "live/data.json",
+      "historyPath": "history",
+      "tables": [],
+      "description": "Unified Security Kernel (Level 0 Module)"
+    },
+    "finance": {
+      "label": "Enterprise Finance",
+      "engine": "cpp",
+      "schemaFallbackPath": "data/schemas/finance_schema.json",
+      "seedPath": "seeds/initial.json",
+      "livePath": "live/data.json",
+      "historyPath": "history",
+      "tables": [],
+      "transactional_tables": [
+        "fin_journal_headers",
+        "fin_budgets",
+        "fin_cheques",
+        "fin_bank_statements"
+      ],
+      "description": "Enterprise Financial System (GL, AR/AP, Budgeting, Analytics)"
+    }
+  }
+}

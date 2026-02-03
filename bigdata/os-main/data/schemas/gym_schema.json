@@ -1,0 +1,53 @@
+{
+    "name": "gym",
+    "title": "Gym Management",
+    "description": "Schema definition for Gym Management System",
+    "schema": {
+        "tables": [
+            {
+                "name": "gym_config",
+                "fields": []
+            },
+            {
+                "name": "staff",
+                "fields": []
+            },
+            {
+                "name": "gym_member",
+                "fields": []
+            },
+            {
+                "name": "membership_plan",
+                "fields": []
+            },
+            {
+                "name": "membership_subscription",
+                "fields": []
+            },
+            {
+                "name": "gym_service",
+                "fields": []
+            },
+            {
+                "name": "service_transaction",
+                "fields": []
+            },
+            {
+                "name": "payment_transaction",
+                "fields": []
+            },
+            {
+                "name": "attendance_log",
+                "fields": []
+            },
+            {
+                "name": "reminder",
+                "fields": []
+            },
+            {
+                "name": "revenue_report",
+                "fields": []
+            }
+        ]
+    }
+}

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام الموظفين - مشكاة</title>
+  <!-- Mishkah Core -->
+  <script src="../mishkah-utils.js"></script>
+  <script src="../mishkah.core.js"></script>
+  <script src="../mishkah-ui.js"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3b82f6',
+            secondary: '#64748b'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen p-8 text-gray-800 font-sans">
+  <div id="app"></div>
+
+  <script>
+    // الاختصارات
+    const D = Mishkah.DSL;
+    const UI = Mishkah.UI;
+
+    // 1. قاعدة البيانات (Database)
+    const database = {
+      data: {
+        // قائمة الموظفين الابتدائية
+        employees: [
+          { id: 1, name: 'إسراء جابر', role: 'مدير تنفيذي' },
+          { id: 2, name: 'عصام جمعة', role: 'مدير تقني' },
+          { id: 3, name: 'محمد شهاب', role: 'مدير مالي' },
+          { id: 4, name: 'أحمد محمد', role: 'مصمم واجهات' },
+          { id: 5, name: 'حسين فتحي', role: 'مهندس جودة' }
+        ],
+        // حالة حقل الإدخال الجديد
+        newEmployeeName: '',
+        newEmployeeRole: ''
+      },
+      env: {
+        lang: 'ar',
+        theme: 'light'
+      },
+      i18n: {
+        dict: {} // يمكن إضافة الترجمات هنا
+      }
+    };
+
+    // 2. الأوامر (Orders)
+    const orders = {
+      // تحديث نص الاسم عند الكتابة
+      'emp.input.name': {
+        on: ['input'],
+        gkeys: ['input:name'],
+        handler: (e, ctx) => {
+          ctx.setState(state => {
+            const s = { ...state };
+            s.data.newEmployeeName = e.target.value;
+            return s;
+          });
+        }
+      },
+
+      // تحديث نص المسمى الوظيفي
+      'emp.input.role': {
+        on: ['input'],
+        gkeys: ['input:role'],
+        handler: (e, ctx) => {
+          ctx.setState(state => {
+            const s = { ...state };
+            s.data.newEmployeeRole = e.target.value;
+            return s;
+          });
+        }
+      },
+
+      // إضافة موظف جديد
+      'emp.add': {
+        on: ['click'],
+        gkeys: ['btn:add'],
+        handler: (e, ctx) => {
+          ctx.setState(state => {
+            if (!state.data.newEmployeeName.trim()) {
+              alert('الرجاء كتابة اسم الموظف');
+              return state;
+            }
+            if (!state.data.newEmployeeRole.trim()) {
+              alert('الرجاء كتابة المسمى الوظيفي');
+              return state;
+            }
+
+            const s = { ...state };
+            const newEmp = {
+              id: Date.now(),
+              name: s.data.newEmployeeName,
+              role: s.data.newEmployeeRole
+            };
+
+            s.data.employees = [...s.data.employees, newEmp];
+            s.data.newEmployeeName = '';
+            s.data.newEmployeeRole = ''; // تصفير الحقل
+            return s;
+          });
+        }
+      },
+
+      // حذف موظف
+      'emp.delete': {
+        on: ['click'],
+        gkeys: ['btn:delete'],
+        handler: (e, ctx) => {
+          // نستخدم data-id المخزن في الزر
+          const id = Number(e.target.dataset.id);
+          if (!id) return;
+
+          ctx.setState(state => {
+            if (!confirm('هل أنت متأكد من الحذف؟')) return state;
+            const s = { ...state };
+            s.data.employees = s.data.employees.filter(emp => emp.id !== id);
+            return s;
+          });
+        }
+      },
+
+      // عرض قاعدة البيانات
+      'sys.debug': {
+        on: ['click'],
+        gkeys: ['btn:debug'],
+        handler: (e, ctx) => {
+          console.log('Current Database:', ctx.getState());
+          alert(JSON.stringify(ctx.getState(), null, 2));
+        }
+      }
+    };
+
+    // 3. الواجهة (DSL Body)
+    function body(db) {
+
+      // عنوان الصفحة
+      const header = D.header({ attrs: { class: 'mb-8 text-center' } }, [
+        D.h1({ attrs: { class: 'text-4xl font-bold text-primary mb-2' } }, ['نظام إدارة الموظفين']),
+        D.p({ attrs: { class: 'text-secondary' } }, ['فريق العمل المميز'])
+      ]);
+
+      // نموذج الإضافة
+      const addForm = D.div({ attrs: { class: 'bg-white p-6 rounded-xl shadow-md mb-8 flex gap-4 items-end' } }, [
+        // حقل الاسم
+        D.div({ attrs: { class: 'flex-1' } }, [
+          D.label({ attrs: { class: 'block text-sm font-medium mb-1' } }, ['اسم الموظف']),
+          D.input({
+            attrs: {
+              class: 'w-full p-2 border rounded-lg focus:ring-2 focus:ring-primary outline-none',
+              placeholder: 'اكتب الاسم...',
+              value: db.data.newEmployeeName,
+              gkey: 'input:name'
+            }
+          })
+        ]),
+        // حقل الوظيفة
+        D.div({ attrs: { class: 'flex-1' } }, [
+          D.label({ attrs: { class: 'block text-sm font-medium mb-1' } }, ['المسمى الوظيفي']),
+          D.input({
+            attrs: {
+              class: 'w-full p-2 border rounded-lg focus:ring-2 focus:ring-primary outline-none',
+              placeholder: 'وظيفة الموظف...',
+              value: db.data.newEmployeeRole,
+              gkey: 'input:role'
+            }
+          })
+        ]),
+        // زر الإضافة
+        D.button({
+          attrs: {
+            class: 'bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition font-bold h-[42px]',
+            gkey: 'btn:add'
+          }
+        }, ['إضافة +'])
+      ]);
+
+      // قائمة الموظفين
+      const listItems = db.data.employees.map(emp => {
+        return D.div({
+          attrs: { class: 'flex items-center justify-between p-4 bg-white border-b last:border-0 hover:bg-gray-50 transition' }
+        }, [
+          // معلومات الموظف
+          D.div({ attrs: { class: 'flex items-center gap-4' } }, [
+            // أيقونة / صورة رمزية
+            D.div({ attrs: { class: 'w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-primary font-bold' } }, [
+              emp.name.charAt(0) // الحرف الأول
+            ]),
+            D.div({}, [
+              D.h3({ attrs: { class: 'font-bold' } }, [emp.name]),
+              D.span({ attrs: { class: 'text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full' } }, [emp.role])
+            ])
+          ]),
+
+          // زر الحذف
+          D.button({
+            attrs: {
+              class: 'text-red-500 hover:bg-red-50 p-2 rounded-full transition w-8 h-8 flex items-center justify-center',
+              gkey: 'btn:delete',
+              'data-id': emp.id
+            }
+          }, ['✕'])
+        ]);
+      });
+
+      const employeeList = D.div({ attrs: { class: 'bg-white rounded-xl shadow-lg overflow-hidden' } },
+        listItems.length ? listItems : [
+          D.div({ attrs: { class: 'p-8 text-center text-gray-400' } }, ['لا يوجد موظفين حالياً'])
+        ]
+      );
+
+      // زر عرض البيانات (Debug)
+      const debugBtn = D.button({
+        attrs: {
+          class: 'fixed bottom-4 left-4 bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg text-sm hover:bg-black transition z-50',
+          gkey: 'btn:debug'
+        }
+      }, ['🔍 عرض قاعدة البيانات']);
+
+      return D.div({ attrs: { class: 'max-w-2xl mx-auto' } }, [
+        header,
+        addForm,
+        employeeList,
+        debugBtn
+      ]);
+    }
+
+    // تشغيل التطبيق
+    Mishkah.app.setBody(body);
+    Mishkah.app.create(database, orders).mount('#app');
+
+  </script>
+</body>
+
+</html>

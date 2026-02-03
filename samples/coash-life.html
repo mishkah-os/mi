@@ -1,0 +1,1458 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>الكوتش سالي راضي | كوتش علاقات وتنمية ذات</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://ws.mas.com.eg/lib/mishkah.core.js"></script>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script async src="https://www.tiktok.com/embed.js"></script>
+
+  <style>
+    :root[data-theme="light"] {
+      --bg-body: #f8fafc;
+      --bg-grad: radial-gradient(1200px 600px at 50% 0%, #f1f8ff 0%, #f8fafc 55%, #f3f4f6 100%);
+      --bg-surface: #ffffff;
+      --bg-elev: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary: #2563eb;
+      --primary-fg: #ffffff;
+      --accent: #ec4899;
+      --border: #e2e8f0;
+      --ring: rgba(37, 99, 235, .20);
+      --glass: rgba(255, 255, 255, .76);
+      --shadow: 0 18px 50px rgba(2, 6, 23, .12);
+      --soft: rgba(37, 99, 235, .08);
+    }
+
+    :root[data-theme="dark"] {
+      --bg-body: #040b1a;
+      --bg-grad: radial-gradient(1000px 520px at 50% 0%, #0d2b6a 0%, #071225 55%, #040b1a 100%);
+      --bg-surface: #081a36;
+      --bg-elev: #0b2145;
+      --text-main: #e6f1ff;
+      --text-muted: #9ab0d6;
+      --primary: #8ab4ff;
+      --primary-fg: #041224;
+      --accent: #ff7ab6;
+      --border: #1e3a66;
+      --ring: rgba(138, 180, 255, .22);
+      --glass: rgba(4, 11, 26, .64);
+      --shadow: 0 30px 90px rgba(0, 0, 0, .45);
+      --soft: rgba(138, 180, 255, .12);
+    }
+
+    body {
+      background: var(--bg-grad);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: "Cairo", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      min-height: 100vh;
+      transition: background .25s, color .25s;
+    }
+
+    .font-en {
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    }
+
+    .font-serif {
+      font-family: "Playfair Display", serif;
+    }
+
+    .glass {
+      background: var(--glass);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .08) 0%, rgba(255, 255, 255, .03) 100%);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    :root[data-theme="light"] .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .92) 0%, rgba(255, 255, 255, .78) 100%);
+    }
+
+    .btn {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .04);
+      color: var(--text-main);
+    }
+
+    :root[data-theme="light"] .btn {
+      background: rgba(2, 6, 23, .02)
+    }
+
+    .btn:hover {
+      filter: brightness(1.03)
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-fg);
+      border-color: transparent;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.02)
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, .10);
+      border: 1px solid rgba(255, 255, 255, .12);
+    }
+
+    :root[data-theme="light"] .badge {
+      background: rgba(2, 6, 23, .04);
+      border: 1px solid rgba(2, 6, 23, .08);
+    }
+
+    .chip {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .chip-active {
+      background: var(--soft);
+      border-color: rgba(37, 99, 235, .35);
+    }
+
+    :root[data-theme="dark"] .chip-active {
+      border-color: rgba(138, 180, 255, .40)
+    }
+
+    .focus-ring:focus {
+      outline: none;
+      box-shadow: 0 0 0 6px var(--ring)
+    }
+
+    .shadow-soft {
+      box-shadow: 0 22px 70px rgba(2, 6, 23, .25)
+    }
+
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .shell-enter {
+      animation: shellIn .28s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    @keyframes shellIn {
+      from {
+        transform: translateY(10px);
+        opacity: 0
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1
+      }
+    }
+
+    /* Lightbox */
+    .lb-backdrop {
+      background: rgba(0, 0, 0, .78);
+      backdrop-filter: blur(10px)
+    }
+
+    :root {
+      --hero-title: var(--text-main);
+      --hero-desc: var(--text-muted);
+    }
+
+    :root[data-theme="dark"] #hero {
+      --hero-title: #0f172a;
+      --hero-desc: #334155;
+    }
+
+    .hero-title {
+      color: var(--hero-title);
+    }
+
+    .hero-desc {
+      color: var(--hero-desc);
+    }
+
+    :root[data-theme="dark"] .hero-card {
+      background: rgba(255, 255, 255, .72);
+      border-color: rgba(15, 23, 42, .12);
+      box-shadow: 0 28px 90px rgba(0, 0, 0, .35);
+    }
+
+    :root[data-theme="dark"] .hero-card .btn {
+      color: #0f172a;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    const whatsappLink = ''
+    const API_URL = "../../r/j";
+
+    function qp(name) {
+      try { return new URLSearchParams(location.search).get(name) || ""; } catch (_) { return ""; }
+    }
+    function getCookie(name) {
+      const m = String(document.cookie || "").match(new RegExp("(^|;\s*)" + name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "=([^;]*)"));
+      return m ? decodeURIComponent(m[2]) : "";
+    }
+    function safe(v, fb) { return (v == null || v === "") ? (fb || "") : v; }
+    function cleanPath(p) {
+      if (!p) return "";
+      const s = String(p).trim();
+      if (!s) return "";
+      if (s.startsWith("http://") || s.startsWith("https://")) return s;
+      if (s.startsWith("./") || s.startsWith("../")) return s;
+      if (s.startsWith("/")) return s;
+      return "../../" + s;
+    }
+    function formatMoney(v) {
+      const n = Number(v);
+      if (!isFinite(n)) return String(v || "");
+      return n.toLocaleString(undefined, { maximumFractionDigits: 2 });
+    }
+    function splitLines(text) {
+      const t = String(text || "").trim();
+      if (!t) return [];
+      return t.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+    }
+    function normalizeImages(list) {
+      const out = [];
+      if (!Array.isArray(list)) return out;
+      const seen = new Set();
+      for (const x of list) {
+        const p = cleanPath(x);
+        if (!p || seen.has(p)) continue;
+        seen.add(p);
+        out.push(p);
+      }
+      return out;
+    }
+
+    async function apiPost(payload) {
+      try {
+        const r = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
+          body: new URLSearchParams(payload)
+        });
+        const j = await r.json();
+        if (Array.isArray(j)) return j;
+        if (j && Array.isArray(j.data)) return j.data;
+        if (j && Array.isArray(j.rows)) return j.rows;
+        return j ? [j] : [];
+      } catch (_) {
+        return null;
+      }
+    }
+
+    async function fetchShopItems(companyId) {
+      const parm = "('" + (companyId || "") + "')";
+      const rows = await apiPost({ tb: "coach_get_Item", tbtype: "view", cols: "ID,Item_name,item_photo,Item_Description,Price,Company_ID", parm });
+      if (rows && rows.length) return rows;
+      return [];
+    }
+
+    async function fetchBlogList(lang, companyId) {
+      const categoryId = "12b89a65d3d640fda89969093ca5409b";
+      const parm = "('" + (companyId || "") + "','" + categoryId + "')";
+      const rows = await apiPost({ tb: "coach_life_get_post", tbtype: "view", cols: "ID,main_photo,title,post_details,company_id,post_category,post_outline", parm });
+      return rows && rows.length ? rows : [];
+    }
+
+    async function fetchTestimonials(companyId) {
+      const parm = "('" + (companyId || "") + "','planner')";
+      const rows = await apiPost({ tb: "web_coach_get_gallery", tbtype: "view", cols: "ID,photo_url,type", parm });
+      return rows && rows.length ? rows : [];
+    }
+
+    async function fetchSingleBlog(id, lang) {
+      // If backend supports single post by ID, keep this; otherwise fallback to list item match
+      const parm = "('" + (id || "") + "','" + (lang || "ar") + "')";
+      const rows = await apiPost({ tb: "coach_single_blog", tbtype: "view", parm });
+      return rows && rows[0] ? rows[0] : null;
+    }
+
+
+    const database = {
+      data: {
+        mobileMenuOpen: false,
+        currentSlide: 0,
+
+        shopOpen: false,
+        shopSearch: "",
+        cartOpen: false,
+        galleryOpen: false,
+        galleryIndex: 0,
+        blogModalOpen: false,
+        blogModalId: null,
+        videosShowAll: false,
+        testimonialsShowAll: false,
+        blogItems: [],
+        shopItems: [],
+        testimonialsItems: [],
+        shopLoading: true,
+        blogLoading: true,
+        testimonialsLoading: true,
+
+        toast: null,
+        faqOpen: null
+      },
+      env: { theme: "dark", lang: "ar", dir: "rtl", companyId: "1D6109C1-53F5-4393-A476-CE1A9CAB99CC" },
+      content: {
+        brand: {
+          name: { ar: "سالي راضي", en: "Sally Rady" },
+          title: { ar: "لايف كوتش وكوتش علاقات", en: "Life Coach & Relationship Coach" },
+          logo: "https://sallyrady.com/UploadFiles/web/ecommerce_coash/images/sallyraddylogo.png",
+          logoVideo: "https://sallyrady.com/UploadFiles/web/ecommerce_coash/images/logo_video.mp4",
+          phone: "201000000000",
+          email: "info@sallyrady.com",
+          whatsapp: "201000000000",
+          instagram: "https://www.instagram.com/coachsallyrady",
+          facebook: "https://www.facebook.com/Tashakorat/",
+          facebook2: "https://www.facebook.com/sally.hussinrady/",
+          tiktok: "https://www.tiktok.com/@coachsallyrady",
+          addressLines: {
+            ar: ["مصر"],
+            en: ["Egypt"]
+          }
+        },
+        hero: {
+          slides: [
+            {
+              img: "https://sallyrady.com/UploadFiles/web/ecommerce_coash/images/bgn-slider-01.jpg",
+              mobImg: "https://sallyrady.com/UploadFiles/web/ecommerce_coash/images/bgn-slider-01_mob.jpg",
+              align: "left",
+              badge: { ar: "جلسات فردية • جروب كوتشنج", en: "1:1 Sessions • Group Coaching" },
+              title: { ar: "افهمي نفسك… وابدئي تغييرك الحقيقي", en: "Understand yourself, start real change" },
+              desc: {
+                ar: "كوتش سالي راضي متخصصة في العلاقات الزوجية والأسرية وتنمية الذات، بخبرة واسعة في الجلسات الفردية والجروب كوتشنج. تساعدك على رؤية أوضح لنفسك، واتخاذ قرارات أنضج، وبناء علاقة أكثر هدوءًا واتزانًا.",
+                en: "Specialized in marital & family relationships and self-development, with extensive experience in 1:1 sessions and group coaching."
+              }
+            },
+            {
+              img: "https://sallyrady.com/UploadFiles/web/ecommerce_coash/images/bgn-slider-02.jpg",
+              mobImg: "https://sallyrady.com/UploadFiles/web/ecommerce_coash/images/bgn-slider-02_mob.jpg",
+              align: "right",
+              badge: { ar: "التدوين كأداة تغيير", en: "Journaling as a tool" },
+              title: { ar: "التدوين… بوابتك للفهم العميق", en: "Journaling for deep clarity" },
+              desc: {
+                ar: "من خلال التدوين وأدوات الكوتشنج الفعالة، هتقدري تفهمي مشاعرك ودوافعك بشكل أعمق، وتخرجي من دوامة التكرار لنقطة بداية جديدة.",
+                en: "Through journaling and effective coaching tools, you gain clarity and healthier patterns."
+              }
+            },
+            {
+              img: "https://sallyrady.com/UploadFiles/web/ecommerce_coash/images/bgn-slider-03.jpg",
+              mobImg: "https://sallyrady.com/UploadFiles/web/ecommerce_coash/images/bgn-slider-03_mob.jpg",
+              align: "left",
+              badge: { ar: "اهتمام بقضايا حياتك", en: "Real-life support" },
+              title: { ar: "أنا هنا لمساعدتك", en: "I'm here to help" },
+              desc: {
+                ar: "نحن جميعًا نعلم كم يمكن أن تكون الحياة مليئة بالتحديات والصعوبات، وأنه لا يوجد دائمًا جواب لكل المشاكل التي قد تواجهها… لكن يوجد طريق أوضح حين نعرف أنفسنا أولًا. وأنا هنا لمساعدتك.",
+                en: "Life is challenging. We may not have every answer, but we can always build a clearer path—together."
+              }
+            }
+          ]
+        },
+        features: [
+          {
+            icon: "fa-solid fa-heart-pulse",
+            title: { ar: "كوتشنج علاقات بوعي", en: "Relationship coaching" },
+            desc: { ar: "فهم أعمق لنفسك وحدودك واحتياجاتك داخل العلاقة.", en: "Deeper clarity about needs, boundaries, and patterns." }
+          },
+          {
+            icon: "fa-solid fa-users",
+            title: { ar: "جلسات فردية وجروب", en: "1:1 & group sessions" },
+            desc: { ar: "اختاري الأنسب لك بين جلسات فردية أو جروب كوتشنج.", en: "Pick what fits you: private sessions or group coaching." }
+          },
+          {
+            icon: "fa-solid fa-feather-pointed",
+            title: { ar: "التدوين كأداة تغيير", en: "Journaling tools" },
+            desc: { ar: "أدوات تدوين تساعدك تلاحظي وتفهمي وتطوري قراراتك.", en: "Journaling practices that build awareness and growth." }
+          },
+          {
+            icon: "fa-solid fa-compass",
+            title: { ar: "خطوات عملية قابلة للتطبيق", en: "Actionable steps" },
+            desc: { ar: "مش كلام عام—خطة بسيطة قابلة للتطبيق كل أسبوع.", en: "Not generic talk—simple weekly steps you can apply." }
+          }
+        ],
+
+        shop: {
+          headline: { ar: "المتجر", en: "Shop" },
+          sub: { ar: "منتجات مختارة تساعدك على تنظيم حياتك وتطوير ذاتك", en: "Curated products that support your growth" }
+        },
+        gallery: {
+          headline: { ar: "الجاليري", en: "Gallery" },
+          sub: { ar: "لحظات ولقطات من رحلة التطوير", en: "Moments from the journey" },
+          images: [
+            "/UploadFiles/israa_Gaber/israa_Gaber/Photoroom-20250209_215651_03042025110206169.png",
+            "/UploadFiles/israa_Gaber/israa_Gaber/Photoroom-20250209_220046_03042025112414018.png",
+            "/UploadFiles/israa_Gaber/israa_Gaber/Photoroom-20250209_220022_03042025130708291.png",
+            "/UploadFiles/israa_Gaber/israa_Gaber/Dofoto_20250210_220627215_03042025125800764.png"
+          ]
+        },
+        faq: [
+          {
+            q: { ar: "هل الكوتشنج مناسب لي؟", en: "Is coaching right for me?" },
+            a: { ar: "لو عندك رغبة حقيقية في الفهم والتغيير خطوة بخطوة—فالكوتشنج مناسب جدًا. هنشتغل معًا على الهدف والوعي والعادات.", en: "If you want clarity and a step-by-step change, coaching is a great fit." }
+          },
+          {
+            q: { ar: "هل توجد جلسات أونلاين؟", en: "Do you offer online sessions?" },
+            a: { ar: "نعم—متاح أونلاين حسب المواعيد المتاحة. تواصلي عبر واتساب لتحديد التفاصيل.", en: "Yes—online sessions are available. Reach out on WhatsApp to schedule." }
+          }
+        ],
+        videos: [
+          { id: "7600735924791627016", url: "https://www.tiktok.com/@coachsallyrady/video/7600735924791627016" },
+          { id: "7600155207892274450", url: "https://www.tiktok.com/@coachsallyrady/video/7600155207892274450" },
+          { id: "7599341746849418503", url: "https://www.tiktok.com/@coachsallyrady/video/7599341746849418503" },
+          { id: "7599025062183750920", url: "https://www.tiktok.com/@coachsallyrady/video/7599025062183750920" },
+          { id: "7598667872222727442", url: "https://www.tiktok.com/@coachsallyrady/video/7598667872222727442" },
+          { id: "7598523338633268488", url: "https://www.tiktok.com/@coachsallyrady/video/7598523338633268488" },
+          { id: "7598188945633070354", url: "https://www.tiktok.com/@coachsallyrady/video/7598188945633070354" },
+          { id: "7596020517224664338", url: "https://www.tiktok.com/@coachsallyrady/video/7596020517224664338" },
+          { id: "7593025896244612360", url: "https://www.tiktok.com/@coachsallyrady/video/7593025896244612360" },
+          { id: "7587865041525837064", url: "https://www.tiktok.com/@coachsallyrady/video/7587865041525837064" },
+          { id: "7585250782195223826", url: "https://www.tiktok.com/@coachsallyrady/video/7585250782195223826" },
+          { id: "7584157807520386311", url: "https://www.tiktok.com/@coachsallyrady/video/7584157807520386311" },
+          { id: "7582161389217778962", url: "https://www.tiktok.com/@coachsallyrady/video/7582161389217778962" },
+          { id: "7580058937882381575", url: "https://www.tiktok.com/@coachsallyrady/video/7580058937882381575" },
+          { id: "7578819271585778962", url: "https://www.tiktok.com/@coachsallyrady/video/7578819271585778962" }
+        ],
+        team: [
+          {
+            name: { ar: "إسراء فتحي", en: "Esraa Fathy" },
+            role: { ar: "مصممة الجرافيك", en: "Graphic Designer" },
+            photo: "/UploadFiles/web/ecommerce_coash/images/Israa_fathy.jpeg",
+            bio: {
+              ar: "العقل البصري وراء هوية العلامة، مهندسة متخصصة في التصميم الجرافيكي. تصاميمها دائمًا تعكس روح العلامة بأسلوب مبتكر وجذاب. تمتلك رؤية فنية عملية توازن بين الجمال والوظيفية.",
+              en: "The visual mind behind our brand identity, a specialized graphic design engineer. Her designs always reflect spirit with innovative and attractive style."
+            }
+          },
+          {
+            name: { ar: "آلاء حسين", en: "Alaa Hussein" },
+            role: { ar: "مسؤولة التسويق", en: "Marketing Manager" },
+            photo: "/UploadFiles/web/ecommerce_coash/images/Alaa_Huss.jpeg",
+            bio: {
+              ar: "العقل الإبداعي وراء حملاتنا التسويقية، تجمع بين الفهم العميق للمشاعر الإنسانية والمهارات التحليلية الدقيقة. حاصلة على درجة البكالوريوس في التجارة وإدارة الأعمال، تؤمن بأن العلاقات القوية تبدأ بفهم أعمق للنفس والآخرين.",
+              en: "The creative mind behind our marketing campaigns, combining deep understanding of human emotions with analytical skills. Bachelor's degree in Commerce and Business Administration."
+            }
+          }
+        ]
+      },
+      i18n: {
+        dict: {
+          nav_home: { ar: "الرئيسية", en: "Home" },
+          nav_shop: { ar: "المتجر", en: "Shop" },
+          nav_blog: { ar: "المدونة", en: "Blog" },
+          nav_gallery: { ar: "الجاليري", en: "Gallery" },
+          nav_about: { ar: "عن الكوتش", en: "About" },
+          nav_contact: { ar: "تواصل", en: "Contact" },
+          btn_lang: { ar: "EN", en: "AR" },
+          btn_theme: { ar: "الثيم", en: "Theme" },
+          btn_whatsapp: { ar: "واتساب سريع", en: "WhatsApp" },
+          btn_blog: { en: "Blog", ar: "المدونة" },
+          btn_shop_now: { en: "Shop Now", ar: "تسوّقي الآن" },
+          btn_book: { ar: "احجزي جلسة", en: "Book a Session" },
+          btn_explore_shop: { ar: "تسوقي الآن", en: "Shop Now" },
+          btn_view_details: { ar: "عرض التفاصيل", en: "View Details" },
+          btn_add_to_cart: { ar: "أضف لعربة التسوق", en: "Add to Cart" },
+          btn_open_cart: { ar: "العربة", en: "Cart" },
+          lbl_price: { ar: "السعر", en: "Price" },
+          lbl_close: { ar: "إغلاق", en: "Close" },
+          lbl_back: { ar: "رجوع", en: "Back" },
+          lbl_loading: { ar: "جاري التحميل…", en: "Loading…" },
+          sec_faq: { ar: "أسئلة شائعة", en: "FAQ" },
+          sec_contact: { ar: "تواصل بسرعة", en: "Get in touch" },
+          sec_quote: { ar: "اقتباس", en: "Quote" },
+          toast_added: { ar: "تمت الإضافة إلى العربة", en: "Added to cart" }
+        }
+      }
+    };
+
+    const orders = {
+      "sys.theme": {
+        on: ["click"], gkeys: ["btn:theme"],
+        handler: (e, ctx) => {
+          const st = ctx.getState();
+          const next = st.env.theme === "light" ? "dark" : "light";
+          ctx.setState(s => ({ ...s, env: { ...s.env, theme: next } }));
+        }
+      },
+      "sys.lang": {
+        on: ["click"], gkeys: ["btn:lang"],
+        handler: (e, ctx) => {
+          const st = ctx.getState();
+          const next = st.env.lang === "ar" ? "en" : "ar";
+          const dir = next === "ar" ? "rtl" : "ltr";
+          ctx.setState(s => ({ ...s, env: { ...s.env, lang: next, dir } }));
+          (async () => {
+            const s2 = ctx.getState();
+            const blog = await fetchBlogList(s2.env.lang, s2.env.companyId);
+            ctx.setState(s => ({ ...s, data: { ...s.data, blogItems: blog } }));
+          })().catch(_ => { });
+        }
+      },
+      "sys.menu": {
+        on: ["click"], gkeys: ["btn:menu"],
+        handler: (e, ctx) => ctx.setState(s => ({ ...s, data: { ...s.data, mobileMenuOpen: !s.data.mobileMenuOpen } }))
+      },
+      "video.play": {
+        on: ["DOMContentLoaded", "canplay"],
+        gkeys: ["video:play"],
+        handler: (e) => {
+          const v = e.target.closest("video");
+          if (v) {
+            v.currentTime = 0;
+            v.play().catch(() => { });
+          }
+        }
+      },
+      "scroll.to": {
+        on: ["click"], gkeys: ["nav:scroll"],
+        handler: (e, ctx) => {
+          const el = e.target.closest("[data-to]");
+          const to = el ? el.dataset.to : "";
+          ctx.setState(s => ({ ...s, data: { ...s.data, mobileMenuOpen: false } }));
+          if (!to) return;
+          const target = document.getElementById(to);
+          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      },
+      "slide.next": {
+        on: ["click"], gkeys: ["slide:next"],
+        handler: (e, ctx) => ctx.setState(s => ({ ...s, data: { ...s.data, currentSlide: (s.data.currentSlide + 1) % s.content.hero.slides.length } }))
+      },
+      "slide.prev": {
+        on: ["click"], gkeys: ["slide:prev"],
+        handler: (e, ctx) => ctx.setState(s => ({ ...s, data: { ...s.data, currentSlide: (s.data.currentSlide - 1 + s.content.hero.slides.length) % s.content.hero.slides.length } }))
+      },
+      "slide.dot": {
+        on: ["click"], gkeys: ["slide:dot"],
+        handler: (e, ctx) => {
+          const el = e.target.closest("[data-i]");
+          if (!el) return;
+          const i = Number(el.dataset.i);
+          if (!isFinite(i)) return;
+          ctx.setState(s => ({ ...s, data: { ...s.data, currentSlide: i } }));
+        }
+      },
+      "cart.toggle": {
+        on: ["click"], gkeys: ["cart:toggle"],
+        handler: (e, ctx) => ctx.setState(s => ({ ...s, data: { ...s.data, cartOpen: !s.data.cartOpen } }))
+      },
+      "cart.clear": {
+        on: ["click"], gkeys: ["cart:clear"],
+        handler: (e, ctx) => {
+          localStorage.removeItem("cart");
+          ctx.setState(s => ({ ...s, data: { ...s.data, cartCount: 0, toast: null } }));
+        }
+      },
+      "shop.add": {
+        on: ["click"], gkeys: ["shop:add"],
+        handler: (e, ctx) => {
+          const el = e.target.closest("[data-id]");
+          if (!el) return;
+          const id = el.dataset.id || "";
+          const name = el.dataset.name || "";
+          const price = el.dataset.price || "";
+          const photo = el.dataset.photo || "";
+          const product = { id, name, price, photo, quantity: 1 };
+
+          let cart = [];
+          try {
+            const raw = localStorage.getItem("cart");
+            cart = raw ? JSON.parse(raw) : [];
+            if (!Array.isArray(cart)) cart = [];
+          } catch (_) { cart = []; }
+
+          const ex = cart.find(x => String(x.id) === String(id));
+          if (ex) ex.quantity = (Number(ex.quantity) || 1) + 1;
+          else cart.push(product);
+
+          localStorage.setItem("cart", JSON.stringify(cart));
+          ctx.setState(s => ({ ...s, data: { ...s.data, cartCount: cart.reduce((a, b) => a + (Number(b.quantity) || 1), 0), toast: { msgKey: "toast_added", ts: Date.now() } } }));
+          setTimeout(() => {
+            const st = ctx.getState();
+            if (st.data.toast && Date.now() - st.data.toast.ts > 2200) {
+              ctx.setState(ss => ({ ...ss, data: { ...ss.data, toast: null } }));
+            }
+          }, 2400);
+        }
+      },
+      "gallery.open": {
+        on: ["click"], gkeys: ["gallery:open"],
+        handler: (e, ctx) => {
+          const el = e.target.closest("[data-i]");
+          if (!el) return;
+          const i = Number(el.dataset.i);
+          if (!isFinite(i)) return;
+          ctx.setState(s => ({ ...s, data: { ...s.data, galleryOpen: true, galleryIndex: i } }));
+        }
+      },
+      "gallery.close": {
+        on: ["click"], gkeys: ["gallery:close"],
+        handler: (e, ctx) => ctx.setState(s => ({ ...s, data: { ...s.data, galleryOpen: false } }))
+      },
+      "gallery.next": {
+        on: ["click"], gkeys: ["gallery:next"],
+        handler: (e, ctx) => {
+          const imgs = normalizeImages(ctx.getState().content.gallery.images || []);
+          if (!imgs.length) return;
+          ctx.setState(s => ({ ...s, data: { ...s.data, galleryIndex: (s.data.galleryIndex + 1) % imgs.length } }));
+        }
+      },
+      "gallery.prev": {
+        on: ["click"],
+        gkeys: ["gallery:prev"],
+        handler: (_, ctx) => {
+          const st = ctx.getState();
+          const max = (normalizeImages(st.content.gallery.images || []).length || 1);
+          ctx.setState(s => ({ data: { ...s.data, galleryIndex: (s.data.galleryIndex - 1 + max) % max } }));
+        }
+      },
+      "blog.modal.open": {
+        on: ["click"],
+        gkeys: ["blog:open"],
+        handler: (e, ctx) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const id = e.target.closest("[data-blog-id]")?.getAttribute("data-blog-id");
+          if (!id) return;
+          ctx.setState(s => ({ data: { ...s.data, blogModalOpen: true, blogModalId: id } }));
+        }
+      },
+      "blog.modal.close": {
+        on: ["click"],
+        gkeys: ["blog:close"],
+        handler: (e, ctx) => {
+          e.preventDefault();
+          e.stopPropagation();
+          ctx.setState(s => ({ data: { ...s.data, blogModalOpen: false, blogModalId: null } }));
+        }
+      },
+      "videos.showMore": {
+        on: ["click"],
+        gkeys: ["videos:showmore"],
+        handler: (_, ctx) => {
+          ctx.setState(s => ({ data: { ...s.data, videosShowAll: !s.data.videosShowAll } }));
+        }
+      },
+      "testimonials.showMore": {
+        on: ["click"],
+        gkeys: ["testimonials:showmore"],
+        handler: (_, ctx) => {
+          ctx.setState(s => ({ data: { ...s.data, testimonialsShowAll: !s.data.testimonialsShowAll } }));
+        }
+      },
+      "faq.toggle": {
+        on: ["click"], gkeys: ["faq:toggle"],
+        handler: (e, ctx) => {
+          const el = e.target.closest("[data-i]");
+          if (!el) return;
+          const i = Number(el.dataset.i);
+          if (!isFinite(i)) return;
+          ctx.setState(s => ({ ...s, data: { ...s.data, faqOpen: s.data.faqOpen === i ? null : i } }));
+        }
+      }
+    };
+
+    function body(db) {
+      const D = Mishkah.DSL;
+      const t = (k) => db.i18n.dict[k] ? (db.i18n.dict[k][db.env.lang] || db.i18n.dict[k].ar || db.i18n.dict[k].en || k) : k;
+      const content = (obj) => obj ? (obj[db.env.lang] || obj.ar || obj.en || "") : "";
+      const isRtl = db.env.dir === "rtl";
+      const brand = db.content.brand;
+
+      document.documentElement.setAttribute("data-theme", db.env.theme);
+      document.documentElement.setAttribute("lang", db.env.lang);
+      document.documentElement.setAttribute("dir", db.env.dir);
+
+      const wa = "https://wa.me/" + safe(brand.whatsapp, "");
+      const mail = "mailto:" + safe(brand.email, "");
+      const tel = "tel:" + String(safe(brand.phone, "")).replace(/\s+/g, "");
+
+      const TopBar = () => D.Div({ attrs: { class: "hidden md:block glass text-[var(--text-muted)] text-xs" } }, [
+        D.Div({ attrs: { class: "max-w-7xl mx-auto px-4 py-2 flex items-center justify-between" } }, [
+          D.Div({ attrs: { class: "flex items-center gap-5" } }, [
+            brand.phone ? D.A({ attrs: { href: tel, class: "hover:text-[var(--text-main)] transition-colors" } }, [
+              D.I({ attrs: { class: "fa-solid fa-phone text-[var(--primary)] ml-2" } }),
+              brand.phone
+            ]) : null,
+            brand.email ? D.A({ attrs: { href: mail, class: "hover:text-[var(--text-main)] transition-colors" } }, [
+              D.I({ attrs: { class: "fa-solid fa-envelope text-[var(--primary)] ml-2" } }),
+              brand.email
+            ]) : null
+          ]),
+          D.Div({ attrs: { class: "flex items-center gap-4" } }, [
+            brand.whatsapp ? D.A({ attrs: { href: wa, target: "_blank", class: "hover:text-[var(--text-main)] transition-colors" } }, [
+              D.I({ attrs: { class: "fa-brands fa-whatsapp text-[var(--primary)] ml-2" } }),
+              t("btn_whatsapp")
+            ]) : null
+          ])
+        ])
+      ]);
+
+      const Navbar = () => D.Nav({ attrs: { class: "sticky top-0 z-50 glass" } }, [
+        D.Div({ attrs: { class: "max-w-7xl mx-auto px-4 h-20 flex items-center justify-between" } }, [
+          D.Div({ attrs: { class: "flex items-center gap-3" } }, [
+            D.Img({ attrs: { src: cleanPath(content({ ar: brand.logo, en: brand.logo })), class: "h-11 w-11 rounded-2xl object-contain border border-[var(--border)] bg-white/50" } }),
+            D.Div({ attrs: { class: "leading-tight" } }, [
+              D.Div({ attrs: { class: "text-lg font-black tracking-wide" } }, [content(brand.name)]),
+              D.Div({ attrs: { class: "text-[11px] text-[var(--text-muted)] font-bold tracking-widest uppercase" } }, [content(brand.title)])
+            ])
+          ]),
+
+          D.Div({ attrs: { class: "hidden lg:flex items-center gap-8 font-bold text-sm" } }, [
+            D.Button({ attrs: { gkey: "nav:scroll", "data-to": "hero", class: "hover:text-[var(--primary)] transition-colors" } }, [t("nav_home")]),
+            D.Button({ attrs: { gkey: "nav:scroll", "data-to": "shop", class: "hover:text-[var(--primary)] transition-colors" } }, [t("nav_shop")]),
+            D.Button({ attrs: { gkey: "nav:scroll", "data-to": "videos", class: "hover:text-[var(--primary)] transition-colors" } }, [content({ ar: "الفيديوهات", en: "Videos" })]),
+            D.Button({ attrs: { gkey: "nav:scroll", "data-to": "blog", class: "hover:text-[var(--primary)] transition-colors" } }, [t("nav_blog")]),
+            D.Button({ attrs: { gkey: "nav:scroll", "data-to": "gallery", class: "hover:text-[var(--primary)] transition-colors" } }, [t("nav_gallery")]),
+            D.Button({ attrs: { gkey: "nav:scroll", "data-to": "testimonials", class: "hover:text-[var(--primary)] transition-colors" } }, [content({ ar: "المراجعات", en: "Reviews" })]),
+            D.Button({ attrs: { gkey: "nav:scroll", "data-to": "team", class: "hover:text-[var(--primary)] transition-colors" } }, [content({ ar: "الفريق", en: "Team" })]),
+            D.Button({ attrs: { gkey: "nav:scroll", "data-to": "contact", class: "hover:text-[var(--primary)] transition-colors" } }, [t("nav_contact")])
+          ]),
+
+          D.Div({ attrs: { class: "flex items-center gap-2" } }, [
+            D.Button({ attrs: { gkey: "cart:toggle", class: "btn px-3 py-2 rounded-xl text-xs font-black focus-ring flex items-center gap-2" } }, [
+              D.I({ attrs: { class: "fa-solid fa-bag-shopping text-[var(--primary)]" } }),
+              t("btn_open_cart"),
+              db.data.cartCount ? D.Span({ attrs: { class: "badge px-2 py-0.5 rounded-full text-[11px] font-black" } }, [String(db.data.cartCount)]) : null
+            ]),
+            D.Button({ attrs: { gkey: "btn:lang", class: "btn px-3 py-2 rounded-xl text-xs font-black focus-ring" } }, [t("btn_lang")]),
+            D.Button({ attrs: { gkey: "btn:theme", class: "btn w-10 h-10 rounded-xl flex items-center justify-center focus-ring" } }, [db.env.theme === "light" ? "🌙" : "☀️"]),
+            D.Button({ attrs: { gkey: "btn:menu", class: "lg:hidden btn w-10 h-10 rounded-xl flex items-center justify-center text-lg focus-ring" } }, [
+              D.I({ attrs: { class: "fa-solid fa-bars" } })
+            ])
+          ])
+        ])
+      ]);
+      function toMobImg(url) {
+        const u = String(url || "");
+        const m = u.match(/(\.[a-zA-Z0-9]+)$/);
+        if (!m) return u;
+        return u.replace(m[1], "_mob" + m[1]);
+      }
+
+      function isMobileHero() {
+        return window.matchMedia && window.matchMedia("(max-width: 639px)").matches;
+      }
+
+      function heroImg(slide) {
+        if (isMobileHero()) {
+          return slide.mobImg ? cleanPath(slide.mobImg) : toMobImg(cleanPath(slide.img));
+        }
+        return cleanPath(slide.img);
+      }
+
+      const Hero = () => {
+        const slides = db.content.hero.slides || [];
+        const s = slides[db.data.currentSlide] || slides[0] || {};
+
+        // Lighter overlays (photos must stay clear) + mobile layout shows image above text
+        const mobileImg = heroImg(s);
+
+        return D.Section({ attrs: { id: "hero", class: "relative overflow-hidden" } }, [
+          // Mobile hero: image on top, text underneath (no heavy overlay)
+          D.Div({ attrs: { class: "sm:hidden" } }, [
+            D.Div({ attrs: { class: "relative" } }, [
+              D.Img({ attrs: { src: mobileImg, class: "w-full h-[46vh] object-cover" } }),
+              D.Div({ attrs: { class: "absolute inset-0 bg-gradient-to-t from-black/15 via-black/0 to-black/0" } }, [])
+            ]),
+            D.Div({ attrs: { class: "px-4 pt-8 pb-10 bg-[var(--bg-body)]" } }, [
+              D.Div({ attrs: { class: "inline-flex items-center gap-2 badge rounded-full px-4 py-2 text-xs font-bold tracking-widest" } }, [
+                D.I({ attrs: { class: "fa-solid fa-heart text-[var(--primary)]" } }),
+                content(s.badge)
+              ]),
+              D.H1({ attrs: { class: "mt-4 text-3xl font-serif font-bold leading-tight" } }, [content(s.title)]),
+              D.P({ attrs: { class: "mt-3 text-[15px] text-[var(--text-muted)] leading-relaxed" } }, [content(s.desc)]),
+              D.Div({ attrs: { class: "mt-6 flex flex-col gap-3" } }, [
+                D.A({ attrs: { href: wa, target: "_blank", class: "btn-primary px-6 py-4 rounded-2xl font-bold focus-ring flex items-center justify-center gap-2" } }, [
+                  D.I({ attrs: { class: "fa-brands fa-whatsapp" } }),
+                  t("btn_whatsapp")
+                ]),
+                D.Button({ attrs: { gkey: "nav:scroll", "data-to": "shop", class: "btn px-6 py-4 rounded-2xl font-bold focus-ring flex items-center justify-center gap-2" } }, [
+                  D.I({ attrs: { class: "fa-solid fa-bag-shopping text-[var(--primary)]" } }),
+                  t("btn_shop_now")
+                ])
+              ])
+            ])
+          ]),
+
+          // Desktop/tablet hero: background image with soft overlay
+          D.Div({ attrs: { class: "hidden sm:block relative h-[78vh] lg:h-[86vh]" } }, [
+            (() => {
+              const bg = heroImg(s);
+              return D.Div({ attrs: { class: "absolute inset-0 bg-cover bg-left", style: "background-image:url('" + bg + "')" } }, []);
+            })(),
+            D.Div({ attrs: { class: "absolute inset-0 bg-gradient-to-b from-black/15 via-black/0 to-[var(--bg-body)]" } }, []),
+
+            D.Div({ attrs: { class: "absolute inset-0" } }, [
+              D.Div({ attrs: { class: "max-w-7xl mx-auto px-6 h-full flex items-center justify-" + (s.align === "left" ? "start" : "end") } }, [
+                D.Div({ attrs: { class: "w-full lg:w-[520px] xl:w-[560px] hero-card rounded-[2.3rem] border p-8 backdrop-blur-sm" } }, [
+                  D.Div({ attrs: { class: "inline-flex items-center gap-2 badge rounded-full px-4 py-2 text-xs font-bold tracking-widest" } }, [
+                    D.I({ attrs: { class: "fa-solid fa-heart text-[var(--primary)]" } }),
+                    content(s.sub)
+                  ]),
+                  D.H1({ attrs: { class: "mt-5 text-4xl md:text-5xl font-serif font-bold leading-tight hero-title" } }, [content(s.title)]),
+                  D.P({ attrs: { class: "mt-4 text-base md:text-lg leading-relaxed hero-desc" } }, [content(s.desc)]),
+
+                  D.Div({ attrs: { class: "mt-7 flex flex-wrap gap-3" } }, [
+                    D.A({ attrs: { href: whatsappLink, target: "_blank", class: "btn-primary px-6 py-4 rounded-2xl font-bold focus-ring flex items-center justify-center gap-2" } }, [
+                      D.I({ attrs: { class: "fa-brands fa-whatsapp" } }),
+                      t("btn_whatsapp")
+                    ]),
+                    D.Button({ attrs: { gkey: "nav:scroll", "data-to": "shop", class: "btn px-6 py-4 rounded-2xl font-bold focus-ring flex items-center justify-center gap-2" } }, [
+                      D.I({ attrs: { class: "fa-solid fa-bag-shopping text-[var(--primary)]" } }),
+                      t("btn_shop_now")
+                    ]),
+                    D.Button({ attrs: { gkey: "nav:scroll", "data-to": "blog", class: "btn px-6 py-4 rounded-2xl font-bold focus-ring flex items-center justify-center gap-2" } }, [
+                      D.I({ attrs: { class: "fa-solid fa-pen-nib text-[var(--primary)]" } }),
+                      t("btn_blog")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+
+            D.Button({ attrs: { gkey: "slide:prev", class: "hidden md:flex absolute top-1/2 left-6 -translate-y-1/2 w-12 h-12 rounded-2xl btn items-center justify-center focus-ring" } }, [D.I({ attrs: { class: "fa-solid fa-chevron-left" } })]),
+            D.Button({ attrs: { gkey: "slide:next", class: "hidden md:flex absolute top-1/2 right-6 -translate-y-1/2 w-12 h-12 rounded-2xl btn items-center justify-center focus-ring" } }, [D.I({ attrs: { class: "fa-solid fa-chevron-right" } })]),
+
+            D.Div({ attrs: { class: "absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2" } },
+              (db.content.hero.slides || []).map((_, i) => D.Button({
+                attrs: {
+                  gkey: "slide:dot",
+                  "data-i": String(i),
+                  class: "h-2.5 rounded-full transition-all " + (i === db.data.currentSlide ? "w-10 bg-[var(--primary)]" : "w-2.5 bg-white/55 hover:bg-white/80")
+                }
+              }, []))
+            )
+          ])
+          ,
+
+          // Feature strip under hero
+          D.Div({ attrs: { class: "max-w-7xl mx-auto px-4 sm:px-6 -mt-10 sm:-mt-12 relative z-10" } }, [
+            D.Div({ attrs: { class: "grid sm:grid-cols-2 lg:grid-cols-4 gap-4" } }, db.content.features.map(f => D.Div({
+              attrs: { class: "card rounded-3xl p-5" }
+            }, [
+              D.Div({ attrs: { class: "flex items-center gap-3" } }, [
+                D.Div({ attrs: { class: "w-12 h-12 rounded-2xl flex items-center justify-center border border-[var(--border)] bg-white/5" } }, [
+                  D.I({ attrs: { class: f.icon + " text-[var(--primary)] text-xl" } })
+                ]),
+                D.Div({}, [
+                  D.Div({ attrs: { class: "font-bold" } }, [content(f.title)]),
+                  D.Div({ attrs: { class: "text-sm text-[var(--text-muted)]" } }, [content(f.desc)])
+                ])
+              ])
+            ])))
+          ])
+        ]);
+      };
+
+      const VideoSignature = () => D.Section({ attrs: { id: "video-signature", class: "py-12 sm:py-16" } }, [
+        D.Div({ attrs: { class: "max-w-7xl mx-auto px-4" } }, [
+          D.Div({ attrs: { class: "card rounded-[2.5rem] overflow-hidden border border-[var(--border)]" } }, [
+            D.Video({
+              attrs: {
+                src: cleanPath(brand.logoVideo || "/UploadFiles/web/ecommerce_coash/images/logo_video.mp4"),
+                poster: cleanPath(brand.logo),
+                autoplay: "",
+                loop: "",
+                muted: "",
+                playsinline: "",
+                preload: "auto",
+                gkey: "video:play",
+                id: "video:play",
+                title: content({ ar: "فيديو توقيع الكوتش سالي راضي", en: "Coach Sally Rady Signature Video" }),
+                class: "w-full h-auto"
+              }
+            })
+          ])
+        ])
+      ]);
+
+      const Videos = () => {
+        const allVideos = db.content.videos || [];
+        const showAll = db.data.videosShowAll;
+        const visibleVideos = showAll ? allVideos : allVideos.slice(0, 4);
+
+        return D.Section({ attrs: { id: "videos", class: "py-16" } }, [
+          D.Div({ attrs: { class: "max-w-7xl mx-auto px-4" } }, [
+            D.Div({ attrs: { class: "text-center mb-10" } }, [
+              D.Div({ attrs: { class: "text-sm tracking-widest uppercase text-[var(--primary)] font-black" } }, [content({ ar: "الفيديوهات", en: "Videos" })]),
+              D.H2({ attrs: { class: "mt-3 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold" } }, [content({ ar: "شاهدي أحدث فيديوهاتي", en: "Watch My Latest Videos" })]),
+              D.Div({ attrs: { class: "mt-5 w-24 h-1 bg-[var(--accent)] mx-auto rounded-full" } }, [])
+            ]),
+
+            D.Div({ attrs: { class: "grid sm:grid-cols-2 lg:grid-cols-3 gap-6" } }, visibleVideos.map(video =>
+              D.Div({ attrs: { class: "card rounded-3xl overflow-hidden p-4" } }, [
+                D.Blockquote ? D.Blockquote({
+                  attrs: {
+                    class: "tiktok-embed",
+                    cite: video.url,
+                    "data-video-id": video.id
+                  }
+                }, [D.Section ? D.Section({}, []) : null]) : null
+              ])
+            )),
+
+            allVideos.length > 4 ? D.Div({ attrs: { class: "mt-10 text-center" } }, [
+              D.Button({ attrs: { gkey: "videos:showmore", class: "btn px-8 py-3 rounded-2xl font-black text-lg focus-ring" } }, [
+                content(showAll ? { ar: "عرض أقل", en: "Show Less" } : { ar: "المزيد من الفيديوهات", en: "More Videos" })
+              ])
+            ]) : null
+          ])
+        ]);
+      };
+
+      const Shop = () => {
+        const items = db.data.shopItems || [];
+        const loading = db.data.shopLoading;
+
+        const ProductCard = (p) => {
+          const id = safe(p.ID || p.id, "");
+          const name = safe(p.Item_name || p.item_name || p.name, "");
+          const photo = cleanPath(p.item_photo || p.Item_photo || p.photo || "");
+          const desc = safe(p.Item_Description || p.description || "", "");
+          const price = safe(p.Price || p.price, "");
+          const money = formatMoney(price);
+
+          return D.Div({ attrs: { class: "rounded-3xl overflow-hidden border border-[var(--border)] bg-[var(--bg-surface)] hover:brightness-110 transition-all duration-300" } }, [
+            D.Div({ attrs: { class: "relative h-48 overflow-hidden" } }, [
+              photo ? D.Img({ attrs: { src: photo, class: "w-full h-full object-cover" } }) : D.Div({ attrs: { class: "w-full h-full bg-black/10" } }, []),
+              D.Div({ attrs: { class: "absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/55 to-transparent" } }, []),
+              price ? D.Div({ attrs: { class: "absolute top-4 right-4 badge px-3 py-1 rounded-full text-xs font-black" } }, [money + " EGP"]) : null
+            ]),
+            D.Div({ attrs: { class: "p-5" } }, [
+              D.Div({ attrs: { class: "font-black text-lg" } }, [name]),
+              desc ? D.Div({ attrs: { class: "mt-2 text-sm text-[var(--text-muted)] line-clamp-3 leading-relaxed" } }, [desc]) : null,
+              D.Div({ attrs: { class: "mt-5 flex gap-2" } }, [
+                D.Button({ attrs: { gkey: "shop:add", "data-id": id, "data-name": name, "data-price": String(price || ""), "data-photo": photo, class: "btn-primary flex-1 px-4 py-3 rounded-2xl font-black focus-ring flex items-center justify-center gap-2" } }, [
+                  D.I({ attrs: { class: "fa-solid fa-cart-plus" } }),
+                  t("btn_add_to_cart")
+                ]),
+                D.A({ attrs: { href: "../../WEB/index?id=9cd9a4d8025046e78457778c36a1f56dproduct&itemid=" + encodeURIComponent(id) + "&itemname=" + encodeURIComponent(name), class: "btn px-4 py-3 rounded-2xl font-black focus-ring flex items-center justify-center" } }, [
+                  D.I({ attrs: { class: "fa-solid fa-arrow-up-right-from-square text-[var(--primary)]" } })
+                ])
+              ])
+            ])
+          ]);
+        };
+
+        const skeleton = () => D.Div({ attrs: { class: "rounded-3xl overflow-hidden border border-[var(--border)] bg-white/5 animate-pulse" } }, [
+          D.Div({ attrs: { class: "h-48 bg-white/10" } }, []),
+          D.Div({ attrs: { class: "p-5 space-y-3" } }, [
+            D.Div({ attrs: { class: "h-4 w-2/3 bg-white/10 rounded" } }, []),
+            D.Div({ attrs: { class: "h-3 w-full bg-white/10 rounded" } }, []),
+            D.Div({ attrs: { class: "h-10 w-full bg-white/10 rounded-2xl" } }, [])
+          ])
+        ]);
+
+        return D.Section({ attrs: { id: "shop", class: "pt-20 pb-16" } }, [
+          D.Div({ attrs: { class: "max-w-7xl mx-auto px-4" } }, [
+            D.Div({ attrs: { class: "text-center mb-10" } }, [
+              D.Div({ attrs: { class: "text-sm tracking-widest uppercase text-[var(--primary)] font-black" } }, [content(db.content.shop.sub)]),
+              D.H2({ attrs: { class: "mt-3 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold" } }, [content(db.content.shop.headline)]),
+              D.Div({ attrs: { class: "mt-5 w-24 h-1 bg-[var(--accent)] mx-auto rounded-full" } }, [])
+            ]),
+
+            loading
+              ? D.Div({ attrs: { class: "grid sm:grid-cols-2 lg:grid-cols-3 gap-6" } }, [skeleton(), skeleton(), skeleton(), skeleton(), skeleton(), skeleton()])
+              : items.length
+                ? D.Div({ attrs: { class: "grid sm:grid-cols-2 lg:grid-cols-3 gap-6" } }, items.map(ProductCard))
+                : D.Div({ attrs: { class: "card rounded-3xl p-8 text-center text-[var(--text-muted)] font-bold" } }, [
+                  content({ ar: "لا توجد منتجات متاحة حاليًا. برجاء التواصل عبر واتساب.", en: "No products available right now. Please reach out via WhatsApp." })
+                ])
+          ])
+        ]);
+      };
+
+      const Blog = () => {
+        const items = db.data.blogItems || [];
+        return D.Section({ attrs: { id: "blog", class: "py-16" } }, [
+          D.Div({ attrs: { class: "max-w-7xl mx-auto px-4" } }, [
+            D.Div({ attrs: { class: "text-center mb-10" } }, [
+              D.H2({ attrs: { class: "text-3xl sm:text-4xl font-serif font-bold" } }, [content({ ar: "المدونة", en: "Blog" })]),
+              D.Div({ attrs: { class: "mt-4 w-20 h-1 bg-[var(--accent)] mx-auto rounded-full" } }, [])
+            ]),
+            items.length
+              ? D.Div({ attrs: { class: "grid md:grid-cols-2 lg:grid-cols-3 gap-6" } },
+                items.slice(0, 6).map(x => {
+                  const title = safe(x.title || x.Title || "", "");
+                  const excerpt = safe(x.post_outline || x.outline || x.excerpt || "", "");
+                  const img = cleanPath(x.main_photo || x.photo || x.image || x.cover || "");
+                  const postId = x.ID || x.id || "";
+
+                  return D.Div({
+                    attrs: {
+                      class: "group rounded-3xl overflow-hidden border border-[var(--border)] bg-[var(--bg-surface)] hover:brightness-110 transition-all cursor-pointer",
+                      onclick: (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        db.setState(s => ({ data: { ...s.data, blogModalOpen: true, blogModalId: postId } }));
+                      }
+                    }
+                  }, [
+                    D.Div({ attrs: { class: "h-44 overflow-hidden bg-black/10" } }, [
+                      img ? D.Img({ attrs: { src: img, class: "w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-500" } }) : null
+                    ]),
+                    D.Div({ attrs: { class: "p-5" } }, [
+                      D.Div({ attrs: { class: "font-black text-lg line-clamp-2" } }, [title || content({ ar: "مقال جديد", en: "New post" })]),
+                      excerpt ? D.Div({ attrs: { class: "mt-2 text-sm text-[var(--text-muted)] line-clamp-3 leading-relaxed" } }, [excerpt]) : null,
+                      D.Div({ attrs: { class: "mt-4 font-black text-[var(--primary)]" } }, [content({ ar: "اقرئي المزيد ←", en: "Read more →" })])
+                    ])
+                  ]);
+                })
+              )
+              : D.Div({ attrs: { class: "card rounded-3xl p-8 text-center text-[var(--text-muted)] font-bold" } }, [
+                content({ ar: "سيتم إضافة مقالات قريبًا.", en: "Blog posts are coming soon." })
+              ])
+          ])
+        ]);
+      };
+
+      const Gallery = () => {
+        const imgs = normalizeImages(db.content.gallery.images || []);
+        return D.Section({ attrs: { id: "gallery", class: "py-16" } }, [
+          D.Div({ attrs: { class: "max-w-7xl mx-auto px-4" } }, [
+            D.Div({ attrs: { class: "text-center mb-10" } }, [
+              D.Div({ attrs: { class: "text-sm tracking-widest uppercase text-[var(--primary)] font-black" } }, [content(db.content.gallery.sub)]),
+              D.H2({ attrs: { class: "mt-3 text-3xl sm:text-4xl font-serif font-bold" } }, [content(db.content.gallery.headline)]),
+              D.Div({ attrs: { class: "mt-5 w-24 h-1 bg-[var(--accent)] mx-auto rounded-full" } }, [])
+            ]),
+            D.Div({ attrs: { class: "grid grid-cols-2 md:grid-cols-4 gap-4" } }, imgs.map((src, i) =>
+              D.Button({ attrs: { gkey: "gallery:open", "data-i": String(i), class: "relative rounded-3xl overflow-hidden border border-[var(--border)] bg-black/10 focus-ring" } }, [
+                D.Img({ attrs: { src: src, class: "w-full h-40 sm:h-48 object-cover hover:scale-[1.04] transition-transform duration-500" } }),
+                D.Div({ attrs: { class: "absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" } }, []),
+                D.Div({ attrs: { class: "absolute bottom-3 right-3 badge px-3 py-1 rounded-full text-xs font-black" } }, [content({ ar: "تكبير", en: "Zoom" })])
+              ])
+            ))
+          ])
+        ]);
+      };
+
+      const FAQ = () => D.Section({ attrs: { class: "py-10" } }, [
+        D.Div({ attrs: { class: "max-w-4xl mx-auto px-4" } }, [
+          D.Div({ attrs: { class: "text-center mb-8" } }, [
+            D.H2({ attrs: { class: "text-3xl sm:text-4xl font-serif font-bold" } }, [t("sec_faq")]),
+            D.Div({ attrs: { class: "mt-4 w-20 h-1 bg-[var(--accent)] mx-auto rounded-full" } }, [])
+          ]),
+          D.Div({ attrs: { class: "space-y-3" } }, (db.content.faq || []).map((f, i) => {
+            const open = db.data.faqOpen === i;
+            return D.Div({ attrs: { class: "rounded-3xl border border-[var(--border)] bg-[var(--bg-surface)] overflow-hidden" } }, [
+              D.Button({ attrs: { gkey: "faq:toggle", "data-i": String(i), class: "w-full text-right px-6 py-5 flex items-center justify-between font-black" } }, [
+                D.Span({}, [content(f.q)]),
+                D.I({ attrs: { class: "fa-solid " + (open ? "fa-minus" : "fa-plus") + " text-[var(--primary)]" } })
+              ]),
+              open ? D.Div({ attrs: { class: "px-6 pb-6 text-[var(--text-muted)] leading-relaxed" } }, [content(f.a)]) : null
+            ]);
+          }))
+        ])
+      ]);
+
+      const Testimonials = () => {
+        const allTestimonials = db.data.testimonialsItems || [];
+        const showAll = db.data.testimonialsShowAll;
+        const visibleTestimonials = showAll ? allTestimonials : allTestimonials.slice(0, 3);
+
+        return D.Section({ attrs: { id: "testimonials", class: "py-16" } }, [
+          D.Div({ attrs: { class: "max-w-7xl mx-auto px-4" } }, [
+            D.Div({ attrs: { class: "text-center mb-10" } }, [
+              D.Div({ attrs: { class: "text-sm tracking-widest uppercase text-[var(--primary)] font-black" } }, [content({ ar: "آراء العملاء", en: "Testimonials" })]),
+              D.H2({ attrs: { class: "mt-3 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold" } }, [content({ ar: "تشكرات", en: "Client Reviews" })]),
+              D.Div({ attrs: { class: "mt-5 w-24 h-1 bg-[var(--accent)] mx-auto rounded-full" } }, [])
+            ]),
+
+            visibleTestimonials.length ? D.Div({ attrs: { class: "grid sm:grid-cols-2 lg:grid-cols-3 gap-6" } }, visibleTestimonials.map(item =>
+              D.Div({ attrs: { class: "card rounded-3xl overflow-hidden p-4" } }, [
+                item.photo_url ? D.Img({ attrs: { src: cleanPath(item.photo_url), class: "w-full h-auto rounded-2xl" } }) : null
+              ])
+            )) : D.Div({ attrs: { class: "text-center text-[var(--text-muted)] py-10" } }, [content({ ar: "لا توجد مراجعات حالياً", en: "No reviews yet" })]),
+
+            allTestimonials.length > 3 ? D.Div({ attrs: { class: "mt-10 text-center" } }, [
+              D.Button({ attrs: { gkey: "testimonials:showmore", class: "btn px-8 py-3 rounded-2xl font-black text-lg focus-ring" } }, [
+                content(showAll ? { ar: "عرض أقل", en: "Show Less" } : { ar: "المزيد من التشكرات", en: "More Reviews" })
+              ])
+            ]) : null
+          ])
+        ]);
+      };
+
+      const Team = () => D.Section({ attrs: { id: "team", class: "py-16" } }, [
+        D.Div({ attrs: { class: "max-w-7xl mx-auto px-4" } }, [
+          D.Div({ attrs: { class: "text-center mb-10" } }, [
+            D.Div({ attrs: { class: "text-sm tracking-widest uppercase text-[var(--primary)] font-black" } }, [content({ ar: "الفريق", en: "Team" })]),
+            D.H2({ attrs: { class: "mt-3 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold" } }, [content({ ar: "فريق العمل", en: "Our Team" })]),
+            D.Div({ attrs: { class: "mt-5 w-24 h-1 bg-[var(--accent)] mx-auto rounded-full" } }, [])
+          ]),
+
+          D.Div({ attrs: { class: "grid sm:grid-cols-2 gap-6 lg:gap-8" } }, (db.content.team || []).map(member => D.Div({ attrs: { class: "card rounded-[2.5rem] overflow-hidden" } }, [
+            member.photo ? D.Div({ attrs: { class: "h-80 sm:h-96 overflow-hidden bg-gradient-to-b from-[var(--primary)]/20 to-transparent" } }, [
+              D.Img({ attrs: { src: cleanPath(member.photo), class: "w-full h-full object-cover object-top" } })
+            ]) : null,
+            D.Div({ attrs: { class: "p-6 sm:p-8" } }, [
+              D.H3({ attrs: { class: "text-2xl font-black" } }, [content(member.name)]),
+              D.Div({ attrs: { class: "mt-2 text-[var(--primary)] font-bold tracking-wide" } }, [content(member.role)]),
+              D.P({ attrs: { class: "mt-4 text-[var(--text-muted)] leading-relaxed" } }, [content(member.bio)])
+            ])
+          ])))
+        ])
+      ]);
+
+      const Contact = () => D.Section({ attrs: { id: "contact", class: "py-16" } }, [
+        D.Div({ attrs: { class: "max-w-7xl mx-auto px-4" } }, [
+          D.Div({ attrs: { class: "text-center mb-10" } }, [
+            D.H2({ attrs: { class: "text-3xl sm:text-4xl lg:text-5xl font-serif font-bold" } }, [t("sec_contact")]),
+            D.Div({ attrs: { class: "mt-5 w-24 h-1 bg-[var(--accent)] mx-auto rounded-full" } }, [])
+          ]),
+          D.Div({ attrs: { class: "grid lg:grid-cols-3 gap-6" } }, [
+            D.Div({ attrs: { class: "card rounded-3xl p-7" } }, [
+              D.Div({ attrs: { class: "flex items-center gap-3" } }, [
+                D.Div({ attrs: { class: "w-12 h-12 rounded-2xl flex items-center justify-center border border-[var(--border)] bg-white/5" } }, [
+                  D.I({ attrs: { class: "fa-brands fa-whatsapp text-[var(--primary)] text-xl" } })
+                ]),
+                D.Div({}, [
+                  D.Div({ attrs: { class: "font-black" } }, [t("btn_whatsapp")]),
+                  D.A({ attrs: { href: wa, target: "_blank", class: "text-sm text-[var(--text-muted)] hover:text-[var(--primary)]" } }, [safe(brand.whatsapp, "")])
+                ])
+              ])
+            ]),
+            D.Div({ attrs: { class: "card rounded-3xl p-7" } }, [
+              D.Div({ attrs: { class: "flex items-center gap-3" } }, [
+                D.Div({ attrs: { class: "w-12 h-12 rounded-2xl flex items-center justify-center border border-[var(--border)] bg-white/5" } }, [
+                  D.I({ attrs: { class: "fa-solid fa-envelope text-[var(--primary)] text-xl" } })
+                ]),
+                D.Div({}, [
+                  D.Div({ attrs: { class: "font-black" } }, [content({ ar: "البريد الرسمي", en: "Official Email" })]),
+                  D.A({ attrs: { href: mail, class: "text-sm text-[var(--text-muted)] hover:text-[var(--primary)]" } }, [safe(brand.email, "")])
+                ])
+              ])
+            ]),
+            D.Div({ attrs: { class: "card rounded-3xl p-7" } }, [
+              D.Div({ attrs: { class: "flex items-center gap-3" } }, [
+                D.Div({ attrs: { class: "w-12 h-12 rounded-2xl flex items-center justify-center border border-[var(--border)] bg-white/5" } }, [
+                  D.I({ attrs: { class: "fa-solid fa-location-dot text-[var(--primary)] text-xl" } })
+                ]),
+                D.Div({}, [
+                  D.Div({ attrs: { class: "font-black" } }, [content({ ar: "الموقع", en: "Location" })]),
+                  D.Div({ attrs: { class: "text-sm text-[var(--text-muted)]" } }, [content(brand.addressLines)])
+                ])
+              ])
+            ])
+          ]),
+
+          D.Div({ attrs: { class: "mt-8 card rounded-[2.5rem] overflow-hidden" } }, [
+            D.Div({ attrs: { class: "grid lg:grid-cols-2" } }, [
+              D.Div({ attrs: { class: "p-8" } }, [
+                D.Div({ attrs: { class: "text-sm tracking-widest uppercase text-[var(--primary)] font-black" } }, [content({ ar: "تواصلي الآن", en: "Contact" })]),
+                D.Div({ attrs: { class: "mt-2 text-2xl font-black" } }, [content({ ar: "رسالة سريعة… واستجابة أسرع", en: "Quick message, fast response" })]),
+                D.Div({ attrs: { class: "mt-4 text-[var(--text-muted)] leading-relaxed" } }, [
+                  content({ ar: "اكتبي باختصار مشكلتك أو هدفك (علاقة/تنمية ذات/تحديات يومية)، وسأساعدك في اختيار الخطوة التالية المناسبة.", en: "Send your goal or concern, and we’ll choose the next best step." })
+                ]),
+                D.Form ? D.Form({ attrs: { class: "mt-6 space-y-3", onsubmit: "return false" } }, [
+                  D.Input({ attrs: { type: "text", placeholder: content({ ar: "الاسم", en: "Name" }), class: "w-full bg-[var(--bg-body)] border border-[var(--border)] rounded-2xl px-4 py-3 focus-ring" } }),
+                  D.Input({ attrs: { type: "email", placeholder: content({ ar: "البريد الإلكتروني", en: "Email" }), class: "w-full bg-[var(--bg-body)] border border-[var(--border)] rounded-2xl px-4 py-3 focus-ring" } }),
+                  D.Textarea ? D.Textarea({ attrs: { rows: "4", placeholder: content({ ar: "رسالتك…", en: "Message…" }), class: "w-full bg-[var(--bg-body)] border border-[var(--border)] rounded-2xl px-4 py-3 focus-ring" } }) : null,
+                  D.A({ attrs: { href: wa, target: "_blank", class: "btn-primary px-6 py-4 rounded-2xl font-black focus-ring flex items-center justify-center gap-2" } }, [
+                    D.I({ attrs: { class: "fa-brands fa-whatsapp" } }),
+                    t("btn_whatsapp")
+                  ])
+                ]) : null
+              ]),
+              D.Div({ attrs: { class: "min-h-[320px] bg-[var(--bg-body)]" } }, [
+                D.Iframe ? D.Iframe({
+                  attrs: {
+                    src: "https://www.google.com/maps?q=30.2299,31.4755&z=14&output=embed",
+                    class: "w-full h-full min-h-[320px] border-0"
+                  }
+                }) : D.Div({ attrs: { class: "w-full h-full min-h-[320px] flex items-center justify-center text-[var(--text-muted)]" } }, ["Map"])
+              ])
+            ])
+          ])
+        ])
+      ]);
+
+      const Footer = () => D.Footer({ attrs: { class: "mt-6 bg-black/20 border-t border-white/5" } }, [
+        D.Div({ attrs: { class: "max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row gap-6 items-center justify-between" } }, [
+          D.Div({ attrs: { class: "flex items-center gap-3" } }, [
+            D.Img({ attrs: { src: cleanPath(brand.logo), class: "h-11 w-11 rounded-2xl border border-[var(--border)] bg-white/50 object-contain" } }),
+            D.Div({ attrs: { class: "leading-tight" } }, [
+              D.Div({ attrs: { class: "font-black" } }, [content(brand.name)]),
+              D.Div({ attrs: { class: "text-sm text-[var(--text-muted)]" } }, [content(brand.title)])
+            ])
+          ]),
+          D.Div({ attrs: { class: "text-sm text-[var(--text-muted)] text-center" } }, [content({ ar: "© 2026 Sally Rady. جميع الحقوق محفوظة.", en: "© 2026 Sally Rady. All rights reserved." })]),
+          D.Div({ attrs: { class: "flex items-center gap-3" } }, [
+            brand.whatsapp ? D.A({ attrs: { href: wa, target: "_blank", class: "btn w-11 h-11 rounded-2xl flex items-center justify-center hover:brightness-110" } }, [D.I({ attrs: { class: "fa-brands fa-whatsapp text-[var(--primary)] text-lg" } })]) : null,
+            brand.instagram ? D.A({ attrs: { href: brand.instagram, target: "_blank", class: "btn w-11 h-11 rounded-2xl flex items-center justify-center hover:brightness-110" } }, [D.I({ attrs: { class: "fa-brands fa-instagram text-[var(--primary)] text-lg" } })]) : null,
+            brand.facebook ? D.A({ attrs: { href: brand.facebook, target: "_blank", class: "btn w-11 h-11 rounded-2xl flex items-center justify-center hover:brightness-110" } }, [D.I({ attrs: { class: "fa-brands fa-facebook text-[var(--primary)] text-lg" } })]) : null,
+            brand.tiktok ? D.A({ attrs: { href: brand.tiktok, target: "_blank", class: "btn w-11 h-11 rounded-2xl flex items-center justify-center hover:brightness-110" } }, [D.I({ attrs: { class: "fa-brands fa-tiktok text-[var(--primary)] text-lg" } })]) : null,
+            brand.email ? D.A({ attrs: { href: mail, class: "btn w-11 h-11 rounded-2xl flex items-center justify-center hover:brightness-110" } }, [D.I({ attrs: { class: "fa-solid fa-envelope text-[var(--primary)] text-lg" } })]) : null
+          ])
+        ])
+      ]);
+
+      const MobileMenuLinks = () => {
+        if (!db.data.mobileMenuOpen) return null;
+        const items = [
+          { to: "hero", label: t("nav_home") },
+          { to: "shop", label: t("nav_shop") },
+          { to: "videos", label: content({ ar: "الفيديوهات", en: "Videos" }) },
+          { to: "blog", label: t("nav_blog") },
+          { to: "gallery", label: t("nav_gallery") },
+          { to: "testimonials", label: content({ ar: "المراجعات", en: "Reviews" }) },
+          { to: "team", label: content({ ar: "الفريق", en: "Team" }) },
+          { to: "contact", label: t("nav_contact") }
+        ];
+        return D.Div({ attrs: { class: "fixed inset-0 z-[90] bg-black/80 backdrop-blur-md flex" } }, [
+          D.Div({ attrs: { class: "w-[86%] max-w-sm h-full bg-[var(--bg-body)] border-l border-[var(--border)] p-5" } }, [
+            D.Div({ attrs: { class: "flex items-center justify-between" } }, [
+              D.Div({ attrs: { class: "flex items-center gap-3" } }, [
+                D.Img({ attrs: { src: cleanPath(brand.logo), class: "h-10 w-10 rounded-2xl border border-[var(--border)] bg-white/50 object-contain" } }),
+                D.Div({ attrs: { class: "font-black" } }, [content(brand.name)])
+              ]),
+              D.Button({ attrs: { gkey: "btn:menu", class: "btn w-10 h-10 rounded-2xl flex items-center justify-center" } }, [
+                D.I({ attrs: { class: "fa-solid fa-xmark" } })
+              ])
+            ]),
+            D.Div({ attrs: { class: "mt-8 flex flex-col gap-3" } }, items.map(x =>
+              D.Button({ attrs: { gkey: "nav:scroll", "data-to": x.to, class: "btn px-4 py-4 rounded-2xl font-black flex items-center justify-between" } }, [
+                x.label, D.I({ attrs: { class: "fa-solid fa-arrow-left text-[var(--primary)]" } })
+              ])
+            )),
+            D.Div({ attrs: { class: "mt-8 grid grid-cols-2 gap-3" } }, [
+              D.Button({ attrs: { gkey: "btn:lang", class: "btn px-4 py-3 rounded-2xl font-black" } }, [t("btn_lang")]),
+              D.Button({ attrs: { gkey: "btn:theme", class: "btn px-4 py-3 rounded-2xl font-black" } }, [db.env.theme === "light" ? "🌙" : "☀️"])
+            ])
+          ]),
+          D.Div({ attrs: { class: "flex-1", gkey: "btn:menu" } }, [])
+        ]);
+      };
+
+      const CartDrawer = () => {
+        if (!db.data.cartOpen) return null;
+
+        let cart = [];
+        try {
+          const raw = localStorage.getItem("cart");
+          cart = raw ? JSON.parse(raw) : [];
+          if (!Array.isArray(cart)) cart = [];
+        } catch (_) { cart = []; }
+
+        const total = cart.reduce((a, b) => a + (Number(b.price) || 0) * (Number(b.quantity) || 1), 0);
+
+        return D.Div({ attrs: { class: "fixed inset-0 z-[95] bg-black/70 backdrop-blur-md flex justify-end shell-enter" } }, [
+          D.Div({ attrs: { class: "w-[92%] max-w-md h-full bg-[var(--bg-body)] border-r border-[var(--border)] p-5 overflow-y-auto" } }, [
+            D.Div({ attrs: { class: "flex items-center justify-between" } }, [
+              D.Div({ attrs: { class: "font-black text-lg" } }, [t("btn_open_cart")]),
+              D.Button({ attrs: { gkey: "cart:toggle", class: "btn w-10 h-10 rounded-2xl flex items-center justify-center" } }, [D.I({ attrs: { class: "fa-solid fa-xmark" } })])
+            ]),
+            cart.length ? D.Div({ attrs: { class: "mt-5 space-y-3" } }, cart.map(x =>
+              D.Div({ attrs: { class: "rounded-3xl border border-[var(--border)] bg-[var(--bg-surface)] p-4 flex gap-3 items-center" } }, [
+                x.photo ? D.Img({ attrs: { src: cleanPath(x.photo), class: "w-16 h-16 rounded-2xl object-cover border border-[var(--border)]" } }) : null,
+                D.Div({ attrs: { class: "flex-1" } }, [
+                  D.Div({ attrs: { class: "font-black" } }, [safe(x.name, "")]),
+                  D.Div({ attrs: { class: "text-sm text-[var(--text-muted)]" } }, [content({ ar: "الكمية: ", en: "Qty: " }) + String(x.quantity || 1)]),
+                  D.Div({ attrs: { class: "text-sm font-black text-[var(--primary)]" } }, [formatMoney(x.price) + " EGP"])
+                ])
+              ])
+            )) : D.Div({ attrs: { class: "mt-8 text-center text-[var(--text-muted)] font-bold" } }, [content({ ar: "العربة فارغة حاليًا.", en: "Your cart is empty." })]),
+            D.Div({ attrs: { class: "mt-6 rounded-3xl border border-[var(--border)] bg-[var(--bg-surface)] p-5" } }, [
+              D.Div({ attrs: { class: "flex items-center justify-between font-black" } }, [
+                D.Div({}, [content({ ar: "الإجمالي", en: "Total" })]),
+                D.Div({ attrs: { class: "text-[var(--primary)]" } }, [formatMoney(total) + " EGP"])
+              ]),
+              D.Div({ attrs: { class: "mt-4 grid grid-cols-2 gap-3" } }, [
+                D.A({ attrs: { href: wa, target: "_blank", class: "btn-primary px-4 py-3 rounded-2xl font-black focus-ring flex items-center justify-center gap-2" } }, [
+                  D.I({ attrs: { class: "fa-brands fa-whatsapp" } }),
+                  content({ ar: "إرسال الطلب", en: "Send Order" })
+                ]),
+                D.Button({ attrs: { gkey: "cart:clear", class: "btn px-4 py-3 rounded-2xl font-black focus-ring" } }, [
+                  content({ ar: "تفريغ", en: "Clear" })
+                ])
+              ])
+            ])
+          ]),
+          D.Div({ attrs: { class: "flex-1", gkey: "cart:toggle" } }, [])
+        ]);
+      };
+
+      const GalleryLightbox = () => {
+        if (!db.data.galleryOpen) return null;
+        const imgs = normalizeImages(db.content.gallery.images || []);
+        const src = imgs[db.data.galleryIndex] || imgs[0] || "";
+        return D.Div({ attrs: { class: "fixed inset-0 z-[110] lb-backdrop flex items-center justify-center p-4 shell-enter", gkey: "gallery:close" } }, [
+          D.Div({ attrs: { class: "relative w-full max-w-5xl" } }, [
+            D.Button({ attrs: { gkey: "gallery:close", class: "absolute -top-3 " + (isRtl ? "-left-3" : "-right-3") + " btn w-12 h-12 rounded-2xl flex items-center justify-center focus-ring" } }, [
+              D.I({ attrs: { class: "fa-solid fa-xmark" } })
+            ]),
+            D.Div({ attrs: { class: "rounded-[2.5rem] overflow-hidden border border-white/10 shadow-soft bg-black/30" } }, [
+              src ? D.Img({ attrs: { src: src, class: "w-full max-h-[78vh] object-contain bg-black/40" } }) : null
+            ]),
+            D.Div({ attrs: { class: "mt-4 flex items-center justify-between" } }, [
+              D.Button({ attrs: { gkey: "gallery:prev", class: "btn px-4 py-3 rounded-2xl font-black focus-ring flex items-center gap-2" } }, [
+                D.I({ attrs: { class: "fa-solid fa-chevron-right" } }),
+                content({ ar: "السابق", en: "Prev" })
+              ]),
+              D.Button({ attrs: { gkey: "gallery:next", class: "btn px-4 py-3 rounded-2xl font-black focus-ring flex items-center gap-2" } }, [
+                content({ ar: "التالي", en: "Next" }),
+                D.I({ attrs: { class: "fa-solid fa-chevron-left" } })
+              ])
+            ])
+          ])
+        ]);
+      };
+
+      const BlogModal = () => {
+        if (!db.data.blogModalOpen || !db.data.blogModalId) return null;
+
+        const post = db.data.blogItems.find(p => (p.ID || p.id) === db.data.blogModalId);
+        if (!post) return null;
+
+        const title = safe(post.title || post.Title || "", "");
+        const content = safe(post.post_details || post.details || post.content || "", "");
+        const img = cleanPath(post.main_photo || post.photo || post.image || post.cover || "");
+
+        return D.Div({ attrs: { class: "fixed inset-0 z-[120] lb-backdrop flex items-center justify-center p-4 shell-enter overflow-y-auto", gkey: "blog:close" } }, [
+          D.Div({ attrs: { class: "relative w-full max-w-4xl my-8" } }, [
+            D.Button({ attrs: { gkey: "blog:close", class: "absolute -top-3 " + (isRtl ? "-left-3" : "-right-3") + " btn w-12 h-12 rounded-2xl flex items-center justify-center focus-ring z-10" } }, [
+              D.I({ attrs: { class: "fa-solid fa-xmark" } })
+            ]),
+
+            D.Div({ attrs: { class: "card rounded-[2.5rem] overflow-hidden max-h-[85vh] overflow-y-auto" } }, [
+              img ? D.Div({ attrs: { class: "h-64 sm:h-80 overflow-hidden bg-gradient-to-b from-[var(--primary)]/20 to-transparent" } }, [
+                D.Img({ attrs: { src: img, class: "w-full h-full object-cover" } })
+              ]) : null,
+
+              D.Div({ attrs: { class: "p-6 sm:p-10" } }, [
+                D.H1({ attrs: { class: "text-3xl sm:text-4xl font-serif font-bold leading-tight" } }, [title]),
+
+                D.Div({ attrs: { class: "mt-6 prose prose-lg max-w-none", style: "color: var(--text); line-height: 1.8;" } }, [
+                  D.RawHtml({ html: content, sanitize: true })
+                ]),
+
+                D.Div({ attrs: { class: "mt-8 pt-6 border-t border-[var(--border)]" } }, [
+                  D.Button({ attrs: { gkey: "blog:close", class: "btn px-6 py-3 rounded-2xl font-black focus-ring" } }, [
+                    content({ ar: "إغلاق", en: "Close" })
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]);
+      };
+
+      const Toast = () => {
+        if (!db.data.toast) return null;
+        const msg = t(db.data.toast.msgKey || "");
+        return D.Div({ attrs: { class: "fixed z-[120] bottom-5 right-5 card rounded-3xl px-5 py-4 flex items-center gap-3 shadow-soft" } }, [
+          D.Div({ attrs: { class: "w-10 h-10 rounded-2xl bg-[var(--soft)] border border-[var(--border)] flex items-center justify-center" } }, [
+            D.I({ attrs: { class: "fa-solid fa-check text-[var(--primary)]" } })
+          ]),
+          D.Div({ attrs: { class: "font-black" } }, [msg])
+        ]);
+      };
+
+      const FloatingWhatsApp = () => brand.whatsapp ? D.A({
+        attrs: {
+          href: wa,
+          target: "_blank",
+          class: "fixed z-[80] bottom-5 left-5 w-14 h-14 rounded-[1.3rem] btn-primary flex items-center justify-center shadow-soft"
+        }
+      }, [D.I({ attrs: { class: "fa-brands fa-whatsapp text-2xl" } })]) : null;
+
+      return D.Div({ attrs: { class: "min-h-screen" } }, [
+        TopBar(),
+        Navbar(),
+        Hero(),
+        VideoSignature(),
+        Shop(),
+        Videos(),
+        Blog(),
+        Gallery(),
+        Team(),
+        FAQ(),
+        Contact(),
+        Footer(),
+        MobileMenuLinks(),
+        CartDrawer(),
+        GalleryLightbox(),
+        BlogModal(),
+        Toast(),
+        FloatingWhatsApp()
+      ]);
+    }
+
+    Mishkah.app.setBody(body);
+    const app = Mishkah.app.create(database, orders);
+    app.mount("#app");
+
+
+    document.documentElement.dataset.theme = app.getState().env.theme;
+    function refreshCartCount() {
+      let cart = [];
+      try {
+        const raw = localStorage.getItem("cart");
+        cart = raw ? JSON.parse(raw) : [];
+        if (!Array.isArray(cart)) cart = [];
+      } catch (_) { cart = []; }
+      const count = cart.reduce((a, b) => a + (Number(b.quantity) || 1), 0);
+      app.setState(s => ({ ...s, data: { ...s.data, cartCount: count } }));
+    }
+
+    (async () => {
+      refreshCartCount();
+
+      const st = app.getState();
+      const [items, blog, testimonials] = await Promise.all([
+        fetchShopItems(st.env.companyId),
+        fetchBlogList(st.env.lang, st.env.companyId),
+        fetchTestimonials(st.env.companyId)
+      ]);
+
+      app.setState(s => ({ ...s, data: { ...s.data, shopItems: items, shopLoading: false } }));
+
+      if (blog && blog.length) {
+        app.setState(s => ({ ...s, data: { ...s.data, blogItems: blog } }));
+      }
+
+      if (testimonials && testimonials.length) {
+        app.setState(s => ({ ...s, data: { ...s.data, testimonialsItems: testimonials, testimonialsLoading: false } }));
+      }
+
+      setInterval(() => {
+        const s = app.getState();
+        const slides = (s.content.hero.slides || []);
+        if (!slides.length) return;
+        const next = (s.data.currentSlide + 1) % slides.length;
+        app.setState(ss => ({ ...ss, data: { ...ss.data, currentSlide: next } }));
+      }, 4500);
+    })().catch(_ => app.setState(s => ({ ...s, data: { ...s.data, shopLoading: false } })));
+  </script>
+</body>
+
+</html>

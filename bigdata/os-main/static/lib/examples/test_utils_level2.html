@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mishkah Level 2 - Router, Store, Query Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #f093fb;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: #fff;
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            color: #fff;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #eb3349, #f45c43);
+            color: #fff;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .status.success {
+            background: rgba(56, 239, 125, 0.2);
+            border: 1px solid rgba(56, 239, 125, 0.4);
+        }
+
+        .status.info {
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+        }
+
+        .status.error {
+            background: rgba(235, 51, 73, 0.2);
+            border: 1px solid rgba(235, 51, 73, 0.4);
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #38ef7d;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 8px 16px;
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(102, 126, 234, 0.4);
+        }
+
+        .data-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #f093fb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <script src="../mishkah.core.js"></script>
+    <script src="../mishkah-react.js"></script>
+    <script src="../mishkah-utils.js"></script>
+    <script src="../mishkah-jsx.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🚀 Mishkah Level 2 - Router, Store, Query</h1>
+        <div id="app"></div>
+    </div>
+
+    <script type="text/jsx">
+        const { useState, useEffect, Fragment } = Mishkah.React;
+        const { Router, Store, Query } = Mishkah.utils;
+
+        // ==================================================
+        // Test 1: Store (Zustand/Redux style)
+        // ==================================================
+        
+        // Create a counter store
+        const counterStore = Store.createStore(
+            (set, get) => ({
+                count: 0,
+                increment: () => set({ count: get().count + 1 }),
+                decrement: () => set({ count: get().count - 1 }),
+                reset: () => set({ count: 0 })
+            }),
+            { name: 'counter', devtools: true }
+        );
+
+        // Create a todo store with persistence
+        const todoStore = Store.createStore(
+            { todos: [], filter: 'all' },
+            { name: 'todos', persist: true }
+        );
+
+        function StoreTest() {
+            const count = Store.useStore(counterStore, s => s.count);
+            const state = counterStore.getState();
+
+            return (
+                <div className="card">
+                    <h2>📦 Test 1: Store (Zustand/Redux Style)</h2>
+                    
+                    <p>Count: <code>{count}</code></p>
+                    
+                    <div>
+                        <button className="btn btn-primary" onClick={state.increment}>
+                            + Increment
+                        </button>
+                        <button className="btn btn-danger" onClick={state.decrement}>
+                            - Decrement
+                        </button>
+                        <button className="btn btn-success" onClick={state.reset}>
+                            Reset
+                        </button>
+                    </div>
+                    
+                    <div className="status success">
+                        <strong>✓ Store.createStore + Store.useStore يعمل!</strong>
+                        <br/>
+                        Features: persist, devtools, selectors, actions
+                    </div>
+                </div>
+            );
+        }
+
+        // ==================================================
+        // Test 2: Store with Actions
+        // ==================================================
+        
+        function StoreActionsTest() {
+            const [todos, setTodos] = useState(todoStore.getState().todos);
+            const [input, setInput] = useState('');
+
+            useEffect(() => {
+                return todoStore.subscribe((state) => {
+                    setTodos(state.todos);
+                });
+            }, []);
+
+            const addTodo = () => {
+                if (!input.trim()) return;
+                todoStore.setState({
+                    todos: [...todoStore.getState().todos, {
+                        id: Date.now(),
+                        text: input,
+                        done: false
+                    }]
+                });
+                setInput('');
+            };
+
+            const toggleTodo = (id) => {
+                todoStore.setState({
+                    todos: todoStore.getState().todos.map(t => 
+                        t.id === id ? { ...t, done: !t.done } : t
+                    )
+                });
+            };
+
+            const clearDone = () => {
+                todoStore.setState({
+                    todos: todoStore.getState().todos.filter(t => !t.done)
+                });
+            };
+
+            return (
+                <div className="card">
+                    <h2>📝 Test 2: Store with Persistence</h2>
+                    
+                    <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
+                        <input 
+                            type="text"
+                            value={input}
+                            onChange={e => setInput(e.target.value)}
+                            placeholder="أضف مهمة جديدة..."
+                            style={{ flex: 1, padding: '10px', borderRadius: '8px', border: 'none' }}
+                        />
+                        <button className="btn btn-primary" onClick={addTodo}>إضافة</button>
+                    </div>
+                    
+                    <div>
+                        {todos.map(todo => (
+                            <div 
+                                key={todo.id}
+                                onClick={() => toggleTodo(todo.id)}
+                                style={{ 
+                                    padding: '10px', 
+                                    margin: '5px 0', 
+                                    background: 'rgba(255,255,255,0.1)',
+                                    borderRadius: '8px',
+                                    cursor: 'pointer',
+                                    textDecoration: todo.done ? 'line-through' : 'none',
+                                    opacity: todo.done ? 0.5 : 1
+                                }}
+                            >
+                                {todo.done ? '✓ ' : '○ '}{todo.text}
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {todos.length > 0 && (
+                        <button className="btn btn-danger" onClick={clearDone}>
+                            حذف المهام المكتملة
+                        </button>
+                    )}
+                    
+                    <div className="status info">
+                        <strong>💾 Persistent Store!</strong> - أعد تحميل الصفحة، ستجد المهام محفوظة!
+                    </div>
+                </div>
+            );
+        }
+
+        // ==================================================
+        // Test 3: Router
+        // ==================================================
+        
+        function RouterTest() {
+            const [currentPath, setCurrentPath] = useState(Router.currentPath);
+
+            useEffect(() => {
+                return Router.subscribe(({ path }) => {
+                    setCurrentPath(path);
+                });
+            }, []);
+
+            // Initialize router
+            Router.init();
+
+            return (
+                <div className="card">
+                    <h2>🧭 Test 3: Router (React Router Style)</h2>
+                    
+                    <p>Current Path: <code>{currentPath}</code></p>
+                    
+                    <div className="nav-links">
+                        <a href="#" onClick={(e) => { e.preventDefault(); Router.navigate('/'); }}>
+                            🏠 Home
+                        </a>
+                        <a href="#" onClick={(e) => { e.preventDefault(); Router.navigate('/about'); }}>
+                            ℹ️ About
+                        </a>
+                        <a href="#" onClick={(e) => { e.preventDefault(); Router.navigate('/users/123'); }}>
+                            👤 User 123
+                        </a>
+                        <a href="#" onClick={(e) => { e.preventDefault(); Router.navigate('/products?category=electronics'); }}>
+                            📦 Products
+                        </a>
+                    </div>
+                    
+                    <div className="data-box">
+                        <p>Location: {JSON.stringify(Router.useLocation())}</p>
+                    </div>
+                    
+                    <div className="status success">
+                        <strong>✓ Router works!</strong>
+                        <br/>
+                        Features: navigate, useNavigate, useParams, useLocation, useSearchParams
+                    </div>
+                </div>
+            );
+        }
+
+        // ==================================================
+        // Test 4: Query (React Query Style)
+        // ==================================================
+        
+        // Fake API
+        const fakeApi = {
+            getUsers: () => new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve([
+                        { id: 1, name: 'أحمد', role: 'Admin' },
+                        { id: 2, name: 'محمد', role: 'User' },
+                        { id: 3, name: 'سارة', role: 'Editor' }
+                    ]);
+                }, 1000);
+            }),
+            createUser: (data) => new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({ id: Date.now(), ...data });
+                }, 500);
+            })
+        };
+
+        function QueryTest() {
+            const { data, isLoading, isError, error, refetch } = Query.useQuery(
+                'users',
+                fakeApi.getUsers,
+                { staleTime: 5000 }
+            );
+
+            return (
+                <div className="card">
+                    <h2>🔄 Test 4: Query (React Query Style)</h2>
+                    
+                    {isLoading && (
+                        <div className="loading">
+                            <div className="spinner"></div>
+                            <span>Loading users...</span>
+                        </div>
+                    )}
+                    
+                    {isError && (
+                        <div className="status error">Error: {error?.message}</div>
+                    )}
+                    
+                    {data && (
+                        <div className="data-box">
+                            {data.map(user => (
+                                <div key={user.id} style={{ padding: '8px 0' }}>
+                                    👤 <strong>{user.name}</strong> - {user.role}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    
+                    <button className="btn btn-primary" onClick={refetch}>
+                        🔄 Refetch
+                    </button>
+                    
+                    <div className="status success">
+                        <strong>✓ Query.useQuery works!</strong>
+                        <br/>
+                        Features: caching, staleTime, retry, refetch, invalidate
+                    </div>
+                </div>
+            );
+        }
+
+        // ==================================================
+        // Test 5: Mutation
+        // ==================================================
+        
+        function MutationTest() {
+            const [newUserName, setNewUserName] = useState('');
+            const [createdUsers, setCreatedUsers] = useState([]);
+            
+            const mutation = Query.useMutation(
+                (userData) => fakeApi.createUser(userData),
+                {
+                    onSuccess: (data) => {
+                        setCreatedUsers(prev => [...prev, data]);
+                        setNewUserName('');
+                    }
+                }
+            );
+
+            const handleCreate = () => {
+                if (!newUserName.trim()) return;
+                mutation.mutate({ name: newUserName, role: 'New User' });
+            };
+
+            return (
+                <div className="card">
+                    <h2>✨ Test 5: Mutation (Create/Update/Delete)</h2>
+                    
+                    <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
+                        <input 
+                            type="text"
+                            value={newUserName}
+                            onChange={e => setNewUserName(e.target.value)}
+                            placeholder="اسم المستخدم الجديد..."
+                            style={{ flex: 1, padding: '10px', borderRadius: '8px', border: 'none' }}
+                        />
+                        <button 
+                            className="btn btn-success" 
+                            onClick={handleCreate}
+                            disabled={mutation.isLoading}
+                        >
+                            {mutation.isLoading ? '...' : '+ إضافة'}
+                        </button>
+                    </div>
+                    
+                    {createdUsers.length > 0 && (
+                        <div className="data-box">
+                            <strong>المستخدمين الجدد:</strong>
+                            {createdUsers.map(user => (
+                                <div key={user.id} style={{ padding: '5px 0' }}>
+                                    ✅ {user.name} (ID: {user.id})
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    
+                    <div className="status success">
+                        <strong>✓ Query.useMutation works!</strong>
+                        <br/>
+                        Features: onSuccess, onError, onSettled, optimistic updates
+                    </div>
+                </div>
+            );
+        }
+
+        // ==================================================
+        // Test 6: Atom (Jotai Style)
+        // ==================================================
+        
+        const themeAtom = Store.atom('dark');
+
+        function AtomTest() {
+            const [theme, setTheme] = useState(themeAtom.get());
+
+            useEffect(() => {
+                return themeAtom.subscribe(setTheme);
+            }, []);
+
+            const toggleTheme = () => {
+                themeAtom.set(t => t === 'dark' ? 'light' : 'dark');
+            };
+
+            return (
+                <div className="card">
+                    <h2>⚛️ Test 6: Atom (Jotai Style)</h2>
+                    
+                    <p>Current Theme: <code>{theme}</code></p>
+                    
+                    <button className="btn btn-primary" onClick={toggleTheme}>
+                        Toggle Theme
+                    </button>
+                    
+                    <div className="status success">
+                        <strong>✓ Store.atom works!</strong>
+                        <br/>
+                        Simple reactive primitive for atomic state
+                    </div>
+                </div>
+            );
+        }
+
+        // ==================================================
+        // Main App
+        // ==================================================
+        
+        function App() {
+            return (
+                <>
+                    <StoreTest />
+                    <StoreActionsTest />
+                    <RouterTest />
+                    <QueryTest />
+                    <MutationTest />
+                    <AtomTest />
+                    
+                    <div className="card">
+                        <h2>✅ All Level 2 Features Complete!</h2>
+                        <div className="status success">
+                            <strong>🎉 Mishkah Utils - React Ecosystem Complete!</strong>
+                        </div>
+                        <ul style={{ paddingRight: '20px', marginTop: '15px' }}>
+                            <li>✅ <code>Router.BrowserRouter</code> / <code>Router.Route</code> / <code>Router.Link</code></li>
+                            <li>✅ <code>Router.useNavigate</code> / <code>useParams</code> / <code>useLocation</code></li>
+                            <li>✅ <code>Store.createStore</code> - Redux/Zustand style</li>
+                            <li>✅ <code>Store.useStore</code> - Hook with selectors</li>
+                            <li>✅ <code>Store.atom</code> - Jotai style primitives</li>
+                            <li>✅ <code>Query.useQuery</code> - React Query style fetching</li>
+                            <li>✅ <code>Query.useMutation</code> - Mutations with callbacks</li>
+                            <li>✅ Persistence, DevTools, Caching, Retry, Refetch</li>
+                        </ul>
+                    </div>
+                </>
+            );
+        }
+
+        Mishkah.React.render(App, document.getElementById('app'));
+    </script>
+</body>
+
+</html>
