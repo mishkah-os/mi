@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mishkah Core - مثال مصغر للنواة</title>
+
+    <!-- تحميل النواة -->
+    <script src="../../lib/mishkah.core.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #app {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .counter-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .counter-display:hover {
+            transform: scale(1.05);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            background: white;
+            border: 3px solid #667eea;
+            color: #667eea;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        button:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .reset-btn {
+            grid-column: 1 / -1;
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #c82333;
+            border-color: #c82333;
+        }
+
+        .info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-right: 5px solid #667eea;
+        }
+
+        .info h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .info p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .info code {
+            background: #667eea;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        const M = Mishkah;
+        const D = M.DSL;
+
+        // 1. DATABASE (The Soul)
+        const database = {
+            data: {
+                count: 0
+            },
+            env: {
+                lang: 'ar',
+                theme: 'light'
+            },
+            i18n: {
+                dict: {
+                    'title': { ar: 'Hussein', en: 'Hussein' },
+                    'subtitle': { ar: 'مثال بسيط لعداد', en: 'Simple Counter Example' },
+                    'increment': { ar: '+', en: '+' },
+                    'decrement': { ar: '-', en: '-' },
+                    'reset': { ar: 'إعادة تعيين', en: 'Reset' }
+                }
+            }
+        };
+
+        // Helper for Translation
+        const t = (key) => database.i18n.dict[key][database.env.lang] || key;
+
+        // 2. ORDERS (The Mind)
+        const orders = {
+            'counter.increment': {
+                on: ['click'],
+                gkeys: ['btn:inc'],
+                handler: (e, ctx) => {
+                    ctx.setState(state => {
+                        return { ...state, data: { ...state.data, count: state.data.count + 1 } };
+                    });
+                }
+            },
+            'counter.decrement': {
+                on: ['click'],
+                gkeys: ['btn:dec'],
+                handler: (e, ctx) => {
+                    ctx.setState(state => {
+                        return { ...state, data: { ...state.data, count: state.data.count - 1 } };
+                    });
+                }
+            },
+            'counter.double': {
+                on: ['click'],
+                gkeys: ['btn:double'],
+                handler: (e, ctx) => {
+                    ctx.setState(state => {
+                        return { ...state, data: { ...state.data, count: state.data.count * 2 } };
+                    });
+                }
+            },
+            'counter.reset': {
+                on: ['click'],
+                gkeys: ['btn:reset'],
+                handler: (e, ctx) => {
+                    ctx.setState(state => {
+                        return { ...state, data: { ...state.data, count: 0 } };
+                    });
+                }
+            }
+        };
+
+        // 3. DSL (The Body)
+        function body(db) {
+            // Re-bind t inside body to use current db if needed, though db passed is usually same ref
+            // But relying on closure above is fine for this simple example.
+            const t = (key) => db.i18n.dict[key][db.env.lang] || key;
+
+            return D.Div({ attrs: { class: 'card' } }, [
+                // Title
+                D.H1({ attrs: { class: 'title' } }, [t('title')]),
+
+                // Subtitle
+                D.P({ attrs: { class: 'subtitle' } }, [t('subtitle')]),
+
+                // Counter Display
+                D.Div({ attrs: { class: 'counter-display' } }, [
+                    String(db.data.count)
+                ]),
+
+                // Button Group
+                D.Div({ attrs: { class: 'button-group' } }, [
+                    D.Button({ attrs: { gkey: 'btn:inc' } }, [t('increment')]),
+                    D.Button({ attrs: { gkey: 'btn:dec' } }, [t('decrement')]),
+                    D.Button({ attrs: { gkey: 'btn:double' } }, ['x2']),
+                    D.Button({ attrs: { class: 'reset-btn', gkey: 'btn:reset' } }, [t('reset')])
+                ]),
+
+                // Info
+                D.Div({ attrs: { class: 'info' } }, [
+                    D.H3({}, ['معلومات']),
+                    D.P({}, ['هذا مثال بسيط يوضح كيفية استخدام مشكاة']),
+                    D.P({}, ['يمكنك تعديل الملف ', D.Code({}, ['sample-dsl.html']), ' لتجربة المزيد'])
+                ])
+            ]);
+        }
+
+        // 4. Launch
+        Mishkah.app.setBody(body);
+        Mishkah.app.create(database, orders).mount('#app');
+
+    </script>
+</body>
+
+</html>
